@@ -1,0 +1,2707 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SCENE-FLIX</title>
+<link rel="icon" href="https://cdn.imweb.me/thumbnail/20250630/b0666a1e5ca4e.png">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:      #0a0a0a;
+  --surf:    #141414;
+  --card:    #181818;
+  --card-h:  #1f1f1f;
+  --border:  rgba(255,255,255,0.08);
+  --border-h:rgba(255,255,255,0.16);
+  --accent:  #e0d4c0;
+  --text:    #e8e8e8;
+  --muted:   #888;
+  --dim:     #2a2a2a;
+
+  --c-music:    #6ec6c0;
+  --c-mv:       #c07090;
+  --c-itslive:  #a080d0;
+  --c-content:  #80b870;
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  font-size: 14px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+header {
+  padding: 40px 40px 32px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(224,212,192,0.06) 0%, transparent 70%);
+  position: relative;
+}
+
+.wordmark-img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  filter: brightness(1);
+}
+
+.wordmark {
+  font-size: 1.6rem;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+
+.tagline {
+  margin-top: 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.song-nav-outer {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,10,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.section-nav {
+  display: flex;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+  gap: 0;
+}
+
+.section-tab {
+  padding: 14px 22px;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--muted);
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.section-tab:hover { color: var(--text); }
+.section-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.song-nav-inner {
+  background: var(--surf);
+  border-bottom: 1px solid var(--border);
+}
+
+.song-nav {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.song-tab {
+  padding: 13px 16px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  color: var(--muted);
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-family: 'Inter', sans-serif;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.song-tab:hover { color: var(--text); }
+.song-tab.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+  font-weight: 500;
+}
+
+.song-tab .cnt {
+  display: inline-block;
+  font-size: 0.58rem;
+  padding: 1px 6px;
+  margin-left: 5px;
+  color: var(--muted);
+  background: var(--surf);
+  border-radius: 10px;
+  vertical-align: middle;
+}
+.song-tab.active .cnt {
+  background: rgba(224,212,192,0.1);
+  color: var(--accent);
+}
+
+.type-bar {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 16px 40px 0;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.type-btn {
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+}
+.type-btn:hover { color: var(--text); border-color: var(--border-h); }
+.type-btn[data-lm="원이"]:hover   { border-color: #045a42; }
+.type-btn[data-lm="미나미"]:hover { border-color: #2b99c4; }
+.type-btn[data-lm="메이"]:hover   { border-color: #ecd25b; }
+.type-btn[data-lm="제나"]:hover   { border-color: #ba92db; }
+
+.type-btn.content-active {
+  color: var(--c-content);
+  border-color: var(--c-content);
+  background: rgba(128,184,112,0.08);
+}
+
+.type-btn.active[data-t="all"]      { color: var(--text);       border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); }
+.type-btn.active[data-t="music"]    { color: var(--c-music);    border-color: var(--c-music);    background: rgba(110,198,192,0.08); }
+.type-btn.active[data-t="mv"]       { color: var(--c-mv);       border-color: var(--c-mv);       background: rgba(192,112,144,0.08); }
+.type-btn.active[data-t="itslive"]  { color: var(--c-itslive);  border-color: var(--c-itslive);  background: rgba(160,128,208,0.08); }
+.type-btn.active[data-t="content"]  { color: var(--c-content);  border-color: var(--c-content);  background: rgba(128,184,112,0.08); }
+/* Live 멤버 필터 버튼 */
+.type-btn.active[data-lm="all"]    { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.07); }
+.type-btn.active[data-lm="전원"]   { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.07); }
+.type-btn.active[data-lm="원이"]   { color: #04a06e; border-color: #045a42;               background: rgba(4,90,66,0.15); }
+.type-btn.active[data-lm="리브"]   { color: #e0e0e0; border-color: rgba(220,220,220,0.5); background: rgba(0,0,0,0.35); }
+.type-btn.active[data-lm="미나미"] { color: #2b99c4; border-color: #2b99c4;               background: rgba(43,153,196,0.12); }
+.type-btn.active[data-lm="메이"]   { color: #c9a800; border-color: #ecd25b;               background: rgba(236,210,91,0.12); }
+.type-btn.active[data-lm="제나"]   { color: #ba92db; border-color: #ba92db;               background: rgba(186,146,219,0.12); }
+
+.grid-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px 40px 80px;
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+}
+
+.vcard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
+  text-decoration: none;
+  display: block;
+  animation: fadeUp 0.3s ease both;
+  box-shadow: none;
+}
+
+@keyframes fadeUp {
+  from { opacity:0; transform: translateY(10px); }
+  to   { opacity:1; transform: translateY(0); }
+}
+
+.vcard:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-h);
+  background: var(--card-h);
+}
+
+.vcard.tb-music:hover   { border-color: rgba(110,198,192,0.5);  box-shadow: 0 4px 24px rgba(110,198,192,0.15), 0 0 0 1px rgba(110,198,192,0.15); }
+.vcard.tb-mv:hover      { border-color: rgba(192,112,144,0.5);  box-shadow: 0 4px 24px rgba(192,112,144,0.15), 0 0 0 1px rgba(192,112,144,0.15); }
+.vcard.tb-itslive:hover { border-color: rgba(160,128,208,0.5);  box-shadow: 0 4px 24px rgba(160,128,208,0.15), 0 0 0 1px rgba(160,128,208,0.15); }
+.vcard.tb-content:hover { border-color: rgba(128,184,112,0.5);  box-shadow: 0 4px 24px rgba(128,184,112,0.15), 0 0 0 1px rgba(128,184,112,0.15); }
+
+.thumb {
+  position: relative;
+  padding-top: 56.25%;
+  background: var(--surf);
+  overflow: hidden;
+}
+
+.thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease, opacity 0.3s;
+}
+.vcard:hover .thumb img { transform: scale(1.04); }
+
+.last-watched-badge {
+  position: absolute;
+  bottom: 6px;
+  left: 6px;
+  background: rgba(0,0,0,0.75);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.play-ring {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.2s;
+  background: rgba(0,0,0,0.3);
+}
+.vcard:hover .play-ring { opacity: 1; }
+
+.play-ring svg {
+  width: 40px; height: 40px;
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  padding: 11px 10px 11px 13px;
+}
+.play-ring svg path { fill: #0a0a0a; }
+
+.type-badge {
+  position: absolute;
+  top: 8px; left: 8px;
+  font-size: 0.56rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-weight: 500;
+  backdrop-filter: blur(6px);
+}
+.tb-music   { background: rgba(110,198,192,0.15); color: var(--c-music);   border: 1px solid rgba(110,198,192,0.2); }
+.tb-mv      { background: rgba(192,112,144,0.15); color: var(--c-mv);      border: 1px solid rgba(192,112,144,0.2); }
+.tb-itslive { background: rgba(160,128,208,0.15); color: var(--c-itslive); border: 1px solid rgba(160,128,208,0.2); }
+.tb-content { background: rgba(128,184,112,0.15); color: var(--c-content); border: 1px solid rgba(128,184,112,0.2); }
+
+.cbody {
+  padding: 10px 12px 12px;
+}
+
+.csong {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.csong-multi {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.4;
+}
+
+.cmeta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.cdate {
+  font-size: 0.67rem;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.ctags {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.ctag {
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  padding: 1px 7px;
+  border-radius: 2px;
+  background: var(--dim);
+  color: var(--muted);
+}
+
+.ctag.hl {
+  background: rgba(224,212,192,0.06);
+  color: var(--accent);
+}
+
+.skeleton {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { opacity:1; }
+  50%      { opacity:0.4; }
+}
+.skel-thumb { padding-top: 56.25%; background: var(--surf); }
+.skel-body  { padding: 10px 12px 12px; }
+.skel-line  { height: 9px; background: var(--surf); border-radius: 3px; margin-bottom: 7px; }
+.skel-line.s  { width: 55%; }
+.skel-line.xs { width: 35%; }
+
+.empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+.empty .ico { font-size: 2rem; margin-bottom: 12px; opacity: 0.3; }
+.empty p { font-size: 0.8rem; }
+
+.fantube-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 40px 80px;
+}
+
+.fantube-desc {
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.fantube-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.ftcard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 14px 18px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  cursor: pointer;
+  transition: transform 0.22s, border-color 0.22s, background 0.22s, box-shadow 0.22s;
+  animation: fadeUp 0.3s ease both;
+  position: relative;
+  overflow: hidden;
+}
+
+.ftcard::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.025) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.ftcard:hover {
+  transform: translateY(-4px);
+  border-color: rgba(224,212,192,0.28);
+  background: var(--card-h);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(224,212,192,0.1);
+}
+
+.ftcard-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--surf);
+  border: 2px solid var(--border);
+  overflow: hidden;
+  flex-shrink: 0;
+  transition: border-color 0.22s;
+}
+
+.ftcard:hover .ftcard-avatar {
+  border-color: rgba(224,212,192,0.4);
+}
+
+.ftcard-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.ftcard-avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: var(--muted);
+  background: var(--surf);
+}
+
+.ftcard-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  width: 100%;
+  min-width: 0;
+}
+
+.ftcard-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  text-align: center;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  word-break: break-word;
+}
+
+.ftcard-handle {
+  font-size: 0.62rem;
+  color: var(--muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  letter-spacing: 0.01em;
+}
+
+.ftcard-arrow {
+  font-size: 0.62rem;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateY(2px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.ftcard:hover .ftcard-arrow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.ftcard-skel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 14px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+.ftcard-skel-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--surf);
+}
+
+.ftcard-skel-line {
+  height: 9px;
+  background: var(--surf);
+  border-radius: 3px;
+  width: 70%;
+}
+
+.ftcard-skel-line.s { width: 50%; }
+
+@media (max-width: 700px) {
+  .fantube-wrap { padding: 20px 12px 60px; }
+  .fantube-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .ftcard { padding: 16px 10px 14px; gap: 9px; }
+  .ftcard-avatar { width: 56px; height: 56px; }
+  .ftcard-name { font-size: 0.74rem; }
+  .ftcard-handle { display: none; }
+}
+
+@media (max-width: 400px) {
+  .fantube-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.member-wrap {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.member-desc {
+  font-size: 0.75rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}
+
+.member-btns {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.member-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  padding: 0;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: all 0.25s;
+  overflow: hidden;
+  position: relative;
+  animation: fadeUp 0.35s ease both;
+}
+
+.member-btn:hover {
+  border-color: rgba(224,212,192,0.3);
+  transform: translateY(-3px);
+  background: var(--card-h);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(224,212,192,0.12);
+}
+
+.member-photo-wrap {
+  width: 100%;
+  aspect-ratio: 3/4;
+  overflow: hidden;
+  position: relative;
+}
+
+.member-photo-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 55%;
+  background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.4) 55%, transparent 100%);
+  pointer-events: none;
+}
+
+.member-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.5s ease;
+  display: block;
+}
+
+.member-btn:hover .member-photo {
+  transform: scale(1.06);
+}
+
+.member-name-wrap {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 14px 14px 14px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.member-name {
+  font-size: 0.88rem;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  font-weight: 500;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+}
+
+.member-arrow {
+  font-size: 0.65rem;
+  color: var(--accent);
+  opacity: 0;
+  transform: translateX(-4px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+.member-btn:hover .member-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+@media (max-width: 700px) {
+  .member-wrap { padding: 28px 16px; }
+  .member-btns { grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .member-name { font-size: 0.75rem; }
+}
+
+@media (max-width: 400px) {
+  .member-btns { grid-template-columns: repeat(2, 1fr); }
+}
+
+.links-wrap {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 36px 40px 80px;
+}
+
+.links-section-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  margin-top: 32px;
+  padding-left: 2px;
+}
+.links-section-label:first-child { margin-top: 0; }
+
+.links-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 8px;
+}
+
+.link-row {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 12px 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--text);
+  transition: background 0.2s, border-color 0.2s, transform 0.18s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  animation: fadeUp 0.35s ease both;
+}
+
+.link-row::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.025) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.link-row:hover {
+  background: var(--card-h);
+  border-color: rgba(224,212,192,0.22);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+
+.link-icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.link-row:hover .link-icon {
+  background: rgba(255,255,255,0.09);
+}
+
+.link-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.link-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+}
+
+.link-label {
+  font-size: 0.79rem;
+  font-weight: 500;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  letter-spacing: 0.01em;
+}
+
+.link-url {
+  font-size: 0.62rem;
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.link-arrow {
+  flex-shrink: 0;
+  color: var(--muted);
+  font-size: 0.7rem;
+  transition: color 0.18s, transform 0.18s;
+  opacity: 0.5;
+}
+.link-row:hover .link-arrow {
+  color: var(--accent);
+  transform: translate(1px, -1px);
+  opacity: 1;
+}
+
+@media (max-width: 700px) {
+  .links-wrap { padding: 20px 12px 60px; }
+  .links-list { grid-template-columns: repeat(2, 1fr); gap: 7px; }
+  .link-url   { display: none; }
+  .link-label { font-size: 0.75rem; }
+  .link-row   { padding: 10px 12px; gap: 9px; }
+}
+
+@media (max-width: 700px) {
+  
+  header { padding: 24px 16px 18px; }
+  .wordmark-img { height: 38px; }
+  .tagline { font-size: 0.6rem; margin-top: 5px; }
+
+  
+  .section-nav {
+    padding: 0 12px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .section-nav::-webkit-scrollbar { display: none; }
+  .section-tab { padding: 11px 13px; font-size: 0.63rem; white-space: nowrap; }
+  
+  #secAbout { margin-left: 0; }
+
+  
+  .song-nav {
+    padding: 0 12px;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .song-nav::-webkit-scrollbar { display: none; }
+  .song-tab { padding: 10px 11px; font-size: 0.62rem; }
+  .song-tab .cnt { display: none; }
+
+  
+  .type-bar { padding: 10px 12px 0; gap: 5px; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+  .type-bar::-webkit-scrollbar { display: none; }
+  .type-btn { padding: 4px 11px; font-size: 0.64rem; white-space: nowrap; flex-shrink: 0; }
+
+  
+  .grid-wrap { padding: 12px 10px 60px; }
+  .video-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+
+  
+  .cbody { padding: 8px 9px 10px; }
+  .csong { font-size: 0.74rem; }
+  .csong-multi { font-size: 0.74rem; }
+  .cdate { font-size: 0.6rem; }
+  .ctag  { font-size: 0.55rem; padding: 1px 5px; }
+  .play-ring svg { width: 32px; height: 32px; padding: 9px 8px 9px 10px; }
+
+  
+  .member-wrap { padding: 24px 12px; }
+
+  
+  .links-wrap { padding: 16px 12px 60px; }
+  .link-url   { display: none; }
+  .link-label { font-size: 0.78rem; }
+  .link-row   { padding: 12px 14px; gap: 10px; }
+
+  
+  #aboutMode .links-wrap { padding: 20px 16px 60px; }
+}
+
+@media (max-width: 360px) {
+  .video-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .song-tab   { padding: 10px 9px; font-size: 0.58rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <img src="Logo.png" alt="RESCENE" class="wordmark-img" onclick="pickSection('about')" style="cursor:pointer;">
+  <p class="tagline">리센느 영상 몰아보기 SCENE-FLIX</p>
+</header>
+
+<div class="song-nav-outer">
+  <div class="section-nav" id="sectionNav">
+    <button class="section-tab" id="secSongs" onclick="pickSection('songs')">Songs</button>
+    <button class="section-tab" id="secContent" onclick="pickSection('content')">자체 컨텐츠</button>
+    <button class="section-tab" id="secLive" onclick="pickSection('live')">Live</button>
+    <button class="section-tab" id="secExternal" onclick="pickSection('external')">외부 컨텐츠</button>
+    <button class="section-tab" id="secFantube" onclick="pickSection('fantube')">팬튜브</button>
+    <button class="section-tab" id="secMember" onclick="pickSection('member')">멤버별 관련 영상</button>
+    <button class="section-tab" id="secLinks" onclick="pickSection('links')">RESCENE 관련 링크</button>
+    <button class="section-tab" id="secAbout" onclick="pickSection('about')" style="margin-left:auto;">About</button>
+  </div>
+</div>
+
+<div id="songMode">
+  <div class="song-nav-inner">
+    <div class="song-nav" id="songNav"></div>
+  </div>
+  
+  <div class="type-bar">
+    <button class="type-btn active" data-t="all"      onclick="setType(this,'all')">전체</button>
+    <button class="type-btn"        data-t="music"    onclick="setType(this,'music')">음악방송</button>
+    <button class="type-btn"        data-t="mv"       onclick="setType(this,'mv')">뮤직비디오</button>
+    <button class="type-btn"        data-t="itslive"  onclick="setType(this,'itslive')">It's Live</button>
+  </div>
+</div>
+
+<div id="contentMode" style="display:none;">
+  <div class="song-nav-inner">
+    <div class="song-nav" id="contentNav"></div>
+  </div>
+</div>
+
+<div id="liveMode" style="display:none;">
+  <div class="song-nav-inner">
+    <div class="song-nav" id="liveNav"></div>
+  </div>
+  <div class="type-bar">
+    <button class="type-btn active" data-lm="all"    onclick="setLiveMember(this,'all')">전체</button>
+    <button class="type-btn"        data-lm="전원"   onclick="setLiveMember(this,'전원')">전원</button>
+    <button class="type-btn"        data-lm="원이"   onclick="setLiveMember(this,'원이')">원이</button>
+    <button class="type-btn"        data-lm="리브"   onclick="setLiveMember(this,'리브')">리브</button>
+    <button class="type-btn"        data-lm="미나미" onclick="setLiveMember(this,'미나미')">미나미</button>
+    <button class="type-btn"        data-lm="메이"   onclick="setLiveMember(this,'메이')">메이</button>
+    <button class="type-btn"        data-lm="제나"   onclick="setLiveMember(this,'제나')">제나</button>
+  </div>
+</div>
+
+<div id="liveGrid" style="display:none;">
+  <div class="grid-wrap">
+    <div class="video-grid" id="liveGridInner"></div>
+  </div>
+</div>
+
+<div id="externalMode" style="display:none;">
+  <div class="song-nav-inner">
+    <div class="song-nav" id="externalNav"></div>
+  </div>
+</div>
+
+<div id="fantubeMode" style="display:none;">
+  <div class="fantube-wrap">
+    <p class="fantube-desc">리센느를 사랑하는 팬 유튜버들의 채널 모음입니다.</p>
+    <div class="fantube-grid" id="fantubeGrid"></div>
+  </div>
+</div>
+
+<div id="memberMode" style="display:none;">
+  <div class="member-wrap">
+    <p class="member-desc">멤버를 선택하면 유튜브에서 관련 영상을 검색합니다.</p>
+    <div class="member-btns">
+      <button class="member-btn" onclick="searchMember('원이')">
+        <div class="member-photo-wrap"><img src="https://yt3.ggpht.com/NbDzqAmTu35-LKXoMf-SBsa1nCqhq01rrqjPz7rTmJkCAJdSh-c0uRekJhkWbOxR6ss8N8_E7l92=s640-c-fcrop64=1,22d90000dd07ffff-rw-nd-v1" alt="원이" class="member-photo"></div>
+        <div class="member-name-wrap"><span class="member-name">원이</span><span class="member-arrow">↗</span></div>
+      </button>
+      <button class="member-btn" onclick="searchMember('리브')">
+        <div class="member-photo-wrap"><img src="https://yt3.ggpht.com/xnp2l_uFqse2zgQBK7fLT8R9mmkBoALEbBJq_ngRRWVQpQnoOt4fwPdiiobfvs5woMNnMaH9R5gLAg=s640-c-fcrop64=1,000022ddffffdd1c-rw-nd-v1" alt="리브" class="member-photo"></div>
+        <div class="member-name-wrap"><span class="member-name">리브</span><span class="member-arrow">↗</span></div>
+      </button>
+      <button class="member-btn" onclick="searchMember('미나미')">
+        <div class="member-photo-wrap"><img src="https://yt3.ggpht.com/E90jE-eOEo3QlSzyhWcNJ2T4fwYt7gOKklWZB2T6sPHytUkQ3XJ8825059rJuc8rt19Ft21zHSuvmg=s640-c-fcrop64=1,000022e9ffffdd16-rw-nd-v1" alt="미나미" class="member-photo"></div>
+        <div class="member-name-wrap"><span class="member-name">미나미</span><span class="member-arrow">↗</span></div>
+      </button>
+      <button class="member-btn" onclick="searchMember('메이')">
+        <div class="member-photo-wrap"><img src="https://yt3.ggpht.com/qE3fVknS_8nm9lYv962fngk5zFrn8u5fbNb0ch-E8uC0jN2ZeAgGbdzA1ZjIXRnnxEMyLmr73jC7fFo=s640-c-fcrop64=1,22e60000dd19ffff-rw-nd-v1" alt="메이" class="member-photo"></div>
+        <div class="member-name-wrap"><span class="member-name">메이</span><span class="member-arrow">↗</span></div>
+      </button>
+      <button class="member-btn" onclick="searchMember('제나')">
+        <div class="member-photo-wrap"><img src="https://yt3.ggpht.com/p0te9-vTFlhSgA1bmK-zemUGIgXRuoWvmnUckikaPs-m3mDQ_18SIP09PRX1wW7L7ZzC2SDfUGn6Kw=s640-c-fcrop64=1,000022ecffffdd13-rw-nd-v1" alt="제나" class="member-photo"></div>
+        <div class="member-name-wrap"><span class="member-name">제나</span><span class="member-arrow">↗</span></div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="linksMode" style="display:none;">
+  <div class="links-wrap">
+
+    <p class="links-section-label">공식 채널</p>
+    <div class="links-list">
+
+      <a class="link-row" href="https://www.youtube.com/@RESCENE_official" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FF0000"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">RESCENE 유튜브</span>
+          <span class="link-url">@RESCENE_official</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row" href="https://www.instagram.com/rescene_official" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f09433"/><stop offset="25%" style="stop-color:#e6683c"/><stop offset="50%" style="stop-color:#dc2743"/><stop offset="75%" style="stop-color:#cc2366"/><stop offset="100%" style="stop-color:#bc1888"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" fill="url(#ig-grad)"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">공식 Instagram</span>
+          <span class="link-url">@rescene_official</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row" href="https://x.com/RESCENEofficial" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">RESCENE X</span>
+          <span class="link-url">@RESCENEofficial</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row" href="https://www.tiktok.com/@rescene_official" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.95a8.27 8.27 0 0 0 4.84 1.54V7.05a4.85 4.85 0 0 1-1.07-.36z" fill="currentColor"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">공식 TikTok</span>
+          <span class="link-url">@rescene_official</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row" href="https://www.facebook.com/RESCENE.official/" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" fill="#1877F2"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">Facebook</span>
+          <span class="link-url">RESCENE.official</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row" href="https://artist.mnetplus.world/main/stg/rescene-official" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h18v2H3zm0 4h12v2H3zm0 4h18v2H3zm0 4h12v2H3zm0 4h18v2H3z" fill="#FF6600"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">MnetPlus</span>
+          <span class="link-url">artist.mnetplus.world</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row" href="https://blip.kr/artists/RESCENE" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" fill="none" stroke="#00C8FF" stroke-width="2"/><path d="M9 8.5c0-.83.67-1.5 1.5-1.5H14a2.5 2.5 0 0 1 0 5h-3.5v3H9V8.5zm1.5 2h3.25a.75.75 0 0 0 0-1.5H10.5V10.5z" fill="#00C8FF"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">Blip</span>
+          <span class="link-url">blip.kr/artists/RESCENE</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+    </div>
+
+    <p class="links-section-label">멤버 채널</p>
+    <div class="links-list">
+
+      <a class="link-row" href="https://www.youtube.com/@helloiamwoninicetomeetyou" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FF0000"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">안녕하세요원이입니다</span>
+          <span class="link-url">@helloiamwoninicetomeetyou</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row" href="https://x.com/RESCENE_twt" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">RESCENE 멤버 X</span>
+          <span class="link-url">@RESCENE_twt</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+    </div>
+
+    <p class="links-section-label">음악 플랫폼</p>
+    <div class="links-list">
+
+      <a class="link-row" href="https://music.youtube.com/search?q=%23%EB%A6%AC%EC%84%BC%EB%8A%90" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 14.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm0-7a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" fill="#FF0000"/><path d="M9.5 10.5l5 2.5-5 2.5v-5z" fill="#FF0000"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">YouTube Music</span>
+          <span class="link-url">music.youtube.com</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row" href="https://www.melon.com/search/total/index.htm?q=%EB%A6%AC%EC%84%BC%EB%8A%90&section=&mwkLogType=T" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><ellipse cx="12" cy="13" rx="8" ry="7" fill="#00CD3C"/><path d="M12 6C12 6 8 3 5 4.5 3 5.5 3.5 8 6 8.5 8 9 10 8.5 12 6z" fill="#00A832"/><circle cx="9" cy="13" r="2" fill="white" opacity="0.3"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">Melon</span>
+          <span class="link-url">melon.com</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row" href="https://www.genie.co.kr/detail/artistInfo?xxnm=82379125" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#0066FF"/><path d="M12 6a6 6 0 0 0-6 6 6 6 0 0 0 6 6 6 6 0 0 0 6-6h-6V6z" fill="white"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">Genie Music</span>
+          <span class="link-url">genie.co.kr</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row" href="https://open.spotify.com/artist/5deOsjuFTKrNMJW3rKuL8S" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.623.623 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 1 1-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 0 1 .207.857zm1.223-2.723a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 1 1-.453-1.492c3.633-1.104 8.149-.569 11.233 1.329a.78.78 0 0 1 .257 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 1 1-.543-1.793c3.53-1.072 9.404-.865 13.115 1.338a.937.937 0 0 1-.955 1.611z" fill="#1DB954"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">Spotify</span>
+          <span class="link-url">open.spotify.com</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row" href="https://rescenestream.com/" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6zm-2 16a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill="var(--c-content)"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">음원총공팀</span>
+          <span class="link-url">rescenestream.com</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+    </div>
+
+    <p class="links-section-label">팬 커뮤니티</p>
+    <div class="links-list">
+
+      <a class="link-row" href="https://gall.dcinside.com/mgallery/board/lists?id=rescene1" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" fill="var(--accent)"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">RESCENE 마이너 갤러리</span>
+          <span class="link-url">dcinside.com</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+    </div>
+
+  </div>
+</div>
+
+<div id="aboutMode" style="display:none;">
+<div class="links-wrap">
+    <div style="max-width:560px; margin:0 auto; padding:40px 0 20px; color:var(--text);">
+
+      <p style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:24px;">About this page</p>
+
+      <p style="font-size:0.95rem; font-weight:500; color:var(--accent); margin-bottom:20px; line-height:1.6;">
+        리센느(RESCENE)의 팬 메이드 페이지입니다. <span style="color:var(--muted);">(by May_)</span>
+      </p>
+
+      <div style="display:flex; flex-direction:column; gap:14px; font-size:0.82rem; line-height:1.8; color:#aaa;">
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <span style="color:var(--accent); margin-top:2px; flex-shrink:0;">✦</span>
+          <span>이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다. 오직 팬들을 위해 만들어졌습니다.</span>
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <span style="color:var(--accent); margin-top:2px; flex-shrink:0;">✦</span>
+          <span>이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국, <strong style="color:var(--text);">더뮤즈 엔터테인먼트</strong>, 그리고 <strong style="color:var(--text);">리센느(RESCENE)</strong>에게 있습니다.</span>
+        </div>
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <span style="color:var(--accent); margin-top:2px; flex-shrink:0;">✦</span>
+          <span>저작권자의 요청이 있을 경우, 해당 영상은 수정 또는 삭제될 수 있습니다.</span>
+        </div>
+      </div>
+
+      <div style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:10px;">
+        <p style="font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted);">Contact</p>
+        <div style="display:inline-flex; align-items:center; gap:8px;">
+          <a href="mailto:sceneflix.may@gmail.com" style="display:inline-flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--accent); text-decoration:none;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            <span style="user-select:text; -webkit-user-select:text;">sceneflix.may@gmail.com</span>
+          </a>
+          <button id="copyMailBtn" onclick="navigator.clipboard.writeText('sceneflix.may@gmail.com').then(()=>{const b=document.getElementById('copyMailBtn');b.textContent='✓';b.style.color='var(--accent)';b.style.borderColor='var(--accent)';setTimeout(()=>{b.textContent='복사';b.style.color='var(--muted)';b.style.borderColor='var(--border-h)';},2000);})" style="font-size:0.62rem; padding:2px 7px; border-radius:5px; border:1px solid var(--border-h); background:transparent; color:var(--muted); cursor:pointer; flex-shrink:0;">복사</button>
+        </div>
+        <p style="font-size:0.75rem; color:#888; line-height:1.7;">버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.</p>
+      </div>
+
+      <div style="margin-top:24px; padding-top:24px; border-top:1px solid var(--border); font-size:0.68rem; color:var(--muted); line-height:1.8;">
+        © 2025 May_ · Fan-made, non-commercial · All rights belong to their respective owners<br>
+        © The Muze Entertainment · © RESCENE
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="grid-wrap" id="grid-wrap-el">
+  <div class="video-grid" id="grid"></div>
+</div>
+
+<script>
+const RESCENE_DATA = [
+  {
+    song: "UhUh",
+    videos: {
+      music: [
+        "https://youtu.be/hToYhcDydK8",
+        "https://youtu.be/mWS0gdW9kgo",
+        "https://youtu.be/gWsxvBfzsjY",
+        "https://youtu.be/nI3sdA9ppk8",
+        "https://youtu.be/gDgehVCqr5Q",
+        "https://youtu.be/DECJpk7cqW4",
+        "https://youtu.be/eHEKKGt7TaA",
+        "https://youtu.be/vVOslnAZL8o",
+      ],
+      mv: [
+        "https://youtu.be/zpSejlkSXLA",
+        "https://youtu.be/Wm1vxMk5YTY",
+      ],
+      itslive: [],
+      content: [],
+    }
+  },
+  {
+    song: "YoYo",
+    videos: {
+      music: [
+        "https://youtu.be/MxRWKezyKQQ",
+        "https://youtu.be/vrn0e-FpvxY",
+        "https://youtu.be/qy3Qt7POFzs",
+        "https://youtu.be/jBdkLY8FiYs",
+        "https://youtu.be/bvPT7woEjsw",
+        "https://youtu.be/cfa5GHSutuQ",
+        "https://youtu.be/h_3gRUWp28E",
+        "https://youtu.be/1VEP3Ra0cas",
+      ],
+      mv: [
+        "https://youtu.be/uDYy2UyO1X4",
+        "https://youtu.be/bhgNiT3qQgU",
+      ],
+      itslive: [
+        "https://youtu.be/sJ-ODnxkf8A",
+      ],
+      content: [],
+    }
+  },
+  {
+    song: "Love Attack",
+    videos: {
+      music: [
+        "https://youtu.be/N3ppk2HK_B8",
+        "https://youtu.be/Hv1wQ6nlpNE",
+        "https://youtu.be/0dnlq5r_Lig",
+        "https://youtu.be/DMxvhtMh53I",
+        "https://youtu.be/Zoqm3733dvo",
+        "https://youtu.be/KVffFcVRoyo",
+        "https://youtu.be/C-MHxQKNl8s",
+        "https://youtu.be/cA8InZsTkXI",
+        "https://youtu.be/PKEo7L2gdkc",
+        "https://youtu.be/LFs29lRZlIQ",
+        "https://youtu.be/e1MlU4PBsCE",
+        "https://youtu.be/ceaNt5hmX_k",
+        "https://youtu.be/hCVwGcINgn0",
+        "https://youtu.be/aYZrrxq6Eno",
+        "https://youtu.be/7fyZwuouAGc",
+      ],
+      mv: [
+        "https://youtu.be/9XttLI0oH0I",
+        "https://youtu.be/WNl67k6StWY",
+      ],
+      itslive: [
+        "https://youtu.be/KRpt7OF4zso",
+      ],
+      content: [],
+    }
+  },
+  {
+    song: "New World",
+    videos: {
+      music: [],
+      mv: [
+        "https://youtu.be/QNXeGm-Wkms",
+      ],
+      itslive: [],
+      content: [],
+    }
+  },
+  {
+    song: "Pinball",
+    videos: {
+      music: [
+        "https://youtu.be/UDkirLRFcoo",
+        "https://youtu.be/-3-uqY7Kpeo",
+        "https://youtu.be/SzsBKX4242s",
+        "https://youtu.be/jMqo2gJ6Jsg",
+        "https://youtu.be/e0u6PCPFX0I",
+        "https://youtu.be/7vMrAZceQqk",
+        "https://youtu.be/zrhQ7uKStJY",
+      ],
+      mv: [
+        "https://youtu.be/B8JJ8RNM-60",
+        "https://youtu.be/6tTsZnKysBc",
+      ],
+      itslive: [],
+      content: [],
+    }
+  },
+  {
+    song: "Glow Up",
+    videos: {
+      music: [
+        "https://youtu.be/FYdghnUJx-Y",
+        "https://youtu.be/VTdLPy8HF7c",
+        "https://youtu.be/d_1IMJUbcyQ",
+        "https://youtu.be/6f9WPj99YTg",
+        "https://youtu.be/VYVDd1qgstw",
+        "https://youtu.be/d-ji6KBTn0Q",
+        "https://youtu.be/r3I9kJGcn3g",
+        "https://youtu.be/oZKutltCcVk",
+        "https://youtu.be/siPHjiGsFIQ",
+        "https://youtu.be/X_KNAUmt83Y",
+        "https://youtu.be/Nxx1P86uqZA",
+        "https://youtu.be/KLgtlTCgLA0",
+        "https://youtu.be/kl0373Z1Wyg",
+        "https://youtu.be/Kqdusm-o07E",
+        "https://youtu.be/wvGCmy3kmho",
+        "https://youtu.be/bQ24gSDbMqY",
+        "https://youtu.be/bmfKxYe2Fog",
+      ],
+      mv: [
+        "https://youtu.be/h0xUtrb_JBc",
+      ],
+      itslive: [
+        "https://youtu.be/6zJRA5U-gq0",
+      ],
+      content: [],
+    }
+  },
+  {
+    song: "CRASH",
+    videos: {
+      music: [
+        "https://youtu.be/pZ9IgDvFOeg",
+        "https://youtu.be/Knty2mLzRG0",
+      ],
+      mv: [],
+      itslive: [],
+      content: [],
+    }
+  },
+  {
+    song: "In my lotion",
+    videos: {
+      music: [
+        "https://youtu.be/DqVwDLWg3ek",
+      ],
+      mv: [],
+      itslive: [],
+      content: [],
+    }
+  },
+  {
+    song: "Deja Vu",
+    videos: {
+      music: [
+        "https://youtu.be/jciMWQgUVCA",
+        "https://youtu.be/fW8CXaBau-U",
+        "https://youtu.be/VmK3uTDnIXs",
+        "https://youtu.be/Qdfsz8--ohE",
+        "https://youtu.be/vQBtHJVbNeM",
+        "https://youtu.be/JdYC0Jomkbs",
+        "https://youtu.be/yaZ0W7JCxpM",
+        "https://youtu.be/NP-DCLrLieg",
+        "https://youtu.be/tpognj67lyg",
+        "https://youtu.be/0bBK49b5yLg",
+        "https://youtu.be/0V2CripEpK4",
+        "https://youtu.be/PmdBmIrb23E",
+        "https://youtu.be/4KbxesLRw-g",
+        "https://youtu.be/nCoPhF-QC4E",
+      ],
+      mv: [
+        "https://youtu.be/ZbO9PBdFRdc",
+        "https://youtu.be/d64dH8mnw9Q",
+      ],
+      itslive: [],
+      content: [],
+    }
+  },
+  {
+    song: "Heart Drop",
+    videos: {
+      music: [
+        "https://youtu.be/OIKX2NgbKLw",
+        "https://youtu.be/dDi-0BaW_8Y",
+        "https://youtu.be/ORiKYmHPVmk",
+        "https://youtu.be/PyLmLfoMPjw",
+        "https://youtu.be/iw8L05s0L2k",
+        "https://youtu.be/2SKGgezncCI",
+      ],
+      mv: [
+        "https://www.youtube.com/watch?v=ByX8EZq8500",
+      ],
+      itslive: [],
+      content: [],
+    }
+  },
+  {
+    song: "Bloom",
+    videos: {
+      music: [
+        "https://youtu.be/G-zlWrcj7DU",
+        "https://youtu.be/xtoXbUIVn6I",
+        "https://youtu.be/potdTm-Dnwk",
+        "https://youtu.be/2KSIBmnCj9w",
+        "https://youtu.be/tNHn5eh6NYY",
+        "https://youtu.be/oyhFLMlQmPg",
+        "https://youtu.be/uCCV5qK0TBM",
+        "https://youtu.be/4ADSzlm18hY",
+      ],
+      mv: [
+        "https://www.youtube.com/watch?v=MC6-82GRK5I",
+        "https://www.youtube.com/watch?v=_zzAi5x0cXc",
+      ],
+      itslive: [],
+      content: [],
+    }
+  },
+  {
+    song: "Busy Boy",
+    videos: {
+      music: [
+        "https://youtu.be/bEkXlmGstIo",
+        "https://youtu.be/5HwxTQouI-0",
+        "https://youtu.be/j1YF0S3CKtw",
+      ],
+      mv: [],
+      itslive: [],
+      content: [],
+    }
+  },
+  {
+    song: "Runaway",
+    videos: {
+      music: [
+        "https://youtu.be/qt2FvoXRw1U",
+        "https://youtu.be/hhMZWsj15xs",
+        "https://youtu.be/F9hbFUr-SmU",
+        "https://youtu.be/IH7HiJWAm2c",
+        "https://youtu.be/cxBb_2o_bJM",
+        "https://www.youtube.com/watch?v=VB_vtps_wus",
+        "https://www.youtube.com/watch?v=TiVvoqGwnR4",
+        "https://www.youtube.com/watch?v=jS37AjjvTVE",
+        "https://www.youtube.com/watch?v=ZoWGyFHTXbI",
+        "https://www.youtube.com/watch?v=xBgCfSx_8PA",
+        "https://www.youtube.com/watch?v=wS7t2XsSZ0Q",
+        "https://www.youtube.com/watch?v=ltc0VGEM5BQ",
+        "https://youtu.be/pdn93AdbmOo",
+      ],
+      mv: [
+        "https://youtu.be/rsZwrTNklos",
+      ],
+      itslive: [
+        "https://www.youtube.com/watch?v=aDHmmrfizIE",
+      ],
+      content: [],
+    }
+  },
+  {
+    song: "다시 만난 세계 Cover",
+    videos: {
+      music: [
+        "https://youtu.be/827onCOjce0",
+      ],
+      mv: [],
+      itslive: [],
+      content: [],
+    }
+  },
+];
+</script>
+<script>
+
+const SHOW_MAP = [
+  { keys: ['뮤직뱅크','Music Bank','musicbank'],          label: '뮤직뱅크',    short: 'KBS2' },
+  { keys: ['인기가요','Inkigayo','SBS Inkigayo'],          label: '인기가요',    short: 'SBS'  },
+  { keys: ['엠카운트다운','M COUNTDOWN','Mcountdown','엠카'],label: '엠카운트다운', short: 'Mnet' },
+  { keys: ['쇼챔피언','Show Champion','Show! Champion'],   label: '쇼챔피언',    short: 'MBC M'},
+  { keys: ['쇼음악중심','쇼! 음악중심','음악중심'],          label: '음악중심',    short: 'MBC'  },
+  { keys: ['THE SHOW','더쇼'],                            label: 'THE SHOW',   short: 'SBS M'},
+  { keys: ["Show! MusicCore",'뮤직코어'],                  label: '음악중심',    short: 'MBC'  },
+  { keys: ["It's Live",'잇츠라이브',"it's live"],          label: "It's Live",  short: 'Naver'},
+];
+
+function parseShow(title) {
+  const t = title.toLowerCase();
+  for (const s of SHOW_MAP) {
+    if (s.keys.some(k => t.includes(k.toLowerCase()))) return s;
+  }
+  return null;
+}
+
+function parseDate(title) {
+  
+  const pat8 = /(\d{4})(\d{2})(\d{2})/;
+  
+  const patSep = /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/;
+  
+  const patKo = /(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/;
+  
+  const pat6 = /(?<![\d])(\d{2})(\d{2})(\d{2})(?![\d])/;
+
+  
+  for (const p of [pat8, patSep, patKo]) {
+    const m = title.match(p);
+    if (m) {
+      const y = m[1], mo = m[2].padStart(2,'0'), d = m[3].padStart(2,'0');
+      if (parseInt(mo) >= 1 && parseInt(mo) <= 12 && parseInt(d) >= 1 && parseInt(d) <= 31) {
+        return `${y}.${mo}.${d}`;
+      }
+    }
+  }
+  
+  const m6 = title.match(pat6);
+  if (m6) {
+    const y = '20' + m6[1], mo = m6[2], d = m6[3];
+    if (parseInt(mo) >= 1 && parseInt(mo) <= 12 && parseInt(d) >= 1 && parseInt(d) <= 31) {
+      return `${y}.${mo}.${d}`;
+    }
+  }
+  return null;
+}
+
+function getVid(url) {
+  const ps = [
+    /youtu\.be\/([^?&\s]+)/,
+    /[?&]v=([^?&\s]+)/,
+    /youtube\.com\/embed\/([^?&\s]+)/,
+    /youtube\.com\/shorts\/([^?&\s]+)/,
+  ];
+  for (const p of ps) { const m = url.match(p); if (m) return m[1]; }
+  return null;
+}
+
+function thumbUrl(vid) {
+  return `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+}
+
+function ytUrl(vid) {
+  return 'https://www.youtube.com/watch?v=' + vid;
+}
+
+function openVideo(e, vid) {
+  if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    e.preventDefault();
+    window.open(ytUrl(vid), '_blank', 'noopener');
+  }
+  // 이전 배지 제거
+  document.querySelectorAll('.last-watched-badge').forEach(el => el.remove());
+  // 새 배지 추가
+  const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-'];
+  for (const p of prefixes) {
+    const card = document.getElementById(p + vid);
+    if (card) {
+      const badge = document.createElement('span');
+      badge.className = 'last-watched-badge';
+      badge.textContent = '마지막으로 본 영상';
+      card.querySelector('.thumb').appendChild(badge);
+      break;
+    }
+  }
+}
+
+async function fetchMeta(url) {
+  try {
+    const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);
+    if (!r.ok) throw 0;
+    const d = await r.json();
+    return {
+      rawTitle: d.title,
+      channel:  d.author_name,
+      date:     parseDate(d.title),
+      show:     parseShow(d.title),
+    };
+  } catch {
+    return { rawTitle: '', channel: '', date: null, show: null };
+  }
+}
+
+const ALL_ITEMS = [];
+for (const entry of RESCENE_DATA) {
+  for (const [type, urls] of Object.entries(entry.videos)) {
+    for (const url of urls) {
+      const vid = getVid(url);
+      if (!vid) continue;
+      ALL_ITEMS.push({ song: entry.song, type, url, vid, meta: null, loaded: false });
+    }
+  }
+}
+
+const CONTENT_DATA = [
+  {
+    category: "RESCENE Introduction",
+    urls: [
+      "https://youtu.be/KrGrd8m2cew",
+      "https://youtu.be/4fqiTeVz504",
+      "https://youtu.be/D88uhaLAGoM",
+      "https://youtu.be/JnVAt6ZMuG4",
+      "https://youtu.be/I_K54WugHtQ",
+      "https://youtu.be/l-RMOXHFMVk",
+      "https://youtu.be/gU5fP2e777Q",
+      "https://youtu.be/JR5CxaHZ1Cc",
+      "https://youtu.be/uDYy2UyO1X4",
+      "https://youtu.be/bJvUwy_gq3A",
+      "https://youtu.be/aA9DTVRSTbo",
+      "https://youtu.be/xkzCywGa1Eg",
+      "https://youtu.be/ONAW3Es4JwE",
+      "https://youtu.be/BvwONwBT3w0",
+      "https://youtu.be/ni0lb6YYPwQ",
+      "https://youtu.be/g-EGc6wVp9I",
+    ]
+  },
+  {
+    category: "BASE NOTES",
+    urls: [
+      "https://youtu.be/4j81hTzk178",
+      "https://youtu.be/HIP4sp40Awo",
+      "https://youtu.be/cLqqjNDqWMg",
+      "https://youtu.be/rDCQNWWWkE0",
+      "https://youtu.be/bqEAFISE7hc",
+      "https://youtu.be/7F3L7R6bZBA",
+      "https://youtu.be/LLMU9CaF9yI",
+      "https://youtu.be/IN5Vnej9UhI",
+      "https://youtu.be/EMoQrQfPF5M",
+      "https://youtu.be/ML00Fu86B9M",
+      "https://youtu.be/duurQm9NmHk",
+      "https://youtu.be/1UKFjyIIyFs",
+      "https://youtu.be/Nt-3cv0OfkE",
+      "https://youtu.be/cGosWWgsNjs",
+      "https://youtu.be/Cx8tXFPXZqk",
+      "https://youtu.be/BowmAWNKCKI",
+      "https://youtu.be/ZSk-lj7jX2k",
+      "https://youtu.be/lAHkez2DvwA",
+      "https://youtu.be/VeLrKottXZI",
+      "https://youtu.be/qOjBSaXFcIg",
+      "https://youtu.be/YExvIec1mtw",
+      "https://youtu.be/MdExOs06el4",
+      "https://youtu.be/_dUcpB9CgaY",
+      "https://youtu.be/nQiNK7p6Ohs",
+      "https://youtu.be/QEkzEM_kJCI",
+      "https://youtu.be/ZcOIlhAih38",
+      "https://youtu.be/EicUPexKEDE",
+      "https://youtu.be/voJbMfriFbI",
+      "https://youtu.be/zCdmGbkZDwo",
+      "https://youtu.be/860263NHDAI",
+      "https://youtu.be/FaNaH1a1c3k",
+      "https://youtu.be/ZzwlwioKwjk",
+      "https://youtu.be/D2bd-ABAbPo",
+      "https://youtu.be/5gUixjcMne8",
+      "https://youtu.be/rQ143lRSSd4",
+      "https://youtu.be/uuCBqyINkhw",
+      "https://youtu.be/edszA3S4eRs",
+      "https://youtu.be/EeHhcBwq0hQ",
+      "https://youtu.be/gSDodK69puY",
+      "https://youtu.be/Gt9GpU1yMWk",
+      "https://youtu.be/cFOAGLZNFCg",
+      "https://youtu.be/UC1s-yWK1Dk",
+      "https://youtu.be/bTLbLf2z8pQ",
+      "https://youtu.be/D0hHQRTADII",
+      "https://youtu.be/YfrsyCN30rs",
+      "https://youtu.be/9fEfAacMpDE",
+      "https://youtu.be/wfrXzdw1SR4",
+      "https://youtu.be/vwsH71lpyG4",
+      "https://youtu.be/uec8lTxOV6k",
+      "https://youtu.be/mw9lpLi_HJA",
+      "https://youtu.be/doGCcKx9F1Q",
+      "https://youtu.be/JdqQpNg9LP0",
+      "https://youtu.be/DT8fJqmk8fY",
+      "https://youtu.be/oVC1aQDDoGI",
+      "https://youtu.be/iV3UtGz3JKU",
+      "https://youtu.be/TD9f8ymdq14",
+      "https://youtu.be/nxR4my5whlU",
+      "https://youtu.be/1cxLn6elYn0",
+      "https://youtu.be/FehXr6GSRKo",
+      "https://youtu.be/vDt7xQkCCtM",
+      "https://youtu.be/u-2SUo7p_vI",
+      "https://youtu.be/wf7AR9GsZsk",
+      "https://youtu.be/LA46XZjrrZk",
+      "https://youtu.be/qrYBehtpojM",
+      "https://youtu.be/h_hW4FoKadc",
+    ]
+  },
+  {
+    category: "THE SCENT",
+    urls: [
+      "https://youtu.be/UwzQFY0eo_A",
+      "https://youtu.be/yzbCEI4ua8o",
+      "https://youtu.be/80GGat88Xzs",
+      "https://youtu.be/b-x8O2jyDkk",
+      "https://youtu.be/b1EJ3YqTAwk",
+    ]
+  },
+  {
+    category: "Special Clip",
+    urls: [
+      "https://youtu.be/Vj2jNxFqong",
+      "https://youtu.be/m_UqbdJV5T8",
+      "https://youtu.be/zCOAQMADQyY",
+      "https://youtu.be/G-tdsyfG90M",
+      "https://youtu.be/kxJNpgmfWjE",
+      "https://youtu.be/Krqqjcs6188",
+      "https://youtu.be/B47O9OcvCXA",
+    ]
+  },
+  {
+    category: "Re-log",
+    urls: [
+      "https://youtu.be/qDUkVfrcWJs",
+      "https://youtu.be/qCstak0tYos",
+      "https://youtu.be/-qG8y0p2Zds",
+      "https://youtu.be/UhgtuFEIAys",
+      "https://youtu.be/97YE7zPrON8",
+      "https://youtu.be/RiBPfWXPS9Y",
+      "https://youtu.be/uJ_MG1I_6MU",
+      "https://youtu.be/r17X1HWHxsM",
+    ]
+  },
+  {
+    category: "Anniversary",
+    urls: [
+      "https://youtu.be/Wa7Cs87L7SU",
+      "https://youtu.be/yPRYmyMw4g0",
+      "https://youtu.be/G2QpiBYo7Pc",
+      "https://youtu.be/O623FzKis10",
+      "https://youtu.be/W6F7n8DDgnk",
+      "https://youtu.be/N1WckPLsJ3k",
+      "https://youtu.be/WkUINlol-OY",
+    ]
+  },
+  {
+    category: "By RESCENE",
+    urls: [
+      "https://youtu.be/_3Wp8i5dfJs",
+      "https://youtu.be/Ocby704Ou-E",
+      "https://youtu.be/i0UW8-8UCvc",
+      "https://youtu.be/OybCC65kqEw",
+      "https://youtu.be/xeEMSoqKfBY",
+      "https://youtu.be/rVPh9-CtmiA",
+      "https://youtu.be/FzUeh7XBOmI",
+      "https://youtu.be/TucLh-PYwwE",
+      "https://youtu.be/e8CfO3CwiGI",
+      "https://youtu.be/vCkkkE7ktes",
+      "https://youtu.be/HVsMGlboV_s",
+      "https://youtu.be/1Jms0oQkL2k",
+      "https://youtu.be/qAdGlDfw7_U",
+      "https://youtu.be/AhJb7wPiOjQ",
+      "https://youtu.be/UUvDItkBMMY",
+      "https://youtu.be/0nIG0brWRao",
+      "https://youtu.be/rAR6A_y3P68",
+      "https://youtu.be/G-1Nc7tTJns",
+    ]
+  },
+];
+
+const CONTENT_ITEMS = [];
+for (const cat of CONTENT_DATA) {
+  for (const url of cat.urls) {
+    const vid = getVid(url);
+    if (!vid) continue;
+    CONTENT_ITEMS.push({ category: cat.category, url, vid, title: null, loaded: false });
+  }
+}
+
+
+
+
+
+
+
+
+const EXTERNAL_KEYS = ['baesungjae', 'relaydance', 'soundbomb360', 'blip', 'dontlookbag', 'recreation', 'interview', 'artistcanvas', 'daytripjeongseon', 'pblive', 'idolbackstage', 'idolunplugged', 'dolsilencium', 'dingo', 'arirangradio', 'matkwon', 'dolbagi', 'starroom', 'hifiction', 'chan19', 'physicalgallary20', 'chan21'];
+const EXTERNAL_LABELS = { baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", recreation: 'Re:Creation', interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰' };
+const EXTERNAL_DATA = {
+  baesungjae: [
+    { vid: 'QI4o-1Z9p_s', url: 'https://www.youtube.com/watch?v=QI4o-1Z9p_s', title: null, date: null, loaded: false },
+    { vid: 'smE4VwcGDTE', url: 'https://youtu.be/smE4VwcGDTE', title: null, date: null, loaded: false },
+    { vid: 'Q7pWeKFbWgU', url: 'https://youtu.be/Q7pWeKFbWgU', title: null, date: null, loaded: false },
+    { vid: 'xgFjQcR5WDA', url: 'https://youtu.be/xgFjQcR5WDA', title: null, date: null, loaded: false },
+    { vid: 'rrbTNmIVKmc', url: 'https://youtu.be/rrbTNmIVKmc', title: null, date: null, loaded: false },
+    { vid: 'GYt_MZcTTMk', url: 'https://youtu.be/GYt_MZcTTMk', title: null, date: null, loaded: false },
+  ],
+  relaydance: [
+    { vid: '4knUMoDhueo', url: 'https://youtu.be/4knUMoDhueo', title: null, date: null, loaded: false },
+    { vid: 'mKW6PsitCSQ', url: 'https://youtu.be/mKW6PsitCSQ', title: null, date: null, loaded: false },
+    { vid: 'HaC6XZRjpXc', url: 'https://youtu.be/HaC6XZRjpXc', title: null, date: null, loaded: false },
+    { vid: 'tyN8SszsRtQ', url: 'https://youtu.be/tyN8SszsRtQ', title: null, date: null, loaded: false },
+    { vid: 'sXecMQuWyOo', url: 'https://youtu.be/sXecMQuWyOo', title: null, date: null, loaded: false },
+    { vid: 'Q3Uy_6Z2cFo', url: 'https://youtu.be/Q3Uy_6Z2cFo', title: null, date: null, loaded: false },
+  ],
+  soundbomb360: [
+    { vid: 'NAXYoFYjcfk', url: 'https://youtu.be/NAXYoFYjcfk', title: null, date: null, loaded: false },
+    { vid: 'HQQcWMYZNjc', url: 'https://youtu.be/HQQcWMYZNjc', title: null, date: null, loaded: false },
+    { vid: '0eoxZv29UkA', url: 'https://youtu.be/0eoxZv29UkA', title: null, date: null, loaded: false },
+    { vid: '-2v4DGzQCSc', url: 'https://youtu.be/-2v4DGzQCSc', title: null, date: null, loaded: false },
+    { vid: 'lCdQIZQQqiQ', url: 'https://youtu.be/lCdQIZQQqiQ', title: null, date: null, loaded: false },
+    { vid: '32pQMFj8AOM', url: 'https://youtu.be/32pQMFj8AOM', title: null, date: null, loaded: false },
+    { vid: 'APOshkYdTL0', url: 'https://youtu.be/APOshkYdTL0', title: null, date: null, loaded: false },
+    { vid: '8-eWWKqMC8k', url: 'https://youtu.be/8-eWWKqMC8k', title: null, date: null, loaded: false },
+    { vid: 'FpBCr5TpPqw', url: 'https://youtu.be/FpBCr5TpPqw', title: null, date: null, loaded: false },
+    { vid: '6hJSgkqUVWc', url: 'https://youtu.be/6hJSgkqUVWc', title: null, date: null, loaded: false },
+    { vid: 'DwNnB6W8DUE', url: 'https://youtu.be/DwNnB6W8DUE', title: null, date: null, loaded: false },
+    { vid: 'IO7z1q7qQQc', url: 'https://youtu.be/IO7z1q7qQQc', title: null, date: null, loaded: false },
+    { vid: '2WaRiz5PU7o', url: 'https://youtu.be/2WaRiz5PU7o', title: null, date: null, loaded: false },
+    { vid: 'YHNopaeAxr8', url: 'https://youtu.be/YHNopaeAxr8', title: null, date: null, loaded: false },
+    { vid: 'qW2ixjRpm9Y', url: 'https://youtu.be/qW2ixjRpm9Y', title: null, date: null, loaded: false },
+  ],
+  blip: [
+    { vid: 'cKa8yd73YFQ', url: 'https://youtu.be/cKa8yd73YFQ', title: null, date: null, loaded: false },
+    { vid: '1i8ghNiKOOU', url: 'https://youtu.be/1i8ghNiKOOU', title: null, date: null, loaded: false },
+    { vid: 'LhpYH1wglWs', url: 'https://youtu.be/LhpYH1wglWs', title: null, date: null, loaded: false },
+    { vid: 'fHa0Mtxb31A', url: 'https://youtu.be/fHa0Mtxb31A', title: null, date: null, loaded: false },
+    { vid: '1a37e5GWMUM', url: 'https://youtu.be/1a37e5GWMUM', title: null, date: null, loaded: false },
+    { vid: 'iGgAH6O4JIs', url: 'https://youtu.be/iGgAH6O4JIs', title: null, date: null, loaded: false },
+    { vid: 'Nw4BTs2K3X4', url: 'https://youtu.be/Nw4BTs2K3X4', title: null, date: null, loaded: false },
+  ],
+  dontlookbag: [
+    { vid: 'bBusIXfjyvI', url: 'https://www.youtube.com/watch?v=bBusIXfjyvI', title: null, date: null, loaded: false },
+    { vid: 'CCBGSoJlFvE', url: 'https://www.youtube.com/watch?v=CCBGSoJlFvE', title: null, date: null, loaded: false },
+    { vid: 'bubnFseL05k', url: 'https://www.youtube.com/watch?v=bubnFseL05k', title: null, date: null, loaded: false },
+  ],
+  recreation: [
+    { vid: 't37nR21Str8', url: 'https://youtu.be/t37nR21Str8', title: null, date: null, loaded: false },
+    { vid: 'adFSoJAc2yg', url: 'https://www.youtube.com/watch?v=adFSoJAc2yg', title: null, date: null, loaded: false },
+    { vid: 'pYMr28ESeGM', url: 'https://youtu.be/pYMr28ESeGM', title: null, date: null, loaded: false },
+    { vid: 'GV_6frhuxPs', url: 'https://youtu.be/GV_6frhuxPs', title: null, date: null, loaded: false },
+    { vid: 'wyTLakQ1Fdg', url: 'https://youtu.be/wyTLakQ1Fdg', title: null, date: null, loaded: false },
+    { vid: 'Qz5c8QVnsFU', url: 'https://youtu.be/Qz5c8QVnsFU', title: null, date: null, loaded: false },
+    { vid: 'fZIZYl6QMYQ', url: 'https://www.youtube.com/watch?v=fZIZYl6QMYQ', title: null, date: null, loaded: false },
+    { vid: 'uOOJQqXyTh0', url: 'https://youtu.be/uOOJQqXyTh0', title: null, date: null, loaded: false },
+    { vid: '4NvNGILmy0Y', url: 'https://youtu.be/4NvNGILmy0Y', title: null, date: null, loaded: false },
+  ],
+  interview: [
+    { vid: 'cAKXNGUi8B0', url: 'https://youtu.be/cAKXNGUi8B0', title: null, date: null, loaded: false },
+    { vid: 'v7U7O3O9-JE', url: 'https://youtu.be/v7U7O3O9-JE', title: null, date: null, loaded: false },
+    { vid: 'NKDjYnV4Wcc', url: 'https://youtu.be/NKDjYnV4Wcc', title: null, date: null, loaded: false },
+    { vid: 'd4psisZDWpg', url: 'https://youtu.be/d4psisZDWpg', title: null, date: null, loaded: false },
+    { vid: 'vqbesIlW4O0', url: 'https://youtu.be/vqbesIlW4O0', title: null, date: null, loaded: false },
+  ],
+  artistcanvas: [
+    { vid: '7ykC1JAdCr8', url: 'https://youtu.be/7ykC1JAdCr8', title: null, date: null, loaded: false },
+    { vid: 'p1asr5bLsl0', url: 'https://youtu.be/p1asr5bLsl0', title: null, date: null, loaded: false },
+    { vid: 'SGmC-YuOWyM', url: 'https://youtu.be/SGmC-YuOWyM', title: null, date: null, loaded: false },
+    { vid: '91Rt3RMQEh8', url: 'https://youtu.be/91Rt3RMQEh8', title: null, date: null, loaded: false },
+    { vid: 'Nuc-IpjcvBs', url: 'https://www.youtube.com/watch?v=Nuc-IpjcvBs', title: null, date: null, loaded: false },
+    { vid: 'WgDRLNgzztU', url: 'https://www.youtube.com/watch?v=WgDRLNgzztU', title: null, date: null, loaded: false },
+    { vid: 'oY_DaS06dlo', url: 'https://www.youtube.com/watch?v=oY_DaS06dlo', title: null, date: null, loaded: false },
+  ],
+  daytripjeongseon: [
+    { vid: 'jEieMUq7iXY', url: 'https://www.youtube.com/watch?v=jEieMUq7iXY', title: null, date: null, loaded: false },
+    { vid: 'MYXmkxiFc54', url: 'https://www.youtube.com/watch?v=MYXmkxiFc54', title: null, date: null, loaded: false },
+  ],
+  pblive: [
+    { vid: 'KLIdXB5MC9s', url: 'https://www.youtube.com/watch?v=KLIdXB5MC9s', title: null, date: null, loaded: false },
+    { vid: 'B444RNWb-u0', url: 'https://www.youtube.com/watch?v=B444RNWb-u0', title: null, date: null, loaded: false },
+    { vid: 'FUhkv2YZxnc', url: 'https://www.youtube.com/watch?v=FUhkv2YZxnc', title: null, date: null, loaded: false },
+    { vid: 'SoxMWDZ7JXw', url: 'https://www.youtube.com/watch?v=SoxMWDZ7JXw', title: null, date: null, loaded: false },
+  ],
+  idolbackstage: [
+    { vid: 'x-R-9B894-E', url: 'https://youtu.be/x-R-9B894-E', title: null, date: null, loaded: false },
+    { vid: 'pHYC8bO6B2o', url: 'https://youtu.be/pHYC8bO6B2o', title: null, date: null, loaded: false },
+    { vid: '6q76zd38izM', url: 'https://youtu.be/6q76zd38izM', title: null, date: null, loaded: false },
+    { vid: 'MWEBO7idPhQ', url: 'https://youtu.be/MWEBO7idPhQ', title: null, date: null, loaded: false },
+    { vid: 'GJCJHzWkvZ8', url: 'https://youtu.be/GJCJHzWkvZ8', title: null, date: null, loaded: false },
+    { vid: 'wlfyyIK0be8', url: 'https://youtu.be/wlfyyIK0be8', title: null, date: null, loaded: false },
+  ],
+  idolunplugged: [
+    { vid: 'qkoHBILB7I4', url: 'https://youtu.be/qkoHBILB7I4', title: null, date: null, loaded: false },
+    { vid: 'caYd7jBfa9U', url: 'https://youtu.be/caYd7jBfa9U', title: null, date: null, loaded: false },
+    { vid: 'W07b3zKHnL4', url: 'https://youtu.be/W07b3zKHnL4', title: null, date: null, loaded: false },
+    { vid: 'uWCcmqVeh8I', url: 'https://youtu.be/uWCcmqVeh8I', title: null, date: null, loaded: false },
+  ],
+  dolsilencium: [
+    { vid: 'HJRim5C0L60', url: 'https://youtu.be/HJRim5C0L60', title: null, date: null, loaded: false },
+    { vid: 'x8EU50FVB1k', url: 'https://youtu.be/x8EU50FVB1k', title: null, date: null, loaded: false },
+    { vid: 'X0THv6jY69g', url: 'https://youtu.be/X0THv6jY69g', title: null, date: null, loaded: false },
+    { vid: 'hW62aZ6-VMA', url: 'https://youtu.be/hW62aZ6-VMA', title: null, date: null, loaded: false },
+  ],
+  dingo: [
+    { vid: '9IcjhTavfqQ', url: 'https://www.youtube.com/watch?v=9IcjhTavfqQ', title: null, date: null, loaded: false },
+    { vid: 'Yh6nG6UwBUg', url: 'https://youtu.be/Yh6nG6UwBUg', title: null, date: null, loaded: false },
+    { vid: 'oSK9blwG864', url: 'https://youtu.be/oSK9blwG864', title: null, date: null, loaded: false },
+    { vid: '4XoeevrIGaA', url: 'https://youtu.be/4XoeevrIGaA', title: null, date: null, loaded: false },
+    { vid: 'cxgqZqo14EA', url: 'https://youtu.be/cxgqZqo14EA', title: null, date: null, loaded: false },
+    { vid: 'idW0CiCAdfk', url: 'https://youtu.be/idW0CiCAdfk', title: null, date: null, loaded: false },
+    { vid: 'Lle0xkhk_9M', url: 'https://youtu.be/Lle0xkhk_9M', title: null, date: null, loaded: false },
+    { vid: '4-BYDjk5EsI', url: 'https://youtu.be/4-BYDjk5EsI', title: null, date: null, loaded: false },
+  ],
+  arirangradio: [
+    { vid: 'NNcBZaJQg1I', url: 'https://youtu.be/NNcBZaJQg1I', title: null, date: null, loaded: false },
+    { vid: 'WwGF_sqjH6c', url: 'https://youtu.be/WwGF_sqjH6c', title: null, date: null, loaded: false },
+    { vid: 'i7jSnzRA8UI', url: 'https://youtu.be/i7jSnzRA8UI', title: null, date: null, loaded: false },
+    { vid: '0pnnVlJLNbA', url: 'https://www.youtube.com/live/0pnnVlJLNbA', title: null, date: null, loaded: false },
+    { vid: 'leXYOsGqltA', url: 'https://youtu.be/leXYOsGqltA', title: null, date: null, loaded: false },
+    { vid: 'OSTU90FPU0I', url: 'https://youtu.be/OSTU90FPU0I', title: null, date: null, loaded: false },
+    { vid: 'BnYYkUQefJQ', url: 'https://youtu.be/BnYYkUQefJQ', title: null, date: null, loaded: false },
+    { vid: 'WhVH7yAaHy8', url: 'https://youtu.be/WhVH7yAaHy8', title: null, date: null, loaded: false },
+    { vid: 'zo2inLqmt64', url: 'https://youtu.be/zo2inLqmt64', title: null, date: null, loaded: false },
+    { vid: 'B4JSgVh2Dc0', url: 'https://youtu.be/B4JSgVh2Dc0', title: null, date: null, loaded: false },
+    { vid: '_GHDLCVpYLM', url: 'https://youtu.be/_GHDLCVpYLM', title: null, date: null, loaded: false },
+    { vid: 'YsPHUlAQkUg', url: 'https://youtu.be/YsPHUlAQkUg', title: null, date: null, loaded: false },
+    { vid: '4iZUV00c8s8', url: 'https://youtu.be/4iZUV00c8s8', title: null, date: null, loaded: false },
+  ],
+  matkwon: [
+    { vid: 'r0aBwvfiNjY', url: 'https://youtu.be/r0aBwvfiNjY', title: null, date: null, loaded: false },
+    { vid: 'ip8k2pM_GOU', url: 'https://youtu.be/ip8k2pM_GOU', title: null, date: null, loaded: false },
+  ],
+  dolbagi: [
+    { vid: 'LgcegoGS41k', url: 'https://www.youtube.com/watch?v=LgcegoGS41k', title: null, date: null, loaded: false },
+  ],
+  starroom: [
+    { vid: 'waTiGXeIRJE', url: 'https://www.youtube.com/watch?v=waTiGXeIRJE', title: null, date: null, loaded: false },
+    { vid: '5Whlkurz0-E', url: 'https://www.youtube.com/watch?v=5Whlkurz0-E', title: null, date: null, loaded: false },
+  ],
+  hifiction: [
+    { vid: '37tje2u7SZ8', url: 'https://youtu.be/37tje2u7SZ8', title: '인질 역할에 아이돌이 왔다 (feat. 리센느)', date: null, loaded: false },
+  ],
+  chan19: [
+    { vid: 'UWBzwqcb9tI', url: 'https://www.youtube.com/watch?v=UWBzwqcb9tI', title: null, date: null, loaded: false },
+    { vid: 'Ge-nX5VE28A', url: 'https://youtu.be/Ge-nX5VE28A?si=Edx8IKKa2VMei_b_', title: null, date: null, loaded: false },
+  ],
+  physicalgallary20: [
+    { vid: 'If2kxD44R8A', url: 'https://youtu.be/If2kxD44R8A?si=Iywjfc0U2AJsKwp1', title: null, date: null, loaded: false },
+  ],
+  chan21: [
+    { vid: 'jO_rFjE-3Es', url: 'https://youtu.be/jO_rFjE-3Es?si=2ouaLPAtkhVFC7HV', title: null, date: null, loaded: false },
+    { vid: 'X0AWk7EITLE', url: 'https://www.youtube.com/watch?v=X0AWk7EITLE', title: null, date: null, loaded: false },
+    { vid: 'W0cpLR0rz0Q', url: 'https://youtu.be/W0cpLR0rz0Q', title: null, date: null, loaded: false },
+    { vid: 'yMeBhxSGvVw', url: 'https://youtu.be/yMeBhxSGvVw', title: null, date: null, loaded: false },
+  ],
+};
+const VID_TO_EXTERNAL_KEY = {};
+for (const key of EXTERNAL_KEYS) {
+  for (const item of EXTERNAL_DATA[key]) {
+    VID_TO_EXTERNAL_KEY[item.vid] = key;
+  }
+}
+
+let curSection = 'about';
+let curSong = 'all';       // 'all' or specific song name
+let curType = 'all';
+let curContentCat = 'all';
+let curExternal = 'all';
+
+function buildContentNav() {
+  const nav = document.getElementById('contentNav');
+  const cats = CONTENT_DATA.map(c => c.category);
+  const totalCnt = CONTENT_ITEMS.length;
+  let html = `<button class="song-tab ${curContentCat === 'all' ? 'active' : ''}" onclick="setContentCat(this,'all')">ALL<span class="cnt">${totalCnt}</span></button>`;
+  html += cats.map(c => {
+    const cnt = CONTENT_ITEMS.filter(i => i.category === c).length;
+    return `<button class="song-tab ${curContentCat === c ? 'active' : ''}" onclick="setContentCat(this,'${c.replace(/'/g,"&#39;")}')">${c}<span class="cnt">${cnt}</span></button>`;
+  }).join('');
+  nav.innerHTML = html;
+}
+
+function setContentCat(el, cat) {
+  curContentCat = cat;
+  document.querySelectorAll('#contentNav .song-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  buildGrid();
+}
+
+function buildContentCard(item, delay) {
+  const title = item.title || item.vid;
+  const dateStr = item.date || '';
+  const channel = item.channel || '';
+  return `<a class="vcard tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+    <div class="thumb">
+      <img src="https://img.youtube.com/vi/${item.vid}/hqdefault.jpg" alt=""
+           loading="lazy"
+           onerror="this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg'">
+      <div class="play-ring">
+        <svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1l10 6-10 6V1z"/>
+        </svg>
+      </div>
+      <span class="type-badge tb-content">${item.category}</span>
+    </div>
+    <div class="cbody">
+      <div class="csong-multi">${title}</div>
+      <div class="cmeta">
+        ${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}
+        ${channel && !dateStr ? `<span class="cdate">${channel}</span>` : ''}
+      </div>
+    </div>
+  </a>`;
+}
+
+async function loadContentMetas(items) {
+  const unloaded = items.filter(i => !i.loaded);
+  const CHUNK = 5;
+  for (let i = 0; i < unloaded.length; i += CHUNK) {
+    const batch = unloaded.slice(i, i + CHUNK);
+    await Promise.all(batch.map(async item => {
+      try {
+        const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(item.url)}&format=json`);
+        if (r.ok) {
+          const d = await r.json();
+          item.title = d.title;
+          item.date = parseDate(d.title);
+          item.channel = d.author_name || '';
+        }
+      } catch {}
+      item.loaded = true;
+      
+      const sk = document.getElementById(`csk-${item.vid}`);
+      const vc = document.getElementById(`cvc-${item.vid}`);
+      const target = sk || vc;
+      if (target) {
+        const delay = target.style.animationDelay;
+        const tmp = document.createElement('div');
+        tmp.innerHTML = buildContentCard(item, delay);
+        target.replaceWith(tmp.firstElementChild);
+      }
+    }));
+  }
+}
+
+function buildExternalNav() {
+  const nav = document.getElementById('externalNav');
+  const totalCnt = EXTERNAL_KEYS.reduce((s, k) => s + EXTERNAL_DATA[k].length, 0);
+  let html = `<button class="song-tab ${curExternal === 'all' ? 'active' : ''}" onclick="pickExternal(this,'all')">ALL<span class="cnt">${totalCnt}</span></button>`;
+  html += EXTERNAL_KEYS.map(key => {
+    const cnt = EXTERNAL_DATA[key].length;
+    return `<button class="song-tab ${curExternal === key ? 'active' : ''}" onclick="pickExternal(this,'${key}')">${EXTERNAL_LABELS[key]}<span class="cnt">${cnt}</span></button>`;
+  }).join('');
+  nav.innerHTML = html;
+}
+
+function pickExternal(el, key) {
+  curExternal = key;
+  document.querySelectorAll('#externalNav .song-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  buildExternalGrid();
+}
+
+function buildExternalCard(item, delay) {
+  const title = item.title || item.vid;
+  const dateStr = item.date || '';
+  return `<a class="vcard tb-content" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+    <div class="thumb">
+      <img src="https://img.youtube.com/vi/${item.vid}/hqdefault.jpg" alt=""
+           loading="lazy"
+           onerror="this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg'">
+      <div class="play-ring">
+        <svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1l10 6-10 6V1z"/>
+        </svg>
+      </div>
+    </div>
+    <div class="cbody">
+      <div class="csong-multi">${title}</div>
+      <div class="cmeta">
+        ${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}
+      </div>
+    </div>
+  </a>`;
+}
+
+async function loadExternalMetas(items) {
+  const unloaded = items.filter(i => !i.loaded);
+  const CHUNK = 5;
+  for (let i = 0; i < unloaded.length; i += CHUNK) {
+    const batch = unloaded.slice(i, i + CHUNK);
+    await Promise.all(batch.map(async item => {
+      try {
+        const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(item.url)}&format=json`);
+        if (r.ok) {
+          const d = await r.json();
+          if (!item.title) item.title = d.title;
+          item.date = parseDate(d.title);
+        }
+      } catch {}
+      if (!item.title) {
+        const key = VID_TO_EXTERNAL_KEY[item.vid];
+        item.title = key ? EXTERNAL_LABELS[key] : item.vid;
+      }
+      item.loaded = true;
+      const sk = document.getElementById(`esk-${item.vid}`);
+      const vc = document.getElementById(`evc-${item.vid}`);
+      const target = sk || vc;
+      if (target) {
+        const delay = target.style.animationDelay;
+        const tmp = document.createElement('div');
+        tmp.innerHTML = buildExternalCard(item, delay);
+        target.replaceWith(tmp.firstElementChild);
+      }
+    }));
+  }
+}
+
+function buildExternalGrid() {
+  const grid = document.getElementById('grid');
+  const items = curExternal === 'all'
+    ? EXTERNAL_KEYS.flatMap(k => EXTERNAL_DATA[k])
+    : (EXTERNAL_DATA[curExternal] || []);
+
+  if (!items.length) {
+    grid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>링크가 아직 추가되지 않았습니다.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = items.map((item, idx) => {
+    const delay = `${Math.min(idx * 0.03, 0.4)}s`;
+    if (!item.loaded) {
+      return `<div class="skeleton" id="esk-${item.vid}" style="animation-delay:${delay}">
+        <div class="skel-thumb"></div>
+        <div class="skel-body">
+          <div class="skel-line"></div>
+          <div class="skel-line s"></div>
+        </div>
+      </div>`;
+    }
+    return buildExternalCard(item, delay);
+  }).join('');
+
+  loadExternalMetas(items);
+}
+
+const FANTUBE_CHANNELS = [
+  { name: 'TTL', url: 'https://www.youtube.com/@춘장치킨', handle: '@춘장치킨', avatar: 'https://yt3.googleusercontent.com/8E3s7hQiB_UCdrO0_kWdIYymV_gH359msiZ5mcO3jhGDhZzrcXEMPhbTf5H8u93wjoVOJzG1=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '리센느서치P', url: 'https://www.youtube.com/@리센느서치P', handle: '@리센느서치P', avatar: 'https://yt3.googleusercontent.com/uvDeiIdmS9IDmpJ5C6pyFbwN-nOBhPZM1JGxxUKyrk-HdliyqfTsJWR3ZOJVquBtSiLFd6746tU=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '사진정원2', url: 'https://www.youtube.com/@picture_garden2', handle: '@picture_garden2', avatar: 'https://yt3.googleusercontent.com/KyaXKKjFB2y_H5b0Kgh01Wx9SJSj9gW3-aF1WarH5DYd337zQha1EybTcmfqDJ_WnkJfNryr-mc=s160-c-k-c0x00ffffff-no-rj' },
+  { name: 'SCENT', url: 'https://www.youtube.com/@RESCENE_SCENT', handle: '@RESCENE_SCENT', avatar: 'https://yt3.googleusercontent.com/tIM5mGKZjPBwt_txc3qUBzGBtLuBO9q4vi-zIp6OSQ6dYIoNTLHsoST430y7rH0R1WzwR9KyvQ0=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '치즈냥이리브', url: 'https://www.youtube.com/@치즈냥이리브', handle: '@치즈냥이리브', avatar: 'https://yt3.googleusercontent.com/gbFsolUY6QR-6smv_V20qlV31uGDpWVTvbh8J2KKosUvZHhuandJl8_S-9f4cJFNQeHnlcr88zU=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '힘센느', url: 'https://www.youtube.com/@힘센느', handle: '@힘센느', avatar: 'https://yt3.googleusercontent.com/GksWxlzV92UCCRgTEi0NuKId6ccueipo6EW7nr8xCjc5vPyly-qbq1DN-yf08svGV8ZpZpMM=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '예넨이', url: 'https://www.youtube.com/@yeneni0819', handle: '@yeneni0819', avatar: 'https://yt3.googleusercontent.com/uX-qNhjjtfR7FuYLMHr8UaXmz_9rBJpDECrI2G8wtRRtYILmFC9QcIMDKVXKwRlHuIU7WQTdw48=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '이센느', url: 'https://www.youtube.com/@이센느', handle: '@이센느', avatar: 'https://yt3.googleusercontent.com/Fp0Uqp2dRPpbnNcV4BhXI4gGp6FFZZKyiWg0NNJvvmpg22Pb9FvovBKKrfegWNqAJqcPaWFM2Zo=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '르센느아니고리센느', url: 'https://www.youtube.com/@르센느아니고리센느', handle: '@르센느아니고리센느', avatar: 'https://yt3.googleusercontent.com/jyA38uXCWTuxLB1Sp6NYDukDZ5JXwod0ce-fsHbzbBN52GkrFYRi21usp1l_xW-sLvOp2gog=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '카르나미♡', url: 'https://www.youtube.com/@CARNAMI_1129', handle: '@CARNAMI_1129', avatar: 'https://yt3.googleusercontent.com/9TbDOac0fQ9yTO212Ya_BR0RfG_h-gCd4nNTUiw_vE1MHJvpnSz41UJ3D8AN4OwLqfPeCkouqw=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '젠콩단', url: 'https://www.youtube.com/@젠콩단', handle: '@젠콩단', avatar: 'https://yt3.googleusercontent.com/zsQeZENh-c1vZrYRl7Pbbx97iloTwdDFHz8GHdEjwXWzQ_WvwKqKJf6ss-7RTtiJW3xtQ6uJ0J0=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '원아지', url: 'https://www.youtube.com/@wonaji_525', handle: '@wonaji_525', avatar: 'https://yt3.googleusercontent.com/nP3pdIQTe1K87lDzP3rBetDQMY2RgT3PNUfOSPfKceL7t9eAmQ5GoPMz38nPGTD9egH-rhVMJQ=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '리센느붐업', url: 'https://www.youtube.com/@rescene_boomup', handle: '@rescene_boomup', avatar: 'https://yt3.googleusercontent.com/_mQaZ72UrRvlL4Kk0IV1joxoVx1405xEjCyIWeaeDa6MgF5P9lsy4sgRQQB6WciNIaMHmeGKfg=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '어디까엉', url: 'https://www.youtube.com/@어디까엉', handle: '@어디까엉', avatar: 'https://yt3.googleusercontent.com/uLj6pQmYLdk0Ozq4SfxjQ2aviPB5OUfCN4pxufQji7JSCFe2hEbFsK43_fTjw12i8SZiWRDjkw=s160-c-k-c0x00ffffff-no-rj' },
+  { name: 'Flow.', url: 'https://www.youtube.com/@Flow_0525', handle: '@Flow_0525', avatar: 'https://yt3.googleusercontent.com/At_LA7kGlYuqMPqqg-ZJq8Wze1geQ24rIabNXRYkI9LBnMhsLQX9i678aZyoP-llmDU-aW6XNg=s160-c-k-c0x00ffffff-no-rj' },
+];
+
+
+function buildFantubeCard(ch, idx, avatarUrl) {
+  const delay = `${Math.min(idx * 0.04, 0.5)}s`;
+  const avatarHtml = avatarUrl
+    ? `<img src="${avatarUrl}" alt="${ch.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'ftcard-avatar-placeholder\\'>▶</div>'">`
+    : `<div class="ftcard-avatar-placeholder">▶</div>`;
+  return `<a class="ftcard" href="${ch.url}" target="_blank" rel="noopener" style="animation-delay:${delay}">
+    <div class="ftcard-avatar">${avatarHtml}</div>
+    <div class="ftcard-info">
+      <span class="ftcard-name">${ch.name}</span>
+      <span class="ftcard-handle">${ch.handle}</span>
+    </div>
+    <span class="ftcard-arrow">↗</span>
+  </a>`;
+}
+
+let _fantubeBuildDone = false;
+
+function buildFantubeGrid() {
+  const grid = document.getElementById('fantubeGrid');
+  if (!grid) return;
+  if (_fantubeBuildDone) return;
+
+  grid.innerHTML = FANTUBE_CHANNELS.map((ch, i) =>
+    buildFantubeCard(ch, i, ch.avatar)
+  ).join('');
+
+  _fantubeBuildDone = true;
+}
+
+let curLiveYear   = 'all';
+let curLiveMember = 'all';
+
+function buildLiveNav() {
+  const nav = document.getElementById('liveNav');
+  let html = `<button class="song-tab ${curLiveYear === 'all'  ? 'active' : ''}" onclick="pickLiveYear(this,'all')">ALL</button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2024' ? 'active' : ''}" onclick="pickLiveYear(this,'2024')">2024년</button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2025' ? 'active' : ''}" onclick="pickLiveYear(this,'2025')">2025년</button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2026' ? 'active' : ''}" onclick="pickLiveYear(this,'2026')">2026년</button>`;
+  nav.innerHTML = html;
+}
+
+function pickLiveYear(el, year) {
+  curLiveYear = year;
+  document.querySelectorAll('#liveNav .song-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  buildLiveGrid();
+}
+
+function setLiveMember(el, member) {
+  curLiveMember = member;
+  document.querySelectorAll('#liveMode .type-btn').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  buildLiveGrid();
+}
+
+const LIVE_DATA_2024 = [
+  { vid:'8T0J9NrvxYs', url:'https://youtu.be/8T0J9NrvxYs', date:'3월 26일', title:null, members:['전원'], year:'2024' },
+  { vid:'wKoIL4KobIs', url:'https://youtu.be/wKoIL4KobIs', date:'4월 5일', title:null, members:['전원'], year:'2024' },
+  { vid:'kGe2er0xjGc', url:'https://youtu.be/kGe2er0xjGc', date:'4월 9일', title:null, members:['전원'], year:'2024' },
+  { vid:'C5NgIlSDTqY', url:'https://youtu.be/C5NgIlSDTqY', date:'4월 17일', title:null, members:['전원'], year:'2024' },
+  { vid:'czq2GsxdmNI', url:'https://youtu.be/czq2GsxdmNI', date:'4월 26일', title:null, members:['전원'], year:'2024' },
+  { vid:'9MaWl8r8s1w', url:'https://youtu.be/9MaWl8r8s1w', date:'5월 8일', title:null, members:['전원'], year:'2024' },
+  { vid:'6rPltcoAxaA', url:'https://youtu.be/6rPltcoAxaA', date:'5월 13일', title:null, members:['미나미'], year:'2024' },
+  { vid:'biKOyXFy8Bk', url:'https://youtu.be/biKOyXFy8Bk', date:'5월 18일', title:null, members:['리브','미나미'], year:'2024' },
+  { vid:'CiY40Jh4dws', url:'https://youtu.be/CiY40Jh4dws', date:'5월 25일', title:null, members:['원이'], year:'2024' },
+  { vid:'8le7k6JSSwE', url:'https://youtu.be/8le7k6JSSwE', date:'5월 29일', title:null, members:['전원'], year:'2024' },
+  { vid:'vHeY4_qcey0', url:'https://youtu.be/vHeY4_qcey0', date:'6월 1일', title:null, members:['전원'], year:'2024' },
+  { vid:'-HZ_MU5RB4I', url:'https://youtu.be/-HZ_MU5RB4I', date:'6월 8일', title:null, members:['원이'], year:'2024' },
+  { vid:'5WrT3GeMgNg', url:'https://youtu.be/5WrT3GeMgNg', date:'6월 8일', title:null, members:['원이','메이'], year:'2024' },
+  { vid:'SAc0ZrJzS9U', url:'https://youtu.be/SAc0ZrJzS9U', date:'6월 13일', title:'제나와 리브의 노래방 💓. Zena and Liv\'s Karaoke💞', members:['제나','리브'], year:'2024' },
+  { vid:'b4fgkgaLUVk', url:'https://youtu.be/b4fgkgaLUVk', date:'6월 15일', title:null, members:['원이','메이'], year:'2024' },
+  { vid:'oDWGsOCxrZQ', url:'https://youtu.be/oDWGsOCxrZQ', date:'6월 15일', title:null, members:['리브','미나미','제나'], year:'2024' },
+  { vid:'TXUZTKgeyXo', url:'https://www.youtube.com/live/TXUZTKgeyXo?si=ogIBga3eSiEs7Ier', date:'6월 15일', title:null, members:['전원'], year:'2024' },
+  { vid:'JHFCQl4_ljY', url:'https://youtu.be/JHFCQl4_ljY', date:'6월 28일', title:null, members:['전원'], year:'2024' },
+  { vid:'lm_9K2aH050', url:'https://youtu.be/lm_9K2aH050', date:'7월 10일', title:null, members:['전원'], year:'2024' },
+  { vid:'wxy_btUxqDA', url:'https://youtu.be/wxy_btUxqDA', date:'7월 26일', title:null, members:['메이'], year:'2024' },
+  { vid:'vRl5KRj3BMc', url:'https://youtu.be/vRl5KRj3BMc', date:'7월 27일', title:null, members:['원이','리브'], year:'2024' },
+  { vid:'T3L2q0iB9Mk', url:'https://youtu.be/T3L2q0iB9Mk', date:'7월 28일', title:null, members:['리브','제나'], year:'2024' },
+  { vid:'dw2u2tbECg4', url:'https://youtu.be/dw2u2tbECg4', date:'8월 3일', title:null, members:['리브','메이'], year:'2024' },
+  { vid:'v5z11R6kTnU', url:'https://youtu.be/v5z11R6kTnU', date:'8월 3일', title:null, members:['원이','리브','메이'], year:'2024' },
+  { vid:'u4yJfOybF4Y', url:'https://youtu.be/u4yJfOybF4Y', date:'8월 4일', title:null, members:['원이'], year:'2024' },
+  { vid:'AGPM1rywdcw', url:'https://youtu.be/AGPM1rywdcw', date:'8월 9일', title:null, members:['리브','제나'], year:'2024' },
+  { vid:'f9FnEhOVezs', url:'https://youtu.be/f9FnEhOVezs', date:'8월 19일', title:null, members:['메이'], year:'2024' },
+  { vid:'LcPJKLQP-dI', url:'https://youtu.be/LcPJKLQP-dI', date:'8월 31일', title:null, members:['리브','제나'], year:'2024' },
+  { vid:'qt2Sv4mikmg', url:'https://youtu.be/qt2Sv4mikmg', date:'9월 3일', title:null, members:['원이','메이'], year:'2024' },
+  { vid:'-UCU2EBgQ2w', url:'https://youtu.be/-UCU2EBgQ2w', date:'9월 3일', title:null, members:['원이','메이','제나'], year:'2024' },
+  { vid:'l6szHmEa-V4', url:'https://youtu.be/l6szHmEa-V4', date:'9월 5일', title:null, members:['리브','미나미'], year:'2024' },
+  { vid:'ssxQskkO1uE', url:'https://youtu.be/ssxQskkO1uE', date:'9월 5일', title:null, members:['리브','미나미'], year:'2024' },
+  { vid:'rTxp0md55Gg', url:'https://youtu.be/rTxp0md55Gg', date:'9월 5일', title:null, members:['리브','미나미','제나'], year:'2024' },
+  { vid:'VB5d5bILm5o', url:'https://youtu.be/VB5d5bILm5o', date:'9월 6일', title:null, members:['리브','메이','제나'], year:'2024' },
+  { vid:'hlC3ceUHF50', url:'https://youtu.be/hlC3ceUHF50', date:'9월 8일', title:null, members:['전원'], year:'2024' },
+  { vid:'5YHhBw9BRdY', url:'https://youtu.be/5YHhBw9BRdY', date:'9월 18일', title:null, members:['메이'], year:'2024' },
+  { vid:'FzKwxj4wkUs', url:'https://youtu.be/FzKwxj4wkUs', date:'9월 24일', title:null, members:['원이'], year:'2024' },
+  { vid:'iKZ5b_il1gA', url:'https://youtu.be/iKZ5b_il1gA', date:'9월 28일', title:null, members:['메이'], year:'2024' },
+  { vid:'Eu6QZZRX1l4', url:'https://www.youtube.com/live/Eu6QZZRX1l4?si=uhTtHDPzSwRxb3he', date:'9월 28일', title:null, members:['리브','메이','제나'], year:'2024' },
+  { vid:'egGs5vitwk8', url:'https://youtu.be/egGs5vitwk8', date:'10월 1일', title:null, members:['미나미'], year:'2024' },
+  { vid:'lG-sME3x8R8', url:'https://youtu.be/lG-sME3x8R8', date:'10월 2일', title:null, members:['리브','제나','원이','메이'], year:'2024' },
+  { vid:'P4L4GeNMaWk', url:'https://youtu.be/P4L4GeNMaWk', date:'10월 7일', title:null, members:['전원'], year:'2024' },
+  { vid:'vzk4wXM98J0', url:'https://youtu.be/vzk4wXM98J0', date:'10월 9일', title:null, members:['원이','리브','제나'], year:'2024' },
+  { vid:'a8Cec3V8QiM', url:'https://youtu.be/a8Cec3V8QiM', date:'10월 11일', title:null, members:['리브'], year:'2024' },
+  { vid:'l0QnN1z-lgg', url:'https://youtu.be/l0QnN1z-lgg', date:'10월 19일', title:null, members:['원이'], year:'2024' },
+  { vid:'Ln5VWvqHDEM', url:'https://youtu.be/Ln5VWvqHDEM', date:'10월 20일', title:null, members:['리브','미나미','제나'], year:'2024' },
+  { vid:'vzLpABYZXrU', url:'https://youtu.be/vzLpABYZXrU', date:'10월 20일', title:null, members:['리브','미나미','제나'], year:'2024' },
+  { vid:'wMafswIJhUg', url:'https://youtu.be/wMafswIJhUg', date:'10월 20일', title:null, members:['메이'], year:'2024' },
+  { vid:'6rAdtQAVsJc', url:'https://youtu.be/6rAdtQAVsJc', date:'10월 25일', title:null, members:['리브','미나미','제나'], year:'2024' },
+  { vid:'ubIGCREnJ1k', url:'https://youtu.be/ubIGCREnJ1k', date:'10월 27일', title:null, members:['원이'], year:'2024' },
+  { vid:'KgrymtWNQ3s', url:'https://youtu.be/KgrymtWNQ3s', date:'10월 30일', title:null, members:['미나미'], year:'2024' },
+  { vid:'A5iTE_FdEgY', url:'https://youtu.be/A5iTE_FdEgY', date:'10월 31일', title:null, members:['리브'], year:'2024' },
+  { vid:'uF_5P75RJsM', url:'https://youtu.be/uF_5P75RJsM', date:'11월 3일', title:null, members:['원이'], year:'2024' },
+  { vid:'ryn87JFtW2k', url:'https://youtu.be/ryn87JFtW2k', date:'11월 7일', title:null, members:['원이','리브','메이'], year:'2024' },
+  { vid:'bf2nRE9F-Ms', url:'https://youtu.be/bf2nRE9F-Ms', date:'11월 8일', title:null, members:['원이','메이'], year:'2024' },
+  { vid:'m8n73GwIrpQ', url:'https://youtu.be/m8n73GwIrpQ', date:'11월 16일', title:null, members:['메이','제나'], year:'2024' },
+  { vid:'Ay-PdxOh86I', url:'https://youtu.be/Ay-PdxOh86I', date:'11월 17일', title:null, members:['원이','미나미'], year:'2024' },
+  { vid:'XRFGyzK2Prk', url:'https://youtu.be/XRFGyzK2Prk', date:'11월 18일', title:null, members:['원이'], year:'2024' },
+  { vid:'t3oae9KLstA', url:'https://youtu.be/t3oae9KLstA', date:'11월 22일', title:null, members:['리브','메이'], year:'2024' },
+  { vid:'Knn-QpiTRJI', url:'https://youtu.be/Knn-QpiTRJI', date:'11월 23일', title:null, members:['원이'], year:'2024' },
+  { vid:'oyUiOiS8T3U', url:'https://youtu.be/oyUiOiS8T3U', date:'11월 27일', title:null, members:['제나'], year:'2024' },
+  { vid:'nxrahKVucyU', url:'https://youtu.be/nxrahKVucyU', date:'11월 29일', title:null, members:['미나미'], year:'2024' },
+  { vid:'F7pS4GjQ0y4', url:'https://youtu.be/F7pS4GjQ0y4', date:'11월 30일', title:null, members:['리브'], year:'2024' },
+  { vid:'hJEM2m5MhEo', url:'https://youtu.be/hJEM2m5MhEo', date:'12월 3일', title:null, members:['원이'], year:'2024' },
+  { vid:'RxIhBp6dJCk', url:'https://youtu.be/RxIhBp6dJCk', date:'12월 10일', title:null, members:['원이','리브'], year:'2024' },
+  { vid:'A-GGtiI2_eU', url:'https://youtu.be/A-GGtiI2_eU', date:'12월 13일', title:null, members:['메이'], year:'2024' },
+  { vid:'vrpVuJWhc_o', url:'https://youtu.be/vrpVuJWhc_o', date:'12월 14일', title:null, members:['원이','메이'], year:'2024' },
+  { vid:'hMTrHvBo-6E', url:'https://youtu.be/hMTrHvBo-6E', date:'12월 16일', title:null, members:['리브','제나'], year:'2024' },
+  { vid:'p9iNLbtUvbM', url:'https://youtu.be/p9iNLbtUvbM', date:'12월 16일', title:null, members:['미나미'], year:'2024' },
+  { vid:'_Y0iAMz2-sw', url:'https://youtu.be/_Y0iAMz2-sw', date:'12월 19일', title:null, members:['원이'], year:'2024' },
+  { vid:'I5n1JjWPgQU', url:'https://youtu.be/I5n1JjWPgQU', date:'12월 14일', title:null, members:['메이'], year:'2024' },
+  { vid:'I80WHuDtT9I', url:'https://youtu.be/I80WHuDtT9I', date:'12월 24일', title:null, members:['전원'], year:'2024' },
+  { vid:'rwFSq6jXSsY', url:'https://youtu.be/rwFSq6jXSsY', date:'12월 25일', title:null, members:['전원'], year:'2024' },
+  { vid:'upTarPjmgyM', url:'https://youtu.be/upTarPjmgyM', date:'12월 26일', title:null, members:['원이','리브'], year:'2024' },
+];
+
+const LIVE_DATA_2025 = [
+  { vid:'r0ndZikTONE', url:'https://youtu.be/r0ndZikTONE', date:'1월 10일', members:['전원'], year:'2025' },
+  { vid:'UAVL6qhNeG4', url:'https://youtu.be/UAVL6qhNeG4', date:'1월 15일', members:['메이'], year:'2025' },
+  { vid:'uj6-zSUwlc0', url:'https://youtu.be/uj6-zSUwlc0', date:'1월 17일', members:['전원'], year:'2025' },
+  { vid:'apoPobosOjE', url:'https://youtu.be/apoPobosOjE', date:'1월 18일', members:['제나'], year:'2025' },
+  { vid:'1uztX5At3Jw', url:'https://youtu.be/1uztX5At3Jw', date:'1월 19일', members:['전원'], year:'2025' },
+  { vid:'YJ8QR4BwAzE', url:'https://youtu.be/YJ8QR4BwAzE', date:'1월 22일', members:['메이'], year:'2025' },
+  { vid:'ewhVQf3P3zg', url:'https://youtu.be/ewhVQf3P3zg', date:'1월 23일', members:['전원'], year:'2025' },
+  { vid:'mDk2Cha_5S4', url:'https://youtu.be/mDk2Cha_5S4', date:'1월 26일', members:['원이'], year:'2025' },
+  { vid:'nv5JnstJCmI', url:'https://youtu.be/nv5JnstJCmI', date:'1월 27일', members:['전원'], year:'2025' },
+  { vid:'qpZrJLheWHY', url:'https://youtu.be/qpZrJLheWHY', date:'2월 4일',  members:['전원'], year:'2025' },
+  { vid:'CpXuvyMl70E', url:'https://youtu.be/CpXuvyMl70E', date:'2월 5일',  members:['전원'], year:'2025' },
+  { vid:'7ufduZI1wkw', url:'https://youtu.be/7ufduZI1wkw', date:'2월 8일',  members:['메이'], year:'2025' },
+  { vid:'R3PwWttEdIw', url:'https://youtu.be/R3PwWttEdIw', date:'2월 18일', members:['메이'], year:'2025' },
+  { vid:'Bm4z4Y3hpMc', url:'https://youtu.be/Bm4z4Y3hpMc', date:'2월 24일', members:['원이','리브'], year:'2025' },
+  { vid:'wVU5F7sLLwI', url:'https://youtu.be/wVU5F7sLLwI', date:'2월 26일', members:['원이','메이'], year:'2025' },
+  { vid:'7ALQVuM_4rs', url:'https://youtu.be/7ALQVuM_4rs', date:'3월 4일',  members:['원이'], year:'2025' },
+  { vid:'N8YK9EcZ9AM', url:'https://youtu.be/N8YK9EcZ9AM', date:'3월 5일',  members:['리브','미나미','제나'], year:'2025' },
+  { vid:'Na2m2B5i2RA', url:'https://youtu.be/Na2m2B5i2RA', date:'3월 8일',  members:['전원'], year:'2025' },
+  { vid:'PAy10qC36Wo', url:'https://youtu.be/PAy10qC36Wo', date:'3월 12일', members:['제나'], year:'2025' },
+  { vid:'U3Wh8pnShuw', url:'https://youtu.be/U3Wh8pnShuw', date:'3월 12일', members:['제나'], year:'2025' },
+  { vid:'Nx_8DoX1XTo', url:'https://youtu.be/Nx_8DoX1XTo', date:'3월 13일', members:['원이','메이'], year:'2025' },
+  { vid:'qDyL8w8TEcE', url:'https://youtu.be/qDyL8w8TEcE', date:'3월 17일', members:['리브'], year:'2025' },
+  { vid:'UVIgk0maplg', url:'https://youtu.be/UVIgk0maplg', date:'3월 21일', members:['리브','미나미','제나'], year:'2025' },
+  { vid:'zuaw_7yM6cs', url:'https://youtu.be/zuaw_7yM6cs', date:'3월 23일', members:['메이'], year:'2025' },
+  { vid:'knM9M-eoypw', url:'https://youtu.be/knM9M-eoypw', date:'3월 26일', members:['전원'], year:'2025' },
+  { vid:'8-FF7PUAiso', url:'https://youtu.be/8-FF7PUAiso', date:'3월 27일', members:['원이'], year:'2025' },
+  { vid:'J-CCk7qFIvU', url:'https://youtu.be/J-CCk7qFIvU', date:'3월 30일', members:['리브','미나미'], year:'2025' },
+  { vid:'6kHUuc0_w2g', url:'https://youtu.be/6kHUuc0_w2g', date:'4월 4일',  members:['원이'], year:'2025' },
+  { vid:'3NCdvx-3WuY', url:'https://youtu.be/3NCdvx-3WuY', date:'4월 7일',  members:['메이'], year:'2025' },
+  { vid:'aWFozbrTRuM', url:'https://youtu.be/aWFozbrTRuM', date:'4월 13일', members:['메이','제나'], year:'2025' },
+  { vid:'FxeciB7rH5o', url:'https://youtu.be/FxeciB7rH5o', date:'4월 17일', members:['제나','미나미'], year:'2025' },
+  { vid:'KRTkKDGmJAo', url:'https://youtu.be/KRTkKDGmJAo', date:'4월 20일', members:['원이'], year:'2025' },
+  { vid:'CIUHzr5FhuI', url:'https://youtu.be/CIUHzr5FhuI', date:'4월 21일', members:['메이'], year:'2025' },
+  { vid:'BkSN30JVPaM', url:'https://youtu.be/BkSN30JVPaM', date:'4월 29일', members:['리브'], year:'2025' },
+  { vid:'rIZh1QbTxc8', url:'https://youtu.be/rIZh1QbTxc8', date:'5월 3일',  members:['원이'], year:'2025' },
+  { vid:'AGDTlHt-u-w', url:'https://youtu.be/AGDTlHt-u-w', date:'5월 4일',  members:['메이'], year:'2025' },
+  { vid:'cxBY3u-NVHM', url:'https://youtu.be/cxBY3u-NVHM', date:'5월 13일', members:['원이'], year:'2025' },
+  { vid:'iOIDJK_N6ZE', url:'https://www.youtube.com/live/iOIDJK_N6ZE', date:'5월 16일', members:['메이'], year:'2025' },
+  { vid:'wM6cg3jP6vA', url:'https://www.youtube.com/live/wM6cg3jP6vA', date:'5월 21일', members:['리브','미나미','제나'], year:'2025' },
+  { vid:'WkRZ9x8075M', url:'https://youtu.be/WkRZ9x8075M', date:'5월 22일', members:['원이'], year:'2025' },
+  { vid:'2M9XTQKscLs', url:'https://youtu.be/2M9XTQKscLs', date:'5월 23일', members:['메이'], year:'2025' },
+  { vid:'mm197YcRfrU', url:'https://youtu.be/mm197YcRfrU', date:'5월 23일', members:['리브','제나'], year:'2025' },
+  { vid:'JNI3e-4LlyI', url:'https://youtu.be/JNI3e-4LlyI', date:'5월 25일', members:['원이'], year:'2025' },
+  { vid:'QoeohNK7ZRk', url:'https://youtu.be/QoeohNK7ZRk', date:'5월 30일', members:['리브'], year:'2025' },
+  { vid:'e97EWZMJ9O8', url:'https://youtu.be/e97EWZMJ9O8', date:'6월 5일',  members:['원이'], year:'2025' },
+  { vid:'WQ-yI4llN1w', url:'https://youtu.be/WQ-yI4llN1w', date:'6월 13일', members:['원이','메이'], year:'2025' },
+  { vid:'r_TFRK1PMY8', url:'https://youtu.be/r_TFRK1PMY8', date:'6월 21일', members:['메이'], year:'2025' },
+  { vid:'C21Bvn4GHyA', url:'https://youtu.be/C21Bvn4GHyA', date:'6월 30일', members:['원이'], year:'2025' },
+  { vid:'1-IOC-BAHU4', url:'https://youtu.be/1-IOC-BAHU4', date:'7월 1일',  members:['리브','미나미','제나'], year:'2025' },
+  { vid:'vOCEhvvQFbk', url:'https://youtu.be/vOCEhvvQFbk', date:'7월 2일',  members:['전원'], year:'2025' },
+  { vid:'Clu4G1Ht0po', url:'https://youtu.be/Clu4G1Ht0po', date:'7월 12일', members:['메이'], year:'2025' },
+  { vid:'fh_shy7OnY8', url:'https://youtu.be/fh_shy7OnY8', date:'7월 12일', members:['리브','미나미'], year:'2025' },
+  { vid:'GG_DOFlOLNw', url:'https://youtu.be/GG_DOFlOLNw', date:'7월 15일', members:['제나'], year:'2025' },
+  { vid:'-gThknZPq6c', url:'https://youtu.be/-gThknZPq6c', date:'7월 18일', members:['원이'], year:'2025' },
+  { vid:'rAhHTMrV6XM', url:'https://youtu.be/rAhHTMrV6XM', date:'7월 23일', members:['원이'], year:'2025' },
+  { vid:'t5tRpJq8kQU', url:'https://youtu.be/t5tRpJq8kQU', date:'7월 29일', members:['메이'], year:'2025' },
+  { vid:'UQhYBozbkZ4', url:'https://youtu.be/UQhYBozbkZ4', date:'7월 30일', members:['제나'], year:'2025' },
+  { vid:'jBxoeukgI_E', url:'https://youtu.be/jBxoeukgI_E', date:'7월 30일', members:['리브'], year:'2025' },
+  { vid:'dpXIn_msoRw', url:'https://youtu.be/dpXIn_msoRw', date:'8월 3일',  members:['원이'], year:'2025' },
+  { vid:'rN9j6-kASEw', url:'https://youtu.be/rN9j6-kASEw', date:'8월 3일',  members:['원이'], year:'2025' },
+  { vid:'aKf8a8my8V8', url:'https://youtu.be/aKf8a8my8V8', date:'8월 3일',  members:['제나'], year:'2025' },
+  { vid:'pay7oTvcvu0', url:'https://youtu.be/pay7oTvcvu0', date:'8월 11일', members:['메이'], year:'2025' },
+  { vid:'9WKOTZ_JDtE', url:'https://youtu.be/9WKOTZ_JDtE', date:'8월 14일', members:['리브'], year:'2025' },
+  { vid:'95V4tkGpdhM', url:'https://youtu.be/95V4tkGpdhM', date:'8월 16일', members:['미나미','제나'], year:'2025' },
+  { vid:'zO7ndCNpJfs', url:'https://youtu.be/zO7ndCNpJfs', date:'8월 19일', members:['메이'], year:'2025' },
+  { vid:'vk9d1i3v1LA', url:'https://youtu.be/vk9d1i3v1LA', date:'9월 2일',  members:['원이'], year:'2025' },
+  { vid:'UCuVkx8tVaM', url:'https://youtu.be/UCuVkx8tVaM', date:'9월 10일', members:['제나'], year:'2025' },
+  { vid:'3zWV9lPx8YY', url:'https://youtu.be/3zWV9lPx8YY', date:'9월 11일', members:['메이'], year:'2025' },
+  { vid:'vvEGCDqmyTg', url:'https://youtu.be/vvEGCDqmyTg', date:'9월 13일', members:['미나미'], year:'2025' },
+  { vid:'03zFmuZFGY0', url:'https://youtu.be/03zFmuZFGY0', date:'9월 15일', members:['원이'], year:'2025' },
+  { vid:'B2EQ7Z1Z_eA', url:'https://www.youtube.com/live/B2EQ7Z1Z_eA', date:'9월 15일', members:['리브'], year:'2025' },
+  { vid:'N06m6oN44Uo', url:'https://www.youtube.com/live/N06m6oN44Uo', date:'9월 26일', members:['리브','제나'], year:'2025' },
+  { vid:'ssVEtcEp5VU', url:'https://www.youtube.com/live/ssVEtcEp5VU', date:'9월 28일', members:['원이'], year:'2025' },
+  { vid:'yH3_XtSKW9U', url:'https://www.youtube.com/watch?v=yH3_XtSKW9U', date:'10월 11일', members:['리브'], year:'2025' },
+  { vid:'vNiYjsW4oss', url:'https://www.youtube.com/watch?v=vNiYjsW4oss', date:'10월 21일', members:['원이','메이'], year:'2025' },
+  { vid:'Ps8ek0RwnGw', url:'https://www.youtube.com/watch?v=Ps8ek0RwnGw', date:'10월 22일', members:['메이'], year:'2025' },
+  { vid:'WPra128W_jQ', url:'https://www.youtube.com/watch?v=WPra128W_jQ', date:'10월 25일', members:['전원'], year:'2025' },
+  { vid:'K9PXm6WRTAI', url:'https://www.youtube.com/watch?v=K9PXm6WRTAI', date:'11월 3일',  members:['메이'], year:'2025' },
+  { vid:'SZ1bfLcvE2I', url:'https://www.youtube.com/watch?v=SZ1bfLcvE2I', date:'11월 4일',  members:['메이','제나'], year:'2025' },
+  { vid:'bMBZ4Z9MbLs', url:'https://www.youtube.com/watch?v=bMBZ4Z9MbLs', date:'11월 6일',  members:['원이'], year:'2025' },
+  { vid:'KFGEtUbS9LQ', url:'https://www.youtube.com/watch?v=KFGEtUbS9LQ', date:'11월 13일', members:['리브','미나미'], year:'2025' },
+  { vid:'cS-0kYeg5OM', url:'https://www.youtube.com/watch?v=cS-0kYeg5OM', date:'11월 18일', members:['원이'], year:'2025' },
+  { vid:'Lyipu8YHFps', url:'https://www.youtube.com/watch?v=Lyipu8YHFps', date:'11월 20일', members:['메이'], year:'2025' },
+  { vid:'i8YN1lJHFQs', url:'https://www.youtube.com/watch?v=i8YN1lJHFQs', date:'11월 22일', members:['리브','제나'], year:'2025' },
+  { vid:'MAGjOr5W9rU', url:'https://www.youtube.com/watch?v=MAGjOr5W9rU', date:'11월 25일', members:['전원'], year:'2025' },
+  { vid:'R5OzH7VqjQg', url:'https://www.youtube.com/watch?v=R5OzH7VqjQg', date:'11월 27일', members:['제나'], year:'2025' },
+  { vid:'8hMHb2VgVm4', url:'https://www.youtube.com/watch?v=8hMHb2VgVm4', date:'11월 29일', members:['미나미'], year:'2025' },
+  { vid:'F-ySwaNhyjQ', url:'https://www.youtube.com/watch?v=F-ySwaNhyjQ', date:'12월 9일',  members:['메이'], year:'2025' },
+  { vid:'lk4M8L6nCtA', url:'https://www.youtube.com/watch?v=lk4M8L6nCtA', date:'12월 15일', members:['리브','제나'], year:'2025' },
+  { vid:'LVkDp-_tZ-8', url:'https://youtu.be/LVkDp-_tZ-8', date:'12월 15일', members:['리브','미나미'], year:'2025' },
+];
+
+const LIVE_DATA_2026 = [
+  { vid:'G2fH76iGIww', url:'https://youtu.be/G2fH76iGIww', date:'1월 7일',  members:['메이'],          year:'2026' },
+  { vid:'PHGpwoGKDjw', url:'https://youtu.be/PHGpwoGKDjw', date:'1월 8일',  members:['원이'],          year:'2026' },
+  { vid:'BAs5EBG6XJE', url:'https://youtu.be/BAs5EBG6XJE', date:'1월 13일', members:['미나미'],        year:'2026' },
+  { vid:'zd7YuijCjCU', url:'https://youtu.be/zd7YuijCjCU', date:'1월 23일', members:['리브'],          year:'2026' },
+  { vid:'umvrWnLKJf8', url:'https://youtu.be/umvrWnLKJf8', date:'1월 29일', members:['메이'],          year:'2026' },
+  { vid:'sGNEn2U3oa8', url:'https://youtu.be/sGNEn2U3oa8', date:'2월 1일',  members:['미나미'],        year:'2026' },
+  { vid:'Yfaf_loE6JU', url:'https://youtu.be/Yfaf_loE6JU', date:'2월 14일', members:['원이'],          year:'2026' },
+  { vid:'9NZFY8Y8gSo', url:'https://youtu.be/9NZFY8Y8gSo', date:'2월 15일', members:['메이','제나'],   year:'2026' },
+  { vid:'SHDW59ad--0', url:'https://youtu.be/SHDW59ad--0', date:'2월 15일', members:['리브','미나미'], year:'2026' },
+  { vid:'-yzwpc2Y2Xs', url:'https://youtu.be/-yzwpc2Y2Xs', date:'2월 21일', members:['원이'],          year:'2026' },
+  { vid:'DYu1KSw7298', url:'https://youtu.be/DYu1KSw7298', date:'2월 25일', members:['리브','미나미'], year:'2026' },
+  { vid:'VH1niRMAIII', url:'https://youtu.be/VH1niRMAIII', date:'2월 26일', members:['메이','제나'],   year:'2026' },
+  { vid:'01BFjTsRHBk', url:'https://youtu.be/01BFjTsRHBk', date:'3월 4일',  members:['메이'],          year:'2026' },
+  { vid:'ZZQFWsRh16Q', url:'https://youtu.be/ZZQFWsRh16Q', date:'3월 15일', members:['전원'],          year:'2026' },
+  { vid:'ibXfcqYoeW4', url:'https://youtu.be/ibXfcqYoeW4', date:'3월 17일', members:['메이'],          year:'2026' },
+  { vid:'ZoKjU232QKg', url:'https://youtu.be/ZoKjU232QKg', date:'3월 26일', members:['전원'],          year:'2026' },
+  { vid:'HeFboYmjuys', url:'https://youtu.be/HeFboYmjuys', date:'3월 27일', members:['미나미','제나'], year:'2026' },
+  { vid:'SsZwyvEUi2A', url:'https://youtu.be/SsZwyvEUi2A', date:'4월 8일',  members:['전원'],          year:'2026' },
+  { vid:'g92oyTei23w', url:'https://youtu.be/g92oyTei23w', date:'4월 12일', members:['메이'],          year:'2026' },
+  { vid:'BFuq597SWAA', url:'https://youtu.be/BFuq597SWAA', date:'4월 15일', members:['미나미','제나'], year:'2026' },
+  { vid:'oaPTaoYn_nQ', url:'https://youtu.be/oaPTaoYn_nQ', date:'4월 16일', members:['원이'],          year:'2026' },
+  { vid:'jd28WtI0GyA', url:'https://youtu.be/jd28WtI0GyA', date:'4월 22일', members:['리브','미나미'], year:'2026' },
+  { vid:'Kg7eQZ4c0jA', url:'https://youtu.be/Kg7eQZ4c0jA', date:'4월 27일', members:['메이'],          year:'2026' },
+];
+
+const ALL_LIVE = [...LIVE_DATA_2024, ...LIVE_DATA_2025, ...LIVE_DATA_2026];
+
+function memberMatch(item) {
+  if (curLiveMember === 'all') return true;
+  if (curLiveMember === '전원') return item.members.includes('전원');
+  return item.members.includes(curLiveMember) || item.members.includes('전원');
+}
+
+function buildLiveCard(item, delay) {
+  const memberBadges = item.members.map(m =>
+    `<span class="ctag ${m === '전원' ? 'hl' : ''}">${m}</span>`
+  ).join('');
+  const title = item.title || '로딩 중...';
+  return `<a class="vcard tb-itslive" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+    <div class="thumb">
+      <img src="https://img.youtube.com/vi/${item.vid}/hqdefault.jpg" alt=""
+           loading="lazy"
+           onerror="this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg'">
+      <div class="play-ring">
+        <svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg>
+      </div>
+      <span class="type-badge tb-itslive">LIVE</span>
+    </div>
+    <div class="cbody">
+      <div class="csong-multi" id="lvc-title-${item.vid}">${title}</div>
+      <div class="cmeta">
+        <span class="cdate">${item.year} · ${item.date}</span>
+      </div>
+      <div class="ctags">${memberBadges}</div>
+    </div>
+  </a>`;
+}
+
+async function loadLiveTitles(items) {
+  const CHUNK = 6;
+  const toLoad = items.filter(i => !i.title);
+  for (let i = 0; i < toLoad.length; i += CHUNK) {
+    await Promise.all(toLoad.slice(i, i + CHUNK).map(async item => {
+      try {
+        const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(item.url)}&format=json`);
+        if (r.ok) { const d = await r.json(); item.title = d.title; }
+      } catch {}
+      if (!item.title) item.title = item.date + ' 라이브';
+      const el = document.getElementById(`lvc-title-${item.vid}`);
+      if (el) el.textContent = item.title;
+    }));
+  }
+}
+
+function buildLiveGrid() {
+  const grid = document.getElementById('liveGridInner');
+  if (!grid) return;
+  let items = ALL_LIVE;
+  if (curLiveYear !== 'all') items = items.filter(i => i.year === curLiveYear);
+  items = items.filter(memberMatch);
+  if (!items.length) {
+    grid.innerHTML = `<div class="empty"><div class="ico">📺</div><p>해당 라이브가 없습니다.</p></div>`;
+    return;
+  }
+  grid.innerHTML = items.map((item, idx) => buildLiveCard(item, `${Math.min(idx * 0.03, 0.4)}s`)).join('');
+  loadLiveTitles(items);
+}
+
+function buildSongNav() {
+  const nav = document.getElementById('songNav');
+  const allCnt = ALL_ITEMS.filter(i => i.type !== 'content').length;
+  let html = `<button class="song-tab ${curSong === 'all' ? 'active' : ''}"
+    onclick="pickSong('all')">All<span class="cnt">${allCnt}</span></button>`;
+  html += RESCENE_DATA.map(e => {
+    const cnt = ALL_ITEMS.filter(i => i.song === e.song && i.type !== 'content').length;
+    if (cnt === 0) return '';
+    return `<button class="song-tab ${e.song === curSong ? 'active' : ''}"
+      onclick="pickSong('${e.song.replace(/'/g,"&#39;")}')">
+      ${e.song}<span class="cnt">${cnt}</span>
+    </button>`;
+  }).join('');
+  nav.innerHTML = html;
+}
+
+const TYPE_BADGE = { music:'tb-music', mv:'tb-mv', itslive:'tb-itslive', content:'tb-content' };
+const TYPE_LABEL = { music:'음악방송', mv:'뮤직비디오', itslive:"It's Live", content:'자체컨텐츠' };
+
+function buildCard(item, delay) {
+  const tb = TYPE_BADGE[item.type] || 'tb-content';
+  const tl = TYPE_LABEL[item.type] || item.type;
+
+  if (!item.loaded) {
+    return `<div class="skeleton" id="sk-${item.vid}" style="animation-delay:${delay}">
+      <div class="skel-thumb"></div>
+      <div class="skel-body">
+        <div class="skel-line"></div>
+        <div class="skel-line s"></div>
+        <div class="skel-line xs"></div>
+      </div>
+    </div>`;
+  }
+
+  const m = item.meta;
+  const dateStr = m?.date || '';
+  const show = m?.show;
+  const channel = m?.channel || '';
+  const tags = [];
+  if (show) tags.push(`<span class="ctag hl">${show.label}</span>`);
+  else if (channel) tags.push(`<span class="ctag">${channel}</span>`);
+
+  return `<a class="vcard ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+    <div class="thumb">
+      <img src="${thumbUrl(item.vid)}" alt=""
+           loading="lazy"
+           onerror="this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg'">
+      <div class="play-ring">
+        <svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg">
+          <path d="M1 1l10 6-10 6V1z"/>
+        </svg>
+      </div>
+      <span class="type-badge ${tb}">${tl}</span>
+    </div>
+    <div class="cbody">
+      <div class="csong">${item.song}</div>
+      <div class="cmeta">
+        ${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}
+      </div>
+      ${tags.length ? `<div class="ctags">${tags.join('')}</div>` : ''}
+    </div>
+  </a>`;
+}
+
+function buildGrid() {
+  const grid = document.getElementById('grid');
+
+  if (curSection === 'external') {
+    buildExternalGrid();
+    return;
+  }
+
+  if (curSection === 'content') {
+    let items = curContentCat === 'all'
+      ? CONTENT_ITEMS
+      : CONTENT_ITEMS.filter(i => i.category === curContentCat);
+
+    if (!items.length) {
+      grid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
+      return;
+    }
+
+    grid.innerHTML = items.map((item, idx) => {
+      const delay = `${Math.min(idx * 0.03, 0.4)}s`;
+      if (!item.loaded) {
+        return `<div class="skeleton" id="csk-${item.vid}" style="animation-delay:${delay}">
+          <div class="skel-thumb"></div>
+          <div class="skel-body">
+            <div class="skel-line"></div>
+            <div class="skel-line s"></div>
+          </div>
+        </div>`;
+      }
+      return buildContentCard(item, delay);
+    }).join('');
+
+    loadContentMetas(items);
+    return;
+  }
+
+  
+  let items = ALL_ITEMS.filter(i => i.type !== 'content');
+  if (curSong !== 'all') items = items.filter(i => i.song === curSong);
+  if (curType !== 'all') items = items.filter(i => i.type === curType);
+
+  if (!items.length) {
+    grid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = items.map((item, idx) => buildCard(item, `${Math.min(idx * 0.03, 0.4)}s`)).join('');
+  loadMetas(items);
+}
+
+async function loadMetas(items) {
+  const unloaded = items.filter(i => !i.loaded);
+  const CHUNK = 5;
+  for (let i = 0; i < unloaded.length; i += CHUNK) {
+    const batch = unloaded.slice(i, i + CHUNK);
+    await Promise.all(batch.map(async item => {
+      item.meta = await fetchMeta(item.url);
+      item.loaded = true;
+      replaceSkeleton(item);
+    }));
+  }
+}
+
+function replaceSkeleton(item) {
+  const skEl = document.getElementById(`sk-${item.vid}`);
+  const vcEl = document.getElementById(`vc-${item.vid}`);
+  const target = skEl || vcEl;
+  if (!target) return;
+  const delay = target.style.animationDelay;
+  const html = buildCard(item, delay);
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  const newEl = tmp.firstElementChild;
+  target.replaceWith(newEl);
+}
+
+function pickSection(section) {
+  curSection = section;
+  document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+  const tabId = section === 'songs' ? 'secSongs' : section === 'content' ? 'secContent' : section === 'live' ? 'secLive' : section === 'external' ? 'secExternal' : section === 'fantube' ? 'secFantube' : section === 'member' ? 'secMember' : section === 'links' ? 'secLinks' : 'secAbout';
+  document.getElementById(tabId).classList.add('active');
+
+  document.getElementById('songMode').style.display      = section === 'songs'    ? '' : 'none';
+  document.getElementById('contentMode').style.display   = section === 'content'  ? '' : 'none';
+  document.getElementById('liveMode').style.display      = section === 'live'     ? '' : 'none';
+  document.getElementById('externalMode').style.display  = section === 'external' ? '' : 'none';
+  document.getElementById('fantubeMode').style.display   = section === 'fantube'  ? '' : 'none';
+  document.getElementById('memberMode').style.display    = section === 'member'   ? '' : 'none';
+  document.getElementById('linksMode').style.display     = section === 'links'    ? '' : 'none';
+  document.getElementById('aboutMode').style.display     = section === 'about'    ? '' : 'none';
+  document.getElementById('grid-wrap-el').style.display  = (section === 'member' || section === 'links' || section === 'about' || section === 'fantube' || section === 'live') ? 'none' : '';
+  document.getElementById('liveGrid').style.display = section === 'live' ? '' : 'none';
+
+  if (section === 'member') {
+    document.querySelectorAll('.member-btn').forEach((el, i) => {
+      el.style.animationDelay = `${i * 0.06}s`;
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
+  }
+
+  if (section === 'links') {
+    document.querySelectorAll('.link-row').forEach((el, i) => {
+      el.style.animationDelay = `${Math.min(i * 0.04, 0.5)}s`;
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
+  }
+
+  if (section === 'about') {
+    document.querySelectorAll('#aboutMode .links-wrap > div > *').forEach((el, i) => {
+      el.style.animationDelay = `${i * 0.07}s`;
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = 'fadeUp 0.35s ease both';
+    });
+  }
+
+  if (section === 'content') { buildContentNav(); buildGrid(); }
+  if (section === 'live') { buildLiveNav(); buildLiveGrid(); }
+  if (section === 'external') { buildExternalNav(); buildExternalGrid(); }
+  if (section === 'fantube') buildFantubeGrid();
+  if (section === 'songs') buildGrid();
+}
+
+function searchMember(name) {
+  const query = encodeURIComponent('#리센느 ' + name);
+  window.open('https://www.youtube.com/results?search_query=' + query, '_blank', 'noopener');
+}
+
+function pickSong(song) {
+  curSong = song;
+  document.querySelectorAll('.song-tab').forEach(t => {
+    const label = t.childNodes[0]?.textContent?.trim();
+    t.classList.toggle('active', label === song || (song === 'all' && label === 'All'));
+  });
+  buildGrid();
+}
+
+function setType(el, type) {
+  curType = type;
+  document.querySelectorAll('.type-btn[data-t]').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  buildGrid();
+}
+
+buildSongNav();
+buildContentNav();
+buildExternalNav();
+buildLiveNav();
+buildLiveGrid();
+pickSection('about');
+
+document.addEventListener("contextmenu", e => e.preventDefault());
+</script>
+</body>
+</html>
