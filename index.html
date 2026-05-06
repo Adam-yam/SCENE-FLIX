@@ -25,8 +25,142 @@
   --c-content:  #80b870;
 }
 
+[data-theme="light"] {
+  --bg:      #f5f4f1;
+  --surf:    #eceae5;
+  --card:    #e8e5de;
+  --card-h:  #dedad1;
+  --border:  rgba(0,0,0,0.09);
+  --border-h:rgba(0,0,0,0.18);
+  --accent:  #5a4a30;
+  --text:    #1a1a1a;
+  --muted:   #777;
+  --dim:     #d0cdc6;
+
+  --c-music:    #2a9a94;
+  --c-mv:       #a04060;
+  --c-itslive:  #7050b0;
+  --c-content:  #4a8a34;
+}
+
+[data-theme="light"] .wordmark-img {
+  filter: invert(1);
+}
+
+#themeToggle {
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  background: none;
+  border: 1px solid var(--border-h);
+  border-radius: 20px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 5px 10px;
+  font-size: 0.7rem;
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.15s, border-color 0.15s;
+}
+#themeToggle:hover { color: var(--text); border-color: var(--border-h); }
+#themeToggle svg { width: 13px; height: 13px; }
+
+#scrollTop {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--surf);
+  border: 1px solid var(--border-h);
+  color: var(--muted);
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, background 0.15s, opacity 0.2s;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+#scrollTop:hover { color: var(--text); background: var(--card-h); }
+#scrollTop svg { width: 16px; height: 16px; }
+
+.bm-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.18s, transform 0.18s, color 0.15s, background 0.15s;
+  z-index: 4;
+  flex-shrink: 0;
+  padding: 0;
+  font-family: inherit;
+}
+.bm-btn svg { width: 13px; height: 13px; pointer-events: none; display: block; }
+.vcard:hover .bm-btn { opacity: 1; transform: scale(1) translateY(4px); }
+.bm-btn:hover { background: rgba(0,0,0,0.8); color: #fff; }
+.bm-btn.bm-active {
+  opacity: 1;
+  transform: scale(1) translateY(4px);
+  color: #f0c060;
+  background: rgba(0,0,0,0.65);
+  border-color: rgba(240,192,96,0.4);
+}
+.bm-btn.bm-active svg { fill: #f0c060; stroke: #f0c060; }
+
+.bm-empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+.bm-empty .ico { font-size: 2rem; margin-bottom: 14px; opacity: 0.25; }
+.bm-empty p { font-size: 0.82rem; margin-bottom: 6px; }
+.bm-empty small { font-size: 0.7rem; opacity: 0.6; }
+
+.vcard-tooltip {
+  position: fixed;
+  background: rgba(15,15,15,0.96);
+  color: #e8e8e8;
+  font-size: 0.72rem;
+  font-family: 'Inter', sans-serif;
+  line-height: 1.5;
+  padding: 7px 11px;
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+  max-width: 280px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0;
+  transform: translateY(4px);
+  transition: opacity 0.15s, transform 0.15s;
+  white-space: pre-wrap;
+  word-break: break-word;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+.vcard-tooltip.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 * { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 
 body {
   background: var(--bg);
@@ -53,15 +187,6 @@ header {
   object-fit: contain;
   display: block;
   margin: 0 auto;
-  filter: brightness(1);
-}
-
-.wordmark {
-  font-size: 1.6rem;
-  font-weight: 300;
-  letter-spacing: 0.3em;
-  color: var(--accent);
-  text-transform: uppercase;
 }
 
 .tagline {
@@ -76,7 +201,8 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(10,10,10,0.95);
+  background: var(--bg);
+  background: color-mix(in srgb, var(--bg) 95%, transparent);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
 }
@@ -86,7 +212,6 @@ header {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 40px;
-  gap: 0;
 }
 
 .section-tab {
@@ -198,7 +323,7 @@ header {
 .type-btn.active[data-t="mv"]       { color: var(--c-mv);       border-color: var(--c-mv);       background: rgba(192,112,144,0.08); }
 .type-btn.active[data-t="itslive"]  { color: var(--c-itslive);  border-color: var(--c-itslive);  background: rgba(160,128,208,0.08); }
 .type-btn.active[data-t="content"]  { color: var(--c-content);  border-color: var(--c-content);  background: rgba(128,184,112,0.08); }
-/* Live 멤버 필터 버튼 */
+
 .type-btn.active[data-lm="all"]    { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.07); }
 .type-btn.active[data-lm="전원"]   { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.07); }
 .type-btn.active[data-lm="원이"]   { color: #04a06e; border-color: #045a42;               background: rgba(4,90,66,0.15); }
@@ -206,6 +331,72 @@ header {
 .type-btn.active[data-lm="미나미"] { color: #2b99c4; border-color: #2b99c4;               background: rgba(43,153,196,0.12); }
 .type-btn.active[data-lm="메이"]   { color: #c9a800; border-color: #ecd25b;               background: rgba(236,210,91,0.12); }
 .type-btn.active[data-lm="제나"]   { color: #ba92db; border-color: #ba92db;               background: rgba(186,146,219,0.12); }
+
+.search-bar {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 40px 14px;
+}
+.search-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.search-input-wrap > svg {
+  position: absolute;
+  left: 13px;
+  width: 15px;
+  height: 15px;
+  color: var(--muted);
+  pointer-events: none;
+  flex-shrink: 0;
+  z-index: 1;
+}
+#searchInput {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
+  padding: 8px 36px 8px 36px;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+  box-sizing: border-box;
+  min-width: 0;
+}
+#searchInput::placeholder { color: var(--muted); }
+#searchInput:focus {
+  border-color: var(--border-h);
+  background: rgba(255,255,255,0.07);
+}
+#searchClear {
+  position: absolute;
+  right: 8px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 4px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.15s;
+  flex-shrink: 0;
+  z-index: 1;
+}
+#searchClear:hover { color: var(--text); }
+#searchClear svg { width: 12px; height: 12px; display: block; }
+#searchResultCount {
+  position: absolute;
+  right: 34px;
+  font-size: 0.65rem;
+  color: var(--muted);
+  pointer-events: none;
+  white-space: nowrap;
+}
 
 .grid-wrap {
   max-width: 1280px;
@@ -805,18 +996,11 @@ header {
 }
 
 @media (max-width: 700px) {
-  .links-wrap { padding: 20px 12px 60px; }
-  .links-list { grid-template-columns: repeat(2, 1fr); gap: 7px; }
-  .link-url   { display: none; }
-  .link-label { font-size: 0.75rem; }
-  .link-row   { padding: 10px 12px; gap: 9px; }
-}
-
-@media (max-width: 700px) {
-  
   header { padding: 24px 16px 18px; }
   .wordmark-img { height: 38px; }
   .tagline { font-size: 0.6rem; margin-top: 5px; }
+  #themeToggle { right: 12px; font-size: 0.62rem; padding: 4px 8px; }
+  #scrollTop { bottom: 16px; right: 16px; width: 36px; height: 36px; }
 
   
   .section-nav {
@@ -848,6 +1032,8 @@ header {
   .type-bar::-webkit-scrollbar { display: none; }
   .type-btn { padding: 4px 11px; font-size: 0.64rem; white-space: nowrap; flex-shrink: 0; }
 
+  .search-bar { padding: 10px 12px 10px; }
+
   
   .grid-wrap { padding: 12px 10px 60px; }
   .video-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
@@ -865,6 +1051,7 @@ header {
 
   
   .links-wrap { padding: 16px 12px 60px; }
+  .links-list { grid-template-columns: repeat(2, 1fr); gap: 7px; }
   .link-url   { display: none; }
   .link-label { font-size: 0.78rem; }
   .link-row   { padding: 12px 14px; gap: 10px; }
@@ -884,6 +1071,20 @@ header {
 <header>
   <img src="Logo.png" alt="RESCENE" class="wordmark-img" onclick="pickSection('about')" style="cursor:pointer;">
   <p class="tagline">리센느 영상 몰아보기 SCENE-FLIX</p>
+  <button id="themeToggle" onclick="toggleTheme()" title="다크/라이트 모드 전환">
+    <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <span id="themeLabel">Light</span>
+  </button>
 </header>
 
 <div class="song-nav-outer">
@@ -896,6 +1097,23 @@ header {
     <button class="section-tab" id="secMember" onclick="pickSection('member')">멤버별 관련 영상</button>
     <button class="section-tab" id="secLinks" onclick="pickSection('links')">RESCENE 관련 링크</button>
     <button class="section-tab" id="secAbout" onclick="pickSection('about')" style="margin-left:auto;">About</button>
+    <button class="section-tab" id="secBookmark" onclick="pickSection('bookmark')">★ 즐겨찾기<span id="bmCount"></span></button>
+  </div>
+</div>
+
+<!-- 검색창 -->
+<div class="search-bar" id="searchBar" style="display:none;">
+  <div class="search-input-wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+    <input type="text" id="searchInput" placeholder="영상 제목으로 검색..." autocomplete="off" oninput="onSearch(this.value)">
+    <span id="searchResultCount"></span>
+    <button id="searchClear" onclick="clearSearch()" title="검색어 지우기">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
   </div>
 </div>
 
@@ -947,7 +1165,7 @@ header {
 
 <div id="fantubeMode" style="display:none;">
   <div class="fantube-wrap">
-    <p class="fantube-desc">리센느의 팬 유튜버들의 채널 모음입니다.</p>
+    <p class="fantube-desc">리센느의 팬 유튜버들의 채널입니다.</p>
     <div class="fantube-grid" id="fantubeGrid"></div>
   </div>
 </div>
@@ -1171,6 +1389,8 @@ header {
   </div>
 </div>
 
+<div id="bookmarkMode" style="display:none;"></div>
+
 <div id="aboutMode" style="display:none;">
 <div class="links-wrap">
     <div style="max-width:560px; margin:0 auto; padding:40px 0 20px; color:var(--text);">
@@ -1181,7 +1401,7 @@ header {
         리센느(RESCENE)의 팬 메이드 페이지입니다. <span style="color:var(--muted);">(by May_)</span>
       </p>
 
-      <div style="display:flex; flex-direction:column; gap:14px; font-size:0.82rem; line-height:1.8; color:#aaa;">
+      <div style="display:flex; flex-direction:column; gap:14px; font-size:0.82rem; line-height:1.8; color:var(--text);">
         <div style="display:flex; gap:12px; align-items:flex-start;">
           <span style="color:var(--accent); margin-top:2px; flex-shrink:0;">✦</span>
           <span>이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다. 오직 팬들을 위해 만들어졌습니다.</span>
@@ -1205,7 +1425,7 @@ header {
           </a>
           <button id="copyMailBtn" onclick="navigator.clipboard.writeText('sceneflix.may@gmail.com').then(()=>{const b=document.getElementById('copyMailBtn');b.textContent='✓';b.style.color='var(--accent)';b.style.borderColor='var(--accent)';setTimeout(()=>{b.textContent='복사';b.style.color='var(--muted)';b.style.borderColor='var(--border-h)';},2000);})" style="font-size:0.62rem; padding:2px 7px; border-radius:5px; border:1px solid var(--border-h); background:transparent; color:var(--muted); cursor:pointer; flex-shrink:0;">복사</button>
         </div>
-        <p style="font-size:0.75rem; color:#888; line-height:1.7;">버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.</p>
+        <p style="font-size:0.75rem; color:var(--muted); line-height:1.7;">버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.</p>
       </div>
 
       <div style="margin-top:24px; padding-top:24px; border-top:1px solid var(--border); font-size:0.68rem; color:var(--muted); line-height:1.8;">
@@ -1577,9 +1797,8 @@ function openVideo(e, vid) {
     e.preventDefault();
     window.open(ytUrl(vid), '_blank', 'noopener');
   }
-  // 이전 배지 제거
+
   document.querySelectorAll('.last-watched-badge').forEach(el => el.remove());
-  // 새 배지 추가
   const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-'];
   for (const p of prefixes) {
     const card = document.getElementById(p + vid);
@@ -1593,19 +1812,19 @@ function openVideo(e, vid) {
   }
 }
 
-async function fetchMeta(url) {
+async function fetchMeta(url, fallbackTitle = '') {
   try {
     const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);
     if (!r.ok) throw 0;
     const d = await r.json();
     return {
-      rawTitle: d.title,
+      rawTitle: d.title || fallbackTitle,
       channel:  d.author_name,
       date:     parseDate(d.title),
       show:     parseShow(d.title),
     };
   } catch {
-    return { rawTitle: '', channel: '', date: null, show: null };
+    return { rawTitle: fallbackTitle, channel: '', date: null, show: null };
   }
 }
 
@@ -1949,13 +2168,13 @@ const EXTERNAL_DATA = {
   ],
   chan19: [
     { vid: 'UWBzwqcb9tI', url: 'https://www.youtube.com/watch?v=UWBzwqcb9tI', title: null, date: null, loaded: false },
-    { vid: 'Ge-nX5VE28A', url: 'https://youtu.be/Ge-nX5VE28A?si=Edx8IKKa2VMei_b_', title: null, date: null, loaded: false },
+    { vid: 'Ge-nX5VE28A', url: 'https://youtu.be/Ge-nX5VE28A', title: null, date: null, loaded: false },
   ],
   physicalgallary20: [
-    { vid: 'If2kxD44R8A', url: 'https://youtu.be/If2kxD44R8A?si=Iywjfc0U2AJsKwp1', title: null, date: null, loaded: false },
+    { vid: 'If2kxD44R8A', url: 'https://youtu.be/If2kxD44R8A', title: null, date: null, loaded: false },
   ],
   chan21: [
-    { vid: 'jO_rFjE-3Es', url: 'https://youtu.be/jO_rFjE-3Es?si=2ouaLPAtkhVFC7HV', title: null, date: null, loaded: false },
+    { vid: 'jO_rFjE-3Es', url: 'https://youtu.be/jO_rFjE-3Es', title: null, date: null, loaded: false },
     { vid: 'X0AWk7EITLE', url: 'https://www.youtube.com/watch?v=X0AWk7EITLE', title: null, date: null, loaded: false },
     { vid: 'W0cpLR0rz0Q', url: 'https://youtu.be/W0cpLR0rz0Q', title: null, date: null, loaded: false },
     { vid: 'yMeBhxSGvVw', url: 'https://youtu.be/yMeBhxSGvVw', title: null, date: null, loaded: false },
@@ -2008,6 +2227,7 @@ function buildContentCard(item, delay) {
         </svg>
       </div>
       <span class="type-badge tb-content">${item.category}</span>
+      ${bmBtnHtml(item.vid)}
     </div>
     <div class="cbody">
       <div class="csong-multi">${title}</div>
@@ -2080,6 +2300,7 @@ function buildExternalCard(item, delay) {
           <path d="M1 1l10 6-10 6V1z"/>
         </svg>
       </div>
+      ${bmBtnHtml(item.vid)}
     </div>
     <div class="cbody">
       <div class="csong-multi">${title}</div>
@@ -2148,6 +2369,7 @@ function buildExternalGrid() {
   }).join('');
 
   loadExternalMetas(items);
+  if (curSearchQuery) applySearch();
 }
 
 const FANTUBE_CHANNELS = [
@@ -2225,80 +2447,80 @@ function setLiveMember(el, member) {
 }
 
 const LIVE_DATA_2024 = [
-  { vid:'8T0J9NrvxYs', url:'https://youtu.be/8T0J9NrvxYs', date:'3월 26일', title:null, members:['전원'], year:'2024' },
-  { vid:'wKoIL4KobIs', url:'https://youtu.be/wKoIL4KobIs', date:'4월 5일', title:null, members:['전원'], year:'2024' },
-  { vid:'kGe2er0xjGc', url:'https://youtu.be/kGe2er0xjGc', date:'4월 9일', title:null, members:['전원'], year:'2024' },
-  { vid:'C5NgIlSDTqY', url:'https://youtu.be/C5NgIlSDTqY', date:'4월 17일', title:null, members:['전원'], year:'2024' },
-  { vid:'czq2GsxdmNI', url:'https://youtu.be/czq2GsxdmNI', date:'4월 26일', title:null, members:['전원'], year:'2024' },
-  { vid:'9MaWl8r8s1w', url:'https://youtu.be/9MaWl8r8s1w', date:'5월 8일', title:null, members:['전원'], year:'2024' },
-  { vid:'6rPltcoAxaA', url:'https://youtu.be/6rPltcoAxaA', date:'5월 13일', title:null, members:['미나미'], year:'2024' },
-  { vid:'biKOyXFy8Bk', url:'https://youtu.be/biKOyXFy8Bk', date:'5월 18일', title:null, members:['리브','미나미'], year:'2024' },
-  { vid:'CiY40Jh4dws', url:'https://youtu.be/CiY40Jh4dws', date:'5월 25일', title:null, members:['원이'], year:'2024' },
-  { vid:'8le7k6JSSwE', url:'https://youtu.be/8le7k6JSSwE', date:'5월 29일', title:null, members:['전원'], year:'2024' },
-  { vid:'vHeY4_qcey0', url:'https://youtu.be/vHeY4_qcey0', date:'6월 1일', title:null, members:['전원'], year:'2024' },
-  { vid:'-HZ_MU5RB4I', url:'https://youtu.be/-HZ_MU5RB4I', date:'6월 8일', title:null, members:['원이'], year:'2024' },
-  { vid:'5WrT3GeMgNg', url:'https://youtu.be/5WrT3GeMgNg', date:'6월 8일', title:null, members:['원이','메이'], year:'2024' },
+  { vid:'8T0J9NrvxYs', url:'https://youtu.be/8T0J9NrvxYs', date:'3월 26일', members:['전원'], year:'2024' },
+  { vid:'wKoIL4KobIs', url:'https://youtu.be/wKoIL4KobIs', date:'4월 5일', members:['전원'], year:'2024' },
+  { vid:'kGe2er0xjGc', url:'https://youtu.be/kGe2er0xjGc', date:'4월 9일', members:['전원'], year:'2024' },
+  { vid:'C5NgIlSDTqY', url:'https://youtu.be/C5NgIlSDTqY', date:'4월 17일', members:['전원'], year:'2024' },
+  { vid:'czq2GsxdmNI', url:'https://youtu.be/czq2GsxdmNI', date:'4월 26일', members:['전원'], year:'2024' },
+  { vid:'9MaWl8r8s1w', url:'https://youtu.be/9MaWl8r8s1w', date:'5월 8일', members:['전원'], year:'2024' },
+  { vid:'6rPltcoAxaA', url:'https://youtu.be/6rPltcoAxaA', date:'5월 13일', members:['미나미'], year:'2024' },
+  { vid:'biKOyXFy8Bk', url:'https://youtu.be/biKOyXFy8Bk', date:'5월 18일', members:['리브','미나미'], year:'2024' },
+  { vid:'CiY40Jh4dws', url:'https://youtu.be/CiY40Jh4dws', date:'5월 25일', members:['원이'], year:'2024' },
+  { vid:'8le7k6JSSwE', url:'https://youtu.be/8le7k6JSSwE', date:'5월 29일', members:['전원'], year:'2024' },
+  { vid:'vHeY4_qcey0', url:'https://youtu.be/vHeY4_qcey0', date:'6월 1일', members:['전원'], year:'2024' },
+  { vid:'-HZ_MU5RB4I', url:'https://youtu.be/-HZ_MU5RB4I', date:'6월 8일', members:['원이'], year:'2024' },
+  { vid:'5WrT3GeMgNg', url:'https://youtu.be/5WrT3GeMgNg', date:'6월 8일', members:['원이','메이'], year:'2024' },
   { vid:'SAc0ZrJzS9U', url:'https://youtu.be/SAc0ZrJzS9U', date:'6월 13일', title:'제나와 리브의 노래방 💓. Zena and Liv\'s Karaoke💞', members:['제나','리브'], year:'2024' },
-  { vid:'b4fgkgaLUVk', url:'https://youtu.be/b4fgkgaLUVk', date:'6월 15일', title:null, members:['원이','메이'], year:'2024' },
-  { vid:'oDWGsOCxrZQ', url:'https://youtu.be/oDWGsOCxrZQ', date:'6월 15일', title:null, members:['리브','미나미','제나'], year:'2024' },
-  { vid:'TXUZTKgeyXo', url:'https://www.youtube.com/live/TXUZTKgeyXo?si=ogIBga3eSiEs7Ier', date:'6월 15일', title:null, members:['전원'], year:'2024' },
-  { vid:'JHFCQl4_ljY', url:'https://youtu.be/JHFCQl4_ljY', date:'6월 28일', title:null, members:['전원'], year:'2024' },
-  { vid:'lm_9K2aH050', url:'https://youtu.be/lm_9K2aH050', date:'7월 10일', title:null, members:['전원'], year:'2024' },
-  { vid:'wxy_btUxqDA', url:'https://youtu.be/wxy_btUxqDA', date:'7월 26일', title:null, members:['메이'], year:'2024' },
-  { vid:'vRl5KRj3BMc', url:'https://youtu.be/vRl5KRj3BMc', date:'7월 27일', title:null, members:['원이','리브'], year:'2024' },
-  { vid:'T3L2q0iB9Mk', url:'https://youtu.be/T3L2q0iB9Mk', date:'7월 28일', title:null, members:['리브','제나'], year:'2024' },
-  { vid:'dw2u2tbECg4', url:'https://youtu.be/dw2u2tbECg4', date:'8월 3일', title:null, members:['리브','메이'], year:'2024' },
-  { vid:'v5z11R6kTnU', url:'https://youtu.be/v5z11R6kTnU', date:'8월 3일', title:null, members:['원이','리브','메이'], year:'2024' },
-  { vid:'u4yJfOybF4Y', url:'https://youtu.be/u4yJfOybF4Y', date:'8월 4일', title:null, members:['원이'], year:'2024' },
-  { vid:'AGPM1rywdcw', url:'https://youtu.be/AGPM1rywdcw', date:'8월 9일', title:null, members:['리브','제나'], year:'2024' },
-  { vid:'f9FnEhOVezs', url:'https://youtu.be/f9FnEhOVezs', date:'8월 19일', title:null, members:['메이'], year:'2024' },
-  { vid:'LcPJKLQP-dI', url:'https://youtu.be/LcPJKLQP-dI', date:'8월 31일', title:null, members:['리브','제나'], year:'2024' },
-  { vid:'qt2Sv4mikmg', url:'https://youtu.be/qt2Sv4mikmg', date:'9월 3일', title:null, members:['원이','메이'], year:'2024' },
-  { vid:'-UCU2EBgQ2w', url:'https://youtu.be/-UCU2EBgQ2w', date:'9월 3일', title:null, members:['원이','메이','제나'], year:'2024' },
-  { vid:'l6szHmEa-V4', url:'https://youtu.be/l6szHmEa-V4', date:'9월 5일', title:null, members:['리브','미나미'], year:'2024' },
-  { vid:'ssxQskkO1uE', url:'https://youtu.be/ssxQskkO1uE', date:'9월 5일', title:null, members:['리브','미나미'], year:'2024' },
-  { vid:'rTxp0md55Gg', url:'https://youtu.be/rTxp0md55Gg', date:'9월 5일', title:null, members:['리브','미나미','제나'], year:'2024' },
-  { vid:'VB5d5bILm5o', url:'https://youtu.be/VB5d5bILm5o', date:'9월 6일', title:null, members:['리브','메이','제나'], year:'2024' },
-  { vid:'hlC3ceUHF50', url:'https://youtu.be/hlC3ceUHF50', date:'9월 8일', title:null, members:['전원'], year:'2024' },
-  { vid:'5YHhBw9BRdY', url:'https://youtu.be/5YHhBw9BRdY', date:'9월 18일', title:null, members:['메이'], year:'2024' },
-  { vid:'FzKwxj4wkUs', url:'https://youtu.be/FzKwxj4wkUs', date:'9월 24일', title:null, members:['원이'], year:'2024' },
-  { vid:'iKZ5b_il1gA', url:'https://youtu.be/iKZ5b_il1gA', date:'9월 28일', title:null, members:['메이'], year:'2024' },
-  { vid:'Eu6QZZRX1l4', url:'https://www.youtube.com/live/Eu6QZZRX1l4?si=uhTtHDPzSwRxb3he', date:'9월 28일', title:null, members:['리브','메이','제나'], year:'2024' },
-  { vid:'egGs5vitwk8', url:'https://youtu.be/egGs5vitwk8', date:'10월 1일', title:null, members:['미나미'], year:'2024' },
-  { vid:'lG-sME3x8R8', url:'https://youtu.be/lG-sME3x8R8', date:'10월 2일', title:null, members:['리브','제나','원이','메이'], year:'2024' },
-  { vid:'P4L4GeNMaWk', url:'https://youtu.be/P4L4GeNMaWk', date:'10월 7일', title:null, members:['전원'], year:'2024' },
-  { vid:'vzk4wXM98J0', url:'https://youtu.be/vzk4wXM98J0', date:'10월 9일', title:null, members:['원이','리브','제나'], year:'2024' },
-  { vid:'a8Cec3V8QiM', url:'https://youtu.be/a8Cec3V8QiM', date:'10월 11일', title:null, members:['리브'], year:'2024' },
-  { vid:'l0QnN1z-lgg', url:'https://youtu.be/l0QnN1z-lgg', date:'10월 19일', title:null, members:['원이'], year:'2024' },
-  { vid:'Ln5VWvqHDEM', url:'https://youtu.be/Ln5VWvqHDEM', date:'10월 20일', title:null, members:['리브','미나미','제나'], year:'2024' },
-  { vid:'vzLpABYZXrU', url:'https://youtu.be/vzLpABYZXrU', date:'10월 20일', title:null, members:['리브','미나미','제나'], year:'2024' },
-  { vid:'wMafswIJhUg', url:'https://youtu.be/wMafswIJhUg', date:'10월 20일', title:null, members:['메이'], year:'2024' },
-  { vid:'6rAdtQAVsJc', url:'https://youtu.be/6rAdtQAVsJc', date:'10월 25일', title:null, members:['리브','미나미','제나'], year:'2024' },
-  { vid:'ubIGCREnJ1k', url:'https://youtu.be/ubIGCREnJ1k', date:'10월 27일', title:null, members:['원이'], year:'2024' },
-  { vid:'KgrymtWNQ3s', url:'https://youtu.be/KgrymtWNQ3s', date:'10월 30일', title:null, members:['미나미'], year:'2024' },
-  { vid:'A5iTE_FdEgY', url:'https://youtu.be/A5iTE_FdEgY', date:'10월 31일', title:null, members:['리브'], year:'2024' },
-  { vid:'uF_5P75RJsM', url:'https://youtu.be/uF_5P75RJsM', date:'11월 3일', title:null, members:['원이'], year:'2024' },
-  { vid:'ryn87JFtW2k', url:'https://youtu.be/ryn87JFtW2k', date:'11월 7일', title:null, members:['원이','리브','메이'], year:'2024' },
-  { vid:'bf2nRE9F-Ms', url:'https://youtu.be/bf2nRE9F-Ms', date:'11월 8일', title:null, members:['원이','메이'], year:'2024' },
-  { vid:'m8n73GwIrpQ', url:'https://youtu.be/m8n73GwIrpQ', date:'11월 16일', title:null, members:['메이','제나'], year:'2024' },
-  { vid:'Ay-PdxOh86I', url:'https://youtu.be/Ay-PdxOh86I', date:'11월 17일', title:null, members:['원이','미나미'], year:'2024' },
-  { vid:'XRFGyzK2Prk', url:'https://youtu.be/XRFGyzK2Prk', date:'11월 18일', title:null, members:['원이'], year:'2024' },
-  { vid:'t3oae9KLstA', url:'https://youtu.be/t3oae9KLstA', date:'11월 22일', title:null, members:['리브','메이'], year:'2024' },
-  { vid:'Knn-QpiTRJI', url:'https://youtu.be/Knn-QpiTRJI', date:'11월 23일', title:null, members:['원이'], year:'2024' },
-  { vid:'oyUiOiS8T3U', url:'https://youtu.be/oyUiOiS8T3U', date:'11월 27일', title:null, members:['제나'], year:'2024' },
-  { vid:'nxrahKVucyU', url:'https://youtu.be/nxrahKVucyU', date:'11월 29일', title:null, members:['미나미'], year:'2024' },
-  { vid:'F7pS4GjQ0y4', url:'https://youtu.be/F7pS4GjQ0y4', date:'11월 30일', title:null, members:['리브'], year:'2024' },
-  { vid:'hJEM2m5MhEo', url:'https://youtu.be/hJEM2m5MhEo', date:'12월 3일', title:null, members:['원이'], year:'2024' },
-  { vid:'RxIhBp6dJCk', url:'https://youtu.be/RxIhBp6dJCk', date:'12월 10일', title:null, members:['원이','리브'], year:'2024' },
-  { vid:'A-GGtiI2_eU', url:'https://youtu.be/A-GGtiI2_eU', date:'12월 13일', title:null, members:['메이'], year:'2024' },
-  { vid:'vrpVuJWhc_o', url:'https://youtu.be/vrpVuJWhc_o', date:'12월 14일', title:null, members:['원이','메이'], year:'2024' },
-  { vid:'hMTrHvBo-6E', url:'https://youtu.be/hMTrHvBo-6E', date:'12월 16일', title:null, members:['리브','제나'], year:'2024' },
-  { vid:'p9iNLbtUvbM', url:'https://youtu.be/p9iNLbtUvbM', date:'12월 16일', title:null, members:['미나미'], year:'2024' },
-  { vid:'_Y0iAMz2-sw', url:'https://youtu.be/_Y0iAMz2-sw', date:'12월 19일', title:null, members:['원이'], year:'2024' },
-  { vid:'I5n1JjWPgQU', url:'https://youtu.be/I5n1JjWPgQU', date:'12월 14일', title:null, members:['메이'], year:'2024' },
-  { vid:'I80WHuDtT9I', url:'https://youtu.be/I80WHuDtT9I', date:'12월 24일', title:null, members:['전원'], year:'2024' },
-  { vid:'rwFSq6jXSsY', url:'https://youtu.be/rwFSq6jXSsY', date:'12월 25일', title:null, members:['전원'], year:'2024' },
-  { vid:'upTarPjmgyM', url:'https://youtu.be/upTarPjmgyM', date:'12월 26일', title:null, members:['원이','리브'], year:'2024' },
+  { vid:'b4fgkgaLUVk', url:'https://youtu.be/b4fgkgaLUVk', date:'6월 15일', members:['원이','메이'], year:'2024' },
+  { vid:'oDWGsOCxrZQ', url:'https://youtu.be/oDWGsOCxrZQ', date:'6월 15일', members:['리브','미나미','제나'], year:'2024' },
+  { vid:'TXUZTKgeyXo', url:'https://www.youtube.com/live/TXUZTKgeyXo', date:'6월 15일', members:['전원'], year:'2024' },
+  { vid:'JHFCQl4_ljY', url:'https://youtu.be/JHFCQl4_ljY', date:'6월 28일', members:['전원'], year:'2024' },
+  { vid:'lm_9K2aH050', url:'https://youtu.be/lm_9K2aH050', date:'7월 10일', members:['전원'], year:'2024' },
+  { vid:'wxy_btUxqDA', url:'https://youtu.be/wxy_btUxqDA', date:'7월 26일', members:['메이'], year:'2024' },
+  { vid:'vRl5KRj3BMc', url:'https://youtu.be/vRl5KRj3BMc', date:'7월 27일', members:['원이','리브'], year:'2024' },
+  { vid:'T3L2q0iB9Mk', url:'https://youtu.be/T3L2q0iB9Mk', date:'7월 28일', members:['리브','제나'], year:'2024' },
+  { vid:'dw2u2tbECg4', url:'https://youtu.be/dw2u2tbECg4', date:'8월 3일', members:['리브','메이'], year:'2024' },
+  { vid:'v5z11R6kTnU', url:'https://youtu.be/v5z11R6kTnU', date:'8월 3일', members:['원이','리브','메이'], year:'2024' },
+  { vid:'u4yJfOybF4Y', url:'https://youtu.be/u4yJfOybF4Y', date:'8월 4일', members:['원이'], year:'2024' },
+  { vid:'AGPM1rywdcw', url:'https://youtu.be/AGPM1rywdcw', date:'8월 9일', members:['리브','제나'], year:'2024' },
+  { vid:'f9FnEhOVezs', url:'https://youtu.be/f9FnEhOVezs', date:'8월 19일', members:['메이'], year:'2024' },
+  { vid:'LcPJKLQP-dI', url:'https://youtu.be/LcPJKLQP-dI', date:'8월 31일', members:['리브','제나'], year:'2024' },
+  { vid:'qt2Sv4mikmg', url:'https://youtu.be/qt2Sv4mikmg', date:'9월 3일', members:['원이','메이'], year:'2024' },
+  { vid:'-UCU2EBgQ2w', url:'https://youtu.be/-UCU2EBgQ2w', date:'9월 3일', members:['원이','메이','제나'], year:'2024' },
+  { vid:'l6szHmEa-V4', url:'https://youtu.be/l6szHmEa-V4', date:'9월 5일', members:['리브','미나미'], year:'2024' },
+  { vid:'ssxQskkO1uE', url:'https://youtu.be/ssxQskkO1uE', date:'9월 5일', members:['리브','미나미'], year:'2024' },
+  { vid:'rTxp0md55Gg', url:'https://youtu.be/rTxp0md55Gg', date:'9월 5일', members:['리브','미나미','제나'], year:'2024' },
+  { vid:'VB5d5bILm5o', url:'https://youtu.be/VB5d5bILm5o', date:'9월 6일', members:['리브','메이','제나'], year:'2024' },
+  { vid:'hlC3ceUHF50', url:'https://youtu.be/hlC3ceUHF50', date:'9월 8일', members:['전원'], year:'2024' },
+  { vid:'5YHhBw9BRdY', url:'https://youtu.be/5YHhBw9BRdY', date:'9월 18일', members:['메이'], year:'2024' },
+  { vid:'FzKwxj4wkUs', url:'https://youtu.be/FzKwxj4wkUs', date:'9월 24일', members:['원이'], year:'2024' },
+  { vid:'iKZ5b_il1gA', url:'https://youtu.be/iKZ5b_il1gA', date:'9월 28일', members:['메이'], year:'2024' },
+  { vid:'Eu6QZZRX1l4', url:'https://www.youtube.com/live/Eu6QZZRX1l4', date:'9월 28일', members:['리브','메이','제나'], year:'2024' },
+  { vid:'egGs5vitwk8', url:'https://youtu.be/egGs5vitwk8', date:'10월 1일', members:['미나미'], year:'2024' },
+  { vid:'lG-sME3x8R8', url:'https://youtu.be/lG-sME3x8R8', date:'10월 2일', members:['리브','제나','원이','메이'], year:'2024' },
+  { vid:'P4L4GeNMaWk', url:'https://youtu.be/P4L4GeNMaWk', date:'10월 7일', members:['전원'], year:'2024' },
+  { vid:'vzk4wXM98J0', url:'https://youtu.be/vzk4wXM98J0', date:'10월 9일', members:['원이','리브','제나'], year:'2024' },
+  { vid:'a8Cec3V8QiM', url:'https://youtu.be/a8Cec3V8QiM', date:'10월 11일', members:['리브'], year:'2024' },
+  { vid:'l0QnN1z-lgg', url:'https://youtu.be/l0QnN1z-lgg', date:'10월 19일', members:['원이'], year:'2024' },
+  { vid:'Ln5VWvqHDEM', url:'https://youtu.be/Ln5VWvqHDEM', date:'10월 20일', members:['리브','미나미','제나'], year:'2024' },
+  { vid:'vzLpABYZXrU', url:'https://youtu.be/vzLpABYZXrU', date:'10월 20일', members:['리브','미나미','제나'], year:'2024' },
+  { vid:'wMafswIJhUg', url:'https://youtu.be/wMafswIJhUg', date:'10월 20일', members:['메이'], year:'2024' },
+  { vid:'6rAdtQAVsJc', url:'https://youtu.be/6rAdtQAVsJc', date:'10월 25일', members:['리브','미나미','제나'], year:'2024' },
+  { vid:'ubIGCREnJ1k', url:'https://youtu.be/ubIGCREnJ1k', date:'10월 27일', members:['원이'], year:'2024' },
+  { vid:'KgrymtWNQ3s', url:'https://youtu.be/KgrymtWNQ3s', date:'10월 30일', members:['미나미'], year:'2024' },
+  { vid:'A5iTE_FdEgY', url:'https://youtu.be/A5iTE_FdEgY', date:'10월 31일', members:['리브'], year:'2024' },
+  { vid:'uF_5P75RJsM', url:'https://youtu.be/uF_5P75RJsM', date:'11월 3일', members:['원이'], year:'2024' },
+  { vid:'ryn87JFtW2k', url:'https://youtu.be/ryn87JFtW2k', date:'11월 7일', members:['원이','리브','메이'], year:'2024' },
+  { vid:'bf2nRE9F-Ms', url:'https://youtu.be/bf2nRE9F-Ms', date:'11월 8일', members:['원이','메이'], year:'2024' },
+  { vid:'m8n73GwIrpQ', url:'https://youtu.be/m8n73GwIrpQ', date:'11월 16일', members:['메이','제나'], year:'2024' },
+  { vid:'Ay-PdxOh86I', url:'https://youtu.be/Ay-PdxOh86I', date:'11월 17일', members:['원이','미나미'], year:'2024' },
+  { vid:'XRFGyzK2Prk', url:'https://youtu.be/XRFGyzK2Prk', date:'11월 18일', members:['원이'], year:'2024' },
+  { vid:'t3oae9KLstA', url:'https://youtu.be/t3oae9KLstA', date:'11월 22일', members:['리브','메이'], year:'2024' },
+  { vid:'Knn-QpiTRJI', url:'https://youtu.be/Knn-QpiTRJI', date:'11월 23일', members:['원이'], year:'2024' },
+  { vid:'oyUiOiS8T3U', url:'https://youtu.be/oyUiOiS8T3U', date:'11월 27일', members:['제나'], year:'2024' },
+  { vid:'nxrahKVucyU', url:'https://youtu.be/nxrahKVucyU', date:'11월 29일', members:['미나미'], year:'2024' },
+  { vid:'F7pS4GjQ0y4', url:'https://youtu.be/F7pS4GjQ0y4', date:'11월 30일', members:['리브'], year:'2024' },
+  { vid:'hJEM2m5MhEo', url:'https://youtu.be/hJEM2m5MhEo', date:'12월 3일', members:['원이'], year:'2024' },
+  { vid:'RxIhBp6dJCk', url:'https://youtu.be/RxIhBp6dJCk', date:'12월 10일', members:['원이','리브'], year:'2024' },
+  { vid:'A-GGtiI2_eU', url:'https://youtu.be/A-GGtiI2_eU', date:'12월 13일', members:['메이'], year:'2024' },
+  { vid:'vrpVuJWhc_o', url:'https://youtu.be/vrpVuJWhc_o', date:'12월 14일', members:['원이','메이'], year:'2024' },
+  { vid:'hMTrHvBo-6E', url:'https://youtu.be/hMTrHvBo-6E', date:'12월 16일', members:['리브','제나'], year:'2024' },
+  { vid:'p9iNLbtUvbM', url:'https://youtu.be/p9iNLbtUvbM', date:'12월 16일', members:['미나미'], year:'2024' },
+  { vid:'_Y0iAMz2-sw', url:'https://youtu.be/_Y0iAMz2-sw', date:'12월 19일', members:['원이'], year:'2024' },
+  { vid:'I5n1JjWPgQU', url:'https://youtu.be/I5n1JjWPgQU', date:'12월 14일', members:['메이'], year:'2024' },
+  { vid:'I80WHuDtT9I', url:'https://youtu.be/I80WHuDtT9I', date:'12월 24일', members:['전원'], year:'2024' },
+  { vid:'rwFSq6jXSsY', url:'https://youtu.be/rwFSq6jXSsY', date:'12월 25일', members:['전원'], year:'2024' },
+  { vid:'upTarPjmgyM', url:'https://youtu.be/upTarPjmgyM', date:'12월 26일', members:['원이','리브'], year:'2024' },
 ];
 
 const LIVE_DATA_2025 = [
@@ -2442,6 +2664,7 @@ function buildLiveCard(item, delay) {
         <svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg>
       </div>
       <span class="type-badge tb-itslive">LIVE</span>
+      ${bmBtnHtml(item.vid)}
     </div>
     <div class="cbody">
       <div class="csong-multi" id="lvc-title-${item.vid}">${title}</div>
@@ -2481,7 +2704,152 @@ function buildLiveGrid() {
   }
   grid.innerHTML = items.map((item, idx) => buildLiveCard(item, `${Math.min(idx * 0.03, 0.4)}s`)).join('');
   loadLiveTitles(items);
+  if (curSearchQuery) applySearch();
 }
+
+let BOOKMARKS = new Set();
+try {
+  const saved = localStorage.getItem('rescene-bookmarks');
+  if (saved) BOOKMARKS = new Set(JSON.parse(saved));
+} catch {}
+
+function saveBookmarks() {
+  try { localStorage.setItem('rescene-bookmarks', JSON.stringify([...BOOKMARKS])); } catch {}
+}
+
+function toggleBookmark(e, vid) {
+  e.preventDefault();
+  e.stopPropagation();
+  if (BOOKMARKS.has(vid)) {
+    BOOKMARKS.delete(vid);
+  } else {
+    BOOKMARKS.add(vid);
+  }
+  saveBookmarks();
+
+  // 현재 보이는 모든 카드의 북마크 버튼 상태 갱신
+  const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-'];
+  for (const p of prefixes) {
+    const card = document.getElementById(p + vid);
+    if (card) updateBmBtn(card, vid);
+  }
+
+  if (curSection === 'bookmark') buildBookmarkGrid();
+
+  updateBookmarkTabCount();
+}
+
+function updateBmBtn(card, vid) {
+  const btn = card.querySelector('.bm-btn');
+  if (!btn) return;
+  if (BOOKMARKS.has(vid)) {
+    btn.classList.add('bm-active');
+    btn.title = '즐겨찾기 해제';
+  } else {
+    btn.classList.remove('bm-active');
+    btn.title = '즐겨찾기 추가';
+  }
+}
+
+function bmBtnHtml(vid) {
+  const active = BOOKMARKS.has(vid);
+  return `<button class="bm-btn ${active ? 'bm-active' : ''}" title="${active ? '즐겨찾기 해제' : '즐겨찾기 추가'}" onclick="toggleBookmark(event,'${vid}')">
+    <svg viewBox="2 2 20 19.02" fill="${active ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+    </svg>
+  </button>`;
+}
+
+function updateBookmarkTabCount() {
+  const span = document.getElementById('bmCount');
+  if (!span) return;
+  const cnt = BOOKMARKS.size;
+  span.textContent = cnt > 0 ? ` (${cnt})` : '';
+}
+
+function buildBookmarkGrid() {
+  const grid = document.getElementById('grid');
+  if (!grid) return;
+
+  if (!BOOKMARKS.size) {
+    grid.innerHTML = `<div class="bm-empty">
+      <div class="ico">★</div>
+      <p>즐겨찾기한 영상이 없어요.</p>
+      <small>카드에 마우스를 올리면 ★ 버튼이 나타납니다.</small>
+    </div>`;
+    return;
+  }
+
+  const allVids = [
+    ...ALL_ITEMS.map(i => ({ ...i, _src: 'main' })),
+    ...CONTENT_ITEMS.map(i => ({ vid: i.vid, url: i.url, type: 'content', song: i.category, meta: { rawTitle: i.title, date: i.date, show: null, channel: i.channel || '' }, loaded: i.loaded, _src: 'content' })),
+    ...EXTERNAL_KEYS.flatMap(k => EXTERNAL_DATA[k].map(i => ({ vid: i.vid, url: i.url, type: 'content', song: EXTERNAL_LABELS[k], meta: { rawTitle: i.title, date: i.date, show: null, channel: '' }, loaded: i.loaded, _src: 'external' }))),
+    ...ALL_LIVE.map(i => ({ vid: i.vid, url: i.url, type: 'itslive', song: i.date, meta: { rawTitle: i.title, date: `${i.year} · ${i.date}`, show: null, channel: '' }, loaded: !!i.title, _src: 'live', _liveItem: i })),
+  ];
+
+  const items = allVids.filter(i => BOOKMARKS.has(i.vid));
+  const seen = new Set();
+  const unique = items.filter(i => { if (seen.has(i.vid)) return false; seen.add(i.vid); return true; });
+
+  grid.innerHTML = unique.map((item, idx) => {
+    const delay = `${Math.min(idx * 0.03, 0.4)}s`;
+    const tb = TYPE_BADGE[item.type] || 'tb-content';
+    const tl = TYPE_LABEL[item.type] || item.type;
+    const m = item.meta || {};
+    const videoTitle = m.rawTitle || item.song || item.vid;
+    const dateStr = m.date || '';
+    const show = m.show;
+    const channel = m.channel || '';
+    const tags = [];
+    if (show) tags.push(`<span class="ctag hl">${show.label}</span>`);
+    else if (channel) tags.push(`<span class="ctag">${channel}</span>`);
+    if (item._src === 'live' && item._liveItem) {
+      const memberBadges = item._liveItem.members.map(mm =>
+        `<span class="ctag ${mm === '전원' ? 'hl' : ''}">${mm}</span>`
+      ).join('');
+      return `<a class="vcard ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/${item.vid}/hqdefault.jpg" alt="" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg'">
+          <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
+          <span class="type-badge ${tb}">LIVE</span>
+          ${bmBtnHtml(item.vid)}
+        </div>
+        <div class="cbody">
+          <div class="csong-multi">${videoTitle || item._liveItem.date + ' 라이브'}</div>
+          <div class="cmeta"><span class="cdate">${dateStr}</span></div>
+          <div class="ctags">${memberBadges}</div>
+        </div>
+      </a>`;
+    }
+    if (!item.loaded) {
+      return `<a class="vcard ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+        <div class="thumb">
+          <img src="https://img.youtube.com/vi/${item.vid}/hqdefault.jpg" alt="" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg'">
+          <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
+          <span class="type-badge ${tb}">${tl}</span>
+          ${bmBtnHtml(item.vid)}
+        </div>
+        <div class="cbody">
+          <div class="csong">${item.song}</div>
+        </div>
+      </a>`;
+    }
+    return `<a class="vcard ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+      <div class="thumb">
+        <img src="https://img.youtube.com/vi/${item.vid}/hqdefault.jpg" alt="" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg'">
+        <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
+        <span class="type-badge ${tb}">${tl}</span>
+        ${bmBtnHtml(item.vid)}
+      </div>
+      <div class="cbody">
+        <div class="csong-multi">${videoTitle}</div>
+        <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
+        ${tags.length ? `<div class="ctags">${tags.join('')}</div>` : ''}
+      </div>
+    </a>`;
+  }).join('');
+}
+
 
 function buildSongNav() {
   const nav = document.getElementById('songNav');
@@ -2521,6 +2889,7 @@ function buildCard(item, delay) {
   const dateStr = m?.date || '';
   const show = m?.show;
   const channel = m?.channel || '';
+  const videoTitle = m?.rawTitle || item.song;
   const tags = [];
   if (show) tags.push(`<span class="ctag hl">${show.label}</span>`);
   else if (channel) tags.push(`<span class="ctag">${channel}</span>`);
@@ -2536,9 +2905,10 @@ function buildCard(item, delay) {
         </svg>
       </div>
       <span class="type-badge ${tb}">${tl}</span>
+      ${bmBtnHtml(item.vid)}
     </div>
     <div class="cbody">
-      <div class="csong">${item.song}</div>
+      <div class="csong">${videoTitle}</div>
       <div class="cmeta">
         ${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}
       </div>
@@ -2549,11 +2919,6 @@ function buildCard(item, delay) {
 
 function buildGrid() {
   const grid = document.getElementById('grid');
-
-  if (curSection === 'external') {
-    buildExternalGrid();
-    return;
-  }
 
   if (curSection === 'content') {
     let items = curContentCat === 'all'
@@ -2580,6 +2945,7 @@ function buildGrid() {
     }).join('');
 
     loadContentMetas(items);
+    if (curSearchQuery) applySearch();
     return;
   }
 
@@ -2595,6 +2961,7 @@ function buildGrid() {
 
   grid.innerHTML = items.map((item, idx) => buildCard(item, `${Math.min(idx * 0.03, 0.4)}s`)).join('');
   loadMetas(items);
+  if (curSearchQuery) applySearch();
 }
 
 async function loadMetas(items) {
@@ -2603,7 +2970,7 @@ async function loadMetas(items) {
   for (let i = 0; i < unloaded.length; i += CHUNK) {
     const batch = unloaded.slice(i, i + CHUNK);
     await Promise.all(batch.map(async item => {
-      item.meta = await fetchMeta(item.url);
+      item.meta = await fetchMeta(item.url, item.song);
       item.loaded = true;
       replaceSkeleton(item);
     }));
@@ -2626,7 +2993,7 @@ function replaceSkeleton(item) {
 function pickSection(section) {
   curSection = section;
   document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
-  const tabId = section === 'songs' ? 'secSongs' : section === 'content' ? 'secContent' : section === 'live' ? 'secLive' : section === 'external' ? 'secExternal' : section === 'fantube' ? 'secFantube' : section === 'member' ? 'secMember' : section === 'links' ? 'secLinks' : 'secAbout';
+  const tabId = section === 'songs' ? 'secSongs' : section === 'content' ? 'secContent' : section === 'live' ? 'secLive' : section === 'external' ? 'secExternal' : section === 'fantube' ? 'secFantube' : section === 'member' ? 'secMember' : section === 'links' ? 'secLinks' : section === 'bookmark' ? 'secBookmark' : 'secAbout';
   document.getElementById(tabId).classList.add('active');
 
   document.getElementById('songMode').style.display      = section === 'songs'    ? '' : 'none';
@@ -2636,9 +3003,15 @@ function pickSection(section) {
   document.getElementById('fantubeMode').style.display   = section === 'fantube'  ? '' : 'none';
   document.getElementById('memberMode').style.display    = section === 'member'   ? '' : 'none';
   document.getElementById('linksMode').style.display     = section === 'links'    ? '' : 'none';
+  document.getElementById('bookmarkMode').style.display  = section === 'bookmark' ? '' : 'none';
   document.getElementById('aboutMode').style.display     = section === 'about'    ? '' : 'none';
   document.getElementById('grid-wrap-el').style.display  = (section === 'member' || section === 'links' || section === 'about' || section === 'fantube' || section === 'live') ? 'none' : '';
   document.getElementById('liveGrid').style.display = section === 'live' ? '' : 'none';
+
+  const searchableSections = ['songs', 'content', 'external', 'live', 'bookmark'];
+  const searchBar = document.getElementById('searchBar');
+  searchBar.style.display = searchableSections.includes(section) ? '' : 'none';
+  clearSearch();
 
   if (section === 'member') {
     document.querySelectorAll('.member-btn').forEach((el, i) => {
@@ -2672,6 +3045,65 @@ function pickSection(section) {
   if (section === 'external') { buildExternalNav(); buildExternalGrid(); }
   if (section === 'fantube') buildFantubeGrid();
   if (section === 'songs') buildGrid();
+  if (section === 'bookmark') buildBookmarkGrid();
+}
+
+let curSearchQuery = '';
+
+function onSearch(val) {
+  curSearchQuery = val.trim();
+  const clearBtn = document.getElementById('searchClear');
+  clearBtn.style.display = curSearchQuery ? 'flex' : 'none';
+  applySearch();
+}
+
+function clearSearch() {
+  curSearchQuery = '';
+  const inp = document.getElementById('searchInput');
+  if (inp) { inp.value = ''; inp.style.paddingRight = '36px'; }
+  const clearBtn = document.getElementById('searchClear');
+  if (clearBtn) clearBtn.style.display = 'none';
+  const countEl = document.getElementById('searchResultCount');
+  if (countEl) countEl.textContent = '';
+  applySearch();
+}
+
+function applySearch() {
+  const q = curSearchQuery.toLowerCase();
+
+  const grid = document.getElementById('grid');
+
+  const liveGrid = document.getElementById('liveGridInner');
+
+  const targetGrid = curSection === 'live' ? liveGrid : grid;
+  if (!targetGrid) return;
+
+  const cards = targetGrid.querySelectorAll('.vcard');
+  let visible = 0;
+  cards.forEach(card => {
+    if (!q) {
+      card.style.display = '';
+      visible++;
+      return;
+    }
+    const primary = card.querySelector('.csong')?.textContent || '';
+    const multi   = card.querySelector('.csong-multi')?.textContent || '';
+    const badge   = card.querySelector('.type-badge')?.textContent || '';
+    const tags    = card.querySelector('.ctags')?.textContent || '';
+    const date    = card.querySelector('.cdate')?.textContent || '';
+    const searchTarget = (primary + ' ' + multi + ' ' + badge + ' ' + tags + ' ' + date).toLowerCase();
+    const match = searchTarget.includes(q);
+    card.style.display = match ? '' : 'none';
+    if (match) visible++;
+  });
+
+  const countEl = document.getElementById('searchResultCount');
+  const inp = document.getElementById('searchInput');
+  if (countEl) {
+    const text = q ? `${visible}개` : '';
+    countEl.textContent = text;
+    if (inp) inp.style.paddingRight = text ? '80px' : '36px';
+  }
 }
 
 function searchMember(name) {
@@ -2696,13 +3128,123 @@ function setType(el, type) {
 }
 
 buildSongNav();
-buildContentNav();
-buildExternalNav();
-buildLiveNav();
-buildLiveGrid();
 pickSection('about');
 
 document.addEventListener("contextmenu", e => e.preventDefault());
+
+function toggleTheme() {
+  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
+  const next = isLight ? 'dark' : 'light';
+  applyTheme(next);
+  try { localStorage.setItem('rescene-theme', next); } catch {}
+}
+
+function applyTheme(theme) {
+  if (theme === 'light') {
+    document.documentElement.setAttribute('data-theme', 'light');
+    document.getElementById('themeLabel').textContent = 'Dark';
+    document.getElementById('themeIcon').innerHTML = `
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    `;
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+    document.getElementById('themeLabel').textContent = 'Light';
+    document.getElementById('themeIcon').innerHTML = `
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    `;
+  }
+}
+
+try {
+  const saved = localStorage.getItem('rescene-theme');
+  if (saved === 'light') applyTheme('light');
+  // 저장값이 없거나 'dark'면 기본 다크모드 유지
+} catch {}
+
+(function() {
+  const tab = document.getElementById('secBookmark');
+  if (tab) {
+    const w = tab.getBoundingClientRect().width;
+    tab.style.minWidth = w + 'px';
+  }
+})();
+updateBookmarkTabCount();
+
+window.addEventListener('load', () => {
+  const scrollTopBtn = document.getElementById('scrollTop');
+  if (!scrollTopBtn) return;
+  window.addEventListener('scroll', () => {
+    scrollTopBtn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+  }, { passive: true });
+  scrollTopBtn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+
+const tooltip = document.getElementById('vcardTooltip');
+let tooltipTimer = null;
+
+document.addEventListener('mouseover', e => {
+  const card = e.target.closest('.vcard');
+  if (!card) return;
+  if (e.target.closest('.bm-btn')) return;
+
+  const titleEl = card.querySelector('.csong, .csong-multi');
+  if (!titleEl) return;
+  const fullText = titleEl.textContent.trim();
+  if (!fullText || fullText === '로딩 중...') return;
+
+  const isTruncated = titleEl.scrollWidth > titleEl.clientWidth + 2 ||
+    titleEl.scrollHeight > titleEl.clientHeight + 2;
+  if (!isTruncated) return;
+
+  clearTimeout(tooltipTimer);
+  tooltipTimer = setTimeout(() => {
+    const rect = card.getBoundingClientRect();
+    tooltip.textContent = fullText;
+    tooltip.classList.add('visible');
+
+    let top = rect.bottom + 8;
+    let left = rect.left;
+    if (top + 80 > window.innerHeight) top = rect.top - 8 - tooltip.offsetHeight;
+    if (left + 288 > window.innerWidth) left = window.innerWidth - 296;
+    if (left < 8) left = 8;
+    tooltip.style.top  = top  + 'px';
+    tooltip.style.left = left + 'px';
+  }, 400);
+});
+
+document.addEventListener('mouseout', e => {
+  const card = e.target.closest('.vcard');
+  if (!card) return;
+  clearTimeout(tooltipTimer);
+  tooltip.classList.remove('visible');
+});
+
+document.addEventListener('mousemove', e => {
+  if (!tooltip.classList.contains('visible')) return;
+  if (!e.target.closest('.vcard')) {
+    clearTimeout(tooltipTimer);
+    tooltip.classList.remove('visible');
+  }
+});
 </script>
+
+<button id="scrollTop" title="맨 위로">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="18 15 12 9 6 15"/>
+  </svg>
+</button>
+
+<div id="vcardTooltip" class="vcard-tooltip"></div>
+
 </body>
 </html>
