@@ -23,6 +23,8 @@
   --c-mv:       #c07090;
   --c-itslive:  #a080d0;
   --c-content:  #80b870;
+  --c-onthespot:#e09050;
+  --c-fullcam:  #d4c84a;
 }
 
 [data-theme="light"] {
@@ -41,6 +43,8 @@
   --c-mv:       #a04060;
   --c-itslive:  #7050b0;
   --c-content:  #4a8a34;
+  --c-onthespot:#c06820;
+  --c-fullcam:  #a89a10;
 }
 
 [data-theme="light"] .wordmark-img {
@@ -323,6 +327,8 @@ header {
 .type-btn.active[data-t="mv"]       { color: var(--c-mv);       border-color: var(--c-mv);       background: rgba(192,112,144,0.08); }
 .type-btn.active[data-t="itslive"]  { color: var(--c-itslive);  border-color: var(--c-itslive);  background: rgba(160,128,208,0.08); }
 .type-btn.active[data-t="content"]  { color: var(--c-content);  border-color: var(--c-content);  background: rgba(128,184,112,0.08); }
+.type-btn.active[data-t="onthespot"]{ color: var(--c-onthespot);border-color: var(--c-onthespot);background: rgba(224,144,80,0.08); }
+.type-btn.active[data-t="fullcam"]  { color: var(--c-fullcam);  border-color: var(--c-fullcam);  background: rgba(212,200,74,0.08); }
 
 .type-btn.active[data-lm="all"]    { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.07); }
 .type-btn.active[data-lm="전원"]   { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.07); }
@@ -438,6 +444,30 @@ header {
 .vcard.tb-mv:hover      { border-color: rgba(192,112,144,0.5);  box-shadow: 0 4px 24px rgba(192,112,144,0.15), 0 0 0 1px rgba(192,112,144,0.15); }
 .vcard.tb-itslive:hover { border-color: rgba(160,128,208,0.5);  box-shadow: 0 4px 24px rgba(160,128,208,0.15), 0 0 0 1px rgba(160,128,208,0.15); }
 .vcard.tb-content:hover { border-color: rgba(128,184,112,0.5);  box-shadow: 0 4px 24px rgba(128,184,112,0.15), 0 0 0 1px rgba(128,184,112,0.15); }
+.vcard.tb-onthespot:hover { border-color: rgba(224,144,80,0.5); box-shadow: 0 4px 24px rgba(224,144,80,0.15), 0 0 0 1px rgba(224,144,80,0.15); }
+.vcard.tb-fullcam:hover   { border-color: rgba(212,200,74,0.5); box-shadow: 0 4px 24px rgba(212,200,74,0.15), 0 0 0 1px rgba(212,200,74,0.15); }
+
+/* Live 카드 멤버별 배경색 */
+.vcard.lm-wonyi    { background: rgba(4,90,66,0.18);    border-color: rgba(4,160,110,0.22); }
+.vcard.lm-liv      { background: rgba(200,200,200,0.1);  border-color: rgba(220,220,220,0.2); }
+.vcard.lm-minami   { background: rgba(43,153,196,0.15);  border-color: rgba(43,153,196,0.22); }
+.vcard.lm-may      { background: rgba(236,210,91,0.13);  border-color: rgba(236,210,91,0.22); }
+.vcard.lm-zena     { background: rgba(186,146,219,0.15); border-color: rgba(186,146,219,0.22); }
+.vcard.lm-all      { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
+
+.vcard.lm-wonyi:hover  { border-color: rgba(4,160,110,0.55);  box-shadow: 0 4px 24px rgba(4,160,110,0.18),  0 0 0 1px rgba(4,160,110,0.18); }
+.vcard.lm-liv:hover    { border-color: rgba(220,220,220,0.5);  box-shadow: 0 4px 24px rgba(200,200,200,0.15), 0 0 0 1px rgba(200,200,200,0.15); }
+.vcard.lm-minami:hover { border-color: rgba(43,153,196,0.55);  box-shadow: 0 4px 24px rgba(43,153,196,0.18),  0 0 0 1px rgba(43,153,196,0.18); }
+.vcard.lm-may:hover    { border-color: rgba(236,210,91,0.55);   box-shadow: 0 4px 24px rgba(236,210,91,0.18),  0 0 0 1px rgba(236,210,91,0.18); }
+.vcard.lm-zena:hover   { border-color: rgba(186,146,219,0.55);  box-shadow: 0 4px 24px rgba(186,146,219,0.18), 0 0 0 1px rgba(186,146,219,0.18); }
+.vcard.lm-all:hover    { border-color: rgba(255,255,255,0.3);   box-shadow: 0 4px 24px rgba(255,255,255,0.08), 0 0 0 1px rgba(255,255,255,0.08); }
+
+[data-theme="light"] .vcard.lm-wonyi  { background: rgba(4,90,66,0.08);    border-color: rgba(4,160,110,0.2); }
+[data-theme="light"] .vcard.lm-liv    { background: rgba(80,80,80,0.07);    border-color: rgba(80,80,80,0.18); }
+[data-theme="light"] .vcard.lm-minami { background: rgba(43,153,196,0.08);  border-color: rgba(43,153,196,0.2); }
+[data-theme="light"] .vcard.lm-may    { background: rgba(180,140,0,0.08);   border-color: rgba(180,140,0,0.2); }
+[data-theme="light"] .vcard.lm-zena   { background: rgba(140,90,200,0.08);  border-color: rgba(140,90,200,0.2); }
+[data-theme="light"] .vcard.lm-all    { background: rgba(0,0,0,0.04);       border-color: rgba(0,0,0,0.12); }
 
 .thumb {
   position: relative;
@@ -507,6 +537,8 @@ header {
 .tb-mv      { background: rgba(192,112,144,0.15); color: var(--c-mv);      border: 1px solid rgba(192,112,144,0.2); }
 .tb-itslive { background: rgba(160,128,208,0.15); color: var(--c-itslive); border: 1px solid rgba(160,128,208,0.2); }
 .tb-content { background: rgba(128,184,112,0.15); color: var(--c-content); border: 1px solid rgba(128,184,112,0.2); }
+.tb-onthespot { background: rgba(224,144,80,0.15); color: var(--c-onthespot); border: 1px solid rgba(224,144,80,0.2); }
+.tb-fullcam   { background: rgba(212,200,74,0.15);  color: var(--c-fullcam);   border: 1px solid rgba(212,200,74,0.2); }
 
 .cbody {
   padding: 10px 12px 12px;
@@ -1123,10 +1155,12 @@ header {
   </div>
   
   <div class="type-bar">
-    <button class="type-btn active" data-t="all"      onclick="setType(this,'all')">전체</button>
-    <button class="type-btn"        data-t="music"    onclick="setType(this,'music')">음악방송</button>
-    <button class="type-btn"        data-t="mv"       onclick="setType(this,'mv')">뮤직비디오</button>
-    <button class="type-btn"        data-t="itslive"  onclick="setType(this,'itslive')">It's Live</button>
+    <button class="type-btn active" data-t="all"        onclick="setType(this,'all')">전체</button>
+    <button class="type-btn"        data-t="music"      onclick="setType(this,'music')">음악방송</button>
+    <button class="type-btn"        data-t="mv"         onclick="setType(this,'mv')">뮤직비디오</button>
+    <button class="type-btn"        data-t="itslive"    onclick="setType(this,'itslive')">It's Live</button>
+    <button class="type-btn"        data-t="onthespot"  onclick="setType(this,'onthespot')">온더스팟</button>
+    <button class="type-btn"        data-t="fullcam"    onclick="setType(this,'fullcam')">풀캠</button>
   </div>
 </div>
 
@@ -1462,6 +1496,14 @@ const RESCENE_DATA = [
       ],
       itslive: [],
       content: [],
+      fullcam: [
+        "https://youtu.be/HI44av9b-p0",
+        "https://youtu.be/9crNU22HXeI",
+        "https://youtu.be/zRX1b98YuXI",
+        "https://youtu.be/pxVqH5vXiHQ",
+        "https://youtu.be/Zs_anCC_CII",
+        "https://youtu.be/-qGGOZvF3bM",
+      ],
     }
   },
   {
@@ -1515,6 +1557,12 @@ const RESCENE_DATA = [
         "https://youtu.be/KRpt7OF4zso",
       ],
       content: [],
+      fullcam: [
+        "https://www.youtube.com/watch?v=Js9GfM7Baro",
+        "https://www.youtube.com/watch?v=N8CXYL5k55Q",
+        "https://youtu.be/eSYYmYUcNzA",
+        "https://youtu.be/iJcAoFJEnVk",
+      ],
     }
   },
   {
@@ -1546,6 +1594,10 @@ const RESCENE_DATA = [
       ],
       itslive: [],
       content: [],
+      fullcam: [
+        "https://www.youtube.com/watch?v=ry5RuaSkrSI",
+        "https://youtu.be/B7764l0EoZ8",
+      ],
     }
   },
   {
@@ -1577,6 +1629,22 @@ const RESCENE_DATA = [
         "https://youtu.be/6zJRA5U-gq0",
       ],
       content: [],
+      fullcam: [
+        "https://youtu.be/6cdQofxcx-Q",
+        "https://youtu.be/jdqK6LK0TJM",
+        "https://youtu.be/AREZqO9jOVg",
+        "https://youtu.be/Pc47HBXzwq8",
+        "https://youtu.be/tZQfTAtOj9Y",
+        "https://youtu.be/IgioGCvEilI",
+        "https://youtu.be/7xFqqNUVPic",
+        "https://youtu.be/ANezrT2tgzQ",
+        "https://youtu.be/N3eg7CC_0Tc",
+        "https://youtu.be/kpWf5bUP0lU",
+        "https://youtu.be/tgktKUesL7Y",
+      ],
+      onthespot: [
+        "https://youtu.be/W5PQMyCqeLI",
+      ],
     }
   },
   {
@@ -1589,6 +1657,9 @@ const RESCENE_DATA = [
       mv: [],
       itslive: [],
       content: [],
+      fullcam: [
+        "https://youtu.be/J5b6wF4l1-M",
+      ],
     }
   },
   {
@@ -1600,6 +1671,9 @@ const RESCENE_DATA = [
       mv: [],
       itslive: [],
       content: [],
+      fullcam: [
+        "https://youtu.be/IhT1AFBnS5w",
+      ],
     }
   },
   {
@@ -1627,6 +1701,13 @@ const RESCENE_DATA = [
       ],
       itslive: [],
       content: [],
+      fullcam: [
+        "https://youtu.be/6T4pOC5n-_U",
+        "https://youtu.be/ujyaAKCov6w",
+        "https://youtu.be/F9vfnMIzBg4",
+        "https://youtu.be/IkfqBFngfOY",
+        "https://youtu.be/BPZe73lqCXE",
+      ],
     }
   },
   {
@@ -1645,6 +1726,12 @@ const RESCENE_DATA = [
       ],
       itslive: [],
       content: [],
+      fullcam: [
+        "https://www.youtube.com/watch?v=lcx3Os50zTE",
+        "https://youtu.be/ir-RVKjgPEo",
+        "https://www.youtube.com/watch?v=6onRLZIhI8U",
+        "https://www.youtube.com/watch?v=yMPlofal3UQ",
+      ],
     }
   },
   {
@@ -1666,6 +1753,17 @@ const RESCENE_DATA = [
       ],
       itslive: [],
       content: [],
+      fullcam: [
+        "https://www.youtube.com/watch?v=d_F6LDCDopg",
+        "https://www.youtube.com/watch?v=6RY9sqYCwCk",
+        "https://www.youtube.com/watch?v=-4Fm-MGYbtY",
+        "https://www.youtube.com/watch?v=X9MLJes6GTM",
+        "https://www.youtube.com/watch?v=IzekCaFYKKs",
+        "https://www.youtube.com/watch?v=Bo6OPsjf4IU",
+      ],
+      onthespot: [
+        "https://youtu.be/kjvlrGs5f7c",
+      ],
     }
   },
   {
@@ -1679,6 +1777,10 @@ const RESCENE_DATA = [
       mv: [],
       itslive: [],
       content: [],
+      fullcam: [
+        "https://www.youtube.com/watch?v=6HfHdNWmbJU",
+        "https://www.youtube.com/watch?v=IdyiOZezIwA",
+      ],
     }
   },
   {
@@ -1706,6 +1808,16 @@ const RESCENE_DATA = [
         "https://www.youtube.com/watch?v=aDHmmrfizIE",
       ],
       content: [],
+      fullcam: [
+        "https://youtu.be/-1Z90SCzObQ",
+        "https://youtu.be/HRiQNiZNnG0",
+        "https://youtu.be/GyyxdYSPOxk",
+        "https://youtu.be/JzpAvUIldeU",
+        "https://youtu.be/LaAzdDX8MFM",
+        "https://youtu.be/3mn7ioaRW3M",
+        "https://youtu.be/kp15zTUo5g4",
+        "https://youtu.be/_vdG8XQlLlo",
+      ],
     }
   },
   {
@@ -1717,6 +1829,9 @@ const RESCENE_DATA = [
       mv: [],
       itslive: [],
       content: [],
+      fullcam: [
+        "https://youtu.be/HfbOnltEL6g",
+      ],
     }
   },
 ];
@@ -1980,6 +2095,20 @@ const CONTENT_DATA = [
     ]
   },
   {
+    category: "Re:Creation",
+    urls: [
+      "https://youtu.be/t37nR21Str8",
+      "https://www.youtube.com/watch?v=adFSoJAc2yg",
+      "https://youtu.be/pYMr28ESeGM",
+      "https://youtu.be/GV_6frhuxPs",
+      "https://youtu.be/wyTLakQ1Fdg",
+      "https://youtu.be/Qz5c8QVnsFU",
+      "https://www.youtube.com/watch?v=fZIZYl6QMYQ",
+      "https://youtu.be/uOOJQqXyTh0",
+      "https://youtu.be/4NvNGILmy0Y",
+    ]
+  },
+  {
     category: "By RESCENE",
     urls: [
       "https://youtu.be/_3Wp8i5dfJs",
@@ -2020,8 +2149,8 @@ for (const cat of CONTENT_DATA) {
 
 
 
-const EXTERNAL_KEYS = ['baesungjae', 'relaydance', 'soundbomb360', 'blip', 'dontlookbag', 'recreation', 'interview', 'artistcanvas', 'daytripjeongseon', 'pblive', 'idolbackstage', 'idolunplugged', 'dolsilencium', 'dingo', 'arirangradio', 'matkwon', 'dolbagi', 'starroom', 'hifiction', 'chan19', 'physicalgallary20', 'chan21'];
-const EXTERNAL_LABELS = { baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", recreation: 'Re:Creation', interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰' };
+const EXTERNAL_KEYS = ['baesungjae', 'relaydance', 'soundbomb360', 'blip', 'dontlookbag', 'interview', 'artistcanvas', 'daytripjeongseon', 'pblive', 'idolbackstage', 'idolunplugged', 'dolsilencium', 'dingo', 'arirangradio', 'matkwon', 'dolbagi', 'starroom', 'hifiction', 'chan19', 'physicalgallary20', 'chan21'];
+const EXTERNAL_LABELS = { baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰' };
 const EXTERNAL_DATA = {
   baesungjae: [
     { vid: 'QI4o-1Z9p_s', url: 'https://www.youtube.com/watch?v=QI4o-1Z9p_s', title: null, date: null, loaded: false },
@@ -2069,17 +2198,6 @@ const EXTERNAL_DATA = {
     { vid: 'bBusIXfjyvI', url: 'https://www.youtube.com/watch?v=bBusIXfjyvI', title: null, date: null, loaded: false },
     { vid: 'CCBGSoJlFvE', url: 'https://www.youtube.com/watch?v=CCBGSoJlFvE', title: null, date: null, loaded: false },
     { vid: 'bubnFseL05k', url: 'https://www.youtube.com/watch?v=bubnFseL05k', title: null, date: null, loaded: false },
-  ],
-  recreation: [
-    { vid: 't37nR21Str8', url: 'https://youtu.be/t37nR21Str8', title: null, date: null, loaded: false },
-    { vid: 'adFSoJAc2yg', url: 'https://www.youtube.com/watch?v=adFSoJAc2yg', title: null, date: null, loaded: false },
-    { vid: 'pYMr28ESeGM', url: 'https://youtu.be/pYMr28ESeGM', title: null, date: null, loaded: false },
-    { vid: 'GV_6frhuxPs', url: 'https://youtu.be/GV_6frhuxPs', title: null, date: null, loaded: false },
-    { vid: 'wyTLakQ1Fdg', url: 'https://youtu.be/wyTLakQ1Fdg', title: null, date: null, loaded: false },
-    { vid: 'Qz5c8QVnsFU', url: 'https://youtu.be/Qz5c8QVnsFU', title: null, date: null, loaded: false },
-    { vid: 'fZIZYl6QMYQ', url: 'https://www.youtube.com/watch?v=fZIZYl6QMYQ', title: null, date: null, loaded: false },
-    { vid: 'uOOJQqXyTh0', url: 'https://youtu.be/uOOJQqXyTh0', title: null, date: null, loaded: false },
-    { vid: '4NvNGILmy0Y', url: 'https://youtu.be/4NvNGILmy0Y', title: null, date: null, loaded: false },
   ],
   interview: [
     { vid: 'cAKXNGUi8B0', url: 'https://youtu.be/cAKXNGUi8B0', title: null, date: null, loaded: false },
@@ -2650,12 +2768,19 @@ function memberMatch(item) {
   return item.members.includes(curLiveMember) || item.members.includes('전원');
 }
 
+const MEMBER_CLASS = { '원이':'lm-wonyi', '리브':'lm-liv', '미나미':'lm-minami', '메이':'lm-may', '제나':'lm-zena', '전원':'lm-all' };
+function getLiveCardClass(members) {
+  if (!members || !members.length) return 'lm-all';
+  if (members.includes('전원')) return 'lm-all';
+  return MEMBER_CLASS[members[0]] || 'lm-all';
+}
 function buildLiveCard(item, delay) {
   const memberBadges = item.members.map(m =>
     `<span class="ctag ${m === '전원' ? 'hl' : ''}">${m}</span>`
   ).join('');
   const title = item.title || '로딩 중...';
-  return `<a class="vcard tb-itslive" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+  const lmClass = getLiveCardClass(item.members);
+  return `<a class="vcard ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
     <div class="thumb">
       <img src="https://img.youtube.com/vi/${item.vid}/hqdefault.jpg" alt=""
            loading="lazy"
@@ -2867,8 +2992,8 @@ function buildSongNav() {
   nav.innerHTML = html;
 }
 
-const TYPE_BADGE = { music:'tb-music', mv:'tb-mv', itslive:'tb-itslive', content:'tb-content' };
-const TYPE_LABEL = { music:'음악방송', mv:'뮤직비디오', itslive:"It's Live", content:'자체컨텐츠' };
+const TYPE_BADGE = { music:'tb-music', mv:'tb-mv', itslive:'tb-itslive', content:'tb-content', onthespot:'tb-onthespot', fullcam:'tb-fullcam' };
+const TYPE_LABEL = { music:'음악방송', mv:'뮤직비디오', itslive:"It's Live", content:'자체컨텐츠', onthespot:'온더스팟', fullcam:'풀캠' };
 
 function buildCard(item, delay) {
   const tb = TYPE_BADGE[item.type] || 'tb-content';
@@ -2893,6 +3018,7 @@ function buildCard(item, delay) {
   const tags = [];
   if (show) tags.push(`<span class="ctag hl">${show.label}</span>`);
   else if (channel) tags.push(`<span class="ctag">${channel}</span>`);
+  if (item.type === 'onthespot') tags.push(`<span class="ctag hl" style="color:var(--c-onthespot)">온더스팟</span>`);
 
   return `<a class="vcard ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
     <div class="thumb">
