@@ -2432,6 +2432,16 @@ const DATE_MAP = {
   'FcMaC8akSU8': '2026.04.09',
   'giWNmOtwsR4': '2026.04.17',
   'NS7tSrMrWsc': '2026.05.01',
+  '6Iq7hCk7XgA': '2024.08.13',
+  'd54HzwVCBIk': '2025.02.13',
+  'QlKRgD1rnDE': '2025.11.28',
+  'Ng2UW4QBLGs': '2025.02.18',
+  'iQmR7Rn1BgU': '2025.07.04',
+  'J19TvSizVl8': '2024.08.12',
+  'FTFRUqq81CU': '2025.02.17',
+  'Dia2f1ZWI9o': '2025.02.18',
+  'JdQ81bhZQyw': '2026.04.19',
+  '_AqXSSQ0Cmo': '2026.05.08',
 };
 
 function parseDate(title) {
@@ -2742,6 +2752,7 @@ const CONTENT_DATA = [
       "https://www.youtube.com/watch?v=FcMaC8akSU8",
       "https://www.youtube.com/watch?v=giWNmOtwsR4",
       "https://www.youtube.com/watch?v=NS7tSrMrWsc",
+      "https://youtu.be/_AqXSSQ0Cmo",
     ]
   },
 ];
@@ -2755,8 +2766,8 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_KEYS = ['arirangradio','dingo','relaydance','interview','physicalgallary20','matkwon','chan19','hifiction','baesungjae','blip','chan21','dolsilencium','studiokkok','idolbackstage','artistcanvas','daytripjeongseon','dontlookbag','pblive','dolbagi','starroom','soundbomb360','idolunplugged'];
-const EXTERNAL_LABELS = { baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ' };
+const EXTERNAL_KEYS = ['arirangradio','dingo','mbcradio','relaydance','interview','physicalgallary20','matkwon','chan19','hifiction','baesungjae','blip','chan21','dolsilencium','studiokkok','idolbackstage','artistcanvas','daytripjeongseon','dontlookbag','pblive','dolbagi','starroom','soundbomb360','idolunplugged'];
+const EXTERNAL_LABELS = { baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio' };
 const EXTERNAL_DATA = {
   baesungjae: [
     { vid: 'QI4o-1Z9p_s', url: 'https://www.youtube.com/watch?v=QI4o-1Z9p_s', title: null, date: '2025.01.10', loaded: false },
@@ -2930,6 +2941,17 @@ const EXTERNAL_DATA = {
     { vid: 'fB0bjJB6f6Y', url: 'https://www.youtube.com/watch?v=fB0bjJB6f6Y', title: null, date: '2026.04.24', loaded: false },
     { vid: 'iLBc6SQJYZU', url: 'https://www.youtube.com/watch?v=iLBc6SQJYZU', title: null, date: '2026.05.01', loaded: false },
     { vid: 'TuBlsrL8HDE', url: 'https://www.youtube.com/watch?v=TuBlsrL8HDE', title: null, date: '2026.05.08', loaded: false },
+  ],
+  mbcradio: [
+    { vid: '6Iq7hCk7XgA', url: 'https://youtu.be/6Iq7hCk7XgA', title: null, date: '2024.08.13', loaded: false },
+    { vid: 'J19TvSizVl8', url: 'https://www.youtube.com/live/J19TvSizVl8', title: null, date: '2024.08.12', loaded: false },
+    { vid: 'd54HzwVCBIk', url: 'https://youtu.be/d54HzwVCBIk', title: null, date: '2025.02.13', loaded: false },
+    { vid: 'FTFRUqq81CU', url: 'https://www.youtube.com/live/FTFRUqq81CU', title: null, date: '2025.02.17', loaded: false },
+    { vid: 'Ng2UW4QBLGs', url: 'https://youtu.be/Ng2UW4QBLGs', title: null, date: '2025.02.18', loaded: false },
+    { vid: 'Dia2f1ZWI9o', url: 'https://youtu.be/Dia2f1ZWI9o', title: null, date: '2025.02.18', loaded: false },
+    { vid: 'iQmR7Rn1BgU', url: 'https://youtu.be/iQmR7Rn1BgU', title: null, date: '2025.07.04', loaded: false },
+    { vid: 'QlKRgD1rnDE', url: 'https://www.youtube.com/live/QlKRgD1rnDE', title: null, date: '2025.11.28', loaded: false },
+    { vid: 'JdQ81bhZQyw', url: 'https://youtu.be/JdQ81bhZQyw', title: null, date: '2026.04.19', loaded: false },
   ],
 };
 const VID_TO_EXTERNAL_KEY = {};
