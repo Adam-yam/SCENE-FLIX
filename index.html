@@ -205,7 +205,6 @@ header {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--bg);
   background: color-mix(in srgb, var(--bg) 95%, transparent);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -316,11 +315,6 @@ header {
 .type-btn[data-lm="메이"]:hover   { border-color: #ecd25b; }
 .type-btn[data-lm="제나"]:hover   { border-color: #ba92db; }
 
-.type-btn.content-active {
-  color: var(--c-content);
-  border-color: var(--c-content);
-  background: rgba(128,184,112,0.08);
-}
 
 .type-btn.active[data-t="all"]      { color: var(--text);       border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); }
 .type-btn.active[data-t="music"]    { color: var(--c-music);    border-color: var(--c-music);    background: rgba(110,198,192,0.08); }
@@ -343,10 +337,45 @@ header {
   margin: 0 auto;
   padding: 14px 40px 14px;
 }
+.search-bar-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 .search-input-wrap {
   position: relative;
   display: flex;
   align-items: center;
+  max-width: 560px;
+  width: 100%;
+  margin-left: auto;
+}
+.sort-btns {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+}
+.sort-btn {
+  padding: 6px 13px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  font-family: 'Inter', sans-serif;
+  transition: all 0.15s;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.sort-btn:hover { color: var(--text); border-color: var(--border-h); }
+.sort-btn.active {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: rgba(224,212,192,0.07);
 }
 .search-input-wrap > svg {
   position: absolute;
@@ -447,7 +476,6 @@ header {
 .vcard.tb-onthespot:hover { border-color: rgba(224,144,80,0.5); box-shadow: 0 4px 24px rgba(224,144,80,0.15), 0 0 0 1px rgba(224,144,80,0.15); }
 .vcard.tb-fullcam:hover   { border-color: rgba(212,200,74,0.5); box-shadow: 0 4px 24px rgba(212,200,74,0.15), 0 0 0 1px rgba(212,200,74,0.15); }
 
-/* Live 카드 멤버별 배경색 */
 .vcard.lm-wonyi    { background: rgba(4,90,66,0.18);    border-color: rgba(4,160,110,0.22); }
 .vcard.lm-liv      { background: rgba(200,200,200,0.1);  border-color: rgba(220,220,220,0.2); }
 .vcard.lm-minami   { background: rgba(43,153,196,0.15);  border-color: rgba(43,153,196,0.22); }
@@ -756,33 +784,6 @@ header {
   transform: translateY(0);
 }
 
-.ftcard-skel {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 20px 14px 18px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  animation: pulse 1.6s ease-in-out infinite;
-}
-
-.ftcard-skel-avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: var(--surf);
-}
-
-.ftcard-skel-line {
-  height: 9px;
-  background: var(--surf);
-  border-radius: 3px;
-  width: 70%;
-}
-
-.ftcard-skel-line.s { width: 50%; }
 
 @media (max-width: 700px) {
   .fantube-wrap { padding: 20px 12px 60px; }
@@ -1065,6 +1066,7 @@ header {
   .type-btn { padding: 4px 11px; font-size: 0.64rem; white-space: nowrap; flex-shrink: 0; }
 
   .search-bar { padding: 10px 12px 10px; }
+  .search-input-wrap { max-width: 100%; }
 
   
   .grid-wrap { padding: 12px 10px 60px; }
@@ -1133,19 +1135,30 @@ header {
   </div>
 </div>
 
-<!-- 검색창 -->
 <div class="search-bar" id="searchBar" style="display:none;">
-  <div class="search-input-wrap">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-    </svg>
-    <input type="text" id="searchInput" placeholder="영상 제목으로 검색..." autocomplete="off" oninput="onSearch(this.value)">
-    <span id="searchResultCount"></span>
-    <button id="searchClear" onclick="clearSearch()" title="검색어 지우기">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+  <div class="search-bar-inner">
+    <div class="sort-btns">
+      <button class="sort-btn active" id="sortNewest" onclick="setSort('newest')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+        최신순
+      </button>
+      <button class="sort-btn" id="sortOldest" onclick="setSort('oldest')">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        오래된순
+      </button>
+    </div>
+    <div class="search-input-wrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
-    </button>
+      <input type="text" id="searchInput" placeholder="영상 제목으로 검색..." autocomplete="off" oninput="onSearch(this.value)">
+      <span id="searchResultCount"></span>
+      <button id="searchClear" onclick="clearSearch()" title="검색어 지우기">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
   </div>
 </div>
 
@@ -1448,18 +1461,25 @@ header {
           <span style="color:var(--accent); margin-top:2px; flex-shrink:0;">✦</span>
           <span>저작권자의 요청이 있을 경우, 해당 영상은 수정 또는 삭제될 수 있습니다.</span>
         </div>
+        <div style="display:flex; gap:12px; align-items:flex-start;">
+          <span style="color:var(--accent); margin-top:2px; flex-shrink:0;">✦</span>
+          <span>업데이트 내용은 리센느 마이너 갤러리에서 확인 하실 수 있습니다.</span>
+        </div>
       </div>
 
-      <div style="margin-top:36px; padding-top:24px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:10px;">
-        <p style="font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted);">Contact</p>
+      <div style="margin-top:36px; padding:20px 22px; border-radius:12px; background:var(--card); border:1px solid var(--border-h); display:flex; flex-direction:column; gap:10px;">
+        <p style="font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); font-weight:500;">Contact</p>
         <div style="display:inline-flex; align-items:center; gap:8px;">
-          <a href="mailto:sceneflix.may@gmail.com" style="display:inline-flex; align-items:center; gap:8px; font-size:0.82rem; color:var(--accent); text-decoration:none;">
+          <a href="mailto:sceneflix.may@gmail.com" style="display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; color:var(--text); text-decoration:none; font-weight:500;">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             <span style="user-select:text; -webkit-user-select:text;">sceneflix.may@gmail.com</span>
           </a>
           <button id="copyMailBtn" onclick="navigator.clipboard.writeText('sceneflix.may@gmail.com').then(()=>{const b=document.getElementById('copyMailBtn');b.textContent='✓';b.style.color='var(--accent)';b.style.borderColor='var(--accent)';setTimeout(()=>{b.textContent='복사';b.style.color='var(--muted)';b.style.borderColor='var(--border-h)';},2000);})" style="font-size:0.62rem; padding:2px 7px; border-radius:5px; border:1px solid var(--border-h); background:transparent; color:var(--muted); cursor:pointer; flex-shrink:0;">복사</button>
         </div>
-        <p style="font-size:0.75rem; color:var(--muted); line-height:1.7;">버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.</p>
+        <div style="margin-top:2px; padding-top:10px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:5px;">
+          <p style="font-size:0.75rem; color:var(--muted); line-height:1.7;">버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.</p>
+          <p style="font-size:0.75rem; color:var(--muted); line-height:1.7;">더 좋은 페이지를 만들기 위해 리마인 여러분의 건의사항을 기다리고 있습니다. 상단 메일로 편하게 보내주세요!</p>
+        </div>
       </div>
 
       <div style="margin-top:24px; padding-top:24px; border-top:1px solid var(--border); font-size:0.68rem; color:var(--muted); line-height:1.8;">
@@ -1477,35 +1497,6 @@ header {
 
 <script>
 const RESCENE_DATA = [
-  {
-    song: "UhUh",
-    videos: {
-      music: [
-        "https://youtu.be/hToYhcDydK8",
-        "https://youtu.be/mWS0gdW9kgo",
-        "https://youtu.be/gWsxvBfzsjY",
-        "https://youtu.be/nI3sdA9ppk8",
-        "https://youtu.be/gDgehVCqr5Q",
-        "https://youtu.be/DECJpk7cqW4",
-        "https://youtu.be/eHEKKGt7TaA",
-        "https://youtu.be/vVOslnAZL8o",
-      ],
-      mv: [
-        "https://youtu.be/zpSejlkSXLA",
-        "https://youtu.be/Wm1vxMk5YTY",
-      ],
-      itslive: [],
-      content: [],
-      fullcam: [
-        "https://youtu.be/HI44av9b-p0",
-        "https://youtu.be/9crNU22HXeI",
-        "https://youtu.be/zRX1b98YuXI",
-        "https://youtu.be/pxVqH5vXiHQ",
-        "https://youtu.be/Zs_anCC_CII",
-        "https://youtu.be/-qGGOZvF3bM",
-      ],
-    }
-  },
   {
     song: "YoYo",
     videos: {
@@ -1526,7 +1517,34 @@ const RESCENE_DATA = [
       itslive: [
         "https://youtu.be/sJ-ODnxkf8A",
       ],
-      content: [],
+    }
+  },
+  {
+    song: "UhUh",
+    videos: {
+      music: [
+        "https://youtu.be/hToYhcDydK8",
+        "https://youtu.be/mWS0gdW9kgo",
+        "https://youtu.be/gWsxvBfzsjY",
+        "https://youtu.be/nI3sdA9ppk8",
+        "https://youtu.be/gDgehVCqr5Q",
+        "https://youtu.be/DECJpk7cqW4",
+        "https://youtu.be/eHEKKGt7TaA",
+        "https://youtu.be/vVOslnAZL8o",
+      ],
+      mv: [
+        "https://youtu.be/zpSejlkSXLA",
+        "https://youtu.be/Wm1vxMk5YTY",
+      ],
+      itslive: [],
+      fullcam: [
+        "https://youtu.be/HI44av9b-p0",
+        "https://youtu.be/9crNU22HXeI",
+        "https://youtu.be/zRX1b98YuXI",
+        "https://youtu.be/pxVqH5vXiHQ",
+        "https://youtu.be/Zs_anCC_CII",
+        "https://youtu.be/-qGGOZvF3bM",
+      ],
     }
   },
   {
@@ -1556,7 +1574,6 @@ const RESCENE_DATA = [
       itslive: [
         "https://youtu.be/KRpt7OF4zso",
       ],
-      content: [],
       fullcam: [
         "https://www.youtube.com/watch?v=Js9GfM7Baro",
         "https://www.youtube.com/watch?v=N8CXYL5k55Q",
@@ -1573,7 +1590,6 @@ const RESCENE_DATA = [
         "https://youtu.be/QNXeGm-Wkms",
       ],
       itslive: [],
-      content: [],
     }
   },
   {
@@ -1593,7 +1609,6 @@ const RESCENE_DATA = [
         "https://youtu.be/6tTsZnKysBc",
       ],
       itslive: [],
-      content: [],
       fullcam: [
         "https://www.youtube.com/watch?v=ry5RuaSkrSI",
         "https://youtu.be/B7764l0EoZ8",
@@ -1628,7 +1643,6 @@ const RESCENE_DATA = [
       itslive: [
         "https://youtu.be/6zJRA5U-gq0",
       ],
-      content: [],
       fullcam: [
         "https://youtu.be/6cdQofxcx-Q",
         "https://youtu.be/jdqK6LK0TJM",
@@ -1648,6 +1662,19 @@ const RESCENE_DATA = [
     }
   },
   {
+    song: "다시 만난 세계 Cover",
+    videos: {
+      music: [
+        "https://youtu.be/827onCOjce0",
+      ],
+      mv: [],
+      itslive: [],
+      fullcam: [
+        "https://youtu.be/HfbOnltEL6g",
+      ],
+    }
+  },
+  {
     song: "CRASH",
     videos: {
       music: [
@@ -1656,7 +1683,6 @@ const RESCENE_DATA = [
       ],
       mv: [],
       itslive: [],
-      content: [],
       fullcam: [
         "https://youtu.be/J5b6wF4l1-M",
       ],
@@ -1670,7 +1696,6 @@ const RESCENE_DATA = [
       ],
       mv: [],
       itslive: [],
-      content: [],
       fullcam: [
         "https://youtu.be/IhT1AFBnS5w",
       ],
@@ -1700,7 +1725,6 @@ const RESCENE_DATA = [
         "https://youtu.be/d64dH8mnw9Q",
       ],
       itslive: [],
-      content: [],
       fullcam: [
         "https://youtu.be/6T4pOC5n-_U",
         "https://youtu.be/ujyaAKCov6w",
@@ -1725,7 +1749,6 @@ const RESCENE_DATA = [
         "https://www.youtube.com/watch?v=ByX8EZq8500",
       ],
       itslive: [],
-      content: [],
       fullcam: [
         "https://www.youtube.com/watch?v=lcx3Os50zTE",
         "https://youtu.be/ir-RVKjgPEo",
@@ -1752,7 +1775,6 @@ const RESCENE_DATA = [
         "https://www.youtube.com/watch?v=_zzAi5x0cXc",
       ],
       itslive: [],
-      content: [],
       fullcam: [
         "https://www.youtube.com/watch?v=d_F6LDCDopg",
         "https://www.youtube.com/watch?v=6RY9sqYCwCk",
@@ -1776,7 +1798,6 @@ const RESCENE_DATA = [
       ],
       mv: [],
       itslive: [],
-      content: [],
       fullcam: [
         "https://www.youtube.com/watch?v=6HfHdNWmbJU",
         "https://www.youtube.com/watch?v=IdyiOZezIwA",
@@ -1807,7 +1828,6 @@ const RESCENE_DATA = [
       itslive: [
         "https://www.youtube.com/watch?v=aDHmmrfizIE",
       ],
-      content: [],
       fullcam: [
         "https://youtu.be/-1Z90SCzObQ",
         "https://youtu.be/HRiQNiZNnG0",
@@ -1817,20 +1837,6 @@ const RESCENE_DATA = [
         "https://youtu.be/3mn7ioaRW3M",
         "https://youtu.be/kp15zTUo5g4",
         "https://youtu.be/_vdG8XQlLlo",
-      ],
-    }
-  },
-  {
-    song: "다시 만난 세계 Cover",
-    videos: {
-      music: [
-        "https://youtu.be/827onCOjce0",
-      ],
-      mv: [],
-      itslive: [],
-      content: [],
-      fullcam: [
-        "https://youtu.be/HfbOnltEL6g",
       ],
     }
   },
@@ -1856,6 +1862,577 @@ function parseShow(title) {
   }
   return null;
 }
+
+const DATE_MAP = {
+  '-1Z90SCzObQ': '2026.04.13',
+  '-2v4DGzQCSc': '2026.04.27',
+  '-3-uqY7Kpeo': '2024.09.24',
+  '-HZ_MU5RB4I': '2024.06.08',
+  '-UCU2EBgQ2w': '2024.09.03',
+  '-gThknZPq6c': '2025.07.17',
+  '-qG8y0p2Zds': '2024.12.27',
+  '-qGGOZvF3bM': '2024.05.26',
+  '-yzwpc2Y2Xs': '2026.02.20',
+  '01BFjTsRHBk': '2026.03.04',
+  '03zFmuZFGY0': '2025.09.14',
+  '0V2CripEpK4': '2025.07.18',
+  '0bBK49b5yLg': '2025.07.18',
+  '0dnlq5r_Lig': '2024.09.03',
+  '0eoxZv29UkA': '2026.04.27',
+  '0nIG0brWRao': '2025.12.06',
+  '1-IOC-BAHU4': '2025.07.01',
+  '1Jms0oQkL2k': '2025.08.21',
+  '1UKFjyIIyFs': '2024.06.13',
+  '1VEP3Ra0cas': '2024.05.29',
+  '1a37e5GWMUM': '2025.02.21',
+  '1cxLn6elYn0': '2026.01.12',
+  '1i8ghNiKOOU': '2025.02.07',
+  '1uztX5At3Jw': '2025.01.19',
+  '2KSIBmnCj9w': '2025.12.05',
+  '2M9XTQKscLs': '2025.05.22',
+  '2SKGgezncCI': '2025.11.21',
+  '2WaRiz5PU7o': '2026.04.21',
+  '32pQMFj8AOM': '2026.04.14',
+  '37tje2u7SZ8': '2024.12.28',
+  '3NCdvx-3WuY': '2025.04.07',
+  '3mn7ioaRW3M': '2026.04.18',
+  '3zWV9lPx8YY': '2025.09.12',
+  '4-BYDjk5EsI': '2025.05.13',
+  '4ADSzlm18hY': '2025.12.20',
+  '4KbxesLRw-g': '2025.07.25',
+  '4NvNGILmy0Y': '2026.04.30',
+  '4XoeevrIGaA': '2024.10.04',
+  '4fqiTeVz504': '2024.02.16',
+  '4iZUV00c8s8': '2025.02.24',
+  '4j81hTzk178': '2024.04.06',
+  '4knUMoDhueo': '2024.09.01',
+  '5HwxTQouI-0': '2026.03.01',
+  '5WrT3GeMgNg': '2024.06.08',
+  '5YHhBw9BRdY': '2024.09.18',
+  '5gUixjcMne8': '2025.04.11',
+  '6T4pOC5n-_U': '2025.07.03',
+  '6cdQofxcx-Q': '2025.02.06',
+  '6f9WPj99YTg': '2025.02.09',
+  '6hJSgkqUVWc': '2026.04.14',
+  '6kHUuc0_w2g': '2025.04.03',
+  '6q76zd38izM': '2025.08.28',
+  '6rAdtQAVsJc': '2024.10.24',
+  '6rPltcoAxaA': '2024.05.13',
+  '6tTsZnKysBc': '2024.09.30',
+  '6zJRA5U-gq0': '2025.02.06',
+  '7ALQVuM_4rs': '2025.03.04',
+  '7F3L7R6bZBA': '2024.04.30',
+  '7fyZwuouAGc': '2025.03.21',
+  '7ufduZI1wkw': '2025.02.08',
+  '7vMrAZceQqk': '2024.09.29',
+  '7xFqqNUVPic': '2025.02.20',
+  '7ykC1JAdCr8': '2025.10.26',
+  '8-FF7PUAiso': '2025.03.26',
+  '8-eWWKqMC8k': '2026.04.14',
+  '80GGat88Xzs': '2024.04.27',
+  '827onCOjce0': '2025.02.06',
+  '860263NHDAI': '2025.03.07',
+  '8T0J9NrvxYs': '2024.03.26',
+  '8le7k6JSSwE': '2024.05.29',
+  '91Rt3RMQEh8': '2025.10.29',
+  '95V4tkGpdhM': '2025.08.16',
+  '97YE7zPrON8': '2026.02.04',
+  '9MaWl8r8s1w': '2024.05.08',
+  '9NZFY8Y8gSo': '2026.02.15',
+  '9WKOTZ_JDtE': '2025.08.14',
+  '9XttLI0oH0I': '2024.08.27',
+  '9crNU22HXeI': '2024.04.15',
+  '9fEfAacMpDE': '2025.09.12',
+  'A-GGtiI2_eU': '2024.12.12',
+  'A5iTE_FdEgY': '2024.10.31',
+  'AGDTlHt-u-w': '2025.05.04',
+  'ANezrT2tgzQ': '2025.02.21',
+  'APOshkYdTL0': '2026.04.14',
+  'AREZqO9jOVg': '2025.02.10',
+  'AhJb7wPiOjQ': '2025.09.19',
+  'Ay-PdxOh86I': '2024.11.17',
+  'B47O9OcvCXA': '2026.02.17',
+  'B4JSgVh2Dc0': '2024.05.09',
+  'B7764l0EoZ8': '2024.12.20',
+  'B8JJ8RNM-60': '2024.09.21',
+  'BAs5EBG6XJE': '2026.01.13',
+  'BFuq597SWAA': '2026.04.15',
+  'BPZe73lqCXE': '2025.07.25',
+  'BkSN30JVPaM': '2025.04.29',
+  'Bm4z4Y3hpMc': '2025.02.24',
+  'BnYYkUQefJQ': '2025.02.24',
+  'BowmAWNKCKI': '2024.09.11',
+  'BvwONwBT3w0': '2024.03.21',
+  'C-MHxQKNl8s': '2024.09.11',
+  'C21Bvn4GHyA': '2025.06.29',
+  'C5NgIlSDTqY': '2024.04.17',
+  'CIUHzr5FhuI': '2025.04.21',
+  'CiY40Jh4dws': '2024.05.25',
+  'Clu4G1Ht0po': '2025.07.12',
+  'CpXuvyMl70E': '2025.02.05',
+  'Cx8tXFPXZqk': '2024.09.06',
+  'D0hHQRTADII': '2025.08.29',
+  'D2bd-ABAbPo': '2025.04.02',
+  'D88uhaLAGoM': '2024.02.17',
+  'DECJpk7cqW4': '2024.04.17',
+  'DMxvhtMh53I': '2024.09.05',
+  'DT8fJqmk8fY': '2025.12.13',
+  'DYu1KSw7298': '2026.02.25',
+  'DqVwDLWg3ek': '2025.03.05',
+  'DwNnB6W8DUE': '2026.04.21',
+  'EMoQrQfPF5M': '2024.05.09',
+  'EeHhcBwq0hQ': '2025.07.18',
+  'EicUPexKEDE': '2025.03.01',
+  'F7pS4GjQ0y4': '2024.11.30',
+  'F9hbFUr-SmU': '2026.04.11',
+  'F9vfnMIzBg4': '2025.07.09',
+  'FYdghnUJx-Y': '2025.02.06',
+  'FaNaH1a1c3k': '2025.03.15',
+  'FehXr6GSRKo': '2026.01.16',
+  'FpBCr5TpPqw': '2026.04.14',
+  'FxeciB7rH5o': '2025.04.17',
+  'FzKwxj4wkUs': '2024.09.23',
+  'FzUeh7XBOmI': '2025.07.11',
+  'G-1Nc7tTJns': '2026.04.05',
+  'G-tdsyfG90M': '2025.10.06',
+  'G-zlWrcj7DU': '2025.11.28',
+  'G2QpiBYo7Pc': '2025.08.19',
+  'G2fH76iGIww': '2026.01.07',
+  'GG_DOFlOLNw': '2025.07.15',
+  'GJCJHzWkvZ8': '2025.09.19',
+  'GV_6frhuxPs': '2025.06.05',
+  'GYt_MZcTTMk': '2026.04.01',
+  'Ge-nX5VE28A': '2024.12.25',
+  'Gt9GpU1yMWk': '2025.07.24',
+  'GyyxdYSPOxk': '2026.04.13',
+  'HI44av9b-p0': '2024.04.01',
+  'HIP4sp40Awo': '2024.04.07',
+  'HJRim5C0L60': '2025.07.16',
+  'HQQcWMYZNjc': '2026.04.21',
+  'HRiQNiZNnG0': '2026.04.11',
+  'HVsMGlboV_s': '2025.08.18',
+  'HaC6XZRjpXc': '2025.02.09',
+  'HeFboYmjuys': '2026.03.27',
+  'HfbOnltEL6g': '2025.02.06',
+  'Hv1wQ6nlpNE': '2024.09.01',
+  'I5n1JjWPgQU': '2024.12.20',
+  'I80WHuDtT9I': '2024.12.24',
+  'IH7HiJWAm2c': '2026.04.12',
+  'IN5Vnej9UhI': '2024.05.07',
+  'IO7z1q7qQQc': '2026.04.21',
+  'I_K54WugHtQ': '2024.02.19',
+  'If2kxD44R8A': '2024.10.17',
+  'IgioGCvEilI': '2025.02.17',
+  'IhT1AFBnS5w': '2025.03.05',
+  'IkfqBFngfOY': '2025.07.14',
+  'J-CCk7qFIvU': '2025.03.30',
+  'J5b6wF4l1-M': '2025.02.12',
+  'JHFCQl4_ljY': '2024.06.27',
+  'JNI3e-4LlyI': '2025.05.25',
+  'JR5CxaHZ1Cc': '2024.02.28',
+  'JdYC0Jomkbs': '2025.07.11',
+  'JdqQpNg9LP0': '2025.12.05',
+  'JnVAt6ZMuG4': '2024.02.18',
+  'JzpAvUIldeU': '2026.04.15',
+  'KLgtlTCgLA0': '2025.02.22',
+  'KRTkKDGmJAo': '2025.04.19',
+  'KRpt7OF4zso': '2024.09.07',
+  'KVffFcVRoyo': '2024.09.07',
+  'Kg7eQZ4c0jA': '2026.04.27',
+  'KgrymtWNQ3s': '2024.10.29',
+  'Knn-QpiTRJI': '2024.11.23',
+  'Knty2mLzRG0': '2025.03.04',
+  'Kqdusm-o07E': '2025.02.26',
+  'KrGrd8m2cew': '2024.02.14',
+  'Krqqjcs6188': '2025.12.25',
+  'LA46XZjrrZk': '2026.04.21',
+  'LFs29lRZlIQ': '2024.09.13',
+  'LLMU9CaF9yI': '2024.05.02',
+  'LVkDp-_tZ-8': '2025.12.18',
+  'LaAzdDX8MFM': '2026.04.16',
+  'LcPJKLQP-dI': '2024.08.31',
+  'LhpYH1wglWs': '2025.02.14',
+  'Lle0xkhk_9M': '2025.05.06',
+  'Ln5VWvqHDEM': '2024.10.19',
+  'ML00Fu86B9M': '2024.05.12',
+  'MWEBO7idPhQ': '2025.09.12',
+  'MdExOs06el4': '2024.11.06',
+  'MxRWKezyKQQ': '2024.05.01',
+  'N1WckPLsJ3k': '2025.11.29',
+  'N3eg7CC_0Tc': '2025.02.24',
+  'N3ppk2HK_B8': '2024.08.30',
+  'N8YK9EcZ9AM': '2025.03.05',
+  'NAXYoFYjcfk': '2026.04.14',
+  'NKDjYnV4Wcc': '2025.08.24',
+  'NNcBZaJQg1I': '2024.05.09',
+  'NP-DCLrLieg': '2025.07.15',
+  'Na2m2B5i2RA': '2025.03.08',
+  'Nt-3cv0OfkE': '2024.07.05',
+  'Nw4BTs2K3X4': '2026.04.20',
+  'Nx_8DoX1XTo': '2025.03.13',
+  'Nxx1P86uqZA': '2025.02.21',
+  'O623FzKis10': '2025.10.11',
+  'OIKX2NgbKLw': '2025.11.07',
+  'ONAW3Es4JwE': '2024.03.08',
+  'ORiKYmHPVmk': '2025.11.12',
+  'OSTU90FPU0I': '2025.02.24',
+  'Ocby704Ou-E': '2024.12.24',
+  'OybCC65kqEw': '2025.04.18',
+  'P4L4GeNMaWk': '2024.10.06',
+  'PAy10qC36Wo': '2025.03.12',
+  'PHGpwoGKDjw': '2026.01.08',
+  'PKEo7L2gdkc': '2024.09.13',
+  'Pc47HBXzwq8': '2025.02.12',
+  'PmdBmIrb23E': '2025.07.23',
+  'PyLmLfoMPjw': '2025.11.14',
+  'Q3Uy_6Z2cFo': '2026.04.13',
+  'Q7pWeKFbWgU': '2025.06.27',
+  'QEkzEM_kJCI': '2025.02.24',
+  'QNXeGm-Wkms': '2024.09.12',
+  'Qdfsz8--ohE': '2025.07.09',
+  'QoeohNK7ZRk': '2025.05.30',
+  'Qz5c8QVnsFU': '2025.06.14',
+  'R3PwWttEdIw': '2025.02.17',
+  'RiBPfWXPS9Y': '2026.03.04',
+  'RxIhBp6dJCk': '2024.12.09',
+  'SAc0ZrJzS9U': '2024.06.13',
+  'SGmC-YuOWyM': '2025.10.28',
+  'SHDW59ad--0': '2026.02.15',
+  'SsZwyvEUi2A': '2026.04.08',
+  'SzsBKX4242s': '2024.09.25',
+  'T3L2q0iB9Mk': '2024.07.28',
+  'TD9f8ymdq14': '2026.01.05',
+  'TucLh-PYwwE': '2025.08.08',
+  'U3Wh8pnShuw': '2025.03.12',
+  'UAVL6qhNeG4': '2025.01.15',
+  'UC1s-yWK1Dk': '2025.08.06',
+  'UCuVkx8tVaM': '2025.09.10',
+  'UDkirLRFcoo': '2024.09.22',
+  'UQhYBozbkZ4': '2025.07.29',
+  'UUvDItkBMMY': '2025.12.06',
+  'UVIgk0maplg': '2025.03.20',
+  'UhgtuFEIAys': '2026.01.30',
+  'UwzQFY0eo_A': '2024.04.18',
+  'VB5d5bILm5o': '2024.09.06',
+  'VH1niRMAIII': '2026.02.26',
+  'VTdLPy8HF7c': '2025.02.07',
+  'VYVDd1qgstw': '2025.02.12',
+  'VeLrKottXZI': '2024.10.04',
+  'Vj2jNxFqong': '2024.11.13',
+  'VmK3uTDnIXs': '2025.07.08',
+  'W07b3zKHnL4': '2026.04.17',
+  'W0cpLR0rz0Q': '2026.04.24',
+  'W5PQMyCqeLI': '2025.02.06',
+  'W6F7n8DDgnk': '2025.11.27',
+  'WNl67k6StWY': '2024.09.05',
+  'WQ-yI4llN1w': '2025.06.13',
+  'Wa7Cs87L7SU': '2025.03.26',
+  'WhVH7yAaHy8': '2026.04.20',
+  'WkRZ9x8075M': '2025.05.21',
+  'WkUINlol-OY': '2026.03.26',
+  'Wm1vxMk5YTY': '2024.04.13',
+  'WwGF_sqjH6c': '2024.09.20',
+  'X0THv6jY69g': '2025.07.17',
+  'XRFGyzK2Prk': '2024.11.18',
+  'X_KNAUmt83Y': '2025.02.20',
+  'YExvIec1mtw': '2024.10.30',
+  'YHNopaeAxr8': '2026.04.21',
+  'YJ8QR4BwAzE': '2025.01.22',
+  'Yfaf_loE6JU': '2026.02.14',
+  'YfrsyCN30rs': '2025.09.05',
+  'Yh6nG6UwBUg': '2024.08.30',
+  'YsPHUlAQkUg': '2025.02.24',
+  'ZSk-lj7jX2k': '2024.09.13',
+  'ZZQFWsRh16Q': '2026.03.15',
+  'ZbO9PBdFRdc': '2025.07.02',
+  'ZcOIlhAih38': '2025.02.27',
+  'ZoKjU232QKg': '2026.03.26',
+  'Zoqm3733dvo': '2024.09.06',
+  'Zs_anCC_CII': '2024.05.23',
+  '_3Wp8i5dfJs': '2024.11.18',
+  '_GHDLCVpYLM': '2024.05.09',
+  '_Y0iAMz2-sw': '2024.12.19',
+  '_dUcpB9CgaY': '2025.01.07',
+  '_vdG8XQlLlo': '2026.04.28',
+  'a8Cec3V8QiM': '2024.10.11',
+  'aA9DTVRSTbo': '2024.03.06',
+  'aKf8a8my8V8': '2025.08.03',
+  'aWFozbrTRuM': '2025.04.13',
+  'aYZrrxq6Eno': '2025.03.12',
+  'apoPobosOjE': '2025.01.18',
+  'b-x8O2jyDkk': '2024.05.04',
+  'b1EJ3YqTAwk': '2024.05.11',
+  'b4fgkgaLUVk': '2024.06.15',
+  'bEkXlmGstIo': '2026.02.28',
+  'bJvUwy_gq3A': '2024.03.04',
+  'bQ24gSDbMqY': '2025.03.02',
+  'bTLbLf2z8pQ': '2025.08.14',
+  'bf2nRE9F-Ms': '2024.11.08',
+  'bhgNiT3qQgU': '2024.05.05',
+  'biKOyXFy8Bk': '2024.05.18',
+  'bmfKxYe2Fog': '2025.03.04',
+  'bqEAFISE7hc': '2024.04.26',
+  'bvPT7woEjsw': '2024.05.23',
+  'cA8InZsTkXI': '2024.09.12',
+  'cAKXNGUi8B0': '2024.10.14',
+  'cFOAGLZNFCg': '2025.08.01',
+  'cGosWWgsNjs': '2024.09.04',
+  'cKa8yd73YFQ': '2025.02.03',
+  'cLqqjNDqWMg': '2024.04.19',
+  'caYd7jBfa9U': '2026.04.16',
+  'ceaNt5hmX_k': '2024.10.09',
+  'cfa5GHSutuQ': '2024.05.26',
+  'cxBY3u-NVHM': '2025.05.13',
+  'cxBb_2o_bJM': '2026.04.15',
+  'cxgqZqo14EA': '2024.10.09',
+  'czq2GsxdmNI': '2024.04.26',
+  'd-ji6KBTn0Q': '2025.02.13',
+  'd4psisZDWpg': '2025.09.08',
+  'd64dH8mnw9Q': '2025.07.10',
+  'dDi-0BaW_8Y': '2025.11.11',
+  'd_1IMJUbcyQ': '2025.02.08',
+  'doGCcKx9F1Q': '2025.11.21',
+  'dpXIn_msoRw': '2025.08.02',
+  'duurQm9NmHk': '2024.05.15',
+  'dw2u2tbECg4': '2024.08.03',
+  'e0u6PCPFX0I': '2024.09.28',
+  'e1MlU4PBsCE': '2024.09.14',
+  'e8CfO3CwiGI': '2025.08.13',
+  'e97EWZMJ9O8': '2025.06.05',
+  'eHEKKGt7TaA': '2024.04.19',
+  'eSYYmYUcNzA': '2024.09.11',
+  'edszA3S4eRs': '2025.07.16',
+  'egGs5vitwk8': '2024.10.01',
+  'ewhVQf3P3zg': '2025.01.23',
+  'f9FnEhOVezs': '2024.08.19',
+  'fHa0Mtxb31A': '2025.02.17',
+  'fW8CXaBau-U': '2025.07.04',
+  'fh_shy7OnY8': '2025.07.12',
+  'g-EGc6wVp9I': '2024.03.05',
+  'g92oyTei23w': '2026.04.12',
+  'gDgehVCqr5Q': '2024.04.16',
+  'gSDodK69puY': '2025.07.23',
+  'gU5fP2e777Q': '2024.02.21',
+  'gWsxvBfzsjY': '2024.04.12',
+  'h0xUtrb_JBc': '2025.02.05',
+  'hCVwGcINgn0': '2024.10.10',
+  'hJEM2m5MhEo': '2024.12.02',
+  'hMTrHvBo-6E': '2024.12.16',
+  'hToYhcDydK8': '2024.03.29',
+  'hW62aZ6-VMA': '2026.04.16',
+  'h_3gRUWp28E': '2024.05.28',
+  'h_hW4FoKadc': '2026.04.28',
+  'hhMZWsj15xs': '2026.04.10',
+  'hlC3ceUHF50': '2024.09.08',
+  'i0UW8-8UCvc': '2025.04.01',
+  'i7jSnzRA8UI': '2024.09.23',
+  'iGgAH6O4JIs': '2026.04.13',
+  'iJcAoFJEnVk': '2024.09.16',
+  'iKZ5b_il1gA': '2024.09.28',
+  'iV3UtGz3JKU': '2025.12.31',
+  'ibXfcqYoeW4': '2026.03.18',
+  'idW0CiCAdfk': '2024.10.22',
+  'ip8k2pM_GOU': '2024.11.18',
+  'ir-RVKjgPEo': '2025.11.17',
+  'iw8L05s0L2k': '2025.11.19',
+  'j1YF0S3CKtw': '2026.03.04',
+  'jBdkLY8FiYs': '2024.05.10',
+  'jBxoeukgI_E': '2025.07.30',
+  'jMqo2gJ6Jsg': '2024.09.27',
+  'jO_rFjE-3Es': '2025.02.07',
+  'jciMWQgUVCA': '2025.07.03',
+  'jd28WtI0GyA': '2026.04.22',
+  'jdqK6LK0TJM': '2025.02.07',
+  'kGe2er0xjGc': '2024.04.09',
+  'kjvlrGs5f7c': '2025.11.28',
+  'kl0373Z1Wyg': '2025.02.23',
+  'knM9M-eoypw': '2025.03.26',
+  'kp15zTUo5g4': '2026.04.20',
+  'kpWf5bUP0lU': '2025.03.03',
+  'kxJNpgmfWjE': '2025.11.12',
+  'l-RMOXHFMVk': '2024.02.20',
+  'l0QnN1z-lgg': '2024.10.18',
+  'l6szHmEa-V4': '2024.09.05',
+  'lAHkez2DvwA': '2024.09.22',
+  'lCdQIZQQqiQ': '2026.04.28',
+  'lG-sME3x8R8': '2024.10.01',
+  'leXYOsGqltA': '2025.02.11',
+  'lm_9K2aH050': '2024.07.10',
+  'm8n73GwIrpQ': '2024.11.16',
+  'mDk2Cha_5S4': '2025.01.25',
+  'mKW6PsitCSQ': '2024.12.24',
+  'mWS0gdW9kgo': '2024.04.09',
+  'm_UqbdJV5T8': '2024.12.25',
+  'mm197YcRfrU': '2025.05.23',
+  'mw9lpLi_HJA': '2025.11.14',
+  'nCoPhF-QC4E': '2025.08.01',
+  'nI3sdA9ppk8': '2024.04.12',
+  'nQiNK7p6Ohs': '2025.01.15',
+  'ni0lb6YYPwQ': '2024.05.09',
+  'nv5JnstJCmI': '2025.01.27',
+  'nxR4my5whlU': '2026.01.07',
+  'nxrahKVucyU': '2024.11.29',
+  'oDWGsOCxrZQ': '2024.06.15',
+  'oSK9blwG864': '2024.09.09',
+  'oVC1aQDDoGI': '2025.12.29',
+  'oZKutltCcVk': '2025.02.15',
+  'oaPTaoYn_nQ': '2026.04.16',
+  'oyUiOiS8T3U': '2024.11.27',
+  'oyhFLMlQmPg': '2025.12.07',
+  'p1asr5bLsl0': '2025.10.27',
+  'p9iNLbtUvbM': '2024.12.16',
+  'pHYC8bO6B2o': '2025.08.21',
+  'pYMr28ESeGM': '2025.01.17',
+  'pZ0ZM-2jvwg': '2026.05.05',
+  'pZ9IgDvFOeg': '2025.02.12',
+  'pay7oTvcvu0': '2025.08.11',
+  'pdn93AdbmOo': '2026.05.01',
+  'potdTm-Dnwk': '2025.12.03',
+  'pxVqH5vXiHQ': '2024.05.02',
+  'qAdGlDfw7_U': '2025.08.21',
+  'qCstak0tYos': '2024.12.09',
+  'qDUkVfrcWJs': '2024.11.21',
+  'qDyL8w8TEcE': '2025.03.17',
+  'qOjBSaXFcIg': '2024.10.23',
+  'qW2ixjRpm9Y': '2026.04.21',
+  'qkoHBILB7I4': '2026.04.15',
+  'qpZrJLheWHY': '2025.02.04',
+  'qrYBehtpojM': '2026.04.23',
+  'qt2FvoXRw1U': '2026.04.09',
+  'qt2Sv4mikmg': '2024.09.03',
+  'qy3Qt7POFzs': '2024.05.08',
+  'r0aBwvfiNjY': '2024.11.11',
+  'r0ndZikTONE': '2025.01.09',
+  'r17X1HWHxsM': '2026.03.18',
+  'r3I9kJGcn3g': '2025.02.14',
+  'rAR6A_y3P68': '2025.12.06',
+  'rAhHTMrV6XM': '2025.07.23',
+  'rDCQNWWWkE0': '2024.04.23',
+  'rIZh1QbTxc8': '2025.05.02',
+  'rN9j6-kASEw': '2025.08.02',
+  'rQ143lRSSd4': '2025.05.09',
+  'rTxp0md55Gg': '2024.09.05',
+  'rVPh9-CtmiA': '2025.06.16',
+  'r_TFRK1PMY8': '2025.06.20',
+  'rrbTNmIVKmc': '2026.04.01',
+  'rsZwrTNklos': '2026.04.08',
+  'rwFSq6jXSsY': '2024.12.25',
+  'ryn87JFtW2k': '2024.11.07',
+  'sGNEn2U3oa8': '2026.02.01',
+  'sJ-ODnxkf8A': '2024.05.16',
+  'sXecMQuWyOo': '2025.11.26',
+  'siPHjiGsFIQ': '2025.02.16',
+  'smE4VwcGDTE': '2025.02.06',
+  'ssxQskkO1uE': '2024.09.05',
+  't37nR21Str8': '2024.12.23',
+  't3oae9KLstA': '2024.11.22',
+  't5tRpJq8kQU': '2025.07.29',
+  'tNHn5eh6NYY': '2025.12.06',
+  'tZQfTAtOj9Y': '2025.02.14',
+  'tgktKUesL7Y': '2025.03.03',
+  'tpognj67lyg': '2025.07.16',
+  'tyN8SszsRtQ': '2025.07.06',
+  'u-2SUo7p_vI': '2026.02.19',
+  'u4yJfOybF4Y': '2024.08.03',
+  'uCCV5qK0TBM': '2025.12.13',
+  'uDYy2UyO1X4': '2024.02.29',
+  'uF_5P75RJsM': '2024.11.03',
+  'uJ_MG1I_6MU': '2026.03.11',
+  'uOOJQqXyTh0': '2026.04.04',
+  'uWCcmqVeh8I': '2026.04.18',
+  'ubIGCREnJ1k': '2024.10.27',
+  'uec8lTxOV6k': '2025.10.24',
+  'uj6-zSUwlc0': '2025.01.17',
+  'ujyaAKCov6w': '2025.07.07',
+  'umvrWnLKJf8': '2026.01.29',
+  'upTarPjmgyM': '2024.12.25',
+  'uuCBqyINkhw': '2025.06.16',
+  'v5z11R6kTnU': '2024.08.03',
+  'v7U7O3O9-JE': '2025.08.02',
+  'vCkkkE7ktes': '2025.08.18',
+  'vDt7xQkCCtM': '2026.01.22',
+  'vHeY4_qcey0': '2024.06.01',
+  'vOCEhvvQFbk': '2025.07.02',
+  'vQBtHJVbNeM': '2025.07.10',
+  'vRl5KRj3BMc': '2024.07.27',
+  'vVOslnAZL8o': '2024.04.26',
+  'vk9d1i3v1LA': '2025.09.02',
+  'voJbMfriFbI': '2025.03.03',
+  'vqbesIlW4O0': '2026.04.15',
+  'vrn0e-FpvxY': '2024.05.03',
+  'vrpVuJWhc_o': '2024.12.14',
+  'vvEGCDqmyTg': '2025.09.13',
+  'vwsH71lpyG4': '2025.10.17',
+  'vzLpABYZXrU': '2024.10.19',
+  'vzk4wXM98J0': '2024.10.09',
+  'wKoIL4KobIs': '2024.04.04',
+  'wMafswIJhUg': '2024.10.20',
+  'wVU5F7sLLwI': '2025.02.26',
+  'wf7AR9GsZsk': '2026.02.25',
+  'wfrXzdw1SR4': '2025.09.26',
+  'wlfyyIK0be8': '2025.09.26',
+  'wvGCmy3kmho': '2025.02.28',
+  'wxy_btUxqDA': '2024.07.26',
+  'wyTLakQ1Fdg': '2025.06.12',
+  'x-R-9B894-E': '2025.08.14',
+  'x8EU50FVB1k': '2026.04.14',
+  'xeEMSoqKfBY': '2025.04.30',
+  'xgFjQcR5WDA': '2025.12.05',
+  'xkzCywGa1Eg': '2024.03.07',
+  'xtoXbUIVn6I': '2025.11.30',
+  'yMeBhxSGvVw': '2026.05.01',
+  'yPRYmyMw4g0': '2025.05.25',
+  'yaZ0W7JCxpM': '2025.07.11',
+  'yzbCEI4ua8o': '2024.04.20',
+  'zCOAQMADQyY': '2025.01.28',
+  'zCdmGbkZDwo': '2025.03.05',
+  'zO7ndCNpJfs': '2025.08.19',
+  'zRX1b98YuXI': '2024.04.18',
+  'zd7YuijCjCU': '2026.01.23',
+  'zo2inLqmt64': '2026.04.20',
+  'zpSejlkSXLA': '2024.03.26',
+  'zrhQ7uKStJY': '2024.10.02',
+  'zuaw_7yM6cs': '2025.03.23',
+  'ZzwlwioKwjk': '2025.03.19',
+  'Js9GfM7Baro': '2024.09.02',
+  'N8CXYL5k55Q': '2024.09.09',
+  'ry5RuaSkrSI': '2024.09.23',
+  'ByX8EZq8500': '2025.11.06',
+  'lcx3Os50zTE': '2025.11.10',
+  '6onRLZIhI8U': '2025.11.19',
+  'yMPlofal3UQ': '2025.11.24',
+  'MC6-82GRK5I': '2025.11.25',
+  '_zzAi5x0cXc': '2025.12.08',
+  'd_F6LDCDopg': '2025.12.01',
+  '6RY9sqYCwCk': '2025.12.01',
+  '-4Fm-MGYbtY': '2026.01.05',
+  'X9MLJes6GTM': '2025.12.05',
+  'IzekCaFYKKs': '2025.12.08',
+  'Bo6OPsjf4IU': '2025.12.12',
+  '6HfHdNWmbJU': '2026.03.02',
+  'IdyiOZezIwA': '2026.03.04',
+  'VB_vtps_wus': '2026.04.16',
+  'TiVvoqGwnR4': '2026.04.17',
+  'jS37AjjvTVE': '2026.04.18',
+  'ZoWGyFHTXbI': '2026.04.19',
+  'xBgCfSx_8PA': '2026.04.22',
+  'wS7t2XsSZ0Q': '2026.04.24',
+  'ltc0VGEM5BQ': '2026.04.26',
+  'aDHmmrfizIE': '2026.04.13',
+  'adFSoJAc2yg': '2025.01.13',
+  'fZIZYl6QMYQ': '2026.02.11',
+  'lSxqQYipZoU': '2026.02.05',
+  '6sIeZF5_ixU': '2026.02.10',
+  'fbgmOeTkKHw': '2026.02.10',
+  '1O4hJxumimA': '2026.02.20',
+  'ZLWqgD03tFU': '2026.02.27',
+  'bvUS-ri9nqQ': '2026.03.06',
+  'heifaIjlSUc': '2026.03.20',
+  'inaTPJiZ734': '2026.03.29',
+  'FcMaC8akSU8': '2026.04.09',
+  'giWNmOtwsR4': '2026.04.17',
+  'NS7tSrMrWsc': '2026.05.01',
+};
 
 function parseDate(title) {
   
@@ -1908,38 +2485,58 @@ function ytUrl(vid) {
 }
 
 function openVideo(e, vid) {
-  if (!/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-    e.preventDefault();
-    window.open(ytUrl(vid), '_blank', 'noopener');
+  e.preventDefault();
+
+  const webUrl = ytUrl(vid);
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  if (!isMobile) {
+    window.open(webUrl, '_blank', 'noopener');
+  } else {
+    
+    const appUrl = `vnd.youtube://${vid}`;
+    const fallback = setTimeout(() => {
+      window.location.href = webUrl;
+    }, 1200);
+
+    window.location.href = appUrl;
+
+    
+    window.addEventListener('blur', () => clearTimeout(fallback), { once: true });
   }
 
   document.querySelectorAll('.last-watched-badge').forEach(el => el.remove());
-  const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-'];
+
+  const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-'];
+
   for (const p of prefixes) {
     const card = document.getElementById(p + vid);
+
     if (card) {
       const badge = document.createElement('span');
       badge.className = 'last-watched-badge';
       badge.textContent = '마지막으로 본 영상';
+
       card.querySelector('.thumb').appendChild(badge);
       break;
     }
   }
 }
 
-async function fetchMeta(url, fallbackTitle = '') {
+async function fetchMeta(url, fallbackTitle = '', vid = '') {
   try {
     const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);
     if (!r.ok) throw 0;
     const d = await r.json();
+    const parsedDate = parseDate(d.title);
     return {
       rawTitle: d.title || fallbackTitle,
       channel:  d.author_name,
-      date:     parseDate(d.title),
+      date:     parsedDate || (vid && DATE_MAP[vid]) || null,
       show:     parseShow(d.title),
     };
   } catch {
-    return { rawTitle: fallbackTitle, channel: '', date: null, show: null };
+    return { rawTitle: fallbackTitle, channel: '', date: (vid && DATE_MAP[vid]) || null, show: null };
   }
 }
 
@@ -2070,45 +2667,6 @@ const CONTENT_DATA = [
     ]
   },
   {
-    category: "Re-log",
-    urls: [
-      "https://youtu.be/qDUkVfrcWJs",
-      "https://youtu.be/qCstak0tYos",
-      "https://youtu.be/-qG8y0p2Zds",
-      "https://youtu.be/UhgtuFEIAys",
-      "https://youtu.be/97YE7zPrON8",
-      "https://youtu.be/RiBPfWXPS9Y",
-      "https://youtu.be/uJ_MG1I_6MU",
-      "https://youtu.be/r17X1HWHxsM",
-    ]
-  },
-  {
-    category: "Anniversary",
-    urls: [
-      "https://youtu.be/Wa7Cs87L7SU",
-      "https://youtu.be/yPRYmyMw4g0",
-      "https://youtu.be/G2QpiBYo7Pc",
-      "https://youtu.be/O623FzKis10",
-      "https://youtu.be/W6F7n8DDgnk",
-      "https://youtu.be/N1WckPLsJ3k",
-      "https://youtu.be/WkUINlol-OY",
-    ]
-  },
-  {
-    category: "Re:Creation",
-    urls: [
-      "https://youtu.be/t37nR21Str8",
-      "https://www.youtube.com/watch?v=adFSoJAc2yg",
-      "https://youtu.be/pYMr28ESeGM",
-      "https://youtu.be/GV_6frhuxPs",
-      "https://youtu.be/wyTLakQ1Fdg",
-      "https://youtu.be/Qz5c8QVnsFU",
-      "https://www.youtube.com/watch?v=fZIZYl6QMYQ",
-      "https://youtu.be/uOOJQqXyTh0",
-      "https://youtu.be/4NvNGILmy0Y",
-    ]
-  },
-  {
     category: "By RESCENE",
     urls: [
       "https://youtu.be/_3Wp8i5dfJs",
@@ -2131,6 +2689,61 @@ const CONTENT_DATA = [
       "https://youtu.be/G-1Nc7tTJns",
     ]
   },
+  {
+    category: "Re-log",
+    urls: [
+      "https://youtu.be/qDUkVfrcWJs",
+      "https://youtu.be/qCstak0tYos",
+      "https://youtu.be/-qG8y0p2Zds",
+      "https://youtu.be/UhgtuFEIAys",
+      "https://youtu.be/97YE7zPrON8",
+      "https://youtu.be/RiBPfWXPS9Y",
+      "https://youtu.be/uJ_MG1I_6MU",
+      "https://youtu.be/r17X1HWHxsM",
+    ]
+  },
+  {
+    category: "Re:Creation",
+    urls: [
+      "https://youtu.be/t37nR21Str8",
+      "https://www.youtube.com/watch?v=adFSoJAc2yg",
+      "https://youtu.be/pYMr28ESeGM",
+      "https://youtu.be/GV_6frhuxPs",
+      "https://youtu.be/wyTLakQ1Fdg",
+      "https://youtu.be/Qz5c8QVnsFU",
+      "https://www.youtube.com/watch?v=fZIZYl6QMYQ",
+      "https://youtu.be/uOOJQqXyTh0",
+      "https://youtu.be/4NvNGILmy0Y",
+    ]
+  },
+  {
+    category: "Anniversary",
+    urls: [
+      "https://youtu.be/Wa7Cs87L7SU",
+      "https://youtu.be/yPRYmyMw4g0",
+      "https://youtu.be/G2QpiBYo7Pc",
+      "https://youtu.be/O623FzKis10",
+      "https://youtu.be/W6F7n8DDgnk",
+      "https://youtu.be/N1WckPLsJ3k",
+      "https://youtu.be/WkUINlol-OY",
+    ]
+  },
+  {
+    category: "안녕하세요원이입니다잘부탁드립니다",
+    urls: [
+      "https://www.youtube.com/watch?v=lSxqQYipZoU",
+      "https://www.youtube.com/watch?v=6sIeZF5_ixU",
+      "https://www.youtube.com/watch?v=fbgmOeTkKHw",
+      "https://www.youtube.com/watch?v=1O4hJxumimA",
+      "https://www.youtube.com/watch?v=ZLWqgD03tFU",
+      "https://www.youtube.com/watch?v=bvUS-ri9nqQ",
+      "https://www.youtube.com/watch?v=heifaIjlSUc",
+      "https://www.youtube.com/watch?v=inaTPJiZ734",
+      "https://www.youtube.com/watch?v=FcMaC8akSU8",
+      "https://www.youtube.com/watch?v=giWNmOtwsR4",
+      "https://www.youtube.com/watch?v=NS7tSrMrWsc",
+    ]
+  },
 ];
 
 const CONTENT_ITEMS = [];
@@ -2138,175 +2751,197 @@ for (const cat of CONTENT_DATA) {
   for (const url of cat.urls) {
     const vid = getVid(url);
     if (!vid) continue;
-    CONTENT_ITEMS.push({ category: cat.category, url, vid, title: null, loaded: false });
+    CONTENT_ITEMS.push({ category: cat.category, url, vid, title: null, date: DATE_MAP[vid] || null, loaded: false });
   }
 }
 
-
-
-
-
-
-
-
-const EXTERNAL_KEYS = ['baesungjae', 'relaydance', 'soundbomb360', 'blip', 'dontlookbag', 'interview', 'artistcanvas', 'daytripjeongseon', 'pblive', 'idolbackstage', 'idolunplugged', 'dolsilencium', 'dingo', 'arirangradio', 'matkwon', 'dolbagi', 'starroom', 'hifiction', 'chan19', 'physicalgallary20', 'chan21'];
-const EXTERNAL_LABELS = { baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰' };
+const EXTERNAL_KEYS = ['arirangradio','dingo','relaydance','interview','physicalgallary20','matkwon','chan19','hifiction','baesungjae','blip','chan21','dolsilencium','studiokkok','idolbackstage','artistcanvas','daytripjeongseon','dontlookbag','pblive','dolbagi','starroom','soundbomb360','idolunplugged'];
+const EXTERNAL_LABELS = { baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ' };
 const EXTERNAL_DATA = {
   baesungjae: [
-    { vid: 'QI4o-1Z9p_s', url: 'https://www.youtube.com/watch?v=QI4o-1Z9p_s', title: null, date: null, loaded: false },
-    { vid: 'smE4VwcGDTE', url: 'https://youtu.be/smE4VwcGDTE', title: null, date: null, loaded: false },
-    { vid: 'Q7pWeKFbWgU', url: 'https://youtu.be/Q7pWeKFbWgU', title: null, date: null, loaded: false },
-    { vid: 'xgFjQcR5WDA', url: 'https://youtu.be/xgFjQcR5WDA', title: null, date: null, loaded: false },
-    { vid: 'rrbTNmIVKmc', url: 'https://youtu.be/rrbTNmIVKmc', title: null, date: null, loaded: false },
-    { vid: 'GYt_MZcTTMk', url: 'https://youtu.be/GYt_MZcTTMk', title: null, date: null, loaded: false },
+    { vid: 'QI4o-1Z9p_s', url: 'https://www.youtube.com/watch?v=QI4o-1Z9p_s', title: null, date: '2025.01.10', loaded: false },
+    { vid: 'smE4VwcGDTE', url: 'https://youtu.be/smE4VwcGDTE', title: null, date: '2025.02.06', loaded: false },
+    { vid: 'Q7pWeKFbWgU', url: 'https://youtu.be/Q7pWeKFbWgU', title: null, date: '2025.06.27', loaded: false },
+    { vid: 'xgFjQcR5WDA', url: 'https://youtu.be/xgFjQcR5WDA', title: null, date: '2025.12.05', loaded: false },
+    { vid: 'rrbTNmIVKmc', url: 'https://youtu.be/rrbTNmIVKmc', title: null, date: '2026.04.01', loaded: false },
+    { vid: 'GYt_MZcTTMk', url: 'https://youtu.be/GYt_MZcTTMk', title: null, date: '2026.04.01', loaded: false },
   ],
   relaydance: [
-    { vid: '4knUMoDhueo', url: 'https://youtu.be/4knUMoDhueo', title: null, date: null, loaded: false },
-    { vid: 'mKW6PsitCSQ', url: 'https://youtu.be/mKW6PsitCSQ', title: null, date: null, loaded: false },
-    { vid: 'HaC6XZRjpXc', url: 'https://youtu.be/HaC6XZRjpXc', title: null, date: null, loaded: false },
-    { vid: 'tyN8SszsRtQ', url: 'https://youtu.be/tyN8SszsRtQ', title: null, date: null, loaded: false },
-    { vid: 'sXecMQuWyOo', url: 'https://youtu.be/sXecMQuWyOo', title: null, date: null, loaded: false },
-    { vid: 'Q3Uy_6Z2cFo', url: 'https://youtu.be/Q3Uy_6Z2cFo', title: null, date: null, loaded: false },
+    { vid: '4knUMoDhueo', url: 'https://youtu.be/4knUMoDhueo', title: null, date: '2024.09.01', loaded: false },
+    { vid: 'mKW6PsitCSQ', url: 'https://youtu.be/mKW6PsitCSQ', title: null, date: '2024.12.24', loaded: false },
+    { vid: 'HaC6XZRjpXc', url: 'https://youtu.be/HaC6XZRjpXc', title: null, date: '2025.02.09', loaded: false },
+    { vid: 'tyN8SszsRtQ', url: 'https://youtu.be/tyN8SszsRtQ', title: null, date: '2025.07.06', loaded: false },
+    { vid: 'sXecMQuWyOo', url: 'https://youtu.be/sXecMQuWyOo', title: null, date: '2025.11.26', loaded: false },
+    { vid: 'Q3Uy_6Z2cFo', url: 'https://youtu.be/Q3Uy_6Z2cFo', title: null, date: '2026.04.13', loaded: false },
   ],
   soundbomb360: [
-    { vid: 'NAXYoFYjcfk', url: 'https://youtu.be/NAXYoFYjcfk', title: null, date: null, loaded: false },
-    { vid: 'HQQcWMYZNjc', url: 'https://youtu.be/HQQcWMYZNjc', title: null, date: null, loaded: false },
-    { vid: '0eoxZv29UkA', url: 'https://youtu.be/0eoxZv29UkA', title: null, date: null, loaded: false },
-    { vid: '-2v4DGzQCSc', url: 'https://youtu.be/-2v4DGzQCSc', title: null, date: null, loaded: false },
-    { vid: 'lCdQIZQQqiQ', url: 'https://youtu.be/lCdQIZQQqiQ', title: null, date: null, loaded: false },
-    { vid: '32pQMFj8AOM', url: 'https://youtu.be/32pQMFj8AOM', title: null, date: null, loaded: false },
-    { vid: 'APOshkYdTL0', url: 'https://youtu.be/APOshkYdTL0', title: null, date: null, loaded: false },
-    { vid: '8-eWWKqMC8k', url: 'https://youtu.be/8-eWWKqMC8k', title: null, date: null, loaded: false },
-    { vid: 'FpBCr5TpPqw', url: 'https://youtu.be/FpBCr5TpPqw', title: null, date: null, loaded: false },
-    { vid: '6hJSgkqUVWc', url: 'https://youtu.be/6hJSgkqUVWc', title: null, date: null, loaded: false },
-    { vid: 'DwNnB6W8DUE', url: 'https://youtu.be/DwNnB6W8DUE', title: null, date: null, loaded: false },
-    { vid: 'IO7z1q7qQQc', url: 'https://youtu.be/IO7z1q7qQQc', title: null, date: null, loaded: false },
-    { vid: '2WaRiz5PU7o', url: 'https://youtu.be/2WaRiz5PU7o', title: null, date: null, loaded: false },
-    { vid: 'YHNopaeAxr8', url: 'https://youtu.be/YHNopaeAxr8', title: null, date: null, loaded: false },
-    { vid: 'qW2ixjRpm9Y', url: 'https://youtu.be/qW2ixjRpm9Y', title: null, date: null, loaded: false },
+    { vid: 'NAXYoFYjcfk', url: 'https://youtu.be/NAXYoFYjcfk', title: null, date: '2026.04.14', loaded: false },
+    { vid: 'HQQcWMYZNjc', url: 'https://youtu.be/HQQcWMYZNjc', title: null, date: '2026.04.21', loaded: false },
+    { vid: '0eoxZv29UkA', url: 'https://youtu.be/0eoxZv29UkA', title: null, date: '2026.04.27', loaded: false },
+    { vid: '-2v4DGzQCSc', url: 'https://youtu.be/-2v4DGzQCSc', title: null, date: '2026.04.27', loaded: false },
+    { vid: 'lCdQIZQQqiQ', url: 'https://youtu.be/lCdQIZQQqiQ', title: null, date: '2026.04.28', loaded: false },
+    { vid: '32pQMFj8AOM', url: 'https://youtu.be/32pQMFj8AOM', title: null, date: '2026.04.14', loaded: false },
+    { vid: 'APOshkYdTL0', url: 'https://youtu.be/APOshkYdTL0', title: null, date: '2026.04.14', loaded: false },
+    { vid: '8-eWWKqMC8k', url: 'https://youtu.be/8-eWWKqMC8k', title: null, date: '2026.04.14', loaded: false },
+    { vid: 'FpBCr5TpPqw', url: 'https://youtu.be/FpBCr5TpPqw', title: null, date: '2026.04.14', loaded: false },
+    { vid: '6hJSgkqUVWc', url: 'https://youtu.be/6hJSgkqUVWc', title: null, date: '2026.04.14', loaded: false },
+    { vid: 'DwNnB6W8DUE', url: 'https://youtu.be/DwNnB6W8DUE', title: null, date: '2026.04.21', loaded: false },
+    { vid: 'IO7z1q7qQQc', url: 'https://youtu.be/IO7z1q7qQQc', title: null, date: '2026.04.21', loaded: false },
+    { vid: '2WaRiz5PU7o', url: 'https://youtu.be/2WaRiz5PU7o', title: null, date: '2026.04.21', loaded: false },
+    { vid: 'YHNopaeAxr8', url: 'https://youtu.be/YHNopaeAxr8', title: null, date: '2026.04.21', loaded: false },
+    { vid: 'qW2ixjRpm9Y', url: 'https://youtu.be/qW2ixjRpm9Y', title: null, date: '2026.04.21', loaded: false },
   ],
   blip: [
-    { vid: 'cKa8yd73YFQ', url: 'https://youtu.be/cKa8yd73YFQ', title: null, date: null, loaded: false },
-    { vid: '1i8ghNiKOOU', url: 'https://youtu.be/1i8ghNiKOOU', title: null, date: null, loaded: false },
-    { vid: 'LhpYH1wglWs', url: 'https://youtu.be/LhpYH1wglWs', title: null, date: null, loaded: false },
-    { vid: 'fHa0Mtxb31A', url: 'https://youtu.be/fHa0Mtxb31A', title: null, date: null, loaded: false },
-    { vid: '1a37e5GWMUM', url: 'https://youtu.be/1a37e5GWMUM', title: null, date: null, loaded: false },
-    { vid: 'iGgAH6O4JIs', url: 'https://youtu.be/iGgAH6O4JIs', title: null, date: null, loaded: false },
-    { vid: 'Nw4BTs2K3X4', url: 'https://youtu.be/Nw4BTs2K3X4', title: null, date: null, loaded: false },
+    { vid: 'cKa8yd73YFQ', url: 'https://youtu.be/cKa8yd73YFQ', title: null, date: '2025.02.03', loaded: false },
+    { vid: '1i8ghNiKOOU', url: 'https://youtu.be/1i8ghNiKOOU', title: null, date: '2025.02.07', loaded: false },
+    { vid: 'LhpYH1wglWs', url: 'https://youtu.be/LhpYH1wglWs', title: null, date: '2025.02.14', loaded: false },
+    { vid: 'fHa0Mtxb31A', url: 'https://youtu.be/fHa0Mtxb31A', title: null, date: '2025.02.17', loaded: false },
+    { vid: '1a37e5GWMUM', url: 'https://youtu.be/1a37e5GWMUM', title: null, date: '2025.02.21', loaded: false },
+    { vid: 'iGgAH6O4JIs', url: 'https://youtu.be/iGgAH6O4JIs', title: null, date: '2026.04.13', loaded: false },
+    { vid: 'Nw4BTs2K3X4', url: 'https://youtu.be/Nw4BTs2K3X4', title: null, date: '2026.04.20', loaded: false },
   ],
   dontlookbag: [
-    { vid: 'bBusIXfjyvI', url: 'https://www.youtube.com/watch?v=bBusIXfjyvI', title: null, date: null, loaded: false },
-    { vid: 'CCBGSoJlFvE', url: 'https://www.youtube.com/watch?v=CCBGSoJlFvE', title: null, date: null, loaded: false },
-    { vid: 'bubnFseL05k', url: 'https://www.youtube.com/watch?v=bubnFseL05k', title: null, date: null, loaded: false },
+    { vid: 'bBusIXfjyvI', url: 'https://www.youtube.com/watch?v=bBusIXfjyvI', title: null, date: '2026.02.05', loaded: false },
+    { vid: 'CCBGSoJlFvE', url: 'https://www.youtube.com/watch?v=CCBGSoJlFvE', title: null, date: '2026.02.13', loaded: false },
+    { vid: 'bubnFseL05k', url: 'https://www.youtube.com/watch?v=bubnFseL05k', title: null, date: '2026.03.16', loaded: false },
   ],
   interview: [
-    { vid: 'cAKXNGUi8B0', url: 'https://youtu.be/cAKXNGUi8B0', title: null, date: null, loaded: false },
-    { vid: 'v7U7O3O9-JE', url: 'https://youtu.be/v7U7O3O9-JE', title: null, date: null, loaded: false },
-    { vid: 'NKDjYnV4Wcc', url: 'https://youtu.be/NKDjYnV4Wcc', title: null, date: null, loaded: false },
-    { vid: 'd4psisZDWpg', url: 'https://youtu.be/d4psisZDWpg', title: null, date: null, loaded: false },
-    { vid: 'vqbesIlW4O0', url: 'https://youtu.be/vqbesIlW4O0', title: null, date: null, loaded: false },
+    { vid: 'cAKXNGUi8B0', url: 'https://youtu.be/cAKXNGUi8B0', title: null, date: '2024.10.14', loaded: false },
+    { vid: 'v7U7O3O9-JE', url: 'https://youtu.be/v7U7O3O9-JE', title: null, date: '2025.08.02', loaded: false },
+    { vid: 'NKDjYnV4Wcc', url: 'https://youtu.be/NKDjYnV4Wcc', title: null, date: '2025.08.24', loaded: false },
+    { vid: 'd4psisZDWpg', url: 'https://youtu.be/d4psisZDWpg', title: null, date: '2025.09.08', loaded: false },
+    { vid: 'vqbesIlW4O0', url: 'https://youtu.be/vqbesIlW4O0', title: null, date: '2026.04.15', loaded: false },
   ],
   artistcanvas: [
-    { vid: '7ykC1JAdCr8', url: 'https://youtu.be/7ykC1JAdCr8', title: null, date: null, loaded: false },
-    { vid: 'p1asr5bLsl0', url: 'https://youtu.be/p1asr5bLsl0', title: null, date: null, loaded: false },
-    { vid: 'SGmC-YuOWyM', url: 'https://youtu.be/SGmC-YuOWyM', title: null, date: null, loaded: false },
-    { vid: '91Rt3RMQEh8', url: 'https://youtu.be/91Rt3RMQEh8', title: null, date: null, loaded: false },
-    { vid: 'Nuc-IpjcvBs', url: 'https://www.youtube.com/watch?v=Nuc-IpjcvBs', title: null, date: null, loaded: false },
-    { vid: 'WgDRLNgzztU', url: 'https://www.youtube.com/watch?v=WgDRLNgzztU', title: null, date: null, loaded: false },
-    { vid: 'oY_DaS06dlo', url: 'https://www.youtube.com/watch?v=oY_DaS06dlo', title: null, date: null, loaded: false },
+    { vid: '7ykC1JAdCr8', url: 'https://youtu.be/7ykC1JAdCr8', title: null, date: '2025.10.26', loaded: false },
+    { vid: 'p1asr5bLsl0', url: 'https://youtu.be/p1asr5bLsl0', title: null, date: '2025.10.27', loaded: false },
+    { vid: 'SGmC-YuOWyM', url: 'https://youtu.be/SGmC-YuOWyM', title: null, date: '2025.10.28', loaded: false },
+    { vid: '91Rt3RMQEh8', url: 'https://youtu.be/91Rt3RMQEh8', title: null, date: '2025.10.29', loaded: false },
+    { vid: 'Nuc-IpjcvBs', url: 'https://www.youtube.com/watch?v=Nuc-IpjcvBs', title: null, date: '2025.11.21', loaded: false },
+    { vid: 'WgDRLNgzztU', url: 'https://www.youtube.com/watch?v=WgDRLNgzztU', title: null, date: '2025.11.22', loaded: false },
+    { vid: 'oY_DaS06dlo', url: 'https://www.youtube.com/watch?v=oY_DaS06dlo', title: null, date: '2025.11.23', loaded: false },
   ],
   daytripjeongseon: [
-    { vid: 'jEieMUq7iXY', url: 'https://www.youtube.com/watch?v=jEieMUq7iXY', title: null, date: null, loaded: false },
-    { vid: 'MYXmkxiFc54', url: 'https://www.youtube.com/watch?v=MYXmkxiFc54', title: null, date: null, loaded: false },
+    { vid: 'jEieMUq7iXY', url: 'https://www.youtube.com/watch?v=jEieMUq7iXY', title: null, date: '2026.01.22', loaded: false },
+    { vid: 'MYXmkxiFc54', url: 'https://www.youtube.com/watch?v=MYXmkxiFc54', title: null, date: '2026.01.29', loaded: false },
   ],
   pblive: [
-    { vid: 'KLIdXB5MC9s', url: 'https://www.youtube.com/watch?v=KLIdXB5MC9s', title: null, date: null, loaded: false },
-    { vid: 'B444RNWb-u0', url: 'https://www.youtube.com/watch?v=B444RNWb-u0', title: null, date: null, loaded: false },
-    { vid: 'FUhkv2YZxnc', url: 'https://www.youtube.com/watch?v=FUhkv2YZxnc', title: null, date: null, loaded: false },
-    { vid: 'SoxMWDZ7JXw', url: 'https://www.youtube.com/watch?v=SoxMWDZ7JXw', title: null, date: null, loaded: false },
+    { vid: 'KLIdXB5MC9s', url: 'https://www.youtube.com/watch?v=KLIdXB5MC9s', title: null, date: '2026.03.28', loaded: false },
+    { vid: 'B444RNWb-u0', url: 'https://www.youtube.com/watch?v=B444RNWb-u0', title: null, date: '2026.03.29', loaded: false },
+    { vid: 'FUhkv2YZxnc', url: 'https://www.youtube.com/watch?v=FUhkv2YZxnc', title: null, date: '2026.03.30', loaded: false },
+    { vid: 'SoxMWDZ7JXw', url: 'https://www.youtube.com/watch?v=SoxMWDZ7JXw', title: null, date: '2026.03.31', loaded: false },
   ],
   idolbackstage: [
-    { vid: 'x-R-9B894-E', url: 'https://youtu.be/x-R-9B894-E', title: null, date: null, loaded: false },
-    { vid: 'pHYC8bO6B2o', url: 'https://youtu.be/pHYC8bO6B2o', title: null, date: null, loaded: false },
-    { vid: '6q76zd38izM', url: 'https://youtu.be/6q76zd38izM', title: null, date: null, loaded: false },
-    { vid: 'MWEBO7idPhQ', url: 'https://youtu.be/MWEBO7idPhQ', title: null, date: null, loaded: false },
-    { vid: 'GJCJHzWkvZ8', url: 'https://youtu.be/GJCJHzWkvZ8', title: null, date: null, loaded: false },
-    { vid: 'wlfyyIK0be8', url: 'https://youtu.be/wlfyyIK0be8', title: null, date: null, loaded: false },
+    { vid: 'x-R-9B894-E', url: 'https://youtu.be/x-R-9B894-E', title: null, date: '2025.08.14', loaded: false },
+    { vid: 'pHYC8bO6B2o', url: 'https://youtu.be/pHYC8bO6B2o', title: null, date: '2025.08.21', loaded: false },
+    { vid: '6q76zd38izM', url: 'https://youtu.be/6q76zd38izM', title: null, date: '2025.08.28', loaded: false },
+    { vid: 'MWEBO7idPhQ', url: 'https://youtu.be/MWEBO7idPhQ', title: null, date: '2025.09.12', loaded: false },
+    { vid: 'GJCJHzWkvZ8', url: 'https://youtu.be/GJCJHzWkvZ8', title: null, date: '2025.09.19', loaded: false },
+    { vid: 'wlfyyIK0be8', url: 'https://youtu.be/wlfyyIK0be8', title: null, date: '2025.09.26', loaded: false },
   ],
   idolunplugged: [
-    { vid: 'qkoHBILB7I4', url: 'https://youtu.be/qkoHBILB7I4', title: null, date: null, loaded: false },
-    { vid: 'caYd7jBfa9U', url: 'https://youtu.be/caYd7jBfa9U', title: null, date: null, loaded: false },
-    { vid: 'W07b3zKHnL4', url: 'https://youtu.be/W07b3zKHnL4', title: null, date: null, loaded: false },
-    { vid: 'uWCcmqVeh8I', url: 'https://youtu.be/uWCcmqVeh8I', title: null, date: null, loaded: false },
+    { vid: 'qkoHBILB7I4', url: 'https://youtu.be/qkoHBILB7I4', title: null, date: '2026.04.15', loaded: false },
+    { vid: 'caYd7jBfa9U', url: 'https://youtu.be/caYd7jBfa9U', title: null, date: '2026.04.16', loaded: false },
+    { vid: 'W07b3zKHnL4', url: 'https://youtu.be/W07b3zKHnL4', title: null, date: '2026.04.17', loaded: false },
+    { vid: 'uWCcmqVeh8I', url: 'https://youtu.be/uWCcmqVeh8I', title: null, date: '2026.04.18', loaded: false },
   ],
   dolsilencium: [
-    { vid: 'HJRim5C0L60', url: 'https://youtu.be/HJRim5C0L60', title: null, date: null, loaded: false },
-    { vid: 'x8EU50FVB1k', url: 'https://youtu.be/x8EU50FVB1k', title: null, date: null, loaded: false },
-    { vid: 'X0THv6jY69g', url: 'https://youtu.be/X0THv6jY69g', title: null, date: null, loaded: false },
-    { vid: 'hW62aZ6-VMA', url: 'https://youtu.be/hW62aZ6-VMA', title: null, date: null, loaded: false },
+    { vid: 'HJRim5C0L60', url: 'https://youtu.be/HJRim5C0L60', title: null, date: '2025.07.16', loaded: false },
+    { vid: 'x8EU50FVB1k', url: 'https://youtu.be/x8EU50FVB1k', title: null, date: '2026.04.14', loaded: false },
+    { vid: 'X0THv6jY69g', url: 'https://youtu.be/X0THv6jY69g', title: null, date: '2025.07.17', loaded: false },
+    { vid: 'hW62aZ6-VMA', url: 'https://youtu.be/hW62aZ6-VMA', title: null, date: '2026.04.16', loaded: false },
   ],
   dingo: [
-    { vid: '9IcjhTavfqQ', url: 'https://www.youtube.com/watch?v=9IcjhTavfqQ', title: null, date: null, loaded: false },
-    { vid: 'Yh6nG6UwBUg', url: 'https://youtu.be/Yh6nG6UwBUg', title: null, date: null, loaded: false },
-    { vid: 'oSK9blwG864', url: 'https://youtu.be/oSK9blwG864', title: null, date: null, loaded: false },
-    { vid: '4XoeevrIGaA', url: 'https://youtu.be/4XoeevrIGaA', title: null, date: null, loaded: false },
-    { vid: 'cxgqZqo14EA', url: 'https://youtu.be/cxgqZqo14EA', title: null, date: null, loaded: false },
-    { vid: 'idW0CiCAdfk', url: 'https://youtu.be/idW0CiCAdfk', title: null, date: null, loaded: false },
-    { vid: 'Lle0xkhk_9M', url: 'https://youtu.be/Lle0xkhk_9M', title: null, date: null, loaded: false },
-    { vid: '4-BYDjk5EsI', url: 'https://youtu.be/4-BYDjk5EsI', title: null, date: null, loaded: false },
+    { vid: '9IcjhTavfqQ', url: 'https://www.youtube.com/watch?v=9IcjhTavfqQ', title: null, date: '2024.08.28', loaded: false },
+    { vid: 'Yh6nG6UwBUg', url: 'https://youtu.be/Yh6nG6UwBUg', title: null, date: '2024.08.30', loaded: false },
+    { vid: 'oSK9blwG864', url: 'https://youtu.be/oSK9blwG864', title: null, date: '2024.09.09', loaded: false },
+    { vid: '4XoeevrIGaA', url: 'https://youtu.be/4XoeevrIGaA', title: null, date: '2024.10.04', loaded: false },
+    { vid: 'cxgqZqo14EA', url: 'https://youtu.be/cxgqZqo14EA', title: null, date: '2024.10.09', loaded: false },
+    { vid: 'idW0CiCAdfk', url: 'https://youtu.be/idW0CiCAdfk', title: null, date: '2024.10.22', loaded: false },
+    { vid: 'Lle0xkhk_9M', url: 'https://youtu.be/Lle0xkhk_9M', title: null, date: '2025.05.06', loaded: false },
+    { vid: '4-BYDjk5EsI', url: 'https://youtu.be/4-BYDjk5EsI', title: null, date: '2025.05.13', loaded: false },
   ],
   arirangradio: [
-    { vid: 'NNcBZaJQg1I', url: 'https://youtu.be/NNcBZaJQg1I', title: null, date: null, loaded: false },
-    { vid: 'WwGF_sqjH6c', url: 'https://youtu.be/WwGF_sqjH6c', title: null, date: null, loaded: false },
-    { vid: 'i7jSnzRA8UI', url: 'https://youtu.be/i7jSnzRA8UI', title: null, date: null, loaded: false },
-    { vid: '0pnnVlJLNbA', url: 'https://www.youtube.com/live/0pnnVlJLNbA', title: null, date: null, loaded: false },
-    { vid: 'leXYOsGqltA', url: 'https://youtu.be/leXYOsGqltA', title: null, date: null, loaded: false },
-    { vid: 'OSTU90FPU0I', url: 'https://youtu.be/OSTU90FPU0I', title: null, date: null, loaded: false },
-    { vid: 'BnYYkUQefJQ', url: 'https://youtu.be/BnYYkUQefJQ', title: null, date: null, loaded: false },
-    { vid: 'WhVH7yAaHy8', url: 'https://youtu.be/WhVH7yAaHy8', title: null, date: null, loaded: false },
-    { vid: 'zo2inLqmt64', url: 'https://youtu.be/zo2inLqmt64', title: null, date: null, loaded: false },
-    { vid: 'B4JSgVh2Dc0', url: 'https://youtu.be/B4JSgVh2Dc0', title: null, date: null, loaded: false },
-    { vid: '_GHDLCVpYLM', url: 'https://youtu.be/_GHDLCVpYLM', title: null, date: null, loaded: false },
-    { vid: 'YsPHUlAQkUg', url: 'https://youtu.be/YsPHUlAQkUg', title: null, date: null, loaded: false },
-    { vid: '4iZUV00c8s8', url: 'https://youtu.be/4iZUV00c8s8', title: null, date: null, loaded: false },
+    { vid: 'NNcBZaJQg1I', url: 'https://youtu.be/NNcBZaJQg1I', title: null, date: '2024.05.09', loaded: false },
+    { vid: 'WwGF_sqjH6c', url: 'https://youtu.be/WwGF_sqjH6c', title: null, date: '2024.09.20', loaded: false },
+    { vid: 'i7jSnzRA8UI', url: 'https://youtu.be/i7jSnzRA8UI', title: null, date: '2024.09.23', loaded: false },
+    { vid: '0pnnVlJLNbA', url: 'https://www.youtube.com/live/0pnnVlJLNbA', title: null, date: '2025.02.11', loaded: false },
+    { vid: 'leXYOsGqltA', url: 'https://youtu.be/leXYOsGqltA', title: null, date: '2025.02.11', loaded: false },
+    { vid: 'OSTU90FPU0I', url: 'https://youtu.be/OSTU90FPU0I', title: null, date: '2025.02.24', loaded: false },
+    { vid: 'BnYYkUQefJQ', url: 'https://youtu.be/BnYYkUQefJQ', title: null, date: '2025.02.24', loaded: false },
+    { vid: 'WhVH7yAaHy8', url: 'https://youtu.be/WhVH7yAaHy8', title: null, date: '2026.04.20', loaded: false },
+    { vid: 'zo2inLqmt64', url: 'https://youtu.be/zo2inLqmt64', title: null, date: '2026.04.20', loaded: false },
+    { vid: 'B4JSgVh2Dc0', url: 'https://youtu.be/B4JSgVh2Dc0', title: null, date: '2024.05.09', loaded: false },
+    { vid: '_GHDLCVpYLM', url: 'https://youtu.be/_GHDLCVpYLM', title: null, date: '2024.05.09', loaded: false },
+    { vid: 'YsPHUlAQkUg', url: 'https://youtu.be/YsPHUlAQkUg', title: null, date: '2025.02.24', loaded: false },
+    { vid: '4iZUV00c8s8', url: 'https://youtu.be/4iZUV00c8s8', title: null, date: '2025.02.24', loaded: false },
   ],
   matkwon: [
-    { vid: 'r0aBwvfiNjY', url: 'https://youtu.be/r0aBwvfiNjY', title: null, date: null, loaded: false },
-    { vid: 'ip8k2pM_GOU', url: 'https://youtu.be/ip8k2pM_GOU', title: null, date: null, loaded: false },
+    { vid: 'r0aBwvfiNjY', url: 'https://youtu.be/r0aBwvfiNjY', title: null, date: '2024.11.11', loaded: false },
+    { vid: 'ip8k2pM_GOU', url: 'https://youtu.be/ip8k2pM_GOU', title: null, date: '2024.11.18', loaded: false },
   ],
   dolbagi: [
-    { vid: 'LgcegoGS41k', url: 'https://www.youtube.com/watch?v=LgcegoGS41k', title: null, date: null, loaded: false },
+    { vid: 'LgcegoGS41k', url: 'https://www.youtube.com/watch?v=LgcegoGS41k', title: null, date: '2026.03.29', loaded: false },
   ],
   starroom: [
-    { vid: 'waTiGXeIRJE', url: 'https://www.youtube.com/watch?v=waTiGXeIRJE', title: null, date: null, loaded: false },
-    { vid: '5Whlkurz0-E', url: 'https://www.youtube.com/watch?v=5Whlkurz0-E', title: null, date: null, loaded: false },
+    { vid: 'waTiGXeIRJE', url: 'https://www.youtube.com/watch?v=waTiGXeIRJE', title: null, date: '2026.03.31', loaded: false },
+    { vid: '5Whlkurz0-E', url: 'https://www.youtube.com/watch?v=5Whlkurz0-E', title: null, date: '2026.04.02', loaded: false },
   ],
   hifiction: [
-    { vid: '37tje2u7SZ8', url: 'https://youtu.be/37tje2u7SZ8', title: '인질 역할에 아이돌이 왔다 (feat. 리센느)', date: null, loaded: false },
+    { vid: '37tje2u7SZ8', url: 'https://youtu.be/37tje2u7SZ8', title: '인질 역할에 아이돌이 왔다 (feat. 리센느)', date: '2024.12.28', loaded: false },
   ],
   chan19: [
-    { vid: 'UWBzwqcb9tI', url: 'https://www.youtube.com/watch?v=UWBzwqcb9tI', title: null, date: null, loaded: false },
-    { vid: 'Ge-nX5VE28A', url: 'https://youtu.be/Ge-nX5VE28A', title: null, date: null, loaded: false },
+    { vid: 'UWBzwqcb9tI', url: 'https://www.youtube.com/watch?v=UWBzwqcb9tI', title: null, date: '2024.12.14', loaded: false },
+    { vid: 'Ge-nX5VE28A', url: 'https://youtu.be/Ge-nX5VE28A', title: null, date: '2024.12.25', loaded: false },
   ],
   physicalgallary20: [
-    { vid: 'If2kxD44R8A', url: 'https://youtu.be/If2kxD44R8A', title: null, date: null, loaded: false },
+    { vid: 'If2kxD44R8A', url: 'https://youtu.be/If2kxD44R8A', title: null, date: '2024.10.17', loaded: false },
   ],
   chan21: [
-    { vid: 'jO_rFjE-3Es', url: 'https://youtu.be/jO_rFjE-3Es', title: null, date: null, loaded: false },
-    { vid: 'X0AWk7EITLE', url: 'https://www.youtube.com/watch?v=X0AWk7EITLE', title: null, date: null, loaded: false },
-    { vid: 'W0cpLR0rz0Q', url: 'https://youtu.be/W0cpLR0rz0Q', title: null, date: null, loaded: false },
-    { vid: 'yMeBhxSGvVw', url: 'https://youtu.be/yMeBhxSGvVw', title: null, date: null, loaded: false },
+    { vid: 'jO_rFjE-3Es', url: 'https://youtu.be/jO_rFjE-3Es', title: null, date: '2025.02.07', loaded: false },
+    { vid: 'X0AWk7EITLE', url: 'https://www.youtube.com/watch?v=X0AWk7EITLE', title: null, date: '2025.11.21', loaded: false },
+    { vid: 'W0cpLR0rz0Q', url: 'https://youtu.be/W0cpLR0rz0Q', title: null, date: '2026.04.24', loaded: false },
+    { vid: 'yMeBhxSGvVw', url: 'https://youtu.be/yMeBhxSGvVw', title: null, date: '2026.05.01', loaded: false },
+  ],
+  studiokkok: [
+    { vid: '6pMUeLI4hAM', url: 'https://www.youtube.com/watch?v=6pMUeLI4hAM', title: null, date: '2025.08.13', loaded: false },
+    { vid: '0MDOY5m-Xa4', url: 'https://www.youtube.com/watch?v=0MDOY5m-Xa4', title: null, date: '2025.08.15', loaded: false },
+    { vid: 'FkzlNowaWOY', url: 'https://www.youtube.com/watch?v=FkzlNowaWOY', title: null, date: '2025.08.29', loaded: false },
+    { vid: 'vi-4XTy-Sl8', url: 'https://www.youtube.com/watch?v=vi-4XTy-Sl8', title: null, date: '2025.09.19', loaded: false },
+    { vid: 'r5B1ZUu3VrE', url: 'https://www.youtube.com/watch?v=r5B1ZUu3VrE', title: null, date: '2025.10.10', loaded: false },
+    { vid: 'OgzZei1v22M', url: 'https://www.youtube.com/watch?v=OgzZei1v22M', title: null, date: '2025.10.24', loaded: false },
+    { vid: 'RwQPrwx4GdQ', url: 'https://www.youtube.com/watch?v=RwQPrwx4GdQ', title: null, date: '2025.11.14', loaded: false },
+    { vid: 'HamNe9Fntew', url: 'https://www.youtube.com/watch?v=HamNe9Fntew', title: null, date: '2025.12.05', loaded: false },
+    { vid: 'k3SHr4Cvkk0', url: 'https://www.youtube.com/watch?v=k3SHr4Cvkk0', title: null, date: '2025.12.12', loaded: false },
+    { vid: 'RAdzJewQUs0', url: 'https://www.youtube.com/watch?v=RAdzJewQUs0', title: null, date: '2026.01.02', loaded: false },
+    { vid: 'aFhYXNCn-g8', url: 'https://www.youtube.com/watch?v=aFhYXNCn-g8', title: null, date: '2026.01.16', loaded: false },
+    { vid: 'OEo-LuPR0xQ', url: 'https://www.youtube.com/watch?v=OEo-LuPR0xQ', title: null, date: '2026.01.30', loaded: false },
+    { vid: 'ALL7wNu1oV8', url: 'https://www.youtube.com/watch?v=ALL7wNu1oV8', title: null, date: '2026.02.06', loaded: false },
+    { vid: 'CdCTblZ6TBs', url: 'https://www.youtube.com/watch?v=CdCTblZ6TBs', title: null, date: '2026.02.13', loaded: false },
+    { vid: 'dDesySmyTUA', url: 'https://www.youtube.com/watch?v=dDesySmyTUA', title: null, date: '2026.02.20', loaded: false },
+    { vid: 'RPP-Vvsnfo4', url: 'https://www.youtube.com/watch?v=RPP-Vvsnfo4', title: null, date: '2026.02.27', loaded: false },
+    { vid: 'rMfoWvneX4o', url: 'https://www.youtube.com/watch?v=rMfoWvneX4o', title: null, date: '2026.03.06', loaded: false },
+    { vid: '--QzVnSp-UI', url: 'https://www.youtube.com/watch?v=--QzVnSp-UI', title: null, date: '2026.03.13', loaded: false },
+    { vid: 'YmG80DphBgE', url: 'https://www.youtube.com/watch?v=YmG80DphBgE', title: null, date: '2026.03.20', loaded: false },
+    { vid: '2ej7jEBCJnQ', url: 'https://www.youtube.com/watch?v=2ej7jEBCJnQ', title: null, date: '2026.03.27', loaded: false },
+    { vid: 'zeGThcVvi-U', url: 'https://www.youtube.com/watch?v=zeGThcVvi-U', title: null, date: '2026.04.03', loaded: false },
+    { vid: '899JRmfaCx8', url: 'https://www.youtube.com/watch?v=899JRmfaCx8', title: null, date: '2026.04.10', loaded: false },
+    { vid: '9BTgYmDmOEE', url: 'https://www.youtube.com/watch?v=9BTgYmDmOEE', title: null, date: '2026.04.17', loaded: false },
+    { vid: 'fB0bjJB6f6Y', url: 'https://www.youtube.com/watch?v=fB0bjJB6f6Y', title: null, date: '2026.04.24', loaded: false },
+    { vid: 'iLBc6SQJYZU', url: 'https://www.youtube.com/watch?v=iLBc6SQJYZU', title: null, date: '2026.05.01', loaded: false },
   ],
 };
 const VID_TO_EXTERNAL_KEY = {};
 for (const key of EXTERNAL_KEYS) {
   for (const item of EXTERNAL_DATA[key]) {
     VID_TO_EXTERNAL_KEY[item.vid] = key;
+
+    if (!item.date && DATE_MAP[item.vid]) item.date = DATE_MAP[item.vid];
   }
 }
 
 let curSection = 'about';
-let curSong = 'all';       // 'all' or specific song name
+let curSong = 'all';       
 let curType = 'all';
 let curContentCat = 'all';
 let curExternal = 'all';
@@ -2332,7 +2967,7 @@ function setContentCat(el, cat) {
 
 function buildContentCard(item, delay) {
   const title = item.title || item.vid;
-  const dateStr = item.date || '';
+  const dateStr = item.date || DATE_MAP[item.vid] || '';
   const channel = item.channel || '';
   return `<a class="vcard tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
     <div class="thumb">
@@ -2368,10 +3003,12 @@ async function loadContentMetas(items) {
         if (r.ok) {
           const d = await r.json();
           item.title = d.title;
-          item.date = parseDate(d.title);
+          if (!item.date) item.date = parseDate(d.title);
           item.channel = d.author_name || '';
         }
       } catch {}
+
+      if (!item.date && DATE_MAP[item.vid]) item.date = DATE_MAP[item.vid];
       item.loaded = true;
       
       const sk = document.getElementById(`csk-${item.vid}`);
@@ -2407,7 +3044,7 @@ function pickExternal(el, key) {
 
 function buildExternalCard(item, delay) {
   const title = item.title || item.vid;
-  const dateStr = item.date || '';
+  const dateStr = item.date || DATE_MAP[item.vid] || '';
   return `<a class="vcard tb-content" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
     <div class="thumb">
       <img src="https://img.youtube.com/vi/${item.vid}/hqdefault.jpg" alt=""
@@ -2440,9 +3077,11 @@ async function loadExternalMetas(items) {
         if (r.ok) {
           const d = await r.json();
           if (!item.title) item.title = d.title;
-          item.date = parseDate(d.title);
+          if (!item.date) item.date = parseDate(d.title);
         }
       } catch {}
+      
+      if (!item.date && DATE_MAP[item.vid]) item.date = DATE_MAP[item.vid];
       if (!item.title) {
         const key = VID_TO_EXTERNAL_KEY[item.vid];
         item.title = key ? EXTERNAL_LABELS[key] : item.vid;
@@ -2463,9 +3102,15 @@ async function loadExternalMetas(items) {
 
 function buildExternalGrid() {
   const grid = document.getElementById('grid');
-  const items = curExternal === 'all'
+  let items = curExternal === 'all'
     ? EXTERNAL_KEYS.flatMap(k => EXTERNAL_DATA[k])
     : (EXTERNAL_DATA[curExternal] || []);
+
+  items = [...items].sort((a, b) => {
+    const da = dateStrToNum(a.date || '0');
+    const db = dateStrToNum(b.date || '0');
+    return curSort === 'oldest' ? da - db : db - da;
+  });
 
   if (!items.length) {
     grid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>링크가 아직 추가되지 않았습니다.</p></div>`;
@@ -2474,7 +3119,7 @@ function buildExternalGrid() {
 
   grid.innerHTML = items.map((item, idx) => {
     const delay = `${Math.min(idx * 0.03, 0.4)}s`;
-    if (!item.loaded) {
+    if (!item.loaded && !item.date) {
       return `<div class="skeleton" id="esk-${item.vid}" style="animation-delay:${delay}">
         <div class="skel-thumb"></div>
         <div class="skel-body">
@@ -2507,7 +3152,6 @@ const FANTUBE_CHANNELS = [
   { name: '어디까엉', url: 'https://www.youtube.com/@어디까엉', handle: '@어디까엉', avatar: 'https://yt3.googleusercontent.com/uLj6pQmYLdk0Ozq4SfxjQ2aviPB5OUfCN4pxufQji7JSCFe2hEbFsK43_fTjw12i8SZiWRDjkw=s160-c-k-c0x00ffffff-no-rj' },
   { name: 'Flow.', url: 'https://www.youtube.com/@Flow_0525', handle: '@Flow_0525', avatar: 'https://yt3.googleusercontent.com/At_LA7kGlYuqMPqqg-ZJq8Wze1geQ24rIabNXRYkI9LBnMhsLQX9i678aZyoP-llmDU-aW6XNg=s160-c-k-c0x00ffffff-no-rj' },
 ];
-
 
 function buildFantubeCard(ch, idx, avatarUrl) {
   const delay = `${Math.min(idx * 0.04, 0.5)}s`;
@@ -2543,17 +3187,21 @@ let curLiveMember = 'all';
 
 function buildLiveNav() {
   const nav = document.getElementById('liveNav');
-  let html = `<button class="song-tab ${curLiveYear === 'all'  ? 'active' : ''}" onclick="pickLiveYear(this,'all')">ALL</button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2024' ? 'active' : ''}" onclick="pickLiveYear(this,'2024')">2024년</button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2025' ? 'active' : ''}" onclick="pickLiveYear(this,'2025')">2025년</button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2026' ? 'active' : ''}" onclick="pickLiveYear(this,'2026')">2026년</button>`;
+  const allCnt  = ALL_LIVE.length;
+  const cnt2024 = LIVE_DATA_2024.length;
+  const cnt2025 = LIVE_DATA_2025.length;
+  const cnt2026 = LIVE_DATA_2026.length;
+  let html = `<button class="song-tab ${curLiveYear === 'all'  ? 'active' : ''}" onclick="pickLiveYear(this,'all')">ALL<span class="cnt">${allCnt}</span></button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2024' ? 'active' : ''}" onclick="pickLiveYear(this,'2024')">2024년<span class="cnt">${cnt2024}</span></button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2025' ? 'active' : ''}" onclick="pickLiveYear(this,'2025')">2025년<span class="cnt">${cnt2025}</span></button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2026' ? 'active' : ''}" onclick="pickLiveYear(this,'2026')">2026년<span class="cnt">${cnt2026}</span></button>`;
   nav.innerHTML = html;
+
 }
 
 function pickLiveYear(el, year) {
   curLiveYear = year;
-  document.querySelectorAll('#liveNav .song-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
+  buildLiveNav();
   buildLiveGrid();
 }
 
@@ -2774,6 +3422,44 @@ function getLiveCardClass(members) {
   if (members.includes('전원')) return 'lm-all';
   return MEMBER_CLASS[members[0]] || 'lm-all';
 }
+function dateStrToNum(dateStr) {
+  
+  if (!dateStr) return 0;
+  return parseInt(dateStr.replace(/\./g, ''), 10) || 0;
+}
+
+function sortItemsByDate(items, dir) {
+  return [...items].sort((a, b) => {
+    const da = dateStrToNum(DATE_MAP[a.vid] || (a.meta && a.meta.date) || '0');
+    const db = dateStrToNum(DATE_MAP[b.vid] || (b.meta && b.meta.date) || '0');
+    return dir === 'oldest' ? da - db : db - da;
+  });
+}
+
+function sortLiveItemsByDate(items, dir) {
+  return [...items].sort((a, b) => {
+    const da = parseInt((a.year + formatLiveDateNums(a)).replace(/\./g,''), 10) || 0;
+    const db = parseInt((b.year + formatLiveDateNums(b)).replace(/\./g,''), 10) || 0;
+    return dir === 'oldest' ? da - db : db - da;
+  });
+}
+
+function formatLiveDateNums(item) {
+  const m = item.date.match(/(\d{1,2})월\s*(\d{1,2})일/);
+  if (m) return `.${m[1].padStart(2,'0')}.${m[2].padStart(2,'0')}`;
+  return '.01.01';
+}
+
+function formatLiveDate(item) {
+  const monthDay = item.date; 
+  const year = item.year;     
+  const m = monthDay.match(/(\d{1,2})월\s*(\d{1,2})일/);
+  if (m) {
+    return `${year}.${m[1].padStart(2,'0')}.${m[2].padStart(2,'0')}`;
+  }
+  return `${year} · ${monthDay}`;
+}
+
 function buildLiveCard(item, delay) {
   const memberBadges = item.members.map(m =>
     `<span class="ctag ${m === '전원' ? 'hl' : ''}">${m}</span>`
@@ -2794,7 +3480,7 @@ function buildLiveCard(item, delay) {
     <div class="cbody">
       <div class="csong-multi" id="lvc-title-${item.vid}">${title}</div>
       <div class="cmeta">
-        <span class="cdate">${item.year} · ${item.date}</span>
+        <span class="cdate">${formatLiveDate(item)}</span>
       </div>
       <div class="ctags">${memberBadges}</div>
     </div>
@@ -2823,6 +3509,8 @@ function buildLiveGrid() {
   let items = ALL_LIVE;
   if (curLiveYear !== 'all') items = items.filter(i => i.year === curLiveYear);
   items = items.filter(memberMatch);
+  
+  items = sortLiveItemsByDate(items, curSort);
   if (!items.length) {
     grid.innerHTML = `<div class="empty"><div class="ico">📺</div><p>해당 라이브가 없습니다.</p></div>`;
     return;
@@ -2852,7 +3540,6 @@ function toggleBookmark(e, vid) {
   }
   saveBookmarks();
 
-  // 현재 보이는 모든 카드의 북마크 버튼 상태 갱신
   const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-'];
   for (const p of prefixes) {
     const card = document.getElementById(p + vid);
@@ -2909,7 +3596,7 @@ function buildBookmarkGrid() {
     ...ALL_ITEMS.map(i => ({ ...i, _src: 'main' })),
     ...CONTENT_ITEMS.map(i => ({ vid: i.vid, url: i.url, type: 'content', song: i.category, meta: { rawTitle: i.title, date: i.date, show: null, channel: i.channel || '' }, loaded: i.loaded, _src: 'content' })),
     ...EXTERNAL_KEYS.flatMap(k => EXTERNAL_DATA[k].map(i => ({ vid: i.vid, url: i.url, type: 'content', song: EXTERNAL_LABELS[k], meta: { rawTitle: i.title, date: i.date, show: null, channel: '' }, loaded: i.loaded, _src: 'external' }))),
-    ...ALL_LIVE.map(i => ({ vid: i.vid, url: i.url, type: 'itslive', song: i.date, meta: { rawTitle: i.title, date: `${i.year} · ${i.date}`, show: null, channel: '' }, loaded: !!i.title, _src: 'live', _liveItem: i })),
+    ...ALL_LIVE.map(i => ({ vid: i.vid, url: i.url, type: 'itslive', song: i.date, meta: { rawTitle: i.title, date: formatLiveDate(i), show: null, channel: '' }, loaded: !!i.title, _src: 'live', _liveItem: i })),
   ];
 
   const items = allVids.filter(i => BOOKMARKS.has(i.vid));
@@ -2975,14 +3662,13 @@ function buildBookmarkGrid() {
   }).join('');
 }
 
-
 function buildSongNav() {
   const nav = document.getElementById('songNav');
-  const allCnt = ALL_ITEMS.filter(i => i.type !== 'content').length;
+  const allCnt = ALL_ITEMS.length;
   let html = `<button class="song-tab ${curSong === 'all' ? 'active' : ''}"
     onclick="pickSong('all')">All<span class="cnt">${allCnt}</span></button>`;
   html += RESCENE_DATA.map(e => {
-    const cnt = ALL_ITEMS.filter(i => i.song === e.song && i.type !== 'content').length;
+    const cnt = ALL_ITEMS.filter(i => i.song === e.song).length;
     if (cnt === 0) return '';
     return `<button class="song-tab ${e.song === curSong ? 'active' : ''}"
       onclick="pickSong('${e.song.replace(/'/g,"&#39;")}')">
@@ -3011,7 +3697,7 @@ function buildCard(item, delay) {
   }
 
   const m = item.meta;
-  const dateStr = m?.date || '';
+  const dateStr = m?.date || DATE_MAP[item.vid] || '';
   const show = m?.show;
   const channel = m?.channel || '';
   const videoTitle = m?.rawTitle || item.song;
@@ -3051,6 +3737,12 @@ function buildGrid() {
       ? CONTENT_ITEMS
       : CONTENT_ITEMS.filter(i => i.category === curContentCat);
 
+    items = [...items].sort((a, b) => {
+      const da = dateStrToNum(a.date || '0');
+      const db = dateStrToNum(b.date || '0');
+      return curSort === 'oldest' ? da - db : db - da;
+    });
+
     if (!items.length) {
       grid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
       return;
@@ -3058,7 +3750,7 @@ function buildGrid() {
 
     grid.innerHTML = items.map((item, idx) => {
       const delay = `${Math.min(idx * 0.03, 0.4)}s`;
-      if (!item.loaded) {
+      if (!item.loaded && !item.date) {
         return `<div class="skeleton" id="csk-${item.vid}" style="animation-delay:${delay}">
           <div class="skel-thumb"></div>
           <div class="skel-body">
@@ -3076,9 +3768,11 @@ function buildGrid() {
   }
 
   
-  let items = ALL_ITEMS.filter(i => i.type !== 'content');
+  let items = [...ALL_ITEMS];
   if (curSong !== 'all') items = items.filter(i => i.song === curSong);
   if (curType !== 'all') items = items.filter(i => i.type === curType);
+
+  items = sortItemsByDate(items, curSort);
 
   if (!items.length) {
     grid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
@@ -3096,7 +3790,8 @@ async function loadMetas(items) {
   for (let i = 0; i < unloaded.length; i += CHUNK) {
     const batch = unloaded.slice(i, i + CHUNK);
     await Promise.all(batch.map(async item => {
-      item.meta = await fetchMeta(item.url, item.song);
+      item.meta = await fetchMeta(item.url, item.song, item.vid);
+      if (!item.meta.date && DATE_MAP[item.vid]) item.meta.date = DATE_MAP[item.vid];
       item.loaded = true;
       replaceSkeleton(item);
     }));
@@ -3119,7 +3814,8 @@ function replaceSkeleton(item) {
 function pickSection(section) {
   curSection = section;
   document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
-  const tabId = section === 'songs' ? 'secSongs' : section === 'content' ? 'secContent' : section === 'live' ? 'secLive' : section === 'external' ? 'secExternal' : section === 'fantube' ? 'secFantube' : section === 'member' ? 'secMember' : section === 'links' ? 'secLinks' : section === 'bookmark' ? 'secBookmark' : 'secAbout';
+  const TAB_ID_MAP = { songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', fantube:'secFantube', member:'secMember', links:'secLinks', bookmark:'secBookmark', about:'secAbout' };
+  const tabId = TAB_ID_MAP[section] || 'secAbout';
   document.getElementById(tabId).classList.add('active');
 
   document.getElementById('songMode').style.display      = section === 'songs'    ? '' : 'none';
@@ -3137,7 +3833,7 @@ function pickSection(section) {
   const searchableSections = ['songs', 'content', 'external', 'live', 'bookmark'];
   const searchBar = document.getElementById('searchBar');
   searchBar.style.display = searchableSections.includes(section) ? '' : 'none';
-  clearSearch();
+  clearSearch(true);
 
   if (section === 'member') {
     document.querySelectorAll('.member-btn').forEach((el, i) => {
@@ -3175,6 +3871,18 @@ function pickSection(section) {
 }
 
 let curSearchQuery = '';
+let curSort = 'newest'; 
+
+function setSort(dir) {
+  curSort = dir;
+  document.getElementById('sortNewest').classList.toggle('active', dir === 'newest');
+  document.getElementById('sortOldest').classList.toggle('active', dir === 'oldest');
+
+  if (curSection === 'songs' || curSection === 'content') buildGrid();
+  else if (curSection === 'live') buildLiveGrid();
+  else if (curSection === 'external') buildExternalGrid();
+  else if (curSection === 'bookmark') buildBookmarkGrid();
+}
 
 function onSearch(val) {
   curSearchQuery = val.trim();
@@ -3183,7 +3891,7 @@ function onSearch(val) {
   applySearch();
 }
 
-function clearSearch() {
+function clearSearch(skipApply) {
   curSearchQuery = '';
   const inp = document.getElementById('searchInput');
   if (inp) { inp.value = ''; inp.style.paddingRight = '36px'; }
@@ -3191,7 +3899,43 @@ function clearSearch() {
   if (clearBtn) clearBtn.style.display = 'none';
   const countEl = document.getElementById('searchResultCount');
   if (countEl) countEl.textContent = '';
-  applySearch();
+  if (!skipApply) applySearch();
+}
+
+function normalizeDateQuery(raw) {
+  
+  const q = raw.trim();
+  if (!q) return null;
+
+  
+  const digits = q.replace(/[\.\-\/]/g, '');
+
+  
+  if (!/^\d+$/.test(digits)) return null;
+
+  if (digits.length === 6) {
+    
+    const yy = digits.slice(0, 2);
+    const mm = digits.slice(2, 4);
+    const dd = digits.slice(4, 6);
+    
+    if (+mm < 1 || +mm > 12 || +dd < 1 || +dd > 31) return null;
+    return `20${yy}.${mm}.${dd}`;
+  }
+  if (digits.length === 8) {
+    
+    const yyyy = digits.slice(0, 4);
+    const mm   = digits.slice(4, 6);
+    const dd   = digits.slice(6, 8);
+    if (+mm < 1 || +mm > 12 || +dd < 1 || +dd > 31) return null;
+    return `${yyyy}.${mm}.${dd}`;
+  }
+  if (digits.length === 4 && +digits >= 2020 && +digits <= 2030) {
+    
+    return digits;
+  }
+
+  return null;
 }
 
 function applySearch() {
@@ -3206,19 +3950,30 @@ function applySearch() {
 
   const cards = targetGrid.querySelectorAll('.vcard');
   let visible = 0;
+
+  
+  const dateNorm = normalizeDateQuery(q.replace(/\s/g, ''));
+
   cards.forEach(card => {
     if (!q) {
       card.style.display = '';
       visible++;
       return;
     }
-    const primary = card.querySelector('.csong')?.textContent || '';
-    const multi   = card.querySelector('.csong-multi')?.textContent || '';
-    const badge   = card.querySelector('.type-badge')?.textContent || '';
-    const tags    = card.querySelector('.ctags')?.textContent || '';
-    const date    = card.querySelector('.cdate')?.textContent || '';
-    const searchTarget = (primary + ' ' + multi + ' ' + badge + ' ' + tags + ' ' + date).toLowerCase();
-    const match = searchTarget.includes(q);
+    const date = card.querySelector('.cdate')?.textContent?.trim() || '';
+
+    let match;
+    if (dateNorm) {
+      
+      match = date !== '' && date.includes(dateNorm);
+    } else {
+      const primary = card.querySelector('.csong')?.textContent || '';
+      const multi   = card.querySelector('.csong-multi')?.textContent || '';
+      const badge   = card.querySelector('.type-badge')?.textContent || '';
+      const tags    = card.querySelector('.ctags')?.textContent || '';
+      const searchTarget = (primary + ' ' + multi + ' ' + badge + ' ' + tags + ' ' + date).toLowerCase();
+      match = searchTarget.includes(q);
+    }
     card.style.display = match ? '' : 'none';
     if (match) visible++;
   });
@@ -3239,7 +3994,7 @@ function searchMember(name) {
 
 function pickSong(song) {
   curSong = song;
-  document.querySelectorAll('.song-tab').forEach(t => {
+  document.querySelectorAll('#songNav .song-tab').forEach(t => {
     const label = t.childNodes[0]?.textContent?.trim();
     t.classList.toggle('active', label === song || (song === 'all' && label === 'All'));
   });
@@ -3292,7 +4047,7 @@ function applyTheme(theme) {
 try {
   const saved = localStorage.getItem('rescene-theme');
   if (saved === 'light') applyTheme('light');
-  // 저장값이 없거나 'dark'면 기본 다크모드 유지
+
 } catch {}
 
 (function() {
