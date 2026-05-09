@@ -48,14 +48,14 @@
 }
 
 [data-theme="light"] .wordmark-img {
-  filter: invert(1);
+  filter: invert(1) drop-shadow(0 0 6px rgba(90,60,20,0.45)) drop-shadow(0 0 18px rgba(160,100,30,0.2));
 }
 
 #themeToggle {
   position: absolute;
-  top: 50%;
+  bottom: 17px;
   right: 40px;
-  transform: translateY(-50%);
+  transform: none;
   background: none;
   border: 1px solid var(--border-h);
   border-radius: 20px;
@@ -71,6 +71,59 @@
 }
 #themeToggle:hover { color: var(--text); border-color: var(--border-h); }
 #themeToggle svg { width: 13px; height: 13px; }
+
+#langSwitcher {
+  position: absolute;
+  bottom: 17px;
+  left: 40px;
+  transform: none;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--surf);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 3px;
+}
+.lang-btn {
+  background: none;
+  border: none;
+  border-radius: 7px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 5px 11px;
+  font-size: 0.62rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  transition: color 0.18s, background 0.18s;
+  position: relative;
+  line-height: 1;
+}
+.lang-btn:hover { color: var(--text); }
+.lang-btn.active {
+  color: var(--accent);
+  background: rgba(224,212,192,0.13);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+[data-theme="light"] .lang-btn.active {
+  background: rgba(90,74,48,0.10);
+}
+@media (max-width: 600px) {
+  #langSwitcher {
+    position: static;
+    transform: none;
+    margin: 10px auto 0;
+    display: inline-flex;
+  }
+  #themeToggle {
+    position: absolute;
+    top: 14px;
+    right: 12px;
+    bottom: auto;
+    transform: none;
+  }
+}
 
 #scrollTop {
   position: fixed;
@@ -191,6 +244,8 @@ header {
   object-fit: contain;
   display: block;
   margin: 0 auto;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,0.55)) drop-shadow(0 0 18px rgba(255,255,255,0.2));
+  transition: filter 0.3s ease;
 }
 
 .tagline {
@@ -218,9 +273,9 @@ header {
 }
 
 .section-tab {
-  padding: 14px 22px;
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
+  padding: 14px clamp(8px, 1.3vw, 22px);
+  font-size: clamp(0.63rem, 0.82vw, 0.75rem);
+  letter-spacing: clamp(0.04em, 0.08vw, 0.12em);
   text-transform: uppercase;
   cursor: pointer;
   color: var(--muted);
@@ -231,6 +286,7 @@ header {
   font-weight: 500;
   transition: color 0.15s, border-color 0.15s;
   white-space: nowrap;
+  flex-shrink: 1;
 }
 .section-tab:hover { color: var(--text); }
 .section-tab.active {
@@ -1029,7 +1085,7 @@ header {
 }
 
 @media (max-width: 700px) {
-  header { padding: 24px 16px 18px; }
+  header { padding: 24px 16px 38px; }
   .wordmark-img { height: 38px; }
   .tagline { font-size: 0.6rem; margin-top: 5px; }
   #themeToggle { right: 12px; font-size: 0.62rem; padding: 4px 8px; }
@@ -1044,7 +1100,7 @@ header {
     scrollbar-width: none;
   }
   .section-nav::-webkit-scrollbar { display: none; }
-  .section-tab { padding: 11px 13px; font-size: 0.63rem; white-space: nowrap; }
+  .section-tab { padding: 10px 9px; font-size: 0.59rem; letter-spacing: 0.02em; white-space: nowrap; }
   
   #secAbout { margin-left: 0; }
 
@@ -1104,7 +1160,14 @@ header {
 
 <header>
   <img src="Logo.png" alt="RESCENE" class="wordmark-img" onclick="pickSection('about')" style="cursor:pointer;">
-  <p class="tagline">리센느 영상 몰아보기 SCENE-FLIX</p>
+  <p class="tagline" id="headerTagline">리센느 영상 몰아보기 SCENE-FLIX</p>
+
+  <div id="langSwitcher">
+    <button class="lang-btn active" onclick="setLang('KR')">KR</button>
+    <button class="lang-btn" onclick="setLang('JP')">JP</button>
+    <button class="lang-btn" onclick="setLang('EN')">EN</button>
+  </div>
+
   <button id="themeToggle" onclick="toggleTheme()" title="다크/라이트 모드 전환">
     <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="5"/>
@@ -1123,15 +1186,15 @@ header {
 
 <div class="song-nav-outer">
   <div class="section-nav" id="sectionNav">
-    <button class="section-tab" id="secSongs" onclick="pickSection('songs')">Songs</button>
-    <button class="section-tab" id="secContent" onclick="pickSection('content')">자체 컨텐츠</button>
-    <button class="section-tab" id="secLive" onclick="pickSection('live')">Live</button>
-    <button class="section-tab" id="secExternal" onclick="pickSection('external')">외부 컨텐츠</button>
-    <button class="section-tab" id="secFantube" onclick="pickSection('fantube')">팬튜브</button>
-    <button class="section-tab" id="secMember" onclick="pickSection('member')">멤버별 관련 영상</button>
-    <button class="section-tab" id="secLinks" onclick="pickSection('links')">RESCENE 관련 링크</button>
-    <button class="section-tab" id="secAbout" onclick="pickSection('about')" style="margin-left:auto;">About</button>
-    <button class="section-tab" id="secBookmark" onclick="pickSection('bookmark')">★ 즐겨찾기<span id="bmCount"></span></button>
+    <button class="section-tab" id="secSongs"    onclick="pickSection('songs')"    data-i18n="tab_songs">Songs</button>
+    <button class="section-tab" id="secContent"  onclick="pickSection('content')"  data-i18n="tab_content">자체 컨텐츠</button>
+    <button class="section-tab" id="secLive"     onclick="pickSection('live')"     data-i18n="tab_live">Live</button>
+    <button class="section-tab" id="secExternal" onclick="pickSection('external')" data-i18n="tab_external">외부 컨텐츠</button>
+    <button class="section-tab" id="secFantube"  onclick="pickSection('fantube')"  data-i18n="tab_fantube">팬튜브</button>
+    <button class="section-tab" id="secMember"   onclick="pickSection('member')"   data-i18n="tab_member">멤버별 영상</button>
+    <button class="section-tab" id="secLinks"    onclick="pickSection('links')"    data-i18n="tab_links">RESCENE 링크</button>
+    <button class="section-tab" id="secAbout"    onclick="pickSection('about')" style="margin-left:auto;" data-i18n="tab_about">About</button>
+    <button class="section-tab" id="secBookmark" onclick="pickSection('bookmark')" data-i18n="tab_bookmark">★ 즐겨찾기<span id="bmCount"></span></button>
   </div>
 </div>
 
@@ -1140,18 +1203,18 @@ header {
     <div class="sort-btns">
       <button class="sort-btn active" id="sortNewest" onclick="setSort('newest')">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
-        최신순
+        <span data-i18n="sort_newest">최신순</span>
       </button>
       <button class="sort-btn" id="sortOldest" onclick="setSort('oldest')">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
-        오래된순
+        <span data-i18n="sort_oldest">오래된순</span>
       </button>
     </div>
     <div class="search-input-wrap">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
-      <input type="text" id="searchInput" placeholder="영상 제목으로 검색..." autocomplete="off" oninput="onSearch(this.value)">
+      <input type="text" id="searchInput" placeholder="영상 제목으로 검색..." autocomplete="off" oninput="onSearch(this.value)" data-i18n-placeholder="search_placeholder">
       <span id="searchResultCount"></span>
       <button id="searchClear" onclick="clearSearch()" title="검색어 지우기">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
@@ -1168,12 +1231,12 @@ header {
   </div>
   
   <div class="type-bar">
-    <button class="type-btn active" data-t="all"        onclick="setType(this,'all')">전체</button>
-    <button class="type-btn"        data-t="music"      onclick="setType(this,'music')">음악방송</button>
-    <button class="type-btn"        data-t="mv"         onclick="setType(this,'mv')">뮤직비디오</button>
-    <button class="type-btn"        data-t="itslive"    onclick="setType(this,'itslive')">It's Live</button>
-    <button class="type-btn"        data-t="onthespot"  onclick="setType(this,'onthespot')">온더스팟</button>
-    <button class="type-btn"        data-t="fullcam"    onclick="setType(this,'fullcam')">풀캠</button>
+    <button class="type-btn active" data-t="all"        onclick="setType(this,'all')"        data-i18n="filter_all">전체</button>
+    <button class="type-btn"        data-t="music"      onclick="setType(this,'music')"      data-i18n="filter_music">음악방송</button>
+    <button class="type-btn"        data-t="mv"         onclick="setType(this,'mv')"         data-i18n="filter_mv">뮤직비디오</button>
+    <button class="type-btn"        data-t="itslive"    onclick="setType(this,'itslive')"    data-i18n="filter_itslive">It's Live</button>
+    <button class="type-btn"        data-t="onthespot"  onclick="setType(this,'onthespot')"  data-i18n="filter_onthespot">온더스팟</button>
+    <button class="type-btn"        data-t="fullcam"    onclick="setType(this,'fullcam')"    data-i18n="filter_fullcam">풀캠</button>
   </div>
 </div>
 
@@ -1188,8 +1251,8 @@ header {
     <div class="song-nav" id="liveNav"></div>
   </div>
   <div class="type-bar">
-    <button class="type-btn active" data-lm="all"    onclick="setLiveMember(this,'all')">전체</button>
-    <button class="type-btn"        data-lm="전원"   onclick="setLiveMember(this,'전원')">전원</button>
+    <button class="type-btn active" data-lm="all"    onclick="setLiveMember(this,'all')"    data-i18n="filter_all">전체</button>
+    <button class="type-btn"        data-lm="전원"   onclick="setLiveMember(this,'전원')"   data-i18n="filter_all_members">전원</button>
     <button class="type-btn"        data-lm="원이"   onclick="setLiveMember(this,'원이')">원이</button>
     <button class="type-btn"        data-lm="리브"   onclick="setLiveMember(this,'리브')">리브</button>
     <button class="type-btn"        data-lm="미나미" onclick="setLiveMember(this,'미나미')">미나미</button>
@@ -1212,14 +1275,14 @@ header {
 
 <div id="fantubeMode" style="display:none;">
   <div class="fantube-wrap">
-    <p class="fantube-desc">리센느의 팬 유튜버들의 채널입니다.</p>
+    <p class="fantube-desc" data-i18n="fantube_desc">리센느의 팬 유튜버들의 채널입니다.</p>
     <div class="fantube-grid" id="fantubeGrid"></div>
   </div>
 </div>
 
 <div id="memberMode" style="display:none;">
   <div class="member-wrap">
-    <p class="member-desc">멤버를 선택하면 유튜브에서 관련 영상을 검색합니다.</p>
+    <p class="member-desc" data-i18n="member_desc">멤버를 선택하면 유튜브에서 관련 영상을 검색합니다.</p>
     <div class="member-btns">
       <button class="member-btn" onclick="searchMember('원이')">
         <div class="member-photo-wrap"><img src="https://yt3.ggpht.com/NbDzqAmTu35-LKXoMf-SBsa1nCqhq01rrqjPz7rTmJkCAJdSh-c0uRekJhkWbOxR6ss8N8_E7l92=s640-c-fcrop64=1,22d90000dd07ffff-rw-nd-v1" alt="원이" class="member-photo"></div>
@@ -1248,7 +1311,7 @@ header {
 <div id="linksMode" style="display:none;">
   <div class="links-wrap">
 
-    <p class="links-section-label">공식 채널</p>
+    <p class="links-section-label" data-i18n="links_official">공식 채널</p>
     <div class="links-list">
 
       <a class="link-row" href="https://www.youtube.com/@RESCENE_official" target="_blank" rel="noopener">
@@ -1330,7 +1393,7 @@ header {
 
     </div>
 
-    <p class="links-section-label">멤버 채널</p>
+    <p class="links-section-label" data-i18n="links_member_ch">멤버 채널</p>
     <div class="links-list">
 
       <a class="link-row" href="https://www.youtube.com/@helloiamwoninicetomeetyou" target="_blank" rel="noopener">
@@ -1357,7 +1420,7 @@ header {
 
     </div>
 
-    <p class="links-section-label">음악 플랫폼</p>
+    <p class="links-section-label" data-i18n="links_music_platform">음악 플랫폼</p>
     <div class="links-list">
 
       <a class="link-row" href="https://music.youtube.com/search?q=%23%EB%A6%AC%EC%84%BC%EB%8A%90" target="_blank" rel="noopener">
@@ -1417,7 +1480,7 @@ header {
 
     </div>
 
-    <p class="links-section-label">팬 커뮤니티</p>
+    <p class="links-section-label" data-i18n="links_fan_community">팬 커뮤니티</p>
     <div class="links-list">
 
       <a class="link-row" href="https://gall.dcinside.com/mgallery/board/lists?id=rescene1" target="_blank" rel="noopener">
@@ -1440,55 +1503,155 @@ header {
 
 <div id="aboutMode" style="display:none;">
 <div class="links-wrap">
-    <div style="max-width:560px; margin:0 auto; padding:40px 0 20px; color:var(--text);">
+  <div style="max-width:520px; margin:0 auto; padding:52px 0 72px; color:var(--text);">
 
-      <p style="font-size:0.72rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--muted); margin-bottom:24px;">About this page</p>
-
-      <p style="font-size:0.95rem; font-weight:500; color:var(--accent); margin-bottom:20px; line-height:1.6;">
-        리센느(RESCENE)의 팬 메이드 페이지입니다. <span style="color:var(--muted);">(by May_)</span>
+    <!-- ── HERO HEADER ── -->
+    <div style="margin-bottom:40px; padding-bottom:32px; border-bottom:1px solid var(--border); position:relative;">
+      <!-- 장식선 -->
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;">
+        <div style="height:1px; width:28px; background:var(--accent); opacity:0.5;"></div>
+        <span style="font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); font-weight:500;">Scene-Flix</span>
+      </div>
+      <p style="font-size:1.15rem; font-weight:500; color:var(--accent); line-height:1.65; margin:0 0 6px;" data-i18n="about_headline">
+        리센느(RESCENE)의 팬 메이드 페이지입니다.
       </p>
+      <p style="font-size:0.78rem; color:var(--muted); font-weight:400; letter-spacing:0.03em;" data-i18n="about_byline">made with love, by May_</p>
+    </div>
 
-      <div style="display:flex; flex-direction:column; gap:14px; font-size:0.82rem; line-height:1.8; color:var(--text);">
-        <div style="display:flex; gap:12px; align-items:flex-start;">
-          <span style="color:var(--accent); margin-top:2px; flex-shrink:0;">✦</span>
-          <span>이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다. 오직 팬들을 위해 만들어졌습니다.</span>
+    <!-- ── 섹션 1: 페이지 안내 ── -->
+    <div style="margin-bottom:28px;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+        <span style="font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); font-weight:500;" data-i18n="about_section_info">페이지 안내</span>
+        <div style="flex:1; height:1px; background:var(--border);"></div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:12px; font-size:0.8rem; line-height:1.8; color:var(--text);">
+        <div style="display:flex; gap:11px; align-items:flex-start;">
+          <span style="color:var(--accent); margin-top:3px; flex-shrink:0; font-size:0.6rem; line-height:1;">✦</span>
+          <span data-i18n="about_bullet1">이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다. 오직 팬들을 위해 만들어졌습니다.</span>
         </div>
-        <div style="display:flex; gap:12px; align-items:flex-start;">
-          <span style="color:var(--accent); margin-top:2px; flex-shrink:0;">✦</span>
-          <span>이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국, <strong style="color:var(--text);">더뮤즈 엔터테인먼트</strong>, 그리고 <strong style="color:var(--text);">리센느(RESCENE)</strong>에게 있습니다.</span>
+        <div style="display:flex; gap:11px; align-items:flex-start;">
+          <span style="color:var(--accent); margin-top:3px; flex-shrink:0; font-size:0.6rem; line-height:1;">✦</span>
+          <span data-i18n="about_bullet2">이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국, <strong style="color:var(--accent); font-weight:600;">더뮤즈 엔터테인먼트</strong>, 그리고 <strong style="color:var(--accent); font-weight:600;">리센느(RESCENE)</strong>에게 있습니다.</span>
         </div>
-        <div style="display:flex; gap:12px; align-items:flex-start;">
-          <span style="color:var(--accent); margin-top:2px; flex-shrink:0;">✦</span>
-          <span>저작권자의 요청이 있을 경우, 해당 영상은 수정 또는 삭제될 수 있습니다.</span>
+        <div style="display:flex; gap:11px; align-items:flex-start;">
+          <span style="color:var(--accent); margin-top:3px; flex-shrink:0; font-size:0.6rem; line-height:1;">✦</span>
+          <span data-i18n="about_bullet3">저작권자의 요청이 있을 경우, 해당 영상은 수정 또는 삭제될 수 있습니다.</span>
         </div>
-        <div style="display:flex; gap:12px; align-items:flex-start;">
-          <span style="color:var(--accent); margin-top:2px; flex-shrink:0;">✦</span>
-          <span>업데이트 내용은 리센느 마이너 갤러리에서 확인 하실 수 있습니다.</span>
+        <div style="display:flex; gap:11px; align-items:flex-start;">
+          <span style="color:var(--accent); margin-top:3px; flex-shrink:0; font-size:0.6rem; line-height:1;">✦</span>
+          <span data-i18n="about_bullet4">업데이트 내용은 <a href="https://gall.dcinside.com/mgallery/board/lists?id=rescene1" target="_blank" rel="noopener" style="color:var(--accent); text-decoration:underline; text-decoration-color:rgba(224,212,192,0.4); text-underline-offset:3px; font-weight:500; transition:text-decoration-color 0.15s;" onmouseenter="this.style.textDecorationColor='var(--accent)';" onmouseleave="this.style.textDecorationColor='rgba(224,212,192,0.4)';" data-i18n-href="about_bullet4_link_text">리센느 마이너 갤러리</a>에서 확인 하실 수 있습니다.</span>
         </div>
       </div>
+    </div>
 
-      <div style="margin-top:36px; padding:20px 22px; border-radius:12px; background:var(--card); border:1px solid var(--border-h); display:flex; flex-direction:column; gap:10px;">
-        <p style="font-size:0.62rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--accent); font-weight:500;">Contact</p>
-        <div style="display:inline-flex; align-items:center; gap:8px;">
-          <a href="mailto:sceneflix.may@gmail.com" style="display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; color:var(--text); text-decoration:none; font-weight:500;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+    <!-- ── 섹션 2: About RESCENE ── -->
+    <div style="margin-bottom:28px;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+        <span style="font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); font-weight:500;">About RESCENE</span>
+        <div style="flex:1; height:1px; background:var(--border);"></div>
+      </div>
+      <div id="resceneCard"
+        onclick="window.open('https://adam-yam.github.io/Introduce-RESCENE/','_blank','noopener')"
+        style="position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--border); cursor:pointer; background:var(--surf); transition:transform 0.38s cubic-bezier(0.22,1,0.36,1), border-color 0.22s, box-shadow 0.38s;"
+        onmouseenter="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(224,212,192,0.28)';this.style.boxShadow='0 16px 48px rgba(0,0,0,0.45), 0 0 0 1px rgba(224,212,192,0.1)';"
+        onmouseleave="this.style.transform='';this.style.borderColor='';this.style.boxShadow='';">
+
+        <!-- iframe 미리보기 -->
+        <div style="position:relative; height:190px; overflow:hidden; background:var(--bg);">
+          <div style="position:absolute; inset:0; z-index:2; background:linear-gradient(to bottom, rgba(0,0,0,0) 20%, var(--surf) 100%); pointer-events:none;"></div>
+          <iframe
+            src="https://adam-yam.github.io/Introduce-RESCENE/"
+            style="width:200%; height:380px; transform:scale(0.5); transform-origin:top left; pointer-events:none; border:none; display:block;"
+            scrolling="no" loading="lazy" tabindex="-1"
+            sandbox="allow-scripts allow-same-origin">
+          </iframe>
+          <div id="resceneCardPlaceholder" style="position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;background:var(--bg);">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.4;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+              <span style="font-size:0.65rem;letter-spacing:0.1em;">미리보기 로딩 중</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 하단 info bar -->
+        <div style="padding:13px 16px 15px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); background:var(--surf);">
+          <div style="display:flex; flex-direction:column; gap:2px;">
+            <p style="font-size:0.78rem; font-weight:600; color:var(--accent); letter-spacing:0.06em; margin:0;">RESCENE</p>
+            <p style="font-size:0.63rem; color:var(--muted); margin:0; letter-spacing:0.02em;" data-i18n="about_rescene_sub">리센느 소개 페이지 (팬 제작)</p>
+          </div>
+          <div style="display:flex; align-items:center; gap:5px; padding:6px 13px; border-radius:6px; border:1px solid var(--border-h); background:rgba(224,212,192,0.04); font-size:0.65rem; color:var(--accent); letter-spacing:0.08em; flex-shrink:0; transition:background 0.15s;"
+            onmouseenter="this.style.background='rgba(224,212,192,0.1)';"
+            onmouseleave="this.style.background='rgba(224,212,192,0.04)';">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span data-i18n="about_goto">바로가기</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── 섹션 3: Contact ── -->
+    <div style="margin-bottom:36px;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+        <span style="font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); font-weight:500;">Contact</span>
+        <div style="flex:1; height:1px; background:var(--border);"></div>
+      </div>
+      <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden;">
+        <!-- 이메일 행 -->
+        <div style="padding:16px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); background:var(--card);">
+          <a href="mailto:sceneflix.may@gmail.com"
+            style="display:inline-flex; align-items:center; gap:9px; font-size:0.82rem; color:var(--text); text-decoration:none; font-weight:500; transition:color 0.15s;"
+            onmouseenter="this.style.color='var(--accent)';" onmouseleave="this.style.color='var(--text)';">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex-shrink:0;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             <span style="user-select:text; -webkit-user-select:text;">sceneflix.may@gmail.com</span>
           </a>
-          <button id="copyMailBtn" onclick="navigator.clipboard.writeText('sceneflix.may@gmail.com').then(()=>{const b=document.getElementById('copyMailBtn');b.textContent='✓';b.style.color='var(--accent)';b.style.borderColor='var(--accent)';setTimeout(()=>{b.textContent='복사';b.style.color='var(--muted)';b.style.borderColor='var(--border-h)';},2000);})" style="font-size:0.62rem; padding:2px 7px; border-radius:5px; border:1px solid var(--border-h); background:transparent; color:var(--muted); cursor:pointer; flex-shrink:0;">복사</button>
+          <button id="copyMailBtn"
+            onclick="navigator.clipboard.writeText('sceneflix.may@gmail.com').then(()=>{const b=document.getElementById('copyMailBtn');b.textContent='✓';b.style.color='var(--accent)';b.style.borderColor='var(--accent)';setTimeout(()=>{b.textContent=window._i18n&&window._i18n[window._curLang]?window._i18n[window._curLang].about_copy:'복사';b.style.color='var(--muted)';b.style.borderColor='var(--border-h)';},2000);})"
+            style="font-size:0.6rem; padding:3px 9px; border-radius:5px; border:1px solid var(--border-h); background:transparent; color:var(--muted); cursor:pointer; flex-shrink:0; letter-spacing:0.04em; transition:color 0.15s, border-color 0.15s;" data-i18n="about_copy">복사</button>
         </div>
-        <div style="margin-top:2px; padding-top:10px; border-top:1px solid var(--border); display:flex; flex-direction:column; gap:5px;">
-          <p style="font-size:0.75rem; color:var(--muted); line-height:1.7;">버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.</p>
-          <p style="font-size:0.75rem; color:var(--muted); line-height:1.7;">더 좋은 페이지를 만들기 위해 리마인 여러분의 건의사항을 기다리고 있습니다. 상단 메일로 편하게 보내주세요!</p>
+        <!-- 안내 문구 -->
+        <div style="padding:16px 20px; background:var(--surf); display:flex; flex-direction:column; gap:7px;">
+          <p style="font-size:0.74rem; color:var(--muted); line-height:1.75; margin:0;" data-i18n="about_contact1">버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.</p>
+          <p style="font-size:0.74rem; color:var(--muted); line-height:1.75; margin:0;" data-i18n="about_contact2">더 좋은 페이지를 만들기 위해 리마인 여러분의 건의사항을 기다리고 있습니다.</p>
+          <p style="font-size:0.74rem; color:var(--muted); line-height:1.75; margin:0;" data-i18n="about_contact3">또한, 제작자에게 전하고 싶은 말이나 의견이 있다면 자유롭게 남겨주세요.</p>
         </div>
       </div>
+    </div>
 
-      <div style="margin-top:24px; padding-top:24px; border-top:1px solid var(--border); font-size:0.68rem; color:var(--muted); line-height:1.8;">
+    <!-- ── Copyright footer ── -->
+    <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
+      <div style="display:flex; align-items:center; gap:8px; opacity:0.3;">
+        <div style="height:1px; width:20px; background:var(--muted);"></div>
+        <span style="font-size:0.5rem; letter-spacing:0.15em;">✦</span>
+        <div style="height:1px; width:20px; background:var(--muted);"></div>
+      </div>
+      <p style="font-size:0.64rem; color:var(--muted); line-height:1.9; text-align:center; opacity:0.55; margin:4px 0 0;">
         © 2025 May_ · Fan-made, non-commercial · All rights belong to their respective owners<br>
         © The Muze Entertainment · © RESCENE
-      </div>
-
+      </p>
     </div>
+
   </div>
+</div>
+
+<script>
+(function(){
+  var iframe = document.querySelector('#resceneCard iframe');
+  var ph = document.getElementById('resceneCardPlaceholder');
+  if(iframe && ph){
+    iframe.addEventListener('load', function(){
+      ph.style.opacity='0'; ph.style.transition='opacity 0.5s';
+      setTimeout(function(){ ph.style.display='none'; }, 500);
+    });
+    setTimeout(function(){
+      if(ph && ph.style.display!=='none'){
+        ph.style.opacity='0'; ph.style.transition='opacity 0.5s';
+        setTimeout(function(){ ph.style.display='none'; }, 500);
+      }
+    }, 4000);
+  }
+})();
+</script>
+
 </div>
 
 <div class="grid-wrap" id="grid-wrap-el">
@@ -1496,6 +1659,191 @@ header {
 </div>
 
 <script>
+// ══════════════════════════════════════════════
+//  i18n — 다국어 번역 시스템
+// ══════════════════════════════════════════════
+window._curLang = 'KR';
+
+window._i18n = {
+  KR: {
+    headerTagline:        '리센느 영상 몰아보기 SCENE-FLIX',
+    tab_songs:            'Songs',
+    tab_content:          '자체 컨텐츠',
+    tab_live:             'Live',
+    tab_external:         '외부 컨텐츠',
+    tab_fantube:          '팬튜브',
+    tab_member:           '멤버별 영상',
+    tab_links:            'RESCENE 링크',
+    tab_about:            'About',
+    tab_bookmark:         '★ 즐겨찾기',
+    sort_newest:          '최신순',
+    sort_oldest:          '오래된순',
+    search_placeholder:   '영상 제목으로 검색...',
+    filter_all:           '전체',
+    filter_all_members:   '전원',
+    filter_music:         '음악방송',
+    filter_mv:            '뮤직비디오',
+    filter_itslive:       "It's Live",
+    filter_onthespot:     '온더스팟',
+    filter_fullcam:       '풀캠',
+    fantube_desc:         '리센느의 팬 유튜버들의 채널입니다.',
+    member_desc:          '멤버를 선택하면 유튜브에서 관련 영상을 검색합니다.',
+    links_official:       '공식 채널',
+    links_member_ch:      '멤버 채널',
+    links_music_platform: '음악 플랫폼',
+    links_fan_community:  '팬 커뮤니티',
+    about_headline:       '리센느(RESCENE)의 팬 메이드 페이지입니다.',
+    about_byline:         'made with love, by May_',
+    about_section_info:   '페이지 안내',
+    about_bullet1:        '이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다. 오직 팬들을 위해 만들어졌습니다.',
+    about_bullet2:        '이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국, <strong style="color:var(--accent);font-weight:600;">더뮤즈 엔터테인먼트</strong>, 그리고 <strong style="color:var(--accent);font-weight:600;">리센느(RESCENE)</strong>에게 있습니다.',
+    about_bullet3:        '저작권자의 요청이 있을 경우, 해당 영상은 수정 또는 삭제될 수 있습니다.',
+    about_bullet4:        '업데이트 내용은 <a href="https://gall.dcinside.com/mgallery/board/lists?id=rescene1" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;text-decoration-color:rgba(224,212,192,0.4);text-underline-offset:3px;font-weight:500;" onmouseenter="this.style.textDecorationColor=\'var(--accent)\';" onmouseleave="this.style.textDecorationColor=\'rgba(224,212,192,0.4)\';">리센느 마이너 갤러리</a>에서 확인 하실 수 있습니다.',
+    about_rescene_sub:    '리센느 소개 페이지 (팬 제작)',
+    about_goto:           '바로가기',
+    about_copy:           '복사',
+    about_contact1:       '버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.',
+    about_contact2:       '더 좋은 페이지를 만들기 위해 리마인 여러분의 건의사항을 기다리고 있습니다.',
+    about_contact3:       '또한, 제작자에게 전하고 싶은 말이나 의견이 있다면 자유롭게 남겨주세요.',
+    live_year_suffix:     '년',
+  },
+  JP: {
+    headerTagline:        'RESCENEの映像まとめ SCENE-FLIX',
+    tab_songs:            'Songs',
+    tab_content:          '自体コンテンツ',
+    tab_live:             'Live',
+    tab_external:         '外部コンテンツ',
+    tab_fantube:          'Fan Tube',
+    tab_member:           'メンバー動画',
+    tab_links:            'RESCENEリンク',
+    tab_about:            'About',
+    tab_bookmark:         '★ お気に入り',
+    sort_newest:          '新しい順',
+    sort_oldest:          '古い順',
+    search_placeholder:   '動画タイトルで検索...',
+    filter_all:           '全て',
+    filter_all_members:   '全員',
+    filter_music:         '音楽番組',
+    filter_mv:            'ミュージックビデオ',
+    filter_itslive:       "It's Live",
+    filter_onthespot:     'オンザスポット',
+    filter_fullcam:       'フルカム',
+    fantube_desc:         'RESCENEのファンYouTuberのチャンネルです。',
+    member_desc:          'メンバーを選択するとYouTubeで関連動画を検索します。',
+    links_official:       '公式チャンネル',
+    links_member_ch:      'メンバーチャンネル',
+    links_music_platform: '音楽プラットフォーム',
+    links_fan_community:  'ファンコミュニティ',
+    about_headline:       'RESCENE のファンメイドページです。',
+    about_byline:         'made with love, by May_',
+    about_section_info:   'ページ案内',
+    about_bullet1:        'このページは収益を目的とせず、広告追加の予定は一切ありません。ファンのためだけに作られました。',
+    about_bullet2:        'このページに掲載された各動画の著作権は、各音楽番組の放送局、<strong style="color:var(--accent);font-weight:600;">The Muze Entertainment</strong>、および<strong style="color:var(--accent);font-weight:600;">RESCENE</strong>に帰属します。',
+    about_bullet3:        '著作権者の要請があった場合、該当動画は修正または削除される場合があります。',
+    about_bullet4:        'アップデート情報は<a href="https://gall.dcinside.com/mgallery/board/lists?id=rescene1" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;text-decoration-color:rgba(224,212,192,0.4);text-underline-offset:3px;font-weight:500;" onmouseenter="this.style.textDecorationColor=\'var(--accent)\';" onmouseleave="this.style.textDecorationColor=\'rgba(224,212,192,0.4)\';">RESCENEマイナーギャラリー</a>でご確認いただけます。',
+    about_rescene_sub:    'RESCENEの紹介ページ（ファン制作）',
+    about_goto:           '移動する',
+    about_copy:           'コピー',
+    about_contact1:       'バグ報告、追加・削除のリクエストは、正当な理由と共に上記メールにてご連絡ください。',
+    about_contact2:       'より良いページを作るため、リマインのみなさんのご意見をお待ちしています。',
+    about_contact3:       'また、制作者に伝えたいことやご意見があれば、お気軽にどうぞ。',
+    live_year_suffix:     '年',
+  },
+  EN: {
+    headerTagline:        'RESCENE Video Archive SCENE-FLIX',
+    tab_songs:            'Songs',
+    tab_content:          'Original',
+    tab_live:             'Live',
+    tab_external:         'External',
+    tab_fantube:          'Fan Tube',
+    tab_member:           'By Member',
+    tab_links:            'Links',
+    tab_about:            'About',
+    tab_bookmark:         '★ Saved',
+    sort_newest:          'Newest',
+    sort_oldest:          'Oldest',
+    search_placeholder:   'Search by video title...',
+    filter_all:           'All',
+    filter_all_members:   'All Members',
+    filter_music:         'Music Show',
+    filter_mv:            'Music Video',
+    filter_itslive:       "It's Live",
+    filter_onthespot:     'On the Spot',
+    filter_fullcam:       'Full Cam',
+    fantube_desc:         'YouTube channels run by RESCENE fan creators.',
+    member_desc:          'Select a member to search for related videos on YouTube.',
+    links_official:       'Official Channels',
+    links_member_ch:      'Member Channels',
+    links_music_platform: 'Music Platforms',
+    links_fan_community:  'Fan Community',
+    about_headline:       'A fan-made page dedicated to RESCENE.',
+    about_byline:         'made with love, by May_',
+    about_section_info:   'Page Info',
+    about_bullet1:        'This page is non-commercial and has no plans to include ads. It was made purely for fans.',
+    about_bullet2:        'All video rights belong to their respective broadcasting stations, <strong style="color:var(--accent);font-weight:600;">The Muze Entertainment</strong>, and <strong style="color:var(--accent);font-weight:600;">RESCENE</strong>.',
+    about_bullet3:        'Videos may be modified or removed upon request from the copyright holders.',
+    about_bullet4:        'Update notices can be found at the <a href="https://gall.dcinside.com/mgallery/board/lists?id=rescene1" target="_blank" rel="noopener" style="color:var(--accent);text-decoration:underline;text-decoration-color:rgba(224,212,192,0.4);text-underline-offset:3px;font-weight:500;" onmouseenter="this.style.textDecorationColor=\'var(--accent)\';" onmouseleave="this.style.textDecorationColor=\'rgba(224,212,192,0.4)\';">RESCENE Minor Gallery</a>.',
+    about_rescene_sub:    'RESCENE Introduction Page (Fan-made)',
+    about_goto:           'Visit',
+    about_copy:           'Copy',
+    about_contact1:       'For bug reports or add/remove requests, please contact us at the email above with a valid reason.',
+    about_contact2:       'We welcome any suggestions to help improve this page.',
+    about_contact3:       'Feel free to share any thoughts or messages for the creator as well.',
+    live_year_suffix:     '',
+    live_year_prefix:     '',
+  }
+};
+
+function setLang(lang) {
+  window._curLang = lang;
+  // 버튼 active 상태
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.textContent.trim() === lang);
+  });
+  const t = window._i18n[lang];
+  if (!t) return;
+
+  // 일반 텍스트 요소
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (!(key in t)) return;
+    // bookmark 탭은 bmCount span을 살려야 함
+    if (key === 'tab_bookmark') {
+      const bmSpan = document.getElementById('bmCount');
+      el.textContent = t[key];
+      if (bmSpan) el.appendChild(bmSpan);
+    } else {
+      el.innerHTML = t[key];
+    }
+  });
+
+  // placeholder
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (key in t) el.placeholder = t[key];
+  });
+
+  // 헤더 tagline
+  const tagline = document.getElementById('headerTagline');
+  if (tagline) tagline.textContent = t.headerTagline;
+
+  // localStorage 저장
+  try { localStorage.setItem('rescene-lang', lang); } catch {}
+
+  // live nav 연도 레이블 갱신
+  if (curSection === 'live') {
+    buildLiveNav();
+    buildLiveGrid();
+    // 멤버 필터 active 상태 복원
+    document.querySelectorAll('#liveMode .type-btn[data-lm]').forEach(btn => {
+      const lm = btn.getAttribute('data-lm');
+      btn.classList.toggle('active', lm === curLiveMember);
+    });
+  }
+}
+
+// ══════════════════════════════════════════════
+
 const RESCENE_DATA = [
   {
     song: "YoYo",
@@ -1874,6 +2222,7 @@ const DATE_MAP = {
   '-qGGOZvF3bM': '2024.05.26',
   '-yzwpc2Y2Xs': '2026.02.20',
   '01BFjTsRHBk': '2026.03.04',
+  'SG2K2YCh3uk': '2026.05.08',
   '03zFmuZFGY0': '2025.09.14',
   '0V2CripEpK4': '2025.07.18',
   '0bBK49b5yLg': '2025.07.18',
@@ -2766,8 +3115,8 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_KEYS = ['arirangradio','dingo','mbcradio','relaydance','interview','physicalgallary20','matkwon','chan19','hifiction','baesungjae','blip','chan21','dolsilencium','studiokkok','idolbackstage','artistcanvas','daytripjeongseon','dontlookbag','pblive','dolbagi','starroom','soundbomb360','idolunplugged'];
-const EXTERNAL_LABELS = { baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio' };
+const EXTERNAL_KEYS = ['arirangradio','mbcradio','dingo','relaydance','interview','physicalgallary20','matkwon','chan19','hifiction','baesungjae','blip','chan21','adoruv','dolsilencium','bokmenking','studiokkok','idolbackstage','baekbanjourneys','artistcanvas','daytripjeongseon','dontlookbag','pblive','dolbagi','starroom','soundbomb360','idolunplugged'];
+const EXTERNAL_LABELS = { bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio' };
 const EXTERNAL_DATA = {
   baesungjae: [
     { vid: 'QI4o-1Z9p_s', url: 'https://www.youtube.com/watch?v=QI4o-1Z9p_s', title: null, date: '2025.01.10', loaded: false },
@@ -2823,6 +3172,13 @@ const EXTERNAL_DATA = {
     { vid: 'd4psisZDWpg', url: 'https://youtu.be/d4psisZDWpg', title: null, date: '2025.09.08', loaded: false },
     { vid: 'vqbesIlW4O0', url: 'https://youtu.be/vqbesIlW4O0', title: null, date: '2026.04.15', loaded: false },
   ],
+  baekbanjourneys: [
+    { vid: 'Y_vp0RIO6CI', url: 'https://youtu.be/Y_vp0RIO6CI', title: null, date: '2025.12.18', loaded: false },
+    { vid: '_Ck7ZWzjyMY', url: 'https://youtu.be/_Ck7ZWzjyMY', title: null, date: '2025.12.22', loaded: false },
+    { vid: '2wl1eslGL7g', url: 'https://youtu.be/2wl1eslGL7g', title: null, date: '2025.12.22', loaded: false },
+    { vid: 'qiEXl-TwNg4', url: 'https://youtu.be/qiEXl-TwNg4', title: null, date: '2025.12.23', loaded: false },
+    { vid: 'cCr2lhfVLxE', url: 'https://youtu.be/cCr2lhfVLxE', title: null, date: '2025.12.23', loaded: false },
+  ],
   artistcanvas: [
     { vid: '7ykC1JAdCr8', url: 'https://youtu.be/7ykC1JAdCr8', title: null, date: '2025.10.26', loaded: false },
     { vid: 'p1asr5bLsl0', url: 'https://youtu.be/p1asr5bLsl0', title: null, date: '2025.10.27', loaded: false },
@@ -2855,6 +3211,9 @@ const EXTERNAL_DATA = {
     { vid: 'caYd7jBfa9U', url: 'https://youtu.be/caYd7jBfa9U', title: null, date: '2026.04.16', loaded: false },
     { vid: 'W07b3zKHnL4', url: 'https://youtu.be/W07b3zKHnL4', title: null, date: '2026.04.17', loaded: false },
     { vid: 'uWCcmqVeh8I', url: 'https://youtu.be/uWCcmqVeh8I', title: null, date: '2026.04.18', loaded: false },
+  ],
+  adoruv: [
+    { vid: 'mjUekIjNJ0w', url: 'https://youtu.be/mjUekIjNJ0w', title: null, date: '2025.07.07', loaded: false },
   ],
   dolsilencium: [
     { vid: 'HJRim5C0L60', url: 'https://youtu.be/HJRim5C0L60', title: null, date: '2025.07.16', loaded: false },
@@ -2941,6 +3300,11 @@ const EXTERNAL_DATA = {
     { vid: 'fB0bjJB6f6Y', url: 'https://www.youtube.com/watch?v=fB0bjJB6f6Y', title: null, date: '2026.04.24', loaded: false },
     { vid: 'iLBc6SQJYZU', url: 'https://www.youtube.com/watch?v=iLBc6SQJYZU', title: null, date: '2026.05.01', loaded: false },
     { vid: 'TuBlsrL8HDE', url: 'https://www.youtube.com/watch?v=TuBlsrL8HDE', title: null, date: '2026.05.08', loaded: false },
+  ],
+  bokmenking: [
+    { vid: 'jt5dpJ1iVoM', url: 'https://youtu.be/jt5dpJ1iVoM', title: null, date: '2025.08.03', loaded: false },
+    { vid: 'M-qJ2Bf3FZg', url: 'https://youtu.be/M-qJ2Bf3FZg', title: null, date: '2025.08.03', loaded: false },
+    { vid: '9LnzP7fXUS0', url: 'https://youtu.be/9LnzP7fXUS0', title: null, date: '2025.08.04', loaded: false },
   ],
   mbcradio: [
     { vid: '6Iq7hCk7XgA', url: 'https://youtu.be/6Iq7hCk7XgA', title: null, date: '2024.08.13', loaded: false },
@@ -3214,10 +3578,16 @@ function buildLiveNav() {
   const cnt2024 = LIVE_DATA_2024.length;
   const cnt2025 = LIVE_DATA_2025.length;
   const cnt2026 = LIVE_DATA_2026.length;
+  const t = window._i18n[window._curLang] || window._i18n['KR'];
+  const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
+  function yearLabel(y) {
+    if (window._curLang === 'EN') return y;
+    return y + suffix;
+  }
   let html = `<button class="song-tab ${curLiveYear === 'all'  ? 'active' : ''}" onclick="pickLiveYear(this,'all')">ALL<span class="cnt">${allCnt}</span></button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2024' ? 'active' : ''}" onclick="pickLiveYear(this,'2024')">2024년<span class="cnt">${cnt2024}</span></button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2025' ? 'active' : ''}" onclick="pickLiveYear(this,'2025')">2025년<span class="cnt">${cnt2025}</span></button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2026' ? 'active' : ''}" onclick="pickLiveYear(this,'2026')">2026년<span class="cnt">${cnt2026}</span></button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2024' ? 'active' : ''}" onclick="pickLiveYear(this,'2024')">${yearLabel('2024')}<span class="cnt">${cnt2024}</span></button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2025' ? 'active' : ''}" onclick="pickLiveYear(this,'2025')">${yearLabel('2025')}<span class="cnt">${cnt2025}</span></button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2026' ? 'active' : ''}" onclick="pickLiveYear(this,'2026')">${yearLabel('2026')}<span class="cnt">${cnt2026}</span></button>`;
   nav.innerHTML = html;
 
 }
@@ -3230,7 +3600,7 @@ function pickLiveYear(el, year) {
 
 function setLiveMember(el, member) {
   curLiveMember = member;
-  document.querySelectorAll('#liveMode .type-btn').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('#liveMode .type-btn[data-lm]').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   buildLiveGrid();
 }
@@ -3429,6 +3799,7 @@ const LIVE_DATA_2026 = [
   { vid:'oaPTaoYn_nQ', url:'https://youtu.be/oaPTaoYn_nQ', date:'4월 16일', members:['원이'],          year:'2026' },
   { vid:'jd28WtI0GyA', url:'https://youtu.be/jd28WtI0GyA', date:'4월 22일', members:['리브','미나미'], year:'2026' },
   { vid:'Kg7eQZ4c0jA', url:'https://youtu.be/Kg7eQZ4c0jA', date:'4월 27일', members:['메이'],          year:'2026' },
+  { vid:'SG2K2YCh3uk', url:'https://youtu.be/SG2K2YCh3uk', date:'5월 8일',  members:['리브'],          year:'2026' },
 ];
 
 const ALL_LIVE = [...LIVE_DATA_2024, ...LIVE_DATA_2025, ...LIVE_DATA_2026];
@@ -3446,7 +3817,6 @@ function getLiveCardClass(members) {
   return MEMBER_CLASS[members[0]] || 'lm-all';
 }
 function dateStrToNum(dateStr) {
-  
   if (!dateStr) return 0;
   return parseInt(dateStr.replace(/\./g, ''), 10) || 0;
 }
@@ -3886,7 +4256,13 @@ function pickSection(section) {
   }
 
   if (section === 'content') { buildContentNav(); buildGrid(); }
-  if (section === 'live') { buildLiveNav(); buildLiveGrid(); }
+  if (section === 'live') {
+    buildLiveNav(); buildLiveGrid();
+    document.querySelectorAll('#liveMode .type-btn[data-lm]').forEach(btn => {
+      const lm = btn.getAttribute('data-lm');
+      btn.classList.toggle('active', lm === curLiveMember);
+    });
+  }
   if (section === 'external') { buildExternalNav(); buildExternalGrid(); }
   if (section === 'fantube') buildFantubeGrid();
   if (section === 'songs') buildGrid();
@@ -3926,27 +4302,21 @@ function clearSearch(skipApply) {
 }
 
 function normalizeDateQuery(raw) {
-  
   const q = raw.trim();
   if (!q) return null;
 
-  
   const digits = q.replace(/[\.\-\/]/g, '');
 
-  
   if (!/^\d+$/.test(digits)) return null;
 
   if (digits.length === 6) {
-    
     const yy = digits.slice(0, 2);
     const mm = digits.slice(2, 4);
     const dd = digits.slice(4, 6);
-    
     if (+mm < 1 || +mm > 12 || +dd < 1 || +dd > 31) return null;
     return `20${yy}.${mm}.${dd}`;
   }
   if (digits.length === 8) {
-    
     const yyyy = digits.slice(0, 4);
     const mm   = digits.slice(4, 6);
     const dd   = digits.slice(6, 8);
@@ -3954,7 +4324,6 @@ function normalizeDateQuery(raw) {
     return `${yyyy}.${mm}.${dd}`;
   }
   if (digits.length === 4 && +digits >= 2020 && +digits <= 2030) {
-    
     return digits;
   }
 
@@ -3965,7 +4334,6 @@ function applySearch() {
   const q = curSearchQuery.toLowerCase();
 
   const grid = document.getElementById('grid');
-
   const liveGrid = document.getElementById('liveGridInner');
 
   const targetGrid = curSection === 'live' ? liveGrid : grid;
@@ -3974,7 +4342,6 @@ function applySearch() {
   const cards = targetGrid.querySelectorAll('.vcard');
   let visible = 0;
 
-  
   const dateNorm = normalizeDateQuery(q.replace(/\s/g, ''));
 
   cards.forEach(card => {
@@ -3987,7 +4354,6 @@ function applySearch() {
 
     let match;
     if (dateNorm) {
-      
       match = date !== '' && date.includes(dateNorm);
     } else {
       const primary = card.querySelector('.csong')?.textContent || '';
@@ -4070,7 +4436,11 @@ function applyTheme(theme) {
 try {
   const saved = localStorage.getItem('rescene-theme');
   if (saved === 'light') applyTheme('light');
+} catch {}
 
+try {
+  const savedLang = localStorage.getItem('rescene-lang');
+  if (savedLang && ['KR','JP','EN'].includes(savedLang)) setLang(savedLang);
 } catch {}
 
 (function() {
