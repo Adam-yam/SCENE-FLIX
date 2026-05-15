@@ -64,6 +64,7 @@
   gap: 8px;
 }
 
+/* ── More Links Dropdown ── */
 #moreLinksWrap {
   position: absolute;
   bottom: 17px;
@@ -3300,6 +3301,8 @@ const DATE_MAP = {
   'oXUCpdqFfOQ': '2026.05.06',
   'v_lvcboab9w': '2026.05.13',
   'h-gPZhMkvFo': '2026.05.07',
+  'TpajmJJlHSE': '2026.05.15',
+  '2S15hwuwMuA': '2026.05.15',
 };
 
 function parseDate(title) {
@@ -3611,6 +3614,7 @@ const CONTENT_DATA = [
       "https://www.youtube.com/watch?v=giWNmOtwsR4",
       "https://www.youtube.com/watch?v=NS7tSrMrWsc",
       "https://youtu.be/_AqXSSQ0Cmo",
+      "https://youtu.be/TpajmJJlHSE",
     ]
   },
 ];
@@ -3818,6 +3822,7 @@ const EXTERNAL_DATA = {
     { vid: 'fB0bjJB6f6Y', url: 'https://www.youtube.com/watch?v=fB0bjJB6f6Y', date: '2026.04.24' },
     { vid: 'iLBc6SQJYZU', url: 'https://www.youtube.com/watch?v=iLBc6SQJYZU', date: '2026.05.01' },
     { vid: 'TuBlsrL8HDE', url: 'https://www.youtube.com/watch?v=TuBlsrL8HDE', date: '2026.05.08' },
+    { vid: '2S15hwuwMuA', url: 'https://www.youtube.com/watch?v=2S15hwuwMuA', date: '2026.05.15' },
   ],
   bokmenking: [
     { vid: 'jt5dpJ1iVoM', url: 'https://youtu.be/jt5dpJ1iVoM', date: '2025.08.03' },
@@ -4034,6 +4039,7 @@ const FANTUBE_CHANNELS = [
   { name: 'Flow.', url: 'https://www.youtube.com/@Flow_0525', handle: '@Flow_0525', avatar: 'https://yt3.googleusercontent.com/At_LA7kGlYuqMPqqg-ZJq8Wze1geQ24rIabNXRYkI9LBnMhsLQX9i678aZyoP-llmDU-aW6XNg=s160-c-k-c0x00ffffff-no-rj' },
   { name: '온리원이', url: 'https://www.youtube.com/@%EC%98%A8%EB%A6%AC%EC%9B%90%EC%9D%B4', handle: '@온리원이', avatar: 'https://yt3.googleusercontent.com/R3eHUJ4L9IrxCbrvYIT3e8-khwCDL6JzvTlS9UxyHKyMqIrMkxcrIOOFa5EDKvIBDvDQl5BFzg=s160-c-k-c0x00ffffff-no-rj' },
   { name: 'Pandanim', url: 'https://www.youtube.com/@PandanimRS/featured', handle: '@PandanimRS', avatar: 'https://yt3.googleusercontent.com/ciBX_WNH52eQtpGhyWRKEIjP_WXf9gNifFMz3yYDXfFwUZtoRVsSg1cBIrvA9JbsYCQHchWxxSw=s160-c-k-c0x00ffffff-no-rj', subtitle: 'For ENG/JP Subtitle' },
+  { name: '리센느 헤르츠', url: 'https://www.youtube.com/@%EB%A6%AC%EC%84%BC%EB%8A%90%ED%97%A4%EB%A5%B4%EC%B8%A0', handle: '@리센느헤르츠', avatar: 'https://yt3.googleusercontent.com/6VAPZoUSKlHxiWhF7NKF7euMTynN6EDuLEq1NE5_5jxx9AHTOMCqGz-Uaw8A9OByWw6fdvTS=s160-c-k-c0x00ffffff-no-rj' },
 ];
 
 function buildFantubeCard(ch, idx, avatarUrl) {
@@ -5504,6 +5510,7 @@ function updateMobileBookmarkBadge() {
 }
 updateMobileBookmarkBadge();
 
+// ── More Links Dropdown ──
 function toggleMoreLinks(e) {
   if (e) e.stopPropagation();
   const wrap = document.getElementById('moreLinksWrap');
