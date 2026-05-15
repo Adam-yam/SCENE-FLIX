@@ -58,11 +58,109 @@
 #headerControls {
   position: absolute;
   bottom: 17px;
-  right: 40px;
+  left: 40px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
+
+#moreLinksWrap {
+  position: absolute;
+  bottom: 17px;
+  right: 40px;
+  z-index: 300;
+}
+
+#moreLinksBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.13);
+  border-radius: 8px;
+  color: rgba(220,220,220,0.9);
+  cursor: pointer;
+  padding: 8px 14px;
+  font-size: 0.7rem;
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+#moreLinksBtn:hover,
+#moreLinksWrap.open #moreLinksBtn {
+  background: rgba(255,255,255,0.09);
+  border-color: rgba(255,255,255,0.22);
+  color: #fff;
+}
+[data-theme="light"] #moreLinksBtn {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.14);
+  color: rgba(30,20,10,0.75);
+}
+[data-theme="light"] #moreLinksBtn:hover,
+[data-theme="light"] #moreLinksWrap.open #moreLinksBtn {
+  background: rgba(0,0,0,0.08);
+  border-color: rgba(0,0,0,0.22);
+  color: #1a1a1a;
+}
+#moreLinksBtn svg.grid-ico { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.75; }
+#moreLinksBtn svg.chevron  { width: 11px; height: 11px; flex-shrink: 0; opacity: 0.6; transition: transform 0.2s; }
+#moreLinksWrap.open #moreLinksBtn svg.chevron { transform: rotate(180deg); }
+
+#moreLinksDropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  background: #181818;
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 5px 0;
+  min-width: 200px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.6);
+  opacity: 0;
+  transform: translateY(-6px) scale(0.97);
+  pointer-events: none;
+  transition: opacity 0.18s, transform 0.18s;
+}
+#moreLinksWrap.open #moreLinksDropdown {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+[data-theme="light"] #moreLinksDropdown {
+  background: #edeae3;
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+}
+
+.more-link-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 16px;
+  color: rgba(210,210,210,0.85);
+  text-decoration: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: background 0.13s, color 0.13s;
+  cursor: pointer;
+}
+.more-link-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
+[data-theme="light"] .more-link-item { color: rgba(40,30,20,0.8); }
+[data-theme="light"] .more-link-item:hover { background: rgba(0,0,0,0.05); color: #1a1a1a; }
+
+.more-link-left { display: flex; align-items: center; gap: 11px; }
+.more-link-item svg.item-ico { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.6; }
+.more-link-item svg.ext-ico  { width: 12px; height: 12px; flex-shrink: 0; opacity: 0.35; }
+
+@media (max-width: 600px) { #moreLinksWrap { display: none; } }
 
 #themeToggle {
   background: none;
@@ -1549,6 +1647,15 @@ header {
     </div>
   </div>
   <div class="drawer-divider"></div>
+  <a class="drawer-item" href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener" onclick="closeDrawer()" style="text-decoration:none;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    SCENE-BOARD 바로가기
+  </a>
+  <a class="drawer-item" href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener" onclick="closeDrawer()" style="text-decoration:none;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    ABOUT RESCENE
+  </a>
+  <div class="drawer-divider"></div>
 
   <div class="drawer-items">
     <button class="drawer-item" id="dAllVideos" onclick="closeDrawer(); pickSection('allvideos');">
@@ -1621,6 +1728,36 @@ header {
   <img src="Logo.png" alt="RESCENE" class="wordmark-img" onclick="pickSection('about')" style="cursor:pointer;">
   <p class="tagline" id="headerTagline">리센느 영상 몰아보기 SCENE-FLIX</p>
 
+
+  <div id="moreLinksWrap">
+    <button id="moreLinksBtn" onclick="toggleMoreLinks(event)">
+      <svg class="grid-ico" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <rect x="3" y="3" width="4" height="4" rx="1"/><rect x="10" y="3" width="4" height="4" rx="1"/><rect x="17" y="3" width="4" height="4" rx="1"/>
+        <rect x="3" y="10" width="4" height="4" rx="1"/><rect x="10" y="10" width="4" height="4" rx="1"/><rect x="17" y="10" width="4" height="4" rx="1"/>
+        <rect x="3" y="17" width="4" height="4" rx="1"/><rect x="10" y="17" width="4" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/>
+      </svg>
+      MORE LINKS
+      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9"/>
+      </svg>
+    </button>
+    <div id="moreLinksDropdown">
+      <a class="more-link-item" href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener">
+        <span class="more-link-left">
+          <svg class="item-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          SCENE-BOARD
+        </span>
+        <svg class="ext-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a class="more-link-item" href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener">
+        <span class="more-link-left">
+          <svg class="item-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          ABOUT RESCENE
+        </span>
+        <svg class="ext-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </div>
 
   <div id="headerControls">
     <div id="langSwitcherDesktop">
@@ -1975,50 +2112,6 @@ header {
       </div>
     </div>
 
-
-    <div style="margin-bottom:28px;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
-        <span style="font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); font-weight:500;">About RESCENE</span>
-        <div style="flex:1; height:1px; background:var(--border);"></div>
-      </div>
-      <div id="resceneCard"
-        onclick="window.open('https://adam-yam.github.io/Introduce-RESCENE/','_blank','noopener')"
-        style="position:relative; border-radius:12px; overflow:hidden; border:1px solid var(--border); cursor:pointer; background:var(--surf); transition:transform 0.38s cubic-bezier(0.22,1,0.36,1), border-color 0.22s, box-shadow 0.38s;"
-        onmouseenter="this.style.transform='translateY(-4px)';this.style.borderColor='rgba(224,212,192,0.28)';this.style.boxShadow='0 16px 48px rgba(0,0,0,0.45), 0 0 0 1px rgba(224,212,192,0.1)';"
-        onmouseleave="this.style.transform='';this.style.borderColor='';this.style.boxShadow='';">
-
-
-        <div style="position:relative; height:190px; overflow:hidden; background:var(--bg);">
-          <div style="position:absolute; inset:0; z-index:2; background:linear-gradient(to bottom, rgba(0,0,0,0) 20%, var(--surf) 100%); pointer-events:none;"></div>
-          <iframe
-            src="https://adam-yam.github.io/Introduce-RESCENE/"
-            style="width:200%; height:380px; transform:scale(0.5); transform-origin:top left; pointer-events:none; border:none; display:block;"
-            scrolling="no" loading="lazy" tabindex="-1"
-            sandbox="allow-scripts allow-same-origin">
-          </iframe>
-          <div id="resceneCardPlaceholder" style="position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;background:var(--bg);">
-            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.4;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-              <span style="font-size:0.65rem;letter-spacing:0.1em;">미리보기 로딩 중</span>
-            </div>
-          </div>
-        </div>
-
-
-        <div style="padding:13px 16px 15px; display:flex; align-items:center; justify-content:space-between; border-top:1px solid var(--border); background:var(--surf);">
-          <div style="display:flex; flex-direction:column; gap:2px;">
-            <p style="font-size:0.78rem; font-weight:600; color:var(--accent); letter-spacing:0.06em; margin:0;">RESCENE</p>
-            <p style="font-size:0.63rem; color:var(--muted); margin:0; letter-spacing:0.02em;" data-i18n="about_rescene_sub">리센느 소개 페이지 (팬 제작)</p>
-          </div>
-          <div style="display:flex; align-items:center; gap:5px; padding:6px 13px; border-radius:6px; border:1px solid var(--border-h); background:rgba(224,212,192,0.04); font-size:0.65rem; color:var(--accent); letter-spacing:0.08em; flex-shrink:0; transition:background 0.15s;"
-            onmouseenter="this.style.background='rgba(224,212,192,0.1)';"
-            onmouseleave="this.style.background='rgba(224,212,192,0.04)';">
-            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            <span data-i18n="about_goto">바로가기</span>
-          </div>
-        </div>
-      </div>
-    </div>
 
 
     <div style="margin-bottom:36px;">
@@ -2632,6 +2725,7 @@ const DATE_MAP = {
   '-yzwpc2Y2Xs': '2026.02.20',
   '01BFjTsRHBk': '2026.03.04',
   'SG2K2YCh3uk': '2026.05.08',
+  'OQiuG_trYVQ': '2026.05.14',
   '03zFmuZFGY0': '2025.09.14',
   '0V2CripEpK4': '2025.07.18',
   '0bBK49b5yLg': '2025.07.18',
@@ -4202,6 +4296,7 @@ const LIVE_DATA_2026 = [
   { vid:'jd28WtI0GyA', url:'https://youtu.be/jd28WtI0GyA', date:'4월 22일', members:['리브','미나미'], year:'2026' },
   { vid:'Kg7eQZ4c0jA', url:'https://youtu.be/Kg7eQZ4c0jA', date:'4월 27일', members:['메이'],          year:'2026' },
   { vid:'SG2K2YCh3uk', url:'https://youtu.be/SG2K2YCh3uk', date:'5월 8일',  members:['리브'],          year:'2026' },
+  { vid:'OQiuG_trYVQ', url:'https://www.youtube.com/live/OQiuG_trYVQ?si=_ffmX64vCO_bKRKf', date:'5월 14일', members:['원이'], year:'2026' },
 ];
 
 const ALL_LIVE = [...LIVE_DATA_2024, ...LIVE_DATA_2025, ...LIVE_DATA_2026];
@@ -5408,6 +5503,19 @@ function updateMobileBookmarkBadge() {
   if (badge) badge.textContent = BOOKMARKS.size > 0 ? String(BOOKMARKS.size) : '';
 }
 updateMobileBookmarkBadge();
+
+function toggleMoreLinks(e) {
+  if (e) e.stopPropagation();
+  const wrap = document.getElementById('moreLinksWrap');
+  wrap.classList.toggle('open');
+}
+function closeMoreLinks() {
+  document.getElementById('moreLinksWrap').classList.remove('open');
+}
+document.addEventListener('click', function(e) {
+  const wrap = document.getElementById('moreLinksWrap');
+  if (wrap && !wrap.contains(e.target)) wrap.classList.remove('open');
+});
 </script>
 
 <button id="scrollTop" title="맨 위로">
