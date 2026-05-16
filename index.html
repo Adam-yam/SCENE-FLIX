@@ -1798,7 +1798,7 @@ header {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
-      <input type="text" id="searchInput" placeholder="영상 제목으로 검색..." autocomplete="off" oninput="onSearch(this.value)" data-i18n-placeholder="search_placeholder">
+      <input type="text" id="searchInput" placeholder="제목, 카테고리, 채널명으로 검색..." autocomplete="off" oninput="onSearch(this.value)" data-i18n-placeholder="search_placeholder">
       <span id="searchResultCount"></span>
       <button id="searchClear" onclick="clearSearch()" title="검색어 지우기">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
@@ -2185,7 +2185,7 @@ window._i18n = {
     tab_bookmark_full:    '즐겨찾기',
     sort_newest:          '최신순',
     sort_oldest:          '오래된순',
-    search_placeholder:   '영상 제목으로 검색...',
+    search_placeholder:   '제목, 카테고리, 채널명으로 검색...',
     filter_all:           '전체',
     filter_all_members:   '전원',
     filter_music:         '음악방송',
@@ -2230,7 +2230,7 @@ window._i18n = {
     tab_bookmark_full:    'お気に入り',
     sort_newest:          '新しい順',
     sort_oldest:          '古い順',
-    search_placeholder:   '動画タイトルで検索...',
+    search_placeholder:   'タイトル・カテゴリ・チャンネルで検索...',
     filter_all:           '全て',
     filter_all_members:   '全員',
     filter_music:         '音楽番組',
@@ -2275,7 +2275,7 @@ window._i18n = {
     tab_bookmark_full:    'Saved',
     sort_newest:          'Newest',
     sort_oldest:          'Oldest',
-    search_placeholder:   'Search by video title...',
+    search_placeholder:   'Search by title, category or channel...',
     filter_all:           'All',
     filter_all_members:   'All Members',
     filter_music:         'Music Show',
@@ -3877,7 +3877,8 @@ function buildContentCard(item, delay) {
   const title = item.loaded ? (item.title || item.vid) : '로딩 중...';
   const dateStr = item.date || DATE_MAP[item.vid] || '';
   const channel = item.channel || '';
-  return `<a class="vcard tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+  const categoryLabel = item.category === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : (item.category || '');
+  return `<a class="vcard tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-category="${categoryLabel}">
     <div class="thumb">
       <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt=""
            loading="lazy"
@@ -3964,7 +3965,9 @@ function pickExternal(el, key) {
 function buildExternalCard(item, delay) {
   const title = item.loaded ? (item.title || item.vid) : '로딩 중...';
   const dateStr = item.date || DATE_MAP[item.vid] || '';
-  return `<a class="vcard tb-content" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+  const channelKey = VID_TO_EXTERNAL_KEY[item.vid] || '';
+  const channelLabel = EXTERNAL_LABELS[channelKey] || channelKey;
+  return `<a class="vcard tb-content" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-channel="${channelLabel}">
     <div class="thumb">
       <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt=""
            loading="lazy"
@@ -4634,7 +4637,8 @@ function buildCard(item, delay) {
     if (item.type === 'onthespot') tags.push(`<span class="ctag hl" style="color:var(--c-onthespot)">온더스팟</span>`);
   }
 
-  return `<a class="vcard ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+  const showLabel = m?.show?.label || '';
+  return `<a class="vcard ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-show="${showLabel}" data-channel="${channel}" data-type="${tl}">
     <div class="thumb">
       <img src="${thumbUrl(item.vid)}" alt=""
            loading="lazy"
@@ -5247,7 +5251,11 @@ function applySearch() {
       const multi   = card.querySelector('.csong-multi')?.textContent || '';
       const badge   = card.querySelector('.type-badge')?.textContent || '';
       const tags    = card.querySelector('.ctags')?.textContent || '';
-      const searchTarget = (primary + ' ' + multi + ' ' + badge + ' ' + tags + ' ' + date).toLowerCase();
+      const channel  = card.getAttribute('data-channel') || '';
+      const category = card.getAttribute('data-category') || '';
+      const show     = card.getAttribute('data-show') || '';
+      const type     = card.getAttribute('data-type') || '';
+      const searchTarget = (primary + ' ' + multi + ' ' + badge + ' ' + tags + ' ' + channel + ' ' + category + ' ' + show + ' ' + type + ' ' + date).toLowerCase();
       match = searchTarget.includes(q);
     }
     card.style.display = match ? '' : 'none';
