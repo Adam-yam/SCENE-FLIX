@@ -321,6 +321,7 @@ body {
   font-size: 14px;
   user-select: none;
   -webkit-user-select: none;
+  transition: padding-left 0.22s cubic-bezier(0.4,0,0.2,1);
 }
 
 header {
@@ -452,12 +453,27 @@ header {
   font-size: 0.7rem;
   letter-spacing: 0.05em;
   cursor: pointer;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.28);
   background: transparent;
   color: var(--muted);
   font-family: 'Inter', sans-serif;
-  transition: all 0.15s;
 }
+[data-theme="light"] .type-btn {
+  border-color: rgba(0,0,0,0.22);
+}
+
+.type-btn[data-t="music"]     { border-color: var(--c-music);     }
+.type-btn[data-t="mv"]        { border-color: var(--c-mv);        }
+.type-btn[data-t="itslive"]   { border-color: var(--c-itslive);   }
+.type-btn[data-t="content"]   { border-color: var(--c-content);   }
+.type-btn[data-t="onthespot"] { border-color: var(--c-onthespot); }
+.type-btn[data-t="fullcam"]   { border-color: var(--c-fullcam);   }
+
+.type-btn[data-lm="원이"]    { border-color: #04a06e; }
+.type-btn[data-lm="리브"]    { border-color: rgba(220,220,220,0.5); }
+.type-btn[data-lm="미나미"]  { border-color: #2b99c4; }
+.type-btn[data-lm="메이"]    { border-color: #ecd25b; }
+.type-btn[data-lm="제나"]    { border-color: #ba92db; }
 .type-btn:hover { color: var(--text); border-color: var(--border-h); }
 .type-btn[data-lm="원이"]:hover   { border-color: #045a42; }
 .type-btn[data-lm="미나미"]:hover { border-color: #2b99c4; }
@@ -472,8 +488,10 @@ header {
 .type-btn.active[data-t="onthespot"]{ color: var(--c-onthespot);border-color: var(--c-onthespot);background: rgba(224,144,80,0.08); }
 .type-btn.active[data-t="fullcam"]  { color: var(--c-fullcam);  border-color: var(--c-fullcam);  background: rgba(212,200,74,0.08); }
 
-.type-btn.active[data-lm="all"]    { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.07); }
-.type-btn.active[data-lm="전원"]   { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.07); }
+.type-btn.active[data-lm="all"]    { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
+.type-btn.active[data-lm="전원"]   { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
+[data-theme="light"] .type-btn.active[data-lm="all"]  { color: var(--text); border-color: rgba(0,0,0,0.35); background: rgba(0,0,0,0.08); }
+[data-theme="light"] .type-btn.active[data-lm="전원"] { color: var(--text); border-color: rgba(0,0,0,0.35); background: rgba(0,0,0,0.08); }
 .type-btn.active[data-lm="원이"]   { color: #04a06e; border-color: #045a42;               background: rgba(4,90,66,0.15); }
 .type-btn.active[data-lm="리브"]   { color: #e0e0e0; border-color: rgba(220,220,220,0.5); background: rgba(0,0,0,0.35); }
 .type-btn.active[data-lm="미나미"] { color: #2b99c4; border-color: #2b99c4;               background: rgba(43,153,196,0.12); }
@@ -513,7 +531,7 @@ header {
   background: transparent;
   color: var(--muted);
   font-family: 'Inter', sans-serif;
-  transition: all 0.15s;
+  
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -844,7 +862,7 @@ header {
   text-decoration: none;
   color: var(--text);
   cursor: pointer;
-  transition: transform 0.22s, border-color 0.22s, background 0.22s, box-shadow 0.22s;
+  
   animation: fadeUp 0.3s ease both;
   position: relative;
   overflow: hidden;
@@ -1562,16 +1580,330 @@ header {
   }
 }
 
+@media (max-width: 700px) {
+  #subSidebar { display: none !important; }
+}
+
 @media (min-width: 701px) {
   #mobileBottomNav { display: none !important; }
   #mobileMenuBtn { display: none !important; }
   #mobileDrawerOverlay { display: none !important; }
   #mobileDrawer { display: none !important; }
   #themeToggle { display: flex !important; }
-  #headerControls { display: flex !important; }
 }
+
+
+.btn-base{
+  border:none;
+  background:none;
+  cursor:pointer;
+  font-family:'Inter',sans-serif;
+  transition:all .15s;
+}
+
+.card-base{
+  background:var(--card);
+  border:1px solid var(--border);
+  transition:
+    transform .22s,
+    border-color .22s,
+    background .22s,
+    box-shadow .22s;
+}
+
+.flex-center{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hidden-scrollbar{
+  scrollbar-width:none;
+}
+.hidden-scrollbar::-webkit-scrollbar{
+  display:none;
+}
+
+.hover-lift:hover{
+  transform:translateY(-4px);
+}
+
+
+
+@media (min-width: 701px) {
+
+  body {
+    padding-left: 260px;
+  }
+
+  .song-nav-outer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 120;
+    border-right: 1px solid var(--border);
+    border-bottom: none;
+    background: color-mix(in srgb, var(--bg) 96%, transparent);
+    backdrop-filter: blur(18px);
+  }
+
+  .song-nav-outer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .section-nav {
+    flex-direction: column;
+    padding: 8px 8px 8px;
+    gap: 2px;
+    flex: 1;
+    max-width: none;
+    margin: 0;
+    justify-content: flex-start;
+  }
+
+  .section-tab {
+    width: 100%;
+    text-align: left;
+    border-bottom: none;
+    border-left: 2px solid transparent;
+    border-radius: 8px;
+    padding: 10px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: normal;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    flex-shrink: 0;
+  }
+
+  .section-tab svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    opacity: 0.6;
+    display: block;
+  }
+
+  .section-tab.active svg {
+    opacity: 1;
+  }
+
+  .section-tab.active {
+    border-left-color: var(--accent);
+    background: rgba(255,255,255,0.04);
+  }
+
+  .section-tab.active.has-sub::after {
+    content: '›';
+    margin-left: auto;
+    font-size: 1rem;
+    color: var(--accent);
+    opacity: 0.6;
+    line-height: 1;
+  }
+
+  #sidebarBottom {
+    border-top: 1px solid var(--border);
+    padding: 14px 12px 16px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  #sidebarBottom .sb-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  #sidebarBottom .sb-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+
+  #sidebarBottom .sb-label svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+    opacity: 0.6;
+  }
+
+  .song-nav-inner {
+    display: none !important;
+  }
+
+  .type-bar {
+    display: flex !important;
+    padding: 14px 32px 0;
+  }
+
+  #subSidebarOverlay {
+    position: fixed;
+    top: 0;
+    left: 260px;   
+    right: 0;
+    bottom: 0;
+    z-index: 128;
+    pointer-events: none;
+  }
+  #subSidebarOverlay.open {
+    pointer-events: auto;
+  }
+
+  #subSidebar {
+    position: fixed;
+    top: 0;
+    left: 260px;
+    width: 220px;
+    height: 100vh;
+    overflow-y: auto;
+    scrollbar-width: none;
+    overscroll-behavior: contain;
+    z-index: 129;
+    border-right: 1px solid var(--border-h);
+    background: color-mix(in srgb, var(--bg) 98%, transparent);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(-16px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.2s cubic-bezier(0.4,0,0.2,1), opacity 0.2s;
+    box-shadow: 4px 0 32px rgba(0,0,0,0.45), 1px 0 0 var(--border-h);
+  }
+
+  #subSidebar.open {
+    transform: translateX(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+  #subSidebar::-webkit-scrollbar { display: none; }
+
+  .sub-sidebar-header {
+    padding: 22px 16px 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 6px;
+    flex-shrink: 0;
+  }
+
+  .sub-sidebar-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.7;
+  }
+
+  .sub-sidebar-section-label {
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    opacity: 0.55;
+    padding: 12px 16px 6px;
+    flex-shrink: 0;
+  }
+
+  #subSidebar .song-tab {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    text-align: left;
+    border-bottom: none;
+    border-left: 2px solid transparent;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-size: 0.72rem;
+    margin: 0;
+    white-space: normal;
+    line-height: 1.3;
+  }
+
+  #subSidebar .song-tab.active {
+    border-left-color: var(--accent);
+    color: var(--accent);
+    background: rgba(224,212,192,0.07);
+  }
+
+  #subSidebar .song-tab .cnt {
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  #subSidebar .type-btn {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 32px);
+    margin: 0 16px;
+    padding: 9px 12px;
+    border-radius: 8px;
+    font-size: 0.71rem;
+    letter-spacing: 0.03em;
+    border: none;
+    border-left: 2px solid transparent;
+    background: transparent;
+    color: var(--muted);
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    transition: color 0.15s, background 0.15s, border-color 0.15s;
+    text-align: left;
+  }
+
+  #subSidebar .type-btn:hover {
+    color: var(--text);
+    background: rgba(255,255,255,0.04);
+  }
+
+  #subSidebar .type-btn.active[data-t="all"]      { color: var(--text);        border-left-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.05); }
+  #subSidebar .type-btn.active[data-t="music"]    { color: var(--c-music);     border-left-color: var(--c-music);    background: rgba(110,198,192,0.08); }
+  #subSidebar .type-btn.active[data-t="mv"]       { color: var(--c-mv);        border-left-color: var(--c-mv);       background: rgba(192,112,144,0.08); }
+  #subSidebar .type-btn.active[data-t="itslive"]  { color: var(--c-itslive);   border-left-color: var(--c-itslive);  background: rgba(160,128,208,0.08); }
+  #subSidebar .type-btn.active[data-t="content"]  { color: var(--c-content);   border-left-color: var(--c-content);  background: rgba(128,184,112,0.08); }
+  #subSidebar .type-btn.active[data-t="onthespot"]{ color: var(--c-onthespot); border-left-color: var(--c-onthespot);background: rgba(224,144,80,0.08); }
+  #subSidebar .type-btn.active[data-t="fullcam"]  { color: var(--c-fullcam);   border-left-color: var(--c-fullcam);  background: rgba(212,200,74,0.08); }
+
+  #subSidebar .type-btn.active[data-lm="all"]    { color: var(--text);    border-left-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.05); }
+  #subSidebar .type-btn.active[data-lm="전원"]   { color: #fff;           border-left-color: rgba(255,255,255,0.4);  background: rgba(255,255,255,0.07); }
+  #subSidebar .type-btn.active[data-lm="원이"]   { color: #04a06e;        border-left-color: #045a42;                background: rgba(4,90,66,0.15); }
+  #subSidebar .type-btn.active[data-lm="리브"]   { color: #e0e0e0;        border-left-color: rgba(220,220,220,0.5);  background: rgba(0,0,0,0.35); }
+  #subSidebar .type-btn.active[data-lm="미나미"] { color: #2b99c4;        border-left-color: #2b99c4;                background: rgba(43,153,196,0.12); }
+  #subSidebar .type-btn.active[data-lm="메이"]   { color: #c9a800;        border-left-color: #ecd25b;                background: rgba(236,210,91,0.12); }
+  #subSidebar .type-btn.active[data-lm="제나"]   { color: #ba92db;        border-left-color: #ba92db;                background: rgba(186,146,219,0.12); }
+
+  .sub-sidebar-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 8px 16px;
+    flex-shrink: 0;
+  }
+
+  .type-bar,
+  .search-bar,
+  .grid-wrap,
+  .fantube-wrap,
+  .member-wrap,
+  .links-wrap {
+    max-width: 1600px;
+  }
+
+  header {
+    padding-top: 34px;
+  }
+}
+
 </style>
 </head>
+
 <body>
 
 <button id="mobileMenuBtn" onclick="toggleDrawer()" aria-label="메뉴 열기">
@@ -1627,85 +1959,85 @@ header {
         Language
       </span>
       <div id="langSwitcher">
-        <button class="lang-btn active" onclick="setLang('KR')">KR</button>
-        <button class="lang-btn" onclick="setLang('JP')">JP</button>
-        <button class="lang-btn" onclick="setLang('EN')">EN</button>
+        <button class="lang-btn btn-base active" onclick="setLang('KR')">KR</button>
+        <button class="lang-btn btn-base" onclick="setLang('JP')">JP</button>
+        <button class="lang-btn btn-base" onclick="setLang('EN')">EN</button>
       </div>
     </div>
   </div>
   <div class="drawer-divider"></div>
-  <a class="drawer-item" href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener" onclick="closeDrawer()" style="text-decoration:none;">
+  <a class="drawer-item btn-base" href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener" onclick="closeDrawer()" style="text-decoration:none;">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
     SCENE-BOARD 바로가기
   </a>
-  <a class="drawer-item" href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener" onclick="closeDrawer()" style="text-decoration:none;">
+  <a class="drawer-item btn-base" href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener" onclick="closeDrawer()" style="text-decoration:none;">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
     ABOUT RESCENE
   </a>
   <div class="drawer-divider"></div>
 
   <div class="drawer-items">
-    <button class="drawer-item" id="dAllVideos" onclick="closeDrawer(); pickSection('allvideos');">
+    <button class="drawer-item btn-base" id="dAllVideos" onclick="closeDrawer(); pickSection('allvideos');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 3H8"/><path d="M12 3v4"/></svg>
       <span data-i18n="tab_allvideos">전체 보기</span>
     </button>
-    <button class="drawer-item" id="dSongs"    onclick="closeDrawer(); pickSection('songs');">
+    <button class="drawer-item btn-base" id="dBookmark" onclick="closeDrawer(); pickSection('bookmark');">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span data-i18n="tab_bookmark_full">즐겨찾기</span>
+      <span class="drawer-badge" id="drawerBmCount"></span>
+    </button>
+    <div class="drawer-divider"></div>
+    <button class="drawer-item btn-base" id="dSongs"    onclick="closeDrawer(); pickSection('songs');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
       <span data-i18n="tab_songs">Songs</span>
     </button>
-    <button class="drawer-item" id="dContent"  onclick="closeDrawer(); pickSection('content');">
+    <button class="drawer-item btn-base" id="dContent"  onclick="closeDrawer(); pickSection('content');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
       <span data-i18n="tab_content_full">자체 컨텐츠</span>
     </button>
-    <button class="drawer-item" id="dLive"     onclick="closeDrawer(); pickSection('live');">
+    <button class="drawer-item btn-base" id="dLive"     onclick="closeDrawer(); pickSection('live');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
       <span data-i18n="tab_live">Live</span>
     </button>
-    <button class="drawer-item" id="dExternal" onclick="closeDrawer(); pickSection('external');">
+    <button class="drawer-item btn-base" id="dExternal" onclick="closeDrawer(); pickSection('external');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       <span data-i18n="tab_external_full">외부 컨텐츠</span>
     </button>
     <div class="drawer-divider"></div>
-    <button class="drawer-item" id="dFantube"  onclick="closeDrawer(); pickSection('fantube');">
+    <button class="drawer-item btn-base" id="dFantube"  onclick="closeDrawer(); pickSection('fantube');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       <span data-i18n="tab_fantube">팬튜브</span>
     </button>
-    <button class="drawer-item" id="dLinks"    onclick="closeDrawer(); pickSection('links');">
+    <button class="drawer-item btn-base" id="dLinks"    onclick="closeDrawer(); pickSection('links');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
       <span data-i18n="tab_links">RESCENE 링크</span>
     </button>
-    <button class="drawer-item" id="dAbout"    onclick="closeDrawer(); pickSection('about');">
+    <button class="drawer-item btn-base" id="dAbout"    onclick="closeDrawer(); pickSection('about');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       About
-    </button>
-    <div class="drawer-divider"></div>
-    <button class="drawer-item" id="dBookmark" onclick="closeDrawer(); pickSection('bookmark');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      <span data-i18n="tab_bookmark_full">즐겨찾기</span>
-      <span class="drawer-badge" id="drawerBmCount"></span>
     </button>
   </div>
 </div>
 
 <nav id="mobileBottomNav">
   <div id="navIndicator"></div>
-  <button class="mob-nav-btn" id="mnSongs"    onclick="pickSection('songs')">
+  <button class="mob-nav-btn btn-base" id="mnSongs"    onclick="pickSection('songs')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
     <span data-i18n="tab_songs">Songs</span>
   </button>
-  <button class="mob-nav-btn" id="mnLive"     onclick="pickSection('live')">
+  <button class="mob-nav-btn btn-base" id="mnLive"     onclick="pickSection('live')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
     <span data-i18n="tab_live">Live</span>
   </button>
-  <button class="mob-nav-btn" id="mnBookmark" onclick="pickSection('bookmark')">
+  <button class="mob-nav-btn btn-base" id="mnBookmark" onclick="pickSection('bookmark')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
     <span data-i18n="tab_bookmark">즐겨찾기</span>
   </button>
-  <button class="mob-nav-btn" id="mnContent"  onclick="pickSection('content')">
+  <button class="mob-nav-btn btn-base" id="mnContent"  onclick="pickSection('content')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
     <span data-i18n="tab_content">자체</span>
   </button>
-  <button class="mob-nav-btn" id="mnExternal" onclick="pickSection('external')">
+  <button class="mob-nav-btn btn-base" id="mnExternal" onclick="pickSection('external')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
     <span data-i18n="tab_external">외부</span>
   </button>
@@ -1744,42 +2076,93 @@ header {
       </a>
     </div>
   </div>
-
-  <div id="headerControls">
-    <div id="langSwitcherDesktop">
-      <button class="lang-btn active" onclick="setLang('KR')">KR</button>
-      <button class="lang-btn" onclick="setLang('JP')">JP</button>
-      <button class="lang-btn" onclick="setLang('EN')">EN</button>
-    </div>
-    <button id="themeToggle" onclick="toggleTheme()" title="다크/라이트 모드 전환">
-      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="12" cy="12" r="5"/>
-        <line x1="12" y1="1" x2="12" y2="3"/>
-        <line x1="12" y1="21" x2="12" y2="23"/>
-        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-        <line x1="1" y1="12" x2="3" y2="12"/>
-        <line x1="21" y1="12" x2="23" y2="12"/>
-        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-      </svg>
-      <span id="themeLabel">Light</span>
-    </button>
-  </div>
 </header>
 
 <div class="song-nav-outer">
-  <div class="section-nav" id="sectionNav">
-    <button class="section-tab" id="secAllVideos" onclick="pickSection('allvideos')"  data-i18n="tab_allvideos">전체 보기</button>
-    <button class="section-tab" id="secSongs"    onclick="pickSection('songs')"    data-i18n="tab_songs">Songs</button>
-    <button class="section-tab" id="secContent"  onclick="pickSection('content')"  data-i18n="tab_content_full">자체 컨텐츠</button>
-    <button class="section-tab" id="secLive"     onclick="pickSection('live')"     data-i18n="tab_live">Live</button>
-    <button class="section-tab" id="secExternal" onclick="pickSection('external')" data-i18n="tab_external_full">외부 컨텐츠</button>
-    <button class="section-tab" id="secFantube"  onclick="pickSection('fantube')"  data-i18n="tab_fantube">팬튜브</button>
-    <button class="section-tab" id="secLinks"    onclick="pickSection('links')"    data-i18n="tab_links">RESCENE 링크</button>
-    <button class="section-tab" id="secAbout"    onclick="pickSection('about')" style="margin-left:auto;" data-i18n="tab_about">About</button>
-    <button class="section-tab" id="secBookmark" onclick="pickSection('bookmark')" data-i18n="tab_bookmark">★ 즐겨찾기<span id="bmCount"></span></button>
+  <div style="padding:20px 20px 10px;border-bottom:1px solid var(--border);margin-bottom:4px;">
+    <div style="font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">
+      Navigation
+    </div>
   </div>
+  <div class="section-nav" id="sectionNav">
+    <button class="section-tab" id="secAllVideos" onclick="pickSection('allvideos')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 3H8"/><path d="M12 3v4"/></svg>
+      <span data-i18n="tab_allvideos">전체 보기</span>
+    </button>
+    <button class="section-tab" id="secBookmark" onclick="pickSection('bookmark')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <span data-i18n="tab_bookmark">★ 즐겨찾기</span><span id="bmCount"></span>
+    </button>
+    <div style="height:1px;background:var(--border);margin:4px 4px;"></div>
+    <button class="section-tab" id="secSongs" onclick="pickSection('songs')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      <span data-i18n="tab_songs">Songs</span>
+    </button>
+    <button class="section-tab" id="secContent" onclick="pickSection('content')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      <span data-i18n="tab_content_full">자체 컨텐츠</span>
+    </button>
+    <button class="section-tab" id="secLive" onclick="pickSection('live')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
+      <span data-i18n="tab_live">Live</span>
+    </button>
+    <button class="section-tab" id="secExternal" onclick="pickSection('external')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span data-i18n="tab_external_full">외부 컨텐츠</span>
+    </button>
+    <div style="height:1px;background:var(--border);margin:4px 4px;"></div>
+    <button class="section-tab" id="secFantube" onclick="pickSection('fantube')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <span data-i18n="tab_fantube">팬튜브</span>
+    </button>
+    <button class="section-tab" id="secLinks" onclick="pickSection('links')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      <span data-i18n="tab_links">RESCENE 링크</span>
+    </button>
+    <button class="section-tab" id="secAbout" onclick="pickSection('about')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span data-i18n="tab_about">About</span>
+    </button>
+  </div>
+
+  <div id="sidebarBottom">
+    <div class="sb-row">
+      <span class="sb-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        Language
+      </span>
+      <div id="langSwitcherDesktop">
+        <button class="lang-btn btn-base active" onclick="setLang('KR')">KR</button>
+        <button class="lang-btn btn-base" onclick="setLang('JP')">JP</button>
+        <button class="lang-btn btn-base" onclick="setLang('EN')">EN</button>
+      </div>
+    </div>
+    <div class="sb-row">
+      <span class="sb-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        Theme
+      </span>
+      <button id="themeToggle" onclick="toggleTheme()" title="다크/라이트 모드 전환">
+        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <span id="themeLabel">Light</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="subSidebarOverlay"></div>
+
+<div id="subSidebar">
+  <div class="sub-sidebar-header">
+    <div class="sub-sidebar-label" id="subSidebarLabel">필터</div>
+  </div>
+  <div id="subSidebarContent"></div>
 </div>
 
 <div class="search-bar" id="searchBar" style="display:none;">
@@ -1789,7 +2172,7 @@ header {
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
         <span data-i18n="sort_newest">최신순</span>
       </button>
-      <button class="sort-btn" id="sortOldest" onclick="setSort('oldest')">
+      <button class="sort-btn btn-base" id="sortOldest" onclick="setSort('oldest')">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         <span data-i18n="sort_oldest">오래된순</span>
       </button>
@@ -1818,10 +2201,10 @@ header {
 
   <div class="type-bar">
     <button class="type-btn active" data-t="all"        onclick="setType(this,'all')"        data-i18n="filter_all">전체</button>
-    <button class="type-btn"        data-t="music"      onclick="setType(this,'music')"      data-i18n="filter_music">음악방송</button>
-    <button class="type-btn"        data-t="mv"         onclick="setType(this,'mv')"         data-i18n="filter_mv">뮤직비디오</button>
-    <button class="type-btn"        data-t="onthespot"  onclick="setType(this,'onthespot')"  data-i18n="filter_onthespot">온더스팟</button>
-    <button class="type-btn"        data-t="fullcam"    onclick="setType(this,'fullcam')"    data-i18n="filter_fullcam">풀캠</button>
+    <button class="type-btn" data-t="music"      onclick="setType(this,'music')"      data-i18n="filter_music">음악방송</button>
+    <button class="type-btn" data-t="mv"         onclick="setType(this,'mv')"         data-i18n="filter_mv">뮤직비디오</button>
+    <button class="type-btn" data-t="onthespot"  onclick="setType(this,'onthespot')"  data-i18n="filter_onthespot">온더스팟</button>
+    <button class="type-btn" data-t="fullcam"    onclick="setType(this,'fullcam')"    data-i18n="filter_fullcam">풀캠</button>
   </div>
 </div>
 
@@ -1837,12 +2220,12 @@ header {
   </div>
   <div class="type-bar">
     <button class="type-btn active" data-lm="all"    onclick="setLiveMember(this,'all')"    data-i18n="filter_all">전체</button>
-    <button class="type-btn"        data-lm="전원"   onclick="setLiveMember(this,'전원')"   data-i18n="filter_all_members">전원</button>
-    <button class="type-btn"        data-lm="원이"   onclick="setLiveMember(this,'원이')">원이</button>
-    <button class="type-btn"        data-lm="리브"   onclick="setLiveMember(this,'리브')">리브</button>
-    <button class="type-btn"        data-lm="미나미" onclick="setLiveMember(this,'미나미')">미나미</button>
-    <button class="type-btn"        data-lm="메이"   onclick="setLiveMember(this,'메이')">메이</button>
-    <button class="type-btn"        data-lm="제나"   onclick="setLiveMember(this,'제나')">제나</button>
+    <button class="type-btn" data-lm="전원"   onclick="setLiveMember(this,'전원')"   data-i18n="filter_all_members">전원</button>
+    <button class="type-btn" data-lm="원이"   onclick="setLiveMember(this,'원이')">원이</button>
+    <button class="type-btn" data-lm="리브"   onclick="setLiveMember(this,'리브')">리브</button>
+    <button class="type-btn" data-lm="미나미" onclick="setLiveMember(this,'미나미')">미나미</button>
+    <button class="type-btn" data-lm="메이"   onclick="setLiveMember(this,'메이')">메이</button>
+    <button class="type-btn" data-lm="제나"   onclick="setLiveMember(this,'제나')">제나</button>
   </div>
 </div>
 
@@ -1871,7 +2254,7 @@ header {
     <p class="links-section-label" data-i18n="links_official">공식 채널</p>
     <div class="links-list">
 
-      <a class="link-row" href="https://www.youtube.com/@RESCENE_official" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://www.youtube.com/@RESCENE_official" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FF0000"/></svg>
         </span>
@@ -1882,7 +2265,7 @@ header {
         <span class="link-arrow">↗</span>
       </a>
 
-      <a class="link-row" href="https://www.instagram.com/rescene_official" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://www.instagram.com/rescene_official" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f09433"/><stop offset="25%" style="stop-color:#e6683c"/><stop offset="50%" style="stop-color:#dc2743"/><stop offset="75%" style="stop-color:#cc2366"/><stop offset="100%" style="stop-color:#bc1888"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" fill="url(#ig-grad)"/></svg>
         </span>
@@ -1893,7 +2276,7 @@ header {
         <span class="link-arrow">↗</span>
       </a>
 
-      <a class="link-row" href="https://x.com/RESCENEofficial" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://x.com/RESCENEofficial" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
         </span>
@@ -1904,7 +2287,7 @@ header {
         <span class="link-arrow">↗</span>
       </a>
 
-      <a class="link-row" href="https://www.tiktok.com/@rescene_official" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://www.tiktok.com/@rescene_official" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.95a8.27 8.27 0 0 0 4.84 1.54V7.05a4.85 4.85 0 0 1-1.07-.36z" fill="currentColor"/></svg>
         </span>
@@ -1915,7 +2298,7 @@ header {
         <span class="link-arrow">↗</span>
       </a>
 
-      <a class="link-row" href="https://www.facebook.com/RESCENE.official/" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://www.facebook.com/RESCENE.official/" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" fill="#1877F2"/></svg>
         </span>
@@ -1926,7 +2309,7 @@ header {
         <span class="link-arrow">↗</span>
       </a>
 
-      <a class="link-row" href="https://artist.mnetplus.world/main/stg/rescene-official" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://artist.mnetplus.world/main/stg/rescene-official" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h18v2H3zm0 4h12v2H3zm0 4h18v2H3zm0 4h12v2H3zm0 4h18v2H3z" fill="#FF6600"/></svg>
         </span>
@@ -1937,7 +2320,7 @@ header {
         <span class="link-arrow">↗</span>
       </a>
 
-      <a class="link-row" href="https://blip.kr/artists/RESCENE" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://blip.kr/artists/RESCENE" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" fill="none" stroke="#00C8FF" stroke-width="2"/><path d="M9 8.5c0-.83.67-1.5 1.5-1.5H14a2.5 2.5 0 0 1 0 5h-3.5v3H9V8.5zm1.5 2h3.25a.75.75 0 0 0 0-1.5H10.5V10.5z" fill="#00C8FF"/></svg>
         </span>
@@ -1953,7 +2336,7 @@ header {
     <p class="links-section-label" data-i18n="links_member_ch">멤버 채널</p>
     <div class="links-list">
 
-      <a class="link-row" href="https://www.youtube.com/@helloiamwoninicetomeetyou" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://www.youtube.com/@helloiamwoninicetomeetyou" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FF0000"/></svg>
         </span>
@@ -1964,7 +2347,7 @@ header {
         <span class="link-arrow">↗</span>
       </a>
 
-      <a class="link-row" href="https://x.com/RESCENE_twt" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://x.com/RESCENE_twt" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
         </span>
@@ -1980,7 +2363,7 @@ header {
     <p class="links-section-label" data-i18n="links_music_platform">음악 플랫폼</p>
     <div class="links-list">
 
-      <a class="link-row" href="https://music.youtube.com/search?q=%23%EB%A6%AC%EC%84%BC%EB%8A%90" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://music.youtube.com/search?q=%23%EB%A6%AC%EC%84%BC%EB%8A%90" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 14.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm0-7a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" fill="#FF0000"/><path d="M9.5 10.5l5 2.5-5 2.5v-5z" fill="#FF0000"/></svg>
         </span>
@@ -1991,7 +2374,7 @@ header {
         <span class="link-arrow">↗</span>
       </a>
 
-      <a class="link-row" href="https://www.melon.com/search/total/index.htm?q=%EB%A6%AC%EC%84%BC%EB%8A%90&section=&mwkLogType=T" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://www.melon.com/search/total/index.htm?q=%EB%A6%AC%EC%84%BC%EB%8A%90&section=&mwkLogType=T" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><ellipse cx="12" cy="13" rx="8" ry="7" fill="#00CD3C"/><path d="M12 6C12 6 8 3 5 4.5 3 5.5 3.5 8 6 8.5 8 9 10 8.5 12 6z" fill="#00A832"/><circle cx="9" cy="13" r="2" fill="white" opacity="0.3"/></svg>
         </span>
@@ -2002,7 +2385,7 @@ header {
         <span class="link-arrow">↗</span>
       </a>
 
-      <a class="link-row" href="https://www.genie.co.kr/detail/artistInfo?xxnm=82379125" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://www.genie.co.kr/detail/artistInfo?xxnm=82379125" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#0066FF"/><path d="M12 6a6 6 0 0 0-6 6 6 6 0 0 0 6 6 6 6 0 0 0 6-6h-6V6z" fill="white"/></svg>
         </span>
@@ -2013,7 +2396,7 @@ header {
         <span class="link-arrow">↗</span>
       </a>
 
-      <a class="link-row" href="https://open.spotify.com/artist/5deOsjuFTKrNMJW3rKuL8S" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://open.spotify.com/artist/5deOsjuFTKrNMJW3rKuL8S" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.623.623 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 1 1-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 0 1 .207.857zm1.223-2.723a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 1 1-.453-1.492c3.633-1.104 8.149-.569 11.233 1.329a.78.78 0 0 1 .257 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 1 1-.543-1.793c3.53-1.072 9.404-.865 13.115 1.338a.937.937 0 0 1-.955 1.611z" fill="#1DB954"/></svg>
         </span>
@@ -2024,7 +2407,7 @@ header {
         <span class="link-arrow">↗</span>
       </a>
 
-      <a class="link-row" href="https://rescenestream.com/" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://rescenestream.com/" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6zm-2 16a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill="var(--c-content)"/></svg>
         </span>
@@ -2040,7 +2423,7 @@ header {
     <p class="links-section-label" data-i18n="links_fan_community">팬 커뮤니티</p>
     <div class="links-list">
 
-      <a class="link-row" href="https://gall.dcinside.com/mgallery/board/lists?id=rescene1" target="_blank" rel="noopener">
+      <a class="link-row card-base" href="https://gall.dcinside.com/mgallery/board/lists?id=rescene1" target="_blank" rel="noopener">
         <span class="link-icon">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" fill="var(--accent)"/></svg>
         </span>
@@ -2320,9 +2703,9 @@ function setLang(lang) {
     if (!(key in t)) return;
 
     if (key === 'tab_bookmark') {
-      const bmSpan = el.id === 'secBookmark' ? document.getElementById('bmCount') : null;
+      const bmSpan = el.closest('#secBookmark') ? document.getElementById('bmCount') : null;
       el.textContent = t[key];
-      if (bmSpan) el.appendChild(bmSpan);
+      if (bmSpan) el.parentElement.appendChild(bmSpan);
     } else {
       el.innerHTML = t[key];
     }
@@ -2690,6 +3073,13 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'M4N1mylLjEY': '2026.05.18',
+  'Aapj6tR9TZ0': '5월 17일',
+  '5Uoc0sHfdn0': '2025.06.13',
+  'uPNlC5gXGWQ': '2025.06.19',
+  '5kKFPPlfG3c': '2025.06.26',
+  'oM1jshK18xU': '2025.07.03',
+  'NeR1lj7DcY0': '2025.07.03',
   '-1Z90SCzObQ': '2026.04.13',
   '-2v4DGzQCSc': '2026.04.27',
   '-3-uqY7Kpeo': '2024.09.24',
@@ -3628,8 +4018,15 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근' };
+const EXTERNAL_LABELS = { itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림' };
 const EXTERNAL_DATA = {
+  mvdream: [
+    { vid: '5Uoc0sHfdn0', url: 'https://youtu.be/5Uoc0sHfdn0', date: '2025.06.13' },
+    { vid: 'uPNlC5gXGWQ', url: 'https://youtu.be/uPNlC5gXGWQ', date: '2025.06.19' },
+    { vid: '5kKFPPlfG3c', url: 'https://youtu.be/5kKFPPlfG3c', date: '2025.06.26' },
+    { vid: 'oM1jshK18xU', url: 'https://youtu.be/oM1jshK18xU', date: '2025.07.03' },
+    { vid: 'NeR1lj7DcY0', url: 'https://youtu.be/NeR1lj7DcY0', date: '2025.07.03' },
+  ],
   itslive: [
     { vid: 'aiDpyP2ng3U', url: 'https://youtu.be/aiDpyP2ng3U', date: '2024.05.08' },
     { vid: 'KRpt7OF4zso', url: 'https://youtu.be/KRpt7OF4zso', date: '2024.09.07' },
@@ -3870,6 +4267,7 @@ const EXTERNAL_DATA = {
     { vid: '8y5egW-5f3Y', url: 'https://youtu.be/8y5egW-5f3Y', date: '2025.09.02' },
   ],
   kcon: [
+    { vid: 'M4N1mylLjEY', url: 'https://youtu.be/M4N1mylLjEY', date: '2026.05.18' },
     { vid: 'yFfKimbDrqo', url: 'https://youtu.be/yFfKimbDrqo', date: '2025.05.21' },
     { vid: 'bn9TWmC2tV4', url: 'https://youtu.be/bn9TWmC2tV4', date: '2025.05.22' },
     { vid: 'Ep5_5JrKIOQ', url: 'https://youtu.be/Ep5_5JrKIOQ', date: '2025.05.23' },
@@ -3928,7 +4326,7 @@ function buildContentCard(item, delay) {
   const dateStr = item.date || DATE_MAP[item.vid] || '';
   const channel = item.channel || '';
   const categoryLabel = item.category === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : (item.category || '');
-  return `<a class="vcard tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-category="${categoryLabel}">
+  return `<a class="vcard card-base hover-lift tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-category="${categoryLabel}">
     <div class="thumb">
       <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt=""
            loading="lazy"
@@ -4017,7 +4415,7 @@ function buildExternalCard(item, delay) {
   const dateStr = item.date || DATE_MAP[item.vid] || '';
   const channelKey = VID_TO_EXTERNAL_KEY[item.vid] || '';
   const channelLabel = EXTERNAL_LABELS[channelKey] || channelKey;
-  return `<a class="vcard tb-content" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-channel="${channelLabel}">
+  return `<a class="vcard card-base hover-lift tb-content" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-channel="${channelLabel}">
     <div class="thumb">
       <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt=""
            loading="lazy"
@@ -4322,6 +4720,7 @@ const LIVE_DATA_2025 = [
 ];
 
 const LIVE_DATA_2026 = [
+  { vid:'Aapj6tR9TZ0', url:'https://youtu.be/Aapj6tR9TZ0', date:'5월 17일', members:['메이'], year:'2026' },
   { vid:'G2fH76iGIww', url:'https://youtu.be/G2fH76iGIww', date:'1월 7일',  members:['메이'],          year:'2026' },
   { vid:'PHGpwoGKDjw', url:'https://youtu.be/PHGpwoGKDjw', date:'1월 8일',  members:['원이'],          year:'2026' },
   { vid:'BAs5EBG6XJE', url:'https://youtu.be/BAs5EBG6XJE', date:'1월 13일', members:['미나미'],        year:'2026' },
@@ -4407,7 +4806,7 @@ function buildLiveCard(item, delay) {
   ).join('');
   const title = item.title || '로딩 중...';
   const lmClass = getLiveCardClass(item.members);
-  return `<a class="vcard ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+  return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
     <div class="thumb">
       <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt=""
            loading="lazy"
@@ -4612,7 +5011,7 @@ function buildBookmarkGrid() {
       const memberBadges = item._liveItem.members.map(mm =>
         `<span class="ctag ${mm === '전원' ? 'hl' : ''}">${mm}</span>`
       ).join('');
-      return `<a class="vcard ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+      return `<a class="vcard card-base hover-lift ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
         <div class="thumb">
           <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
           <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
@@ -4627,7 +5026,7 @@ function buildBookmarkGrid() {
       </a>`;
     }
     if (!item.loaded) {
-      return `<a class="vcard ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+      return `<a class="vcard card-base hover-lift ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
         <div class="thumb">
           <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
           <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
@@ -4639,7 +5038,7 @@ function buildBookmarkGrid() {
         </div>
       </a>`;
     }
-    return `<a class="vcard ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+    return `<a class="vcard card-base hover-lift ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
       <div class="thumb">
         <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
         <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
@@ -4690,7 +5089,7 @@ function buildCard(item, delay) {
   }
 
   const showLabel = m?.show?.label || '';
-  return `<a class="vcard ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-show="${showLabel}" data-channel="${channel}" data-type="${tl}">
+  return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-show="${showLabel}" data-channel="${channel}" data-type="${tl}">
     <div class="thumb">
       <img src="${thumbUrl(item.vid)}" alt=""
            loading="lazy"
@@ -4937,7 +5336,7 @@ function buildAllVideoCard(item, delay) {
       `<span class="ctag ${mm === '전원' ? 'hl' : ''}">${mm}</span>`
     ).join('');
     const displayTitle = item.loaded ? videoTitle : '로딩 중...';
-    return `<a class="vcard ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+    return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
       <div class="thumb">
         <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
         <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
@@ -4952,7 +5351,7 @@ function buildAllVideoCard(item, delay) {
     </a>`;
   }
 
-  return `<a class="vcard ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+  return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
     <div class="thumb">
       <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
       <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
@@ -5153,6 +5552,170 @@ function pickSection(section) {
   if (section === 'bookmark') buildBookmarkGrid();
 
   if (typeof updateMobileNav === 'function') updateMobileNav(section);
+  updateSubSidebar(section);
+}
+
+function updateSubSidebar(section) {
+  const sidebar   = document.getElementById('subSidebar');
+  const content   = document.getElementById('subSidebarContent');
+  const labelEl   = document.getElementById('subSidebarLabel');
+  if (!sidebar || !content) return;
+
+  const SUB_SECTIONS = {
+    songs:    { label: 'Songs' },
+    content:  { label: '자체 컨텐츠' },
+    live:     { label: 'Live' },
+    external: { label: '외부 컨텐츠' },
+  };
+
+  if (!SUB_SECTIONS[section]) {
+    sidebar.classList.remove('open');
+    const ov = document.getElementById('subSidebarOverlay');
+    if (ov) ov.classList.remove('open');
+    document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('has-sub'));
+    return;
+  }
+
+  sidebar.classList.add('open');
+  const ov = document.getElementById('subSidebarOverlay');
+  if (ov) ov.classList.add('open');
+  if (labelEl) labelEl.textContent = SUB_SECTIONS[section].label;
+
+  document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('has-sub'));
+  const TAB_ID_MAP2 = { songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal' };
+  const activeTabId = TAB_ID_MAP2[section];
+  if (activeTabId) {
+    const activeTab = document.getElementById(activeTabId);
+    if (activeTab) activeTab.classList.add('has-sub');
+  }
+
+  let html = '';
+
+  if (section === 'songs') {
+    html += renderSubSongTabs();
+  } else if (section === 'content') {
+    html += renderSubContentTabs();
+  } else if (section === 'live') {
+    html += renderSubLiveTabs();
+  } else if (section === 'external') {
+    html += renderSubExternalTabs();
+  }
+
+  content.innerHTML = html;
+}
+
+function renderSubSongTabs() {
+  const allCnt = ALL_ITEMS.length;
+  let html = `<button class="song-tab ${curSong === 'all' ? 'active' : ''}" onclick="pickSong('all'); syncSubSidebar();">All<span class="cnt">${allCnt}</span></button>`;
+  html += RESCENE_DATA.map(e => {
+    const cnt = ALL_ITEMS.filter(i => i.song === e.song).length;
+    if (cnt === 0) return '';
+    return `<button class="song-tab ${e.song === curSong ? 'active' : ''}" onclick="pickSong('${e.song.replace(/'/g,"&#39;")}'); syncSubSidebar();">${e.song}<span class="cnt">${cnt}</span></button>`;
+  }).join('');
+  return html;
+}
+
+function renderSubTypeBtns() {
+  const types = [
+    { t:'all',       label:'전체',      i18n:'filter_all' },
+    { t:'music',     label:'음악방송',   i18n:'filter_music' },
+    { t:'mv',        label:'뮤직비디오', i18n:'filter_mv' },
+    { t:'onthespot', label:'온더스팟',   i18n:'filter_onthespot' },
+    { t:'fullcam',   label:'풀캠',       i18n:'filter_fullcam' },
+  ];
+  return types.map(({ t, label }) =>
+    `<button class="type-btn${curType === t ? ' active' : ''}" data-t="${t}"
+      onclick="setTypeFromSub(this,'${t}')">${label}</button>`
+  ).join('');
+}
+
+function renderSubContentTabs() {
+  const cats = CONTENT_DATA.map(c => c.category);
+  const totalCnt = CONTENT_ITEMS.length;
+  let html = `<button class="song-tab ${curContentCat === 'all' ? 'active' : ''}" onclick="setContentCat(this,'all'); syncSubSidebar();">ALL<span class="cnt">${totalCnt}</span></button>`;
+  html += cats.map(c => {
+    const cnt = CONTENT_ITEMS.filter(i => i.category === c).length;
+    const label = c === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : c;
+    return `<button class="song-tab ${curContentCat === c ? 'active' : ''}" onclick="setContentCat(this,'${c.replace(/'/g,"&#39;")}'); syncSubSidebar();">${label}<span class="cnt">${cnt}</span></button>`;
+  }).join('');
+  return html;
+}
+
+function renderSubLiveTabs() {
+  const allCnt  = ALL_LIVE.length;
+  const cnt2024 = LIVE_DATA_2024.length;
+  const cnt2025 = LIVE_DATA_2025.length;
+  const cnt2026 = LIVE_DATA_2026.length;
+  const t = window._i18n[window._curLang] || window._i18n['KR'];
+  const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
+  function yl(y) { return window._curLang === 'EN' ? y : y + suffix; }
+  let html = `<button class="song-tab ${curLiveYear === 'all'  ? 'active' : ''}" onclick="pickLiveYear(this,'all'); syncSubSidebar();">ALL<span class="cnt">${allCnt}</span></button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2024' ? 'active' : ''}" onclick="pickLiveYear(this,'2024'); syncSubSidebar();">${yl('2024')}<span class="cnt">${cnt2024}</span></button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2025' ? 'active' : ''}" onclick="pickLiveYear(this,'2025'); syncSubSidebar();">${yl('2025')}<span class="cnt">${cnt2025}</span></button>`;
+  html     += `<button class="song-tab ${curLiveYear === '2026' ? 'active' : ''}" onclick="pickLiveYear(this,'2026'); syncSubSidebar();">${yl('2026')}<span class="cnt">${cnt2026}</span></button>`;
+  return html;
+}
+
+function renderSubLiveMemberBtns() {
+  const members = [
+    { lm:'all',   label:'전체' },
+    { lm:'전원',  label:'전원' },
+    { lm:'원이',  label:'원이' },
+    { lm:'리브',  label:'리브' },
+    { lm:'미나미',label:'미나미' },
+    { lm:'메이',  label:'메이' },
+    { lm:'제나',  label:'제나' },
+  ];
+  return members.map(({ lm, label }) =>
+    `<button class="type-btn${curLiveMember === lm ? ' active' : ''}" data-lm="${lm}"
+      onclick="setLiveMemberFromSub(this,'${lm}')">${label}</button>`
+  ).join('');
+}
+
+function renderSubExternalTabs() {
+  const totalCnt = EXTERNAL_KEYS.reduce((s, k) => s + EXTERNAL_DATA[k].length, 0);
+  let html = `<button class="song-tab ${curExternal === 'all' ? 'active' : ''}" onclick="pickExternalSub(this,'all')">ALL<span class="cnt">${totalCnt}</span></button>`;
+  html += EXTERNAL_KEYS.map(key => {
+    const cnt = EXTERNAL_DATA[key].length;
+    return `<button class="song-tab ${curExternal === key ? 'active' : ''}" onclick="pickExternalSub(this,'${key}')">${EXTERNAL_LABELS[key]}<span class="cnt">${cnt}</span></button>`;
+  }).join('');
+  return html;
+}
+
+function pickExternalSub(el, key) {
+  curExternal = key;
+  document.querySelectorAll('#externalNav .song-tab').forEach(t => t.classList.remove('active'));
+  buildExternalGrid();
+  syncSubSidebar();
+}
+
+function closeSubSidebar() {
+  const sidebar = document.getElementById('subSidebar');
+  const ov = document.getElementById('subSidebarOverlay');
+  if (sidebar) sidebar.classList.remove('open');
+  if (ov) ov.classList.remove('open');
+}
+
+document.getElementById('subSidebarOverlay').addEventListener('click', closeSubSidebar);
+
+function syncSubSidebar() {
+  updateSubSidebar(curSection);
+}
+
+function setTypeFromSub(el, type) {
+  curType = type;
+  document.querySelectorAll('.type-btn[data-t]').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  buildGrid();
+  syncSubSidebar();
+}
+
+function setLiveMemberFromSub(el, member) {
+  curLiveMember = member;
+  document.querySelectorAll('#liveMode .type-btn[data-lm]').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  buildLiveGrid();
+  syncSubSidebar();
 }
 
 let curSearchQuery = '';
