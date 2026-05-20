@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SCENE-FLIX</title>
-<link rel="icon" href="https://cdn.imweb.me/thumbnail/20250630/b0666a1e5ca4e.png">
+<link rel="icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -39,7 +39,7 @@
   --border-h:rgba(0,0,0,0.18);
   --accent:  #5a4a30;
   --text:    #1a1a1a;
-  --muted:   #777;
+  --muted:   #444;
   --dim:     #d0cdc6;
 
   --c-music:    #2a9a94;
@@ -64,103 +64,6 @@
   gap: 8px;
 }
 
-#moreLinksWrap {
-  position: absolute;
-  bottom: 17px;
-  right: 40px;
-  z-index: 300;
-}
-
-#moreLinksBtn {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.13);
-  border-radius: 8px;
-  color: rgba(220,220,220,0.9);
-  cursor: pointer;
-  padding: 8px 14px;
-  font-size: 0.7rem;
-  font-family: 'Inter', sans-serif;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  white-space: nowrap;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
-}
-#moreLinksBtn:hover,
-#moreLinksWrap.open #moreLinksBtn {
-  background: rgba(255,255,255,0.09);
-  border-color: rgba(255,255,255,0.22);
-  color: #fff;
-}
-[data-theme="light"] #moreLinksBtn {
-  background: rgba(0,0,0,0.04);
-  border-color: rgba(0,0,0,0.14);
-  color: rgba(30,20,10,0.75);
-}
-[data-theme="light"] #moreLinksBtn:hover,
-[data-theme="light"] #moreLinksWrap.open #moreLinksBtn {
-  background: rgba(0,0,0,0.08);
-  border-color: rgba(0,0,0,0.22);
-  color: #1a1a1a;
-}
-#moreLinksBtn svg.grid-ico { width: 14px; height: 14px; flex-shrink: 0; opacity: 0.75; }
-#moreLinksBtn svg.chevron  { width: 11px; height: 11px; flex-shrink: 0; opacity: 0.6; transition: transform 0.2s; }
-#moreLinksWrap.open #moreLinksBtn svg.chevron { transform: rotate(180deg); }
-
-#moreLinksDropdown {
-  position: absolute;
-  top: calc(100% + 6px);
-  right: 0;
-  background: #181818;
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px;
-  padding: 5px 0;
-  min-width: 200px;
-  box-shadow: 0 12px 36px rgba(0,0,0,0.6);
-  opacity: 0;
-  transform: translateY(-6px) scale(0.97);
-  pointer-events: none;
-  transition: opacity 0.18s, transform 0.18s;
-}
-#moreLinksWrap.open #moreLinksDropdown {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: auto;
-}
-[data-theme="light"] #moreLinksDropdown {
-  background: #edeae3;
-  border-color: rgba(0,0,0,0.12);
-  box-shadow: 0 12px 36px rgba(0,0,0,0.12);
-}
-
-.more-link-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  padding: 11px 16px;
-  color: rgba(210,210,210,0.85);
-  text-decoration: none;
-  font-family: 'Inter', sans-serif;
-  font-size: 0.7rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  transition: background 0.13s, color 0.13s;
-  cursor: pointer;
-}
-.more-link-item:hover { background: rgba(255,255,255,0.06); color: #fff; }
-[data-theme="light"] .more-link-item { color: rgba(40,30,20,0.8); }
-[data-theme="light"] .more-link-item:hover { background: rgba(0,0,0,0.05); color: #1a1a1a; }
-
-.more-link-left { display: flex; align-items: center; gap: 11px; }
-.more-link-item svg.item-ico { width: 15px; height: 15px; flex-shrink: 0; opacity: 0.6; }
-.more-link-item svg.ext-ico  { width: 12px; height: 12px; flex-shrink: 0; opacity: 0.35; }
-
-@media (max-width: 600px) { #moreLinksWrap { display: none; } }
 
 #themeToggle {
   background: none;
@@ -264,6 +167,9 @@
 }
 .bm-btn svg { width: 13px; height: 13px; pointer-events: none; display: block; }
 .vcard:hover .bm-btn { opacity: 1; transform: scale(1) translateY(4px); }
+@media (hover: none) {
+  .bm-btn { opacity: 1; transform: scale(1) translateY(4px); }
+}
 .bm-btn:hover { background: rgba(0,0,0,0.8); color: #fff; }
 .bm-btn.bm-active {
   opacity: 1;
@@ -311,6 +217,32 @@
 
 * { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+
+@keyframes shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position:  400px 0; }
+}
+.skel {
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--dim) 25%, var(--card-h) 50%, var(--dim) 75%);
+  background-size: 800px 100%;
+  animation: shimmer 1.4s infinite linear;
+  display: block;
+}
+.skel-title  { height: 13px; width: 85%; margin-bottom: 6px; }
+.skel-title2 { height: 13px; width: 60%; margin-bottom: 4px; }
+.skel-date   { height: 10px; width: 50%; margin-top: 4px; }
+.skel-tag    { height: 10px; width: 38%; margin-top: 6px; border-radius: 2px; }
+
+.search-empty {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--muted);
+}
+.search-empty .ico { font-size: 1.8rem; margin-bottom: 12px; opacity: 0.25; }
+.search-empty p    { font-size: 0.82rem; margin-bottom: 4px; }
+.search-empty small{ font-size: 0.7rem; opacity: 0.6; }
 
 body {
   background: var(--bg);
@@ -642,6 +574,18 @@ header {
 .vcard.tb-onthespot:hover { border-color: rgba(224,144,80,0.5); box-shadow: 0 4px 24px rgba(224,144,80,0.15), 0 0 0 1px rgba(224,144,80,0.15); }
 .vcard.tb-fullcam:hover   { border-color: rgba(212,200,74,0.5); box-shadow: 0 4px 24px rgba(212,200,74,0.15), 0 0 0 1px rgba(212,200,74,0.15); }
 
+.vcard.tb-music     { background: rgba(110,198,192,0.15); border-color: rgba(110,198,192,0.22); }
+.vcard.tb-mv        { background: rgba(192,112,144,0.15); border-color: rgba(192,112,144,0.22); }
+.vcard.tb-itslive   { background: rgba(160,128,208,0.15); border-color: rgba(160,128,208,0.22); }
+.vcard.tb-onthespot { background: rgba(224,144,80,0.15);  border-color: rgba(224,144,80,0.22);  }
+.vcard.tb-fullcam   { background: rgba(212,200,74,0.13);  border-color: rgba(212,200,74,0.22);  }
+
+[data-theme="light"] .vcard.tb-music     { background: rgba(42,154,148,0.16);  border-color: rgba(42,154,148,0.35); }
+[data-theme="light"] .vcard.tb-mv        { background: rgba(160,64,96,0.16);   border-color: rgba(160,64,96,0.35);  }
+[data-theme="light"] .vcard.tb-itslive   { background: rgba(112,80,176,0.16);  border-color: rgba(112,80,176,0.35); }
+[data-theme="light"] .vcard.tb-onthespot { background: rgba(192,104,32,0.16);  border-color: rgba(192,104,32,0.35); }
+[data-theme="light"] .vcard.tb-fullcam   { background: rgba(168,154,16,0.16);  border-color: rgba(168,154,16,0.35); }
+
 .vcard.lm-wonyi    { background: rgba(4,90,66,0.18);    border-color: rgba(4,160,110,0.22); }
 .vcard.lm-liv      { background: rgba(200,200,200,0.1);  border-color: rgba(220,220,220,0.2); }
 .vcard.lm-minami   { background: rgba(43,153,196,0.15);  border-color: rgba(43,153,196,0.22); }
@@ -656,11 +600,11 @@ header {
 .vcard.lm-zena:hover   { border-color: rgba(186,146,219,0.55);  box-shadow: 0 4px 24px rgba(186,146,219,0.18), 0 0 0 1px rgba(186,146,219,0.18); }
 .vcard.lm-all:hover    { border-color: rgba(255,255,255,0.3);   box-shadow: 0 4px 24px rgba(255,255,255,0.08), 0 0 0 1px rgba(255,255,255,0.08); }
 
-[data-theme="light"] .vcard.lm-wonyi  { background: rgba(4,90,66,0.08);    border-color: rgba(4,160,110,0.2); }
-[data-theme="light"] .vcard.lm-liv    { background: rgba(80,80,80,0.07);    border-color: rgba(80,80,80,0.18); }
-[data-theme="light"] .vcard.lm-minami { background: rgba(43,153,196,0.08);  border-color: rgba(43,153,196,0.2); }
-[data-theme="light"] .vcard.lm-may    { background: rgba(180,140,0,0.08);   border-color: rgba(180,140,0,0.2); }
-[data-theme="light"] .vcard.lm-zena   { background: rgba(140,90,200,0.08);  border-color: rgba(140,90,200,0.2); }
+[data-theme="light"] .vcard.lm-wonyi  { background: rgba(4,90,66,0.14);    border-color: rgba(4,160,110,0.32); }
+[data-theme="light"] .vcard.lm-liv    { background: rgba(80,80,80,0.12);    border-color: rgba(80,80,80,0.30); }
+[data-theme="light"] .vcard.lm-minami { background: rgba(43,153,196,0.14);  border-color: rgba(43,153,196,0.32); }
+[data-theme="light"] .vcard.lm-may    { background: rgba(180,140,0,0.14);   border-color: rgba(180,140,0,0.32); }
+[data-theme="light"] .vcard.lm-zena   { background: rgba(140,90,200,0.14);  border-color: rgba(140,90,200,0.32); }
 [data-theme="light"] .vcard.lm-all    { background: rgba(0,0,0,0.04);       border-color: rgba(0,0,0,0.12); }
 
 .thumb {
@@ -727,21 +671,21 @@ header {
   font-weight: 500;
   backdrop-filter: blur(6px);
 }
-.tb-music   { background: rgba(110,198,192,0.15); color: var(--c-music);    border: 1px solid currentColor; }
-.tb-mv      { background: rgba(192,112,144,0.15); color: var(--c-mv);       border: 1px solid currentColor; }
-.tb-itslive { background: rgba(160,128,208,0.15); color: var(--c-itslive);  border: 1px solid currentColor; }
-.tb-content { background: rgba(128,184,112,0.15); color: var(--c-content);  border: 1px solid currentColor; }
-.tb-onthespot { background: rgba(224,144,80,0.15); color: var(--c-onthespot); border: 1px solid currentColor; }
-.tb-fullcam   { background: rgba(212,200,74,0.15);  color: var(--c-fullcam);  border: 1px solid currentColor; }
-.tb-external  { background: rgba(122,174,222,0.15); color: var(--c-external); border: 1px solid currentColor; }
+.tb-music   { background: rgba(110,198,192,0.30); color: var(--c-music);    border: 1px solid rgba(110,198,192,0.6); }
+.tb-mv      { background: rgba(192,112,144,0.30); color: var(--c-mv);       border: 1px solid rgba(192,112,144,0.6); }
+.tb-itslive { background: rgba(160,128,208,0.30); color: var(--c-itslive);  border: 1px solid rgba(160,128,208,0.6); }
+.tb-content { background: rgba(128,184,112,0.30); color: var(--c-content);  border: 1px solid rgba(128,184,112,0.6); }
+.tb-onthespot { background: rgba(224,144,80,0.30); color: var(--c-onthespot); border: 1px solid rgba(224,144,80,0.6); }
+.tb-fullcam   { background: rgba(212,200,74,0.30);  color: var(--c-fullcam);  border: 1px solid rgba(212,200,74,0.6); }
+.tb-external  { background: rgba(122,174,222,0.30); color: var(--c-external); border: 1px solid rgba(122,174,222,0.6); }
 
-[data-theme="light"] .tb-music    { background: rgba(42,154,148,0.12); }
-[data-theme="light"] .tb-mv       { background: rgba(160,64,96,0.12); }
-[data-theme="light"] .tb-itslive  { background: rgba(112,80,176,0.12); }
-[data-theme="light"] .tb-content  { background: rgba(74,138,52,0.12); }
-[data-theme="light"] .tb-onthespot{ background: rgba(192,104,32,0.12); }
-[data-theme="light"] .tb-fullcam  { background: rgba(168,154,16,0.12); }
-[data-theme="light"] .tb-external { background: rgba(58,120,196,0.12); }
+[data-theme="light"] .tb-music    { background: rgba(42,154,148,0.22);  border-color: rgba(42,154,148,0.5); }
+[data-theme="light"] .tb-mv       { background: rgba(160,64,96,0.22);   border-color: rgba(160,64,96,0.5);  }
+[data-theme="light"] .tb-itslive  { background: rgba(112,80,176,0.22);  border-color: rgba(112,80,176,0.5); }
+[data-theme="light"] .tb-content  { background: rgba(74,138,52,0.22);   border-color: rgba(74,138,52,0.5);  }
+[data-theme="light"] .tb-onthespot{ background: rgba(192,104,32,0.22);  border-color: rgba(192,104,32,0.5); }
+[data-theme="light"] .tb-fullcam  { background: rgba(168,154,16,0.22);  border-color: rgba(168,154,16,0.5); }
+[data-theme="light"] .tb-external { background: rgba(58,120,196,0.22);  border-color: rgba(58,120,196,0.5); }
 
 .cbody {
   padding: 10px 12px 12px;
@@ -803,22 +747,7 @@ header {
   color: var(--accent);
 }
 
-.skeleton {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  overflow: hidden;
-  animation: pulse 1.6s ease-in-out infinite;
-}
-@keyframes pulse {
-  0%,100% { opacity:1; }
-  50%      { opacity:0.4; }
-}
-.skel-thumb { padding-top: 56.25%; background: var(--surf); }
-.skel-body  { padding: 10px 12px 12px; }
-.skel-line  { height: 9px; background: var(--surf); border-radius: 3px; margin-bottom: 7px; }
-.skel-line.s  { width: 55%; }
-.skel-line.xs { width: 35%; }
+
 
 .empty {
   grid-column: 1/-1;
@@ -1237,19 +1166,43 @@ header {
   #secAbout { margin-left: 0; }
 
   .song-nav {
-    padding: 0 12px;
-    overflow-x: auto;
-    flex-wrap: nowrap;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    padding: 10px 12px;
+    flex-wrap: wrap;
+    overflow-x: visible;
+    gap: 6px;
   }
   .song-nav::-webkit-scrollbar { display: none; }
-  .song-tab { padding: 10px 11px; font-size: 0.62rem; }
+  .song-tab {
+    padding: 6px 13px;
+    font-size: 0.65rem;
+    border-bottom: none;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--card);
+  }
+  .song-tab.active {
+    background: var(--accent);
+    color: var(--bg);
+    border-color: var(--accent);
+    font-weight: 600;
+  }
   .song-tab .cnt { display: none; }
 
-  .type-bar { padding: 10px 12px 0; gap: 5px; overflow-x: auto; flex-wrap: nowrap; scrollbar-width: none; }
+  .type-bar {
+    padding: 8px 12px 10px;
+    gap: 6px;
+    overflow-x: visible;
+    flex-wrap: wrap;
+    scrollbar-width: none;
+  }
   .type-bar::-webkit-scrollbar { display: none; }
-  .type-btn { padding: 4px 11px; font-size: 0.64rem; white-space: nowrap; flex-shrink: 0; }
+  .type-btn {
+    padding: 5px 12px;
+    font-size: 0.64rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    border-radius: 999px;
+  }
 
   .search-bar { padding: 10px 12px 10px; }
   .search-input-wrap { max-width: 100%; }
@@ -1408,7 +1361,7 @@ header {
     top: 0;
     left: 0;
     bottom: 0;
-    width: 260px;
+    width: 220px;
     z-index: 260;
     background: var(--surf);
     border-right: 1px solid var(--border-h);
@@ -1423,7 +1376,7 @@ header {
   #mobileDrawer.open { transform: translateX(0); }
 
   .drawer-header {
-    padding: 20px 20px 16px;
+    padding: 16px 16px 12px;
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
@@ -1434,41 +1387,28 @@ header {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     background: none;
     border: 1px solid var(--border-h);
-    border-radius: 8px;
+    border-radius: 7px;
     color: var(--muted);
     cursor: pointer;
     flex-shrink: 0;
     transition: color 0.15s, background 0.15s;
   }
   .drawer-close-btn:hover { color: var(--text); background: var(--card-h); }
-  .drawer-close-btn svg { width: 14px; height: 14px; }
+  .drawer-close-btn svg { width: 12px; height: 12px; }
 
   .drawer-settings {
-    padding: 14px 20px 12px;
+    padding: 10px 16px 10px;
     flex-shrink: 0;
-  }
-  .drawer-settings-label {
-    font-size: 0.6rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 10px;
-    opacity: 0.7;
-  }
-  .drawer-settings-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
   }
   .drawer-settings-name {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.83rem;
+    gap: 7px;
+    font-size: 0.74rem;
     color: var(--muted);
   }
   .drawer-theme-toggle {
@@ -1496,26 +1436,26 @@ header {
 
   .drawer-items {
     flex: 1;
-    padding: 12px 0;
+    padding: 8px 0;
     overflow-y: auto;
   }
   .drawer-item {
     display: flex;
     align-items: center;
-    gap: 12px;
-    padding: 13px 20px;
+    gap: 10px;
+    padding: 10px 16px;
     background: none;
     border: none;
     color: var(--muted);
     font-family: 'Inter', sans-serif;
-    font-size: 0.83rem;
+    font-size: 0.74rem;
     letter-spacing: 0.03em;
     cursor: pointer;
     width: 100%;
     text-align: left;
     transition: color 0.15s, background 0.15s;
   }
-  .drawer-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .drawer-item svg { width: 14px; height: 14px; flex-shrink: 0; }
   .drawer-item:hover { color: var(--text); background: rgba(255,255,255,0.04); }
   .drawer-item.active { color: var(--accent); background: rgba(224,212,192,0.07); }
   .drawer-item .drawer-badge {
@@ -1527,14 +1467,41 @@ header {
     color: var(--accent);
   }
 
+  .drawer-bottom {
+    border-top: 1px solid var(--border);
+    padding: 12px 16px 16px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .drawer-bottom-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .drawer-bottom-col {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  .drawer-bottom-col #langSwitcher {
+    display: flex !important;
+    width: 100%;
+    background: var(--dim);
+    border: 1px solid var(--border-h);
+    border-radius: 10px;
+    padding: 3px;
+  }
+  .drawer-bottom-col #langSwitcher .lang-btn {
+    flex: 1;
+    text-align: center;
+  }
   .drawer-divider {
     height: 1px;
     background: var(--border);
-    margin: 8px 16px;
-    flex-shrink: 0;
-  }
-  #mobileDrawer > .drawer-divider,
-  #mobileDrawer > a.drawer-item {
+    margin: 5px 12px;
     flex-shrink: 0;
   }
 
@@ -1611,19 +1578,6 @@ header {
     box-shadow .22s;
 }
 
-.flex-center{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.hidden-scrollbar{
-  scrollbar-width:none;
-}
-.hidden-scrollbar::-webkit-scrollbar{
-  display:none;
-}
-
 .hover-lift:hover{
   transform:translateY(-4px);
 }
@@ -1633,17 +1587,18 @@ header {
 @media (min-width: 701px) {
 
   body {
-    padding-left: 260px;
+    padding-left: 200px;
   }
 
   .song-nav-outer {
     position: fixed;
     top: 0;
     left: 0;
-    width: 260px;
+    width: 200px;
     height: 100vh;
     overflow-y: auto;
-    z-index: 120;
+    overflow-x: visible;
+    z-index: 130;
     border-right: 1px solid var(--border);
     border-bottom: none;
     background: color-mix(in srgb, var(--bg) 96%, transparent);
@@ -1657,8 +1612,8 @@ header {
 
   .section-nav {
     flex-direction: column;
-    padding: 8px 8px 8px;
-    gap: 2px;
+    padding: 6px 6px 6px;
+    gap: 1px;
     flex: 1;
     max-width: none;
     margin: 0;
@@ -1670,20 +1625,20 @@ header {
     text-align: left;
     border-bottom: none;
     border-left: 2px solid transparent;
-    border-radius: 8px;
-    padding: 10px 12px;
+    border-radius: 6px;
+    padding: 8px 10px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     white-space: normal;
-    font-size: 0.78rem;
-    letter-spacing: 0.03em;
+    font-size: 0.76rem;
+    letter-spacing: 0.02em;
     flex-shrink: 0;
   }
 
   .section-tab svg {
-    width: 16px;
-    height: 16px;
+    width: 14px;
+    height: 14px;
     flex-shrink: 0;
     opacity: 0.6;
     display: block;
@@ -1709,33 +1664,50 @@ header {
 
   #sidebarBottom {
     border-top: 1px solid var(--border);
-    padding: 14px 12px 16px;
+    padding: 10px 10px 12px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
   }
 
   #sidebarBottom .sb-row {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 8px;
+    gap: 6px;
+  }
+
+  #sidebarBottom .sb-col {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 
   #sidebarBottom .sb-label {
     display: flex;
     align-items: center;
-    gap: 8px;
-    font-size: 0.78rem;
+    gap: 6px;
+    font-size: 0.68rem;
     color: var(--muted);
   }
 
   #sidebarBottom .sb-label svg {
-    width: 14px;
-    height: 14px;
+    width: 12px;
+    height: 12px;
     flex-shrink: 0;
     opacity: 0.6;
+  }
+
+  #sidebarBottom #langSwitcherDesktop {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  #sidebarBottom #langSwitcherDesktop .lang-btn {
+    flex: 1;
+    padding: 5px 4px;
+    text-align: center;
   }
 
   .song-nav-inner {
@@ -1750,10 +1722,10 @@ header {
   #subSidebarOverlay {
     position: fixed;
     top: 0;
-    left: 260px;   
+    left: 420px;
     right: 0;
     bottom: 0;
-    z-index: 128;
+    z-index: 124;
     pointer-events: none;
   }
   #subSidebarOverlay.open {
@@ -1763,22 +1735,22 @@ header {
   #subSidebar {
     position: fixed;
     top: 0;
-    left: 260px;
+    left: 200px;
     width: 220px;
     height: 100vh;
     overflow-y: auto;
     scrollbar-width: none;
     overscroll-behavior: contain;
-    z-index: 129;
+    z-index: 125;
     border-right: 1px solid var(--border-h);
     background: color-mix(in srgb, var(--bg) 98%, transparent);
     backdrop-filter: blur(20px);
     display: flex;
     flex-direction: column;
-    transform: translateX(-16px);
+    transform: translateX(-100%);
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.2s cubic-bezier(0.4,0,0.2,1), opacity 0.2s;
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), opacity 0.15s;
     box-shadow: 4px 0 32px rgba(0,0,0,0.45), 1px 0 0 var(--border-h);
   }
 
@@ -1804,15 +1776,6 @@ header {
     opacity: 0.7;
   }
 
-  .sub-sidebar-section-label {
-    font-size: 0.58rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted);
-    opacity: 0.55;
-    padding: 12px 16px 6px;
-    flex-shrink: 0;
-  }
 
   #subSidebar .song-tab {
     display: flex;
@@ -1880,12 +1843,6 @@ header {
   #subSidebar .type-btn.active[data-lm="메이"]   { color: #c9a800;        border-left-color: #ecd25b;                background: rgba(236,210,91,0.12); }
   #subSidebar .type-btn.active[data-lm="제나"]   { color: #ba92db;        border-left-color: #ba92db;                background: rgba(186,146,219,0.12); }
 
-  .sub-sidebar-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 8px 16px;
-    flex-shrink: 0;
-  }
 
   .type-bar,
   .search-bar,
@@ -1926,46 +1883,6 @@ header {
     </button>
   </div>
 
-  <div class="drawer-settings">
-    <p class="drawer-settings-label">Settings</p>
-    <div class="drawer-settings-row">
-      <span class="drawer-settings-name">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;flex-shrink:0;">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        Theme
-      </span>
-      <button class="drawer-theme-toggle" onclick="toggleTheme()" id="drawerThemeBtn">
-        <span id="mobileThemeLabel">Light</span>
-        <svg id="mobileThemeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-      </button>
-    </div>
-    <div class="drawer-settings-row" style="margin-top:10px;">
-      <span class="drawer-settings-name">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;flex-shrink:0;">
-          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
-          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-        </svg>
-        Language
-      </span>
-      <div id="langSwitcher">
-        <button class="lang-btn btn-base active" onclick="setLang('KR')">KR</button>
-        <button class="lang-btn btn-base" onclick="setLang('JP')">JP</button>
-        <button class="lang-btn btn-base" onclick="setLang('EN')">EN</button>
-      </div>
-    </div>
-  </div>
-  <div class="drawer-divider"></div>
   <a class="drawer-item btn-base" href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener" onclick="closeDrawer()" style="text-decoration:none;">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
     SCENE-BOARD 바로가기
@@ -2017,15 +1934,54 @@ header {
       About
     </button>
   </div>
+
+  <div class="drawer-bottom">
+    <div class="drawer-bottom-col">
+      <span class="drawer-settings-name">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0;">
+          <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/>
+          <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+        </svg>
+        Language
+      </span>
+      <div id="langSwitcher">
+        <button class="lang-btn btn-base active" onclick="setLang('KR')">KR</button>
+        <button class="lang-btn btn-base" onclick="setLang('JP')">JP</button>
+        <button class="lang-btn btn-base" onclick="setLang('EN')">EN</button>
+      </div>
+    </div>
+    <div class="drawer-bottom-row">
+      <span class="drawer-settings-name">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0;">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        Theme
+      </span>
+      <button class="drawer-theme-toggle" onclick="toggleTheme()" id="drawerThemeBtn">
+        <span id="mobileThemeLabel">Light</span>
+        <svg id="mobileThemeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+      </button>
+    </div>
+  </div>
 </div>
 
 <nav id="mobileBottomNav">
   <div id="navIndicator"></div>
-  <button class="mob-nav-btn btn-base" id="mnSongs"    onclick="pickSection('songs')">
+  <button class="mob-nav-btn btn-base" id="mnSongs" onclick="pickSection('songs')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
     <span data-i18n="tab_songs">Songs</span>
   </button>
-  <button class="mob-nav-btn btn-base" id="mnLive"     onclick="pickSection('live')">
+  <button class="mob-nav-btn btn-base" id="mnLive" onclick="pickSection('live')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
     <span data-i18n="tab_live">Live</span>
   </button>
@@ -2033,7 +1989,7 @@ header {
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
     <span data-i18n="tab_bookmark">즐겨찾기</span>
   </button>
-  <button class="mob-nav-btn btn-base" id="mnContent"  onclick="pickSection('content')">
+  <button class="mob-nav-btn btn-base" id="mnContent" onclick="pickSection('content')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
     <span data-i18n="tab_content">자체</span>
   </button>
@@ -2047,42 +2003,33 @@ header {
   <img src="Logo.png" alt="RESCENE" class="wordmark-img" onclick="pickSection('about')" style="cursor:pointer;">
   <p class="tagline" id="headerTagline">리센느 영상 몰아보기 SCENE-FLIX</p>
 
-  <div id="moreLinksWrap">
-    <button id="moreLinksBtn" onclick="toggleMoreLinks(event)">
-      <svg class="grid-ico" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-        <rect x="3" y="3" width="4" height="4" rx="1"/><rect x="10" y="3" width="4" height="4" rx="1"/><rect x="17" y="3" width="4" height="4" rx="1"/>
-        <rect x="3" y="10" width="4" height="4" rx="1"/><rect x="10" y="10" width="4" height="4" rx="1"/><rect x="17" y="10" width="4" height="4" rx="1"/>
-        <rect x="3" y="17" width="4" height="4" rx="1"/><rect x="10" y="17" width="4" height="4" rx="1"/><rect x="17" y="17" width="4" height="4" rx="1"/>
-      </svg>
-      MORE LINKS
-      <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 12 15 18 9"/>
-      </svg>
-    </button>
-    <div id="moreLinksDropdown">
-      <a class="more-link-item" href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener">
-        <span class="more-link-left">
-          <svg class="item-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          SCENE-BOARD
-        </span>
-        <svg class="ext-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-      <a class="more-link-item" href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener">
-        <span class="more-link-left">
-          <svg class="item-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-          ABOUT RESCENE
-        </span>
-        <svg class="ext-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-      </a>
-    </div>
-  </div>
 </header>
 
 <div class="song-nav-outer">
-  <div style="padding:20px 20px 10px;border-bottom:1px solid var(--border);margin-bottom:4px;">
-    <div style="font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">
-      Navigation
+  <div style="padding:14px 10px 10px;border-bottom:1px solid var(--border);margin-bottom:4px;">
+    <div style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;padding:0 2px;">
+      Quick Links
     </div>
+    <a href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener"
+      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family:'Inter',sans-serif;letter-spacing:0.02em;transition:color 0.15s,background 0.15s;margin-bottom:2px;"
+      onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
+      onmouseleave="this.style.background='';this.style.color='var(--muted)'">
+      <span style="display:flex;align-items:center;gap:8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.6;"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        SCENE-BOARD
+      </span>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
+    <a href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener"
+      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family:'Inter',sans-serif;letter-spacing:0.02em;transition:color 0.15s,background 0.15s;"
+      onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
+      onmouseleave="this.style.background='';this.style.color='var(--muted)'">
+      <span style="display:flex;align-items:center;gap:8px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.6;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        ABOUT RESCENE
+      </span>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </a>
   </div>
   <div class="section-nav" id="sectionNav">
     <button class="section-tab" id="secAllVideos" onclick="pickSection('allvideos')">
@@ -2126,7 +2073,7 @@ header {
   </div>
 
   <div id="sidebarBottom">
-    <div class="sb-row">
+    <div class="sb-col">
       <span class="sb-label">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
         Language
@@ -3073,6 +3020,8 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  '6lsqqcbtkCI': '5월 20일',
+  'O0BVlom5poY': '2026.05.20',
   'M4N1mylLjEY': '2026.05.18',
   'Aapj6tR9TZ0': '5월 17일',
   '5Uoc0sHfdn0': '2025.06.13',
@@ -3737,10 +3686,6 @@ function getVid(url) {
   return null;
 }
 
-function thumbUrl(vid) {
-  return `https://img.youtube.com/vi/${vid}/mqdefault.jpg`;
-}
-
 function ytUrl(vid) {
   return 'https://www.youtube.com/watch?v=' + vid;
 }
@@ -3748,8 +3693,7 @@ function ytUrl(vid) {
 function openVideo(e, vid) {
   e.preventDefault();
 
-  const drawer = document.getElementById('mobileDrawer');
-  if (drawer && drawer.classList.contains('open')) {
+  if (_elDrawer && _elDrawer.classList.contains('open')) {
     closeDrawer();
     return;
   }
@@ -3767,6 +3711,8 @@ function openVideo(e, vid) {
     setTimeout(() => { if (!left) window.open(webUrl, '_blank', 'noopener'); }, 1200);
   }
 
+  try { localStorage.setItem('rescene-last-watched', vid); } catch {}
+
   document.querySelectorAll('.last-watched-badge').forEach(el => el.remove());
 
   const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-', 'avc-'];
@@ -3780,6 +3726,25 @@ function openVideo(e, vid) {
       break;
     }
   }
+}
+
+function restoreLastWatched() {
+  try {
+    const vid = localStorage.getItem('rescene-last-watched');
+    if (!vid) return;
+    const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-', 'avc-'];
+    for (const p of prefixes) {
+      const card = document.getElementById(p + vid);
+      if (card) {
+        document.querySelectorAll('.last-watched-badge').forEach(el => el.remove());
+        const badge = document.createElement('span');
+        badge.className = 'last-watched-badge';
+        badge.textContent = '마지막으로 본 영상';
+        card.querySelector('.thumb').appendChild(badge);
+        break;
+      }
+    }
+  } catch {}
 }
 
 async function fetchMeta(url, fallbackTitle = '', vid = '') {
@@ -3930,6 +3895,7 @@ const CONTENT_DATA = [
   {
     category: "By RESCENE",
     urls: [
+      "https://youtu.be/O0BVlom5poY",
       "https://youtu.be/_3Wp8i5dfJs",
       "https://youtu.be/Ocby704Ou-E",
       "https://youtu.be/i0UW8-8UCvc",
@@ -4296,6 +4262,22 @@ for (const key of EXTERNAL_KEYS) {
   }
 }
 
+const _elSearchBar       = document.getElementById('searchBar');
+const _elGrid            = document.getElementById('grid');
+const _elNavIndicator    = document.getElementById('navIndicator');
+const _elMobileBottomNav = document.getElementById('mobileBottomNav');
+const _elSubSidebar      = document.getElementById('subSidebar');
+const _elSubSidebarContent = document.getElementById('subSidebarContent');
+const _elSubSidebarLabel = document.getElementById('subSidebarLabel');
+const _elSubSidebarOverlay = document.getElementById('subSidebarOverlay');
+const _elBmCount         = document.getElementById('bmCount');
+const _elDrawerBmCount   = document.getElementById('drawerBmCount');
+
+const _SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','memberMode','linksMode','bookmarkMode','aboutMode','grid-wrap-el','liveGrid'];
+const _SECTION_EL_CACHE = Object.fromEntries(
+  _SECTION_EL_IDS.map(id => [id, document.getElementById(id)])
+);
+
 let curSection = 'about';
 let curSong = 'all';
 let curType = 'all';
@@ -4308,7 +4290,7 @@ function buildContentNav() {
   const totalCnt = CONTENT_ITEMS.length;
   let html = `<button class="song-tab ${curContentCat === 'all' ? 'active' : ''}" onclick="setContentCat(this,'all')">ALL<span class="cnt">${totalCnt}</span></button>`;
   html += cats.map(c => {
-    const cnt = CONTENT_ITEMS.filter(i => i.category === c).length;
+    const cnt = _CONTENT_COUNT_MAP[c] || 0;
     return `<button class="song-tab ${curContentCat === c ? 'active' : ''}" onclick="setContentCat(this,'${c.replace(/'/g,"&#39;")}')">${c}<span class="cnt">${cnt}</span></button>`;
   }).join('');
   nav.innerHTML = html;
@@ -4322,30 +4304,20 @@ function setContentCat(el, cat) {
 }
 
 function buildContentCard(item, delay) {
-  const title = item.loaded ? (item.title || item.vid) : '로딩 중...';
   const dateStr = item.date || DATE_MAP[item.vid] || '';
   const channel = item.channel || '';
   const categoryLabel = item.category === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : (item.category || '');
+  const titleHtml = item.loaded
+    ? `<div class="csong-multi" id="cvc-title-${item.vid}">${item.title || item.vid}</div>`
+    : `<div class="csong-multi" id="cvc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+  const metaHtml = item.loaded
+    ? (dateStr ? `<span class="cdate">${dateStr}</span>` : (channel && !dateStr ? `<span class="cdate">${channel}</span>` : ''))
+    : `<span class="skel skel-date"></span>`;
   return `<a class="vcard card-base hover-lift tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-category="${categoryLabel}">
-    <div class="thumb">
-      <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt=""
-           loading="lazy"
-           onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'"
-           decoding="async">
-      <div class="play-ring">
-        <svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1l10 6-10 6V1z"/>
-        </svg>
-      </div>
-      <span class="type-badge tb-content">${item.category === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : item.category}</span>
-      ${bmBtnHtml(item.vid)}
-    </div>
+    ${buildThumbHtml(item.vid, `<span class="type-badge tb-content">${categoryLabel}</span>`)}
     <div class="cbody">
-      <div class="csong-multi" id="cvc-title-${item.vid}">${title}</div>
-      <div class="cmeta" id="cvc-meta-${item.vid}">
-        ${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}
-        ${channel && !dateStr ? `<span class="cdate">${channel}</span>` : ''}
-      </div>
+      ${titleHtml}
+      <div class="cmeta" id="cvc-meta-${item.vid}">${metaHtml}</div>
     </div>
   </a>`;
 }
@@ -4411,28 +4383,20 @@ function pickExternal(el, key) {
 }
 
 function buildExternalCard(item, delay) {
-  const title = item.loaded ? (item.title || item.vid) : '로딩 중...';
   const dateStr = item.date || DATE_MAP[item.vid] || '';
   const channelKey = VID_TO_EXTERNAL_KEY[item.vid] || '';
   const channelLabel = EXTERNAL_LABELS[channelKey] || channelKey;
+  const titleHtml = item.loaded
+    ? `<div class="csong-multi" id="evc-title-${item.vid}">${item.title || item.vid}</div>`
+    : `<div class="csong-multi" id="evc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+  const metaHtml = item.loaded
+    ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
+    : `<span class="skel skel-date"></span>`;
   return `<a class="vcard card-base hover-lift tb-content" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-channel="${channelLabel}">
-    <div class="thumb">
-      <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt=""
-           loading="lazy"
-           onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'"
-           decoding="async">
-      <div class="play-ring">
-        <svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1l10 6-10 6V1z"/>
-        </svg>
-      </div>
-      ${bmBtnHtml(item.vid)}
-    </div>
+    ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
-      <div class="csong-multi" id="evc-title-${item.vid}">${title}</div>
-      <div class="cmeta">
-        ${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}
-      </div>
+      ${titleHtml}
+      <div class="cmeta">${metaHtml}</div>
     </div>
   </a>`;
 }
@@ -4720,6 +4684,7 @@ const LIVE_DATA_2025 = [
 ];
 
 const LIVE_DATA_2026 = [
+  { vid:'6lsqqcbtkCI', url:'https://youtu.be/6lsqqcbtkCI', date:'5월 20일', members:['원이'], year:'2026' },
   { vid:'Aapj6tR9TZ0', url:'https://youtu.be/Aapj6tR9TZ0', date:'5월 17일', members:['메이'], year:'2026' },
   { vid:'G2fH76iGIww', url:'https://youtu.be/G2fH76iGIww', date:'1월 7일',  members:['메이'],          year:'2026' },
   { vid:'PHGpwoGKDjw', url:'https://youtu.be/PHGpwoGKDjw', date:'1월 8일',  members:['원이'],          year:'2026' },
@@ -4778,8 +4743,8 @@ function sortItemsByDate(items, dir) {
 
 function sortLiveItemsByDate(items, dir) {
   return [...items].sort((a, b) => {
-    const da = parseInt((a.year + formatLiveDateNums(a)).replace(/\./g,''), 10) || 0;
-    const db = parseInt((b.year + formatLiveDateNums(b)).replace(/\./g,''), 10) || 0;
+    const da = dateStrToNum(a.year + formatLiveDateNums(a));
+    const db = dateStrToNum(b.year + formatLiveDateNums(b));
     return dir === 'oldest' ? da - db : db - da;
   });
 }
@@ -4804,21 +4769,14 @@ function buildLiveCard(item, delay) {
   const memberBadges = item.members.map(m =>
     `<span class="ctag ${m === '전원' ? 'hl' : ''}">${m}</span>`
   ).join('');
-  const title = item.title || '로딩 중...';
+  const titleHtml = item.title
+    ? `<div class="csong-multi" id="lvc-title-${item.vid}">${item.title}</div>`
+    : `<div class="csong-multi" id="lvc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
   const lmClass = getLiveCardClass(item.members);
   return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
-    <div class="thumb">
-      <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt=""
-           loading="lazy"
-           onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
-      <div class="play-ring">
-        <svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg>
-      </div>
-      <span class="type-badge tb-itslive">LIVE</span>
-      ${bmBtnHtml(item.vid)}
-    </div>
+    ${buildThumbHtml(item.vid, `<span class="type-badge tb-itslive">LIVE</span>`)}
     <div class="cbody">
-      <div class="csong-multi" id="lvc-title-${item.vid}">${title}</div>
+      ${titleHtml}
       <div class="cmeta">
         <span class="cdate">${formatLiveDate(item)}</span>
       </div>
@@ -4939,8 +4897,7 @@ function toggleBookmark(e, vid) {
 
   if (curSection === 'bookmark') buildBookmarkGrid();
 
-  updateBookmarkTabCount();
-  updateMobileBookmarkBadge();
+  updateBookmarkCounts();
 }
 
 function updateBmBtn(card, vid) {
@@ -4964,11 +4921,10 @@ function bmBtnHtml(vid) {
   </button>`;
 }
 
-function updateBookmarkTabCount() {
-  const span = document.getElementById('bmCount');
-  if (!span) return;
+function updateBookmarkCounts() {
   const cnt = BOOKMARKS.size;
-  span.textContent = cnt > 0 ? ` (${cnt})` : '';
+  if (_elBmCount) _elBmCount.textContent = cnt > 0 ? ` (${cnt})` : '';
+  if (_elDrawerBmCount) _elDrawerBmCount.textContent = cnt > 0 ? String(cnt) : '';
 }
 
 function buildBookmarkGrid() {
@@ -4976,20 +4932,19 @@ function buildBookmarkGrid() {
   if (!grid) return;
 
   if (!BOOKMARKS.size) {
+    const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const hint = isTouchDevice
+      ? '카드의 ★ 버튼을 눌러 즐겨찾기를 추가하세요.'
+      : '카드에 마우스를 올리면 ★ 버튼이 나타납니다.';
     grid.innerHTML = `<div class="bm-empty">
       <div class="ico">★</div>
       <p>즐겨찾기한 영상이 없어요.</p>
-      <small>카드에 마우스를 올리면 ★ 버튼이 나타납니다.</small>
+      <small>${hint}</small>
     </div>`;
     return;
   }
 
-  const allVids = [
-    ...ALL_ITEMS.map(i => ({ ...i, _src: 'main' })),
-    ...CONTENT_ITEMS.map(i => ({ vid: i.vid, url: i.url, type: 'content', song: i.category, meta: { rawTitle: i.title, date: i.date, show: null, channel: i.channel || '' }, loaded: i.loaded, _src: 'content' })),
-    ...EXTERNAL_KEYS.flatMap(k => EXTERNAL_DATA[k].map(i => ({ vid: i.vid, url: i.url, type: 'external', song: EXTERNAL_LABELS[k], meta: { rawTitle: i.title, date: i.date, show: null, channel: '' }, loaded: i.loaded, _src: 'external' }))),
-    ...ALL_LIVE.map(i => ({ vid: i.vid, url: i.url, type: 'live', song: i.date, meta: { rawTitle: i.title, date: formatLiveDate(i), show: null, channel: '' }, loaded: !!i.title, _src: 'live', _liveItem: i })),
-  ];
+  const allVids = buildUnifiedVideoList();
 
   const items = allVids.filter(i => BOOKMARKS.has(i.vid));
   const seen = new Set();
@@ -5012,12 +4967,7 @@ function buildBookmarkGrid() {
         `<span class="ctag ${mm === '전원' ? 'hl' : ''}">${mm}</span>`
       ).join('');
       return `<a class="vcard card-base hover-lift ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
-        <div class="thumb">
-          <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
-          <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
-          <span class="type-badge ${tb}">LIVE</span>
-          ${bmBtnHtml(item.vid)}
-        </div>
+        ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">LIVE</span>`)}
         <div class="cbody">
           <div class="csong-multi">${videoTitle || item._liveItem.date + ' 라이브'}</div>
           <div class="cmeta"><span class="cdate">${dateStr}</span></div>
@@ -5027,24 +4977,14 @@ function buildBookmarkGrid() {
     }
     if (!item.loaded) {
       return `<a class="vcard card-base hover-lift ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
-        <div class="thumb">
-          <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
-          <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
-          <span class="type-badge ${tb}">${tl}</span>
-          ${bmBtnHtml(item.vid)}
-        </div>
+        ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
         <div class="cbody">
           <div class="csong">${item.song}</div>
         </div>
       </a>`;
     }
     return `<a class="vcard card-base hover-lift ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
-      <div class="thumb">
-        <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
-        <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
-        <span class="type-badge ${tb}">${tl}</span>
-        ${bmBtnHtml(item.vid)}
-      </div>
+      ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
       <div class="cbody">
         <div class="csong-multi">${videoTitle}</div>
         <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
@@ -5054,24 +4994,46 @@ function buildBookmarkGrid() {
   }).join('');
 }
 
-function buildSongNav() {
-  const nav = document.getElementById('songNav');
+const _SONG_COUNT_MAP = Object.fromEntries(
+  RESCENE_DATA.map(e => [e.song, ALL_ITEMS.filter(i => i.song === e.song).length])
+);
+const _CONTENT_COUNT_MAP = Object.fromEntries(
+  CONTENT_DATA.map(c => [c.category, CONTENT_ITEMS.filter(i => i.category === c.category).length])
+);
+
+function _buildSongTabsHtml(onClickSuffix) {
   const allCnt = ALL_ITEMS.length;
-  let html = `<button class="song-tab ${curSong === 'all' ? 'active' : ''}"
-    onclick="pickSong('all')">All<span class="cnt">${allCnt}</span></button>`;
+  let html = `<button class="song-tab ${curSong === 'all' ? 'active' : ''}" onclick="pickSong('all')${onClickSuffix}">All<span class="cnt">${allCnt}</span></button>`;
   html += RESCENE_DATA.map(e => {
-    const cnt = ALL_ITEMS.filter(i => i.song === e.song).length;
+    const cnt = _SONG_COUNT_MAP[e.song] || 0;
     if (cnt === 0) return '';
     return `<button class="song-tab ${e.song === curSong ? 'active' : ''}"
-      onclick="pickSong('${e.song.replace(/'/g,"&#39;")}')">
+      onclick="pickSong('${e.song.replace(/'/g,"&#39;")}')${onClickSuffix}">
       ${e.song}<span class="cnt">${cnt}</span>
     </button>`;
   }).join('');
-  nav.innerHTML = html;
+  return html;
+}
+
+function buildSongNav() {
+  document.getElementById('songNav').innerHTML = _buildSongTabsHtml('');
 }
 
 const TYPE_BADGE = { music:'tb-music', mv:'tb-mv', itslive:'tb-itslive', content:'tb-content', onthespot:'tb-onthespot', fullcam:'tb-fullcam', external:'tb-external', live:'tb-itslive' };
 const TYPE_LABEL = { music:'음악방송', mv:'뮤직비디오', itslive:"It's Live", content:'자체컨텐츠', onthespot:'온더스팟', fullcam:'풀캠', external:'외부컨텐츠', live:'LIVE' };
+
+const _PLAY_RING_SVG = `<div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>`;
+
+function buildThumbHtml(vid, badgeHtml) {
+  return `<div class="thumb">
+    <img src="https://img.youtube.com/vi/${vid}/mqdefault.jpg" alt=""
+         loading="lazy" decoding="async"
+         onerror="this.src='https://img.youtube.com/vi/${vid}/hqdefault.jpg'">
+    ${_PLAY_RING_SVG}
+    ${badgeHtml}
+    ${bmBtnHtml(vid)}
+  </div>`;
+}
 
 function buildCard(item, delay) {
   const tb = TYPE_BADGE[item.type] || 'tb-content';
@@ -5080,34 +5042,32 @@ function buildCard(item, delay) {
   const dateStr = m?.date || DATE_MAP[item.vid] || '';
   const show = m?.show;
   const channel = m?.channel || '';
-  const videoTitle = item.loaded ? (m?.rawTitle || item.song) : '로딩 중...';
+  const videoTitle = item.loaded ? (m?.rawTitle || item.song) : null;
   const tags = [];
   if (item.loaded) {
     if (show) tags.push(`<span class="ctag hl">${show.label}</span>`);
     else if (channel) tags.push(`<span class="ctag">${channel}</span>`);
-    if (item.type === 'onthespot') tags.push(`<span class="ctag hl" style="color:var(--c-onthespot)">온더스팟</span>`);
   }
 
   const showLabel = m?.show?.label || '';
+  const titleHtml = videoTitle
+    ? `<div class="csong" id="vc-title-${item.vid}">${videoTitle}</div>`
+    : `<div class="csong" id="vc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+  const dateHtml = dateStr
+    ? `<span class="cdate" id="vc-date-${item.vid}">${dateStr}</span>`
+    : item.loaded
+      ? `<span class="cdate" id="vc-date-${item.vid}" style="display:none"></span>`
+      : `<span class="skel skel-date" id="vc-date-${item.vid}"></span>`;
+  const tagsHtml = item.loaded
+    ? `<div class="ctags" id="vc-tags-${item.vid}">${tags.join('')}</div>`
+    : `<div class="ctags" id="vc-tags-${item.vid}"><span class="skel skel-tag"></span></div>`;
+
   return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-show="${showLabel}" data-channel="${channel}" data-type="${tl}">
-    <div class="thumb">
-      <img src="${thumbUrl(item.vid)}" alt=""
-           loading="lazy"
-           onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
-      <div class="play-ring">
-        <svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg">
-          <path d="M1 1l10 6-10 6V1z"/>
-        </svg>
-      </div>
-      <span class="type-badge ${tb}">${tl}</span>
-      ${bmBtnHtml(item.vid)}
-    </div>
+    ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
     <div class="cbody">
-      <div class="csong" id="vc-title-${item.vid}">${videoTitle}</div>
-      <div class="cmeta">
-        ${dateStr ? `<span class="cdate" id="vc-date-${item.vid}">${dateStr}</span>` : `<span class="cdate" id="vc-date-${item.vid}" style="display:none"></span>`}
-      </div>
-      <div class="ctags" id="vc-tags-${item.vid}">${tags.join('')}</div>
+      ${titleHtml}
+      <div class="cmeta">${dateHtml}</div>
+      ${tagsHtml}
     </div>
   </a>`;
 }
@@ -5226,8 +5186,8 @@ let _avLoaded    = 0;
 let _avObserver  = null;
 let _avSentinel  = null;
 
-function _buildAvSortedList() {
-  const allVids = [
+function buildUnifiedVideoList() {
+  return [
     ...ALL_ITEMS.map(i => ({
       vid: i.vid, url: i.url, type: i.type, song: i.song,
       meta: i.meta, loaded: i.loaded, _src: 'main', _ref: i
@@ -5248,6 +5208,10 @@ function _buildAvSortedList() {
       loaded: !!i.title, _src: 'live', _liveItem: i, _ref: i
     })),
   ];
+}
+
+function _buildAvSortedList() {
+  const allVids = buildUnifiedVideoList();
   const seen = new Set();
   const unique = allVids.filter(i => { if (seen.has(i.vid)) return false; seen.add(i.vid); return true; });
   const dateOf = item => {
@@ -5335,16 +5299,13 @@ function buildAllVideoCard(item, delay) {
     const memberBadges = item._liveItem.members.map(mm =>
       `<span class="ctag ${mm === '전원' ? 'hl' : ''}">${mm}</span>`
     ).join('');
-    const displayTitle = item.loaded ? videoTitle : '로딩 중...';
+    const titleHtml = item.loaded
+      ? `<div class="csong-multi" id="avc-title-${item.vid}">${videoTitle}</div>`
+      : `<div class="csong-multi" id="avc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
-      <div class="thumb">
-        <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
-        <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
-        <span class="type-badge ${tb}">LIVE</span>
-        ${bmBtnHtml(item.vid)}
-      </div>
+      ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">LIVE</span>`)}
       <div class="cbody">
-        <div class="csong-multi" id="avc-title-${item.vid}">${displayTitle}</div>
+        ${titleHtml}
         <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
         <div class="ctags">${memberBadges}</div>
       </div>
@@ -5352,12 +5313,7 @@ function buildAllVideoCard(item, delay) {
   }
 
   return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
-    <div class="thumb">
-      <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
-      <div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>
-      <span class="type-badge ${tb}">${tl}</span>
-      ${bmBtnHtml(item.vid)}
-    </div>
+    ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
     <div class="cbody">
       <div class="csong-multi">${videoTitle}</div>
       <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
@@ -5452,16 +5408,25 @@ function replaceSkeleton(item) {
   const titleEl = document.getElementById(`vc-title-${item.vid}`);
   const dateEl  = document.getElementById(`vc-date-${item.vid}`);
   const tagsEl  = document.getElementById(`vc-tags-${item.vid}`);
-  if (titleEl) titleEl.textContent = m?.rawTitle || item.song;
+  if (titleEl) {
+    titleEl.innerHTML = '';
+    titleEl.textContent = m?.rawTitle || item.song;
+  }
   if (dateEl) {
     const dateStr = m?.date || DATE_MAP[item.vid] || '';
-    if (dateStr) { dateEl.textContent = dateStr; dateEl.style.display = ''; }
+    if (dateStr) {
+      dateEl.innerHTML = '';
+      dateEl.className = 'cdate';
+      dateEl.textContent = dateStr;
+      dateEl.style.display = '';
+    } else {
+      dateEl.style.display = 'none';
+    }
   }
   if (tagsEl) {
     const tags = [];
     if (m?.show) tags.push(`<span class="ctag hl">${m.show.label}</span>`);
     else if (m?.channel) tags.push(`<span class="ctag">${m.channel}</span>`);
-    if (item.type === 'onthespot') tags.push(`<span class="ctag hl" style="color:var(--c-onthespot)">온더스팟</span>`);
     tagsEl.innerHTML = tags.join('');
   }
 }
@@ -5491,19 +5456,13 @@ function pickSection(section) {
   const activeEls = SECTION_MAP[section] || ['aboutMode'];
 
   SECTION_ELS.forEach(id => {
-    const el = document.getElementById(id);
+    const el = _SECTION_EL_CACHE[id];
     if (!el) return;
-    const show = activeEls.includes(id);
-    if (show) {
-      el.style.display = '';
-    } else {
-      el.style.display = 'none';
-    }
+    el.style.display = activeEls.includes(id) ? '' : 'none';
   });
 
-  const searchableSections = ['allvideos', 'songs', 'content', 'external', 'live', 'bookmark'];
-  const searchBar = document.getElementById('searchBar');
-  searchBar.style.display = searchableSections.includes(section) ? '' : 'none';
+  const _searchableSections = ['allvideos', 'songs', 'content', 'external', 'live', 'bookmark'];
+  _elSearchBar.style.display = _searchableSections.includes(section) ? '' : 'none';
   clearSearch(true);
 
   if (section === 'member') {
@@ -5551,14 +5510,16 @@ function pickSection(section) {
   if (section === 'fantube') buildFantubeGrid();
   if (section === 'bookmark') buildBookmarkGrid();
 
-  if (typeof updateMobileNav === 'function') updateMobileNav(section);
+  updateMobileNav(section);
   updateSubSidebar(section);
+
+  setTimeout(restoreLastWatched, 50);
 }
 
 function updateSubSidebar(section) {
-  const sidebar   = document.getElementById('subSidebar');
-  const content   = document.getElementById('subSidebarContent');
-  const labelEl   = document.getElementById('subSidebarLabel');
+  const sidebar = _elSubSidebar;
+  const content = _elSubSidebarContent;
+  const labelEl = _elSubSidebarLabel;
   if (!sidebar || !content) return;
 
   const SUB_SECTIONS = {
@@ -5570,15 +5531,13 @@ function updateSubSidebar(section) {
 
   if (!SUB_SECTIONS[section]) {
     sidebar.classList.remove('open');
-    const ov = document.getElementById('subSidebarOverlay');
-    if (ov) ov.classList.remove('open');
+    if (_elSubSidebarOverlay) _elSubSidebarOverlay.classList.remove('open');
     document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('has-sub'));
     return;
   }
 
   sidebar.classList.add('open');
-  const ov = document.getElementById('subSidebarOverlay');
-  if (ov) ov.classList.add('open');
+  if (_elSubSidebarOverlay) _elSubSidebarOverlay.classList.add('open');
   if (labelEl) labelEl.textContent = SUB_SECTIONS[section].label;
 
   document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('has-sub'));
@@ -5605,14 +5564,7 @@ function updateSubSidebar(section) {
 }
 
 function renderSubSongTabs() {
-  const allCnt = ALL_ITEMS.length;
-  let html = `<button class="song-tab ${curSong === 'all' ? 'active' : ''}" onclick="pickSong('all'); syncSubSidebar();">All<span class="cnt">${allCnt}</span></button>`;
-  html += RESCENE_DATA.map(e => {
-    const cnt = ALL_ITEMS.filter(i => i.song === e.song).length;
-    if (cnt === 0) return '';
-    return `<button class="song-tab ${e.song === curSong ? 'active' : ''}" onclick="pickSong('${e.song.replace(/'/g,"&#39;")}'); syncSubSidebar();">${e.song}<span class="cnt">${cnt}</span></button>`;
-  }).join('');
-  return html;
+  return _buildSongTabsHtml('; syncSubSidebar();');
 }
 
 function renderSubTypeBtns() {
@@ -5634,7 +5586,7 @@ function renderSubContentTabs() {
   const totalCnt = CONTENT_ITEMS.length;
   let html = `<button class="song-tab ${curContentCat === 'all' ? 'active' : ''}" onclick="setContentCat(this,'all'); syncSubSidebar();">ALL<span class="cnt">${totalCnt}</span></button>`;
   html += cats.map(c => {
-    const cnt = CONTENT_ITEMS.filter(i => i.category === c).length;
+    const cnt = _CONTENT_COUNT_MAP[c] || 0;
     const label = c === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : c;
     return `<button class="song-tab ${curContentCat === c ? 'active' : ''}" onclick="setContentCat(this,'${c.replace(/'/g,"&#39;")}'); syncSubSidebar();">${label}<span class="cnt">${cnt}</span></button>`;
   }).join('');
@@ -5690,10 +5642,8 @@ function pickExternalSub(el, key) {
 }
 
 function closeSubSidebar() {
-  const sidebar = document.getElementById('subSidebar');
-  const ov = document.getElementById('subSidebarOverlay');
-  if (sidebar) sidebar.classList.remove('open');
-  if (ov) ov.classList.remove('open');
+  if (_elSubSidebar) _elSubSidebar.classList.remove('open');
+  if (_elSubSidebarOverlay) _elSubSidebarOverlay.classList.remove('open');
 }
 
 document.getElementById('subSidebarOverlay').addEventListener('click', closeSubSidebar);
@@ -5783,9 +5733,8 @@ function normalizeDateQuery(raw) {
 function applySearch() {
   const q = curSearchQuery.toLowerCase();
 
-  const grid = document.getElementById('grid');
   const liveGrid = document.getElementById('liveGridInner');
-  const targetGrid = curSection === 'live' ? liveGrid : grid;
+  const targetGrid = curSection === 'live' ? liveGrid : _elGrid;
   if (!targetGrid) return;
 
   if (curSection === 'allvideos' && q && _avLoaded < _avSorted.length) {
@@ -5800,9 +5749,9 @@ function applySearch() {
     });
     _avLoaded = _avSorted.length;
     if (_avSentinel && _avSentinel.parentNode) {
-      grid.insertBefore(frag, _avSentinel);
+      _elGrid.insertBefore(frag, _avSentinel);
     } else {
-      grid.appendChild(frag);
+      _elGrid.appendChild(frag);
     }
     loadAllVideosMetas(remaining);
   }
@@ -5821,9 +5770,9 @@ function applySearch() {
     });
     _gridLoaded = _gridSorted.length;
     if (_gridSentinel && _gridSentinel.parentNode) {
-      grid.insertBefore(frag, _gridSentinel);
+      _elGrid.insertBefore(frag, _gridSentinel);
     } else {
-      grid.appendChild(frag);
+      _elGrid.appendChild(frag);
     }
     if (_gridLoadFn) _gridLoadFn(remaining);
   }
@@ -5884,6 +5833,20 @@ function applySearch() {
     countEl.textContent = text;
     if (inp) inp.style.paddingRight = text ? '80px' : '36px';
   }
+
+  const emptyId = 'searchEmptyMsg';
+  let emptyEl = targetGrid.querySelector(`#${emptyId}`);
+  if (q && visible === 0) {
+    if (!emptyEl) {
+      emptyEl = document.createElement('div');
+      emptyEl.id = emptyId;
+      emptyEl.className = 'search-empty';
+      emptyEl.innerHTML = `<div class="ico">🔍</div><p>${q.length > 0 ? `"${q}"` : ''}에 대한 결과가 없습니다.</p><small>다른 키워드로 검색해 보세요.</small>`;
+      targetGrid.appendChild(emptyEl);
+    }
+  } else {
+    if (emptyEl) emptyEl.remove();
+  }
 }
 
 function searchMember(name) {
@@ -5919,16 +5882,8 @@ function toggleTheme() {
   try { localStorage.setItem('rescene-theme', next); } catch {}
 }
 
-function applyTheme(theme) {
-  const isLight = theme === 'light';
-  if (isLight) {
-    document.documentElement.setAttribute('data-theme', 'light');
-  } else {
-    document.documentElement.removeAttribute('data-theme');
-  }
-
-  const moonIcon = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
-  const sunIcon  = `<circle cx="12" cy="12" r="5"/>
+const _THEME_ICON_MOON = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
+const _THEME_ICON_SUN  = `<circle cx="12" cy="12" r="5"/>
       <line x1="12" y1="1" x2="12" y2="3"/>
       <line x1="12" y1="21" x2="12" y2="23"/>
       <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
@@ -5938,8 +5893,16 @@ function applyTheme(theme) {
       <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
       <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
 
+function applyTheme(theme) {
+  const isLight = theme === 'light';
+  if (isLight) {
+    document.documentElement.setAttribute('data-theme', 'light');
+  } else {
+    document.documentElement.removeAttribute('data-theme');
+  }
+
   const label = isLight ? 'Dark' : 'Light';
-  const icon  = isLight ? moonIcon : sunIcon;
+  const icon  = isLight ? _THEME_ICON_MOON : _THEME_ICON_SUN;
 
   ['themeLabel','mobileThemeLabel'].forEach(id => {
     const el = document.getElementById(id);
@@ -5968,29 +5931,33 @@ try {
     tab.style.minWidth = w + 'px';
   }
 })();
-updateBookmarkTabCount();
+updateBookmarkCounts();
 
 window.addEventListener('load', () => {
   const scrollTopBtn = document.getElementById('scrollTop');
   if (!scrollTopBtn) return;
+  let _scrollTicking = false;
   window.addEventListener('scroll', () => {
-    scrollTopBtn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+    if (_scrollTicking) return;
+    _scrollTicking = true;
+    requestAnimationFrame(() => {
+      scrollTopBtn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+      _scrollTicking = false;
+    });
   }, { passive: true });
   scrollTopBtn.addEventListener('click', () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   const activeBtn = document.querySelector('#mobileBottomNav .mob-nav-btn.active');
-  const indicator = document.getElementById('navIndicator');
-  if (activeBtn && indicator) {
-    const nav = document.getElementById('mobileBottomNav');
-    const navRect = nav.getBoundingClientRect();
+  if (activeBtn && _elNavIndicator && _elMobileBottomNav) {
+    const navRect = _elMobileBottomNav.getBoundingClientRect();
     const btnRect = activeBtn.getBoundingClientRect();
-    indicator.style.transition = 'none';
-    indicator.style.left = (btnRect.left - navRect.left) + 'px';
-    indicator.style.width = btnRect.width + 'px';
-    indicator.style.opacity = '1';
-    requestAnimationFrame(() => { indicator.style.transition = ''; });
+    _elNavIndicator.style.transition = 'none';
+    _elNavIndicator.style.left = (btnRect.left - navRect.left) + 'px';
+    _elNavIndicator.style.width = btnRect.width + 'px';
+    _elNavIndicator.style.opacity = '1';
+    requestAnimationFrame(() => { _elNavIndicator.style.transition = ''; });
   }
 });
 
@@ -6004,8 +5971,9 @@ document.addEventListener('mouseover', e => {
 
   const titleEl = card.querySelector('.csong, .csong-multi');
   if (!titleEl) return;
+  if (titleEl.querySelector('.skel')) return;
   const fullText = titleEl.textContent.trim();
-  if (!fullText || fullText === '로딩 중...') return;
+  if (!fullText) return;
 
   const isTruncated = titleEl.scrollWidth > titleEl.clientWidth + 2 ||
     titleEl.scrollHeight > titleEl.clientHeight + 2;
@@ -6034,39 +6002,29 @@ document.addEventListener('mouseout', e => {
   tooltip.classList.remove('visible');
 });
 
-document.addEventListener('mousemove', e => {
-  if (!tooltip.classList.contains('visible')) return;
-  if (!e.target.closest('.vcard')) {
-    clearTimeout(tooltipTimer);
-    tooltip.classList.remove('visible');
-  }
-});
+const _elDrawer        = document.getElementById('mobileDrawer');
+const _elDrawerOverlay = document.getElementById('mobileDrawerOverlay');
+const _elMenuBtn       = document.getElementById('mobileMenuBtn');
 
 function toggleDrawer() {
-  const drawer = document.getElementById('mobileDrawer');
-  const overlay = document.getElementById('mobileDrawerOverlay');
-  const btn = document.getElementById('mobileMenuBtn');
-  const isOpen = drawer.classList.contains('open');
-  if (isOpen) {
+  if (_elDrawer.classList.contains('open')) {
     closeDrawer();
   } else {
-    drawer.classList.add('open');
-    overlay.classList.add('open');
-    btn.classList.add('open');
+    _elDrawer.classList.add('open');
+    _elDrawerOverlay.classList.add('open');
+    if (_elMenuBtn) _elMenuBtn.classList.add('open');
     document.body.style.overflow = 'hidden';
   }
 }
 
 function closeDrawer() {
-  document.getElementById('mobileDrawer').classList.remove('open');
-  const overlay = document.getElementById('mobileDrawerOverlay');
-  overlay.classList.remove('open');
-  const btn = document.getElementById('mobileMenuBtn');
-  if (btn) btn.classList.remove('open');
+  _elDrawer.classList.remove('open');
+  _elDrawerOverlay.classList.remove('open');
+  if (_elMenuBtn) _elMenuBtn.classList.remove('open');
   document.body.style.overflow = '';
 }
 
-document.getElementById('mobileDrawerOverlay').addEventListener('click', function(e) {
+_elDrawerOverlay.addEventListener('click', function(e) {
   e.stopPropagation();
   closeDrawer();
 });
@@ -6081,14 +6039,13 @@ function updateMobileNav(section) {
     external: 'mnExternal', bookmark: 'mnBookmark'
   };
   document.querySelectorAll('.mob-nav-btn').forEach(b => b.classList.remove('active'));
-  const indicator = document.getElementById('navIndicator');
+  const indicator = _elNavIndicator;
   if (bottomMap[section]) {
     const btn = document.getElementById(bottomMap[section]);
     if (btn) {
       btn.classList.add('active');
-      if (indicator) {
-        const nav = document.getElementById('mobileBottomNav');
-        const navRect = nav.getBoundingClientRect();
+      if (indicator && _elMobileBottomNav) {
+        const navRect = _elMobileBottomNav.getBoundingClientRect();
         const btnRect = btn.getBoundingClientRect();
         indicator.style.left = (btnRect.left - navRect.left) + 'px';
         indicator.style.width = btnRect.width + 'px';
@@ -6111,24 +6068,7 @@ function updateMobileNav(section) {
   }
 }
 
-function updateMobileBookmarkBadge() {
-  const badge = document.getElementById('drawerBmCount');
-  if (badge) badge.textContent = BOOKMARKS.size > 0 ? String(BOOKMARKS.size) : '';
-}
-updateMobileBookmarkBadge();
-
-function toggleMoreLinks(e) {
-  if (e) e.stopPropagation();
-  const wrap = document.getElementById('moreLinksWrap');
-  wrap.classList.toggle('open');
-}
-function closeMoreLinks() {
-  document.getElementById('moreLinksWrap').classList.remove('open');
-}
-document.addEventListener('click', function(e) {
-  const wrap = document.getElementById('moreLinksWrap');
-  if (wrap && !wrap.contains(e.target)) wrap.classList.remove('open');
-});
+updateBookmarkCounts();
 </script>
 
 <button id="scrollTop" title="맨 위로">
