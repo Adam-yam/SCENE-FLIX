@@ -4,7 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SCENE-FLIX</title>
-<link rel="icon" href="favicon.png">
+<link rel="icon" href="image/favicon.png">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-05C99P2DB9"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-05C99P2DB9');
+</script>
+<link rel="manifest" href="manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="SCENE-FLIX">
+<link rel="apple-touch-icon" href="image/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1875,7 +1888,7 @@ header {
 
 <div id="mobileDrawer">
   <div class="drawer-header">
-    <img src="Logo.png" alt="RESCENE" class="drawer-logo" onclick="closeDrawer(); pickSection('about');" style="cursor:pointer;">
+    <img src="image/Logo.png" alt="RESCENE" class="drawer-logo" onclick="closeDrawer(); pickSection('about');" style="cursor:pointer;">
     <button class="drawer-close-btn" onclick="closeDrawer()" aria-label="닫기">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
@@ -2000,7 +2013,7 @@ header {
 </nav>
 
 <header>
-  <img src="Logo.png" alt="RESCENE" class="wordmark-img" onclick="pickSection('about')" style="cursor:pointer;">
+  <img src="image/Logo.png" alt="RESCENE" class="wordmark-img" onclick="pickSection('about')" style="cursor:pointer;">
   <p class="tagline" id="headerTagline">리센느 영상 몰아보기 SCENE-FLIX</p>
 
 </header>
@@ -2038,7 +2051,7 @@ header {
     </button>
     <button class="section-tab" id="secBookmark" onclick="pickSection('bookmark')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-      <span data-i18n="tab_bookmark">★ 즐겨찾기</span><span id="bmCount"></span>
+      <span data-i18n="tab_bookmark">즐겨찾기</span><span id="bmCount"></span>
     </button>
     <div style="height:1px;background:var(--border);margin:4px 4px;"></div>
     <button class="section-tab" id="secSongs" onclick="pickSection('songs')">
@@ -3020,8 +3033,6 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
-  '6lsqqcbtkCI': '5월 20일',
-  'O0BVlom5poY': '2026.05.20',
   'M4N1mylLjEY': '2026.05.18',
   'Aapj6tR9TZ0': '5월 17일',
   '5Uoc0sHfdn0': '2025.06.13',
@@ -3895,7 +3906,6 @@ const CONTENT_DATA = [
   {
     category: "By RESCENE",
     urls: [
-      "https://youtu.be/O0BVlom5poY",
       "https://youtu.be/_3Wp8i5dfJs",
       "https://youtu.be/Ocby704Ou-E",
       "https://youtu.be/i0UW8-8UCvc",
@@ -4684,7 +4694,6 @@ const LIVE_DATA_2025 = [
 ];
 
 const LIVE_DATA_2026 = [
-  { vid:'6lsqqcbtkCI', url:'https://youtu.be/6lsqqcbtkCI', date:'5월 20일', members:['원이'], year:'2026' },
   { vid:'Aapj6tR9TZ0', url:'https://youtu.be/Aapj6tR9TZ0', date:'5월 17일', members:['메이'], year:'2026' },
   { vid:'G2fH76iGIww', url:'https://youtu.be/G2fH76iGIww', date:'1월 7일',  members:['메이'],          year:'2026' },
   { vid:'PHGpwoGKDjw', url:'https://youtu.be/PHGpwoGKDjw', date:'1월 8일',  members:['원이'],          year:'2026' },
@@ -4979,7 +4988,9 @@ function buildBookmarkGrid() {
       return `<a class="vcard card-base hover-lift ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
         ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
         <div class="cbody">
-          <div class="csong">${item.song}</div>
+          <div class="csong"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>
+          <div class="cmeta"><span class="skel skel-date"></span></div>
+          <div class="ctags"><span class="skel skel-tag"></span></div>
         </div>
       </a>`;
     }
@@ -6078,6 +6089,14 @@ updateBookmarkCounts();
 </button>
 
 <div id="vcardTooltip" class="vcard-tooltip"></div>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js');
+  });
+}
+</script>
 
 </body>
 </html>
