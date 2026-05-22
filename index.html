@@ -2649,6 +2649,9 @@ window._i18n = {
   }
 };
 
+const _I18N_ELS = Array.from(document.querySelectorAll('[data-i18n]'));
+const _I18N_PLACEHOLDER_ELS = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
+
 function setLang(lang) {
   window._curLang = lang;
 
@@ -2658,7 +2661,7 @@ function setLang(lang) {
   const t = window._i18n[lang];
   if (!t) return;
 
-  document.querySelectorAll('[data-i18n]').forEach(el => {
+  _I18N_ELS.forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (!(key in t)) return;
 
@@ -2671,7 +2674,7 @@ function setLang(lang) {
     }
   });
 
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+  _I18N_PLACEHOLDER_ELS.forEach(el => {
     const key = el.getAttribute('data-i18n-placeholder');
     if (key in t) el.placeholder = t[key];
   });
@@ -3033,6 +3036,8 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'LlMJTeXoe6E': '2026.03.26',
+  's4plNAZfBZc': '2026.05.21',
   '7Xcg79neHng': '5월 21일',
   'O0BVlom5poY': '2026.05.20',
   '6lsqqcbtkCI': '5월 20일',
@@ -3998,8 +4003,12 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림' };
+const EXTERNAL_LABELS = { itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다' };
 const EXTERNAL_DATA = {
+  veryhealthy: [
+    { vid: 'LlMJTeXoe6E', url: 'https://youtu.be/LlMJTeXoe6E', date: '2026.03.26' },
+    { vid: 's4plNAZfBZc', url: 'https://youtu.be/s4plNAZfBZc', date: '2026.05.21' },
+  ],
   mvdream: [
     { vid: '5Uoc0sHfdn0', url: 'https://youtu.be/5Uoc0sHfdn0', date: '2025.06.13' },
     { vid: 'uPNlC5gXGWQ', url: 'https://youtu.be/uPNlC5gXGWQ', date: '2025.06.19' },
@@ -4757,11 +4766,10 @@ function sortItemsByDate(items, dir) {
 }
 
 function sortLiveItemsByDate(items, dir) {
-  return [...items].sort((a, b) => {
-    const da = dateStrToNum(a.year + formatLiveDateNums(a));
-    const db = dateStrToNum(b.year + formatLiveDateNums(b));
-    return dir === 'oldest' ? da - db : db - da;
-  });
+  return items
+    .map(item => ({ item, key: dateStrToNum(item.year + formatLiveDateNums(item)) }))
+    .sort((a, b) => dir === 'oldest' ? a.key - b.key : b.key - a.key)
+    .map(({ item }) => item);
 }
 
 function formatLiveDateNums(item) {
@@ -5011,12 +5019,14 @@ function buildBookmarkGrid() {
   }).join('');
 }
 
-const _SONG_COUNT_MAP = Object.fromEntries(
-  RESCENE_DATA.map(e => [e.song, ALL_ITEMS.filter(i => i.song === e.song).length])
-);
-const _CONTENT_COUNT_MAP = Object.fromEntries(
-  CONTENT_DATA.map(c => [c.category, CONTENT_ITEMS.filter(i => i.category === c.category).length])
-);
+const _SONG_COUNT_MAP = {};
+for (const item of ALL_ITEMS) {
+  _SONG_COUNT_MAP[item.song] = (_SONG_COUNT_MAP[item.song] || 0) + 1;
+}
+const _CONTENT_COUNT_MAP = {};
+for (const item of CONTENT_ITEMS) {
+  _CONTENT_COUNT_MAP[item.category] = (_CONTENT_COUNT_MAP[item.category] || 0) + 1;
+}
 
 function _buildSongTabsHtml(onClickSuffix) {
   const allCnt = ALL_ITEMS.length;
@@ -5203,8 +5213,10 @@ let _avLoaded    = 0;
 let _avObserver  = null;
 let _avSentinel  = null;
 
+let _unifiedVideoListCache = null;
 function buildUnifiedVideoList() {
-  return [
+  if (_unifiedVideoListCache) return _unifiedVideoListCache;
+  _unifiedVideoListCache = [
     ...ALL_ITEMS.map(i => ({
       vid: i.vid, url: i.url, type: i.type, song: i.song,
       meta: i.meta, loaded: i.loaded, _src: 'main', _ref: i
@@ -5225,6 +5237,7 @@ function buildUnifiedVideoList() {
       loaded: !!i.title, _src: 'live', _liveItem: i, _ref: i
     })),
   ];
+  return _unifiedVideoListCache;
 }
 
 function _buildAvSortedList() {
@@ -5448,38 +5461,45 @@ function replaceSkeleton(item) {
   }
 }
 
+const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', fantube:'secFantube', member:'secMember', links:'secLinks', bookmark:'secBookmark', about:'secAbout' };
+const _PICK_SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','memberMode','linksMode','bookmarkMode','aboutMode','grid-wrap-el','liveGrid'];
+const _PICK_SECTION_MAP = {
+  allvideos:['allvideosMode','grid-wrap-el'],
+  songs:    ['songMode','grid-wrap-el'],
+  content:  ['contentMode','grid-wrap-el'],
+  live:     ['liveMode','liveGrid'],
+  external: ['externalMode','grid-wrap-el'],
+  fantube:  ['fantubeMode'],
+  member:   ['memberMode'],
+  links:    ['linksMode'],
+  bookmark: ['bookmarkMode','grid-wrap-el'],
+  about:    ['aboutMode'],
+};
+const _PICK_SEARCHABLE = ['allvideos', 'songs', 'content', 'external', 'live', 'bookmark'];
+const _SUB_SECTIONS = {
+  songs:    { label: 'Songs' },
+  content:  { label: '자체 컨텐츠' },
+  live:     { label: 'Live' },
+  external: { label: '외부 컨텐츠' },
+};
+const _SUB_TAB_ID_MAP = { songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal' };
+
 function pickSection(section) {
   curSection = section;
   window.scrollTo({ top: 0, behavior: 'instant' });
   document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
-  const TAB_ID_MAP = { allvideos:'secAllVideos', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', fantube:'secFantube', member:'secMember', links:'secLinks', bookmark:'secBookmark', about:'secAbout' };
-  const tabId = TAB_ID_MAP[section] || 'secAbout';
+  const tabId = _PICK_TAB_ID_MAP[section] || 'secAbout';
   if (document.getElementById(tabId)) document.getElementById(tabId).classList.add('active');
 
-  const SECTION_ELS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','memberMode','linksMode','bookmarkMode','aboutMode','grid-wrap-el','liveGrid'];
-  const SECTION_MAP = {
-    allvideos:['allvideosMode','grid-wrap-el'],
-    songs:    ['songMode','grid-wrap-el'],
-    content:  ['contentMode','grid-wrap-el'],
-    live:     ['liveMode','liveGrid'],
-    external: ['externalMode','grid-wrap-el'],
-    fantube:  ['fantubeMode'],
-    member:   ['memberMode'],
-    links:    ['linksMode'],
-    bookmark: ['bookmarkMode','grid-wrap-el'],
-    about:    ['aboutMode'],
-  };
+  const activeEls = _PICK_SECTION_MAP[section] || ['aboutMode'];
 
-  const activeEls = SECTION_MAP[section] || ['aboutMode'];
-
-  SECTION_ELS.forEach(id => {
+  _PICK_SECTION_EL_IDS.forEach(id => {
     const el = _SECTION_EL_CACHE[id];
     if (!el) return;
     el.style.display = activeEls.includes(id) ? '' : 'none';
   });
 
-  const _searchableSections = ['allvideos', 'songs', 'content', 'external', 'live', 'bookmark'];
-  _elSearchBar.style.display = _searchableSections.includes(section) ? '' : 'none';
+  _elSearchBar.style.display = _PICK_SEARCHABLE.includes(section) ? '' : 'none';
   clearSearch(true);
 
   if (section === 'member') {
@@ -5539,14 +5559,7 @@ function updateSubSidebar(section) {
   const labelEl = _elSubSidebarLabel;
   if (!sidebar || !content) return;
 
-  const SUB_SECTIONS = {
-    songs:    { label: 'Songs' },
-    content:  { label: '자체 컨텐츠' },
-    live:     { label: 'Live' },
-    external: { label: '외부 컨텐츠' },
-  };
-
-  if (!SUB_SECTIONS[section]) {
+  if (!_SUB_SECTIONS[section]) {
     sidebar.classList.remove('open');
     if (_elSubSidebarOverlay) _elSubSidebarOverlay.classList.remove('open');
     document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('has-sub'));
@@ -5555,11 +5568,10 @@ function updateSubSidebar(section) {
 
   sidebar.classList.add('open');
   if (_elSubSidebarOverlay) _elSubSidebarOverlay.classList.add('open');
-  if (labelEl) labelEl.textContent = SUB_SECTIONS[section].label;
+  if (labelEl) labelEl.textContent = _SUB_SECTIONS[section].label;
 
   document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('has-sub'));
-  const TAB_ID_MAP2 = { songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal' };
-  const activeTabId = TAB_ID_MAP2[section];
+  const activeTabId = _SUB_TAB_ID_MAP[section];
   if (activeTabId) {
     const activeTab = document.getElementById(activeTabId);
     if (activeTab) activeTab.classList.add('has-sub');
