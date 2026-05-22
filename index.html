@@ -2014,7 +2014,7 @@ header {
 
 <header>
   <img src="image/Logo.png" alt="RESCENE" class="wordmark-img" onclick="pickSection('about')" style="cursor:pointer;">
-  <p class="tagline" id="headerTagline">리센느 영상 몰아보기 SCENE-FLIX</p>
+  <p class="tagline" id="headerTagline">리센느 영상 모아보기 SCENE-FLIX</p>
 
 </header>
 
@@ -3036,6 +3036,20 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'PYzVqgqS09g': '2026.04.15',
+  'rTPwkLKoqC4': '2025.02.04',
+  'HmRkIKdRAxI': '2025.03.22',
+  '6X0ftgGOGzM': '2025.12.01',
+  'WvYkfxAWpYo': '2025.12.02',
+  'GtjX3iUnuY0': '2025.12.03',
+  '4Q2pn7Fz-P0': '2025.12.23',
+  'Ll6hkVcR9a4': '2026.04.10',
+  'f8up3TTw_94': '2026.04.11',
+  'TQzioay9wqo': '2026.04.13',
+  'iAfkK5Cb6_M': '2025.12.26',
+  'k6BmYs-MRkI': '2025.12.26',
+  'lviLSHBntGQ': '2025.12.27',
+  'j8GVTYbCv7Q': '2025.12.28',
   'LlMJTeXoe6E': '2026.03.26',
   's4plNAZfBZc': '2026.05.21',
   '7Xcg79neHng': '5월 21일',
@@ -4003,8 +4017,30 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다' };
+const EXTERNAL_LABELS = { itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희' };
 const EXTERNAL_DATA = {
+  ggon: [
+    { vid: 'PYzVqgqS09g', url: 'https://youtu.be/PYzVqgqS09g', date: '2026.04.15' },
+  ],
+  moongtness: [
+    { vid: 'rTPwkLKoqC4', url: 'https://youtu.be/rTPwkLKoqC4', date: '2025.02.04' },
+    { vid: 'HmRkIKdRAxI', url: 'https://youtu.be/HmRkIKdRAxI', date: '2025.03.22' },
+  ],
+  stagewemake: [
+    { vid: '6X0ftgGOGzM', url: 'https://youtu.be/6X0ftgGOGzM', date: '2025.12.01' },
+    { vid: 'WvYkfxAWpYo', url: 'https://youtu.be/WvYkfxAWpYo', date: '2025.12.02' },
+    { vid: 'GtjX3iUnuY0', url: 'https://youtu.be/GtjX3iUnuY0', date: '2025.12.03' },
+    { vid: '4Q2pn7Fz-P0', url: 'https://youtu.be/4Q2pn7Fz-P0', date: '2025.12.23' },
+    { vid: 'Ll6hkVcR9a4', url: 'https://youtu.be/Ll6hkVcR9a4', date: '2026.04.10' },
+    { vid: 'f8up3TTw_94', url: 'https://youtu.be/f8up3TTw_94', date: '2026.04.11' },
+    { vid: 'TQzioay9wqo', url: 'https://youtu.be/TQzioay9wqo', date: '2026.04.13' },
+  ],
+  carplist: [
+    { vid: 'iAfkK5Cb6_M', url: 'https://youtu.be/iAfkK5Cb6_M', date: '2025.12.26' },
+    { vid: 'k6BmYs-MRkI', url: 'https://youtu.be/k6BmYs-MRkI', date: '2025.12.26' },
+    { vid: 'lviLSHBntGQ', url: 'https://youtu.be/lviLSHBntGQ', date: '2025.12.27' },
+    { vid: 'j8GVTYbCv7Q', url: 'https://youtu.be/j8GVTYbCv7Q', date: '2025.12.28' },
+  ],
   veryhealthy: [
     { vid: 'LlMJTeXoe6E', url: 'https://youtu.be/LlMJTeXoe6E', date: '2026.03.26' },
     { vid: 's4plNAZfBZc', url: 'https://youtu.be/s4plNAZfBZc', date: '2026.05.21' },
