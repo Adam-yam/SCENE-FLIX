@@ -77,7 +77,6 @@ gtag('config', 'G-05C99P2DB9');
   gap: 8px;
 }
 
-
 #themeToggle {
   background: none;
   border: 1px solid var(--border-h);
@@ -193,15 +192,22 @@ gtag('config', 'G-05C99P2DB9');
 }
 .bm-btn.bm-active svg { fill: #f0c060; stroke: #f0c060; }
 
-.bm-empty {
+.bm-empty,
+.search-empty,
+.empty {
   grid-column: 1/-1;
   text-align: center;
   padding: 60px 20px;
   color: var(--muted);
 }
-.bm-empty .ico { font-size: 2rem; margin-bottom: 14px; opacity: 0.25; }
-.bm-empty p { font-size: 0.82rem; margin-bottom: 6px; }
-.bm-empty small { font-size: 0.7rem; opacity: 0.6; }
+.bm-empty .ico   { font-size: 2rem;   margin-bottom: 14px; opacity: 0.25; }
+.bm-empty p      { font-size: 0.82rem; margin-bottom: 6px; }
+.bm-empty small  { font-size: 0.7rem;  opacity: 0.6; }
+.search-empty .ico { font-size: 1.8rem; margin-bottom: 12px; opacity: 0.25; }
+.search-empty p    { font-size: 0.82rem; margin-bottom: 4px; }
+.search-empty small{ font-size: 0.7rem;  opacity: 0.6; }
+.empty .ico      { font-size: 2rem;   margin-bottom: 12px; opacity: 0.3; }
+.empty p         { font-size: 0.8rem; }
 
 .vcard-tooltip {
   position: fixed;
@@ -246,16 +252,6 @@ html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 .skel-title2 { height: 13px; width: 60%; margin-bottom: 4px; }
 .skel-date   { height: 10px; width: 50%; margin-top: 4px; }
 .skel-tag    { height: 10px; width: 38%; margin-top: 6px; border-radius: 2px; }
-
-.search-empty {
-  grid-column: 1/-1;
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--muted);
-}
-.search-empty .ico { font-size: 1.8rem; margin-bottom: 12px; opacity: 0.25; }
-.search-empty p    { font-size: 0.82rem; margin-bottom: 4px; }
-.search-empty small{ font-size: 0.7rem; opacity: 0.6; }
 
 body {
   background: var(--bg);
@@ -311,27 +307,40 @@ header {
   padding: 0 40px;
 }
 
-.section-tab {
-  padding: 14px clamp(8px, 1.3vw, 22px);
-  font-size: clamp(0.63rem, 0.82vw, 0.75rem);
-  letter-spacing: clamp(0.04em, 0.08vw, 0.12em);
-  text-transform: uppercase;
+.section-tab,
+.song-tab {
   cursor: pointer;
   color: var(--muted);
   border: none;
   border-bottom: 2px solid transparent;
   background: none;
   font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  transition: color 0.15s, border-color 0.15s;
+  text-transform: uppercase;
   white-space: nowrap;
-  flex-shrink: 1;
+  transition: color 0.15s, border-color 0.15s;
 }
-.section-tab:hover { color: var(--text); }
-.section-tab.active {
+.section-tab:hover,
+.song-tab:hover { color: var(--text); }
+.section-tab.active,
+.song-tab.active {
   color: var(--accent);
   border-bottom-color: var(--accent);
 }
+
+.section-tab {
+  padding: 14px clamp(8px, 1.3vw, 22px);
+  font-size: clamp(0.63rem, 0.82vw, 0.75rem);
+  letter-spacing: clamp(0.04em, 0.08vw, 0.12em);
+  font-weight: 500;
+  flex-shrink: 1;
+}
+
+.song-tab {
+  padding: 13px 16px;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+.song-tab.active { font-weight: 500; }
 
 .song-nav-inner {
   background: var(--surf);
@@ -344,28 +353,6 @@ header {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 40px;
-}
-
-.song-tab {
-  padding: 13px 16px;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  cursor: pointer;
-  color: var(--muted);
-  border: none;
-  border-bottom: 2px solid transparent;
-  background: none;
-  font-family: 'Inter', sans-serif;
-  transition: color 0.15s, border-color 0.15s;
-  white-space: nowrap;
-}
-
-.song-tab:hover { color: var(--text); }
-.song-tab.active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-  font-weight: 500;
 }
 
 .song-tab .cnt {
@@ -476,7 +463,6 @@ header {
   background: transparent;
   color: var(--muted);
   font-family: 'Inter', sans-serif;
-  
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -691,6 +677,8 @@ header {
 .tb-onthespot { background: rgba(224,144,80,0.30); color: var(--c-onthespot); border: 1px solid rgba(224,144,80,0.6); }
 .tb-fullcam   { background: rgba(212,200,74,0.30);  color: var(--c-fullcam);  border: 1px solid rgba(212,200,74,0.6); }
 .tb-external  { background: rgba(122,174,222,0.30); color: var(--c-external); border: 1px solid rgba(122,174,222,0.6); }
+.tb-songs     { background: rgba(224,212,192,0.18); color: var(--accent);     border: 1px solid rgba(224,212,192,0.5); }
+[data-theme="light"] .tb-songs { background: rgba(90,74,48,0.12); border-color: rgba(90,74,48,0.35); }
 
 [data-theme="light"] .tb-music    { background: rgba(42,154,148,0.22);  border-color: rgba(42,154,148,0.5); }
 [data-theme="light"] .tb-mv       { background: rgba(160,64,96,0.22);   border-color: rgba(160,64,96,0.5);  }
@@ -760,16 +748,83 @@ header {
   color: var(--accent);
 }
 
+.ctag.lm-wonyi  { background: rgba(4,90,66,0.2);    color: #04a06e; border: 1px solid rgba(4,160,110,0.4); }
+.ctag.lm-liv    { background: rgba(200,200,200,0.1); color: #d0d0d0; border: 1px solid rgba(220,220,220,0.4); }
+.ctag.lm-minami { background: rgba(43,153,196,0.15); color: #2b99c4; border: 1px solid rgba(43,153,196,0.4); }
+.ctag.lm-may    { background: rgba(236,210,91,0.13); color: #c9a800; border: 1px solid rgba(236,210,91,0.4); }
+.ctag.lm-zena   { background: rgba(186,146,219,0.15);color: #ba92db; border: 1px solid rgba(186,146,219,0.4); }
+[data-theme="light"] .ctag.lm-wonyi  { background: rgba(4,90,66,0.12);    color: #047a52; border-color: rgba(4,160,110,0.35); }
+[data-theme="light"] .ctag.lm-liv    { background: rgba(80,80,80,0.1);    color: #555;    border-color: rgba(80,80,80,0.3); }
+[data-theme="light"] .ctag.lm-minami { background: rgba(43,153,196,0.12); color: #1a7a9e; border-color: rgba(43,153,196,0.35); }
+[data-theme="light"] .ctag.lm-may    { background: rgba(180,140,0,0.12);  color: #907000; border-color: rgba(180,140,0,0.35); }
+[data-theme="light"] .ctag.lm-zena   { background: rgba(140,90,200,0.12); color: #8a50c8; border-color: rgba(140,90,200,0.35); }
 
+.ctag.tb-tag-music     { background: rgba(110,198,192,0.15); color: var(--c-music);    border: 1px solid rgba(110,198,192,0.35); }
+.ctag.tb-tag-mv        { background: rgba(192,112,144,0.15); color: var(--c-mv);       border: 1px solid rgba(192,112,144,0.35); }
+.ctag.tb-tag-itslive   { background: rgba(160,128,208,0.15); color: var(--c-itslive);  border: 1px solid rgba(160,128,208,0.35); }
+.ctag.tb-tag-onthespot { background: rgba(224,144,80,0.15);  color: var(--c-onthespot);border: 1px solid rgba(224,144,80,0.35); }
+.ctag.tb-tag-fullcam   { background: rgba(212,200,74,0.13);  color: var(--c-fullcam);  border: 1px solid rgba(212,200,74,0.35); }
+[data-theme="light"] .ctag.tb-tag-music     { background: rgba(42,154,148,0.12);  border-color: rgba(42,154,148,0.35); }
+[data-theme="light"] .ctag.tb-tag-mv        { background: rgba(160,64,96,0.12);   border-color: rgba(160,64,96,0.35);  }
+[data-theme="light"] .ctag.tb-tag-itslive   { background: rgba(112,80,176,0.12);  border-color: rgba(112,80,176,0.35); }
+[data-theme="light"] .ctag.tb-tag-onthespot { background: rgba(192,104,32,0.12);  border-color: rgba(192,104,32,0.35); }
+[data-theme="light"] .ctag.tb-tag-fullcam   { background: rgba(168,154,16,0.12);  border-color: rgba(168,154,16,0.35); }
 
-.empty {
-  grid-column: 1/-1;
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--muted);
+.ext-channel-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 7px;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  padding: 2px 8px 2px 6px;
+  border-radius: 3px;
+  background: rgba(122,174,222,0.12);
+  color: var(--c-external);
+  border: 1px solid rgba(122,174,222,0.35);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
-.empty .ico { font-size: 2rem; margin-bottom: 12px; opacity: 0.3; }
-.empty p { font-size: 0.8rem; }
+.ext-channel-badge::before {
+  content: '▶';
+  font-size: 0.45rem;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+[data-theme="light"] .ext-channel-badge {
+  background: rgba(58,120,196,0.1);
+  border-color: rgba(58,120,196,0.3);
+}
+
+.content-category-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 7px;
+  font-size: 0.6rem;
+  letter-spacing: 0.06em;
+  padding: 2px 8px 2px 6px;
+  border-radius: 3px;
+  background: rgba(128,184,112,0.12);
+  color: var(--c-content);
+  border: 1px solid rgba(128,184,112,0.35);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.content-category-badge::before {
+  content: '✦';
+  font-size: 0.4rem;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+[data-theme="light"] .content-category-badge {
+  background: rgba(74,138,52,0.1);
+  border-color: rgba(74,138,52,0.3);
+}
 
 .fantube-wrap {
   max-width: 1100px;
@@ -4323,16 +4378,20 @@ for (const key of EXTERNAL_KEYS) {
   }
 }
 
-const _elSearchBar       = document.getElementById('searchBar');
-const _elGrid            = document.getElementById('grid');
-const _elNavIndicator    = document.getElementById('navIndicator');
-const _elMobileBottomNav = document.getElementById('mobileBottomNav');
-const _elSubSidebar      = document.getElementById('subSidebar');
+const _elSearchBar         = document.getElementById('searchBar');
+const _elGrid              = document.getElementById('grid');
+const _elNavIndicator      = document.getElementById('navIndicator');
+const _elMobileBottomNav   = document.getElementById('mobileBottomNav');
+const _elSubSidebar        = document.getElementById('subSidebar');
 const _elSubSidebarContent = document.getElementById('subSidebarContent');
-const _elSubSidebarLabel = document.getElementById('subSidebarLabel');
+const _elSubSidebarLabel   = document.getElementById('subSidebarLabel');
 const _elSubSidebarOverlay = document.getElementById('subSidebarOverlay');
-const _elBmCount         = document.getElementById('bmCount');
-const _elDrawerBmCount   = document.getElementById('drawerBmCount');
+const _elBmCount           = document.getElementById('bmCount');
+const _elDrawerBmCount     = document.getElementById('drawerBmCount');
+const _elThemeLabel        = document.getElementById('themeLabel');
+const _elMobileThemeLabel  = document.getElementById('mobileThemeLabel');
+const _elThemeIcon         = document.getElementById('themeIcon');
+const _elMobileThemeIcon   = document.getElementById('mobileThemeIcon');
 
 const _SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','memberMode','linksMode','bookmarkMode','aboutMode','grid-wrap-el','liveGrid'];
 const _SECTION_EL_CACHE = Object.fromEntries(
@@ -4375,10 +4434,11 @@ function buildContentCard(item, delay) {
     ? (dateStr ? `<span class="cdate">${dateStr}</span>` : (channel && !dateStr ? `<span class="cdate">${channel}</span>` : ''))
     : `<span class="skel skel-date"></span>`;
   return `<a class="vcard card-base hover-lift tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-category="${categoryLabel}">
-    ${buildThumbHtml(item.vid, `<span class="type-badge tb-content">${categoryLabel}</span>`)}
+    ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
       <div class="cmeta" id="cvc-meta-${item.vid}">${metaHtml}</div>
+      ${categoryLabel ? `<div class="content-category-badge">${categoryLabel}</div>` : ''}
     </div>
   </a>`;
 }
@@ -4419,7 +4479,12 @@ async function loadCardMetas(items, mode) {
           item.title = key ? EXTERNAL_LABELS[key] : item.vid;
         }
         const titleEl = document.getElementById(`evc-title-${item.vid}`);
+        const metaEl  = document.getElementById(`evc-meta-${item.vid}`);
         if (titleEl) titleEl.textContent = item.title || item.vid;
+        if (metaEl) {
+          const dateStr = item.date || '';
+          metaEl.innerHTML = dateStr ? `<span class="cdate">${dateStr}</span>` : '';
+        }
       }
     }));
   }
@@ -4457,7 +4522,8 @@ function buildExternalCard(item, delay) {
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
-      <div class="cmeta">${metaHtml}</div>
+      <div class="cmeta" id="evc-meta-${item.vid}">${metaHtml}</div>
+      ${channelLabel ? `<div class="ext-channel-badge">${channelLabel}</div>` : ''}
     </div>
   </a>`;
 }
@@ -4828,14 +4894,14 @@ function formatLiveDate(item) {
 
 function buildLiveCard(item, delay) {
   const memberBadges = item.members.map(m =>
-    `<span class="ctag ${m === '전원' ? 'hl' : ''}">${m}</span>`
+    `<span class="ctag ${MEMBER_CLASS[m] || ''}">${m}</span>`
   ).join('');
   const titleHtml = item.title
     ? `<div class="csong-multi" id="lvc-title-${item.vid}">${item.title}</div>`
     : `<div class="csong-multi" id="lvc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
   const lmClass = getLiveCardClass(item.members);
   return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
-    ${buildThumbHtml(item.vid, `<span class="type-badge tb-itslive">LIVE</span>`)}
+    ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
       <div class="cmeta">
@@ -5013,47 +5079,7 @@ function buildBookmarkGrid() {
 
   grid.innerHTML = unique.map((item, idx) => {
     const delay = `${Math.min(idx * 0.03, 0.4)}s`;
-    const tb = TYPE_BADGE[item.type] || 'tb-content';
-    const tl = TYPE_LABEL[item.type] || item.type;
-    const m = item.meta || {};
-    const videoTitle = m.rawTitle || item.song || item.vid;
-    const dateStr = m.date || '';
-    const show = m.show;
-    const channel = m.channel || '';
-    const tags = [];
-    if (show) tags.push(`<span class="ctag hl">${show.label}</span>`);
-    else if (channel) tags.push(`<span class="ctag">${channel}</span>`);
-    if (item._src === 'live' && item._liveItem) {
-      const memberBadges = item._liveItem.members.map(mm =>
-        `<span class="ctag ${mm === '전원' ? 'hl' : ''}">${mm}</span>`
-      ).join('');
-      return `<a class="vcard card-base hover-lift ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
-        ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">LIVE</span>`)}
-        <div class="cbody">
-          <div class="csong-multi">${videoTitle || item._liveItem.date + ' 라이브'}</div>
-          <div class="cmeta"><span class="cdate">${dateStr}</span></div>
-          <div class="ctags">${memberBadges}</div>
-        </div>
-      </a>`;
-    }
-    if (!item.loaded) {
-      return `<a class="vcard card-base hover-lift ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
-        ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
-        <div class="cbody">
-          <div class="csong"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>
-          <div class="cmeta"><span class="skel skel-date"></span></div>
-          <div class="ctags"><span class="skel skel-tag"></span></div>
-        </div>
-      </a>`;
-    }
-    return `<a class="vcard card-base hover-lift ${tb}" id="bvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
-      ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
-      <div class="cbody">
-        <div class="csong-multi">${videoTitle}</div>
-        <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
-        ${tags.length ? `<div class="ctags">${tags.join('')}</div>` : ''}
-      </div>
-    </a>`;
+    return buildAllVideoCard(item, delay).replace(/id="avc-/g, 'id="bvc-');
   }).join('');
 }
 
@@ -5110,14 +5136,13 @@ function buildCard(item, delay) {
   const videoTitle = item.loaded ? (m?.rawTitle || item.song) : null;
   const tags = [];
   if (item.loaded) {
-    if (show) tags.push(`<span class="ctag hl">${show.label}</span>`);
-    else if (channel) tags.push(`<span class="ctag">${channel}</span>`);
+    tags.push(`<span class="ctag tb-tag-${item.type}">♪ ${tl}</span>`);
   }
 
   const showLabel = m?.show?.label || '';
   const titleHtml = videoTitle
-    ? `<div class="csong" id="vc-title-${item.vid}">${videoTitle}</div>`
-    : `<div class="csong" id="vc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+    ? `<div class="csong-multi" id="vc-title-${item.vid}">${videoTitle}</div>`
+    : `<div class="csong-multi" id="vc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
   const dateHtml = dateStr
     ? `<span class="cdate" id="vc-date-${item.vid}">${dateStr}</span>`
     : item.loaded
@@ -5128,7 +5153,7 @@ function buildCard(item, delay) {
     : `<div class="ctags" id="vc-tags-${item.vid}"><span class="skel skel-tag"></span></div>`;
 
   return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-show="${showLabel}" data-channel="${channel}" data-type="${tl}">
-    ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
+    ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
       <div class="cmeta">${dateHtml}</div>
@@ -5300,6 +5325,10 @@ function _avAppendNextBatch(grid) {
   const batch = _avSorted.slice(_avLoaded, _avLoaded + AV_PAGE_SIZE);
   const frag  = document.createDocumentFragment();
   batch.forEach((item, i) => {
+    if (item._ref && item._ref.loaded && !item.loaded) {
+      item.loaded = true;
+      item.meta   = item._ref.meta || item.meta;
+    }
     const delay = `${Math.min((i % AV_PAGE_SIZE) * 0.025, 0.3)}s`;
     const tmp   = document.createElement('div');
     tmp.innerHTML = buildAllVideoCard(item, delay);
@@ -5354,18 +5383,12 @@ function buildAllVideoCard(item, delay) {
   const tb = TYPE_BADGE[item.type] || 'tb-content';
   const tl = TYPE_LABEL[item.type] || item.type;
   const m = item.meta || {};
-
   const dateStr = m.date || DATE_MAP[item.vid] || '';
-  const show = m.show;
-  const channel = m.channel || '';
   const videoTitle = m.rawTitle || item.song || item.vid;
-  const tags = [];
-  if (show) tags.push(`<span class="ctag hl">${show.label}</span>`);
-  else if (channel) tags.push(`<span class="ctag">${channel}</span>`);
 
   if (item._src === 'live' && item._liveItem) {
     const memberBadges = item._liveItem.members.map(mm =>
-      `<span class="ctag ${mm === '전원' ? 'hl' : ''}">${mm}</span>`
+      `<span class="ctag ${MEMBER_CLASS[mm] || ''}">${mm}</span>`
     ).join('');
     const titleHtml = item.loaded
       ? `<div class="csong-multi" id="avc-title-${item.vid}">${videoTitle}</div>`
@@ -5380,19 +5403,73 @@ function buildAllVideoCard(item, delay) {
     </a>`;
   }
 
+  if (item._src === 'main') {
+    const titleHtml = item.loaded
+      ? `<div class="csong-multi" id="avc-title-${item.vid}">${videoTitle}</div>`
+      : `<div class="csong-multi" id="avc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+    const tagsHtml = item.loaded
+      ? `<div class="ctags"><span class="ctag tb-tag-${item.type}">♪ ${tl}</span></div>`
+      : `<div class="ctags"><span class="skel skel-tag"></span></div>`;
+    return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+      ${buildThumbHtml(item.vid, `<span class="type-badge tb-songs">Songs</span>`)}
+      <div class="cbody">
+        ${titleHtml}
+        <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : item.loaded ? '' : `<span class="skel skel-date"></span>`}</div>
+        ${tagsHtml}
+      </div>
+    </a>`;
+  }
+
+  if (item._src === 'content') {
+    const ref = item._ref;
+    const categoryLabel = (ref.category === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : (ref.category || ''));
+    const titleHtml = item.loaded
+      ? `<div class="csong-multi" id="avc-title-${item.vid}">${videoTitle}</div>`
+      : `<div class="csong-multi" id="avc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+    const metaHtml = item.loaded
+      ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
+      : `<span class="skel skel-date"></span>`;
+    return `<a class="vcard card-base hover-lift tb-content" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+      ${buildThumbHtml(item.vid, `<span class="type-badge tb-content">${tl}</span>`)}
+      <div class="cbody">
+        ${titleHtml}
+        <div class="cmeta">${metaHtml}</div>
+        ${categoryLabel ? `<div class="content-category-badge">${categoryLabel}</div>` : ''}
+      </div>
+    </a>`;
+  }
+
+  if (item._src === 'external') {
+    const channelKey = VID_TO_EXTERNAL_KEY[item.vid] || '';
+    const channelLabel = EXTERNAL_LABELS[channelKey] || channelKey;
+    const titleHtml = item.loaded
+      ? `<div class="csong-multi" id="avc-title-${item.vid}">${videoTitle}</div>`
+      : `<div class="csong-multi" id="avc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+    const metaHtml = item.loaded
+      ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
+      : `<span class="skel skel-date"></span>`;
+    return `<a class="vcard card-base hover-lift tb-external" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+      ${buildThumbHtml(item.vid, `<span class="type-badge tb-external">외부컨텐츠</span>`)}
+      <div class="cbody">
+        ${titleHtml}
+        <div class="cmeta">${metaHtml}</div>
+        ${channelLabel ? `<div class="ext-channel-badge">${channelLabel}</div>` : ''}
+      </div>
+    </a>`;
+  }
+
   return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
     ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
     <div class="cbody">
       <div class="csong-multi">${videoTitle}</div>
       <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
-      ${tags.length ? `<div class="ctags">${tags.join('')}</div>` : ''}
     </div>
   </a>`;
 }
 
 async function loadAllVideosMetas(items) {
   const CHUNK = 6;
-  const mainUnloaded = items.filter(i => i._src === 'main' && !i._ref.loaded);
+  const mainUnloaded = items.filter(i => i._src === 'main' && !i.loaded);
   for (let i = 0; i < mainUnloaded.length; i += CHUNK) {
     if (curSection !== 'allvideos') return;
     const batch = mainUnloaded.slice(i, i + CHUNK);
@@ -5403,17 +5480,25 @@ async function loadAllVideosMetas(items) {
       ref.loaded = true;
       proxy.meta = ref.meta;
       proxy.loaded = true;
-      const el = document.getElementById(`avc-${proxy.vid}`);
-      if (el) {
-        const tmp = document.createElement('div');
-        tmp.innerHTML = buildAllVideoCard(proxy, el.style.animationDelay);
-        el.replaceWith(tmp.firstElementChild);
+      const tl = TYPE_LABEL[proxy.type] || proxy.type;
+      const titleEl = document.getElementById(`avc-title-${proxy.vid}`);
+      const dateEl  = document.querySelector(`#avc-${proxy.vid} .cdate`);
+      const skelDate = document.querySelector(`#avc-${proxy.vid} .skel-date`);
+      const tagsEl  = document.querySelector(`#avc-${proxy.vid} .ctags`);
+      if (titleEl) titleEl.textContent = ref.meta.rawTitle || ref.song;
+      if (dateEl) dateEl.textContent = ref.meta.date || '';
+      else if (skelDate) {
+        const span = document.createElement('span');
+        span.className = 'cdate';
+        span.textContent = ref.meta.date || '';
+        skelDate.replaceWith(span);
       }
+      if (tagsEl) tagsEl.innerHTML = `<span class="ctag tb-tag-${proxy.type}">♪ ${tl}</span>`;
       replaceSkeleton(ref);
     }));
   }
 
-  const otherUnloaded = items.filter(i => (i._src === 'content' || i._src === 'external') && !i._ref.loaded);
+  const otherUnloaded = items.filter(i => (i._src === 'content' || i._src === 'external') && !i.loaded);
   for (let i = 0; i < otherUnloaded.length; i += CHUNK) {
     if (curSection !== 'allvideos') return;
     const batch = otherUnloaded.slice(i, i + CHUNK);
@@ -5425,12 +5510,10 @@ async function loadAllVideosMetas(items) {
       ref.loaded = true;
       proxy.meta = { rawTitle: ref.title, date: ref.date, show: fetched.show, channel: fetched.channel || '' };
       proxy.loaded = true;
-      const el = document.getElementById(`avc-${proxy.vid}`);
-      if (el) {
-        const tmp = document.createElement('div');
-        tmp.innerHTML = buildAllVideoCard(proxy, el.style.animationDelay);
-        el.replaceWith(tmp.firstElementChild);
-      }
+      const titleEl = document.getElementById(`avc-title-${proxy.vid}`);
+      const metaEl  = document.querySelector(`#avc-${proxy.vid} .cmeta`);
+      if (titleEl) titleEl.textContent = ref.title || proxy.vid;
+      if (metaEl) metaEl.innerHTML = ref.date ? `<span class="cdate">${ref.date}</span>` : '';
     }));
   }
 
@@ -5492,10 +5575,8 @@ function replaceSkeleton(item) {
     }
   }
   if (tagsEl) {
-    const tags = [];
-    if (m?.show) tags.push(`<span class="ctag hl">${m.show.label}</span>`);
-    else if (m?.channel) tags.push(`<span class="ctag">${m.channel}</span>`);
-    tagsEl.innerHTML = tags.join('');
+    const tl = TYPE_LABEL[item.type] || item.type;
+    tagsEl.innerHTML = `<span class="ctag tb-tag-${item.type}">♪ ${tl}</span>`;
   }
 }
 
@@ -5522,6 +5603,15 @@ const _SUB_SECTIONS = {
 };
 const _SUB_TAB_ID_MAP = { songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal' };
 
+function _replayAnim(selector, delayFn, animStr = '') {
+  document.querySelectorAll(selector).forEach((el, i) => {
+    el.style.animationDelay = delayFn(i);
+    el.style.animation = 'none';
+    void el.offsetWidth;
+    el.style.animation = animStr;
+  });
+}
+
 function pickSection(section) {
   curSection = section;
   window.scrollTo({ top: 0, behavior: 'instant' });
@@ -5540,32 +5630,9 @@ function pickSection(section) {
   _elSearchBar.style.display = _PICK_SEARCHABLE.includes(section) ? '' : 'none';
   clearSearch(true);
 
-  if (section === 'member') {
-    document.querySelectorAll('.member-btn').forEach((el, i) => {
-      el.style.animationDelay = `${i * 0.06}s`;
-      el.style.animation = 'none';
-      void el.offsetWidth;
-      el.style.animation = '';
-    });
-  }
-
-  if (section === 'links') {
-    document.querySelectorAll('.link-row').forEach((el, i) => {
-      el.style.animationDelay = `${Math.min(i * 0.04, 0.5)}s`;
-      el.style.animation = 'none';
-      void el.offsetWidth;
-      el.style.animation = '';
-    });
-  }
-
-  if (section === 'about') {
-    document.querySelectorAll('#aboutMode .links-wrap > div > *').forEach((el, i) => {
-      el.style.animationDelay = `${i * 0.07}s`;
-      el.style.animation = 'none';
-      void el.offsetWidth;
-      el.style.animation = 'fadeUp 0.35s ease both';
-    });
-  }
+  if (section === 'member') _replayAnim('.member-btn', i => `${i * 0.06}s`);
+  if (section === 'links')  _replayAnim('.link-row',   i => `${Math.min(i * 0.04, 0.5)}s`);
+  if (section === 'about')  _replayAnim('#aboutMode .links-wrap > div > *', i => `${i * 0.07}s`, 'fadeUp 0.35s ease both');
 
   if (section === 'allvideos') buildAllVideosGrid();
   else { _avDisconnectObserver(); }
@@ -5971,14 +6038,10 @@ function applyTheme(theme) {
   const label = isLight ? 'Dark' : 'Light';
   const icon  = isLight ? _THEME_ICON_MOON : _THEME_ICON_SUN;
 
-  ['themeLabel','mobileThemeLabel'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = label;
-  });
-  ['themeIcon','mobileThemeIcon'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = icon;
-  });
+  if (_elThemeLabel) _elThemeLabel.textContent = label;
+  if (_elMobileThemeLabel) _elMobileThemeLabel.textContent = label;
+  if (_elThemeIcon) _elThemeIcon.innerHTML = icon;
+  if (_elMobileThemeIcon) _elMobileThemeIcon.innerHTML = icon;
 }
 
 try {
@@ -6134,8 +6197,6 @@ function updateMobileNav(section) {
     if (btn) btn.classList.add('active');
   }
 }
-
-updateBookmarkCounts();
 </script>
 
 <button id="scrollTop" title="맨 위로">
