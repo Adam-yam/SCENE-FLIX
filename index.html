@@ -1627,7 +1627,6 @@ header {
   #themeToggle { display: flex !important; }
 }
 
-
 .btn-base{
   border:none;
   background:none;
@@ -1649,8 +1648,6 @@ header {
 .hover-lift:hover{
   transform:translateY(-4px);
 }
-
-
 
 @media (min-width: 701px) {
 
@@ -1844,7 +1841,6 @@ header {
     opacity: 0.7;
   }
 
-
   #subSidebar .song-tab {
     display: flex;
     align-items: center;
@@ -1910,7 +1906,6 @@ header {
   #subSidebar .type-btn.active[data-lm="미나미"] { color: #2b99c4;        border-left-color: #2b99c4;                background: rgba(43,153,196,0.12); }
   #subSidebar .type-btn.active[data-lm="메이"]   { color: #c9a800;        border-left-color: #ecd25b;                background: rgba(236,210,91,0.12); }
   #subSidebar .type-btn.active[data-lm="제나"]   { color: #ba92db;        border-left-color: #ba92db;                background: rgba(186,146,219,0.12); }
-
 
   .type-bar,
   .search-bar,
@@ -2236,11 +2231,11 @@ header {
   <div class="type-bar">
     <button class="type-btn active" data-lm="all"    onclick="setLiveMember(this,'all')"    data-i18n="filter_all">전체</button>
     <button class="type-btn" data-lm="전원"   onclick="setLiveMember(this,'전원')"   data-i18n="filter_all_members">전원</button>
-    <button class="type-btn" data-lm="원이"   onclick="setLiveMember(this,'원이')">원이</button>
-    <button class="type-btn" data-lm="리브"   onclick="setLiveMember(this,'리브')">리브</button>
-    <button class="type-btn" data-lm="미나미" onclick="setLiveMember(this,'미나미')">미나미</button>
-    <button class="type-btn" data-lm="메이"   onclick="setLiveMember(this,'메이')">메이</button>
-    <button class="type-btn" data-lm="제나"   onclick="setLiveMember(this,'제나')">제나</button>
+    <button class="type-btn" data-lm="원이"   onclick="setLiveMember(this,'원이')"   data-i18n="filter_member_woni">원이</button>
+    <button class="type-btn" data-lm="리브"   onclick="setLiveMember(this,'리브')"   data-i18n="filter_member_liv">리브</button>
+    <button class="type-btn" data-lm="미나미" onclick="setLiveMember(this,'미나미')" data-i18n="filter_member_minami">미나미</button>
+    <button class="type-btn" data-lm="메이"   onclick="setLiveMember(this,'메이')"   data-i18n="filter_member_may">메이</button>
+    <button class="type-btn" data-lm="제나"   onclick="setLiveMember(this,'제나')"   data-i18n="filter_member_zena">제나</button>
   </div>
 </div>
 
@@ -2610,6 +2605,11 @@ window._i18n = {
     about_contact2:       '더 좋은 페이지를 만들기 위해 리마인 여러분의 건의사항을 기다리고 있습니다.',
     about_contact3:       '또한, 제작자에게 전하고 싶은 말이나 의견이 있다면 자유롭게 남겨주세요.',
     live_year_suffix:     '년',
+    filter_member_woni:   '원이',
+    filter_member_liv:    '리브',
+    filter_member_minami: '미나미',
+    filter_member_may:    '메이',
+    filter_member_zena:   '제나',
   },
   JP: {
     headerTagline:        'RESCENEの映像まとめ SCENE-FLIX',
@@ -2655,6 +2655,11 @@ window._i18n = {
     about_contact2:       'より良いページを作るため、リマインのみなさんのご意見をお待ちしています。',
     about_contact3:       'また、制作者に伝えたいことやご意見があれば、お気軽にどうぞ。',
     live_year_suffix:     '年',
+    filter_member_woni:   'Woni',
+    filter_member_liv:    'Liv',
+    filter_member_minami: 'Minami',
+    filter_member_may:    'May',
+    filter_member_zena:   'Zena',
   },
   EN: {
     headerTagline:        'RESCENE Video Archive SCENE-FLIX',
@@ -2701,6 +2706,11 @@ window._i18n = {
     about_contact3:       'Feel free to share any thoughts or messages for the creator as well.',
     live_year_suffix:     '',
     live_year_prefix:     '',
+    filter_member_woni:   'Woni',
+    filter_member_liv:    'Liv',
+    filter_member_minami: 'Minami',
+    filter_member_may:    'May',
+    filter_member_zena:   'Zena',
   }
 };
 
@@ -2747,6 +2757,14 @@ function setLang(lang) {
       const lm = btn.getAttribute('data-lm');
       btn.classList.toggle('active', lm === curLiveMember);
     });
+  } else if (curSection === 'songs' || curSection === 'content') {
+    buildGrid();
+  } else if (curSection === 'allvideos') {
+    buildAllVideosGrid();
+  }
+
+  if (curSection === 'live' || curSection === 'songs' || curSection === 'allvideos') {
+    syncSubSidebar();
   }
 }
 
@@ -3091,6 +3109,7 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  '3JHcXOBYERA': '2026.05.24',
   'bClA2Os6vpE': '5월 23일',
   'OrCOflk2QmQ': '2026.05.22',
   'PYzVqgqS09g': '2026.04.15',
@@ -4009,6 +4028,7 @@ const CONTENT_DATA = [
   {
     category: "Re-log",
     urls: [
+      "https://youtu.be/3JHcXOBYERA",
       "https://youtu.be/qDUkVfrcWJs",
       "https://youtu.be/qCstak0tYos",
       "https://youtu.be/-qG8y0p2Zds",
@@ -4895,8 +4915,17 @@ function formatLiveDate(item) {
 }
 
 function buildLiveCard(item, delay) {
+  const t = window._i18n[window._curLang] || window._i18n['KR'];
+  const MEMBER_LABEL = {
+    '원이':  t.filter_member_woni   || '원이',
+    '리브':  t.filter_member_liv    || '리브',
+    '미나미':t.filter_member_minami || '미나미',
+    '메이':  t.filter_member_may    || '메이',
+    '제나':  t.filter_member_zena   || '제나',
+    '전원':  t.filter_all_members   || '전원',
+  };
   const memberBadges = item.members.map(m =>
-    `<span class="ctag ${MEMBER_CLASS[m] || ''}">${m}</span>`
+    `<span class="ctag ${MEMBER_CLASS[m] || ''}">${MEMBER_LABEL[m] || m}</span>`
   ).join('');
   const titleHtml = item.title
     ? `<div class="csong-multi" id="lvc-title-${item.vid}">${item.title}</div>`
@@ -5114,6 +5143,20 @@ function buildSongNav() {
 
 const TYPE_BADGE = { music:'tb-music', mv:'tb-mv', itslive:'tb-itslive', content:'tb-content', onthespot:'tb-onthespot', fullcam:'tb-fullcam', external:'tb-external', live:'tb-itslive' };
 const TYPE_LABEL = { music:'음악방송', mv:'뮤직비디오', itslive:"It's Live", content:'자체컨텐츠', onthespot:'온더스팟', fullcam:'풀캠', external:'외부컨텐츠', live:'LIVE' };
+function getTypeLabel(type) {
+  const t = window._i18n[window._curLang] || window._i18n['KR'];
+  const map = {
+    music:    t.filter_music    || TYPE_LABEL.music,
+    mv:       t.filter_mv       || TYPE_LABEL.mv,
+    itslive:  t.filter_itslive  || TYPE_LABEL.itslive,
+    onthespot:t.filter_onthespot|| TYPE_LABEL.onthespot,
+    fullcam:  t.filter_fullcam  || TYPE_LABEL.fullcam,
+    content:  TYPE_LABEL.content,
+    external: TYPE_LABEL.external,
+    live:     TYPE_LABEL.live,
+  };
+  return map[type] || TYPE_LABEL[type] || type;
+}
 
 const _PLAY_RING_SVG = `<div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>`;
 
@@ -5130,7 +5173,7 @@ function buildThumbHtml(vid, badgeHtml) {
 
 function buildCard(item, delay) {
   const tb = TYPE_BADGE[item.type] || 'tb-content';
-  const tl = TYPE_LABEL[item.type] || item.type;
+  const tl = getTypeLabel(item.type);
   const m = item.meta;
   const dateStr = m?.date || DATE_MAP[item.vid] || '';
   const show = m?.show;
@@ -5383,14 +5426,16 @@ function buildAllVideosGrid() {
 
 function buildAllVideoCard(item, delay) {
   const tb = TYPE_BADGE[item.type] || 'tb-content';
-  const tl = TYPE_LABEL[item.type] || item.type;
+  const tl = getTypeLabel(item.type);
   const m = item.meta || {};
   const dateStr = m.date || DATE_MAP[item.vid] || '';
   const videoTitle = m.rawTitle || item.song || item.vid;
 
   if (item._src === 'live' && item._liveItem) {
+    const _t2 = window._i18n[window._curLang] || window._i18n['KR'];
+    const _ML2 = { '원이': _t2.filter_member_woni||'원이', '리브': _t2.filter_member_liv||'리브', '미나미': _t2.filter_member_minami||'미나미', '메이': _t2.filter_member_may||'메이', '제나': _t2.filter_member_zena||'제나', '전원': _t2.filter_all_members||'전원' };
     const memberBadges = item._liveItem.members.map(mm =>
-      `<span class="ctag ${MEMBER_CLASS[mm] || ''}">${mm}</span>`
+      `<span class="ctag ${MEMBER_CLASS[mm] || ''}">${_ML2[mm] || mm}</span>`
     ).join('');
     const titleHtml = item.loaded
       ? `<div class="csong-multi" id="avc-title-${item.vid}">${videoTitle}</div>`
@@ -5482,7 +5527,7 @@ async function loadAllVideosMetas(items) {
       ref.loaded = true;
       proxy.meta = ref.meta;
       proxy.loaded = true;
-      const tl = TYPE_LABEL[proxy.type] || proxy.type;
+      const tl = getTypeLabel(proxy.type);
       const titleEl = document.getElementById(`avc-title-${proxy.vid}`);
       const dateEl  = document.querySelector(`#avc-${proxy.vid} .cdate`);
       const skelDate = document.querySelector(`#avc-${proxy.vid} .skel-date`);
@@ -5577,7 +5622,7 @@ function replaceSkeleton(item) {
     }
   }
   if (tagsEl) {
-    const tl = TYPE_LABEL[item.type] || item.type;
+    const tl = getTypeLabel(item.type);
     tagsEl.innerHTML = `<span class="ctag tb-tag-${item.type}">♪ ${tl}</span>`;
   }
 }
@@ -5745,14 +5790,15 @@ function renderSubLiveTabs() {
 }
 
 function renderSubLiveMemberBtns() {
+  const t = window._i18n[window._curLang] || window._i18n['KR'];
   const members = [
-    { lm:'all',   label:'전체' },
-    { lm:'전원',  label:'전원' },
-    { lm:'원이',  label:'원이' },
-    { lm:'리브',  label:'리브' },
-    { lm:'미나미',label:'미나미' },
-    { lm:'메이',  label:'메이' },
-    { lm:'제나',  label:'제나' },
+    { lm:'all',   label: t.filter_all },
+    { lm:'전원',  label: t.filter_all_members },
+    { lm:'원이',  label: t.filter_member_woni },
+    { lm:'리브',  label: t.filter_member_liv },
+    { lm:'미나미',label: t.filter_member_minami },
+    { lm:'메이',  label: t.filter_member_may },
+    { lm:'제나',  label: t.filter_member_zena },
   ];
   return members.map(({ lm, label }) =>
     `<button class="type-btn${curLiveMember === lm ? ' active' : ''}" data-lm="${lm}"
