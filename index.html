@@ -429,6 +429,8 @@ header {
 .type-btn.active[data-lm="미나미"] { color: #2b99c4; border-color: #2b99c4;               background: rgba(43,153,196,0.12); }
 .type-btn.active[data-lm="메이"]   { color: #c9a800; border-color: #ecd25b;               background: rgba(236,210,91,0.12); }
 .type-btn.active[data-lm="제나"]   { color: #ba92db; border-color: #ba92db;               background: rgba(186,146,219,0.12); }
+.type-btn.active[data-ec-ch]       { color: #7aaede; border-color: #7aaede;               background: rgba(122,174,222,0.15); }
+[data-theme="light"] .type-btn.active[data-ec-ch] { color: #3a78c4; border-color: #3a78c4; background: rgba(58,120,196,0.12); }
 
 .search-bar {
   max-width: 1280px;
@@ -459,7 +461,7 @@ header {
   font-size: 0.7rem;
   letter-spacing: 0.04em;
   cursor: pointer;
-  border: 1px solid var(--border);
+  border: 1px solid rgba(255,255,255,0.32);
   background: transparent;
   color: var(--muted);
   font-family: 'Inter', sans-serif;
@@ -468,7 +470,9 @@ header {
   align-items: center;
   gap: 4px;
 }
-.sort-btn:hover { color: var(--text); border-color: var(--border-h); }
+[data-theme="light"] .sort-btn { border-color: rgba(0,0,0,0.28); }
+.sort-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.55); }
+[data-theme="light"] .sort-btn:hover { border-color: rgba(0,0,0,0.45); }
 .sort-btn.active {
   color: var(--accent);
   border-color: var(--accent);
@@ -572,18 +576,23 @@ header {
 .vcard.tb-content:hover { border-color: rgba(128,184,112,0.5);  box-shadow: 0 4px 24px rgba(128,184,112,0.15), 0 0 0 1px rgba(128,184,112,0.15); }
 .vcard.tb-onthespot:hover { border-color: rgba(224,144,80,0.5); box-shadow: 0 4px 24px rgba(224,144,80,0.15), 0 0 0 1px rgba(224,144,80,0.15); }
 .vcard.tb-fullcam:hover   { border-color: rgba(212,200,74,0.5); box-shadow: 0 4px 24px rgba(212,200,74,0.15), 0 0 0 1px rgba(212,200,74,0.15); }
+.vcard.tb-external:hover  { border-color: rgba(122,174,222,0.5); box-shadow: 0 4px 24px rgba(122,174,222,0.15), 0 0 0 1px rgba(122,174,222,0.15); }
 
 .vcard.tb-music     { background: rgba(110,198,192,0.15); border-color: rgba(110,198,192,0.22); }
 .vcard.tb-mv        { background: rgba(192,112,144,0.15); border-color: rgba(192,112,144,0.22); }
 .vcard.tb-itslive   { background: rgba(160,128,208,0.15); border-color: rgba(160,128,208,0.22); }
+.vcard.tb-content   { background: rgba(128,184,112,0.13); border-color: rgba(128,184,112,0.22); }
 .vcard.tb-onthespot { background: rgba(224,144,80,0.15);  border-color: rgba(224,144,80,0.22);  }
 .vcard.tb-fullcam   { background: rgba(212,200,74,0.13);  border-color: rgba(212,200,74,0.22);  }
+.vcard.tb-external  { background: rgba(122,174,222,0.13); border-color: rgba(122,174,222,0.22); }
 
 [data-theme="light"] .vcard.tb-music     { background: rgba(42,154,148,0.16);  border-color: rgba(42,154,148,0.35); }
 [data-theme="light"] .vcard.tb-mv        { background: rgba(160,64,96,0.16);   border-color: rgba(160,64,96,0.35);  }
 [data-theme="light"] .vcard.tb-itslive   { background: rgba(112,80,176,0.16);  border-color: rgba(112,80,176,0.35); }
+[data-theme="light"] .vcard.tb-content   { background: rgba(74,138,52,0.16);   border-color: rgba(74,138,52,0.35);  }
 [data-theme="light"] .vcard.tb-onthespot { background: rgba(192,104,32,0.16);  border-color: rgba(192,104,32,0.35); }
 [data-theme="light"] .vcard.tb-fullcam   { background: rgba(168,154,16,0.16);  border-color: rgba(168,154,16,0.35); }
+[data-theme="light"] .vcard.tb-external  { background: rgba(58,120,196,0.16);  border-color: rgba(58,120,196,0.35); }
 
 .vcard.lm-wonyi    { background: rgba(4,90,66,0.18);    border-color: rgba(4,160,110,0.22); }
 .vcard.lm-liv      { background: rgba(200,200,200,0.1);  border-color: rgba(220,220,220,0.2); }
@@ -793,10 +802,7 @@ header {
   opacity: 0.7;
   flex-shrink: 0;
 }
-[data-theme="light"] .ext-channel-badge {
-  background: rgba(58,120,196,0.1);
-  border-color: rgba(58,120,196,0.3);
-}
+
 
 .content-category-badge {
   display: inline-flex;
@@ -1256,6 +1262,10 @@ header {
   }
   .song-tab .cnt { display: none; }
 
+  #externalCatNavWrap {
+    display: block;
+  }
+
   .type-bar {
     padding: 8px 12px 10px;
     gap: 6px;
@@ -1655,6 +1665,10 @@ header {
     padding-left: 200px;
   }
 
+  #externalCatNavWrap {
+    display: none !important;
+  }
+
   .song-nav-outer {
     position: fixed;
     top: 0;
@@ -1906,6 +1920,8 @@ header {
   #subSidebar .type-btn.active[data-lm="미나미"] { color: #2b99c4;        border-left-color: #2b99c4;                background: rgba(43,153,196,0.12); }
   #subSidebar .type-btn.active[data-lm="메이"]   { color: #c9a800;        border-left-color: #ecd25b;                background: rgba(236,210,91,0.12); }
   #subSidebar .type-btn.active[data-lm="제나"]   { color: #ba92db;        border-left-color: #ba92db;                background: rgba(186,146,219,0.12); }
+
+  #subSidebar .type-btn.active[data-ec-ch]       { color: var(--c-external); border-left-color: var(--c-external);    background: rgba(122,174,222,0.08); }
 
   .type-bar,
   .search-bar,
@@ -2182,7 +2198,7 @@ header {
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
         <span data-i18n="sort_newest">최신순</span>
       </button>
-      <button class="sort-btn btn-base" id="sortOldest" onclick="setSort('oldest')">
+      <button class="sort-btn" id="sortOldest" onclick="setSort('oldest')">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
         <span data-i18n="sort_oldest">오래된순</span>
       </button>
@@ -2246,9 +2262,10 @@ header {
 </div>
 
 <div id="externalMode" style="display:none;">
-  <div class="song-nav-inner">
-    <div class="song-nav" id="externalNav"></div>
+  <div class="song-nav-inner" id="externalCatNavWrap">
+    <div class="song-nav" id="externalCatNav"></div>
   </div>
+  <div class="type-bar" id="externalChanBar"></div>
 </div>
 
 <div id="fantubeMode" style="display:none;">
@@ -2562,7 +2579,7 @@ window._curLang = 'KR';
 
 window._i18n = {
   KR: {
-    headerTagline:        '리센느 영상 몰아보기 SCENE-FLIX',
+    headerTagline:        '리센느 영상 모아보기 SCENE-FLIX',
     tab_songs:            'Songs',
     tab_allvideos:        '전체 보기',
     tab_content:          '자컨',
@@ -2610,6 +2627,10 @@ window._i18n = {
     filter_member_minami: '미나미',
     filter_member_may:    '메이',
     filter_member_zena:   '제나',
+    ext_cat_song:         '노래',
+    ext_cat_radio:        '라디오',
+    ext_cat_variety:      '예능',
+    ext_cat_interview:    '인터뷰',
   },
   JP: {
     headerTagline:        'RESCENEの映像まとめ SCENE-FLIX',
@@ -2660,6 +2681,10 @@ window._i18n = {
     filter_member_minami: 'Minami',
     filter_member_may:    'May',
     filter_member_zena:   'Zena',
+    ext_cat_song:         '音楽',
+    ext_cat_radio:        'ラジオ',
+    ext_cat_variety:      'バラエティ',
+    ext_cat_interview:    'インタビュー',
   },
   EN: {
     headerTagline:        'RESCENE Video Archive SCENE-FLIX',
@@ -2711,6 +2736,10 @@ window._i18n = {
     filter_member_minami: 'Minami',
     filter_member_may:    'May',
     filter_member_zena:   'Zena',
+    ext_cat_song:         'Music',
+    ext_cat_radio:        'Radio',
+    ext_cat_variety:      'Variety',
+    ext_cat_interview:    'Interview',
   }
 };
 
@@ -2757,13 +2786,15 @@ function setLang(lang) {
       const lm = btn.getAttribute('data-lm');
       btn.classList.toggle('active', lm === curLiveMember);
     });
+  } else if (curSection === 'external') {
+    buildExternalChanBar();
   } else if (curSection === 'songs' || curSection === 'content') {
     buildGrid();
   } else if (curSection === 'allvideos') {
     buildAllVideosGrid();
   }
 
-  if (curSection === 'live' || curSection === 'songs' || curSection === 'allvideos') {
+  if (curSection === 'live' || curSection === 'songs' || curSection === 'allvideos' || curSection === 'external') {
     syncSubSidebar();
   }
 }
@@ -3109,6 +3140,18 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'i3BCs-IcIl4': '5월 25일',
+  'HRD4cPKvymU': '2024.10.10',
+  'LmP-0bJ1EZ0': '2025.05.21',
+  's7Ei2B4Phn0': '2024.10.10',
+  '1B8a5aLWFbY': '2025.05.21',
+  'n45ZvyUbpuo': '2025.05.21',
+  '2parx7YAqOM': '2025.05.21',
+  'QaKu6kvqq7k': '2025.05.21',
+  'Ih12lovTCVU': '2025.05.21',
+  'TqY0RI4z0bs': '2024.10.10',
+  '-nAjP6vUfb0': '2024.10.10',
+  '3-ivv1E6ub0': '2024.10.10',
   '3JHcXOBYERA': '2026.05.24',
   'bClA2Os6vpE': '5월 23일',
   'OrCOflk2QmQ': '2026.05.22',
@@ -4095,8 +4138,21 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희' };
+const EXTERNAL_LABELS = { itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교' };
 const EXTERNAL_DATA = {
+  koreauniv: [
+    { vid: 'HRD4cPKvymU', url: 'https://youtu.be/HRD4cPKvymU', date: '2024.10.10' },
+    { vid: 'LmP-0bJ1EZ0', url: 'https://youtu.be/LmP-0bJ1EZ0', date: '2025.05.21' },
+    { vid: 's7Ei2B4Phn0', url: 'https://youtu.be/s7Ei2B4Phn0', date: '2024.10.10' },
+    { vid: '1B8a5aLWFbY', url: 'https://youtu.be/1B8a5aLWFbY', date: '2025.05.21' },
+    { vid: 'n45ZvyUbpuo', url: 'https://youtu.be/n45ZvyUbpuo', date: '2025.05.21' },
+    { vid: '2parx7YAqOM', url: 'https://youtu.be/2parx7YAqOM', date: '2025.05.21' },
+    { vid: 'QaKu6kvqq7k', url: 'https://youtu.be/QaKu6kvqq7k', date: '2025.05.21' },
+    { vid: 'Ih12lovTCVU', url: 'https://youtu.be/Ih12lovTCVU', date: '2025.05.21' },
+    { vid: 'TqY0RI4z0bs', url: 'https://youtu.be/TqY0RI4z0bs', date: '2024.10.10' },
+    { vid: '-nAjP6vUfb0', url: 'https://youtu.be/-nAjP6vUfb0', date: '2024.10.10' },
+    { vid: '3-ivv1E6ub0', url: 'https://youtu.be/3-ivv1E6ub0', date: '2024.10.10' },
+  ],
   ggon: [
     { vid: 'PYzVqgqS09g', url: 'https://youtu.be/PYzVqgqS09g', date: '2026.04.15' },
   ],
@@ -4384,6 +4440,14 @@ const EXTERNAL_DATA = {
   ],
 };
 const VID_TO_EXTERNAL_KEY = {};
+const EXTERNAL_CATS = {
+  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv'] },
+  radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae'] },
+  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip'] },
+  interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview'] },
+};
+const EXTERNAL_CAT_KEYS = Object.keys(EXTERNAL_CATS);
+
 const EXTERNAL_KEYS = Object.keys(EXTERNAL_DATA).sort((a, b) => {
   const oldest = key => EXTERNAL_DATA[key].reduce((min, item) => {
     const d = item.date || '';
@@ -4424,6 +4488,7 @@ let curSong = 'all';
 let curType = 'all';
 let curContentCat = 'all';
 let curExternal = 'all';
+let curExternalCat = 'all';
 
 function buildContentNav() {
   const nav = document.getElementById('contentNav');
@@ -4511,21 +4576,57 @@ async function loadCardMetas(items, mode) {
   }
 }
 
-function buildExternalNav() {
-  const nav = document.getElementById('externalNav');
-  const totalCnt = EXTERNAL_KEYS.reduce((s, k) => s + EXTERNAL_DATA[k].length, 0);
-  let html = `<button class="song-tab ${curExternal === 'all' ? 'active' : ''}" onclick="pickExternal(this,'all')">ALL<span class="cnt">${totalCnt}</span></button>`;
-  html += EXTERNAL_KEYS.map(key => {
-    const cnt = EXTERNAL_DATA[key].length;
-    return `<button class="song-tab ${curExternal === key ? 'active' : ''}" onclick="pickExternal(this,'${key}')">${EXTERNAL_LABELS[key]}<span class="cnt">${cnt}</span></button>`;
-  }).join('');
-  nav.innerHTML = html;
+function buildExternalChanBar() {
+  const t = (window._i18n && window._i18n[window._curLang]) || window._i18n['KR'];
+  function catLabel(cat) {
+    const key = EXTERNAL_CATS[cat].i18nKey;
+    return (t && t[key]) || EXTERNAL_CATS[cat].label;
+  }
+
+  // Mobile category nav (song-nav style pills)
+  const catNav = document.getElementById('externalCatNav');
+  if (catNav) {
+    let catHtml = `<button class="song-tab ${curExternalCat === 'all' ? 'active' : ''}" onclick="pickExternalCat(this,'all')">${t.filter_all || '전체'}</button>`;
+    catHtml += EXTERNAL_CAT_KEYS.map(cat =>
+      `<button class="song-tab ${curExternalCat === cat ? 'active' : ''}" onclick="pickExternalCat(this,'${cat}')">${catLabel(cat)}</button>`
+    ).join('');
+    catNav.innerHTML = catHtml;
+  }
+
+  // PC/mobile channel bar (type-btn style)
+  const bar = document.getElementById('externalChanBar');
+  if (!bar) return;
+  if (curExternalCat === 'all') {
+    bar.innerHTML = '';
+    bar.style.display = 'none';
+    return;
+  }
+  bar.style.display = '';
+  const catKeys = EXTERNAL_CATS[curExternalCat].keys.filter(k => EXTERNAL_DATA[k]);
+  let html = `<button class="type-btn${curExternal === 'all' ? ' active' : ''}" data-ec-ch="all" onclick="pickExternalChan(this,'all')">${t.filter_all || '전체'}</button>`;
+  html += catKeys.map(key =>
+    `<button class="type-btn${curExternal === key ? ' active' : ''}" data-ec-ch="${key}" onclick="pickExternalChan(this,'${key}')">${EXTERNAL_LABELS[key]}</button>`
+  ).join('');
+  bar.innerHTML = html;
+}
+
+function pickExternalCat(el, cat) {
+  curExternalCat = cat;
+  curExternal = 'all';
+  buildExternalChanBar();
+  buildExternalGrid();
+  syncSubSidebar();
+}
+
+function pickExternalChan(el, key) {
+  curExternal = key;
+  document.querySelectorAll('#externalChanBar .type-btn[data-ec-ch]').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  buildExternalGrid();
 }
 
 function pickExternal(el, key) {
   curExternal = key;
-  document.querySelectorAll('#externalNav .song-tab').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
   buildExternalGrid();
 }
 
@@ -4539,7 +4640,7 @@ function buildExternalCard(item, delay) {
   const metaHtml = item.loaded
     ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
     : `<span class="skel skel-date"></span>`;
-  return `<a class="vcard card-base hover-lift tb-content" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-channel="${channelLabel}">
+  return `<a class="vcard card-base hover-lift tb-external" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-channel="${channelLabel}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
@@ -4551,9 +4652,17 @@ function buildExternalCard(item, delay) {
 
 function buildExternalGrid() {
   const grid = document.getElementById('grid');
-  let items = curExternal === 'all'
-    ? EXTERNAL_KEYS.flatMap(k => EXTERNAL_DATA[k])
-    : (EXTERNAL_DATA[curExternal] || []);
+  let items;
+  if (curExternalCat === 'all') {
+    items = curExternal === 'all'
+      ? EXTERNAL_KEYS.flatMap(k => EXTERNAL_DATA[k])
+      : (EXTERNAL_DATA[curExternal] || []);
+  } else {
+    const catKeys = EXTERNAL_CATS[curExternalCat].keys.filter(k => EXTERNAL_DATA[k]);
+    items = curExternal === 'all'
+      ? catKeys.flatMap(k => EXTERNAL_DATA[k])
+      : (EXTERNAL_DATA[curExternal] || []);
+  }
 
   items = [...items].sort((a, b) => {
     const da = dateStrToNum(a.date || '0');
@@ -4832,6 +4941,7 @@ const LIVE_DATA_2025 = [
 ];
 
 const LIVE_DATA_2026 = [
+  { vid:'i3BCs-IcIl4', url:'https://youtu.be/i3BCs-IcIl4', date:'5월 25일', members:['원이'], year:'2026' },
   { vid:'bClA2Os6vpE', url:'https://youtu.be/bClA2Os6vpE', date:'5월 23일', members:['제나'], year:'2026' },
   { vid:'7Xcg79neHng', url:'https://youtu.be/7Xcg79neHng', date:'5월 21일', members:['미나미','메이','제나'], year:'2026' },
   { vid:'6lsqqcbtkCI', url:'https://youtu.be/6lsqqcbtkCI', date:'5월 20일', members:['원이'], year:'2026' },
@@ -5695,7 +5805,7 @@ function pickSection(section) {
   } else {
     _liveDisconnect();
   }
-  if (section === 'external') { buildExternalNav(); buildExternalGrid(); }
+  if (section === 'external') { buildExternalChanBar(); buildExternalGrid(); }
   if (section === 'fantube') buildFantubeGrid();
   if (section === 'bookmark') buildBookmarkGrid();
 
@@ -5807,20 +5917,38 @@ function renderSubLiveMemberBtns() {
 }
 
 function renderSubExternalTabs() {
+  const t = (window._i18n && window._i18n[window._curLang]) || window._i18n['KR'];
+  function catLabel(cat) {
+    const key = EXTERNAL_CATS[cat].i18nKey;
+    return (t && t[key]) || EXTERNAL_CATS[cat].label;
+  }
   const totalCnt = EXTERNAL_KEYS.reduce((s, k) => s + EXTERNAL_DATA[k].length, 0);
-  let html = `<button class="song-tab ${curExternal === 'all' ? 'active' : ''}" onclick="pickExternalSub(this,'all')">ALL<span class="cnt">${totalCnt}</span></button>`;
-  html += EXTERNAL_KEYS.map(key => {
-    const cnt = EXTERNAL_DATA[key].length;
-    return `<button class="song-tab ${curExternal === key ? 'active' : ''}" onclick="pickExternalSub(this,'${key}')">${EXTERNAL_LABELS[key]}<span class="cnt">${cnt}</span></button>`;
+  let html = `<button class="song-tab ${curExternalCat === 'all' ? 'active' : ''}" onclick="pickExternalCatSub(this,'all')">ALL<span class="cnt">${totalCnt}</span></button>`;
+  html += EXTERNAL_CAT_KEYS.map(cat => {
+    const catData = EXTERNAL_CATS[cat];
+    const cnt = catData.keys.reduce((s, k) => s + (EXTERNAL_DATA[k] ? EXTERNAL_DATA[k].length : 0), 0);
+    return `<button class="song-tab ${curExternalCat === cat ? 'active' : ''}" onclick="pickExternalCatSub(this,'${cat}')">${catLabel(cat)}<span class="cnt">${cnt}</span></button>`;
   }).join('');
   return html;
 }
 
-function pickExternalSub(el, key) {
-  curExternal = key;
-  document.querySelectorAll('#externalNav .song-tab').forEach(t => t.classList.remove('active'));
+function pickExternalCatSub(el, cat) {
+  curExternalCat = cat;
+  curExternal = 'all';
+  buildExternalChanBar();
   buildExternalGrid();
   syncSubSidebar();
+}
+
+function pickExternalChanSub(el, key) {
+  curExternal = key;
+  buildExternalChanBar();
+  buildExternalGrid();
+  syncSubSidebar();
+}
+
+function pickExternalSub(el, key) {
+  pickExternalChanSub(el, key);
 }
 
 function closeSubSidebar() {
