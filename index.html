@@ -41,6 +41,14 @@ gtag('config', 'G-05C99P2DB9');
   --c-onthespot:#e09050;
   --c-fullcam:  #d4c84a;
   --c-external: #7aaede;
+
+  --c-sched-broadcast: #a080d0;
+  --c-sched-radio:     #7aaede;
+  --c-sched-event:     #e09050;
+  --c-sched-fansign:   #c07090;
+  --c-sched-concert:   #80b8a0;
+  --c-sched-notice:    #888888;
+  --c-sched-anniv:     #b8a080;
 }
 
 [data-theme="light"] {
@@ -62,6 +70,14 @@ gtag('config', 'G-05C99P2DB9');
   --c-onthespot:#c06820;
   --c-fullcam:  #a89a10;
   --c-external: #3a78c4;
+
+  --c-sched-broadcast: #6040a0;
+  --c-sched-radio:     #2a68b4;
+  --c-sched-event:     #c06820;
+  --c-sched-fansign:   #a04060;
+  --c-sched-concert:   #3a8860;
+  --c-sched-notice:    #666666;
+  --c-sched-anniv:     #8a6840;
 }
 
 [data-theme="light"] .wordmark-img {
@@ -1937,6 +1953,328 @@ header {
   }
 }
 
+
+#scheduleMode {
+  animation: fadeUp 0.32s ease both;
+}
+.schedule-wrap {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 28px 28px 80px;
+}
+.sched-notice-top {
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+  background: var(--surf);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 13px;
+  margin-bottom: 22px;
+  font-size: 0.68rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.sched-body {
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+.sched-cal-col {
+  flex: 0 0 520px;
+  min-width: 0;
+}
+.sched-list-col {
+  flex: 1;
+  min-width: 0;
+  position: sticky;
+  top: 60px;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-h) transparent;
+}
+.sched-list-col::-webkit-scrollbar { width: 4px; }
+.sched-list-col::-webkit-scrollbar-thumb { background: var(--border-h); border-radius: 2px; }
+
+.sched-list-header {
+  display: flex;
+  align-items: baseline;
+  gap: 9px;
+  padding: 0 2px 14px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 0;
+}
+.sched-list-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.sched-list-count {
+  font-size: 0.65rem;
+  color: var(--muted);
+}
+
+.sched-group {
+  border-bottom: 1px solid var(--border);
+}
+.sched-group:last-child { border-bottom: none; }
+.sched-group-date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 4px 6px;
+}
+.sched-group-day-num {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+  min-width: 32px;
+  text-align: right;
+}
+.sched-group-day-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.sched-group-dow {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.sched-group-month {
+  font-size: 0.62rem;
+  color: var(--muted);
+  opacity: 0.7;
+}
+.sched-group-date.today-group .sched-group-day-num {
+  color: var(--bg);
+  background: var(--accent);
+  border-radius: 6px;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+}
+.sched-group-date.sun-group .sched-group-day-num { color: #c07090; }
+.sched-group-date.sat-group .sched-group-day-num { color: #7aaede; }
+.sched-group-date.today-group .sched-group-day-num { color: var(--bg); }
+
+.sched-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 8px 4px 8px 46px;
+  border-radius: 8px;
+  transition: background 0.12s;
+  cursor: default;
+  margin-bottom: 2px;
+}
+.sched-item:hover { background: var(--card-h); }
+.sched-item-bar {
+  width: 3px;
+  min-height: 36px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.sched-item-body { flex: 1; min-width: 0; }
+.sched-item-title {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text);
+  line-height: 1.5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.sched-item-meta {
+  font-size: 0.67rem;
+  color: var(--muted);
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.sched-item-type-tag {
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+.sched-item-link {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.62rem;
+  border: 1px solid var(--border);
+  padding: 2px 7px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  margin-left: auto;
+  transition: color 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+.sched-item-link:hover { color: var(--accent); border-color: var(--accent); }
+.sched-list-empty {
+  padding: 40px 0;
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.cal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.cal-month-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  text-align: center;
+  flex: 1;
+}
+.cal-nav-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: none;
+  border: 1px solid var(--border-h);
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  flex-shrink: 0;
+}
+.cal-nav-btn svg { width: 14px; height: 14px; }
+.cal-nav-btn:hover { color: var(--text); background: var(--card); border-color: var(--border-h); }
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--border);
+}
+.cal-day-header {
+  background: var(--surf);
+  text-align: center;
+  padding: 8px 4px;
+  font-size: 0.58rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.cal-day-header.sun { color: #c07090; }
+.cal-day-header.sat { color: #7aaede; }
+
+.cal-cell {
+  background: var(--card);
+  min-height: 76px;
+  padding: 6px 5px 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  cursor: default;
+  transition: background 0.15s;
+  position: relative;
+}
+.cal-cell:hover { background: var(--card-h); }
+.cal-cell.other-month { background: var(--surf); opacity: 0.5; }
+.cal-cell.today { background: color-mix(in srgb, var(--accent) 8%, var(--card)); }
+.cal-cell.has-events { cursor: pointer; }
+.cal-cell.selected { background: color-mix(in srgb, var(--accent) 14%, var(--card)); }
+.cal-cell.today .cal-date-num {
+  background: var(--accent);
+  color: var(--bg);
+  border-radius: 50%;
+}
+
+.cal-date-num {
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: var(--muted);
+  line-height: 1;
+  margin-bottom: 2px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.cal-cell.sun-col .cal-date-num { color: #c07090; }
+.cal-cell.sat-col .cal-date-num { color: #7aaede; }
+.cal-cell.today .cal-date-num { color: var(--bg); }
+
+.cal-event-pill {
+  font-size: 0.54rem;
+  line-height: 1.3;
+  padding: 2px 4px;
+  border-radius: 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500;
+}
+.cal-event-pill.type-broadcast { background: color-mix(in srgb, var(--c-sched-broadcast) 22%, transparent); color: var(--c-sched-broadcast); border-left: 2px solid var(--c-sched-broadcast); }
+.cal-event-pill.type-radio     { background: color-mix(in srgb, var(--c-sched-radio)     22%, transparent); color: var(--c-sched-radio);     border-left: 2px solid var(--c-sched-radio); }
+.cal-event-pill.type-event     { background: color-mix(in srgb, var(--c-sched-event)     22%, transparent); color: var(--c-sched-event);     border-left: 2px solid var(--c-sched-event); }
+.cal-event-pill.type-fansign   { background: color-mix(in srgb, var(--c-sched-fansign)   22%, transparent); color: var(--c-sched-fansign);   border-left: 2px solid var(--c-sched-fansign); }
+.cal-event-pill.type-concert   { background: color-mix(in srgb, var(--c-sched-concert)   22%, transparent); color: var(--c-sched-concert);   border-left: 2px solid var(--c-sched-concert); }
+.cal-event-pill.type-notice    { background: color-mix(in srgb, var(--c-sched-notice)    22%, transparent); color: var(--c-sched-notice);    border-left: 2px solid var(--c-sched-notice); }
+.cal-event-pill.type-anniv     { background: color-mix(in srgb, var(--c-sched-anniv)     22%, transparent); color: var(--c-sched-anniv);     border-left: 2px solid var(--c-sched-anniv); }
+.cal-more-badge { font-size: 0.52rem; color: var(--muted); margin-top: 1px; padding-left: 2px; }
+
+.cal-detail { margin-top: 14px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: none; }
+.cal-detail.visible { display: block; animation: fadeUp 0.2s ease both; }
+.cal-detail-header { background: var(--surf); padding: 11px 16px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; color: var(--accent); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.cal-detail-close { background: none; border: none; color: var(--muted); cursor: pointer; padding: 0; display: flex; align-items: center; transition: color 0.15s; }
+.cal-detail-close:hover { color: var(--text); }
+.cal-detail-close svg { width: 14px; height: 14px; }
+.cal-detail-list { background: var(--card); padding: 8px 0; }
+.cal-detail-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 16px; border-bottom: 1px solid var(--border); transition: background 0.12s; }
+.cal-detail-item:last-child { border-bottom: none; }
+.cal-detail-item:hover { background: var(--card-h); }
+.cal-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+.cal-detail-text { flex: 1; }
+.cal-detail-title { font-size: 0.8rem; font-weight: 500; color: var(--text); line-height: 1.5; }
+.cal-detail-meta { font-size: 0.67rem; color: var(--muted); margin-top: 2px; }
+.cal-detail-link { color: var(--muted); text-decoration: none; font-size: 0.63rem; letter-spacing: 0.05em; border: 1px solid var(--border); padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; transition: color 0.15s, border-color 0.15s; }
+.cal-detail-link:hover { color: var(--accent); border-color: var(--accent); }
+
+.cal-legend { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 14px; padding: 0 2px; }
+.cal-legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.64rem; color: var(--muted); }
+
+@media (max-width: 900px) {
+  .sched-body { flex-direction: column; }
+  .sched-cal-col { flex: none; width: 100%; }
+  .sched-list-col { position: static; max-height: none; overflow-y: visible; }
+}
+@media (max-width: 700px) {
+  .schedule-wrap { padding: 16px 10px 80px; }
+  .cal-cell { min-height: 58px; padding: 4px 3px 3px; }
+  .cal-event-pill { font-size: 0.5rem; padding: 1px 3px; }
+  .cal-date-num { font-size: 0.62rem; width: 17px; height: 17px; }
+  .cal-month-title { font-size: 0.95rem; }
+  .sched-notice-top { font-size: 0.63rem; }
+  .sched-cal-col { flex: none; }
+}
+
 </style>
 </head>
 
@@ -1998,6 +2336,11 @@ header {
     <button class="drawer-item btn-base" id="dExternal" onclick="closeDrawer(); pickSection('external');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       <span data-i18n="tab_external_full">외부 컨텐츠</span>
+    </button>
+    <div class="drawer-divider"></div>
+    <button class="drawer-item btn-base" id="dSchedule" onclick="closeDrawer(); pickSection('schedule');">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span data-i18n="tab_schedule">스케줄</span>
     </button>
     <div class="drawer-divider"></div>
     <button class="drawer-item btn-base" id="dFantube"  onclick="closeDrawer(); pickSection('fantube');">
@@ -2135,6 +2478,11 @@ header {
     <button class="section-tab" id="secExternal" onclick="pickSection('external')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       <span data-i18n="tab_external_full">외부 컨텐츠</span>
+    </button>
+    <div style="height:1px;background:var(--border);margin:4px 4px;"></div>
+    <button class="section-tab" id="secSchedule" onclick="pickSection('schedule')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <span data-i18n="tab_schedule">스케줄</span>
     </button>
     <div style="height:1px;background:var(--border);margin:4px 4px;"></div>
     <button class="section-tab" id="secFantube" onclick="pickSection('fantube')">
@@ -2569,6 +2917,45 @@ header {
 
 </div>
 
+<div id="scheduleMode" style="display:none;">
+  <div class="schedule-wrap">
+    <div class="sched-notice-top">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0;opacity:0.6;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <span>스케줄은 공식 채널 및 팬 커뮤니티 정보를 기반으로 표시됩니다. 변동 가능성이 있으니 공식 계정을 함께 확인해 주세요.</span>
+    </div>
+    <div class="sched-body">
+      <div class="sched-cal-col">
+        <div class="cal-header">
+          <button class="cal-nav-btn" id="calPrev" onclick="calNavigate(-1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="cal-month-title" id="calMonthTitle"></div>
+          <button class="cal-nav-btn" id="calNext" onclick="calNavigate(1)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+        <div class="cal-detail" id="calDetail"></div>
+        <div class="cal-legend">
+          <span class="cal-legend-item"><span class="cal-dot" style="background:var(--c-sched-broadcast)"></span>방송</span>
+          <span class="cal-legend-item"><span class="cal-dot" style="background:var(--c-sched-radio)"></span>라디오</span>
+          <span class="cal-legend-item"><span class="cal-dot" style="background:var(--c-sched-event)"></span>행사</span>
+          <span class="cal-legend-item"><span class="cal-dot" style="background:var(--c-sched-fansign)"></span>팬사인회</span>
+          <span class="cal-legend-item"><span class="cal-dot" style="background:var(--c-sched-concert)"></span>공연</span>
+          <span class="cal-legend-item"><span class="cal-dot" style="background:var(--c-sched-notice)"></span>공지</span>
+        </div>
+      </div>
+      <div class="sched-list-col">
+        <div class="sched-list-header">
+          <span class="sched-list-title" id="schedListTitle">전체 일정</span>
+          <span class="sched-list-count" id="schedListCount"></span>
+        </div>
+        <div class="sched-list" id="schedList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="grid-wrap" id="grid-wrap-el">
   <div class="video-grid" id="grid"></div>
 </div>
@@ -2593,6 +2980,7 @@ window._i18n = {
     tab_about:            'About',
     tab_bookmark:         '즐겨찾기',
     tab_bookmark_full:    '즐겨찾기',
+    tab_schedule:         '스케줄',
     sort_newest:          '최신순',
     sort_oldest:          '오래된순',
     search_placeholder:   '제목, 카테고리, 채널명으로 검색...',
@@ -2647,6 +3035,7 @@ window._i18n = {
     tab_about:            'About',
     tab_bookmark:         'お気に入り',
     tab_bookmark_full:    'お気に入り',
+    tab_schedule:         'スケジュール',
     sort_newest:          '新しい順',
     sort_oldest:          '古い順',
     search_placeholder:   'タイトル・カテゴリ・チャンネルで検索...',
@@ -2701,6 +3090,7 @@ window._i18n = {
     tab_about:            'About',
     tab_bookmark:         'Saved',
     tab_bookmark_full:    'Saved',
+    tab_schedule:         'Schedule',
     sort_newest:          'Newest',
     sort_oldest:          'Oldest',
     search_placeholder:   'Search by title, category or channel...',
@@ -3140,6 +3530,7 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  '84M4IlDJaWo': '5월 27일',
   'i3BCs-IcIl4': '5월 25일',
   'HRD4cPKvymU': '2024.10.10',
   'LmP-0bJ1EZ0': '2025.05.21',
@@ -4108,25 +4499,6 @@ const CONTENT_DATA = [
       "https://youtu.be/WkUINlol-OY",
     ]
   },
-  {
-    category: "안녕하세요원이입니다잘부탁드립니다",
-    urls: [
-      "https://youtu.be/OrCOflk2QmQ",
-      "https://www.youtube.com/watch?v=lSxqQYipZoU",
-      "https://www.youtube.com/watch?v=6sIeZF5_ixU",
-      "https://www.youtube.com/watch?v=fbgmOeTkKHw",
-      "https://www.youtube.com/watch?v=1O4hJxumimA",
-      "https://www.youtube.com/watch?v=ZLWqgD03tFU",
-      "https://www.youtube.com/watch?v=bvUS-ri9nqQ",
-      "https://www.youtube.com/watch?v=heifaIjlSUc",
-      "https://www.youtube.com/watch?v=inaTPJiZ734",
-      "https://www.youtube.com/watch?v=FcMaC8akSU8",
-      "https://www.youtube.com/watch?v=giWNmOtwsR4",
-      "https://www.youtube.com/watch?v=NS7tSrMrWsc",
-      "https://youtu.be/_AqXSSQ0Cmo",
-      "https://youtu.be/TpajmJJlHSE",
-    ]
-  },
 ];
 
 const CONTENT_ITEMS = [];
@@ -4138,8 +4510,24 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교' };
+const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교' };
 const EXTERNAL_DATA = {
+  anwonjal: [
+    { vid: 'OrCOflk2QmQ', url: 'https://youtu.be/OrCOflk2QmQ', date: '2026.05.22' },
+    { vid: 'lSxqQYipZoU', url: 'https://www.youtube.com/watch?v=lSxqQYipZoU', date: '2026.02.05' },
+    { vid: '6sIeZF5_ixU', url: 'https://www.youtube.com/watch?v=6sIeZF5_ixU', date: '2026.02.10' },
+    { vid: 'fbgmOeTkKHw', url: 'https://www.youtube.com/watch?v=fbgmOeTkKHw', date: '2026.02.10' },
+    { vid: '1O4hJxumimA', url: 'https://www.youtube.com/watch?v=1O4hJxumimA', date: '2026.02.20' },
+    { vid: 'ZLWqgD03tFU', url: 'https://www.youtube.com/watch?v=ZLWqgD03tFU', date: '2026.02.27' },
+    { vid: 'bvUS-ri9nqQ', url: 'https://www.youtube.com/watch?v=bvUS-ri9nqQ', date: '2026.03.06' },
+    { vid: 'heifaIjlSUc', url: 'https://www.youtube.com/watch?v=heifaIjlSUc', date: '2026.03.20' },
+    { vid: 'inaTPJiZ734', url: 'https://www.youtube.com/watch?v=inaTPJiZ734', date: '2026.03.29' },
+    { vid: 'FcMaC8akSU8', url: 'https://www.youtube.com/watch?v=FcMaC8akSU8', date: '2026.04.09' },
+    { vid: 'giWNmOtwsR4', url: 'https://www.youtube.com/watch?v=giWNmOtwsR4', date: '2026.04.17' },
+    { vid: 'NS7tSrMrWsc', url: 'https://www.youtube.com/watch?v=NS7tSrMrWsc', date: '2026.05.01' },
+    { vid: '_AqXSSQ0Cmo', url: 'https://youtu.be/_AqXSSQ0Cmo', date: '2026.05.08' },
+    { vid: 'TpajmJJlHSE', url: 'https://youtu.be/TpajmJJlHSE', date: '2026.05.15' },
+  ],
   koreauniv: [
     { vid: 'HRD4cPKvymU', url: 'https://youtu.be/HRD4cPKvymU', date: '2024.10.10' },
     { vid: 'LmP-0bJ1EZ0', url: 'https://youtu.be/LmP-0bJ1EZ0', date: '2025.05.21' },
@@ -4443,7 +4831,7 @@ const VID_TO_EXTERNAL_KEY = {};
 const EXTERNAL_CATS = {
   song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv'] },
   radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae'] },
-  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip'] },
+  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip'] },
   interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview'] },
 };
 const EXTERNAL_CAT_KEYS = Object.keys(EXTERNAL_CATS);
@@ -4478,7 +4866,7 @@ const _elMobileThemeLabel  = document.getElementById('mobileThemeLabel');
 const _elThemeIcon         = document.getElementById('themeIcon');
 const _elMobileThemeIcon   = document.getElementById('mobileThemeIcon');
 
-const _SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','memberMode','linksMode','bookmarkMode','aboutMode','grid-wrap-el','liveGrid'];
+const _SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','memberMode','linksMode','bookmarkMode','aboutMode','scheduleMode','grid-wrap-el','liveGrid'];
 const _SECTION_EL_CACHE = Object.fromEntries(
   _SECTION_EL_IDS.map(id => [id, document.getElementById(id)])
 );
@@ -4583,7 +4971,6 @@ function buildExternalChanBar() {
     return (t && t[key]) || EXTERNAL_CATS[cat].label;
   }
 
-  // Mobile category nav (song-nav style pills)
   const catNav = document.getElementById('externalCatNav');
   if (catNav) {
     let catHtml = `<button class="song-tab ${curExternalCat === 'all' ? 'active' : ''}" onclick="pickExternalCat(this,'all')">${t.filter_all || '전체'}</button>`;
@@ -4593,7 +4980,6 @@ function buildExternalChanBar() {
     catNav.innerHTML = catHtml;
   }
 
-  // PC/mobile channel bar (type-btn style)
   const bar = document.getElementById('externalChanBar');
   if (!bar) return;
   if (curExternalCat === 'all') {
@@ -4602,7 +4988,15 @@ function buildExternalChanBar() {
     return;
   }
   bar.style.display = '';
-  const catKeys = EXTERNAL_CATS[curExternalCat].keys.filter(k => EXTERNAL_DATA[k]);
+  const catKeys = EXTERNAL_CATS[curExternalCat].keys
+    .filter(k => EXTERNAL_DATA[k])
+    .sort((a, b) => {
+      const oldest = key => EXTERNAL_DATA[key].reduce((min, item) => {
+        const d = (item.date || DATE_MAP[item.vid] || '');
+        return (!min || d < min) ? d : min;
+      }, '');
+      return oldest(a).localeCompare(oldest(b));
+    });
   let html = `<button class="type-btn${curExternal === 'all' ? ' active' : ''}" data-ec-ch="all" onclick="pickExternalChan(this,'all')">${t.filter_all || '전체'}</button>`;
   html += catKeys.map(key =>
     `<button class="type-btn${curExternal === key ? ' active' : ''}" data-ec-ch="${key}" onclick="pickExternalChan(this,'${key}')">${EXTERNAL_LABELS[key]}</button>`
@@ -4941,6 +5335,7 @@ const LIVE_DATA_2025 = [
 ];
 
 const LIVE_DATA_2026 = [
+  { vid:'84M4IlDJaWo', url:'https://youtu.be/84M4IlDJaWo', date:'5월 27일', members:['원이','리브','미나미','제나'], year:'2026' },
   { vid:'i3BCs-IcIl4', url:'https://youtu.be/i3BCs-IcIl4', date:'5월 25일', members:['원이'], year:'2026' },
   { vid:'bClA2Os6vpE', url:'https://youtu.be/bClA2Os6vpE', date:'5월 23일', members:['제나'], year:'2026' },
   { vid:'7Xcg79neHng', url:'https://youtu.be/7Xcg79neHng', date:'5월 21일', members:['미나미','메이','제나'], year:'2026' },
@@ -5737,8 +6132,8 @@ function replaceSkeleton(item) {
   }
 }
 
-const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', fantube:'secFantube', member:'secMember', links:'secLinks', bookmark:'secBookmark', about:'secAbout' };
-const _PICK_SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','memberMode','linksMode','bookmarkMode','aboutMode','grid-wrap-el','liveGrid'];
+const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', fantube:'secFantube', member:'secMember', links:'secLinks', bookmark:'secBookmark', about:'secAbout', schedule:'secSchedule' };
+const _PICK_SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','memberMode','linksMode','bookmarkMode','aboutMode','scheduleMode','grid-wrap-el','liveGrid'];
 const _PICK_SECTION_MAP = {
   allvideos:['allvideosMode','grid-wrap-el'],
   songs:    ['songMode','grid-wrap-el'],
@@ -5750,6 +6145,7 @@ const _PICK_SECTION_MAP = {
   links:    ['linksMode'],
   bookmark: ['bookmarkMode','grid-wrap-el'],
   about:    ['aboutMode'],
+  schedule: ['scheduleMode'],
 };
 const _PICK_SEARCHABLE = ['allvideos', 'songs', 'content', 'external', 'live', 'bookmark'];
 const _SUB_SECTIONS = {
@@ -5808,6 +6204,7 @@ function pickSection(section) {
   if (section === 'external') { buildExternalChanBar(); buildExternalGrid(); }
   if (section === 'fantube') buildFantubeGrid();
   if (section === 'bookmark') buildBookmarkGrid();
+  if (section === 'schedule') buildCalendar();
 
   updateMobileNav(section);
   updateSubSidebar(section);
@@ -6180,6 +6577,295 @@ function setType(el, type) {
   buildGrid();
 }
 
+let SCHEDULE_DATA = [];
+
+(function loadScheduleJson() {
+  fetch('./schedule.json?_=' + Date.now())
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(data) {
+      SCHEDULE_DATA = (data.events || []).map(function(ev) {
+        return {
+          date:  ev.date  || '',
+          title: ev.title || '',
+          type:  ev.type  || 'notice',
+          note:  ev.detail || ev.note || '',
+          link:  ev.link  || '',
+        };
+      }).filter(function(ev) { return ev.date && ev.title; });
+      if (typeof buildCalendar === 'function' && curSection === 'schedule') {
+        buildCalendar();
+      }
+    })
+    .catch(function(e) {
+      console.warn('schedule.json 로드 실패:', e);
+    });
+})();
+
+const SCHED_TYPE_COLOR = {
+  broadcast: 'var(--c-sched-broadcast)',
+  radio:     'var(--c-sched-radio)',
+  event:     'var(--c-sched-event)',
+  fansign:   'var(--c-sched-fansign)',
+  concert:   'var(--c-sched-concert)',
+  notice:    'var(--c-sched-notice)',
+  anniv:     'var(--c-sched-anniv)',
+};
+
+let _calYear  = new Date().getFullYear();
+let _calMonth = new Date().getMonth();
+let _calSelectedDate = null;
+let _calBuilt = false;
+
+function calNavigate(dir) {
+  _calMonth += dir;
+  if (_calMonth > 11) { _calMonth = 0; _calYear++; }
+  if (_calMonth < 0)  { _calMonth = 11; _calYear--; }
+  _calSelectedDate = null;
+  document.getElementById('calDetail').classList.remove('visible');
+  renderCalendar();
+  renderSchedList();
+}
+
+function buildCalendar() {
+  renderCalendar();
+  renderSchedList();
+}
+
+function renderCalendar() {
+  const lang = window._curLang || 'KR';
+  const monthNames = {
+    KR: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    JP: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+    EN: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+  };
+  const dayNames = {
+    KR: ['일','월','화','수','목','금','토'],
+    JP: ['日','月','火','水','木','金','土'],
+    EN: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+  };
+  const mNames = monthNames[lang] || monthNames.KR;
+  const dNames = dayNames[lang] || dayNames.KR;
+  const calTitle = lang === 'EN'
+    ? `${mNames[_calMonth]} ${_calYear}`
+    : lang === 'JP'
+    ? `${_calYear}年 ${mNames[_calMonth]}`
+    : `${_calYear}년 ${mNames[_calMonth]}`;
+  document.getElementById('calMonthTitle').textContent = calTitle;
+
+  const firstDay = new Date(_calYear, _calMonth, 1).getDay();
+  const daysInMonth = new Date(_calYear, _calMonth + 1, 0).getDate();
+  const daysInPrev = new Date(_calYear, _calMonth, 0).getDate();
+  const today = new Date();
+  const todayY = today.getFullYear(), todayM = today.getMonth(), todayD = today.getDate();
+
+  const evMap = {};
+  for (const ev of SCHEDULE_DATA) {
+    if (!evMap[ev.date]) evMap[ev.date] = [];
+    evMap[ev.date].push(ev);
+  }
+
+  let html = '';
+  for (let i = 0; i < 7; i++) {
+    const cls = i === 0 ? 'sun' : i === 6 ? 'sat' : '';
+    html += `<div class="cal-day-header ${cls}">${dNames[i]}</div>`;
+  }
+
+  const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+
+  for (let c = 0; c < totalCells; c++) {
+    const dow = c % 7;
+    let day, isOther = false, dateStr = '';
+    if (c < firstDay) {
+      day = daysInPrev - firstDay + c + 1; isOther = true;
+      const pm = _calMonth === 0 ? 12 : _calMonth;
+      const py = _calMonth === 0 ? _calYear - 1 : _calYear;
+      dateStr = `${py}-${String(pm).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    } else if (c >= firstDay + daysInMonth) {
+      day = c - firstDay - daysInMonth + 1; isOther = true;
+      const nm = _calMonth === 11 ? 1 : _calMonth + 2;
+      const ny = _calMonth === 11 ? _calYear + 1 : _calYear;
+      dateStr = `${ny}-${String(nm).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    } else {
+      day = c - firstDay + 1;
+      dateStr = `${_calYear}-${String(_calMonth+1).padStart(2,'0')}-${String(day).padStart(2,'0')}`;
+    }
+
+    const isToday = !isOther && _calYear===todayY && _calMonth===todayM && day===todayD;
+    const isSelected = dateStr === _calSelectedDate;
+    const events = evMap[dateStr] || [];
+    const hasEvents = events.length > 0;
+
+    let cellCls = 'cal-cell';
+    if (isOther) cellCls += ' other-month';
+    if (isToday) cellCls += ' today';
+    if (isSelected) cellCls += ' selected';
+    if (hasEvents) cellCls += ' has-events';
+    if (dow === 0) cellCls += ' sun-col';
+    if (dow === 6) cellCls += ' sat-col';
+
+    const onclick = hasEvents ? `onclick="calSelectDate('${dateStr}')"` : '';
+    const MAX_PILLS = 2;
+    let pillsHtml = '';
+    for (let ei = 0; ei < Math.min(events.length, MAX_PILLS); ei++) {
+      pillsHtml += `<div class="cal-event-pill type-${events[ei].type}">${events[ei].title}</div>`;
+    }
+    if (events.length > MAX_PILLS) {
+      pillsHtml += `<div class="cal-more-badge">+${events.length - MAX_PILLS}개 더</div>`;
+    }
+
+    html += `<div class="${cellCls}" ${onclick} data-date="${dateStr}"><div class="cal-date-num">${day}</div>${pillsHtml}</div>`;
+  }
+
+  document.getElementById('calGrid').innerHTML = html;
+}
+
+function calSelectDate(dateStr) {
+  if (_calSelectedDate === dateStr) {
+    _calSelectedDate = null;
+    document.getElementById('calDetail').classList.remove('visible');
+    document.querySelectorAll('.cal-cell.selected').forEach(el => el.classList.remove('selected'));
+    return;
+  }
+  _calSelectedDate = dateStr;
+  document.querySelectorAll('.cal-cell.selected').forEach(el => el.classList.remove('selected'));
+  const cell = document.querySelector(`.cal-cell[data-date="${dateStr}"]`);
+  if (cell) cell.classList.add('selected');
+
+  const events = SCHEDULE_DATA.filter(e => e.date === dateStr);
+  if (!events.length) return;
+
+  const lang = window._curLang || 'KR';
+  const monthNames = {
+    KR:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    JP:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+    EN:['January','February','March','April','May','June','July','August','September','October','November','December'],
+  };
+  const parts = dateStr.split('-');
+  const Y = parseInt(parts[0]), M = parseInt(parts[1])-1, D = parseInt(parts[2]);
+  const mName = (monthNames[lang]||monthNames.KR)[M];
+  const dateLabel = lang==='EN' ? `${mName} ${D}, ${Y}` : `${Y}년 ${mName} ${D}일`;
+
+  const itemsHtml = events.map(ev => {
+    const dotStyle = `background:${SCHED_TYPE_COLOR[ev.type]||'#888'}`;
+    const linkHtml = ev.link ? `<a href="${ev.link}" target="_blank" rel="noopener" class="cal-detail-link">↗ 링크</a>` : '';
+    return `<div class="cal-detail-item">
+      <div class="cal-dot" style="${dotStyle}"></div>
+      <div class="cal-detail-text">
+        <div class="cal-detail-title">${ev.title}</div>
+        ${ev.note ? `<div class="cal-detail-meta">${ev.note}</div>` : ''}
+      </div>
+      ${linkHtml}
+    </div>`;
+  }).join('');
+
+  const detailEl = document.getElementById('calDetail');
+  detailEl.innerHTML = `<div class="cal-detail-header"><span>${dateLabel}</span><button class="cal-detail-close" onclick="calCloseDetail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="cal-detail-list">${itemsHtml}</div>`;
+  detailEl.classList.add('visible');
+  detailEl.scrollIntoView({ behavior:'smooth', block:'nearest' });
+}
+
+function calCloseDetail() {
+  _calSelectedDate = null;
+  document.getElementById('calDetail').classList.remove('visible');
+  document.querySelectorAll('.cal-cell.selected').forEach(el => el.classList.remove('selected'));
+}
+
+function renderSchedList() {
+  const lang = window._curLang || 'KR';
+  const monthNames = {
+    KR:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+    JP:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+    EN:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+  };
+  const dowNames = {
+    KR:['일','월','화','수','목','금','토'],
+    JP:['日','月','火','水','木','金','土'],
+    EN:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+  };
+  const typeLabel = {
+    broadcast: { KR:'방송',    JP:'放送',       EN:'Broadcast' },
+    radio:     { KR:'라디오',  JP:'ラジオ',     EN:'Radio' },
+    event:     { KR:'행사',    JP:'イベント',   EN:'Event' },
+    fansign:   { KR:'팬사인회', JP:'ファンサイン', EN:'Fan Sign' },
+    concert:   { KR:'공연',    JP:'公演',       EN:'Concert' },
+    notice:    { KR:'공지',    JP:'お知らせ',   EN:'Notice' },
+    anniv:     { KR:'기념일',  JP:'記念日',     EN:'Anniversary' },
+  };
+
+  const monthStr = `${_calYear}-${String(_calMonth+1).padStart(2,'0')}`;
+  const monthEvents = SCHEDULE_DATA.filter(e => e.date.startsWith(monthStr));
+  monthEvents.sort((a,b) => a.date.localeCompare(b.date));
+
+  const listEl = document.getElementById('schedList');
+  const countEl = document.getElementById('schedListCount');
+  const titleEl = document.getElementById('schedListTitle');
+  if (!listEl) return;
+
+  const mName = (monthNames[lang]||monthNames.KR)[_calMonth];
+  if (titleEl) titleEl.textContent = lang==='EN' ? `${mName} ${_calYear}` : `${_calYear}년 ${mName}`;
+  if (countEl) countEl.textContent = monthEvents.length ? `${monthEvents.length}개` : '';
+
+  if (!monthEvents.length) {
+    listEl.innerHTML = `<div class="sched-list-empty">이번 달 등록된 스케줄이 없습니다.</div>`;
+    return;
+  }
+
+  const today = new Date();
+  const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
+
+  const groups = {};
+  for (const ev of monthEvents) {
+    if (!groups[ev.date]) groups[ev.date] = [];
+    groups[ev.date].push(ev);
+  }
+
+  let html = '';
+  for (const [dateStr, evs] of Object.entries(groups)) {
+    const parts = dateStr.split('-');
+    const D = parseInt(parts[2]);
+    const dow = new Date(dateStr).getDay();
+    const mN = (monthNames[lang]||monthNames.KR)[parseInt(parts[1])-1];
+    const dowN = (dowNames[lang]||dowNames.KR)[dow];
+    const isToday = dateStr === todayStr;
+    const isSun = dow === 0, isSat = dow === 6;
+    const todayCls = isToday ? ' today-group' : '';
+    const dowCls = isSun ? ' sun-group' : isSat ? ' sat-group' : '';
+
+    html += `<div class="sched-group">
+      <div class="sched-group-date${todayCls}${dowCls}">
+        <div class="sched-group-day-num">${D}</div>
+        <div class="sched-group-day-info">
+          <span class="sched-group-dow">${dowN}${isToday ? (lang==='KR'?' · 오늘':lang==='JP'?' · 今日':' · Today') : ''}</span>
+          <span class="sched-group-month">${mN}</span>
+        </div>
+      </div>`;
+
+    for (const ev of evs) {
+      const bar = `background:${SCHED_TYPE_COLOR[ev.type]||'#888'}`;
+      const tl = (typeLabel[ev.type]||{})[lang] || ev.type;
+      const tagStyle = `background:color-mix(in srgb, ${SCHED_TYPE_COLOR[ev.type]||'#888'} 18%, transparent);color:${SCHED_TYPE_COLOR[ev.type]||'#888'}`;
+      const link = ev.link ? `<a href="${ev.link}" target="_blank" rel="noopener" class="sched-item-link">↗ 링크</a>` : '';
+      html += `<div class="sched-item">
+        <div class="sched-item-bar" style="${bar}"></div>
+        <div class="sched-item-body">
+          <div class="sched-item-title">${ev.title}</div>
+          <div class="sched-item-meta">
+            <span class="sched-item-type-tag" style="${tagStyle}">${tl}</span>
+            ${ev.note ? `<span>${ev.note}</span>` : ''}
+          </div>
+        </div>
+        ${link}
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
+  listEl.innerHTML = html;
+}
+
 buildSongNav();
 pickSection('about');
 
@@ -6365,7 +7051,8 @@ function updateMobileNav(section) {
   const drawerMap = {
     allvideos: 'dAllVideos',
     songs: 'dSongs', content: 'dContent', live: 'dLive', external: 'dExternal',
-    fantube: 'dFantube', links: 'dLinks', about: 'dAbout', bookmark: 'dBookmark'
+    fantube: 'dFantube', links: 'dLinks', about: 'dAbout', bookmark: 'dBookmark',
+    schedule: 'dSchedule',
   };
   document.querySelectorAll('.drawer-item').forEach(b => b.classList.remove('active'));
   if (drawerMap[section]) {
