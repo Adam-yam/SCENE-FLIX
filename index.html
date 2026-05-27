@@ -2185,7 +2185,9 @@ header {
 
 .cal-cell {
   background: var(--card);
-  min-height: 76px;
+  height: 90px;
+  min-height: 90px;
+  max-height: 90px;
   padding: 6px 5px 5px;
   display: flex;
   flex-direction: column;
@@ -2193,6 +2195,7 @@ header {
   cursor: default;
   transition: background 0.15s;
   position: relative;
+  overflow: hidden;
 }
 .cal-cell:hover { background: var(--card-h); }
 .cal-cell.other-month { background: var(--surf); opacity: 0.5; }
@@ -2230,6 +2233,10 @@ header {
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 500;
+  min-width: 0;
+  flex-shrink: 0;
+  width: 100%;
+  box-sizing: border-box;
 }
 .cal-event-pill.type-broadcast { background: color-mix(in srgb, var(--c-sched-broadcast) 22%, transparent); color: var(--c-sched-broadcast); border-left: 2px solid var(--c-sched-broadcast); }
 .cal-event-pill.type-radio     { background: color-mix(in srgb, var(--c-sched-radio)     22%, transparent); color: var(--c-sched-radio);     border-left: 2px solid var(--c-sched-radio); }
@@ -2267,7 +2274,7 @@ header {
 }
 @media (max-width: 700px) {
   .schedule-wrap { padding: 16px 10px 80px; }
-  .cal-cell { min-height: 58px; padding: 4px 3px 3px; }
+  .cal-cell { height: 72px; min-height: 72px; max-height: 72px; padding: 4px 3px 3px; overflow: hidden; }
   .cal-event-pill { font-size: 0.5rem; padding: 1px 3px; }
   .cal-date-num { font-size: 0.62rem; width: 17px; height: 17px; }
   .cal-month-title { font-size: 0.95rem; }
