@@ -52,27 +52,29 @@ def extract_date(ev: dict) -> Optional[str]:
     m = re.search(r"(\d{4})-(\d{2})-(\d{2})", str(raw))
     return f"{m.group(1)}-{m.group(2)}-{m.group(3)}" if m else None
 
+# index.html의 SCHED_TYPE_COLOR / CSS 클래스명과 반드시 일치해야 함
+# broadcast, radio, event, fansign, concert, notice, anniv
 LABEL_MAP = {
+    "공연":    "concert",
+    "팬사인회": "fansign",
+    "음방":    "broadcast",
     "방송":    "broadcast",
+    "예능":    "broadcast",
     "라디오":  "radio",
     "행사":    "event",
-    "팬사인회": "fansign",
-    "공연":    "concert",
-    "공지":    "notice",
     "기념일":  "anniv",
+    "공지":    "notice",
 }
-
-SKIP_LABELS = set()
 
 TYPE_KEYWORDS = {
     "broadcast": ["음방", "음악방송", "inkigayo", "인기가요", "뮤직뱅크", "music bank",
                   "show champion", "엠카운트다운", "mcountdown", "the show",
-                  "방송", "출연", "tv", "예능", "버라이어티"],
+                  "방송", "출연", "인터뷰", "interview", "예능", "버라이어티", "variety", "웹예능"],
     "radio":     ["라디오", "radio"],
-    "event":     ["행사", "이벤트", "event"],
-    "fansign":   ["팬사인", "fansign", "사인회", "팬이벤트", "영상통화"],
     "concert":   ["콘서트", "concert", "showcase", "쇼케이스", "팬미팅", "fanmeeting",
                   "공연", "페스티벌", "festival", "kcon"],
+    "fansign":   ["팬사인", "fansign", "사인회", "팬이벤트", "영상통화"],
+    "event":     ["행사", "이벤트", "event"],
     "notice":    ["공지", "안내", "notice"],
 }
 
@@ -103,6 +105,8 @@ def crawl_month(year: int, month: int) -> list:
         if not d or not title:
             continue
         label_name = (ev.get("label") or {}).get("name", "")
+        if label_name == "기념일":
+            continue
         events.append({
             "date":   d,
             "title":  title,
