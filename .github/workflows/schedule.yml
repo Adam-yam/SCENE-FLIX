@@ -1,0 +1,36 @@
+name: 스케줄 자동 업데이트
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  crawl-schedule:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: crawlers/requirements.txt
+
+      - name: 의존성 설치
+        run: pip install -r crawlers/requirements.txt
+
+      - name: 스케줄 크롤링 실행
+        run: python crawlers/crawl_schedule.py
+
+      - name: 커밋 & 푸시
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git stash
+          git pull --rebase origin main
+          git stash pop
+          git add schedule.json
+          git diff --cached --quiet || git commit -m "chore: 스케줄 자동 업데이트 $(date +'%Y-%m-%d')"
+          git push
