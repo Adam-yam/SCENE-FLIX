@@ -208,6 +208,63 @@ gtag('config', 'G-05C99P2DB9');
 }
 .bm-btn.bm-active svg { fill: #f0c060; stroke: #f0c060; }
 
+/* Share button */
+.share-btn {
+  position: absolute;
+  top: 8px;
+  right: 44px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.55);
+  border: 1px solid rgba(255,255,255,0.15);
+  backdrop-filter: blur(4px);
+  color: rgba(255,255,255,0.6);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.18s, transform 0.18s, color 0.15s, background 0.15s;
+  z-index: 4;
+  flex-shrink: 0;
+  padding: 0;
+  font-family: inherit;
+}
+.share-btn svg { width: 13px; height: 13px; pointer-events: none; display: block; }
+.vcard:hover .share-btn { opacity: 1; transform: scale(1) translateY(4px); }
+@media (hover: none) {
+  .share-btn { opacity: 1; transform: scale(1) translateY(4px); }
+}
+.share-btn:hover { background: rgba(0,0,0,0.8); color: #fff; }
+.share-btn.share-done { color: #7de8a0; border-color: rgba(125,232,160,0.4); background: rgba(0,0,0,0.75); }
+
+/* Copy toast */
+#share-toast {
+  position: fixed;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: rgba(20,20,24,0.92);
+  color: #fff;
+  padding: 9px 18px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.12);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.22s, transform 0.22s;
+  z-index: 9999;
+  white-space: nowrap;
+}
+#share-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
 .bm-empty,
 .search-empty,
 .empty {
@@ -5663,6 +5720,52 @@ function bmBtnHtml(vid) {
   </button>`;
 }
 
+function shareBtnHtml(vid) {
+  return `<button class="share-btn" title="YouTube 링크 복사" onclick="copyShareUrl(event,'${vid}')">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+    </svg>
+  </button>`;
+}
+
+let _shareToastTimer = null;
+function copyShareUrl(e, vid) {
+  e.preventDefault();
+  e.stopPropagation();
+  const url = ytUrl(vid);
+  navigator.clipboard.writeText(url).then(() => {
+    // Button feedback
+    const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-', 'avc-'];
+    for (const p of prefixes) {
+      const card = document.getElementById(p + vid);
+      if (card) {
+        const btn = card.querySelector('.share-btn');
+        if (btn) {
+          btn.classList.add('share-done');
+          setTimeout(() => btn.classList.remove('share-done'), 1800);
+        }
+      }
+    }
+    // Toast
+    const toast = document.getElementById('share-toast');
+    if (toast) {
+      toast.classList.add('show');
+      clearTimeout(_shareToastTimer);
+      _shareToastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+  }).catch(() => {
+    // Fallback for older browsers
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    ta.style.cssText = 'position:fixed;opacity:0';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+}
+
 function updateBookmarkCounts() {
   const cnt = BOOKMARKS.size;
   if (_elBmCount) _elBmCount.textContent = cnt > 0 ? ` (${cnt})` : '';
@@ -5751,6 +5854,7 @@ function buildThumbHtml(vid, badgeHtml) {
          onerror="this.src='https://img.youtube.com/vi/${vid}/hqdefault.jpg'">
     ${_PLAY_RING_SVG}
     ${badgeHtml}
+    ${shareBtnHtml(vid)}
     ${bmBtnHtml(vid)}
   </div>`;
 }
@@ -7149,6 +7253,7 @@ document.addEventListener('mouseover', e => {
   const card = e.target.closest('.vcard');
   if (!card) return;
   if (e.target.closest('.bm-btn')) return;
+  if (e.target.closest('.share-btn')) return;
 
   const titleEl = card.querySelector('.csong, .csong-multi');
   if (!titleEl) return;
@@ -7266,6 +7371,8 @@ if ('serviceWorker' in navigator) {
   });
 }
 </script>
+
+<div id="share-toast">🔗 YouTube 링크 복사됨</div>
 
 </body>
 </html>
