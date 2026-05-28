@@ -2202,6 +2202,27 @@ header {
 .cal-cell.today { background: color-mix(in srgb, var(--accent) 8%, var(--card)); }
 .cal-cell.has-events { cursor: pointer; }
 .cal-cell.selected { background: color-mix(in srgb, var(--accent) 14%, var(--card)); }
+.cal-cell.bday-img-cell {
+  position: relative;
+  overflow: hidden;
+}
+.cal-cell.bday-img-cell::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 0;
+}
+.cal-cell.bday-img-cell .cal-date-num,
+.cal-cell.bday-img-cell .cal-event-pill,
+.cal-cell.bday-img-cell .cal-more-badge {
+  position: relative;
+  z-index: 1;
+}
+.cal-cell.bday-img-cell .cal-date-num {
+  color: #fff;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+}
 .cal-cell.today .cal-date-num {
   background: var(--accent);
   color: var(--bg);
@@ -3194,6 +3215,14 @@ function setLang(lang) {
   if (curSection === 'live' || curSection === 'songs' || curSection === 'allvideos' || curSection === 'external') {
     syncSubSidebar();
   }
+
+  // 언어 변경 시 기념일 제목도 해당 언어로 갱신
+  if (typeof injectAnnivEvents === 'function') {
+    injectAnnivEvents();
+    if (curSection === 'schedule' && typeof buildCalendar === 'function') {
+      buildCalendar();
+    }
+  }
 }
 
 const RESCENE_DATA = [
@@ -3537,6 +3566,20 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'l7lDplAVqLU': '2025.12.02',
+  'ah2108cKQWY': '2025.09.12',
+  'Ihsh9VRZLlo': '2025.09.17',
+  'zdv19CZ1ILI': '2026.01.05',
+  'nBWg9eWMbfc': '2026.03.19',
+  'BV4CrS9QdwU': '2025.07.09',
+  'f94PG5sprsc': '2024.08.29',
+  '6GciHLMdoe4': '2024.08.30',
+  'nUpfK1s1JDU': '2025.07.10',
+  'WRufNY42Qqk': '2025.07.24',
+  'X8mP17Ii5Hc': '2025.08.14',
+  'hpCawkfQN54': '2025.10.02',
+  '2VT7VGZckHw': '2025.07.02',
+  '9Ct1B5lxfy4': '2025.07.14',
   '84M4IlDJaWo': '5월 27일',
   'i3BCs-IcIl4': '5월 25일',
   'HRD4cPKvymU': '2024.10.10',
@@ -4517,8 +4560,38 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교' };
+const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL' };
 const EXTERNAL_DATA = {
+  riswell: [
+    { vid: 'l7lDplAVqLU', url: 'https://youtu.be/l7lDplAVqLU', date: '2025.12.02' },
+  ],
+  toon: [
+    { vid: 'ah2108cKQWY', url: 'https://youtu.be/ah2108cKQWY', date: '2025.09.12' },
+    { vid: 'Ihsh9VRZLlo', url: 'https://youtu.be/Ihsh9VRZLlo', date: '2025.09.17' },
+  ],
+  roadtosee: [
+    { vid: 'nUpfK1s1JDU', url: 'https://youtu.be/nUpfK1s1JDU', date: '2025.07.10' },
+    { vid: 'WRufNY42Qqk', url: 'https://youtu.be/WRufNY42Qqk', date: '2025.07.24' },
+    { vid: 'X8mP17Ii5Hc', url: 'https://youtu.be/X8mP17Ii5Hc', date: '2025.08.14' },
+    { vid: 'hpCawkfQN54', url: 'https://youtu.be/hpCawkfQN54', date: '2025.10.02' },
+  ],
+  todayschool: [
+    { vid: 'f94PG5sprsc', url: 'https://youtu.be/f94PG5sprsc', date: '2024.08.29' },
+    { vid: '6GciHLMdoe4', url: 'https://youtu.be/6GciHLMdoe4', date: '2024.08.30' },
+  ],
+  justicebacteria: [
+    { vid: 'nBWg9eWMbfc', url: 'https://youtu.be/nBWg9eWMbfc', date: '2026.03.19' },
+    { vid: 'BV4CrS9QdwU', url: 'https://youtu.be/BV4CrS9QdwU', date: '2025.07.09' },
+  ],
+  imbank: [
+    { vid: 'zdv19CZ1ILI', url: 'https://youtu.be/zdv19CZ1ILI', date: '2026.01.05' },
+  ],
+  billie: [
+    { vid: '9Ct1B5lxfy4', url: 'https://youtu.be/9Ct1B5lxfy4', date: '2025.07.14' },
+  ],
+  spotify: [
+    { vid: '2VT7VGZckHw', url: 'https://youtu.be/2VT7VGZckHw', date: '2025.07.02' },
+  ],
   anwonjal: [
     { vid: 'OrCOflk2QmQ', url: 'https://youtu.be/OrCOflk2QmQ', date: '2026.05.22' },
     { vid: 'lSxqQYipZoU', url: 'https://www.youtube.com/watch?v=lSxqQYipZoU', date: '2026.02.05' },
@@ -4836,10 +4909,10 @@ const EXTERNAL_DATA = {
 };
 const VID_TO_EXTERNAL_KEY = {};
 const EXTERNAL_CATS = {
-  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv'] },
-  radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae'] },
-  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip'] },
-  interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview'] },
+  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon'] },
+  radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae','billie','riswell'] },
+  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool','roadtosee'] },
+  interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview','spotify'] },
 };
 const EXTERNAL_CAT_KEYS = Object.keys(EXTERNAL_CATS);
 
@@ -6585,6 +6658,89 @@ function setType(el, type) {
 
 let SCHEDULE_DATA = [];
 
+const RESCENE_DEBUT = new Date('2024-03-26');
+
+const MEMBER_BIRTHDAYS = [
+  { name: '원이',  nameJP: 'Woni',   nameEN: 'Woni',   month: 5,  day: 25 },
+  { name: '리브',  nameJP: 'Liv',    nameEN: 'Liv',    month: 10, day: 11 },
+  { name: '미나미',nameJP: 'Minami', nameEN: 'Minami', month: 11, day: 29 },
+  { name: '메이',  nameJP: 'May',    nameEN: 'May',    month: 8,  day: 19 },
+  { name: '제나',  nameJP: 'Zena',   nameEN: 'Zena',   month: 11, day: 27 },
+];
+
+const MEMBER_BDAY_IMG = {
+  '원이':   'image/woni.png',
+  '리브':   'image/liv.png',
+  '미나미': 'image/minami.png',
+  '메이':   'image/may.png',
+  '제나':   'image/zena.png',
+};
+
+const MEMBER_COLORS = {
+  '원이':   '#04a06e',
+  '리브':   '#e0e0e0',
+  '미나미': '#2b99c4',
+  '메이':   '#c9a800',
+  '제나':   '#ba92db',
+};
+
+function _dateStr(d) {
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+
+function generateAnnivEvents() {
+  const events = [];
+  const today = new Date();
+  const lang = window._curLang || 'KR';
+
+  for (let n = 100; ; n += 100) {
+    const d = new Date(RESCENE_DEBUT);
+    d.setDate(d.getDate() + n - 1);
+    if (d.getFullYear() > today.getFullYear() + 3) break;
+    const title = lang === 'EN'
+      ? `RESCENE ${n}-Day Anniversary`
+      : lang === 'JP'
+      ? `RESCENE ${n}日記念日`
+      : `리센느 데뷔 ${n}일`;
+    events.push({ date: _dateStr(d), title, type: 'anniv', note: '' });
+  }
+
+  for (const m of MEMBER_BIRTHDAYS) {
+    for (const yr of [today.getFullYear(), today.getFullYear() + 1]) {
+      const bday = new Date(yr, m.month - 1, m.day);
+      const mName = lang === 'EN' ? m.nameEN : lang === 'JP' ? m.nameJP : m.name;
+      const title = lang === 'EN'
+        ? `Happy Birthday, ${mName}! 🎂`
+        : lang === 'JP'
+        ? `${mName} お誕生日おめでとう！🎂`
+        : `${mName} 생일 🎂`;
+      events.push({
+        date: _dateStr(bday),
+        title,
+        type: 'anniv',
+        note: '',
+        _memberColor: MEMBER_COLORS[m.name] || null,
+        _memberImg: MEMBER_BDAY_IMG[m.name] || null,
+        _isBirthday: true,
+        _memberName: m.name,
+      });
+    }
+  }
+
+  return events;
+}
+
+function injectAnnivEvents() {
+  const existing = new Set(SCHEDULE_DATA.map(e => e.date + '|' + e.title));
+  SCHEDULE_DATA = SCHEDULE_DATA.filter(e => e.type !== 'anniv' || e._fixed);
+  for (const ev of generateAnnivEvents()) {
+    if (!existing.has(ev.date + '|' + ev.title)) {
+      SCHEDULE_DATA.push(ev);
+    }
+  }
+  SCHEDULE_DATA.sort((a, b) => a.date.localeCompare(b.date));
+}
+
 (function loadScheduleJson() {
   fetch('./schedule.json?_=' + Date.now())
     .then(function(r) {
@@ -6599,14 +6755,20 @@ let SCHEDULE_DATA = [];
           type:  ev.type  || 'notice',
           note:  ev.detail || ev.note || '',
           link:  ev.link  || '',
+          _fixed: true,
         };
       }).filter(function(ev) { return ev.date && ev.title; });
+      injectAnnivEvents();
       if (typeof buildCalendar === 'function' && curSection === 'schedule') {
         buildCalendar();
       }
     })
     .catch(function(e) {
       console.warn('schedule.json 로드 실패:', e);
+      injectAnnivEvents();
+      if (typeof buildCalendar === 'function' && curSection === 'schedule') {
+        buildCalendar();
+      }
     });
 })();
 
@@ -6704,6 +6866,10 @@ function renderCalendar() {
     const events = evMap[dateStr] || [];
     const hasEvents = events.length > 0;
 
+    const bdayEv = events.find(e => e._isBirthday);
+    const bdayColor = bdayEv ? bdayEv._memberColor : null;
+    const bdayImg   = bdayEv ? bdayEv._memberImg   : null;
+
     let cellCls = 'cal-cell';
     if (isOther) cellCls += ' other-month';
     if (isToday) cellCls += ' today';
@@ -6711,18 +6877,29 @@ function renderCalendar() {
     if (hasEvents) cellCls += ' has-events';
     if (dow === 0) cellCls += ' sun-col';
     if (dow === 6) cellCls += ' sat-col';
+    if (bdayImg && !isOther) cellCls += ' bday-img-cell';
+
+    const glowStyle = (bdayImg && !isOther)
+      ? ` style="background-image:url('${bdayImg}');background-size:cover;background-position:center top;"`
+      : '';
 
     const onclick = hasEvents ? `onclick="calSelectDate('${dateStr}')"` : '';
     const MAX_PILLS = 2;
     let pillsHtml = '';
     for (let ei = 0; ei < Math.min(events.length, MAX_PILLS); ei++) {
-      pillsHtml += `<div class="cal-event-pill type-${events[ei].type}">${events[ei].title}</div>`;
+      const ev = events[ei];
+      if (ev._isBirthday && ev._memberColor) {
+        const c = ev._memberColor;
+        pillsHtml += `<div class="cal-event-pill type-anniv" style="background:${c}26;color:${c};border-left-color:${c};">${ev.title}</div>`;
+      } else {
+        pillsHtml += `<div class="cal-event-pill type-${ev.type}">${ev.title}</div>`;
+      }
     }
     if (events.length > MAX_PILLS) {
       pillsHtml += `<div class="cal-more-badge">+${events.length - MAX_PILLS}개 더</div>`;
     }
 
-    html += `<div class="${cellCls}" ${onclick} data-date="${dateStr}"><div class="cal-date-num">${day}</div>${pillsHtml}</div>`;
+    html += `<div class="${cellCls}"${glowStyle} ${onclick} data-date="${dateStr}"><div class="cal-date-num">${day}</div>${pillsHtml}</div>`;
   }
 
   document.getElementById('calGrid').innerHTML = html;
@@ -6755,7 +6932,10 @@ function calSelectDate(dateStr) {
   const dateLabel = lang==='EN' ? `${mName} ${D}, ${Y}` : `${Y}년 ${mName} ${D}일`;
 
   const itemsHtml = events.map(ev => {
-    const dotStyle = `background:${SCHED_TYPE_COLOR[ev.type]||'#888'}`;
+    const evColor = (ev._isBirthday && ev._memberColor)
+      ? ev._memberColor
+      : (SCHED_TYPE_COLOR[ev.type] || '#888');
+    const dotStyle = `background:${evColor}`;
     const linkHtml = ev.link ? `<a href="${ev.link}" target="_blank" rel="noopener" class="cal-detail-link">↗ 링크</a>` : '';
     return `<div class="cal-detail-item">
       <div class="cal-dot" style="${dotStyle}"></div>
@@ -6850,9 +7030,12 @@ function renderSchedList() {
       </div>`;
 
     for (const ev of evs) {
-      const bar = `background:${SCHED_TYPE_COLOR[ev.type]||'#888'}`;
+      const evColor = (ev._isBirthday && ev._memberColor)
+        ? ev._memberColor
+        : (SCHED_TYPE_COLOR[ev.type] || '#888');
+      const bar = `background:${evColor}`;
       const tl = (typeLabel[ev.type]||{})[lang] || ev.type;
-      const tagStyle = `background:color-mix(in srgb, ${SCHED_TYPE_COLOR[ev.type]||'#888'} 18%, transparent);color:${SCHED_TYPE_COLOR[ev.type]||'#888'}`;
+      const tagStyle = `background:color-mix(in srgb, ${evColor} 18%, transparent);color:${evColor}`;
       const link = ev.link ? `<a href="${ev.link}" target="_blank" rel="noopener" class="sched-item-link">↗ 링크</a>` : '';
       html += `<div class="sched-item">
         <div class="sched-item-bar" style="${bar}"></div>
