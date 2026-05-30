@@ -1,4 +1,4 @@
-name: 스케줄 자동 업데이트
+name: 스케줄 & 뉴스 자동 업데이트
 
 on:
   workflow_dispatch:
@@ -7,7 +7,7 @@ permissions:
   contents: write
 
 jobs:
-  crawl-schedule:
+  crawl:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,8 +21,11 @@ jobs:
       - name: 의존성 설치
         run: pip install -r crawlers/requirements.txt
 
-      - name: 스케줄 크롤링 실행
+      - name: 스케줄 & 뉴스 크롤링 실행
         run: python crawlers/crawl_schedule.py
+        env:
+          NAVER_CLIENT_ID: ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
 
       - name: 커밋 & 푸시
         run: |
@@ -31,6 +34,6 @@ jobs:
           git stash
           git pull --rebase origin main
           git stash pop
-          git add schedule.json
-          git diff --cached --quiet || git commit -m "chore: 스케줄 자동 업데이트 $(date +'%Y-%m-%d')"
+          git add schedule.json news.json
+          git diff --cached --quiet || git commit -m "chore: 스케줄·뉴스 자동 업데이트 $(date +'%Y-%m-%d %H:%M')"
           git push
