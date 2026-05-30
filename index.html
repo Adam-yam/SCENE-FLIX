@@ -6448,6 +6448,7 @@ function pickSection(section) {
   if (section === 'fantube') buildFantubeGrid();
   if (section === 'bookmark') buildBookmarkGrid();
   if (section === 'schedule') buildCalendar();
+  if (section === 'news') buildNewsGrid();
 
   updateMobileNav(section);
   updateSubSidebar(section);
@@ -6935,8 +6936,7 @@ function injectAnnivEvents() {
       }
     });
 })();
-
-
+// ── 뉴스 ──────────────────────────────────────────────────────────────────
 let NEWS_DATA = [];
 let _newsLoaded = false;
 
