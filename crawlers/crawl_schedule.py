@@ -186,13 +186,15 @@ NAVER_HEADERS = {
 FETCH_HEADERS = {
     "User-Agent": COMMON_UA,
     "Accept-Language": "ko-KR,ko;q=0.9",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+    "Referer": "https://search.naver.com/",
 }
 
 SEARCH_QUERIES = ["리센느", "RESCENE"]
 DISPLAY        = 20
 MAX_ARTICLES   = 20
-THUMB_TIMEOUT  = 6
-THUMB_CONCUR   = 8
+THUMB_TIMEOUT  = 12
+THUMB_CONCUR   = 6
 
 
 def parse_pub_date(raw: str) -> str:
@@ -290,14 +292,28 @@ async def fetch_og_image(
                     return
                 if "html" not in resp.headers.get("Content-Type", ""):
                     return
-                chunk = await resp.content.read(8192)
-                text  = chunk.decode("utf-8", errors="ignore")
+
+                # og:image는 보통 <head> 안에 있으므로 최대 64KB까지 청크로 읽음
+                text = ""
+                async for chunk in resp.content.iter_chunked(8192):
+                    text += chunk.decode("utf-8", errors="ignore")
+                    if len(text) > 65536:
+                        break
+                    # og:image 찾으면 즉시 중단
+                    if 'og:image' in text:
+                        break
 
                 m = re.search(
                     r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
                     text, re.IGNORECASE,
                 ) or re.search(
                     r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']',
+                    text, re.IGNORECASE,
+                ) or re.search(
+                    r'<meta[^>]+name=["\']twitter:image["\'][^>]+content=["\']([^"\']+)["\']',
+                    text, re.IGNORECASE,
+                ) or re.search(
+                    r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+name=["\']twitter:image["\']',
                     text, re.IGNORECASE,
                 )
                 if m:
