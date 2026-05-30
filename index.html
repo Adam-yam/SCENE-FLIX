@@ -170,10 +170,9 @@ gtag('config', 'G-05C99P2DB9');
 #scrollTop:hover { color: var(--text); background: var(--card-h); }
 #scrollTop svg { width: 16px; height: 16px; }
 
-.bm-btn {
+.card-overlay-btn {
   position: absolute;
   top: 8px;
-  right: 8px;
   width: 28px;
   height: 28px;
   border-radius: 50%;
@@ -193,12 +192,15 @@ gtag('config', 'G-05C99P2DB9');
   padding: 0;
   font-family: inherit;
 }
-.bm-btn svg { width: 13px; height: 13px; pointer-events: none; display: block; }
-.vcard:hover .bm-btn { opacity: 1; transform: scale(1) translateY(4px); }
+.card-overlay-btn svg { width: 13px; height: 13px; pointer-events: none; display: block; }
+.vcard:hover .card-overlay-btn { opacity: 1; transform: scale(1) translateY(4px); }
 @media (hover: none) {
-  .bm-btn { opacity: 1; transform: scale(1) translateY(4px); }
+  .card-overlay-btn { opacity: 1; transform: scale(1) translateY(4px); }
 }
-.bm-btn:hover { background: rgba(0,0,0,0.8); color: #fff; }
+.card-overlay-btn:hover { background: rgba(0,0,0,0.8); color: #fff; }
+
+.bm-btn    { right: 8px;  }
+.share-btn { right: 44px; }
 .bm-btn.bm-active {
   opacity: 1;
   transform: scale(1) translateY(4px);
@@ -207,40 +209,8 @@ gtag('config', 'G-05C99P2DB9');
   border-color: rgba(240,192,96,0.4);
 }
 .bm-btn.bm-active svg { fill: #f0c060; stroke: #f0c060; }
-
-/* Share button */
-.share-btn {
-  position: absolute;
-  top: 8px;
-  right: 44px;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(0,0,0,0.55);
-  border: 1px solid rgba(255,255,255,0.15);
-  backdrop-filter: blur(4px);
-  color: rgba(255,255,255,0.6);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transform: scale(0.85);
-  transition: opacity 0.18s, transform 0.18s, color 0.15s, background 0.15s;
-  z-index: 4;
-  flex-shrink: 0;
-  padding: 0;
-  font-family: inherit;
-}
-.share-btn svg { width: 13px; height: 13px; pointer-events: none; display: block; }
-.vcard:hover .share-btn { opacity: 1; transform: scale(1) translateY(4px); }
-@media (hover: none) {
-  .share-btn { opacity: 1; transform: scale(1) translateY(4px); }
-}
-.share-btn:hover { background: rgba(0,0,0,0.8); color: #fff; }
 .share-btn.share-done { color: #7de8a0; border-color: rgba(125,232,160,0.4); background: rgba(0,0,0,0.75); }
 
-/* Copy toast */
 #share-toast {
   position: fixed;
   bottom: 80px;
@@ -2360,7 +2330,6 @@ header {
   .sched-cal-col { flex: none; }
 }
 
-/* ── 뉴스 섹션 ─────────────────────────────── */
 #newsMode { animation: fadeUp 0.32s ease both; }
 .news-wrap { max-width: 1400px; margin: 0 auto; padding: 28px 28px 80px; }
 .news-header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
@@ -3041,7 +3010,7 @@ header {
   <div class="schedule-wrap">
     <div class="sched-notice-top">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0;opacity:0.6;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <span>스케줄은 공식 채널 및 팬 커뮤니티 정보를 기반으로 표시됩니다. 변동 가능성이 있으니 공식 계정을 함께 확인해 주세요.</span>
+      <span>스케줄은 공식 채널 Mnet Plus 정보를 기반으로 표시됩니다. 또한 SCENE-FLIX 내의 스케줄은 12시간마다 갱신됩니다. 실시간 스케줄 확인은 Mnet Plus에서 가능합니다.</span>
     </div>
     <div class="sched-body">
       <div class="sched-cal-col">
@@ -3332,7 +3301,6 @@ function setLang(lang) {
     syncSubSidebar();
   }
 
-  // 언어 변경 시 기념일 제목도 해당 언어로 갱신
   if (typeof injectAnnivEvents === 'function') {
     injectAnnivEvents();
     if (curSection === 'schedule' && typeof buildCalendar === 'function') {
@@ -3682,6 +3650,7 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  '3sFoaAhh6GM': '2026.05.30',
   'WvDMIvcUc2Q': '2026.05.30',
   'I-NAFhupR1s': '2026.05.29',
   'JJBf0jCcfrQ': '2026.05.29',
@@ -3699,7 +3668,6 @@ const DATE_MAP = {
   'hpCawkfQN54': '2025.10.02',
   '2VT7VGZckHw': '2025.07.02',
   '9Ct1B5lxfy4': '2025.07.14',
-  '84M4IlDJaWo': '5월 27일',
   'i3BCs-IcIl4': '5월 25일',
   'HRD4cPKvymU': '2024.10.10',
   'LmP-0bJ1EZ0': '2025.05.21',
@@ -4402,6 +4370,8 @@ function ytUrl(vid) {
   return 'https://www.youtube.com/watch?v=' + vid;
 }
 
+const CARD_PREFIXES = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-', 'avc-'];
+
 function openVideo(e, vid) {
   e.preventDefault();
 
@@ -4427,8 +4397,7 @@ function openVideo(e, vid) {
 
   document.querySelectorAll('.last-watched-badge').forEach(el => el.remove());
 
-  const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-', 'avc-'];
-  for (const p of prefixes) {
+  for (const p of CARD_PREFIXES) {
     const card = document.getElementById(p + vid);
     if (card) {
       const badge = document.createElement('span');
@@ -4444,8 +4413,7 @@ function restoreLastWatched() {
   try {
     const vid = localStorage.getItem('rescene-last-watched');
     if (!vid) return;
-    const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-', 'avc-'];
-    for (const p of prefixes) {
+    for (const p of CARD_PREFIXES) {
       const card = document.getElementById(p + vid);
       if (card) {
         document.querySelectorAll('.last-watched-badge').forEach(el => el.remove());
@@ -4512,6 +4480,7 @@ const CONTENT_DATA = [
   {
     category: "BASE NOTES",
     urls: [
+      "https://youtu.be/3sFoaAhh6GM",
       "https://youtu.be/4j81hTzk178",
       "https://youtu.be/HIP4sp40Awo",
       "https://youtu.be/cLqqjNDqWMg",
@@ -5109,7 +5078,8 @@ function buildContentCard(item, delay) {
   const metaHtml = item.loaded
     ? (dateStr ? `<span class="cdate">${dateStr}</span>` : (channel && !dateStr ? `<span class="cdate">${channel}</span>` : ''))
     : `<span class="skel skel-date"></span>`;
-  return `<a class="vcard card-base hover-lift tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-category="${categoryLabel}">
+  const searchText = [item.title || '', categoryLabel, channel, dateStr].join(' ').toLowerCase();
+  return `<a class="vcard card-base hover-lift tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-category="${categoryLabel}" data-search="${searchText}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
@@ -5149,6 +5119,11 @@ async function loadCardMetas(items, mode) {
             ? `<span class="cdate">${dateStr}</span>`
             : (ch ? `<span class="cdate">${ch}</span>` : '');
         }
+        const cvcEl = document.getElementById(`cvc-${item.vid}`);
+        if (cvcEl) {
+          const categoryLabel = item.category === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : (item.category || '');
+          cvcEl.dataset.search = [item.title || '', categoryLabel, item.channel || '', item.date || ''].join(' ').toLowerCase();
+        }
       } else {
         if (!item.title) {
           const key = VID_TO_EXTERNAL_KEY[item.vid];
@@ -5160,6 +5135,11 @@ async function loadCardMetas(items, mode) {
         if (metaEl) {
           const dateStr = item.date || '';
           metaEl.innerHTML = dateStr ? `<span class="cdate">${dateStr}</span>` : '';
+        }
+        const evcEl = document.getElementById(`evc-${item.vid}`);
+        if (evcEl) {
+          const channelLabel = EXTERNAL_LABELS[VID_TO_EXTERNAL_KEY[item.vid] || ''] || '';
+          evcEl.dataset.search = [item.title || '', channelLabel, item.date || ''].join(' ').toLowerCase();
         }
       }
     }));
@@ -5236,7 +5216,8 @@ function buildExternalCard(item, delay) {
   const metaHtml = item.loaded
     ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
     : `<span class="skel skel-date"></span>`;
-  return `<a class="vcard card-base hover-lift tb-external" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-channel="${channelLabel}">
+  const searchText = [item.title || '', channelLabel, dateStr].join(' ').toLowerCase();
+  return `<a class="vcard card-base hover-lift tb-external" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-channel="${channelLabel}" data-search="${searchText}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
@@ -5536,7 +5517,6 @@ const LIVE_DATA_2025 = [
 ];
 
 const LIVE_DATA_2026 = [
-  { vid:'84M4IlDJaWo', url:'https://youtu.be/84M4IlDJaWo', date:'5월 27일', members:['원이','리브','미나미','제나'], year:'2026' },
   { vid:'i3BCs-IcIl4', url:'https://youtu.be/i3BCs-IcIl4', date:'5월 25일', members:['원이'], year:'2026' },
   { vid:'bClA2Os6vpE', url:'https://youtu.be/bClA2Os6vpE', date:'5월 23일', members:['제나'], year:'2026' },
   { vid:'7Xcg79neHng', url:'https://youtu.be/7Xcg79neHng', date:'5월 21일', members:['미나미','메이','제나'], year:'2026' },
@@ -5637,12 +5617,15 @@ function buildLiveCard(item, delay) {
     ? `<div class="csong-multi" id="lvc-title-${item.vid}">${item.title}</div>`
     : `<div class="csong-multi" id="lvc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
   const lmClass = getLiveCardClass(item.members);
-  return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+  const liveDate = formatLiveDate(item);
+  const memberNames = item.members.join(' ');
+  const searchText = [item.title || '', memberNames, liveDate].join(' ').toLowerCase();
+  return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${searchText}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
       <div class="cmeta">
-        <span class="cdate">${formatLiveDate(item)}</span>
+        <span class="cdate">${liveDate}</span>
       </div>
       <div class="ctags">${memberBadges}</div>
     </div>
@@ -5661,6 +5644,11 @@ async function loadLiveTitles(items) {
       if (!item.title) item.title = item.date + ' 라이브';
       const el = document.getElementById(`lvc-title-${item.vid}`);
       if (el) el.textContent = item.title;
+      const lvcEl = document.getElementById(`lvc-${item.vid}`);
+      if (lvcEl) {
+        const memberNames = (item.members || []).join(' ');
+        lvcEl.dataset.search = [item.title, memberNames, formatLiveDate(item)].join(' ').toLowerCase();
+      }
     }));
   }
 }
@@ -5753,8 +5741,7 @@ function toggleBookmark(e, vid) {
   }
   saveBookmarks();
 
-  const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-', 'avc-'];
-  for (const p of prefixes) {
+  for (const p of CARD_PREFIXES) {
     const card = document.getElementById(p + vid);
     if (card) updateBmBtn(card, vid);
   }
@@ -5778,7 +5765,7 @@ function updateBmBtn(card, vid) {
 
 function bmBtnHtml(vid) {
   const active = BOOKMARKS.has(vid);
-  return `<button class="bm-btn ${active ? 'bm-active' : ''}" title="${active ? '즐겨찾기 해제' : '즐겨찾기 추가'}" onclick="toggleBookmark(event,'${vid}')">
+  return `<button class="card-overlay-btn bm-btn ${active ? 'bm-active' : ''}" title="${active ? '즐겨찾기 해제' : '즐겨찾기 추가'}" onclick="toggleBookmark(event,'${vid}')">
     <svg viewBox="2 2 20 19.02" fill="${active ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
     </svg>
@@ -5786,7 +5773,7 @@ function bmBtnHtml(vid) {
 }
 
 function shareBtnHtml(vid) {
-  return `<button class="share-btn" title="YouTube 링크 복사" onclick="copyShareUrl(event,'${vid}')">
+  return `<button class="card-overlay-btn share-btn" title="YouTube 링크 복사" onclick="copyShareUrl(event,'${vid}')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
       <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
@@ -5800,9 +5787,7 @@ function copyShareUrl(e, vid) {
   e.stopPropagation();
   const url = ytUrl(vid);
   navigator.clipboard.writeText(url).then(() => {
-    // Button feedback
-    const prefixes = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-', 'avc-'];
-    for (const p of prefixes) {
+    for (const p of CARD_PREFIXES) {
       const card = document.getElementById(p + vid);
       if (card) {
         const btn = card.querySelector('.share-btn');
@@ -5812,7 +5797,6 @@ function copyShareUrl(e, vid) {
         }
       }
     }
-    // Toast
     const toast = document.getElementById('share-toast');
     if (toast) {
       toast.classList.add('show');
@@ -5820,7 +5804,6 @@ function copyShareUrl(e, vid) {
       _shareToastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
     }
   }).catch(() => {
-    // Fallback for older browsers
     const ta = document.createElement('textarea');
     ta.value = url;
     ta.style.cssText = 'position:fixed;opacity:0';
@@ -5950,7 +5933,9 @@ function buildCard(item, delay) {
     ? `<div class="ctags" id="vc-tags-${item.vid}">${tags.join('')}</div>`
     : `<div class="ctags" id="vc-tags-${item.vid}"><span class="skel skel-tag"></span></div>`;
 
-  return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-show="${showLabel}" data-channel="${channel}" data-type="${tl}">
+  const searchText = [videoTitle || item.song, tl, showLabel, channel, dateStr].join(' ').toLowerCase();
+
+  return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-show="${showLabel}" data-channel="${channel}" data-type="${tl}" data-search="${searchText}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
@@ -6378,6 +6363,11 @@ function replaceSkeleton(item) {
     const tl = getTypeLabel(item.type);
     tagsEl.innerHTML = `<span class="ctag tb-tag-${item.type}">♪ ${tl}</span>`;
   }
+  const tl = getTypeLabel(item.type);
+  const showLabel = m?.show?.label || '';
+  const channel   = m?.channel    || '';
+  const dateStr   = m?.date || DATE_MAP[item.vid] || '';
+  vcEl.dataset.search = [m?.rawTitle || item.song, tl, showLabel, channel, dateStr].join(' ').toLowerCase();
 }
 
 const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', fantube:'secFantube', member:'secMember', links:'secLinks', bookmark:'secBookmark', about:'secAbout', schedule:'secSchedule', news:'secNews' };
@@ -6763,21 +6753,26 @@ function applySearch() {
       visible++;
       return;
     }
-    const date = card.querySelector('.cdate')?.textContent?.trim() || '';
     let match;
     if (dateNorm) {
+      const date = card.querySelector('.cdate')?.textContent?.trim() || '';
       match = date !== '' && date.includes(dateNorm);
     } else {
-      const primary = card.querySelector('.csong')?.textContent || '';
-      const multi   = card.querySelector('.csong-multi')?.textContent || '';
-      const badge   = card.querySelector('.type-badge')?.textContent || '';
-      const tags    = card.querySelector('.ctags')?.textContent || '';
-      const channel  = card.getAttribute('data-channel') || '';
-      const category = card.getAttribute('data-category') || '';
-      const show     = card.getAttribute('data-show') || '';
-      const type     = card.getAttribute('data-type') || '';
-      const searchTarget = (primary + ' ' + multi + ' ' + badge + ' ' + tags + ' ' + channel + ' ' + category + ' ' + show + ' ' + type + ' ' + date).toLowerCase();
-      match = searchTarget.includes(q);
+      const cached = card.getAttribute('data-search');
+      if (cached !== null) {
+        match = cached.includes(q);
+      } else {
+        const primary  = card.querySelector('.csong')?.textContent || '';
+        const multi    = card.querySelector('.csong-multi')?.textContent || '';
+        const badge    = card.querySelector('.type-badge')?.textContent || '';
+        const tags     = card.querySelector('.ctags')?.textContent || '';
+        const channel  = card.getAttribute('data-channel') || '';
+        const category = card.getAttribute('data-category') || '';
+        const show     = card.getAttribute('data-show') || '';
+        const type     = card.getAttribute('data-type') || '';
+        const date     = card.querySelector('.cdate')?.textContent?.trim() || '';
+        match = (primary + ' ' + multi + ' ' + badge + ' ' + tags + ' ' + channel + ' ' + category + ' ' + show + ' ' + type + ' ' + date).toLowerCase().includes(q);
+      }
     }
     card.style.display = match ? '' : 'none';
     if (match) visible++;
@@ -6942,7 +6937,6 @@ function injectAnnivEvents() {
       }
     });
 })();
-// ── 뉴스 ──────────────────────────────────────────────────────────────────
 let NEWS_DATA = [];
 let _newsLoaded = false;
 
