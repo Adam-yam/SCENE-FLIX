@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-29T15:00:36Z",
+  "updated": "2026-05-30T03:00:34Z",
   "events": [
     {
       "date": "2026-05-05",
@@ -83,6 +83,13 @@
       "title": "[Runaway] 대면 팬사인회 & 포토회 by fairytree in TAIPEI",
       "detail": "",
       "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-06-01",
+      "title": "국립순천대학교 축제",
+      "detail": "",
+      "type": "event",
       "source": "mnetplus"
     },
     {
