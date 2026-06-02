@@ -334,6 +334,9 @@ header {
   letter-spacing: 0.2em;
   color: var(--muted);
   text-transform: uppercase;
+  line-height: 1;
+  min-height: 1em;
+  white-space: nowrap;
 }
 
 .song-nav-outer {
@@ -528,6 +531,9 @@ header {
   display: flex;
   align-items: center;
   gap: 4px;
+  height: 30px;
+  box-sizing: border-box;
+  line-height: 1;
 }
 [data-theme="light"] .sort-btn { border-color: rgba(0,0,0,0.28); }
 .sort-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.55); }
@@ -1183,56 +1189,68 @@ header {
 .links-section-label:first-child { margin-top: 0; }
 
 .links-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 8px;
+  max-width: 824px;
 }
 
 .link-row {
+  width: 200px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   gap: 11px;
-  padding: 12px 14px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  padding: 0 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 13px;
   text-decoration: none;
   color: var(--text);
-  transition: background 0.2s, border-color 0.2s, transform 0.18s, box-shadow 0.2s;
-  position: relative;
-  overflow: hidden;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: background 0.18s, border-color 0.18s, transform 0.18s;
   animation: fadeUp 0.35s ease both;
-}
-
-.link-row::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.025) 0%, transparent 60%);
-  pointer-events: none;
+  height: 54px;
+  box-sizing: border-box;
 }
 
 .link-row:hover {
-  background: var(--card-h);
-  border-color: rgba(224,212,192,0.22);
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.16);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+}
+
+[data-theme="light"] .link-row {
+  background: rgba(255,255,255,0.55);
+  border-color: rgba(0,0,0,0.07);
+}
+[data-theme="light"] .link-row:hover {
+  background: rgba(255,255,255,0.82);
+  border-color: rgba(0,0,0,0.12);
 }
 
 .link-icon {
   flex-shrink: 0;
   width: 30px;
   height: 30px;
-  border-radius: 7px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.09);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s;
+  transition: background 0.18s;
 }
 .link-row:hover .link-icon {
-  background: rgba(255,255,255,0.09);
+  background: rgba(255,255,255,0.11);
+}
+[data-theme="light"] .link-icon {
+  background: rgba(0,0,0,0.04);
+  border-color: rgba(0,0,0,0.07);
+}
+[data-theme="light"] .link-row:hover .link-icon {
+  background: rgba(0,0,0,0.07);
 }
 
 .link-icon svg {
@@ -1256,6 +1274,7 @@ header {
   overflow: hidden;
   text-overflow: ellipsis;
   letter-spacing: 0.01em;
+  line-height: 1.2;
 }
 
 .link-url {
@@ -1264,6 +1283,7 @@ header {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  line-height: 1.2;
 }
 
 .link-arrow {
@@ -1271,7 +1291,7 @@ header {
   color: var(--muted);
   font-size: 0.7rem;
   transition: color 0.18s, transform 0.18s;
-  opacity: 0.5;
+  opacity: 0.35;
 }
 .link-row:hover .link-arrow {
   color: var(--accent);
@@ -1357,10 +1377,8 @@ header {
   .member-wrap { padding: 24px 12px; }
 
   .links-wrap { padding: 16px 12px 60px; }
-  .links-list { grid-template-columns: repeat(2, 1fr); gap: 7px; }
-  .link-url   { display: none; }
-  .link-label { font-size: 0.78rem; }
-  .link-row   { padding: 12px 14px; gap: 10px; }
+  .links-list { max-width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
+  .link-row   { width: auto; padding: 11px 10px; gap: 8px; }
 
   #aboutMode .links-wrap { padding: 20px 16px 60px; }
 }
@@ -1768,10 +1786,14 @@ header {
     display: flex;
     align-items: center;
     gap: 8px;
-    white-space: normal;
-    font-size: 0.76rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.72rem;
     letter-spacing: 0.02em;
     flex-shrink: 0;
+    min-height: 36px;
+    box-sizing: border-box;
   }
 
   .section-tab svg {
@@ -2739,7 +2761,7 @@ header {
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FF0000"/></svg>
         </span>
         <span class="link-text">
-          <span class="link-label">RESCENE 유튜브</span>
+          <span class="link-label">Youtube</span>
           <span class="link-url">@RESCENE_official</span>
         </span>
         <span class="link-arrow">↗</span>
@@ -2750,7 +2772,7 @@ header {
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f09433"/><stop offset="25%" style="stop-color:#e6683c"/><stop offset="50%" style="stop-color:#dc2743"/><stop offset="75%" style="stop-color:#cc2366"/><stop offset="100%" style="stop-color:#bc1888"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" fill="url(#ig-grad)"/></svg>
         </span>
         <span class="link-text">
-          <span class="link-label">공식 Instagram</span>
+          <span class="link-label">Instagram</span>
           <span class="link-url">@rescene_official</span>
         </span>
         <span class="link-arrow">↗</span>
@@ -2761,7 +2783,7 @@ header {
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
         </span>
         <span class="link-text">
-          <span class="link-label">RESCENE X</span>
+          <span class="link-label">X</span>
           <span class="link-url">@RESCENEofficial</span>
         </span>
         <span class="link-arrow">↗</span>
@@ -2772,7 +2794,7 @@ header {
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.95a8.27 8.27 0 0 0 4.84 1.54V7.05a4.85 4.85 0 0 1-1.07-.36z" fill="currentColor"/></svg>
         </span>
         <span class="link-text">
-          <span class="link-label">공식 TikTok</span>
+          <span class="link-label">TikTok</span>
           <span class="link-url">@rescene_official</span>
         </span>
         <span class="link-arrow">↗</span>
@@ -2791,7 +2813,7 @@ header {
 
       <a class="link-row card-base" href="https://artist.mnetplus.world/main/stg/rescene-official" target="_blank" rel="noopener">
         <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 3h18v2H3zm0 4h12v2H3zm0 4h18v2H3zm0 4h12v2H3zm0 4h18v2H3z" fill="#FF6600"/></svg>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="white"/><text x="3" y="16" font-size="10" font-weight="900" font-family="Arial,sans-serif" fill="#eb0b6d">M</text><text x="13" y="13" font-size="8" font-weight="900" font-family="Arial,sans-serif" fill="#eb0b6d">+</text></svg>
         </span>
         <span class="link-text">
           <span class="link-label">MnetPlus</span>
@@ -2802,7 +2824,7 @@ header {
 
       <a class="link-row card-base" href="https://blip.kr/artists/RESCENE" target="_blank" rel="noopener">
         <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" fill="none" stroke="#00C8FF" stroke-width="2"/><path d="M9 8.5c0-.83.67-1.5 1.5-1.5H14a2.5 2.5 0 0 1 0 5h-3.5v3H9V8.5zm1.5 2h3.25a.75.75 0 0 0 0-1.5H10.5V10.5z" fill="#00C8FF"/></svg>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#0d1b3e"/><circle cx="12" cy="12" r="7" fill="none" stroke="white" stroke-width="1.8"/><text x="9.5" y="16.5" font-size="10" font-weight="700" font-family="Arial,sans-serif" fill="white">b</text></svg>
         </span>
         <span class="link-text">
           <span class="link-label">Blip</span>
@@ -2832,7 +2854,7 @@ header {
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
         </span>
         <span class="link-text">
-          <span class="link-label">RESCENE 멤버 X</span>
+          <span class="link-label">Member X</span>
           <span class="link-url">@RESCENE_twt</span>
         </span>
         <span class="link-arrow">↗</span>
@@ -2908,8 +2930,35 @@ header {
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" fill="var(--accent)"/></svg>
         </span>
         <span class="link-text">
-          <span class="link-label">RESCENE 마이너 갤러리</span>
+          <span class="link-label">마이너 갤러리</span>
           <span class="link-url">dcinside.com</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+      <a class="link-row card-base" href="https://www.reddit.com/r/rescene/" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#FF4500"/><path d="M20 12a1.5 1.5 0 0 0-2.55-1.07 7.3 7.3 0 0 0-3.93-1.24l.67-3.13 2.17.46a1.1 1.1 0 1 0 .12-.56l-2.43-.52a.25.25 0 0 0-.3.19l-.74 3.49a7.32 7.32 0 0 0-3.96 1.24A1.5 1.5 0 1 0 7.1 13.5a2.87 2.87 0 0 0-.04.46c0 2.33 2.64 4.22 5.9 4.22s5.9-1.89 5.9-4.22a2.87 2.87 0 0 0-.04-.46A1.5 1.5 0 0 0 20 12zm-10.5 1a1 1 0 1 1 1 1 1 1 0 0 1-1-1zm5.6 2.65a3.56 3.56 0 0 1-2.1.55 3.56 3.56 0 0 1-2.1-.55.25.25 0 0 1 .35-.35 3.07 3.07 0 0 0 1.75.42 3.07 3.07 0 0 0 1.75-.42.25.25 0 0 1 .35.35zm-.1-1.65a1 1 0 1 1 1-1 1 1 0 0 1-1 1z" fill="white"/></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">Reddit</span>
+          <span class="link-url">r/rescene</span>
+        </span>
+        <span class="link-arrow">↗</span>
+      </a>
+
+    </div>
+
+    <p class="links-section-label" data-i18n="links_etc">기타</p>
+    <div class="links-list">
+
+      <a class="link-row card-base" href="https://namu.wiki/w/RESCENE" target="_blank" rel="noopener">
+        <span class="link-icon">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#00A495"/><text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="bold" font-family="sans-serif" fill="white">나무</text></svg>
+        </span>
+        <span class="link-text">
+          <span class="link-label">나무위키</span>
+          <span class="link-url">namu.wiki</span>
         </span>
         <span class="link-arrow">↗</span>
       </a>
@@ -2952,7 +3001,7 @@ header {
             <span style="user-select:text; -webkit-user-select:text;">sceneflix.may@gmail.com</span>
           </a>
           <button id="copyMailBtn"
-            onclick="navigator.clipboard.writeText('sceneflix.may@gmail.com').then(()=>{const b=document.getElementById('copyMailBtn');b.textContent='✓';b.style.color='var(--accent)';b.style.borderColor='var(--accent)';setTimeout(()=>{b.textContent=window._i18n&&window._i18n[window._curLang]?window._i18n[window._curLang].about_copy:'복사';b.style.color='var(--muted)';b.style.borderColor='var(--border-h)';},2000);})"
+            onclick="navigator.clipboard.writeText('sceneflix.may@gmail.com').then(()=>{const b=document.getElementById('copyMailBtn');b.textContent='✓';b.style.color='var(--accent)';b.style.borderColor='var(--accent)';setTimeout(()=>{b.textContent=getCurrentT().about_copy||'복사';b.style.color='var(--muted)';b.style.borderColor='var(--border-h)';},2000);})"
             style="font-size:0.6rem; padding:3px 9px; border-radius:5px; border:1px solid var(--border-h); background:transparent; color:var(--muted); cursor:pointer; flex-shrink:0; letter-spacing:0.04em; transition:color 0.15s, border-color 0.15s;" data-i18n="about_copy">복사</button>
         </div>
 
@@ -3090,6 +3139,10 @@ header {
 
 window._curLang = 'KR';
 
+function getCurrentT() {
+  return window._i18n[window._curLang] || window._i18n['KR'];
+}
+
 window._i18n = {
   KR: {
     headerTagline:        '리센느 영상 모아보기 SCENE-FLIX',
@@ -3124,6 +3177,7 @@ window._i18n = {
     links_member_ch:      '멤버 채널',
     links_music_platform: '음악 플랫폼',
     links_fan_community:  '팬 커뮤니티',
+    links_etc:            '기타',
     about_headline:       '리센느(RESCENE)의 팬 메이드 페이지입니다.',
     about_byline:         'made with love, by May_',
     about_section_info:   '페이지 안내',
@@ -3180,6 +3234,7 @@ window._i18n = {
     links_member_ch:      'メンバーチャンネル',
     links_music_platform: '音楽プラットフォーム',
     links_fan_community:  'ファンコミュニティ',
+    links_etc:            'その他',
     about_headline:       'RESCENE のファンメイドページです。',
     about_byline:         'made with love, by May_',
     about_section_info:   'ページ案内',
@@ -3236,6 +3291,7 @@ window._i18n = {
     links_member_ch:      'Member Channels',
     links_music_platform: 'Music Platforms',
     links_fan_community:  'Fan Community',
+    links_etc:            'Other',
     about_headline:       'A fan-made page dedicated to RESCENE.',
     about_byline:         'made with love, by May_',
     about_section_info:   'Page Info',
@@ -3666,6 +3722,8 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'ovilLN09iYE': '2026.06.01',
+  'v37MJmFb0bA': '2026.06.02',
   'Jf-a6z_6D-c': '2026.06.01',
   '3sFoaAhh6GM': '2026.05.30',
   'WvDMIvcUc2Q': '2026.05.30',
@@ -4342,17 +4400,13 @@ const DATE_MAP = {
   'Kw_x_EcgCLU': '2026.05.15',
 };
 
+const _RX_DATE8   = /(\d{4})(\d{2})(\d{2})/;
+const _RX_DATE_SEP = /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/;
+const _RX_DATE_KO  = /(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/;
+const _RX_DATE6    = /(?<![\d])(\d{2})(\d{2})(\d{2})(?![\d])/;
+
 function parseDate(title) {
-
-  const pat8 = /(\d{4})(\d{2})(\d{2})/;
-
-  const patSep = /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/;
-
-  const patKo = /(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/;
-
-  const pat6 = /(?<![\d])(\d{2})(\d{2})(\d{2})(?![\d])/;
-
-  for (const p of [pat8, patSep, patKo]) {
+  for (const p of [_RX_DATE8, _RX_DATE_SEP, _RX_DATE_KO]) {
     const m = title.match(p);
     if (m) {
       const y = m[1], mo = m[2].padStart(2,'0'), d = m[3].padStart(2,'0');
@@ -4361,8 +4415,7 @@ function parseDate(title) {
       }
     }
   }
-
-  const m6 = title.match(pat6);
+  const m6 = title.match(_RX_DATE6);
   if (m6) {
     const y = '20' + m6[1], mo = m6[2], d = m6[3];
     if (parseInt(mo) >= 1 && parseInt(mo) <= 12 && parseInt(d) >= 1 && parseInt(d) <= 31) {
@@ -4372,14 +4425,15 @@ function parseDate(title) {
   return null;
 }
 
+const _RX_VID_PS = [
+  /youtu\.be\/([^?&\s]+)/,
+  /[?&]v=([^?&\s]+)/,
+  /youtube\.com\/embed\/([^?&\s]+)/,
+  /youtube\.com\/shorts\/([^?&\s]+)/,
+];
+
 function getVid(url) {
-  const ps = [
-    /youtu\.be\/([^?&\s]+)/,
-    /[?&]v=([^?&\s]+)/,
-    /youtube\.com\/embed\/([^?&\s]+)/,
-    /youtube\.com\/shorts\/([^?&\s]+)/,
-  ];
-  for (const p of ps) { const m = url.match(p); if (m) return m[1]; }
+  for (const p of _RX_VID_PS) { const m = url.match(p); if (m) return m[1]; }
   return null;
 }
 
@@ -4792,6 +4846,8 @@ const EXTERNAL_DATA = {
     { vid: '3VIW53k6F4Q', url: 'https://youtu.be/3VIW53k6F4Q', date: '2026.05.01' },
   ],
   baesungjae: [
+    { vid: 'ovilLN09iYE', url: 'https://youtu.be/ovilLN09iYE', date: '2026.06.01' },
+    { vid: 'v37MJmFb0bA', url: 'https://youtu.be/v37MJmFb0bA', date: '2026.06.02' },
     { vid: 'QI4o-1Z9p_s', url: 'https://www.youtube.com/watch?v=QI4o-1Z9p_s', date: '2025.01.10' },
     { vid: 'smE4VwcGDTE', url: 'https://youtu.be/smE4VwcGDTE', date: '2025.02.06' },
     { vid: 'Q7pWeKFbWgU', url: 'https://youtu.be/Q7pWeKFbWgU', date: '2025.06.27' },
@@ -5127,33 +5183,35 @@ function buildContentCard(item, delay) {
   </a>`;
 }
 
+async function _fetchOembed(url, vid) {
+  _loadMetaCache();
+  const cacheKey = vid || url;
+  if (_metaCache[cacheKey]) return _metaCache[cacheKey];
+  try {
+    const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);
+    if (!r.ok) return null;
+    const d = await r.json();
+    const result = { rawTitle: d.title, channel: d.author_name, date: parseDate(d.title), show: parseShow(d.title) };
+    _metaCache[cacheKey] = result;
+    _saveMetaCache();
+    return result;
+  } catch {
+    return null;
+  }
+}
+
 async function loadCardMetas(items, mode) {
   const unloaded = items.filter(i => !i.loaded);
   const CHUNK = 5;
-  _loadMetaCache();
   for (let i = 0; i < unloaded.length; i += CHUNK) {
     const batch = unloaded.slice(i, i + CHUNK);
     await Promise.all(batch.map(async item => {
-      const cacheKey = item.vid || item.url;
-      let d = null;
-      if (_metaCache[cacheKey]) {
-        d = _metaCache[cacheKey];
-      } else {
-        try {
-          const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(item.url)}&format=json`);
-          if (r.ok) {
-            d = await r.json();
-            _metaCache[cacheKey] = { rawTitle: d.title, channel: d.author_name, date: parseDate(d.title), show: parseShow(d.title) };
-            _saveMetaCache();
-          }
-        } catch {}
-      }
+      const d = await _fetchOembed(item.url, item.vid);
       if (d) {
-        if (!item.title) item.title = d.rawTitle || d.title;
-        if (!item.date) item.date = d.date || parseDate(d.rawTitle || d.title || '');
-        if (mode === 'content') item.channel = d.channel || d.author_name || '';
+        if (!item.title) item.title = d.rawTitle;
+        if (!item.date) item.date = d.date;
+        if (mode === 'content') item.channel = d.channel || '';
       }
-
       if (!item.date && DATE_MAP[item.vid]) item.date = DATE_MAP[item.vid];
       item.loaded = true;
 
@@ -5196,10 +5254,10 @@ async function loadCardMetas(items, mode) {
 }
 
 function buildExternalChanBar() {
-  const t = (window._i18n && window._i18n[window._curLang]) || window._i18n['KR'];
+  const t = getCurrentT();
   function catLabel(cat) {
     const key = EXTERNAL_CATS[cat].i18nKey;
-    return (t && t[key]) || EXTERNAL_CATS[cat].label;
+    return t[key] || EXTERNAL_CATS[cat].label;
   }
 
   const catNav = document.getElementById('externalCatNav');
@@ -5310,6 +5368,8 @@ function buildExternalGrid() {
 }
 
 const FANTUBE_CHANNELS = [
+  { name: '리센느며들다', url: 'https://www.youtube.com/@%EB%A6%AC%EC%84%BC%EB%8A%90%EB%A9%B0%EB%93%A4%EB%8B%A4/featured', handle: '@리센느며들다', avatar: 'https://yt3.googleusercontent.com/cRVzDpsQQmGtuqVBuoYiBid8MrArvt_iDa_0l2_tBBW7tNa14zQZzYLy6qHXHD1T6Lvpiuc3W5Q=s160-c-k-c0x00ffffff-no-rj' },
+  { name: '출구없는진경은', url: 'https://www.youtube.com/@Liv-i8l-s5c', handle: '@Liv-i8l-s5c', avatar: 'https://yt3.googleusercontent.com/cONanV40Ymbn_YEB2tNavwLmu6HsYspRkXUEzhSMKmBJJYR6uMKuKa9jTLWkFC_ydPSzhJv9MEE=s160-c-k-c0x00ffffff-no-rj' },
   { name: 'TTL', url: 'https://www.youtube.com/@춘장치킨', handle: '@춘장치킨', avatar: 'https://yt3.googleusercontent.com/8E3s7hQiB_UCdrO0_kWdIYymV_gH359msiZ5mcO3jhGDhZzrcXEMPhbTf5H8u93wjoVOJzG1=s160-c-k-c0x00ffffff-no-rj' },
   { name: '리센느서치P', url: 'https://www.youtube.com/@리센느서치P', handle: '@리센느서치P', avatar: 'https://yt3.googleusercontent.com/uvDeiIdmS9IDmpJ5C6pyFbwN-nOBhPZM1JGxxUKyrk-HdliyqfTsJWR3ZOJVquBtSiLFd6746tU=s160-c-k-c0x00ffffff-no-rj' },
   { name: '사진정원2', url: 'https://www.youtube.com/@picture_garden2', handle: '@picture_garden2', avatar: 'https://yt3.googleusercontent.com/KyaXKKjFB2y_H5b0Kgh01Wx9SJSj9gW3-aF1WarH5DYd337zQha1EybTcmfqDJ_WnkJfNryr-mc=s160-c-k-c0x00ffffff-no-rj' },
@@ -5369,7 +5429,7 @@ function buildLiveNav() {
   const cnt2024 = LIVE_DATA_2024.length;
   const cnt2025 = LIVE_DATA_2025.length;
   const cnt2026 = LIVE_DATA_2026.length;
-  const t = window._i18n[window._curLang] || window._i18n['KR'];
+  const t = getCurrentT();
   const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
   function yearLabel(y) {
     if (window._curLang === 'EN') return y;
@@ -5650,7 +5710,7 @@ function formatLiveDate(item) {
 }
 
 function buildLiveCard(item, delay) {
-  const t = window._i18n[window._curLang] || window._i18n['KR'];
+  const t = getCurrentT();
   const MEMBER_LABEL = {
     '원이':  t.filter_member_woni   || '원이',
     '리브':  t.filter_member_liv    || '리브',
@@ -5683,24 +5743,11 @@ function buildLiveCard(item, delay) {
 
 async function loadLiveTitles(items) {
   const CHUNK = 6;
-  _loadMetaCache();
   const toLoad = items.filter(i => !i.title);
   for (let i = 0; i < toLoad.length; i += CHUNK) {
     await Promise.all(toLoad.slice(i, i + CHUNK).map(async item => {
-      const cacheKey = item.vid || item.url;
-      if (_metaCache[cacheKey]) {
-        item.title = _metaCache[cacheKey].rawTitle || item.title;
-      } else {
-        try {
-          const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(item.url)}&format=json`);
-          if (r.ok) {
-            const d = await r.json();
-            item.title = d.title;
-            _metaCache[cacheKey] = { rawTitle: d.title, channel: d.author_name, date: null, show: null };
-            _saveMetaCache();
-          }
-        } catch {}
-      }
+      const d = await _fetchOembed(item.url, item.vid);
+      if (d) item.title = d.rawTitle;
       if (!item.title) item.title = item.date + ' 라이브';
       const el = document.getElementById(`lvc-title-${item.vid}`);
       if (el) el.textContent = item.title;
@@ -5729,12 +5776,12 @@ function _liveAppendBatch(grid) {
   if (_liveLoaded >= _liveSorted.length) return;
   const batch = _liveSorted.slice(_liveLoaded, _liveLoaded + LIVE_BATCH);
   const frag  = document.createDocumentFragment();
-  batch.forEach((item, i) => {
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = batch.map((item, i) => {
     const delay = `${Math.min((i % LIVE_BATCH) * 0.025, 0.3)}s`;
-    const tmp = document.createElement('div');
-    tmp.innerHTML = buildLiveCard(item, delay);
-    frag.appendChild(tmp.firstElementChild);
-  });
+    return buildLiveCard(item, delay);
+  }).join('');
+  while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
   _liveLoaded += batch.length;
 
   if (_liveSentinel && _liveSentinel.parentNode) {
@@ -5939,7 +5986,7 @@ function buildSongNav() {
 const TYPE_BADGE = { music:'tb-music', mv:'tb-mv', itslive:'tb-itslive', content:'tb-content', onthespot:'tb-onthespot', fullcam:'tb-fullcam', external:'tb-external', live:'tb-itslive' };
 const TYPE_LABEL = { music:'음악방송', mv:'뮤직비디오', itslive:"It's Live", content:'자체컨텐츠', onthespot:'온더스팟', fullcam:'풀캠', external:'외부컨텐츠', live:'LIVE' };
 function getTypeLabel(type) {
-  const t = window._i18n[window._curLang] || window._i18n['KR'];
+  const t = getCurrentT();
   const map = {
     music:    t.filter_music    || TYPE_LABEL.music,
     mv:       t.filter_mv       || TYPE_LABEL.mv,
@@ -6023,14 +6070,12 @@ function _gridAppendBatch(grid) {
   if (_gridLoaded >= _gridSorted.length) return;
   const batch = _gridSorted.slice(_gridLoaded, _gridLoaded + GRID_BATCH);
   const frag  = document.createDocumentFragment();
-  batch.forEach((item, i) => {
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = batch.map((item, i) => {
     const delay = `${Math.min((i % GRID_BATCH) * 0.025, 0.3)}s`;
-    const tmp = document.createElement('div');
-    tmp.innerHTML = _gridSection === 'content'
-      ? buildContentCard(item, delay)
-      : buildCard(item, delay);
-    frag.appendChild(tmp.firstElementChild);
-  });
+    return _gridSection === 'content' ? buildContentCard(item, delay) : buildCard(item, delay);
+  }).join('');
+  while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
   _gridLoaded += batch.length;
 
   if (_gridSentinel && _gridSentinel.parentNode) {
@@ -6167,16 +6212,18 @@ function _avAppendNextBatch(grid) {
   if (_avLoaded >= _avSorted.length) return;
   const batch = _avSorted.slice(_avLoaded, _avLoaded + AV_PAGE_SIZE);
   const frag  = document.createDocumentFragment();
-  batch.forEach((item, i) => {
+  batch.forEach((item) => {
     if (item._ref && item._ref.loaded && !item.loaded) {
       item.loaded = true;
       item.meta   = item._ref.meta || item.meta;
     }
-    const delay = `${Math.min((i % AV_PAGE_SIZE) * 0.025, 0.3)}s`;
-    const tmp   = document.createElement('div');
-    tmp.innerHTML = buildAllVideoCard(item, delay);
-    frag.appendChild(tmp.firstElementChild);
   });
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = batch.map((item, i) => {
+    const delay = `${Math.min((i % AV_PAGE_SIZE) * 0.025, 0.3)}s`;
+    return buildAllVideoCard(item, delay);
+  }).join('');
+  while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
   _avLoaded += batch.length;
 
   if (_avSentinel && _avSentinel.parentNode) {
@@ -6230,7 +6277,7 @@ function buildAllVideoCard(item, delay) {
   const videoTitle = m.rawTitle || item.song || item.vid;
 
   if (item._src === 'live' && item._liveItem) {
-    const _t2 = window._i18n[window._curLang] || window._i18n['KR'];
+    const _t2 = getCurrentT();
     const _ML2 = { '원이': _t2.filter_member_woni||'원이', '리브': _t2.filter_member_liv||'리브', '미나미': _t2.filter_member_minami||'미나미', '메이': _t2.filter_member_may||'메이', '제나': _t2.filter_member_zena||'제나', '전원': _t2.filter_all_members||'전원' };
     const memberBadges = item._liveItem.members.map(mm =>
       `<span class="ctag ${MEMBER_CLASS[mm] || ''}">${_ML2[mm] || mm}</span>`
@@ -6368,20 +6415,8 @@ async function loadAllVideosMetas(items) {
     const batch = liveUnloaded.slice(i, i + CHUNK);
     await Promise.all(batch.map(async proxy => {
       const ref = proxy._ref;
-      const cacheKey = proxy.vid || ref.url;
-      if (_metaCache[cacheKey]) {
-        ref.title = _metaCache[cacheKey].rawTitle || ref.title;
-      } else {
-        try {
-          const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(ref.url)}&format=json`);
-          if (r.ok) {
-            const d = await r.json();
-            ref.title = d.title;
-            _metaCache[cacheKey] = { rawTitle: d.title, channel: d.author_name, date: null, show: null };
-            _saveMetaCache();
-          }
-        } catch {}
-      }
+      const d = await _fetchOembed(ref.url, proxy.vid);
+      if (d) ref.title = d.rawTitle;
       if (!ref.title) ref.title = ref.date + ' 라이브';
       proxy.meta.rawTitle = ref.title;
       proxy.loaded = true;
@@ -6474,8 +6509,12 @@ function _replayAnim(selector, delayFn, animStr = '') {
   });
 }
 
-function pickSection(section) {
+function pickSection(section, _fromPopState) {
   curSection = section;
+  if (!_fromPopState) {
+    const url = section === 'about' ? location.pathname : `${location.pathname}?tab=${section}`;
+    history.pushState({ tab: section }, '', url);
+  }
   window.scrollTo({ top: 0, behavior: 'instant' });
   document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
   const tabId = _PICK_TAB_ID_MAP[section] || 'secAbout';
@@ -6596,7 +6635,7 @@ function renderSubLiveTabs() {
   const cnt2024 = LIVE_DATA_2024.length;
   const cnt2025 = LIVE_DATA_2025.length;
   const cnt2026 = LIVE_DATA_2026.length;
-  const t = window._i18n[window._curLang] || window._i18n['KR'];
+  const t = getCurrentT();
   const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
   function yl(y) { return window._curLang === 'EN' ? y : y + suffix; }
   let html = `<button class="song-tab ${curLiveYear === 'all'  ? 'active' : ''}" onclick="pickLiveYear(this,'all'); syncSubSidebar();">ALL<span class="cnt">${allCnt}</span></button>`;
@@ -6607,7 +6646,7 @@ function renderSubLiveTabs() {
 }
 
 function renderSubLiveMemberBtns() {
-  const t = window._i18n[window._curLang] || window._i18n['KR'];
+  const t = getCurrentT();
   const members = [
     { lm:'all',   label: t.filter_all },
     { lm:'전원',  label: t.filter_all_members },
@@ -6624,10 +6663,10 @@ function renderSubLiveMemberBtns() {
 }
 
 function renderSubExternalTabs() {
-  const t = (window._i18n && window._i18n[window._curLang]) || window._i18n['KR'];
+  const t = getCurrentT();
   function catLabel(cat) {
     const key = EXTERNAL_CATS[cat].i18nKey;
-    return (t && t[key]) || EXTERNAL_CATS[cat].label;
+    return t[key] || EXTERNAL_CATS[cat].label;
   }
   const totalCnt = EXTERNAL_KEYS.reduce((s, k) => s + EXTERNAL_DATA[k].length, 0);
   let html = `<button class="song-tab ${curExternalCat === 'all' ? 'active' : ''}" onclick="pickExternalCatSub(this,'all')">ALL<span class="cnt">${totalCnt}</span></button>`;
@@ -6768,12 +6807,12 @@ function applySearch() {
     _avDisconnectObserver();
     const frag = document.createDocumentFragment();
     const remaining = _avSorted.slice(_avLoaded);
-    remaining.forEach((item, i) => {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = remaining.map((item, i) => {
       const delay = `${Math.min((i % AV_PAGE_SIZE) * 0.025, 0.3)}s`;
-      const tmp = document.createElement('div');
-      tmp.innerHTML = buildAllVideoCard(item, delay);
-      frag.appendChild(tmp.firstElementChild);
-    });
+      return buildAllVideoCard(item, delay);
+    }).join('');
+    while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
     _avLoaded = _avSorted.length;
     if (_avSentinel && _avSentinel.parentNode) {
       _elGrid.insertBefore(frag, _avSentinel);
@@ -6787,14 +6826,12 @@ function applySearch() {
     _gridDisconnect();
     const frag = document.createDocumentFragment();
     const remaining = _gridSorted.slice(_gridLoaded);
-    remaining.forEach((item, i) => {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = remaining.map((item, i) => {
       const delay = `${Math.min((i % GRID_BATCH) * 0.025, 0.3)}s`;
-      const tmp = document.createElement('div');
-      tmp.innerHTML = _gridSection === 'content'
-        ? buildContentCard(item, delay)
-        : buildCard(item, delay);
-      frag.appendChild(tmp.firstElementChild);
-    });
+      return _gridSection === 'content' ? buildContentCard(item, delay) : buildCard(item, delay);
+    }).join('');
+    while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
     _gridLoaded = _gridSorted.length;
     if (_gridSentinel && _gridSentinel.parentNode) {
       _elGrid.insertBefore(frag, _gridSentinel);
@@ -6808,12 +6845,12 @@ function applySearch() {
     _liveDisconnect();
     const frag = document.createDocumentFragment();
     const remaining = _liveSorted.slice(_liveLoaded);
-    remaining.forEach((item, i) => {
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = remaining.map((item, i) => {
       const delay = `${Math.min((i % LIVE_BATCH) * 0.025, 0.3)}s`;
-      const tmp = document.createElement('div');
-      tmp.innerHTML = buildLiveCard(item, delay);
-      frag.appendChild(tmp.firstElementChild);
-    });
+      return buildLiveCard(item, delay);
+    }).join('');
+    while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
     _liveLoaded = _liveSorted.length;
     if (_liveSentinel && _liveSentinel.parentNode) {
       liveGrid.insertBefore(frag, _liveSentinel);
@@ -6987,10 +7024,10 @@ function injectAnnivEvents() {
   SCHEDULE_DATA.sort((a, b) => a.date.localeCompare(b.date));
 }
 
-const _TODAY_KEY = (function() { const d = new Date(); return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`; })();
+const _HOUR_KEY = (function() { const d = new Date(); return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}${String(d.getHours()).padStart(2,'0')}`; })();
 
 (function loadScheduleJson() {
-  fetch('./schedule.json?_=' + _TODAY_KEY)
+  fetch('./schedule.json?_=' + _HOUR_KEY)
     .then(function(r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
@@ -7023,7 +7060,7 @@ let NEWS_DATA = [];
 let _newsLoaded = false;
 
 (function loadNewsJson() {
-  fetch('./news.json?_=' + _TODAY_KEY)
+  fetch('./news.json?_=' + _HOUR_KEY)
     .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(function(data) {
       NEWS_DATA = data.articles || [];
@@ -7350,7 +7387,20 @@ function renderSchedList() {
 }
 
 buildSongNav();
-pickSection('about');
+
+(function () {
+  const _VALID_TABS = new Set(Object.keys(_PICK_TAB_ID_MAP));
+  const params = new URLSearchParams(location.search);
+  const tabFromUrl = params.get('tab');
+  const initTab = (_VALID_TABS.has(tabFromUrl)) ? tabFromUrl : 'about';
+  history.replaceState({ tab: initTab }, '', location.href);
+  pickSection(initTab, true);
+})();
+
+window.addEventListener('popstate', e => {
+  const tab = (e.state && e.state.tab) || 'about';
+  pickSection(tab, true);
+});
 
 document.addEventListener("contextmenu", e => e.preventDefault());
 
