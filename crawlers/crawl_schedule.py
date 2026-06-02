@@ -1,7 +1,4 @@
 #!/usr/bin/env python3
-"""
-통합 크롤러 — 스케줄(schedule.json) + 뉴스(news.json) 동시 생성
-"""
 
 import asyncio
 import html
@@ -20,17 +17,14 @@ import requests
 
 ROOT = pathlib.Path(__file__).parent.parent
 
-# ───────────────────────────── 공통 헤더 ──────────────────────────────────
-
 COMMON_UA = (
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
     "AppleWebKit/537.36 (KHTML, like Gecko) "
     "Chrome/124.0.0.0 Safari/537.36"
 )
 
-# ═══════════════════════════════════════════════════════════════════════════
-#  1. 스케줄 크롤러 (MnetPlus)
-# ═══════════════════════════════════════════════════════════════════════════
+
+# ── 스케줄 크롤러 (MnetPlus) ──
 
 SCHED_HEADERS = {
     "User-Agent": COMMON_UA,
@@ -72,7 +66,7 @@ def extract_date(ev: dict) -> Optional[str]:
     return f"{m.group(1)}-{m.group(2)}-{m.group(3)}" if m else None
 
 
-# index.html의 SCHED_TYPE_COLOR / CSS 클래스명과 반드시 일치해야 함
+# index.html의 SCHED_TYPE_COLOR / CSS 클래스명과 맞춰야 함
 LABEL_MAP = {
     "공연":    "concert",
     "팬사인회": "fansign",
@@ -141,7 +135,7 @@ def crawl_schedule_month(year: int, month: int) -> list:
 
 
 def run_schedule_crawler() -> dict:
-    print("[스케줄 크롤러 v4] 시작", file=sys.stderr)
+    print("[스케줄] 시작", file=sys.stderr)
 
     today  = date.today()
     months = [(today.year, today.month)]
@@ -166,13 +160,11 @@ def run_schedule_crawler() -> dict:
         "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "events":  deduped,
     }
-    print(f"[스케줄 크롤러 v4] 완료 — {len(deduped)}개", file=sys.stderr)
+    print(f"[스케줄] 완료 — {len(deduped)}개", file=sys.stderr)
     return result
 
 
-# ═══════════════════════════════════════════════════════════════════════════
-#  2. 뉴스 크롤러 (Naver API)
-# ═══════════════════════════════════════════════════════════════════════════
+# ── 뉴스 크롤러 (Naver API) ──
 
 NAVER_CLIENT_ID     = os.environ.get("NAVER_CLIENT_ID", "")
 NAVER_CLIENT_SECRET = os.environ.get("NAVER_CLIENT_SECRET", "")
@@ -189,6 +181,9 @@ FETCH_HEADERS = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
     "Referer": "https://search.naver.com/",
 }
+
+# 제목에 이 키워드가 하나라도 있어야 수집 (대소문자 무시)
+TITLE_KEYWORDS = ["리센느", "rescene"]
 
 SEARCH_QUERIES = ["리센느", "RESCENE"]
 DISPLAY        = 20
@@ -215,6 +210,11 @@ def clean_text(t: str) -> str:
     return t.strip()
 
 
+def title_matches(title: str) -> bool:
+    tl = title.lower()
+    return any(kw.lower() in tl for kw in TITLE_KEYWORDS)
+
+
 def crawl_naver_api(query: str) -> list[dict]:
     url = "https://openapi.naver.com/v1/search/news.json"
     params = {
@@ -224,6 +224,7 @@ def crawl_naver_api(query: str) -> list[dict]:
         "sort":    "date",
     }
     articles = []
+    skipped  = 0
     try:
         resp = requests.get(url, headers=NAVER_HEADERS, params=params, timeout=15)
         resp.raise_for_status()
@@ -232,24 +233,33 @@ def crawl_naver_api(query: str) -> list[dict]:
         for item in data.get("items", []):
             title       = clean_text(item.get("title", ""))
             link        = item.get("originallink") or item.get("link", "")
+            naver_link  = item.get("link", "")
             pub_date    = parse_pub_date(item.get("pubDate", ""))
             description = clean_text(item.get("description", ""))
             source_m    = re.search(r"https?://(?:www\.)?([^/]+)", link)
             source      = source_m.group(1) if source_m else "네이버뉴스"
 
+            if not title_matches(title):
+                skipped += 1
+                continue
+
             if title and link:
                 articles.append({
                     "title":       title,
                     "url":         link,
+                    "naver_url":   naver_link,
                     "date":        pub_date,
                     "source":      source,
                     "description": description,
                     "thumbnail":   None,
                 })
 
-        print(f"[Naver API] '{query}' → {len(articles)}개", file=sys.stderr)
+        print(
+            f"[Naver] '{query}' → {len(articles)}개 / 제목 불일치 {skipped}개 제외",
+            file=sys.stderr,
+        )
     except Exception as e:
-        print(f"[Naver API] '{query}' 오류: {e}", file=sys.stderr)
+        print(f"[Naver] '{query}' 오류: {e}", file=sys.stderr)
 
     return articles
 
@@ -271,6 +281,56 @@ def merge_articles(lists: list[list[dict]], max_count: int = MAX_ARTICLES) -> li
     return merged[:max_count]
 
 
+def _is_naver_news_url(url: str) -> bool:
+    return bool(re.search(r"(n\.news|news)\.naver\.com", url))
+
+
+async def _fetch_og_image_from_url(
+    session: aiohttp.ClientSession,
+    url: str,
+    sem: asyncio.Semaphore,
+) -> Optional[str]:
+    async with sem:
+        try:
+            async with session.get(
+                url,
+                headers=FETCH_HEADERS,
+                timeout=aiohttp.ClientTimeout(total=THUMB_TIMEOUT),
+                allow_redirects=True,
+                ssl=False,
+            ) as resp:
+                if resp.status != 200:
+                    return None
+                if "html" not in resp.headers.get("Content-Type", ""):
+                    return None
+
+                # 최대 128KB까지 읽되 og:image 찾으면 바로 중단
+                text = ""
+                async for chunk in resp.content.iter_chunked(8192):
+                    text += chunk.decode("utf-8", errors="ignore")
+                    if len(text) > 131072:
+                        break
+                    if "og:image" in text or "twitter:image" in text:
+                        break
+
+                patterns = [
+                    r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
+                    r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']',
+                    r'<meta[^>]+name=["\']twitter:image["\'][^>]+content=["\']([^"\']+)["\']',
+                    r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+name=["\']twitter:image["\']',
+                    r'<meta[^>]+property=["\']og:image:url["\'][^>]+content=["\']([^"\']+)["\']',
+                ]
+                for pat in patterns:
+                    m = re.search(pat, text, re.IGNORECASE)
+                    if m:
+                        img = m.group(1).strip()
+                        if img.startswith("http"):
+                            return img
+        except Exception:
+            pass
+    return None
+
+
 async def fetch_og_image(
     session: aiohttp.ClientSession,
     article: dict,
@@ -279,57 +339,40 @@ async def fetch_og_image(
     if article.get("thumbnail"):
         return
 
-    async with sem:
-        try:
-            async with session.get(
-                article["url"],
-                headers=FETCH_HEADERS,
-                timeout=aiohttp.ClientTimeout(total=THUMB_TIMEOUT),
-                allow_redirects=True,
-                ssl=False,
-            ) as resp:
-                if resp.status != 200:
-                    return
-                if "html" not in resp.headers.get("Content-Type", ""):
-                    return
+    # 네이버 내부 URL 우선 시도 (og:image 거의 항상 있음)
+    naver_url = article.get("naver_url", "")
+    if naver_url and _is_naver_news_url(naver_url):
+        img = await _fetch_og_image_from_url(session, naver_url, sem)
+        if img:
+            article["thumbnail"] = img
+            print(f"  [naver] {article['title'][:30]}… OK", file=sys.stderr)
+            return
 
-                # og:image는 보통 <head> 안에 있으므로 최대 64KB까지 청크로 읽음
-                text = ""
-                async for chunk in resp.content.iter_chunked(8192):
-                    text += chunk.decode("utf-8", errors="ignore")
-                    if len(text) > 65536:
-                        break
-                    # og:image 찾으면 즉시 중단
-                    if 'og:image' in text:
-                        break
+    # 외부 originallink 시도
+    ext_url = article.get("url", "")
+    if ext_url and not _is_naver_news_url(ext_url):
+        img = await _fetch_og_image_from_url(session, ext_url, sem)
+        if img:
+            article["thumbnail"] = img
+            print(f"  [외부]  {article['title'][:30]}… OK", file=sys.stderr)
+            return
 
-                m = re.search(
-                    r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
-                    text, re.IGNORECASE,
-                ) or re.search(
-                    r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']',
-                    text, re.IGNORECASE,
-                ) or re.search(
-                    r'<meta[^>]+name=["\']twitter:image["\'][^>]+content=["\']([^"\']+)["\']',
-                    text, re.IGNORECASE,
-                ) or re.search(
-                    r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+name=["\']twitter:image["\']',
-                    text, re.IGNORECASE,
-                )
-                if m:
-                    img = m.group(1).strip()
-                    if img.startswith("http"):
-                        article["thumbnail"] = img
-                        print(f"  [og] {article['title'][:28]}… OK", file=sys.stderr)
-        except Exception:
-            pass
+    # originallink도 네이버 계열인 경우 한 번 더
+    if ext_url and _is_naver_news_url(ext_url) and ext_url != naver_url:
+        img = await _fetch_og_image_from_url(session, ext_url, sem)
+        if img:
+            article["thumbnail"] = img
+            print(f"  [naver2]{article['title'][:30]}… OK", file=sys.stderr)
+            return
+
+    print(f"  [없음]  {article['title'][:30]}…", file=sys.stderr)
 
 
 async def enrich_thumbnails(articles: list[dict]):
     need = [a for a in articles if not a.get("thumbnail")]
     if not need:
         return
-    print(f"[썸네일] og:image 수집 — {len(need)}개", file=sys.stderr)
+    print(f"[썸네일] {len(need)}개 수집 중...", file=sys.stderr)
     sem  = asyncio.Semaphore(THUMB_CONCUR)
     conn = aiohttp.TCPConnector(limit=THUMB_CONCUR, ssl=False)
     async with aiohttp.ClientSession(connector=conn) as session:
@@ -339,10 +382,10 @@ async def enrich_thumbnails(articles: list[dict]):
 
 
 def run_news_crawler() -> dict:
-    print("[뉴스 크롤러 v3] 시작", file=sys.stderr)
+    print("[뉴스] 시작", file=sys.stderr)
 
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:
-        print("[뉴스 크롤러] NAVER_CLIENT_ID / SECRET 환경변수 없음 — 건너뜀", file=sys.stderr)
+        print("[뉴스] NAVER 환경변수 없음 — 건너뜀", file=sys.stderr)
         return {"updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "articles": []}
 
     all_articles = []
@@ -351,10 +394,10 @@ def run_news_crawler() -> dict:
         time.sleep(0.3)
 
     articles = merge_articles([all_articles])
-
     asyncio.run(enrich_thumbnails(articles))
 
     for a in articles:
+        a.pop("naver_url", None)
         if not a.get("thumbnail"):
             a["thumbnail"] = None
 
@@ -364,26 +407,19 @@ def run_news_crawler() -> dict:
     }
 
     filled = sum(1 for a in articles if a.get("thumbnail"))
-    print(
-        f"[뉴스 크롤러 v3] 완료 — {len(articles)}개 / 썸네일 {filled}개",
-        file=sys.stderr,
-    )
+    print(f"[뉴스] 완료 — {len(articles)}개 / 썸네일 {filled}개", file=sys.stderr)
     return result
 
 
-# ═══════════════════════════════════════════════════════════════════════════
-#  3. 메인 — 두 크롤러 실행 후 각각 저장
-# ═══════════════════════════════════════════════════════════════════════════
+# ── 메인 ──
 
 def main():
-    # ── 스케줄 ──────────────────────────────────────────────────────────────
     schedule_data = run_schedule_crawler()
     sched_path = ROOT / "schedule.json"
     with open(sched_path, "w", encoding="utf-8") as f:
         json.dump(schedule_data, f, ensure_ascii=False, indent=2)
     print(f"[완료] schedule.json → {sched_path}", file=sys.stderr)
 
-    # ── 뉴스 ────────────────────────────────────────────────────────────────
     news_data = run_news_crawler()
     news_path = ROOT / "news.json"
     with open(news_path, "w", encoding="utf-8") as f:
