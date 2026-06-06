@@ -51,6 +51,14 @@ gtag('config', 'G-05C99P2DB9');
   --c-sched-concert:   #80b8a0;
   --c-sched-notice:    #888888;
   --c-sched-anniv:     #b8a080;
+
+  --c-wonyi:  #04a06e;
+  --c-minami: #2b99c4;
+  --c-mei:    #ecd25b;
+  --c-zena:   #ba92db;
+  --c-wonyi-dark: #045a42;
+  --c-mei-dark:   #c9a800;
+  --c-bm:         #f0c060;
 }
 
 [data-theme="light"] {
@@ -80,6 +88,14 @@ gtag('config', 'G-05C99P2DB9');
   --c-sched-concert:   #3a8860;
   --c-sched-notice:    #666666;
   --c-sched-anniv:     #8a6840;
+
+  --c-wonyi:  #04a06e;
+  --c-minami: #2b99c4;
+  --c-mei:    #ecd25b;
+  --c-zena:   #ba92db;
+  --c-wonyi-dark: #045a42;
+  --c-mei-dark:   #c9a800;
+  --c-bm:         #f0c060;
 }
 
 [data-theme="light"] .wordmark-img {
@@ -206,11 +222,11 @@ gtag('config', 'G-05C99P2DB9');
 .bm-btn.bm-active {
   opacity: 1;
   transform: scale(1) translateY(4px);
-  color: #f0c060;
+  color: var(--c-bm);
   background: rgba(0,0,0,0.65);
   border-color: rgba(240,192,96,0.4);
 }
-.bm-btn.bm-active svg { fill: #f0c060; stroke: #f0c060; }
+.bm-btn.bm-active svg { fill: var(--c-bm); stroke: var(--c-bm); }
 .share-btn.share-done { color: #7de8a0; border-color: rgba(125,232,160,0.4); background: rgba(0,0,0,0.75); }
 
 #share-toast {
@@ -373,19 +389,20 @@ header {
 .song-tab.active {
   color: var(--accent);
   border-bottom-color: var(--accent);
+  font-weight: 500;
 }
 [data-theme="light"] .song-tab.active {
-  color: #3a3a3c;
-  border-bottom-color: #3a3a3c;
+  color: var(--accent);
+  border-bottom-color: var(--accent);
   border-bottom-width: 3px;
   font-weight: 700;
 }
 @media (min-width: 701px) {
   [data-theme="light"] .section-tab.active {
-    border-left-color: #3a3a3c;
+    border-left-color: var(--accent);
     background: rgba(58,58,60,0.07);
     font-weight: 700;
-    color: #3a3a3c;
+    color: var(--accent);
   }
 }
 
@@ -402,7 +419,6 @@ header {
   font-size: 0.72rem;
   letter-spacing: 0.08em;
 }
-.song-tab.active { font-weight: 500; }
 
 .song-nav-inner {
   background: var(--surf);
@@ -463,16 +479,16 @@ header {
 .type-btn[data-t="onthespot"] { border-color: var(--c-onthespot); }
 .type-btn[data-t="fullcam"]   { border-color: var(--c-fullcam);   }
 
-.type-btn[data-lm="원이"]    { border-color: #04a06e; }
+.type-btn[data-lm="원이"]    { border-color: var(--c-wonyi); }
 .type-btn[data-lm="리브"]    { border-color: rgba(220,220,220,0.5); }
-.type-btn[data-lm="미나미"]  { border-color: #2b99c4; }
-.type-btn[data-lm="메이"]    { border-color: #ecd25b; }
-.type-btn[data-lm="제나"]    { border-color: #ba92db; }
+.type-btn[data-lm="미나미"]  { border-color: var(--c-minami); }
+.type-btn[data-lm="메이"]    { border-color: var(--c-mei); }
+.type-btn[data-lm="제나"]    { border-color: var(--c-zena); }
 .type-btn:hover { color: var(--text); border-color: var(--border-h); }
-.type-btn[data-lm="원이"]:hover   { border-color: #045a42; }
-.type-btn[data-lm="미나미"]:hover { border-color: #2b99c4; }
-.type-btn[data-lm="메이"]:hover   { border-color: #ecd25b; }
-.type-btn[data-lm="제나"]:hover   { border-color: #ba92db; }
+.type-btn[data-lm="원이"]:hover   { border-color: var(--c-wonyi-dark); }
+.type-btn[data-lm="미나미"]:hover { border-color: var(--c-minami); }
+.type-btn[data-lm="메이"]:hover   { border-color: var(--c-mei); }
+.type-btn[data-lm="제나"]:hover   { border-color: var(--c-zena); }
 
 .type-btn.active[data-t="all"]      { color: var(--text);       border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); }
 .type-btn.active[data-t="music"]    { color: var(--c-music);    border-color: var(--c-music);    background: rgba(110,198,192,0.08); }
@@ -486,13 +502,13 @@ header {
 .type-btn.active[data-lm="전원"]   { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
 [data-theme="light"] .type-btn.active[data-lm="all"]  { color: var(--text); border-color: rgba(0,0,0,0.35); background: rgba(0,0,0,0.08); }
 [data-theme="light"] .type-btn.active[data-lm="전원"] { color: var(--text); border-color: rgba(0,0,0,0.35); background: rgba(0,0,0,0.08); }
-.type-btn.active[data-lm="원이"]   { color: #04a06e; border-color: #045a42;               background: rgba(4,90,66,0.15); }
+.type-btn.active[data-lm="원이"]   { color: var(--c-wonyi); border-color: var(--c-wonyi-dark); background: rgba(4,90,66,0.15); }
 .type-btn.active[data-lm="리브"]   { color: #e0e0e0; border-color: rgba(220,220,220,0.5); background: rgba(0,0,0,0.35); }
-.type-btn.active[data-lm="미나미"] { color: #2b99c4; border-color: #2b99c4;               background: rgba(43,153,196,0.12); }
-.type-btn.active[data-lm="메이"]   { color: #c9a800; border-color: #ecd25b;               background: rgba(236,210,91,0.12); }
-.type-btn.active[data-lm="제나"]   { color: #ba92db; border-color: #ba92db;               background: rgba(186,146,219,0.12); }
-.type-btn.active[data-ec-ch]       { color: #7aaede; border-color: #7aaede;               background: rgba(122,174,222,0.15); }
-[data-theme="light"] .type-btn.active[data-ec-ch] { color: #3a78c4; border-color: #3a78c4; background: rgba(58,120,196,0.12); }
+.type-btn.active[data-lm="미나미"] { color: var(--c-minami); border-color: var(--c-minami);   background: rgba(43,153,196,0.12); }
+.type-btn.active[data-lm="메이"]   { color: var(--c-mei-dark); border-color: var(--c-mei);    background: rgba(236,210,91,0.12); }
+.type-btn.active[data-lm="제나"]   { color: var(--c-zena); border-color: var(--c-zena);       background: rgba(186,146,219,0.12); }
+.type-btn.active[data-ec-ch]       { color: var(--c-external); border-color: var(--c-external); background: rgba(122,174,222,0.15); }
+[data-theme="light"] .type-btn.active[data-ec-ch] { color: var(--c-external); border-color: var(--c-external); background: rgba(58,120,196,0.12); }
 
 .search-bar {
   max-width: 1280px;
@@ -822,11 +838,11 @@ header {
   color: var(--accent);
 }
 
-.ctag.lm-wonyi  { background: rgba(4,90,66,0.2);    color: #04a06e; border: 1px solid rgba(4,160,110,0.4); }
+.ctag.lm-wonyi  { background: rgba(4,90,66,0.2);    color: var(--c-wonyi); border: 1px solid rgba(4,160,110,0.4); }
 .ctag.lm-liv    { background: rgba(200,200,200,0.1); color: #d0d0d0; border: 1px solid rgba(220,220,220,0.4); }
-.ctag.lm-minami { background: rgba(43,153,196,0.15); color: #2b99c4; border: 1px solid rgba(43,153,196,0.4); }
-.ctag.lm-may    { background: rgba(236,210,91,0.13); color: #c9a800; border: 1px solid rgba(236,210,91,0.4); }
-.ctag.lm-zena   { background: rgba(186,146,219,0.15);color: #ba92db; border: 1px solid rgba(186,146,219,0.4); }
+.ctag.lm-minami { background: rgba(43,153,196,0.15); color: var(--c-minami); border: 1px solid rgba(43,153,196,0.4); }
+.ctag.lm-may    { background: rgba(236,210,91,0.13); color: var(--c-mei-dark); border: 1px solid rgba(236,210,91,0.4); }
+.ctag.lm-zena   { background: rgba(186,146,219,0.15);color: var(--c-zena); border: 1px solid rgba(186,146,219,0.4); }
 [data-theme="light"] .ctag.lm-wonyi  { background: rgba(4,90,66,0.12);    color: #047a52; border-color: rgba(4,160,110,0.35); }
 [data-theme="light"] .ctag.lm-liv    { background: rgba(80,80,80,0.1);    color: #555;    border-color: rgba(80,80,80,0.3); }
 [data-theme="light"] .ctag.lm-minami { background: rgba(43,153,196,0.12); color: #1a7a9e; border-color: rgba(43,153,196,0.35); }
@@ -867,7 +883,6 @@ header {
   opacity: 0.7;
   flex-shrink: 0;
 }
-
 
 .content-category-badge {
   display: inline-flex;
@@ -1994,13 +2009,13 @@ header {
   #subSidebar .type-btn.active[data-t="onthespot"]{ color: var(--c-onthespot); border-left-color: var(--c-onthespot);background: rgba(224,144,80,0.08); }
   #subSidebar .type-btn.active[data-t="fullcam"]  { color: var(--c-fullcam);   border-left-color: var(--c-fullcam);  background: rgba(212,200,74,0.08); }
 
-  #subSidebar .type-btn.active[data-lm="all"]    { color: var(--text);    border-left-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.05); }
-  #subSidebar .type-btn.active[data-lm="전원"]   { color: #fff;           border-left-color: rgba(255,255,255,0.4);  background: rgba(255,255,255,0.07); }
-  #subSidebar .type-btn.active[data-lm="원이"]   { color: #04a06e;        border-left-color: #045a42;                background: rgba(4,90,66,0.15); }
-  #subSidebar .type-btn.active[data-lm="리브"]   { color: #e0e0e0;        border-left-color: rgba(220,220,220,0.5);  background: rgba(0,0,0,0.35); }
-  #subSidebar .type-btn.active[data-lm="미나미"] { color: #2b99c4;        border-left-color: #2b99c4;                background: rgba(43,153,196,0.12); }
-  #subSidebar .type-btn.active[data-lm="메이"]   { color: #c9a800;        border-left-color: #ecd25b;                background: rgba(236,210,91,0.12); }
-  #subSidebar .type-btn.active[data-lm="제나"]   { color: #ba92db;        border-left-color: #ba92db;                background: rgba(186,146,219,0.12); }
+  #subSidebar .type-btn.active[data-lm="all"]    { color: var(--text);           border-left-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.05); }
+  #subSidebar .type-btn.active[data-lm="전원"]   { color: #fff;                  border-left-color: rgba(255,255,255,0.4);  background: rgba(255,255,255,0.07); }
+  #subSidebar .type-btn.active[data-lm="원이"]   { color: var(--c-wonyi);        border-left-color: var(--c-wonyi-dark);    background: rgba(4,90,66,0.15); }
+  #subSidebar .type-btn.active[data-lm="리브"]   { color: #e0e0e0;               border-left-color: rgba(220,220,220,0.5);  background: rgba(0,0,0,0.35); }
+  #subSidebar .type-btn.active[data-lm="미나미"] { color: var(--c-minami);       border-left-color: var(--c-minami);        background: rgba(43,153,196,0.12); }
+  #subSidebar .type-btn.active[data-lm="메이"]   { color: var(--c-mei-dark);     border-left-color: var(--c-mei);           background: rgba(236,210,91,0.12); }
+  #subSidebar .type-btn.active[data-lm="제나"]   { color: var(--c-zena);         border-left-color: var(--c-zena);          background: rgba(186,146,219,0.12); }
 
   #subSidebar .type-btn.active[data-ec-ch]       { color: var(--c-external); border-left-color: var(--c-external);    background: rgba(122,174,222,0.08); }
 
@@ -2017,7 +2032,6 @@ header {
     padding-top: 34px;
   }
 }
-
 
 #scheduleMode {
   animation: fadeUp 0.32s ease both;
@@ -2127,9 +2141,8 @@ header {
   justify-content: center;
   font-size: 1.1rem;
 }
-.sched-group-date.sun-group .sched-group-day-num { color: #c07090; }
-.sched-group-date.sat-group .sched-group-day-num { color: #7aaede; }
-.sched-group-date.today-group .sched-group-day-num { color: var(--bg); }
+.sched-group-date.sun-group .sched-group-day-num { color: var(--c-mv); }
+.sched-group-date.sat-group .sched-group-day-num { color: var(--c-external); }
 
 .sched-item {
   display: flex;
@@ -2245,8 +2258,8 @@ header {
   text-transform: uppercase;
   color: var(--muted);
 }
-.cal-day-header.sun { color: #c07090; }
-.cal-day-header.sat { color: #7aaede; }
+.cal-day-header.sun { color: var(--c-mv); }
+.cal-day-header.sat { color: var(--c-external); }
 
 .cal-cell {
   background: var(--card);
@@ -2306,9 +2319,8 @@ header {
   align-items: center;
   justify-content: center;
 }
-.cal-cell.sun-col .cal-date-num { color: #c07090; }
-.cal-cell.sat-col .cal-date-num { color: #7aaede; }
-.cal-cell.today .cal-date-num { color: var(--bg); }
+.cal-cell.sun-col .cal-date-num { color: var(--c-mv); }
+.cal-cell.sat-col .cal-date-num { color: var(--c-external); }
 
 .cal-event-pill {
   font-size: 0.54rem;
@@ -2984,6 +2996,28 @@ header {
         리센느(RESCENE)의 팬 메이드 페이지입니다.
       </p>
       <p style="font-size:0.78rem; color:var(--muted); font-weight:400; letter-spacing:0.03em;" data-i18n="about_byline">made with love, by May_</p>
+    </div>
+
+    <div id="aboutChartSection" style="margin-bottom:36px;">
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
+        <span style="font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); font-weight:500;">Video Stats</span>
+        <div style="flex:1; height:1px; background:var(--border);"></div>
+      </div>
+      <div style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;">
+        <div style="flex-shrink:0; position:relative; width:200px; height:200px; margin:0 auto;">
+          <svg id="aboutDonutSvg" width="200" height="200" viewBox="0 0 200 200" style="cursor:pointer; display:block;"></svg>
+          <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; pointer-events:none;">
+            <div id="donutCenterLabel" style="font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); line-height:1.3;">전체</div>
+            <div id="donutCenterCount" style="font-size:1.3rem; font-weight:700; color:var(--accent); line-height:1.2;">—</div>
+            <div id="donutCenterPct" style="font-size:0.62rem; color:var(--muted);">100%</div>
+          </div>
+        </div>
+        <div id="aboutChartDetail" style="flex:1; min-width:160px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; display:none;">
+          <div id="chartDetailInner"></div>
+        </div>
+        <div id="aboutChartLegend" style="flex:1; min-width:160px; display:flex; flex-direction:column; gap:10px; justify-content:center;"></div>
+      </div>
+      <p style="font-size:0.66rem; color:var(--muted); margin-top:12px; opacity:0.7;">각 항목을 클릭하면 상세 정보를 볼 수 있습니다.</p>
     </div>
 
     <div style="margin-bottom:36px;">
@@ -3699,8 +3733,6 @@ const RESCENE_DATA = [
     }
   },
 ];
-</script>
-<script>
 
 const SHOW_MAP = [
   { keys: ['뮤직뱅크','Music Bank','musicbank'],          label: '뮤직뱅크',    short: 'KBS2' },
@@ -3722,6 +3754,11 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'SF29doLuBfc': '2026.06.05',
+  '3kzZaHU72Ps': '2026.06.05',
+  'LTmcHWbUcBw': '2026.06.05',
+  '3VIW53k6F4Q': '2026.05.01',
+  'rhy2Ko6LRwY': '2026.06.05',
   'ZZRcStcyalM': '2026.06.04',
   'fUojhdXjziM': '2025.11.19',
   '1IaUAqgaO60': '2025.12.10',
@@ -4766,8 +4803,15 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원' };
+const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹' };
 const EXTERNAL_DATA = {
+  idolpumpking: [
+    { vid: '3VIW53k6F4Q', url: 'https://youtu.be/3VIW53k6F4Q', date: '2026.05.01' },
+    { vid: 'rhy2Ko6LRwY', url: 'https://youtu.be/rhy2Ko6LRwY', date: '2026.06.05' },
+  ],
+  koreaheritage: [
+    { vid: '3kzZaHU72Ps', url: 'https://youtu.be/3kzZaHU72Ps', date: '2026.06.05' },
+  ],
   roka: [
     { vid: 'fUojhdXjziM', url: 'https://youtu.be/fUojhdXjziM', date: '2025.11.19' },
     { vid: '1IaUAqgaO60', url: 'https://youtu.be/1IaUAqgaO60', date: '2025.12.10' },
@@ -4846,6 +4890,7 @@ const EXTERNAL_DATA = {
     { vid: '2VT7VGZckHw', url: 'https://youtu.be/2VT7VGZckHw', date: '2025.07.02' },
   ],
   anwonjal: [
+    { vid: 'SF29doLuBfc', url: 'https://youtu.be/SF29doLuBfc', date: '2026.06.05' },
     { vid: 'JJBf0jCcfrQ', url: 'https://youtu.be/JJBf0jCcfrQ', date: '2026.05.29' },
     { vid: 'OrCOflk2QmQ', url: 'https://youtu.be/OrCOflk2QmQ', date: '2026.05.22' },
     { vid: 'lSxqQYipZoU', url: 'https://www.youtube.com/watch?v=lSxqQYipZoU', date: '2026.02.05' },
@@ -4915,7 +4960,6 @@ const EXTERNAL_DATA = {
     { vid: '6zJRA5U-gq0', url: 'https://youtu.be/6zJRA5U-gq0', date: '2025.02.06' },
     { vid: 'nQSBOVxs_YY', url: 'https://youtu.be/nQSBOVxs_YY', date: '2025.09.18' },
     { vid: 'aDHmmrfizIE', url: 'https://www.youtube.com/watch?v=aDHmmrfizIE', date: '2026.04.13' },
-    { vid: '3VIW53k6F4Q', url: 'https://youtu.be/3VIW53k6F4Q', date: '2026.05.01' },
   ],
   baesungjae: [
     { vid: 'ovilLN09iYE', url: 'https://youtu.be/ovilLN09iYE', date: '2026.06.01' },
@@ -5082,6 +5126,7 @@ const EXTERNAL_DATA = {
     { vid: 'yMeBhxSGvVw', url: 'https://youtu.be/yMeBhxSGvVw', date: '2026.05.01' },
   ],
   studiokkok: [
+    { vid: 'LTmcHWbUcBw', url: 'https://youtu.be/LTmcHWbUcBw', date: '2026.06.05' },
     { vid: 'I-NAFhupR1s', url: 'https://youtu.be/I-NAFhupR1s', date: '2026.05.29' },
     { vid: '6pMUeLI4hAM', url: 'https://www.youtube.com/watch?v=6pMUeLI4hAM', date: '2025.08.13' },
     { vid: '0MDOY5m-Xa4', url: 'https://www.youtube.com/watch?v=0MDOY5m-Xa4', date: '2025.08.15' },
@@ -5174,7 +5219,7 @@ const VID_TO_EXTERNAL_KEY = {};
 const EXTERNAL_CATS = {
   song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon'] },
   radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae','billie','riswell'] },
-  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool','roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging','hobby','studiocake','roka'] },
+  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool','roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging','hobby','studiocake','roka','koreaheritage','idolpumpking'] },
   interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview','spotify'] },
 };
 const EXTERNAL_CAT_KEYS = Object.keys(EXTERNAL_CATS);
@@ -5208,6 +5253,13 @@ const _elThemeLabel        = document.getElementById('themeLabel');
 const _elMobileThemeLabel  = document.getElementById('mobileThemeLabel');
 const _elThemeIcon         = document.getElementById('themeIcon');
 const _elMobileThemeIcon   = document.getElementById('mobileThemeIcon');
+const _elSortNewest        = document.getElementById('sortNewest');
+const _elSortOldest        = document.getElementById('sortOldest');
+const _elSearchClear       = document.getElementById('searchClear');
+const _elSongNav           = document.getElementById('songNav');
+const _elCalDetail         = document.getElementById('calDetail');
+const _elCalMonthTitle     = document.getElementById('calMonthTitle');
+const _elCalGrid           = document.getElementById('calGrid');
 
 const _SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','memberMode','linksMode','bookmarkMode','aboutMode','scheduleMode','newsMode','grid-wrap-el','liveGrid'];
 const _SECTION_EL_CACHE = Object.fromEntries(
@@ -5413,7 +5465,6 @@ function buildExternalCard(item, delay) {
 }
 
 function buildExternalGrid() {
-  const grid = document.getElementById('grid');
   let items;
   if (curExternalCat === 'all') {
     items = curExternal === 'all'
@@ -5433,11 +5484,11 @@ function buildExternalGrid() {
   });
 
   if (!items.length) {
-    grid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>링크가 아직 추가되지 않았습니다.</p></div>`;
+    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>링크가 아직 추가되지 않았습니다.</p></div>`;
     return;
   }
 
-  grid.innerHTML = items.map((item, idx) =>
+  _elGrid.innerHTML = items.map((item, idx) =>
     buildExternalCard(item, `${Math.min(idx * 0.03, 0.4)}s`)
   ).join('');
 
@@ -6006,15 +6057,14 @@ function updateBookmarkCounts() {
 }
 
 function buildBookmarkGrid() {
-  const grid = document.getElementById('grid');
-  if (!grid) return;
+  if (!_elGrid) return;
 
   if (!BOOKMARKS.size) {
     const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     const hint = isTouchDevice
       ? '카드의 ★ 버튼을 눌러 즐겨찾기를 추가하세요.'
       : '카드에 마우스를 올리면 ★ 버튼이 나타납니다.';
-    grid.innerHTML = `<div class="bm-empty">
+    _elGrid.innerHTML = `<div class="bm-empty">
       <div class="ico">★</div>
       <p>즐겨찾기한 영상이 없어요.</p>
       <small>${hint}</small>
@@ -6028,7 +6078,7 @@ function buildBookmarkGrid() {
   const seen = new Set();
   const unique = items.filter(i => { if (seen.has(i.vid)) return false; seen.add(i.vid); return true; });
 
-  grid.innerHTML = unique.map((item, idx) => {
+  _elGrid.innerHTML = unique.map((item, idx) => {
     const delay = `${Math.min(idx * 0.03, 0.4)}s`;
     return buildAllVideoCard(item, delay).replace(/id="avc-/g, 'id="bvc-');
   }).join('');
@@ -6058,7 +6108,7 @@ function _buildSongTabsHtml(onClickSuffix) {
 }
 
 function buildSongNav() {
-  document.getElementById('songNav').innerHTML = _buildSongTabsHtml('');
+  _elSongNav.innerHTML = _buildSongTabsHtml('');
 }
 
 const TYPE_BADGE = { music:'tb-music', mv:'tb-mv', itslive:'tb-itslive', content:'tb-content', onthespot:'tb-onthespot', fullcam:'tb-fullcam', external:'tb-external', live:'tb-itslive' };
@@ -6170,7 +6220,6 @@ function _gridAppendBatch(grid) {
 }
 
 function buildGrid() {
-  const grid = document.getElementById('grid');
   _gridDisconnect();
 
   if (curSection === 'content') {
@@ -6185,7 +6234,7 @@ function buildGrid() {
     });
 
     if (!items.length) {
-      grid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
+      _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
       return;
     }
 
@@ -6193,14 +6242,14 @@ function buildGrid() {
     _gridLoaded  = 0;
     _gridSection = 'content';
     _gridLoadFn  = (items) => loadCardMetas(items, 'content');
-    grid.innerHTML = '';
+    _elGrid.innerHTML = '';
     _gridSentinel = document.createElement('div');
-    _gridSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
-    grid.appendChild(_gridSentinel);
-    _gridAppendBatch(grid);
+    _gridSentinel.style.cssText = '_elGrid-column:1/-1;height:1px;';
+    _elGrid.appendChild(_gridSentinel);
+    _gridAppendBatch(_elGrid);
     if (_gridLoaded < _gridSorted.length) {
       _gridObserver = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) _gridAppendBatch(grid);
+        if (entries[0].isIntersecting) _gridAppendBatch(_elGrid);
       }, { rootMargin: '300px' });
       _gridObserver.observe(_gridSentinel);
     }
@@ -6214,7 +6263,7 @@ function buildGrid() {
   items = sortItemsByDate(items, curSort);
 
   if (!items.length) {
-    grid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
+    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
     return;
   }
 
@@ -6222,14 +6271,14 @@ function buildGrid() {
   _gridLoaded  = 0;
   _gridSection = 'songs';
   _gridLoadFn  = loadMetas;
-  grid.innerHTML = '';
+  _elGrid.innerHTML = '';
   _gridSentinel = document.createElement('div');
-  _gridSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
-  grid.appendChild(_gridSentinel);
-  _gridAppendBatch(grid);
+  _gridSentinel.style.cssText = '_elGrid-column:1/-1;height:1px;';
+  _elGrid.appendChild(_gridSentinel);
+  _gridAppendBatch(_elGrid);
   if (_gridLoaded < _gridSorted.length) {
     _gridObserver = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) _gridAppendBatch(grid);
+      if (entries[0].isIntersecting) _gridAppendBatch(_elGrid);
     }, { rootMargin: '300px' });
     _gridObserver.observe(_gridSentinel);
   }
@@ -6318,28 +6367,27 @@ function _avAppendNextBatch(grid) {
 }
 
 function buildAllVideosGrid() {
-  const grid = document.getElementById('grid');
-  if (!grid) return;
+  if (!_elGrid) return;
 
   _avDisconnectObserver();
   _avSorted = _buildAvSortedList();
   _avLoaded = 0;
 
   if (!_avSorted.length) {
-    grid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
+    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
     return;
   }
 
-  grid.innerHTML = '';
+  _elGrid.innerHTML = '';
   _avSentinel = document.createElement('div');
-  _avSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
-  grid.appendChild(_avSentinel);
+  _avSentinel.style.cssText = '_elGrid-column:1/-1;height:1px;';
+  _elGrid.appendChild(_avSentinel);
 
-  _avAppendNextBatch(grid);
+  _avAppendNextBatch(_elGrid);
 
   if (_avLoaded < _avSorted.length) {
     _avObserver = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) _avAppendNextBatch(grid);
+      if (entries[0].isIntersecting) _avAppendNextBatch(_elGrid);
     }, { rootMargin: '200px' });
     _avObserver.observe(_avSentinel);
   }
@@ -6596,7 +6644,8 @@ function pickSection(section, _fromPopState) {
   window.scrollTo({ top: 0, behavior: 'instant' });
   document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
   const tabId = _PICK_TAB_ID_MAP[section] || 'secAbout';
-  if (document.getElementById(tabId)) document.getElementById(tabId).classList.add('active');
+  const tabEl = document.getElementById(tabId);
+  if (tabEl) tabEl.classList.add('active');
 
   const activeEls = _PICK_SECTION_MAP[section] || ['aboutMode'];
 
@@ -6808,8 +6857,8 @@ let _searchDebounceTimer = null;
 
 function setSort(dir) {
   curSort = dir;
-  document.getElementById('sortNewest').classList.toggle('active', dir === 'newest');
-  document.getElementById('sortOldest').classList.toggle('active', dir === 'oldest');
+  _elSortNewest.classList.toggle('active', dir === 'newest');
+  _elSortOldest.classList.toggle('active', dir === 'oldest');
 
   if (curSection === 'allvideos') buildAllVideosGrid();
   else if (curSection === 'songs' || curSection === 'content') buildGrid();
@@ -6820,8 +6869,7 @@ function setSort(dir) {
 
 function onSearch(val) {
   curSearchQuery = val.trim();
-  const clearBtn = document.getElementById('searchClear');
-  clearBtn.style.display = curSearchQuery ? 'flex' : 'none';
+  _elSearchClear.style.display = curSearchQuery ? 'flex' : 'none';
   clearTimeout(_searchDebounceTimer);
   _searchDebounceTimer = setTimeout(applySearch, 150);
 }
@@ -7127,7 +7175,7 @@ const _HOUR_KEY = (function() { const d = new Date(); return `${d.getFullYear()}
       }
     })
     .catch(function(e) {
-      console.warn('schedule.json 로드 실패:', e);
+      injectAnnivEvents();
       injectAnnivEvents();
       if (typeof buildCalendar === 'function' && curSection === 'schedule') {
         buildCalendar();
@@ -7201,7 +7249,7 @@ function calNavigate(dir) {
   if (_calMonth > 11) { _calMonth = 0; _calYear++; }
   if (_calMonth < 0)  { _calMonth = 11; _calYear--; }
   _calSelectedDate = null;
-  document.getElementById('calDetail').classList.remove('visible');
+  _elCalDetail.classList.remove('visible');
   renderCalendar();
   renderSchedList();
 }
@@ -7230,7 +7278,7 @@ function renderCalendar() {
     : lang === 'JP'
     ? `${_calYear}年 ${mNames[_calMonth]}`
     : `${_calYear}년 ${mNames[_calMonth]}`;
-  document.getElementById('calMonthTitle').textContent = calTitle;
+  _elCalMonthTitle.textContent = calTitle;
 
   const firstDay = new Date(_calYear, _calMonth, 1).getDay();
   const daysInMonth = new Date(_calYear, _calMonth + 1, 0).getDate();
@@ -7311,13 +7359,13 @@ function renderCalendar() {
     html += `<div class="${cellCls}"${glowStyle} ${onclick} data-date="${dateStr}"><div class="cal-date-num">${day}</div>${pillsHtml}</div>`;
   }
 
-  document.getElementById('calGrid').innerHTML = html;
+  _elCalGrid.innerHTML = html;
 }
 
 function calSelectDate(dateStr) {
   if (_calSelectedDate === dateStr) {
     _calSelectedDate = null;
-    document.getElementById('calDetail').classList.remove('visible');
+    _elCalDetail.classList.remove('visible');
     document.querySelectorAll('.cal-cell.selected').forEach(el => el.classList.remove('selected'));
     return;
   }
@@ -7356,15 +7404,14 @@ function calSelectDate(dateStr) {
     </div>`;
   }).join('');
 
-  const detailEl = document.getElementById('calDetail');
-  detailEl.innerHTML = `<div class="cal-detail-header"><span>${dateLabel}</span><button class="cal-detail-close" onclick="calCloseDetail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="cal-detail-list">${itemsHtml}</div>`;
-  detailEl.classList.add('visible');
-  detailEl.scrollIntoView({ behavior:'smooth', block:'nearest' });
+  _elCalDetail.innerHTML = `<div class="cal-detail-header"><span>${dateLabel}</span><button class="cal-detail-close" onclick="calCloseDetail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="cal-detail-list">${itemsHtml}</div>`;
+  _elCalDetail.classList.add('visible');
+  _elCalDetail.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
 
 function calCloseDetail() {
   _calSelectedDate = null;
-  document.getElementById('calDetail').classList.remove('visible');
+  _elCalDetail.classList.remove('visible');
   document.querySelectorAll('.cal-cell.selected').forEach(el => el.classList.remove('selected'));
 }
 
@@ -7465,6 +7512,224 @@ function renderSchedList() {
 }
 
 buildSongNav();
+
+(function () {
+  var _key   = null;
+  var _segs  = [];
+  var _data  = [];
+  var _total = 0;
+  var TYPE_NAMES = { music: 'Music Show', mv: 'MV', itslive: 'ITS LIVE', onthespot: 'On The Spot', fullcam: 'Full Cam' };
+  var SVG_NS = 'http://www.w3.org/2000/svg';
+
+  function pct(a, b) { return b > 0 ? ((a / b) * 100).toFixed(1) : '0.0'; }
+
+  function buildData() {
+    var typeCounts = {};
+    for (var i = 0; i < RESCENE_DATA.length; i++) {
+      var vids = RESCENE_DATA[i].videos;
+      var keys = Object.keys(vids);
+      for (var j = 0; j < keys.length; j++) {
+        typeCounts[keys[j]] = (typeCounts[keys[j]] || 0) + vids[keys[j]].length;
+      }
+    }
+    var songsCount = Object.keys(typeCounts).reduce(function (s, k) { return s + typeCounts[k]; }, 0);
+    var songsSubs  = Object.keys(typeCounts).map(function (k) { return { label: TYPE_NAMES[k] || k, count: typeCounts[k] }; });
+
+    var contentCount = CONTENT_DATA.reduce(function (s, c) { return s + c.urls.length; }, 0);
+    var contentSubs  = CONTENT_DATA.map(function (c) { return { label: c.category, count: c.urls.length }; });
+
+    var liveCount = ALL_LIVE.length;
+    var liveSubs  = [
+      { label: '2024년', count: LIVE_DATA_2024.length },
+      { label: '2025년', count: LIVE_DATA_2025.length },
+      { label: '2026년', count: LIVE_DATA_2026.length }
+    ];
+
+    var extCount = EXTERNAL_KEYS.reduce(function (s, k) { return s + (EXTERNAL_DATA[k] ? EXTERNAL_DATA[k].length : 0); }, 0);
+    var extSubs  = Object.keys(EXTERNAL_CATS).map(function (ck) {
+      var cat = EXTERNAL_CATS[ck];
+      var cnt = cat.keys.reduce(function (s, k) { return s + (EXTERNAL_DATA[k] ? EXTERNAL_DATA[k].length : 0); }, 0);
+      var chs = cat.keys
+        .filter(function (k) { return EXTERNAL_DATA[k] && EXTERNAL_DATA[k].length > 0; })
+        .map(function (k) { return { label: EXTERNAL_LABELS[k] || k, count: EXTERNAL_DATA[k].length }; });
+      return { label: cat.label, count: cnt, channels: chs };
+    });
+
+    return [
+      { key: 'songs',    label: 'Songs',    color: '#c8c8cc', desc: '음악방송 무대 영상 모음입니다.',               count: songsCount,   subtypes: songsSubs   },
+      { key: 'content',  label: '자체컨텐츠', color: '#80b870', desc: 'RESCENE 공식 채널의 자체 제작 컨텐츠입니다.',  count: contentCount, subtypes: contentSubs },
+      { key: 'live',     label: 'Live',     color: '#a080d0', desc: '멤버들의 라이브 방송 영상 모음입니다.',         count: liveCount,    subtypes: liveSubs    },
+      { key: 'external', label: '외부컨텐츠', color: '#7aaede', desc: '외부 채널에서 제작된 협업 및 출연 영상입니다.', count: extCount,     subtypes: extSubs     }
+    ];
+  }
+
+  function setCenter(label, count, p) {
+    var el;
+    el = document.getElementById('donutCenterLabel'); if (el) el.textContent = label;
+    el = document.getElementById('donutCenterCount'); if (el) el.textContent = count;
+    el = document.getElementById('donutCenterPct');   if (el) el.textContent = p;
+  }
+
+  function setOpacity(activeKey) {
+    for (var i = 0; i < _segs.length; i++) {
+      var s = _segs[i];
+      var isActive = s.key === activeKey;
+      s.path._selected = isActive;
+      s.path.setAttribute('opacity', activeKey === null ? '0.88' : (isActive ? '1' : '0.28'));
+    }
+  }
+
+  function renderRows(subtypes, parentCount, color) {
+    return subtypes.map(function (s) {
+      var sp  = pct(s.count, parentCount);
+      var bar = '<div style="height:3px;background:var(--dim);border-radius:2px;overflow:hidden;margin-top:3px;">'
+              + '<div style="height:100%;width:' + sp + '%;background:' + color + ';border-radius:2px;"></div></div>';
+      if (s.channels) {
+        var cid   = 'extcat_' + s.label.replace(/\s+/g, '_');
+        var chRows = s.channels.map(function (ch) {
+          return '<div style="padding:4px 0 4px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;">'
+            + '<span style="font-size:0.64rem;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">· ' + ch.label + '</span>'
+            + '<span style="font-size:0.62rem;color:var(--muted);flex-shrink:0;">' + ch.count + '개</span>'
+            + '</div>';
+        }).join('');
+        return '<div style="border-bottom:1px solid var(--border);">'
+          + '<div onclick="(function(el){var c=document.getElementById(\'' + cid + '\');var open=c.style.display!==\'none\';c.style.display=open?\'none\':\'block\';el.querySelector(\'.cat-arrow\').style.transform=open?\'rotate(0deg)\':\'rotate(90deg)\'})(this)"'
+          + ' style="padding:6px 0;display:flex;align-items:center;cursor:pointer;gap:6px;">'
+          + '<span class="cat-arrow" style="font-size:0.6rem;color:var(--muted);transition:transform 0.18s;display:inline-block;">▶</span>'
+          + '<span style="font-size:0.7rem;color:var(--text);flex:1;">' + s.label + '</span>'
+          + '<span style="font-size:0.65rem;color:var(--muted);flex-shrink:0;">' + s.count + '개 · ' + sp + '%</span>'
+          + '</div>' + bar
+          + '<div id="' + cid + '" style="display:none;">' + chRows + '</div>'
+          + '</div>';
+      }
+      return '<div style="padding:5px 0;border-bottom:1px solid var(--border);">'
+        + '<div style="display:flex;justify-content:space-between;align-items:center;">'
+        + '<span style="font-size:0.68rem;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + s.label + '</span>'
+        + '<span style="font-size:0.65rem;color:var(--muted);flex-shrink:0;margin-left:6px;">' + s.count + '개 · ' + sp + '%</span>'
+        + '</div>' + bar + '</div>';
+    }).join('');
+  }
+
+  window.aboutChartSelect = function (key) {
+    var detailEl = document.getElementById('aboutChartDetail');
+    var legendEl = document.getElementById('aboutChartLegend');
+    var innerEl  = document.getElementById('chartDetailInner');
+    if (!detailEl || !legendEl || !innerEl || _data.length === 0) return;
+
+    if (_key === key) {
+      _key = null;
+      setOpacity(null);
+      detailEl.style.display = 'none';
+      legendEl.style.display = 'flex';
+      setCenter('전체', _total, '100%');
+      return;
+    }
+
+    var d = null;
+    for (var i = 0; i < _data.length; i++) { if (_data[i].key === key) { d = _data[i]; break; } }
+    if (!d) return;
+
+    _key = key;
+    setOpacity(key);
+    setCenter(d.label, d.count, pct(d.count, _total) + '%');
+    detailEl.style.display = 'block';
+    legendEl.style.display = 'none';
+
+    innerEl.innerHTML =
+        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">'
+      + '<div style="width:10px;height:10px;border-radius:3px;background:' + d.color + ';flex-shrink:0;"></div>'
+      + '<span style="font-size:0.72rem;font-weight:600;color:var(--text);">' + d.label + '</span>'
+      + '<button onclick="aboutChartSelect(\'' + key + '\')" style="margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.9rem;padding:2px 4px;line-height:1;" title="닫기">✕</button>'
+      + '</div>'
+      + '<div style="font-size:0.67rem;color:var(--muted);margin-bottom:8px;line-height:1.55;">' + d.desc + '</div>'
+      + '<div style="font-size:0.7rem;font-weight:600;color:' + d.color + ';margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">총 ' + d.count + '개 · 전체의 ' + pct(d.count, _total) + '%</div>'
+      + renderRows(d.subtypes, d.count, d.color);
+  };
+
+  function buildChart() {
+    var svg      = document.getElementById('aboutDonutSvg');
+    var legendEl = document.getElementById('aboutChartLegend');
+    if (!svg || !legendEl) return;
+
+    _data  = buildData();
+    _total = _data.reduce(function (s, d) { return s + d.count; }, 0);
+    if (_total === 0) return;
+
+    _key  = null;
+    _segs = [];
+    svg.innerHTML = '';
+    setCenter('전체', _total, '100%');
+
+    var cx = 100, cy = 100, OR = 88, IR = 55, angle = -Math.PI / 2;
+
+    for (var i = 0; i < _data.length; i++) {
+      var d     = _data[i];
+      var sweep = (d.count / _total) * Math.PI * 2;
+      var a0    = angle;
+      var a1    = angle + sweep;
+      angle     = a1;
+      var lg    = sweep > Math.PI ? 1 : 0;
+      var pathD = 'M' + (cx + OR * Math.cos(a0)) + ',' + (cy + OR * Math.sin(a0))
+                + ' A' + OR + ',' + OR + ' 0 ' + lg + ',1 ' + (cx + OR * Math.cos(a1)) + ',' + (cy + OR * Math.sin(a1))
+                + ' L' + (cx + IR * Math.cos(a1)) + ',' + (cy + IR * Math.sin(a1))
+                + ' A' + IR + ',' + IR + ' 0 ' + lg + ',0 ' + (cx + IR * Math.cos(a0)) + ',' + (cy + IR * Math.sin(a0))
+                + ' Z';
+      var p = document.createElementNS(SVG_NS, 'path');
+      p.setAttribute('d', pathD);
+      p.setAttribute('fill', d.color);
+      p.setAttribute('opacity', '0.88');
+      p.setAttribute('stroke', 'var(--bg)');
+      p.setAttribute('stroke-width', '2');
+      p.setAttribute('data-key', d.key);
+      p.style.cssText = 'cursor:pointer;transition:opacity 0.2s;';
+      (function (key, path) {
+        path.addEventListener('click',      function () { window.aboutChartSelect(key); });
+        path.addEventListener('mouseenter', function () { if (!path._selected) path.setAttribute('opacity', '1'); });
+        path.addEventListener('mouseleave', function () { if (!path._selected) path.setAttribute('opacity', '0.88'); });
+      })(d.key, p);
+      svg.appendChild(p);
+      _segs.push({ key: d.key, path: p });
+    }
+
+    var hole = document.createElementNS(SVG_NS, 'circle');
+    hole.setAttribute('cx', cx);
+    hole.setAttribute('cy', cy);
+    hole.setAttribute('r', IR - 2);
+    hole.setAttribute('fill', 'var(--bg)');
+    hole.style.pointerEvents = 'none';
+    svg.appendChild(hole);
+
+    legendEl.innerHTML = _data.map(function (d) {
+      var p = pct(d.count, _total);
+      return '<div style="display:flex;align-items:center;gap:10px;cursor:pointer;border-radius:8px;padding:6px 8px;transition:background 0.15s;"'
+        + ' onmouseenter="this.style.background=\'var(--card-h)\'" onmouseleave="this.style.background=\'transparent\'"'
+        + ' onclick="aboutChartSelect(\'' + d.key + '\')">'
+        + '<div style="width:12px;height:12px;border-radius:3px;background:' + d.color + ';flex-shrink:0;"></div>'
+        + '<div style="flex:1;min-width:0;">'
+        + '<div style="font-size:0.72rem;font-weight:500;color:var(--text);">' + d.label + '</div>'
+        + '<div style="font-size:0.62rem;color:var(--muted);">' + d.count + '개 · ' + p + '%</div>'
+        + '</div></div>';
+    }).join('');
+  }
+
+  function tryBuild() {
+    if (typeof RESCENE_DATA === 'undefined' || typeof CONTENT_DATA === 'undefined' ||
+        typeof EXTERNAL_DATA === 'undefined' || typeof EXTERNAL_CATS === 'undefined' ||
+        typeof EXTERNAL_KEYS === 'undefined' || typeof EXTERNAL_LABELS === 'undefined' ||
+        typeof ALL_LIVE === 'undefined' || typeof LIVE_DATA_2024 === 'undefined' ||
+        typeof LIVE_DATA_2025 === 'undefined' || typeof LIVE_DATA_2026 === 'undefined') {
+      setTimeout(tryBuild, 50);
+      return;
+    }
+    buildChart();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { requestAnimationFrame(tryBuild); });
+  } else {
+    requestAnimationFrame(tryBuild);
+  }
+})();
 
 (function () {
   const _VALID_TABS = new Set(Object.keys(_PICK_TAB_ID_MAP));
