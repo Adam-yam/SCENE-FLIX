@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>SCENE-FLIX</title>
 <link rel="icon" href="image/favicon.png">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-05C99P2DB9"></script>
@@ -21,8 +21,9 @@ gtag('config', 'G-05C99P2DB9');
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://img.youtube.com" crossorigin>
+<link rel="preconnect" href="https://yt3.googleusercontent.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.youtube.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg:      #1c1c1e;
@@ -59,6 +60,11 @@ gtag('config', 'G-05C99P2DB9');
   --c-wonyi-dark: #045a42;
   --c-mei-dark:   #c9a800;
   --c-bm:         #f0c060;
+
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
 }
 
 [data-theme="light"] {
@@ -169,8 +175,8 @@ gtag('config', 'G-05C99P2DB9');
 
 #scrollTop {
   position: fixed;
-  bottom: 28px;
-  right: 28px;
+  bottom: calc(28px + var(--safe-bottom));
+  right: calc(28px + var(--safe-right));
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -231,7 +237,7 @@ gtag('config', 'G-05C99P2DB9');
 
 #share-toast {
   position: fixed;
-  bottom: 80px;
+  bottom: calc(80px + var(--safe-bottom));
   left: 50%;
   transform: translateX(-50%) translateY(12px);
   background: rgba(20,20,24,0.92);
@@ -267,6 +273,19 @@ gtag('config', 'G-05C99P2DB9');
 .search-empty .ico { font-size: 1.8rem; margin-bottom: 12px; opacity: 0.25; }
 .search-empty p    { font-size: 0.82rem; margin-bottom: 4px; }
 .search-empty small{ font-size: 0.7rem;  opacity: 0.6; }
+
+mark.sh {
+  background: rgba(255, 210, 80, 0.28);
+  color: #ffe799;
+  border-radius: 2px;
+  padding: 0 1px;
+  font-style: normal;
+  font-weight: inherit;
+}
+[data-theme="light"] mark.sh {
+  background: rgba(255, 180, 0, 0.22);
+  color: #8a5e00;
+}
 .empty .ico      { font-size: 2rem;   margin-bottom: 12px; opacity: 0.3; }
 .empty p         { font-size: 0.8rem; }
 
@@ -301,6 +320,10 @@ html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 @keyframes shimmer {
   0%   { background-position: -400px 0; }
   100% { background-position:  400px 0; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0);    }
 }
 .skel {
   border-radius: 4px;
@@ -362,6 +385,12 @@ header {
   background: color-mix(in srgb, var(--bg) 95%, transparent);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
+}
+@media (max-width: 700px) {
+  .song-nav-outer {
+    backdrop-filter: blur(8px);
+    background: color-mix(in srgb, var(--bg) 97%, transparent);
+  }
 }
 
 .section-nav {
@@ -577,11 +606,13 @@ header {
   color: var(--text);
   font-family: 'Inter', sans-serif;
   font-size: 0.75rem;
-  padding: 8px 36px 8px 36px;
+  padding: 8px 80px 8px 36px;
   outline: none;
   transition: border-color 0.15s, background 0.15s;
   box-sizing: border-box;
   min-width: 0;
+  user-select: text;
+  -webkit-user-select: text;
 }
 #searchInput::placeholder { color: var(--muted); }
 #searchInput:focus {
@@ -628,36 +659,42 @@ header {
 }
 
 .vcard {
-  background: var(--card);
-  border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
   text-decoration: none;
   display: block;
   animation: fadeUp 0.3s ease both;
-  box-shadow: none;
+  contain: layout style;
+  content-visibility: auto;
+  contain-intrinsic-size: 0 260px;
 }
 
-@keyframes fadeUp {
-  from { opacity:0; transform: translateY(10px); }
-  to   { opacity:1; transform: translateY(0); }
-}
+@media (hover: hover) {
+  .vcard:hover {
+    transform: translateY(-4px);
+    border-color: var(--border-h);
+    background: var(--card-h);
+  }
 
-.vcard:hover {
-  transform: translateY(-4px);
-  border-color: var(--border-h);
-  background: var(--card-h);
-}
+  .vcard.tb-music:hover   { border-color: rgba(110,198,192,0.5);  box-shadow: 0 4px 24px rgba(110,198,192,0.15), 0 0 0 1px rgba(110,198,192,0.15); }
+  .vcard.tb-mv:hover      { border-color: rgba(192,112,144,0.5);  box-shadow: 0 4px 24px rgba(192,112,144,0.15), 0 0 0 1px rgba(192,112,144,0.15); }
+  .vcard.tb-itslive:hover { border-color: rgba(160,128,208,0.5);  box-shadow: 0 4px 24px rgba(160,128,208,0.15), 0 0 0 1px rgba(160,128,208,0.15); }
+  .vcard.tb-content:hover { border-color: rgba(128,184,112,0.5);  box-shadow: 0 4px 24px rgba(128,184,112,0.15), 0 0 0 1px rgba(128,184,112,0.15); }
+  .vcard.tb-onthespot:hover { border-color: rgba(224,144,80,0.5); box-shadow: 0 4px 24px rgba(224,144,80,0.15), 0 0 0 1px rgba(224,144,80,0.15); }
+  .vcard.tb-fullcam:hover   { border-color: rgba(212,200,74,0.5); box-shadow: 0 4px 24px rgba(212,200,74,0.15), 0 0 0 1px rgba(212,200,74,0.15); }
+  .vcard.tb-external:hover  { border-color: rgba(122,174,222,0.5); box-shadow: 0 4px 24px rgba(122,174,222,0.15), 0 0 0 1px rgba(122,174,222,0.15); }
 
-.vcard.tb-music:hover   { border-color: rgba(110,198,192,0.5);  box-shadow: 0 4px 24px rgba(110,198,192,0.15), 0 0 0 1px rgba(110,198,192,0.15); }
-.vcard.tb-mv:hover      { border-color: rgba(192,112,144,0.5);  box-shadow: 0 4px 24px rgba(192,112,144,0.15), 0 0 0 1px rgba(192,112,144,0.15); }
-.vcard.tb-itslive:hover { border-color: rgba(160,128,208,0.5);  box-shadow: 0 4px 24px rgba(160,128,208,0.15), 0 0 0 1px rgba(160,128,208,0.15); }
-.vcard.tb-content:hover { border-color: rgba(128,184,112,0.5);  box-shadow: 0 4px 24px rgba(128,184,112,0.15), 0 0 0 1px rgba(128,184,112,0.15); }
-.vcard.tb-onthespot:hover { border-color: rgba(224,144,80,0.5); box-shadow: 0 4px 24px rgba(224,144,80,0.15), 0 0 0 1px rgba(224,144,80,0.15); }
-.vcard.tb-fullcam:hover   { border-color: rgba(212,200,74,0.5); box-shadow: 0 4px 24px rgba(212,200,74,0.15), 0 0 0 1px rgba(212,200,74,0.15); }
-.vcard.tb-external:hover  { border-color: rgba(122,174,222,0.5); box-shadow: 0 4px 24px rgba(122,174,222,0.15), 0 0 0 1px rgba(122,174,222,0.15); }
+  .vcard.lm-wonyi:hover  { border-color: rgba(4,160,110,0.55);  box-shadow: 0 4px 24px rgba(4,160,110,0.18),  0 0 0 1px rgba(4,160,110,0.18); }
+  .vcard.lm-liv:hover    { border-color: rgba(220,220,220,0.5);  box-shadow: 0 4px 24px rgba(200,200,200,0.15), 0 0 0 1px rgba(200,200,200,0.15); }
+  .vcard.lm-minami:hover { border-color: rgba(43,153,196,0.55);  box-shadow: 0 4px 24px rgba(43,153,196,0.18),  0 0 0 1px rgba(43,153,196,0.18); }
+  .vcard.lm-may:hover    { border-color: rgba(236,210,91,0.55);   box-shadow: 0 4px 24px rgba(236,210,91,0.18),  0 0 0 1px rgba(236,210,91,0.18); }
+  .vcard.lm-zena:hover   { border-color: rgba(186,146,219,0.55);  box-shadow: 0 4px 24px rgba(186,146,219,0.18), 0 0 0 1px rgba(186,146,219,0.18); }
+  .vcard.lm-all:hover    { border-color: rgba(255,255,255,0.3);   box-shadow: 0 4px 24px rgba(255,255,255,0.08), 0 0 0 1px rgba(255,255,255,0.08); }
+
+  .vcard:hover .thumb img { transform: scale(1.04); }
+  .vcard:hover .play-ring { opacity: 1; }
+}
 
 .vcard.tb-music     { background: rgba(110,198,192,0.15); border-color: rgba(110,198,192,0.22); }
 .vcard.tb-mv        { background: rgba(192,112,144,0.15); border-color: rgba(192,112,144,0.22); }
@@ -682,13 +719,6 @@ header {
 .vcard.lm-zena     { background: rgba(186,146,219,0.15); border-color: rgba(186,146,219,0.22); }
 .vcard.lm-all      { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
 
-.vcard.lm-wonyi:hover  { border-color: rgba(4,160,110,0.55);  box-shadow: 0 4px 24px rgba(4,160,110,0.18),  0 0 0 1px rgba(4,160,110,0.18); }
-.vcard.lm-liv:hover    { border-color: rgba(220,220,220,0.5);  box-shadow: 0 4px 24px rgba(200,200,200,0.15), 0 0 0 1px rgba(200,200,200,0.15); }
-.vcard.lm-minami:hover { border-color: rgba(43,153,196,0.55);  box-shadow: 0 4px 24px rgba(43,153,196,0.18),  0 0 0 1px rgba(43,153,196,0.18); }
-.vcard.lm-may:hover    { border-color: rgba(236,210,91,0.55);   box-shadow: 0 4px 24px rgba(236,210,91,0.18),  0 0 0 1px rgba(236,210,91,0.18); }
-.vcard.lm-zena:hover   { border-color: rgba(186,146,219,0.55);  box-shadow: 0 4px 24px rgba(186,146,219,0.18), 0 0 0 1px rgba(186,146,219,0.18); }
-.vcard.lm-all:hover    { border-color: rgba(255,255,255,0.3);   box-shadow: 0 4px 24px rgba(255,255,255,0.08), 0 0 0 1px rgba(255,255,255,0.08); }
-
 [data-theme="light"] .vcard.lm-wonyi  { background: rgba(4,90,66,0.16);    border-color: rgba(4,160,110,0.45); box-shadow: 0 1px 4px rgba(4,160,110,0.10); }
 [data-theme="light"] .vcard.lm-liv    { background: rgba(80,80,80,0.14);    border-color: rgba(80,80,80,0.40);  box-shadow: 0 1px 4px rgba(80,80,80,0.08); }
 [data-theme="light"] .vcard.lm-minami { background: rgba(43,153,196,0.16);  border-color: rgba(43,153,196,0.45); box-shadow: 0 1px 4px rgba(43,153,196,0.10); }
@@ -708,9 +738,11 @@ header {
   inset: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.4s ease, opacity 0.3s;
 }
-.vcard:hover .thumb img { transform: scale(1.04); }
+
+@media (hover: hover) {
+  .thumb img { transition: transform 0.4s ease, opacity 0.3s; }
+}
 
 .last-watched-badge {
   position: absolute;
@@ -739,7 +771,6 @@ header {
   transition: opacity 0.2s;
   background: rgba(0,0,0,0.3);
 }
-.vcard:hover .play-ring { opacity: 1; }
 
 .play-ring svg {
   width: 40px; height: 40px;
@@ -945,7 +976,6 @@ header {
   text-decoration: none;
   color: var(--text);
   cursor: pointer;
-  
   animation: fadeUp 0.3s ease both;
   position: relative;
   overflow: hidden;
@@ -959,11 +989,23 @@ header {
   pointer-events: none;
 }
 
-.ftcard:hover {
-  transform: translateY(-4px);
-  border-color: rgba(224,212,192,0.28);
-  background: var(--card-h);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(224,212,192,0.1);
+@media (hover: hover) {
+  .ftcard {
+    transition: transform 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
+  }
+  .ftcard:hover {
+    transform: translateY(-4px);
+    border-color: rgba(224,212,192,0.28);
+    background: var(--card-h);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(224,212,192,0.1);
+  }
+  .ftcard:hover .ftcard-avatar {
+    border-color: rgba(224,212,192,0.4);
+  }
+  .ftcard:hover .ftcard-arrow {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .ftcard-avatar {
@@ -974,11 +1016,6 @@ header {
   border: 2px solid var(--border);
   overflow: hidden;
   flex-shrink: 0;
-  transition: border-color 0.22s;
-}
-
-.ftcard:hover .ftcard-avatar {
-  border-color: rgba(224,212,192,0.4);
 }
 
 .ftcard-avatar img {
@@ -1052,13 +1089,8 @@ header {
   transition: opacity 0.2s, transform 0.2s;
 }
 
-.ftcard:hover .ftcard-arrow {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 @media (max-width: 700px) {
-  .fantube-wrap { padding: 20px 12px 60px; }
+  .fantube-wrap { padding: 20px 12px calc(60px + var(--safe-bottom)); }
   .fantube-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .ftcard { padding: 16px 10px 14px; gap: 9px; }
   .ftcard-avatar { width: 56px; height: 56px; }
@@ -1104,17 +1136,26 @@ header {
   color: var(--text);
   font-family: 'Inter', sans-serif;
   cursor: pointer;
-  transition: all 0.25s;
+  transition: transform 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
   overflow: hidden;
   position: relative;
   animation: fadeUp 0.35s ease both;
 }
 
-.member-btn:hover {
-  border-color: rgba(224,212,192,0.3);
-  transform: translateY(-3px);
-  background: var(--card-h);
-  box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(224,212,192,0.12);
+@media (hover: hover) {
+  .member-btn:hover {
+    border-color: rgba(224,212,192,0.3);
+    transform: translateY(-3px);
+    background: var(--card-h);
+    box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(224,212,192,0.12);
+  }
+  .member-btn:hover .member-photo {
+    transform: scale(1.06);
+  }
+  .member-btn:hover .member-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 .member-photo-wrap {
@@ -1138,12 +1179,11 @@ header {
   height: 100%;
   object-fit: cover;
   object-position: center top;
-  transition: transform 0.5s ease;
   display: block;
 }
 
-.member-btn:hover .member-photo {
-  transform: scale(1.06);
+@media (hover: hover) {
+  .member-photo { transition: transform 0.5s ease; }
 }
 
 .member-name-wrap {
@@ -1168,12 +1208,6 @@ header {
   color: var(--accent);
   opacity: 0;
   transform: translateX(-4px);
-  transition: opacity 0.2s, transform 0.2s;
-}
-
-.member-btn:hover .member-arrow {
-  opacity: 1;
-  transform: translateX(0);
 }
 
 @media (max-width: 700px) {
@@ -1230,19 +1264,21 @@ header {
   box-sizing: border-box;
 }
 
-.link-row:hover {
-  background: rgba(255,255,255,0.10);
-  border-color: rgba(255,255,255,0.16);
-  transform: translateY(-2px);
+@media (hover: hover) {
+  .link-row:hover {
+    background: rgba(255,255,255,0.10);
+    border-color: rgba(255,255,255,0.16);
+    transform: translateY(-2px);
+  }
+  [data-theme="light"] .link-row:hover {
+    background: rgba(255,255,255,0.82);
+    border-color: rgba(0,0,0,0.12);
+  }
 }
 
 [data-theme="light"] .link-row {
   background: rgba(255,255,255,0.55);
   border-color: rgba(0,0,0,0.07);
-}
-[data-theme="light"] .link-row:hover {
-  background: rgba(255,255,255,0.82);
-  border-color: rgba(0,0,0,0.12);
 }
 
 .link-icon {
@@ -1255,17 +1291,15 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.18s;
 }
-.link-row:hover .link-icon {
-  background: rgba(255,255,255,0.11);
+@media (hover: hover) {
+  .link-icon { transition: background 0.18s; }
+  .link-row:hover .link-icon { background: rgba(255,255,255,0.11); }
+  [data-theme="light"] .link-row:hover .link-icon { background: rgba(0,0,0,0.07); }
 }
 [data-theme="light"] .link-icon {
   background: rgba(0,0,0,0.04);
   border-color: rgba(0,0,0,0.07);
-}
-[data-theme="light"] .link-row:hover .link-icon {
-  background: rgba(0,0,0,0.07);
 }
 
 .link-icon svg {
@@ -1379,7 +1413,7 @@ header {
   .search-bar { padding: 10px 12px 10px; }
   .search-input-wrap { max-width: 100%; }
 
-  .grid-wrap { padding: 12px 10px 60px; }
+  .grid-wrap { padding: 12px 10px calc(60px + var(--safe-bottom)); }
   .video-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
 
   .cbody { padding: 8px 9px 10px; }
@@ -1391,11 +1425,11 @@ header {
 
   .member-wrap { padding: 24px 12px; }
 
-  .links-wrap { padding: 16px 12px 60px; }
+  .links-wrap { padding: 16px 12px calc(60px + var(--safe-bottom)); }
   .links-list { max-width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
   .link-row   { width: auto; padding: 11px 10px; gap: 8px; }
 
-  #aboutMode .links-wrap { padding: 20px 16px 60px; }
+  #aboutMode .links-wrap { padding: 20px 16px calc(60px + var(--safe-bottom)); }
 }
 
 @media (max-width: 360px) {
@@ -1412,13 +1446,13 @@ header {
   #mobileBottomNav {
     display: flex;
     position: fixed;
-    bottom: 20px;
+    bottom: calc(20px + var(--safe-bottom));
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateZ(0);
     z-index: 200;
-    background: color-mix(in srgb, var(--surf) 55%, transparent);
-    backdrop-filter: blur(20px) saturate(1.8);
-    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    background: color-mix(in srgb, var(--surf) 70%, transparent);
+    backdrop-filter: blur(12px) saturate(1.4);
+    -webkit-backdrop-filter: blur(12px) saturate(1.4);
     border: 1px solid var(--border-h);
     border-radius: 999px;
     height: 60px;
@@ -1431,6 +1465,7 @@ header {
       inset 0 1px 0 rgba(255,255,255,0.06);
     width: calc(100vw - 24px);
     max-width: 400px;
+    will-change: transform;
   }
 
   #navIndicator {
@@ -1490,8 +1525,8 @@ header {
   #mobileMenuBtn {
     display: flex;
     position: fixed;
-    top: 16px;
-    left: 16px;
+    top: calc(16px + var(--safe-top));
+    left: calc(16px + var(--safe-left));
     right: auto;
     z-index: 300;
     width: 36px;
@@ -1513,18 +1548,21 @@ header {
   }
 
   #mobileDrawerOverlay {
-    display: none;
     position: fixed;
     inset: 0;
     z-index: 250;
     background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(1px);
     opacity: 0;
-    transition: opacity 0.25s;
+    visibility: hidden;
+    transition: opacity 0.25s, visibility 0.25s;
     pointer-events: none;
   }
-  #mobileDrawerOverlay.open { pointer-events: all; }
-  #mobileDrawerOverlay.open { display: block; opacity: 1; }
+  #mobileDrawerOverlay.open {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: all;
+  }
 
   #mobileDrawer {
     position: fixed;
@@ -1539,7 +1577,7 @@ header {
     transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
     display: flex;
     flex-direction: column;
-    padding: 0;
+    padding: 0 0 var(--safe-bottom) var(--safe-left);
     box-shadow: 4px 0 32px rgba(0,0,0,0.4);
     overflow-y: auto;
   }
@@ -1734,21 +1772,26 @@ header {
   background:none;
   cursor:pointer;
   font-family:'Inter',sans-serif;
-  transition:all .15s;
+  transition: color .15s, background .15s, border-color .15s, opacity .15s;
 }
 
 .card-base{
   background:var(--card);
   border:1px solid var(--border);
-  transition:
-    transform .22s,
-    border-color .22s,
-    background .22s,
-    box-shadow .22s;
 }
 
-.hover-lift:hover{
-  transform:translateY(-4px);
+@media (hover: hover) {
+  .card-base{
+    transition:
+      transform .22s,
+      border-color .22s,
+      background .22s,
+      box-shadow .22s;
+  }
+
+  .hover-lift:hover{
+    transform:translateY(-4px);
+  }
 }
 
 @media (min-width: 701px) {
@@ -2371,7 +2414,7 @@ header {
   .sched-list-col { position: static; max-height: none; overflow-y: visible; }
 }
 @media (max-width: 700px) {
-  .schedule-wrap { padding: 16px 10px 80px; }
+  .schedule-wrap { padding: 16px 10px calc(80px + var(--safe-bottom)); }
   .cal-cell { height: 72px; min-height: 72px; max-height: 72px; padding: 4px 3px 3px; overflow: hidden; }
   .cal-event-pill { font-size: 0.5rem; padding: 1px 3px; }
   .cal-date-num { font-size: 0.62rem; width: 17px; height: 17px; }
@@ -2405,7 +2448,33 @@ header {
 .news-empty { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--muted); }
 .news-empty .ico { font-size: 2rem; margin-bottom: 14px; opacity: 0.25; }
 .news-empty p { font-size: 0.82rem; }
-@media (max-width: 700px) { .news-wrap { padding: 16px 10px 80px; } .news-grid { grid-template-columns: 1fr; gap: 12px; } .news-title { font-size: 0.78rem; } }
+@media (max-width: 700px) { .news-wrap { padding: 16px 10px calc(80px + var(--safe-bottom)); } .news-grid { grid-template-columns: 1fr; gap: 12px; } .news-title { font-size: 0.78rem; } }
+.chart-legend-item { display:flex; align-items:center; gap:10px; cursor:pointer; border-radius:8px; padding:6px 8px; transition:background 0.15s; }
+.chart-legend-item:hover { background: var(--card-h); }
+.chart-legend-dot { width:12px; height:12px; border-radius:3px; flex-shrink:0; }
+.chart-legend-name { font-size:0.72rem; font-weight:500; color:var(--text); }
+.chart-legend-sub { font-size:0.62rem; color:var(--muted); }
+.chart-detail-header { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+.chart-detail-dot { width:10px; height:10px; border-radius:3px; flex-shrink:0; }
+.chart-detail-label { font-size:0.72rem; font-weight:600; color:var(--text); }
+.chart-detail-close-btn { margin-left:auto; background:none; border:none; color:var(--muted); cursor:pointer; font-size:0.9rem; padding:2px 4px; line-height:1; font-family:inherit; }
+.chart-detail-close-btn:hover { color:var(--text); }
+.chart-detail-desc { font-size:0.67rem; color:var(--muted); margin-bottom:8px; line-height:1.55; }
+.chart-detail-total { font-size:0.7rem; font-weight:600; margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+.chart-row-item { padding:5px 0; border-bottom:1px solid var(--border); }
+.chart-row-head { display:flex; justify-content:space-between; align-items:center; }
+.chart-row-name { font-size:0.68rem; color:var(--text); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.chart-row-count { font-size:0.65rem; color:var(--muted); flex-shrink:0; margin-left:6px; }
+.chart-row-bar-wrap { height:3px; background:var(--dim); border-radius:2px; overflow:hidden; margin-top:3px; }
+.chart-row-bar-fill { height:100%; border-radius:2px; }
+.chart-cat-item { border-bottom:1px solid var(--border); }
+.chart-cat-toggle { padding:6px 0; display:flex; align-items:center; cursor:pointer; gap:6px; }
+.chart-cat-arrow { font-size:0.6rem; color:var(--muted); transition:transform 0.18s; display:inline-block; }
+.chart-cat-label { font-size:0.7rem; color:var(--text); flex:1; }
+.chart-cat-count { font-size:0.65rem; color:var(--muted); flex-shrink:0; }
+.chart-ch-item { padding:4px 0 4px 10px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:6px; }
+.chart-ch-name { font-size:0.64rem; color:var(--muted); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.chart-ch-count { font-size:0.62rem; color:var(--muted); flex-shrink:0; }
 </style>
 </head>
 
@@ -2694,7 +2763,7 @@ header {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
-      <input type="text" id="searchInput" placeholder="제목, 카테고리, 채널명으로 검색..." autocomplete="off" oninput="onSearch(this.value)" data-i18n-placeholder="search_placeholder">
+      <input type="text" id="searchInput" placeholder="제목, 카테고리, 채널명으로 검색..." autocomplete="off" data-i18n-placeholder="search_placeholder">
       <span id="searchResultCount"></span>
       <button id="searchClear" onclick="clearSearch()" title="검색어 지우기">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
@@ -3396,6 +3465,8 @@ function setLang(lang) {
       btn.classList.toggle('active', lm === curLiveMember);
     });
   } else if (curSection === 'external') {
+    _extChanBarCat  = null;
+    _extChanBarLang = null;
     buildExternalChanBar();
   } else if (curSection === 'songs' || curSection === 'content') {
     buildGrid();
@@ -3754,6 +3825,107 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'w3PWN_xnLKU': '2026.01.23',
+  'O_QATiHzjK4': '6월 8일',
+  'o4ZB_NVoCuw': '2026.01.24',
+  'OQcGGTAGXgE': '2024.11.27',
+  'ApxYtJl-qek': '2026.06.06',
+  'u6J30_AMrT8': '2024.08.09',
+  '9eevQUsyYSg': '2024.08.20',
+  'Fh91C72MClw': '2024.08.23',
+  'OGXQNKg5ZrY': '2024.08.25',
+  'xn12KH78Dx4': '2024.08.28',
+  'FKpqORm1MMk': '2024.08.29',
+  'mKXSXoUNOvw': '2024.08.30',
+  'sC5Ue2Tir9c': '2024.09.02',
+  'ys9nHGt1NA8': '2024.09.09',
+  'nSVsLR9QRrM': '2024.09.17',
+  'PsG307aGQMg': '2024.09.20',
+  'YyixhiYpkkY': '2024.09.22',
+  'cTACG96gK1Y': '2024.09.24',
+  'wXn4OfIqzrs': '2024.09.25',
+  'GZ9l5koeWC4': '2024.10.12',
+  '6tTsZnKysBc': '2024.09.30',
+  'WNl67k6StWY': '2024.09.05',
+  'QNXeGm-Wkms': '2024.09.12',
+  'B8JJ8RNM-60': '2024.09.21',
+  '9XttLI0oH0I': '2024.08.27',
+  'e-YOF3n_O6M': '2025.01.19',
+  'GWcHydWnbxs': '2025.02.02',
+  'aTbwfDwH3n4': '2025.02.04',
+  '2HCJzHzFwsA': '2025.01.31',
+  '-Zun-ku7oxE': '2025.02.14',
+  'JdQM9ZoPTWI': '2025.02.12',
+  'YD_yMm-e3JI': '2025.02.21',
+  'ZGftpSHtZ50': '2025.02.07',
+  'WQuoPINWLU8': '2025.02.14',
+  'h0xUtrb_JBc': '2025.02.05',
+  'g9wp5ONbrH8': '2025.06.24',
+  'MX87YV6FWhg': '2025.06.30',
+  'ykajWhay6p8': '2025.07.01',
+  '9FlQOv6-Mjc': '2025.07.02',
+  'LeZdjeSxZTY': '2025.07.04',
+  'wbeO_JG9IU0': '2025.07.11',
+  'BV4CrS9QdwU': '2025.07.09',
+  'd64dH8mnw9Q': '2025.07.10',
+  'k2vT9x9_wQE': '2025.07.18',
+  'v5we0mJpoDM': '2025.07.03',
+  'xF7lFRhuiwk': '2025.07.22',
+  'ZbO9PBdFRdc': '2025.07.02',
+  'hwuuVgI3iuo': '2025.10.27',
+  'nO9U9dx1ILY': '2025.10.30',
+  'UYGWDfGbIzI': '2025.11.04',
+  'jMLAV3LTpoU': '2025.11.05',
+  'JGG9ZO-7PG8': '2025.11.21',
+  '4rQhT9QwG5Q': '2025.11.24',
+  '1svqy_8D7eE': '2025.11.07',
+  'LN-mjYZ_Amk': '2025.11.19',
+  'VKlrVbgJG-g': '2025.11.06',
+  'Ma6IENHO584': '2025.11.25',
+  'cW_T-j47MLI': '2025.11.26',
+  '_zzAi5x0cXc': '2025.12.08',
+  'qYOnNqXcMls': '2025.12.10',
+  '638f3ttCR20': '2025.12.15',
+  'lmuyh52fwGc': '2025.12.17',
+  'sOp-isQ1MAE': '2025.12.23',
+  'qhLDO3nIYfc': '2025.12.24',
+  'ByX8EZq8500': '2025.11.06',
+  'MC6-82GRK5I': '2025.11.25',
+  'mW8lnWqcAmg': '2026.04.03',
+  'GDuMrCcZ0Ls': '2026.04.07',
+  'c7n5ZNS_9sg': '2026.04.10',
+  '7DZlkZ4bMpU': '2026.04.08',
+  'wiZhzVP25H8': '2026.04.14',
+  'Gu_4J16N2fY': '2026.04.09',
+  'aDtNrdAk5gg': '2026.04.16',
+  'rsZwrTNklos': '2026.04.08',
+  'jyQnpPFQ2PA': '2026.06.07',
+  'RimF3YFSC0I': '2025.03.16',
+  'WtITS160b-0': '2025.05.18',
+  '-Z7SM_Luhv8': '2025.10.19',
+  '9R22YsCSEvc': '2024.10.26',
+  '2q1-fQFnWkA': '2025.04.27',
+  'cweaFrC2Wos': '2024.09.30',
+  'JGbZslDPXSE': '2025.03.16',
+  '0Mj4MDUMvB4': '2024.09.29',
+  '0vqajz2UgAQ': '2025.04.09',
+  '_HaM5tFYwxY': '2024.06.09',
+  'ZK08jXLmVrM': '2024.08.11',
+  '2edzNxbGjwM': '2025.05.18',
+  '_PxVRAaaSYs': '2024.06.16',
+  'mlXBZKuPJqo': '2025.10.19',
+  '2XZZNFPDP4U': '2025.10.19',
+  'Gk1E233DXJw': '2025.04.27',
+  'UYFL8ZrkeGs': '2025.05.21',
+  'ihXJ4JugQL4': '2024.06.09',
+  '5Itf5UObUkw': '2024.05.04',
+  'tuavGDlz4R4': '2025.04.16',
+  'P0YyeNTHk3w': '2025.05.16',
+  'Qe_lwsAJIcg': '2024.05.04',
+  'zkl7taxpkxM': '2025.05.21',
+  'wucftc4ijAE': '2025.05.16',
+  'vfxiuIP6kbE': '2024.06.02',
+  'Q1OX_btMPyc': '2025.05.21',
   '17t9izNAYVE': '2026.06.05',
   'SF29doLuBfc': '2026.06.05',
   '3kzZaHU72Ps': '2026.06.05',
@@ -4515,9 +4687,8 @@ function openVideo(e, vid) {
   }
 
   const webUrl = ytUrl(vid);
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
 
-  if (!isMobile) {
+  if (!_isMobile) {
     window.open(webUrl, '_blank', 'noopener');
   } else {
     const appUrl = `vnd.youtube://${vid}`;
@@ -4562,40 +4733,40 @@ function restoreLastWatched() {
 }
 
 const _META_CACHE_KEY = 'rescene-meta-v1';
+const _META_CACHE_TTL = 30 * 24 * 60 * 60 * 1000;
+const _isMobile = window.matchMedia('(max-width: 700px)').matches;
 let _metaCache = null;
 
 function _loadMetaCache() {
   if (_metaCache) return;
-  try { _metaCache = JSON.parse(sessionStorage.getItem(_META_CACHE_KEY) || '{}'); }
-  catch { _metaCache = {}; }
+  try {
+    const raw = localStorage.getItem(_META_CACHE_KEY);
+    if (!raw) { _metaCache = {}; return; }
+    const { data, savedAt } = JSON.parse(raw);
+    if (Date.now() - savedAt > _META_CACHE_TTL) {
+      localStorage.removeItem(_META_CACHE_KEY);
+      _metaCache = {};
+    } else {
+      _metaCache = data || {};
+    }
+  } catch { _metaCache = {}; }
 }
 
 function _saveMetaCache() {
-  try { sessionStorage.setItem(_META_CACHE_KEY, JSON.stringify(_metaCache)); }
+  try { localStorage.setItem(_META_CACHE_KEY, JSON.stringify({ data: _metaCache, savedAt: Date.now() })); }
   catch {}
 }
 
+let _saveMetaCacheTimer = null;
+function _saveMetaCacheDebounced() {
+  clearTimeout(_saveMetaCacheTimer);
+  _saveMetaCacheTimer = setTimeout(_saveMetaCache, 500);
+}
+
 async function fetchMeta(url, fallbackTitle = '', vid = '') {
-  _loadMetaCache();
-  const cacheKey = vid || url;
-  if (_metaCache[cacheKey]) return _metaCache[cacheKey];
-  try {
-    const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);
-    if (!r.ok) throw 0;
-    const d = await r.json();
-    const parsedDate = parseDate(d.title);
-    const result = {
-      rawTitle: d.title || fallbackTitle,
-      channel:  d.author_name,
-      date:     parsedDate || (vid && DATE_MAP[vid]) || null,
-      show:     parseShow(d.title),
-    };
-    _metaCache[cacheKey] = result;
-    _saveMetaCache();
-    return result;
-  } catch {
-    return { rawTitle: fallbackTitle, channel: '', date: (vid && DATE_MAP[vid]) || null, show: null };
-  }
+  const d = await _fetchOembed(url, vid);
+  if (d) return d;
+  return { rawTitle: fallbackTitle, channel: '', date: (vid && DATE_MAP[vid]) || null, show: null };
 }
 
 const ALL_ITEMS = [];
@@ -4631,7 +4802,114 @@ const CONTENT_DATA = [
       "https://youtu.be/g-EGc6wVp9I",
     ]
   },
+  
   {
+    category: "SCENEDROME",
+    urls: [
+      "https://youtu.be/u6J30_AMrT8",
+      "https://youtu.be/9eevQUsyYSg",
+      "https://youtu.be/Fh91C72MClw",
+      "https://youtu.be/OGXQNKg5ZrY",
+      "https://youtu.be/xn12KH78Dx4",
+      "https://youtu.be/FKpqORm1MMk",
+      "https://youtu.be/mKXSXoUNOvw",
+      "https://youtu.be/sC5Ue2Tir9c",
+      "https://youtu.be/ys9nHGt1NA8",
+      "https://youtu.be/nSVsLR9QRrM",
+      "https://youtu.be/PsG307aGQMg",
+      "https://youtu.be/YyixhiYpkkY",
+      "https://youtu.be/cTACG96gK1Y",
+      "https://youtu.be/wXn4OfIqzrs",
+      "https://youtu.be/GZ9l5koeWC4",
+      "https://youtu.be/6tTsZnKysBc",
+      "https://youtu.be/WNl67k6StWY",
+      "https://youtu.be/QNXeGm-Wkms",
+      "https://youtu.be/B8JJ8RNM-60",
+      "https://youtu.be/9XttLI0oH0I",
+    ]
+  },
+
+  
+  {
+    category: "기타",
+    urls: [
+      "https://youtu.be/o4ZB_NVoCuw",
+      "https://youtu.be/OQcGGTAGXgE",
+    ]
+  },
+{
+    category: "Glow Up",
+    urls: [
+      "https://youtu.be/e-YOF3n_O6M",
+      "https://youtu.be/GWcHydWnbxs",
+      "https://youtu.be/aTbwfDwH3n4",
+      "https://youtu.be/2HCJzHzFwsA",
+      "https://youtu.be/-Zun-ku7oxE",
+      "https://youtu.be/JdQM9ZoPTWI",
+      "https://youtu.be/YD_yMm-e3JI",
+      "https://youtu.be/ZGftpSHtZ50",
+      "https://youtu.be/WQuoPINWLU8",
+      "https://youtu.be/h0xUtrb_JBc",
+    ]
+  },
+
+  {
+    category: "Dearest",
+    urls: [
+      "https://youtu.be/g9wp5ONbrH8",
+      "https://youtu.be/MX87YV6FWhg",
+      "https://youtu.be/ykajWhay6p8",
+      "https://youtu.be/9FlQOv6-Mjc",
+      "https://youtu.be/LeZdjeSxZTY",
+      "https://youtu.be/wbeO_JG9IU0",
+      "https://youtu.be/BV4CrS9QdwU",
+      "https://youtu.be/d64dH8mnw9Q",
+      "https://youtu.be/k2vT9x9_wQE",
+      "https://youtu.be/v5we0mJpoDM",
+      "https://youtu.be/xF7lFRhuiwk",
+      "https://youtu.be/ZbO9PBdFRdc",
+    ]
+  },
+
+  {
+    category: "lip bomb",
+    urls: [
+      "https://youtu.be/hwuuVgI3iuo",
+      "https://youtu.be/nO9U9dx1ILY",
+      "https://youtu.be/UYGWDfGbIzI",
+      "https://youtu.be/jMLAV3LTpoU",
+      "https://youtu.be/JGG9ZO-7PG8",
+      "https://youtu.be/4rQhT9QwG5Q",
+      "https://youtu.be/1svqy_8D7eE",
+      "https://youtu.be/LN-mjYZ_Amk",
+      "https://youtu.be/VKlrVbgJG-g",
+      "https://youtu.be/Ma6IENHO584",
+      "https://youtu.be/cW_T-j47MLI",
+      "https://youtu.be/_zzAi5x0cXc",
+      "https://youtu.be/qYOnNqXcMls",
+      "https://youtu.be/638f3ttCR20",
+      "https://youtu.be/lmuyh52fwGc",
+      "https://youtu.be/sOp-isQ1MAE",
+      "https://youtu.be/qhLDO3nIYfc",
+      "https://youtu.be/ByX8EZq8500",
+      "https://youtu.be/MC6-82GRK5I",
+    ]
+  },
+
+  {
+    category: "Runaway",
+    urls: [
+      "https://youtu.be/mW8lnWqcAmg",
+      "https://youtu.be/GDuMrCcZ0Ls",
+      "https://youtu.be/c7n5ZNS_9sg",
+      "https://youtu.be/7DZlkZ4bMpU",
+      "https://youtu.be/wiZhzVP25H8",
+      "https://youtu.be/Gu_4J16N2fY",
+      "https://youtu.be/aDtNrdAk5gg",
+      "https://youtu.be/rsZwrTNklos",
+    ]
+  },
+{
     category: "BASE NOTES",
     urls: [
       "https://youtu.be/3sFoaAhh6GM",
@@ -4770,6 +5048,7 @@ const CONTENT_DATA = [
   {
     category: "Re:Creation",
     urls: [
+      "https://youtu.be/jyQnpPFQ2PA",
       "https://youtu.be/t37nR21Str8",
       "https://www.youtube.com/watch?v=adFSoJAc2yg",
       "https://youtu.be/pYMr28ESeGM",
@@ -4804,8 +5083,11 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급' };
+const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트' };
 const EXTERNAL_DATA = {
+  dadok: [
+    { vid: 'ApxYtJl-qek', url: 'https://youtu.be/ApxYtJl-qek', date: '2026.06.06' },
+  ],
   mmtg: [
     { vid: '17t9izNAYVE', url: 'https://youtu.be/17t9izNAYVE', date: '2026.06.05' },
   ],
@@ -4851,6 +5133,32 @@ const EXTERNAL_DATA = {
     { vid: '6xi9TvHrEQg', url: 'https://youtu.be/6xi9TvHrEQg', date: '2024.09.14' },
   ],
   train: [
+    { vid: 'RimF3YFSC0I', url: 'https://youtu.be/RimF3YFSC0I', date: '2025.03.16' },
+    { vid: 'WtITS160b-0', url: 'https://youtu.be/WtITS160b-0', date: '2025.05.18' },
+    { vid: '-Z7SM_Luhv8', url: 'https://youtu.be/-Z7SM_Luhv8', date: '2025.10.19' },
+    { vid: '9R22YsCSEvc', url: 'https://youtu.be/9R22YsCSEvc', date: '2024.10.26' },
+    { vid: '2q1-fQFnWkA', url: 'https://youtu.be/2q1-fQFnWkA', date: '2025.04.27' },
+    { vid: 'cweaFrC2Wos', url: 'https://youtu.be/cweaFrC2Wos', date: '2024.09.30' },
+    { vid: 'JGbZslDPXSE', url: 'https://youtu.be/JGbZslDPXSE', date: '2025.03.16' },
+    { vid: '0Mj4MDUMvB4', url: 'https://youtu.be/0Mj4MDUMvB4', date: '2024.09.29' },
+    { vid: '0vqajz2UgAQ', url: 'https://youtu.be/0vqajz2UgAQ', date: '2025.04.09' },
+    { vid: '_HaM5tFYwxY', url: 'https://youtu.be/_HaM5tFYwxY', date: '2024.06.09' },
+    { vid: 'ZK08jXLmVrM', url: 'https://youtu.be/ZK08jXLmVrM', date: '2024.08.11' },
+    { vid: '2edzNxbGjwM', url: 'https://youtu.be/2edzNxbGjwM', date: '2025.05.18' },
+    { vid: '_PxVRAaaSYs', url: 'https://youtu.be/_PxVRAaaSYs', date: '2024.06.16' },
+    { vid: 'mlXBZKuPJqo', url: 'https://youtu.be/mlXBZKuPJqo', date: '2025.10.19' },
+    { vid: '2XZZNFPDP4U', url: 'https://youtu.be/2XZZNFPDP4U', date: '2025.10.19' },
+    { vid: 'Gk1E233DXJw', url: 'https://youtu.be/Gk1E233DXJw', date: '2025.04.27' },
+    { vid: 'UYFL8ZrkeGs', url: 'https://youtu.be/UYFL8ZrkeGs', date: '2025.05.21' },
+    { vid: 'ihXJ4JugQL4', url: 'https://youtu.be/ihXJ4JugQL4', date: '2024.06.09' },
+    { vid: '5Itf5UObUkw', url: 'https://youtu.be/5Itf5UObUkw', date: '2024.05.04' },
+    { vid: 'tuavGDlz4R4', url: 'https://youtu.be/tuavGDlz4R4', date: '2025.04.16' },
+    { vid: 'P0YyeNTHk3w', url: 'https://youtu.be/P0YyeNTHk3w', date: '2025.05.16' },
+    { vid: 'Qe_lwsAJIcg', url: 'https://youtu.be/Qe_lwsAJIcg', date: '2024.05.04' },
+    { vid: 'zkl7taxpkxM', url: 'https://youtu.be/zkl7taxpkxM', date: '2025.05.21' },
+    { vid: 'wucftc4ijAE', url: 'https://youtu.be/wucftc4ijAE', date: '2025.05.16' },
+    { vid: 'vfxiuIP6kbE', url: 'https://youtu.be/vfxiuIP6kbE', date: '2024.06.02' },
+    { vid: 'Q1OX_btMPyc', url: 'https://youtu.be/Q1OX_btMPyc', date: '2025.05.21' },
     { vid: 'ixyiX8s5fvs', url: 'https://youtu.be/ixyiX8s5fvs', date: '2026.06.01' },
   ],
   gotthespot: [
@@ -5130,6 +5438,7 @@ const EXTERNAL_DATA = {
     { vid: 'yMeBhxSGvVw', url: 'https://youtu.be/yMeBhxSGvVw', date: '2026.05.01' },
   ],
   studiokkok: [
+    { vid: 'w3PWN_xnLKU', url: 'https://youtu.be/w3PWN_xnLKU', date: '2026.01.23' },
     { vid: 'LTmcHWbUcBw', url: 'https://youtu.be/LTmcHWbUcBw', date: '2026.06.05' },
     { vid: 'I-NAFhupR1s', url: 'https://youtu.be/I-NAFhupR1s', date: '2026.05.29' },
     { vid: '6pMUeLI4hAM', url: 'https://www.youtube.com/watch?v=6pMUeLI4hAM', date: '2025.08.13' },
@@ -5223,7 +5532,7 @@ const VID_TO_EXTERNAL_KEY = {};
 const EXTERNAL_CATS = {
   song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon'] },
   radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae','billie','riswell'] },
-  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool','roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging','hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg'] },
+  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool','roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging','hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok'] },
   interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview','spotify'] },
 };
 const EXTERNAL_CAT_KEYS = Object.keys(EXTERNAL_CATS);
@@ -5269,6 +5578,10 @@ const _SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','ex
 const _SECTION_EL_CACHE = Object.fromEntries(
   _SECTION_EL_IDS.map(id => [id, document.getElementById(id)])
 );
+
+const _allSectionTabs = Array.from(document.querySelectorAll('.section-tab'));
+const _allMobNavBtns  = Array.from(document.querySelectorAll('.mob-nav-btn'));
+const _allDrawerItems = Array.from(document.querySelectorAll('.drawer-item'));
 
 let curSection = 'about';
 let curSong = 'all';
@@ -5327,7 +5640,7 @@ async function _fetchOembed(url, vid) {
     const d = await r.json();
     const result = { rawTitle: d.title, channel: d.author_name, date: parseDate(d.title), show: parseShow(d.title) };
     _metaCache[cacheKey] = result;
-    _saveMetaCache();
+    _saveMetaCacheDebounced();
     return result;
   } catch {
     return null;
@@ -5387,8 +5700,29 @@ async function loadCardMetas(items, mode) {
   }
 }
 
+const _extChanSortCache = {};
+function _getExternalCatKeys(cat) {
+  if (_extChanSortCache[cat]) return _extChanSortCache[cat];
+  const sorted = EXTERNAL_CATS[cat].keys
+    .filter(k => EXTERNAL_DATA[k])
+    .sort((a, b) => {
+      const oldest = key => EXTERNAL_DATA[key].reduce((min, item) => {
+        const d = (item.date || DATE_MAP[item.vid] || '');
+        return (!min || d < min) ? d : min;
+      }, '');
+      return oldest(a).localeCompare(oldest(b));
+    });
+  _extChanSortCache[cat] = sorted;
+  return sorted;
+}
+
+let _extChanBarLang = null;
+let _extChanBarCat  = null;
+
 function buildExternalChanBar() {
   const t = getCurrentT();
+  const lang = window._curLang || 'KR';
+
   function catLabel(cat) {
     const key = EXTERNAL_CATS[cat].i18nKey;
     return t[key] || EXTERNAL_CATS[cat].label;
@@ -5408,18 +5742,23 @@ function buildExternalChanBar() {
   if (curExternalCat === 'all') {
     bar.innerHTML = '';
     bar.style.display = 'none';
+    _extChanBarCat = null;
+    _extChanBarLang = null;
     return;
   }
-  bar.style.display = '';
-  const catKeys = EXTERNAL_CATS[curExternalCat].keys
-    .filter(k => EXTERNAL_DATA[k])
-    .sort((a, b) => {
-      const oldest = key => EXTERNAL_DATA[key].reduce((min, item) => {
-        const d = (item.date || DATE_MAP[item.vid] || '');
-        return (!min || d < min) ? d : min;
-      }, '');
-      return oldest(a).localeCompare(oldest(b));
+
+  if (_extChanBarCat === curExternalCat && _extChanBarLang === lang) {
+    document.querySelectorAll('#externalChanBar .type-btn[data-ec-ch]').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.ecCh === curExternal);
     });
+    return;
+  }
+
+  _extChanBarCat  = curExternalCat;
+  _extChanBarLang = lang;
+
+  bar.style.display = '';
+  const catKeys = _getExternalCatKeys(curExternalCat);
   let html = `<button class="type-btn${curExternal === 'all' ? ' active' : ''}" data-ec-ch="all" onclick="pickExternalChan(this,'all')">${t.filter_all || '전체'}</button>`;
   html += catKeys.map(key =>
     `<button class="type-btn${curExternal === key ? ' active' : ''}" data-ec-ch="${key}" onclick="pickExternalChan(this,'${key}')">${EXTERNAL_LABELS[key]}</button>`
@@ -5469,6 +5808,8 @@ function buildExternalCard(item, delay) {
 }
 
 function buildExternalGrid() {
+  _gridDisconnect();
+
   let items;
   if (curExternalCat === 'all') {
     items = curExternal === 'all'
@@ -5492,11 +5833,21 @@ function buildExternalGrid() {
     return;
   }
 
-  _elGrid.innerHTML = items.map((item, idx) =>
-    buildExternalCard(item, `${Math.min(idx * 0.03, 0.4)}s`)
-  ).join('');
-
-  loadCardMetas(items, 'external');
+  _gridSorted  = items;
+  _gridLoaded  = 0;
+  _gridSection = 'external';
+  _gridLoadFn  = (batch) => loadCardMetas(batch, 'external');
+  _elGrid.innerHTML = '';
+  _gridSentinel = document.createElement('div');
+  _gridSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
+  _elGrid.appendChild(_gridSentinel);
+  _gridAppendBatch(_elGrid);
+  if (_gridLoaded < _gridSorted.length) {
+    _gridObserver = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) _gridAppendBatch(_elGrid);
+    }, { rootMargin: '300px' });
+    _gridObserver.observe(_gridSentinel);
+  }
   if (curSearchQuery) applySearch();
 }
 
@@ -5759,6 +6110,7 @@ const LIVE_DATA_2025 = [
 ];
 
 const LIVE_DATA_2026 = [
+  { vid:'O_QATiHzjK4', url:'https://youtu.be/O_QATiHzjK4', date:'6월 8일', members:['리브','메이','제나'], year:'2026' },
   { vid:'i3BCs-IcIl4', url:'https://youtu.be/i3BCs-IcIl4', date:'5월 25일', members:['원이'], year:'2026' },
   { vid:'bClA2Os6vpE', url:'https://youtu.be/bClA2Os6vpE', date:'5월 23일', members:['제나'], year:'2026' },
   { vid:'7Xcg79neHng', url:'https://youtu.be/7Xcg79neHng', date:'5월 21일', members:['미나미','메이','제나'], year:'2026' },
@@ -5911,7 +6263,7 @@ function _liveAppendBatch(grid) {
   const frag  = document.createDocumentFragment();
   const wrapper = document.createElement('div');
   wrapper.innerHTML = batch.map((item, i) => {
-    const delay = `${Math.min((i % LIVE_BATCH) * 0.025, 0.3)}s`;
+    const delay = `${Math.min((i % LIVE_BATCH) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
     return buildLiveCard(item, delay);
   }).join('');
   while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
@@ -6005,7 +6357,7 @@ function updateBmBtn(card, vid) {
 
 function bmBtnHtml(vid) {
   const active = BOOKMARKS.has(vid);
-  return `<button class="card-overlay-btn bm-btn ${active ? 'bm-active' : ''}" title="${active ? '즐겨찾기 해제' : '즐겨찾기 추가'}" onclick="toggleBookmark(event,'${vid}')">
+  return `<button class="card-overlay-btn bm-btn ${active ? 'bm-active' : ''}" title="${active ? '즐겨찾기 해제' : '즐겨찾기 추가'}" aria-label="${active ? '즐겨찾기 해제' : '즐겨찾기 추가'}" onclick="toggleBookmark(event,'${vid}')">
     <svg viewBox="2 2 20 19.02" fill="${active ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
     </svg>
@@ -6013,7 +6365,7 @@ function bmBtnHtml(vid) {
 }
 
 function shareBtnHtml(vid) {
-  return `<button class="card-overlay-btn share-btn" title="YouTube 링크 복사" onclick="copyShareUrl(event,'${vid}')">
+  return `<button class="card-overlay-btn share-btn" title="YouTube 링크 복사" aria-label="YouTube 링크 복사" onclick="copyShareUrl(event,'${vid}')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
       <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
@@ -6083,7 +6435,7 @@ function buildBookmarkGrid() {
   const unique = items.filter(i => { if (seen.has(i.vid)) return false; seen.add(i.vid); return true; });
 
   _elGrid.innerHTML = unique.map((item, idx) => {
-    const delay = `${Math.min(idx * 0.03, 0.4)}s`;
+    const delay = `${Math.min(idx * (_isMobile ? 0.015 : 0.03), _isMobile ? 0.2 : 0.4)}s`;
     return buildAllVideoCard(item, delay).replace(/id="avc-/g, 'id="bvc-');
   }).join('');
 }
@@ -6204,8 +6556,10 @@ function _gridAppendBatch(grid) {
   const frag  = document.createDocumentFragment();
   const wrapper = document.createElement('div');
   wrapper.innerHTML = batch.map((item, i) => {
-    const delay = `${Math.min((i % GRID_BATCH) * 0.025, 0.3)}s`;
-    return _gridSection === 'content' ? buildContentCard(item, delay) : buildCard(item, delay);
+    const delay = `${Math.min((i % GRID_BATCH) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
+    if (_gridSection === 'content') return buildContentCard(item, delay);
+    if (_gridSection === 'external') return buildExternalCard(item, delay);
+    return buildCard(item, delay);
   }).join('');
   while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
   _gridLoaded += batch.length;
@@ -6248,7 +6602,7 @@ function buildGrid() {
     _gridLoadFn  = (items) => loadCardMetas(items, 'content');
     _elGrid.innerHTML = '';
     _gridSentinel = document.createElement('div');
-    _gridSentinel.style.cssText = '_elGrid-column:1/-1;height:1px;';
+    _gridSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
     _elGrid.appendChild(_gridSentinel);
     _gridAppendBatch(_elGrid);
     if (_gridLoaded < _gridSorted.length) {
@@ -6277,7 +6631,7 @@ function buildGrid() {
   _gridLoadFn  = loadMetas;
   _elGrid.innerHTML = '';
   _gridSentinel = document.createElement('div');
-  _gridSentinel.style.cssText = '_elGrid-column:1/-1;height:1px;';
+  _gridSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
   _elGrid.appendChild(_gridSentinel);
   _gridAppendBatch(_elGrid);
   if (_gridLoaded < _gridSorted.length) {
@@ -6351,7 +6705,7 @@ function _avAppendNextBatch(grid) {
   });
   const wrapper = document.createElement('div');
   wrapper.innerHTML = batch.map((item, i) => {
-    const delay = `${Math.min((i % AV_PAGE_SIZE) * 0.025, 0.3)}s`;
+    const delay = `${Math.min((i % AV_PAGE_SIZE) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
     return buildAllVideoCard(item, delay);
   }).join('');
   while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
@@ -6370,11 +6724,36 @@ function _avAppendNextBatch(grid) {
   }
 }
 
+let _avLastSort = null;
+
 function buildAllVideosGrid() {
   if (!_elGrid) return;
 
+  const newSorted = _buildAvSortedList();
+
+  if (_avLastSort === curSort && _avSorted.length === newSorted.length && _avLoaded === _avSorted.length) {
+    const grid = _elGrid;
+    const cards = Array.from(grid.querySelectorAll('.vcard[id^="avc-"]'));
+    const order = new Map(newSorted.map((item, i) => [item.vid, i]));
+    const sorted = cards.slice().sort((a, b) => {
+      const ai = order.get(a.id.replace('avc-', '')) ?? 0;
+      const bi = order.get(b.id.replace('avc-', '')) ?? 0;
+      return ai - bi;
+    });
+    const frag = document.createDocumentFragment();
+    sorted.forEach(el => frag.appendChild(el));
+    if (_avSentinel && _avSentinel.parentNode) {
+      grid.insertBefore(frag, _avSentinel);
+    } else {
+      grid.appendChild(frag);
+    }
+    if (curSearchQuery) applySearch();
+    return;
+  }
+
+  _avLastSort = curSort;
   _avDisconnectObserver();
-  _avSorted = _buildAvSortedList();
+  _avSorted = newSorted;
   _avLoaded = 0;
 
   if (!_avSorted.length) {
@@ -6384,7 +6763,7 @@ function buildAllVideosGrid() {
 
   _elGrid.innerHTML = '';
   _avSentinel = document.createElement('div');
-  _avSentinel.style.cssText = '_elGrid-column:1/-1;height:1px;';
+  _avSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
   _elGrid.appendChild(_avSentinel);
 
   _avAppendNextBatch(_elGrid);
@@ -6412,10 +6791,12 @@ function buildAllVideoCard(item, delay) {
     const memberBadges = item._liveItem.members.map(mm =>
       `<span class="ctag ${MEMBER_CLASS[mm] || ''}">${_ML2[mm] || mm}</span>`
     ).join('');
+    const memberNames = item._liveItem.members.map(mm => _ML2[mm] || mm).join(' ');
     const titleHtml = item.loaded
       ? `<div class="csong-multi" id="avc-title-${item.vid}">${videoTitle}</div>`
       : `<div class="csong-multi" id="avc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
-    return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+    const initialSearch = (videoTitle + ' ' + dateStr + ' live ' + memberNames).toLowerCase();
+    return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${initialSearch.replace(/"/g,'&quot;')}">
       ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">LIVE</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -6432,7 +6813,8 @@ function buildAllVideoCard(item, delay) {
     const tagsHtml = item.loaded
       ? `<div class="ctags"><span class="ctag tb-tag-${item.type}">♪ ${tl}</span></div>`
       : `<div class="ctags"><span class="skel skel-tag"></span></div>`;
-    return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+    const initialSearch = (videoTitle + ' ' + tl + ' ' + dateStr).toLowerCase();
+    return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${initialSearch.replace(/"/g,'&quot;')}">
       ${buildThumbHtml(item.vid, `<span class="type-badge tb-songs">Songs</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -6451,7 +6833,8 @@ function buildAllVideoCard(item, delay) {
     const metaHtml = item.loaded
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
       : `<span class="skel skel-date"></span>`;
-    return `<a class="vcard card-base hover-lift tb-content" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+    const initialSearch = (videoTitle + ' ' + (ref.category || '') + ' ' + categoryLabel + ' ' + dateStr).toLowerCase();
+    return `<a class="vcard card-base hover-lift tb-content" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${initialSearch.replace(/"/g,'&quot;')}">
       ${buildThumbHtml(item.vid, `<span class="type-badge tb-content">${tl}</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -6470,7 +6853,8 @@ function buildAllVideoCard(item, delay) {
     const metaHtml = item.loaded
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
       : `<span class="skel skel-date"></span>`;
-    return `<a class="vcard card-base hover-lift tb-external" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+    const initialSearch = (videoTitle + ' ' + channelLabel + ' ' + channelKey + ' ' + dateStr).toLowerCase();
+    return `<a class="vcard card-base hover-lift tb-external" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${initialSearch.replace(/"/g,'&quot;')}">
       ${buildThumbHtml(item.vid, `<span class="type-badge tb-external">외부컨텐츠</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -6480,13 +6864,35 @@ function buildAllVideoCard(item, delay) {
     </a>`;
   }
 
-  return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+  const initialSearch = (videoTitle + ' ' + tl + ' ' + dateStr).toLowerCase();
+  return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${initialSearch.replace(/"/g,'&quot;')}">
     ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
     <div class="cbody">
       <div class="csong-multi">${videoTitle}</div>
       <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
     </div>
   </a>`;
+}
+
+function _avUpdateCardSearch(vid, title, date, extra) {
+  const cardEl = document.getElementById(`avc-${vid}`);
+  if (!cardEl) return;
+  const searchText = (title + ' ' + (date || '') + ' ' + (extra || '')).toLowerCase();
+  cardEl.setAttribute('data-search', searchText);
+  if (!curSearchQuery) return;
+  const q = curSearchQuery.toLowerCase();
+  const dateNorm = normalizeDateQuery(q.replace(/\s/g, ''));
+  let match;
+  if (dateNorm) {
+    match = date && date.includes(dateNorm);
+  } else {
+    match = searchText.includes(q);
+  }
+  cardEl.style.display = match ? '' : 'none';
+  if (match) {
+    _hlClear(cardEl);
+    _hlCard(cardEl, dateNorm || q);
+  }
 }
 
 async function loadAllVideosMetas(items) {
@@ -6517,6 +6923,7 @@ async function loadAllVideosMetas(items) {
       }
       if (tagsEl) tagsEl.innerHTML = `<span class="ctag tb-tag-${proxy.type}">♪ ${tl}</span>`;
       replaceSkeleton(ref);
+      _avUpdateCardSearch(proxy.vid, ref.meta.rawTitle || ref.song, ref.meta.date || '', tl);
     }));
   }
 
@@ -6536,6 +6943,9 @@ async function loadAllVideosMetas(items) {
       const metaEl  = document.querySelector(`#avc-${proxy.vid} .cmeta`);
       if (titleEl) titleEl.textContent = ref.title || proxy.vid;
       if (metaEl) metaEl.innerHTML = ref.date ? `<span class="cdate">${ref.date}</span>` : '';
+      const channelKey = VID_TO_EXTERNAL_KEY[proxy.vid] || '';
+      const channelLabel = EXTERNAL_LABELS[channelKey] || fetched.channel || '';
+      _avUpdateCardSearch(proxy.vid, ref.title || proxy.vid, ref.date || '', channelLabel);
     }));
   }
 
@@ -6554,6 +6964,8 @@ async function loadAllVideosMetas(items) {
       if (avcTitle) avcTitle.textContent = ref.title;
       const lvcTitle = document.getElementById(`lvc-title-${proxy.vid}`);
       if (lvcTitle) lvcTitle.textContent = ref.title;
+      const members = (proxy._liveItem && proxy._liveItem.members) ? proxy._liveItem.members.join(' ') : '';
+      _avUpdateCardSearch(proxy.vid, ref.title, proxy.meta.date || '', members);
     }));
   }
 }
@@ -6580,13 +6992,11 @@ function replaceSkeleton(item) {
   const dateEl  = document.getElementById(`vc-date-${item.vid}`);
   const tagsEl  = document.getElementById(`vc-tags-${item.vid}`);
   if (titleEl) {
-    titleEl.innerHTML = '';
     titleEl.textContent = m?.rawTitle || item.song;
   }
   if (dateEl) {
     const dateStr = m?.date || DATE_MAP[item.vid] || '';
     if (dateStr) {
-      dateEl.innerHTML = '';
       dateEl.className = 'cdate';
       dateEl.textContent = dateStr;
       dateEl.style.display = '';
@@ -6606,7 +7016,7 @@ function replaceSkeleton(item) {
 }
 
 const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', fantube:'secFantube', member:'secMember', links:'secLinks', bookmark:'secBookmark', about:'secAbout', schedule:'secSchedule', news:'secNews' };
-const _PICK_SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','memberMode','linksMode','bookmarkMode','aboutMode','scheduleMode','newsMode','grid-wrap-el','liveGrid'];
+const _PICK_SECTION_EL_IDS = _SECTION_EL_IDS;
 const _PICK_SECTION_MAP = {
   allvideos:['allvideosMode','grid-wrap-el'],
   songs:    ['songMode','grid-wrap-el'],
@@ -6631,22 +7041,25 @@ const _SUB_SECTIONS = {
 const _SUB_TAB_ID_MAP = { songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal' };
 
 function _replayAnim(selector, delayFn, animStr = '') {
-  document.querySelectorAll(selector).forEach((el, i) => {
+  const els = Array.from(document.querySelectorAll(selector));
+  if (!els.length) return;
+  els.forEach((el, i) => {
     el.style.animationDelay = delayFn(i);
     el.style.animation = 'none';
-    void el.offsetWidth;
-    el.style.animation = animStr;
   });
+  void els[0].offsetWidth;
+  els.forEach(el => { el.style.animation = animStr; });
 }
 
 function pickSection(section, _fromPopState) {
+  const prevQuery = curSearchQuery;
   curSection = section;
   if (!_fromPopState) {
     const url = section === 'about' ? location.pathname : `${location.pathname}?tab=${section}`;
     history.pushState({ tab: section }, '', url);
   }
   window.scrollTo({ top: 0, behavior: 'instant' });
-  document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('active'));
+  _allSectionTabs.forEach(t => t.classList.remove('active'));
   const tabId = _PICK_TAB_ID_MAP[section] || 'secAbout';
   const tabEl = document.getElementById(tabId);
   if (tabEl) tabEl.classList.add('active');
@@ -6659,8 +7072,12 @@ function pickSection(section, _fromPopState) {
     el.style.display = activeEls.includes(id) ? '' : 'none';
   });
 
-  _elSearchBar.style.display = _PICK_SEARCHABLE.includes(section) ? '' : 'none';
-  clearSearch(true);
+  const isSearchable = _PICK_SEARCHABLE.includes(section);
+  _elSearchBar.style.display = isSearchable ? '' : 'none';
+
+  if (!isSearchable || !prevQuery) {
+    clearSearch(true);
+  }
 
   if (section === 'member') _replayAnim('.member-btn', i => `${i * 0.06}s`);
   if (section === 'links')  _replayAnim('.link-row',   i => `${Math.min(i * 0.04, 0.5)}s`);
@@ -6686,6 +7103,15 @@ function pickSection(section, _fromPopState) {
   if (section === 'schedule') buildCalendar();
   if (section === 'news') buildNewsGrid();
 
+  if (isSearchable && prevQuery) {
+    curSearchQuery = prevQuery;
+    const inp = document.getElementById('searchInput');
+    if (inp) inp.value = prevQuery;
+    const clearBtn = document.getElementById('searchClear');
+    if (clearBtn) clearBtn.style.display = 'flex';
+    applySearch();
+  }
+
   updateMobileNav(section);
   updateSubSidebar(section);
 
@@ -6701,7 +7127,7 @@ function updateSubSidebar(section) {
   if (!_SUB_SECTIONS[section]) {
     sidebar.classList.remove('open');
     if (_elSubSidebarOverlay) _elSubSidebarOverlay.classList.remove('open');
-    document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('has-sub'));
+    _allSectionTabs.forEach(t => t.classList.remove('has-sub'));
     return;
   }
 
@@ -6709,7 +7135,7 @@ function updateSubSidebar(section) {
   if (_elSubSidebarOverlay) _elSubSidebarOverlay.classList.add('open');
   if (labelEl) labelEl.textContent = _SUB_SECTIONS[section].label;
 
-  document.querySelectorAll('.section-tab').forEach(t => t.classList.remove('has-sub'));
+  _allSectionTabs.forEach(t => t.classList.remove('has-sub'));
   const activeTabId = _SUB_TAB_ID_MAP[section];
   if (activeTabId) {
     const activeTab = document.getElementById(activeTabId);
@@ -6878,10 +7304,25 @@ function onSearch(val) {
   _searchDebounceTimer = setTimeout(applySearch, 150);
 }
 
+(function () {
+  const inp = document.getElementById('searchInput');
+  if (!inp) return;
+  let _composing = false;
+  inp.addEventListener('compositionstart', function () { _composing = true; });
+  inp.addEventListener('compositionend', function (e) {
+    _composing = false;
+    onSearch(e.target.value);
+  });
+  inp.addEventListener('input', function (e) {
+    if (_composing) return;
+    onSearch(e.target.value);
+  });
+})();
+
 function clearSearch(skipApply) {
   curSearchQuery = '';
   const inp = document.getElementById('searchInput');
-  if (inp) { inp.value = ''; inp.style.paddingRight = '36px'; }
+  if (inp) { inp.value = ''; }
   const clearBtn = document.getElementById('searchClear');
   if (clearBtn) clearBtn.style.display = 'none';
   const countEl = document.getElementById('searchResultCount');
@@ -6926,6 +7367,54 @@ function normalizeDateQuery(raw) {
   return null;
 }
 
+function _hlEscape(s) {
+  return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function _hlApply(el, q) {
+  if (!el || el.querySelector('.skel')) return;
+  const saved = el.getAttribute('data-hl-orig');
+  const orig = saved !== null ? saved : el.innerHTML;
+  if (saved === null) el.setAttribute('data-hl-orig', orig);
+  if (!q) { el.innerHTML = orig; return; }
+  const re = new RegExp('(' + _hlEscape(q) + ')', 'gi');
+  const tmp = document.createElement('div');
+  tmp.innerHTML = orig;
+  _hlNode(tmp, re);
+  el.innerHTML = tmp.innerHTML;
+}
+
+function _hlNode(node, re) {
+  if (node.nodeType === 3) {
+    const t = node.textContent;
+    if (!re.test(t)) return;
+    re.lastIndex = 0;
+    const span = document.createElement('span');
+    span.innerHTML = t.replace(re, '<mark class="sh">$1</mark>');
+    node.parentNode.replaceChild(span, node);
+    return;
+  }
+  if (node.nodeType === 1 && node.tagName === 'MARK') return;
+  Array.from(node.childNodes).forEach(c => _hlNode(c, re));
+}
+
+function _hlCard(card, q) {
+  const targets = [
+    card.querySelector('.csong'),
+    card.querySelector('.csong-multi'),
+    card.querySelector('.cdate'),
+    card.querySelector('.ctags'),
+  ];
+  targets.forEach(el => _hlApply(el, q));
+}
+
+function _hlClear(card) {
+  card.querySelectorAll('[data-hl-orig]').forEach(el => {
+    el.innerHTML = el.getAttribute('data-hl-orig');
+    el.removeAttribute('data-hl-orig');
+  });
+}
+
 function applySearch() {
   const q = curSearchQuery.toLowerCase();
 
@@ -6939,7 +7428,7 @@ function applySearch() {
     const remaining = _avSorted.slice(_avLoaded);
     const wrapper = document.createElement('div');
     wrapper.innerHTML = remaining.map((item, i) => {
-      const delay = `${Math.min((i % AV_PAGE_SIZE) * 0.025, 0.3)}s`;
+      const delay = `${Math.min((i % AV_PAGE_SIZE) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
       return buildAllVideoCard(item, delay);
     }).join('');
     while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
@@ -6958,7 +7447,7 @@ function applySearch() {
     const remaining = _gridSorted.slice(_gridLoaded);
     const wrapper = document.createElement('div');
     wrapper.innerHTML = remaining.map((item, i) => {
-      const delay = `${Math.min((i % GRID_BATCH) * 0.025, 0.3)}s`;
+      const delay = `${Math.min((i % GRID_BATCH) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
       return _gridSection === 'content' ? buildContentCard(item, delay) : buildCard(item, delay);
     }).join('');
     while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
@@ -6977,7 +7466,7 @@ function applySearch() {
     const remaining = _liveSorted.slice(_liveLoaded);
     const wrapper = document.createElement('div');
     wrapper.innerHTML = remaining.map((item, i) => {
-      const delay = `${Math.min((i % LIVE_BATCH) * 0.025, 0.3)}s`;
+      const delay = `${Math.min((i % LIVE_BATCH) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
       return buildLiveCard(item, delay);
     }).join('');
     while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
@@ -6990,12 +7479,32 @@ function applySearch() {
     loadLiveTitles(remaining);
   }
 
+  if (curSection === 'external' && q && _gridLoaded < _gridSorted.length) {
+    _gridDisconnect();
+    const frag = document.createDocumentFragment();
+    const remaining = _gridSorted.slice(_gridLoaded);
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = remaining.map((item, i) => {
+      const delay = `${Math.min((i % GRID_BATCH) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
+      return buildExternalCard(item, delay);
+    }).join('');
+    while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
+    _gridLoaded = _gridSorted.length;
+    if (_gridSentinel && _gridSentinel.parentNode) {
+      _elGrid.insertBefore(frag, _gridSentinel);
+    } else {
+      _elGrid.appendChild(frag);
+    }
+    if (_gridLoadFn) _gridLoadFn(remaining);
+  }
+
   const cards = targetGrid.querySelectorAll('.vcard');
   let visible = 0;
   const dateNorm = normalizeDateQuery(q.replace(/\s/g, ''));
 
   cards.forEach(card => {
     if (!q) {
+      _hlClear(card);
       card.style.display = '';
       visible++;
       return;
@@ -7022,15 +7531,17 @@ function applySearch() {
       }
     }
     card.style.display = match ? '' : 'none';
-    if (match) visible++;
+    if (match) {
+      _hlCard(card, dateNorm ? dateNorm : q);
+      visible++;
+    } else {
+      _hlClear(card);
+    }
   });
 
   const countEl = document.getElementById('searchResultCount');
-  const inp = document.getElementById('searchInput');
   if (countEl) {
-    const text = q ? `${visible}개` : '';
-    countEl.textContent = text;
-    if (inp) inp.style.paddingRight = text ? '80px' : '36px';
+    countEl.textContent = q ? `${visible}개` : '';
   }
 
   const emptyId = 'searchEmptyMsg';
@@ -7178,8 +7689,7 @@ const _HOUR_KEY = (function() { const d = new Date(); return `${d.getFullYear()}
         buildCalendar();
       }
     })
-    .catch(function(e) {
-      injectAnnivEvents();
+    .catch(function() {
       injectAnnivEvents();
       if (typeof buildCalendar === 'function' && curSection === 'schedule') {
         buildCalendar();
@@ -7222,7 +7732,7 @@ function buildNewsGrid() {
   }
   var noThumb = '<div class="news-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>';
   grid.innerHTML = NEWS_DATA.map(function(a, idx) {
-    var delay = Math.min(idx * 0.035, 0.5).toFixed(3);
+    var delay = Math.min(idx * (_isMobile ? 0.018 : 0.035), _isMobile ? 0.22 : 0.5).toFixed(3);
     var thumb = a.thumbnail ? '<img class="news-thumb" src="'+_escHtml(a.thumbnail)+'" alt="" loading="lazy" decoding="async">' : noThumb;
     var desc = a.description ? '<div class="news-desc">'+_escHtml(a.description)+'</div>' : '';
     return '<a class="news-card" href="'+_escHtml(a.url)+'" target="_blank" rel="noopener" style="animation:fadeUp 0.3s ease both '+delay+'s;">'
@@ -7248,6 +7758,22 @@ let _calMonth = new Date().getMonth();
 let _calSelectedDate = null;
 let _calBuilt = false;
 
+const _CAL_MONTH_NAMES = {
+  KR: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+  JP: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+  EN: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+};
+const _CAL_MONTH_NAMES_SHORT = {
+  KR: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
+  JP: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
+  EN: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+};
+const _CAL_DOW_NAMES = {
+  KR: ['일','월','화','수','목','금','토'],
+  JP: ['日','月','火','水','木','金','土'],
+  EN: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+};
+
 function calNavigate(dir) {
   _calMonth += dir;
   if (_calMonth > 11) { _calMonth = 0; _calYear++; }
@@ -7265,18 +7791,8 @@ function buildCalendar() {
 
 function renderCalendar() {
   const lang = window._curLang || 'KR';
-  const monthNames = {
-    KR: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    JP: ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-    EN: ['January','February','March','April','May','June','July','August','September','October','November','December'],
-  };
-  const dayNames = {
-    KR: ['일','월','화','수','목','금','토'],
-    JP: ['日','月','火','水','木','金','土'],
-    EN: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
-  };
-  const mNames = monthNames[lang] || monthNames.KR;
-  const dNames = dayNames[lang] || dayNames.KR;
+  const mNames = _CAL_MONTH_NAMES[lang] || _CAL_MONTH_NAMES.KR;
+  const dNames = _CAL_DOW_NAMES[lang] || _CAL_DOW_NAMES.KR;
   const calTitle = lang === 'EN'
     ? `${mNames[_calMonth]} ${_calYear}`
     : lang === 'JP'
@@ -7382,14 +7898,9 @@ function calSelectDate(dateStr) {
   if (!events.length) return;
 
   const lang = window._curLang || 'KR';
-  const monthNames = {
-    KR:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    JP:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-    EN:['January','February','March','April','May','June','July','August','September','October','November','December'],
-  };
   const parts = dateStr.split('-');
   const Y = parseInt(parts[0]), M = parseInt(parts[1])-1, D = parseInt(parts[2]);
-  const mName = (monthNames[lang]||monthNames.KR)[M];
+  const mName = (_CAL_MONTH_NAMES[lang] || _CAL_MONTH_NAMES.KR)[M];
   const dateLabel = lang==='EN' ? `${mName} ${D}, ${Y}` : `${Y}년 ${mName} ${D}일`;
 
   const itemsHtml = events.map(ev => {
@@ -7421,16 +7932,6 @@ function calCloseDetail() {
 
 function renderSchedList() {
   const lang = window._curLang || 'KR';
-  const monthNames = {
-    KR:['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
-    JP:['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'],
-    EN:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-  };
-  const dowNames = {
-    KR:['일','월','화','수','목','금','토'],
-    JP:['日','月','火','水','木','金','土'],
-    EN:['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
-  };
   const typeLabel = {
     broadcast: { KR:'방송',    JP:'放送',       EN:'Broadcast' },
     radio:     { KR:'라디오',  JP:'ラジオ',     EN:'Radio' },
@@ -7450,7 +7951,7 @@ function renderSchedList() {
   const titleEl = document.getElementById('schedListTitle');
   if (!listEl) return;
 
-  const mName = (monthNames[lang]||monthNames.KR)[_calMonth];
+  const mName = (_CAL_MONTH_NAMES_SHORT[lang] || _CAL_MONTH_NAMES_SHORT.KR)[_calMonth];
   if (titleEl) titleEl.textContent = lang==='EN' ? `${mName} ${_calYear}` : `${_calYear}년 ${mName}`;
   if (countEl) countEl.textContent = monthEvents.length ? `${monthEvents.length}개` : '';
 
@@ -7473,8 +7974,8 @@ function renderSchedList() {
     const parts = dateStr.split('-');
     const D = parseInt(parts[2]);
     const dow = new Date(dateStr).getDay();
-    const mN = (monthNames[lang]||monthNames.KR)[parseInt(parts[1])-1];
-    const dowN = (dowNames[lang]||dowNames.KR)[dow];
+    const mN = (_CAL_MONTH_NAMES_SHORT[lang] || _CAL_MONTH_NAMES_SHORT.KR)[parseInt(parts[1])-1];
+    const dowN = (_CAL_DOW_NAMES[lang] || _CAL_DOW_NAMES.KR)[dow];
     const isToday = dateStr === todayStr;
     const isSun = dow === 0, isSat = dow === 6;
     const todayCls = isToday ? ' today-group' : '';
@@ -7586,31 +8087,22 @@ buildSongNav();
   function renderRows(subtypes, parentCount, color) {
     return subtypes.map(function (s) {
       var sp  = pct(s.count, parentCount);
-      var bar = '<div style="height:3px;background:var(--dim);border-radius:2px;overflow:hidden;margin-top:3px;">'
-              + '<div style="height:100%;width:' + sp + '%;background:' + color + ';border-radius:2px;"></div></div>';
+      var bar = '<div class="chart-row-bar-wrap"><div class="chart-row-bar-fill" style="width:' + sp + '%;background:' + color + ';"></div></div>';
       if (s.channels) {
-        var cid   = 'extcat_' + s.label.replace(/\s+/g, '_');
+        var cid = 'extcat_' + s.label.replace(/\s+/g, '_');
         var chRows = s.channels.map(function (ch) {
-          return '<div style="padding:4px 0 4px 10px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:6px;">'
-            + '<span style="font-size:0.64rem;color:var(--muted);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">· ' + ch.label + '</span>'
-            + '<span style="font-size:0.62rem;color:var(--muted);flex-shrink:0;">' + ch.count + '개</span>'
-            + '</div>';
+          return '<div class="chart-ch-item"><span class="chart-ch-name">· ' + ch.label + '</span><span class="chart-ch-count">' + ch.count + '개</span></div>';
         }).join('');
-        return '<div style="border-bottom:1px solid var(--border);">'
-          + '<div onclick="(function(el){var c=document.getElementById(\'' + cid + '\');var open=c.style.display!==\'none\';c.style.display=open?\'none\':\'block\';el.querySelector(\'.cat-arrow\').style.transform=open?\'rotate(0deg)\':\'rotate(90deg)\'})(this)"'
-          + ' style="padding:6px 0;display:flex;align-items:center;cursor:pointer;gap:6px;">'
-          + '<span class="cat-arrow" style="font-size:0.6rem;color:var(--muted);transition:transform 0.18s;display:inline-block;">▶</span>'
-          + '<span style="font-size:0.7rem;color:var(--text);flex:1;">' + s.label + '</span>'
-          + '<span style="font-size:0.65rem;color:var(--muted);flex-shrink:0;">' + s.count + '개 · ' + sp + '%</span>'
+        return '<div class="chart-cat-item">'
+          + '<div class="chart-cat-toggle" onclick="(function(el){var c=document.getElementById(\'' + cid + '\');var open=c.style.display!==\'none\';c.style.display=open?\'none\':\'block\';el.querySelector(\'.chart-cat-arrow\').style.transform=open?\'rotate(0deg)\':\'rotate(90deg)\'})(this)">'
+          + '<span class="chart-cat-arrow">▶</span>'
+          + '<span class="chart-cat-label">' + s.label + '</span>'
+          + '<span class="chart-cat-count">' + s.count + '개 · ' + sp + '%</span>'
           + '</div>' + bar
           + '<div id="' + cid + '" style="display:none;">' + chRows + '</div>'
           + '</div>';
       }
-      return '<div style="padding:5px 0;border-bottom:1px solid var(--border);">'
-        + '<div style="display:flex;justify-content:space-between;align-items:center;">'
-        + '<span style="font-size:0.68rem;color:var(--text);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">' + s.label + '</span>'
-        + '<span style="font-size:0.65rem;color:var(--muted);flex-shrink:0;margin-left:6px;">' + s.count + '개 · ' + sp + '%</span>'
-        + '</div>' + bar + '</div>';
+      return '<div class="chart-row-item"><div class="chart-row-head"><span class="chart-row-name">' + s.label + '</span><span class="chart-row-count">' + s.count + '개 · ' + sp + '%</span></div>' + bar + '</div>';
     }).join('');
   }
 
@@ -7640,13 +8132,13 @@ buildSongNav();
     legendEl.style.display = 'none';
 
     innerEl.innerHTML =
-        '<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px;">'
-      + '<div style="width:10px;height:10px;border-radius:3px;background:' + d.color + ';flex-shrink:0;"></div>'
-      + '<span style="font-size:0.72rem;font-weight:600;color:var(--text);">' + d.label + '</span>'
-      + '<button onclick="aboutChartSelect(\'' + key + '\')" style="margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.9rem;padding:2px 4px;line-height:1;" title="닫기">✕</button>'
+        '<div class="chart-detail-header">'
+      + '<div class="chart-detail-dot" style="background:' + d.color + ';"></div>'
+      + '<span class="chart-detail-label">' + d.label + '</span>'
+      + '<button class="chart-detail-close-btn" onclick="aboutChartSelect(\'' + key + '\')" title="닫기">✕</button>'
       + '</div>'
-      + '<div style="font-size:0.67rem;color:var(--muted);margin-bottom:8px;line-height:1.55;">' + d.desc + '</div>'
-      + '<div style="font-size:0.7rem;font-weight:600;color:' + d.color + ';margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);">총 ' + d.count + '개 · 전체의 ' + pct(d.count, _total) + '%</div>'
+      + '<div class="chart-detail-desc">' + d.desc + '</div>'
+      + '<div class="chart-detail-total" style="color:' + d.color + ';">총 ' + d.count + '개 · 전체의 ' + pct(d.count, _total) + '%</div>'
       + renderRows(d.subtypes, d.count, d.color);
   };
 
@@ -7705,13 +8197,11 @@ buildSongNav();
 
     legendEl.innerHTML = _data.map(function (d) {
       var p = pct(d.count, _total);
-      return '<div style="display:flex;align-items:center;gap:10px;cursor:pointer;border-radius:8px;padding:6px 8px;transition:background 0.15s;"'
-        + ' onmouseenter="this.style.background=\'var(--card-h)\'" onmouseleave="this.style.background=\'transparent\'"'
-        + ' onclick="aboutChartSelect(\'' + d.key + '\')">'
-        + '<div style="width:12px;height:12px;border-radius:3px;background:' + d.color + ';flex-shrink:0;"></div>'
+      return '<div class="chart-legend-item" onclick="aboutChartSelect(\'' + d.key + '\')">'
+        + '<div class="chart-legend-dot" style="background:' + d.color + ';"></div>'
         + '<div style="flex:1;min-width:0;">'
-        + '<div style="font-size:0.72rem;font-weight:500;color:var(--text);">' + d.label + '</div>'
-        + '<div style="font-size:0.62rem;color:var(--muted);">' + d.count + '개 · ' + p + '%</div>'
+        + '<div class="chart-legend-name">' + d.label + '</div>'
+        + '<div class="chart-legend-sub">' + d.count + '개 · ' + p + '%</div>'
         + '</div></div>';
     }).join('');
   }
@@ -7911,18 +8401,20 @@ function updateMobileNav(section) {
     songs: 'mnSongs', content: 'mnContent', live: 'mnLive',
     external: 'mnExternal', bookmark: 'mnBookmark'
   };
-  document.querySelectorAll('.mob-nav-btn').forEach(b => b.classList.remove('active'));
+  _allMobNavBtns.forEach(b => b.classList.remove('active'));
   const indicator = _elNavIndicator;
   if (bottomMap[section]) {
     const btn = document.getElementById(bottomMap[section]);
     if (btn) {
       btn.classList.add('active');
       if (indicator && _elMobileBottomNav) {
-        const navRect = _elMobileBottomNav.getBoundingClientRect();
-        const btnRect = btn.getBoundingClientRect();
-        indicator.style.left = (btnRect.left - navRect.left) + 'px';
-        indicator.style.width = btnRect.width + 'px';
-        indicator.style.opacity = '1';
+        requestAnimationFrame(() => {
+          const navRect = _elMobileBottomNav.getBoundingClientRect();
+          const btnRect = btn.getBoundingClientRect();
+          indicator.style.left = (btnRect.left - navRect.left) + 'px';
+          indicator.style.width = btnRect.width + 'px';
+          indicator.style.opacity = '1';
+        });
       }
     }
   } else {
@@ -7936,7 +8428,7 @@ function updateMobileNav(section) {
     schedule: 'dSchedule',
     news: 'dNews',
   };
-  document.querySelectorAll('.drawer-item').forEach(b => b.classList.remove('active'));
+  _allDrawerItems.forEach(b => b.classList.remove('active'));
   if (drawerMap[section]) {
     const btn = document.getElementById(drawerMap[section]);
     if (btn) btn.classList.add('active');
