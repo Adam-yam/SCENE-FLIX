@@ -350,7 +350,7 @@ body {
 }
 
 header {
-  padding: 40px 40px 32px;
+  padding: 12px 40px 10px;
   text-align: center;
   border-bottom: 1px solid var(--border);
   background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(224,212,192,0.06) 0%, transparent 70%);
@@ -358,7 +358,7 @@ header {
 }
 
 .wordmark-img {
-  height: 48px;
+  height: 120px;
   width: auto;
   object-fit: contain;
   display: block;
@@ -606,7 +606,7 @@ header {
   color: var(--text);
   font-family: 'Inter', sans-serif;
   font-size: 0.75rem;
-  padding: 8px 80px 8px 36px;
+  padding: 8px 46px 8px 36px;
   outline: none;
   transition: border-color 0.15s, background 0.15s;
   box-sizing: border-box;
@@ -621,7 +621,7 @@ header {
 }
 #searchClear {
   position: absolute;
-  right: 8px;
+  right: 42px;
   background: none;
   border: none;
   cursor: pointer;
@@ -639,12 +639,32 @@ header {
 #searchClear svg { width: 12px; height: 12px; display: block; }
 #searchResultCount {
   position: absolute;
-  right: 34px;
+  right: 90px;
   font-size: 0.65rem;
   color: var(--muted);
   pointer-events: none;
   white-space: nowrap;
 }
+#searchSubmit {
+  position: absolute;
+  right: 6px;
+  height: calc(100% - 8px);
+  width: 30px;
+  padding: 0;
+  background: var(--accent);
+  border: none;
+  border-radius: 5px;
+  color: var(--bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.15s;
+  z-index: 1;
+}
+#searchSubmit:hover { opacity: 0.85; }
+#searchSubmit svg { width: 12px; height: 12px; flex-shrink: 0; }
 
 .grid-wrap {
   max-width: 1280px;
@@ -1349,9 +1369,9 @@ header {
 }
 
 @media (max-width: 700px) {
-  header { padding: 24px 16px 38px; }
-  .wordmark-img { height: 38px; }
-  .tagline { font-size: 0.6rem; margin-top: 5px; }
+  header { padding: 24px 16px 10px; min-height: 117px; display: flex; flex-direction: column; justify-content: space-between; }
+  .wordmark-img { width: 100%; height: auto; flex-shrink: 0; object-fit: contain; }
+  .tagline { font-size: 0.6rem; margin-top: 0; padding-bottom: 0; flex-shrink: 0; min-height: 0; }
   #themeToggle { right: 12px; font-size: 0.62rem; padding: 4px 8px; }
   #scrollTop { bottom: 96px; right: 16px; width: 36px; height: 36px; }
 
@@ -1412,6 +1432,8 @@ header {
 
   .search-bar { padding: 10px 12px 10px; }
   .search-input-wrap { max-width: 100%; }
+  #searchSubmit span { display: none; }
+  #searchSubmit { padding: 0 10px; gap: 0; }
 
   .grid-wrap { padding: 12px 10px calc(60px + var(--safe-bottom)); }
   .video-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
@@ -1714,7 +1736,7 @@ header {
   }
 
   header {
-    padding: 28px 20px 36px !important;
+    padding: 24px 20px 10px !important;
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -2770,6 +2792,11 @@ header {
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
+      <button id="searchSubmit" onclick="submitSearch()" title="검색">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
     </div>
   </div>
 </div>
@@ -3146,7 +3173,8 @@ header {
       </div>
       <p style="font-size:0.64rem; color:var(--muted); line-height:1.9; text-align:center; opacity:0.55; margin:4px 0 0;">
         © 2025 May_ · Fan-made, non-commercial · All rights belong to their respective owners<br>
-        © The Muze Entertainment · © RESCENE
+        © The Muze Entertainment · © RESCENE<br>
+        Logo illustration by <a href="https://www.instagram.com/baa_kyeon" target="_blank" rel="noopener" style="color:inherit; text-decoration:underline; text-underline-offset:2px;">@baa_kyeon</a> · used with permission
       </p>
     </div>
 
@@ -3267,6 +3295,7 @@ window._i18n = {
     sort_newest:          '최신순',
     sort_oldest:          '오래된순',
     search_placeholder:   '제목, 카테고리, 채널명으로 검색...',
+    search_btn:           '검색',
     filter_all:           '전체',
     filter_all_members:   '전원',
     filter_music:         '음악방송',
@@ -3324,6 +3353,7 @@ window._i18n = {
     sort_newest:          '新しい順',
     sort_oldest:          '古い順',
     search_placeholder:   'タイトル・カテゴリ・チャンネルで検索...',
+    search_btn:           '検索',
     filter_all:           '全て',
     filter_all_members:   '全員',
     filter_music:         '音楽番組',
@@ -3381,6 +3411,7 @@ window._i18n = {
     sort_newest:          'Newest',
     sort_oldest:          'Oldest',
     search_placeholder:   'Search by title, category or channel...',
+    search_btn:           'Search',
     filter_all:           'All',
     filter_all_members:   'All Members',
     filter_music:         'Music Show',
@@ -3457,6 +3488,7 @@ function setLang(lang) {
   try { localStorage.setItem('rescene-lang', lang); } catch {}
 
   if (curSection === 'live') {
+    _liveNavBuilt = false;
     buildLiveNav();
     buildLiveGrid();
 
@@ -3825,6 +3857,10 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'jcGb3UpbdwI': '2026.06.09',
+  'I0JzyK2eTzI': '2026.06.08',
+  'EXFdsa8y8os': '6월 8일',
+  'jR3dAv6Qkfs': '2024.05.17',
   'w3PWN_xnLKU': '2026.01.23',
   'O_QATiHzjK4': '6월 8일',
   'o4ZB_NVoCuw': '2026.01.24',
@@ -3969,7 +4005,6 @@ const DATE_MAP = {
   'Ihsh9VRZLlo': '2025.09.17',
   'zdv19CZ1ILI': '2026.01.05',
   'nBWg9eWMbfc': '2026.03.19',
-  'BV4CrS9QdwU': '2025.07.09',
   'f94PG5sprsc': '2024.08.29',
   '6GciHLMdoe4': '2024.08.30',
   'nUpfK1s1JDU': '2025.07.10',
@@ -3978,6 +4013,7 @@ const DATE_MAP = {
   'hpCawkfQN54': '2025.10.02',
   '2VT7VGZckHw': '2025.07.02',
   '9Ct1B5lxfy4': '2025.07.14',
+
   'i3BCs-IcIl4': '5월 25일',
   'HRD4cPKvymU': '2024.10.10',
   'LmP-0bJ1EZ0': '2025.05.21',
@@ -4681,6 +4717,8 @@ const CARD_PREFIXES = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-', 'avc-'];
 function openVideo(e, vid) {
   e.preventDefault();
 
+  if (e.target.closest('.bm-btn') || e.target.closest('.share-btn')) return;
+
   if (_elDrawer && _elDrawer.classList.contains('open')) {
     closeDrawer();
     return;
@@ -4693,9 +4731,14 @@ function openVideo(e, vid) {
   } else {
     const appUrl = `vnd.youtube://${vid}`;
     let left = false;
-    window.addEventListener('blur', () => { left = true; }, { once: true });
+    let fallbackTimer = null;
+    const onBlur = () => { left = true; clearTimeout(fallbackTimer); };
+    window.addEventListener('blur', onBlur, { once: true });
     window.location.href = appUrl;
-    setTimeout(() => { if (!left) window.open(webUrl, '_blank', 'noopener'); }, 1200);
+    fallbackTimer = setTimeout(() => {
+      window.removeEventListener('blur', onBlur);
+      if (!left) window.open(webUrl, '_blank', 'noopener');
+    }, 1200);
   }
 
   try { localStorage.setItem('rescene-last-watched', vid); } catch {}
@@ -5083,8 +5126,14 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트' };
+const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함' };
 const EXTERNAL_DATA = {
+  norejalham: [
+    { vid: 'jR3dAv6Qkfs', url: 'https://youtu.be/jR3dAv6Qkfs', date: '2024.05.17' },
+  ],
+  dispatch: [
+    { vid: 'I0JzyK2eTzI', url: 'https://youtu.be/I0JzyK2eTzI', date: '2026.06.08' },
+  ],
   dadok: [
     { vid: 'ApxYtJl-qek', url: 'https://youtu.be/ApxYtJl-qek', date: '2026.06.06' },
   ],
@@ -5118,6 +5167,7 @@ const EXTERNAL_DATA = {
     { vid: 'fHi9yZNLJVQ', url: 'https://youtu.be/fHi9yZNLJVQ', date: '2025.07.31' },
   ],
   yoohoo: [
+    { vid: 'jcGb3UpbdwI', url: 'https://youtu.be/jcGb3UpbdwI', date: '2026.06.09' },
     { vid: 'IGSdLavpcwE', url: 'https://youtu.be/IGSdLavpcwE', date: '2025.06.29' },
   ],
   madein: [
@@ -5439,8 +5489,8 @@ const EXTERNAL_DATA = {
   ],
   studiokkok: [
     { vid: 'w3PWN_xnLKU', url: 'https://youtu.be/w3PWN_xnLKU', date: '2026.01.23' },
-    { vid: 'LTmcHWbUcBw', url: 'https://youtu.be/LTmcHWbUcBw', date: '2026.06.05' },
     { vid: 'I-NAFhupR1s', url: 'https://youtu.be/I-NAFhupR1s', date: '2026.05.29' },
+    { vid: 'LTmcHWbUcBw', url: 'https://youtu.be/LTmcHWbUcBw', date: '2026.06.05' },
     { vid: '6pMUeLI4hAM', url: 'https://www.youtube.com/watch?v=6pMUeLI4hAM', date: '2025.08.13' },
     { vid: '0MDOY5m-Xa4', url: 'https://www.youtube.com/watch?v=0MDOY5m-Xa4', date: '2025.08.15' },
     { vid: 'FkzlNowaWOY', url: 'https://www.youtube.com/watch?v=FkzlNowaWOY', date: '2025.08.29' },
@@ -5530,9 +5580,9 @@ const EXTERNAL_DATA = {
 };
 const VID_TO_EXTERNAL_KEY = {};
 const EXTERNAL_CATS = {
-  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon'] },
+  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon','norejalham'] },
   radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae','billie','riswell'] },
-  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool','roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging','hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok'] },
+  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool','roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging','hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok','dispatch'] },
   interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview','spotify'] },
 };
 const EXTERNAL_CAT_KEYS = Object.keys(EXTERNAL_CATS);
@@ -5550,6 +5600,12 @@ for (const key of EXTERNAL_KEYS) {
 
     if (!item.date && DATE_MAP[item.vid]) item.date = DATE_MAP[item.vid];
   }
+}
+
+const _EXTERNAL_TOTAL_COUNT = EXTERNAL_KEYS.reduce((s, k) => s + EXTERNAL_DATA[k].length, 0);
+const _EXTERNAL_CAT_COUNT_MAP = {};
+for (const cat of EXTERNAL_CAT_KEYS) {
+  _EXTERNAL_CAT_COUNT_MAP[cat] = EXTERNAL_CATS[cat].keys.reduce((s, k) => s + (EXTERNAL_DATA[k] ? EXTERNAL_DATA[k].length : 0), 0);
 }
 
 const _elSearchBar         = document.getElementById('searchBar');
@@ -5574,7 +5630,7 @@ const _elCalDetail         = document.getElementById('calDetail');
 const _elCalMonthTitle     = document.getElementById('calMonthTitle');
 const _elCalGrid           = document.getElementById('calGrid');
 
-const _SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','memberMode','linksMode','bookmarkMode','aboutMode','scheduleMode','newsMode','grid-wrap-el','liveGrid'];
+const _SECTION_EL_IDS = ['allvideosMode','songMode','contentMode','liveMode','externalMode','fantubeMode','linksMode','bookmarkMode','aboutMode','scheduleMode','newsMode','grid-wrap-el','liveGrid'];
 const _SECTION_EL_CACHE = Object.fromEntries(
   _SECTION_EL_IDS.map(id => [id, document.getElementById(id)])
 );
@@ -5590,16 +5646,27 @@ let curContentCat = 'all';
 let curExternal = 'all';
 let curExternalCat = 'all';
 
+let _contentNavBuilt = false;
+
 function buildContentNav() {
   const nav = document.getElementById('contentNav');
-  const cats = CONTENT_DATA.map(c => c.category);
-  const totalCnt = CONTENT_ITEMS.length;
-  let html = `<button class="song-tab ${curContentCat === 'all' ? 'active' : ''}" onclick="setContentCat(this,'all')">ALL<span class="cnt">${totalCnt}</span></button>`;
-  html += cats.map(c => {
-    const cnt = _CONTENT_COUNT_MAP[c] || 0;
-    return `<button class="song-tab ${curContentCat === c ? 'active' : ''}" onclick="setContentCat(this,'${c.replace(/'/g,"&#39;")}')">${c}<span class="cnt">${cnt}</span></button>`;
-  }).join('');
-  nav.innerHTML = html;
+  if (!nav) return;
+
+  if (!_contentNavBuilt) {
+    const cats = CONTENT_DATA.map(c => c.category);
+    const totalCnt = CONTENT_ITEMS.length;
+    let html = `<button class="song-tab" data-cc="all" onclick="setContentCat(this,'all')">ALL<span class="cnt">${totalCnt}</span></button>`;
+    html += cats.map(c => {
+      const cnt = _CONTENT_COUNT_MAP[c] || 0;
+      return `<button class="song-tab" data-cc="${c.replace(/"/g,'&quot;')}" onclick="setContentCat(this,'${c.replace(/'/g,"&#39;")}')">${c}<span class="cnt">${cnt}</span></button>`;
+    }).join('');
+    nav.innerHTML = html;
+    _contentNavBuilt = true;
+  }
+
+  nav.querySelectorAll('.song-tab[data-cc]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.cc === curContentCat);
+  });
 }
 
 function setContentCat(el, cat) {
@@ -5607,6 +5674,7 @@ function setContentCat(el, cat) {
   document.querySelectorAll('#contentNav .song-tab').forEach(t => t.classList.remove('active'));
   el.classList.add('active');
   buildGrid();
+  syncSubSidebar();
 }
 
 function buildContentCard(item, delay) {
@@ -5649,8 +5717,10 @@ async function _fetchOembed(url, vid) {
 
 async function loadCardMetas(items, mode) {
   const unloaded = items.filter(i => !i.loaded);
+  const expectedSection = mode === 'content' ? 'content' : 'external';
   const CHUNK = 5;
   for (let i = 0; i < unloaded.length; i += CHUNK) {
+    if (curSection !== expectedSection) return;
     const batch = unloaded.slice(i, i + CHUNK);
     await Promise.all(batch.map(async item => {
       const d = await _fetchOembed(item.url, item.vid);
@@ -5761,7 +5831,7 @@ function buildExternalChanBar() {
   const catKeys = _getExternalCatKeys(curExternalCat);
   let html = `<button class="type-btn${curExternal === 'all' ? ' active' : ''}" data-ec-ch="all" onclick="pickExternalChan(this,'all')">${t.filter_all || '전체'}</button>`;
   html += catKeys.map(key =>
-    `<button class="type-btn${curExternal === key ? ' active' : ''}" data-ec-ch="${key}" onclick="pickExternalChan(this,'${key}')">${EXTERNAL_LABELS[key]}</button>`
+    `<button class="type-btn${curExternal === key ? ' active' : ''}" data-ec-ch="${key}" onclick="pickExternalChan(this,'${key}')">${EXTERNAL_LABELS[key] || key}</button>`
   ).join('');
   bar.innerHTML = html;
 }
@@ -5907,23 +5977,34 @@ function buildFantubeGrid() {
 let curLiveYear   = 'all';
 let curLiveMember = 'all';
 
+let _liveNavBuilt = false;
+
 function buildLiveNav() {
   const nav = document.getElementById('liveNav');
-  const allCnt  = ALL_LIVE.length;
-  const cnt2024 = LIVE_DATA_2024.length;
-  const cnt2025 = LIVE_DATA_2025.length;
-  const cnt2026 = LIVE_DATA_2026.length;
-  const t = getCurrentT();
-  const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
-  function yearLabel(y) {
-    if (window._curLang === 'EN') return y;
-    return y + suffix;
+  if (!nav) return;
+
+  if (!_liveNavBuilt) {
+    const allCnt  = ALL_LIVE.length;
+    const cnt2024 = LIVE_DATA_2024.length;
+    const cnt2025 = LIVE_DATA_2025.length;
+    const cnt2026 = LIVE_DATA_2026.length;
+    const t = getCurrentT();
+    const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
+    function yearLabel(y) {
+      if (window._curLang === 'EN') return y;
+      return y + suffix;
+    }
+    let html = `<button class="song-tab" data-ly="all" onclick="pickLiveYear(this,'all')">ALL<span class="cnt">${allCnt}</span></button>`;
+    html     += `<button class="song-tab" data-ly="2024" onclick="pickLiveYear(this,'2024')">${yearLabel('2024')}<span class="cnt">${cnt2024}</span></button>`;
+    html     += `<button class="song-tab" data-ly="2025" onclick="pickLiveYear(this,'2025')">${yearLabel('2025')}<span class="cnt">${cnt2025}</span></button>`;
+    html     += `<button class="song-tab" data-ly="2026" onclick="pickLiveYear(this,'2026')">${yearLabel('2026')}<span class="cnt">${cnt2026}</span></button>`;
+    nav.innerHTML = html;
+    _liveNavBuilt = true;
   }
-  let html = `<button class="song-tab ${curLiveYear === 'all'  ? 'active' : ''}" onclick="pickLiveYear(this,'all')">ALL<span class="cnt">${allCnt}</span></button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2024' ? 'active' : ''}" onclick="pickLiveYear(this,'2024')">${yearLabel('2024')}<span class="cnt">${cnt2024}</span></button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2025' ? 'active' : ''}" onclick="pickLiveYear(this,'2025')">${yearLabel('2025')}<span class="cnt">${cnt2025}</span></button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2026' ? 'active' : ''}" onclick="pickLiveYear(this,'2026')">${yearLabel('2026')}<span class="cnt">${cnt2026}</span></button>`;
-  nav.innerHTML = html;
+
+  nav.querySelectorAll('.song-tab[data-ly]').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.ly === curLiveYear);
+  });
 }
 
 function pickLiveYear(el, year) {
@@ -6110,6 +6191,7 @@ const LIVE_DATA_2025 = [
 ];
 
 const LIVE_DATA_2026 = [
+  { vid:'EXFdsa8y8os', url:'https://youtu.be/EXFdsa8y8os', date:'6월 8일', members:['리브'], year:'2026' },
   { vid:'O_QATiHzjK4', url:'https://youtu.be/O_QATiHzjK4', date:'6월 8일', members:['리브','메이','제나'], year:'2026' },
   { vid:'i3BCs-IcIl4', url:'https://youtu.be/i3BCs-IcIl4', date:'5월 25일', members:['원이'], year:'2026' },
   { vid:'bClA2Os6vpE', url:'https://youtu.be/bClA2Os6vpE', date:'5월 23일', members:['제나'], year:'2026' },
@@ -6403,6 +6485,22 @@ function copyShareUrl(e, vid) {
     ta.select();
     document.execCommand('copy');
     document.body.removeChild(ta);
+    for (const p of CARD_PREFIXES) {
+      const card = document.getElementById(p + vid);
+      if (card) {
+        const btn = card.querySelector('.share-btn');
+        if (btn) {
+          btn.classList.add('share-done');
+          setTimeout(() => btn.classList.remove('share-done'), 1800);
+        }
+      }
+    }
+    const toast = document.getElementById('share-toast');
+    if (toast) {
+      toast.classList.add('show');
+      clearTimeout(_shareToastTimer);
+      _shareToastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
+    }
   });
 }
 
@@ -6436,7 +6534,7 @@ function buildBookmarkGrid() {
 
   _elGrid.innerHTML = unique.map((item, idx) => {
     const delay = `${Math.min(idx * (_isMobile ? 0.015 : 0.03), _isMobile ? 0.2 : 0.4)}s`;
-    return buildAllVideoCard(item, delay).replace(/id="avc-/g, 'id="bvc-');
+    return buildAllVideoCard(item, delay, 'bvc');
   }).join('');
 }
 
@@ -6650,6 +6748,11 @@ let _avObserver  = null;
 let _avSentinel  = null;
 
 let _unifiedVideoListCache = null;
+
+function _invalidateUnifiedCache() {
+  _unifiedVideoListCache = null;
+}
+
 function buildUnifiedVideoList() {
   if (_unifiedVideoListCache) return _unifiedVideoListCache;
   _unifiedVideoListCache = [
@@ -6734,21 +6837,19 @@ function buildAllVideosGrid() {
   if (_avLastSort === curSort && _avSorted.length === newSorted.length && _avLoaded === _avSorted.length) {
     const grid = _elGrid;
     const cards = Array.from(grid.querySelectorAll('.vcard[id^="avc-"]'));
-    const order = new Map(newSorted.map((item, i) => [item.vid, i]));
-    const sorted = cards.slice().sort((a, b) => {
-      const ai = order.get(a.id.replace('avc-', '')) ?? 0;
-      const bi = order.get(b.id.replace('avc-', '')) ?? 0;
-      return ai - bi;
-    });
-    const frag = document.createDocumentFragment();
-    sorted.forEach(el => frag.appendChild(el));
-    if (_avSentinel && _avSentinel.parentNode) {
-      grid.insertBefore(frag, _avSentinel);
-    } else {
+    if (cards.length === newSorted.length) {
+      const order = new Map(newSorted.map((item, i) => [item.vid, i]));
+      const sorted = cards.slice().sort((a, b) => {
+        const ai = order.get(a.id.replace('avc-', '')) ?? 0;
+        const bi = order.get(b.id.replace('avc-', '')) ?? 0;
+        return ai - bi;
+      });
+      const frag = document.createDocumentFragment();
+      sorted.forEach(el => frag.appendChild(el));
       grid.appendChild(frag);
+      if (curSearchQuery) applySearch();
+      return;
     }
-    if (curSearchQuery) applySearch();
-    return;
   }
 
   _avLastSort = curSort;
@@ -6778,7 +6879,8 @@ function buildAllVideosGrid() {
   if (curSearchQuery) applySearch();
 }
 
-function buildAllVideoCard(item, delay) {
+function buildAllVideoCard(item, delay, idPrefix) {
+  const pfx = idPrefix || 'avc';
   const tb = TYPE_BADGE[item.type] || 'tb-content';
   const tl = getTypeLabel(item.type);
   const m = item.meta || {};
@@ -6792,11 +6894,12 @@ function buildAllVideoCard(item, delay) {
       `<span class="ctag ${MEMBER_CLASS[mm] || ''}">${_ML2[mm] || mm}</span>`
     ).join('');
     const memberNames = item._liveItem.members.map(mm => _ML2[mm] || mm).join(' ');
+    const memberNamesOrig = item._liveItem.members.join(' ');
     const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="avc-title-${item.vid}">${videoTitle}</div>`
-      : `<div class="csong-multi" id="avc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
-    const initialSearch = (videoTitle + ' ' + dateStr + ' live ' + memberNames).toLowerCase();
-    return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${initialSearch.replace(/"/g,'&quot;')}">
+      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${videoTitle}</div>`
+      : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+    const initialSearch = (videoTitle + ' ' + dateStr + ' live ' + memberNames + ' ' + memberNamesOrig).toLowerCase();
+    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escAttr(initialSearch)}">
       ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">LIVE</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -6807,14 +6910,17 @@ function buildAllVideoCard(item, delay) {
   }
 
   if (item._src === 'main') {
+    const showLabel = m.show?.label || '';
+    const channel = m.channel || '';
+    const song = item._ref?.song || item.song || '';
     const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="avc-title-${item.vid}">${videoTitle}</div>`
-      : `<div class="csong-multi" id="avc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${videoTitle}</div>`
+      : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const tagsHtml = item.loaded
       ? `<div class="ctags"><span class="ctag tb-tag-${item.type}">♪ ${tl}</span></div>`
       : `<div class="ctags"><span class="skel skel-tag"></span></div>`;
-    const initialSearch = (videoTitle + ' ' + tl + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${initialSearch.replace(/"/g,'&quot;')}">
+    const initialSearch = (videoTitle + ' ' + tl + ' ' + showLabel + ' ' + channel + ' ' + song + ' ' + dateStr).toLowerCase();
+    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escAttr(initialSearch)}">
       ${buildThumbHtml(item.vid, `<span class="type-badge tb-songs">Songs</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -6828,13 +6934,13 @@ function buildAllVideoCard(item, delay) {
     const ref = item._ref;
     const categoryLabel = (ref.category === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : (ref.category || ''));
     const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="avc-title-${item.vid}">${videoTitle}</div>`
-      : `<div class="csong-multi" id="avc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${videoTitle}</div>`
+      : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const metaHtml = item.loaded
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + (ref.category || '') + ' ' + categoryLabel + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift tb-content" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${initialSearch.replace(/"/g,'&quot;')}">
+    return `<a class="vcard card-base hover-lift tb-content" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escAttr(initialSearch)}">
       ${buildThumbHtml(item.vid, `<span class="type-badge tb-content">${tl}</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -6848,13 +6954,13 @@ function buildAllVideoCard(item, delay) {
     const channelKey = VID_TO_EXTERNAL_KEY[item.vid] || '';
     const channelLabel = EXTERNAL_LABELS[channelKey] || channelKey;
     const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="avc-title-${item.vid}">${videoTitle}</div>`
-      : `<div class="csong-multi" id="avc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${videoTitle}</div>`
+      : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const metaHtml = item.loaded
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + channelLabel + ' ' + channelKey + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift tb-external" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${initialSearch.replace(/"/g,'&quot;')}">
+    return `<a class="vcard card-base hover-lift tb-external" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escAttr(initialSearch)}">
       ${buildThumbHtml(item.vid, `<span class="type-badge tb-external">외부컨텐츠</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -6865,7 +6971,7 @@ function buildAllVideoCard(item, delay) {
   }
 
   const initialSearch = (videoTitle + ' ' + tl + ' ' + dateStr).toLowerCase();
-  return `<a class="vcard card-base hover-lift ${tb}" id="avc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${initialSearch.replace(/"/g,'&quot;')}">
+  return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escAttr(initialSearch)}">
     ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
     <div class="cbody">
       <div class="csong-multi">${videoTitle}</div>
@@ -6874,25 +6980,46 @@ function buildAllVideoCard(item, delay) {
   </a>`;
 }
 
+let _countUpdateRaf = null;
+function _scheduleCountUpdate() {
+  if (_countUpdateRaf) return;
+  _countUpdateRaf = requestAnimationFrame(() => {
+    _countUpdateRaf = null;
+    if (!curSearchQuery) return;
+    const grid = curSection === 'allvideos' ? _elGrid : (curSection === 'live' ? document.getElementById('liveGridInner') : _elGrid);
+    if (!grid) return;
+    const countEl = document.getElementById('searchResultCount');
+    if (countEl) {
+      const total = Array.from(grid.querySelectorAll('.vcard')).filter(c => c.style.display !== 'none').length;
+      countEl.textContent = `${total}개`;
+    }
+  });
+}
+
 function _avUpdateCardSearch(vid, title, date, extra) {
-  const cardEl = document.getElementById(`avc-${vid}`);
-  if (!cardEl) return;
   const searchText = (title + ' ' + (date || '') + ' ' + (extra || '')).toLowerCase();
-  cardEl.setAttribute('data-search', searchText);
-  if (!curSearchQuery) return;
-  const q = curSearchQuery.toLowerCase();
-  const dateNorm = normalizeDateQuery(q.replace(/\s/g, ''));
-  let match;
-  if (dateNorm) {
-    match = date && date.includes(dateNorm);
-  } else {
-    match = searchText.includes(q);
-  }
-  cardEl.style.display = match ? '' : 'none';
-  if (match) {
-    _hlClear(cardEl);
-    _hlCard(cardEl, dateNorm || q);
-  }
+  [`avc-${vid}`, `bvc-${vid}`].forEach(id => {
+    const cardEl = document.getElementById(id);
+    if (!cardEl) return;
+    cardEl.setAttribute('data-search', searchText);
+    if (!curSearchQuery) return;
+    const q = curSearchQuery.toLowerCase();
+    const dateNorm = normalizeDateQuery(q.replace(/\s/g, ''));
+    let match;
+    if (dateNorm) {
+      match = !!(date && date.includes(dateNorm));
+    } else {
+      match = searchText.includes(q);
+    }
+    cardEl.style.display = match ? '' : 'none';
+    if (match) {
+      _hlClear(cardEl);
+      _hlCard(cardEl, dateNorm || q);
+    } else {
+      _hlClear(cardEl);
+    }
+  });
+  if (curSearchQuery) _scheduleCountUpdate();
 }
 
 async function loadAllVideosMetas(items) {
@@ -6923,7 +7050,9 @@ async function loadAllVideosMetas(items) {
       }
       if (tagsEl) tagsEl.innerHTML = `<span class="ctag tb-tag-${proxy.type}">♪ ${tl}</span>`;
       replaceSkeleton(ref);
-      _avUpdateCardSearch(proxy.vid, ref.meta.rawTitle || ref.song, ref.meta.date || '', tl);
+      const showLabel = ref.meta?.show?.label || '';
+      const channel = ref.meta?.channel || '';
+      _avUpdateCardSearch(proxy.vid, ref.meta.rawTitle || ref.song, ref.meta.date || '', tl + ' ' + showLabel + ' ' + channel + ' ' + (ref.song || ''));
     }));
   }
 
@@ -6965,7 +7094,7 @@ async function loadAllVideosMetas(items) {
       const lvcTitle = document.getElementById(`lvc-title-${proxy.vid}`);
       if (lvcTitle) lvcTitle.textContent = ref.title;
       const members = (proxy._liveItem && proxy._liveItem.members) ? proxy._liveItem.members.join(' ') : '';
-      _avUpdateCardSearch(proxy.vid, ref.title, proxy.meta.date || '', members);
+      _avUpdateCardSearch(proxy.vid, ref.title, proxy.meta.date || '', 'live ' + members);
     }));
   }
 }
@@ -6974,6 +7103,7 @@ async function loadMetas(items) {
   const unloaded = items.filter(i => !i.loaded);
   const CHUNK = 5;
   for (let i = 0; i < unloaded.length; i += CHUNK) {
+    if (curSection !== 'songs') return;
     const batch = unloaded.slice(i, i + CHUNK);
     await Promise.all(batch.map(async item => {
       item.meta = await fetchMeta(item.url, item.song, item.vid);
@@ -7015,7 +7145,7 @@ function replaceSkeleton(item) {
   vcEl.dataset.search = [m?.rawTitle || item.song, tl, showLabel, channel, dateStr].join(' ').toLowerCase();
 }
 
-const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', fantube:'secFantube', member:'secMember', links:'secLinks', bookmark:'secBookmark', about:'secAbout', schedule:'secSchedule', news:'secNews' };
+const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', fantube:'secFantube', links:'secLinks', bookmark:'secBookmark', about:'secAbout', schedule:'secSchedule', news:'secNews' };
 const _PICK_SECTION_EL_IDS = _SECTION_EL_IDS;
 const _PICK_SECTION_MAP = {
   allvideos:['allvideosMode','grid-wrap-el'],
@@ -7024,7 +7154,7 @@ const _PICK_SECTION_MAP = {
   live:     ['liveMode','liveGrid'],
   external: ['externalMode','grid-wrap-el'],
   fantube:  ['fantubeMode'],
-  member:   ['memberMode'],
+  member:   [],
   links:    ['linksMode'],
   bookmark: ['bookmarkMode','grid-wrap-el'],
   about:    ['aboutMode'],
@@ -7047,12 +7177,12 @@ function _replayAnim(selector, delayFn, animStr = '') {
     el.style.animationDelay = delayFn(i);
     el.style.animation = 'none';
   });
-  void els[0].offsetWidth;
+  void document.body.offsetWidth;
   els.forEach(el => { el.style.animation = animStr; });
 }
 
+let _restoreLastWatchedTimer = null;
 function pickSection(section, _fromPopState) {
-  const prevQuery = curSearchQuery;
   curSection = section;
   if (!_fromPopState) {
     const url = section === 'about' ? location.pathname : `${location.pathname}?tab=${section}`;
@@ -7075,15 +7205,13 @@ function pickSection(section, _fromPopState) {
   const isSearchable = _PICK_SEARCHABLE.includes(section);
   _elSearchBar.style.display = isSearchable ? '' : 'none';
 
-  if (!isSearchable || !prevQuery) {
-    clearSearch(true);
-  }
+  clearSearch(true);
 
   if (section === 'member') _replayAnim('.member-btn', i => `${i * 0.06}s`);
   if (section === 'links')  _replayAnim('.link-row',   i => `${Math.min(i * 0.04, 0.5)}s`);
   if (section === 'about')  _replayAnim('#aboutMode .links-wrap > div > *', i => `${i * 0.07}s`, 'fadeUp 0.35s ease both');
 
-  if (section === 'allvideos') buildAllVideosGrid();
+  if (section === 'allvideos') { _avLastSort = null; buildAllVideosGrid(); }
   else { _avDisconnectObserver(); }
   if (section === 'content' || section === 'songs') buildGrid();
   else _gridDisconnect();
@@ -7103,19 +7231,11 @@ function pickSection(section, _fromPopState) {
   if (section === 'schedule') buildCalendar();
   if (section === 'news') buildNewsGrid();
 
-  if (isSearchable && prevQuery) {
-    curSearchQuery = prevQuery;
-    const inp = document.getElementById('searchInput');
-    if (inp) inp.value = prevQuery;
-    const clearBtn = document.getElementById('searchClear');
-    if (clearBtn) clearBtn.style.display = 'flex';
-    applySearch();
-  }
-
   updateMobileNav(section);
   updateSubSidebar(section);
 
-  setTimeout(restoreLastWatched, 50);
+  clearTimeout(_restoreLastWatchedTimer);
+  _restoreLastWatchedTimer = setTimeout(restoreLastWatched, 50);
 }
 
 function updateSubSidebar(section) {
@@ -7146,6 +7266,7 @@ function updateSubSidebar(section) {
 
   if (section === 'songs') {
     html += renderSubSongTabs();
+    html += renderSubTypeBtns();
   } else if (section === 'content') {
     html += renderSubContentTabs();
   } else if (section === 'live') {
@@ -7225,11 +7346,9 @@ function renderSubExternalTabs() {
     const key = EXTERNAL_CATS[cat].i18nKey;
     return t[key] || EXTERNAL_CATS[cat].label;
   }
-  const totalCnt = EXTERNAL_KEYS.reduce((s, k) => s + EXTERNAL_DATA[k].length, 0);
-  let html = `<button class="song-tab ${curExternalCat === 'all' ? 'active' : ''}" onclick="pickExternalCatSub(this,'all')">ALL<span class="cnt">${totalCnt}</span></button>`;
+  let html = `<button class="song-tab ${curExternalCat === 'all' ? 'active' : ''}" onclick="pickExternalCatSub(this,'all')">ALL<span class="cnt">${_EXTERNAL_TOTAL_COUNT}</span></button>`;
   html += EXTERNAL_CAT_KEYS.map(cat => {
-    const catData = EXTERNAL_CATS[cat];
-    const cnt = catData.keys.reduce((s, k) => s + (EXTERNAL_DATA[k] ? EXTERNAL_DATA[k].length : 0), 0);
+    const cnt = _EXTERNAL_CAT_COUNT_MAP[cat] || 0;
     return `<button class="song-tab ${curExternalCat === cat ? 'active' : ''}" onclick="pickExternalCatSub(this,'${cat}')">${catLabel(cat)}<span class="cnt">${cnt}</span></button>`;
   }).join('');
   return html;
@@ -7298,10 +7417,28 @@ function setSort(dir) {
 }
 
 function onSearch(val) {
-  curSearchQuery = val.trim();
-  _elSearchClear.style.display = curSearchQuery ? 'flex' : 'none';
+  const hasVal = val.trim().length > 0;
+  _elSearchClear.style.display = hasVal ? 'flex' : 'none';
+}
+
+function submitSearch() {
+  const inp = document.getElementById('searchInput');
+  if (!inp) return;
+  const val = inp.value.trim();
+  curSearchQuery = val;
+  _elSearchClear.style.display = val ? 'flex' : 'none';
   clearTimeout(_searchDebounceTimer);
-  _searchDebounceTimer = setTimeout(applySearch, 150);
+  if (!val) {
+    const countEl = document.getElementById('searchResultCount');
+    if (countEl) countEl.textContent = '';
+    if (curSection === 'allvideos') { buildAllVideosGrid(); return; }
+    if (curSection === 'songs' || curSection === 'content') { buildGrid(); return; }
+    if (curSection === 'live') { buildLiveGrid(); return; }
+    if (curSection === 'external') { buildExternalGrid(); return; }
+    if (curSection === 'bookmark') { buildBookmarkGrid(); return; }
+    return;
+  }
+  applySearch();
 }
 
 (function () {
@@ -7309,13 +7446,15 @@ function onSearch(val) {
   if (!inp) return;
   let _composing = false;
   inp.addEventListener('compositionstart', function () { _composing = true; });
-  inp.addEventListener('compositionend', function (e) {
-    _composing = false;
+  inp.addEventListener('compositionend', function () { _composing = false; });
+  inp.addEventListener('input', function (e) {
     onSearch(e.target.value);
   });
-  inp.addEventListener('input', function (e) {
-    if (_composing) return;
-    onSearch(e.target.value);
+  inp.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !_composing) {
+      e.preventDefault();
+      submitSearch();
+    }
   });
 })();
 
@@ -7334,7 +7473,6 @@ function clearSearch(skipApply) {
     if (curSection === 'live') { buildLiveGrid(); return; }
     if (curSection === 'external') { buildExternalGrid(); return; }
     if (curSection === 'bookmark') { buildBookmarkGrid(); return; }
-    applySearch();
   }
 }
 
@@ -7371,6 +7509,10 @@ function _hlEscape(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
+function _escAttr(s) {
+  return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function _hlApply(el, q) {
   if (!el || el.querySelector('.skel')) return;
   const saved = el.getAttribute('data-hl-orig');
@@ -7386,6 +7528,7 @@ function _hlApply(el, q) {
 
 function _hlNode(node, re) {
   if (node.nodeType === 3) {
+    re.lastIndex = 0;
     const t = node.textContent;
     if (!re.test(t)) return;
     re.lastIndex = 0;
@@ -7415,89 +7558,26 @@ function _hlClear(card) {
   });
 }
 
-function applySearch() {
-  const q = curSearchQuery.toLowerCase();
+let _applySearchToken = 0;
 
-  const liveGrid = document.getElementById('liveGridInner');
-  const targetGrid = curSection === 'live' ? liveGrid : _elGrid;
-  if (!targetGrid) return;
-
-  if (curSection === 'allvideos' && q && _avLoaded < _avSorted.length) {
-    _avDisconnectObserver();
-    const frag = document.createDocumentFragment();
-    const remaining = _avSorted.slice(_avLoaded);
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = remaining.map((item, i) => {
-      const delay = `${Math.min((i % AV_PAGE_SIZE) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
-      return buildAllVideoCard(item, delay);
-    }).join('');
-    while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
-    _avLoaded = _avSorted.length;
-    if (_avSentinel && _avSentinel.parentNode) {
-      _elGrid.insertBefore(frag, _avSentinel);
-    } else {
-      _elGrid.appendChild(frag);
-    }
-    loadAllVideosMetas(remaining);
+function _flushRemaining(remaining, buildFn, container, sentinel, loadFn) {
+  if (!remaining.length) return;
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = remaining.map((item, i) => {
+    const delay = `${Math.min((i % 60) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
+    return buildFn(item, delay);
+  }).join('');
+  const frag = document.createDocumentFragment();
+  while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
+  if (sentinel && sentinel.parentNode) {
+    container.insertBefore(frag, sentinel);
+  } else {
+    container.appendChild(frag);
   }
+  if (loadFn) loadFn(remaining);
+}
 
-  if ((curSection === 'songs' || curSection === 'content') && q && _gridLoaded < _gridSorted.length) {
-    _gridDisconnect();
-    const frag = document.createDocumentFragment();
-    const remaining = _gridSorted.slice(_gridLoaded);
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = remaining.map((item, i) => {
-      const delay = `${Math.min((i % GRID_BATCH) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
-      return _gridSection === 'content' ? buildContentCard(item, delay) : buildCard(item, delay);
-    }).join('');
-    while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
-    _gridLoaded = _gridSorted.length;
-    if (_gridSentinel && _gridSentinel.parentNode) {
-      _elGrid.insertBefore(frag, _gridSentinel);
-    } else {
-      _elGrid.appendChild(frag);
-    }
-    if (_gridLoadFn) _gridLoadFn(remaining);
-  }
-
-  if (curSection === 'live' && q && _liveLoaded < _liveSorted.length) {
-    _liveDisconnect();
-    const frag = document.createDocumentFragment();
-    const remaining = _liveSorted.slice(_liveLoaded);
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = remaining.map((item, i) => {
-      const delay = `${Math.min((i % LIVE_BATCH) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
-      return buildLiveCard(item, delay);
-    }).join('');
-    while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
-    _liveLoaded = _liveSorted.length;
-    if (_liveSentinel && _liveSentinel.parentNode) {
-      liveGrid.insertBefore(frag, _liveSentinel);
-    } else {
-      liveGrid.appendChild(frag);
-    }
-    loadLiveTitles(remaining);
-  }
-
-  if (curSection === 'external' && q && _gridLoaded < _gridSorted.length) {
-    _gridDisconnect();
-    const frag = document.createDocumentFragment();
-    const remaining = _gridSorted.slice(_gridLoaded);
-    const wrapper = document.createElement('div');
-    wrapper.innerHTML = remaining.map((item, i) => {
-      const delay = `${Math.min((i % GRID_BATCH) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
-      return buildExternalCard(item, delay);
-    }).join('');
-    while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
-    _gridLoaded = _gridSorted.length;
-    if (_gridSentinel && _gridSentinel.parentNode) {
-      _elGrid.insertBefore(frag, _gridSentinel);
-    } else {
-      _elGrid.appendChild(frag);
-    }
-    if (_gridLoadFn) _gridLoadFn(remaining);
-  }
-
+function _applySearchFilter(targetGrid, q) {
   const cards = targetGrid.querySelectorAll('.vcard');
   let visible = 0;
   const dateNorm = normalizeDateQuery(q.replace(/\s/g, ''));
@@ -7540,9 +7620,7 @@ function applySearch() {
   });
 
   const countEl = document.getElementById('searchResultCount');
-  if (countEl) {
-    countEl.textContent = q ? `${visible}개` : '';
-  }
+  if (countEl) countEl.textContent = q ? `${visible}개` : '';
 
   const emptyId = 'searchEmptyMsg';
   let emptyEl = targetGrid.querySelector(`#${emptyId}`);
@@ -7551,12 +7629,87 @@ function applySearch() {
       emptyEl = document.createElement('div');
       emptyEl.id = emptyId;
       emptyEl.className = 'search-empty';
-      emptyEl.innerHTML = `<div class="ico">🔍</div><p>${q.length > 0 ? `"${q}"` : ''}에 대한 결과가 없습니다.</p><small>다른 키워드로 검색해 보세요.</small>`;
+      const ico = document.createElement('div');
+      ico.className = 'ico';
+      ico.textContent = '🔍';
+      const p = document.createElement('p');
+      if (q.length > 0) {
+        const quote = document.createElement('strong');
+        quote.textContent = `"${q}"`;
+        p.appendChild(quote);
+        p.appendChild(document.createTextNode('에 대한 결과가 없습니다.'));
+      } else {
+        p.textContent = '결과가 없습니다.';
+      }
+      const small = document.createElement('small');
+      small.textContent = '다른 키워드로 검색해 보세요.';
+      emptyEl.appendChild(ico);
+      emptyEl.appendChild(p);
+      emptyEl.appendChild(small);
       targetGrid.appendChild(emptyEl);
     }
   } else {
     if (emptyEl) emptyEl.remove();
   }
+}
+
+function applySearch() {
+  const q = curSearchQuery.toLowerCase();
+  const token = ++_applySearchToken;
+
+  const liveGrid = document.getElementById('liveGridInner');
+  const targetGrid = curSection === 'live' ? liveGrid : _elGrid;
+  if (!targetGrid) return;
+
+  if (!q) {
+    if (curSection === 'bookmark') {
+      buildBookmarkGrid();
+      return;
+    }
+    _applySearchFilter(targetGrid, q);
+    return;
+  }
+
+  if (curSection === 'allvideos' && _avLoaded < _avSorted.length) {
+    _avDisconnectObserver();
+    const remaining = _avSorted.slice(_avLoaded);
+    _avLoaded = _avSorted.length;
+    _flushRemaining(remaining, (item, delay) => buildAllVideoCard(item, delay), _elGrid, null, loadAllVideosMetas);
+  }
+
+  if ((curSection === 'songs' || curSection === 'content') && _gridLoaded < _gridSorted.length) {
+    _gridDisconnect();
+    const remaining = _gridSorted.slice(_gridLoaded);
+    _gridLoaded = _gridSorted.length;
+    const buildFn = _gridSection === 'content'
+      ? (item, delay) => buildContentCard(item, delay)
+      : (item, delay) => buildCard(item, delay);
+    _flushRemaining(remaining, buildFn, _elGrid, null, _gridLoadFn);
+  }
+
+  if (curSection === 'live' && _liveLoaded < _liveSorted.length) {
+    _liveDisconnect();
+    const remaining = _liveSorted.slice(_liveLoaded);
+    _liveLoaded = _liveSorted.length;
+    _flushRemaining(remaining, (item, delay) => buildLiveCard(item, delay), liveGrid, null, loadLiveTitles);
+  }
+
+  if (curSection === 'external' && _gridSection === 'external' && _gridLoaded < _gridSorted.length) {
+    _gridDisconnect();
+    const remaining = _gridSorted.slice(_gridLoaded);
+    _gridLoaded = _gridSorted.length;
+    _flushRemaining(remaining, (item, delay) => buildExternalCard(item, delay), _elGrid, null, _gridLoadFn);
+  }
+
+  if (curSection === 'bookmark') {
+    buildBookmarkGrid();
+    if (token !== _applySearchToken) return;
+    _applySearchFilter(_elGrid, q);
+    return;
+  }
+
+  if (token !== _applySearchToken) return;
+  _applySearchFilter(targetGrid, q);
 }
 
 function searchMember(name) {
@@ -7654,10 +7807,13 @@ function generateAnnivEvents() {
   return events;
 }
 
+let _baseScheduleData = [];
+
 function injectAnnivEvents() {
-  const existing = new Set(SCHEDULE_DATA.map(e => e.date + '|' + e.title));
-  SCHEDULE_DATA = SCHEDULE_DATA.filter(e => e.type !== 'anniv' || e._fixed);
-  for (const ev of generateAnnivEvents()) {
+  const annivEvents = generateAnnivEvents();
+  const existing = new Set(_baseScheduleData.map(e => e.date + '|' + e.title));
+  SCHEDULE_DATA = [..._baseScheduleData];
+  for (const ev of annivEvents) {
     if (!existing.has(ev.date + '|' + ev.title)) {
       SCHEDULE_DATA.push(ev);
     }
@@ -7674,14 +7830,13 @@ const _HOUR_KEY = (function() { const d = new Date(); return `${d.getFullYear()}
       return r.json();
     })
     .then(function(data) {
-      SCHEDULE_DATA = (data.events || []).map(function(ev) {
+      _baseScheduleData = (data.events || []).map(function(ev) {
         return {
           date:  ev.date  || '',
           title: ev.title || '',
           type:  ev.type  || 'notice',
           note:  ev.detail || ev.note || '',
           link:  ev.link  || '',
-          _fixed: true,
         };
       }).filter(function(ev) { return ev.date && ev.title; });
       injectAnnivEvents();
@@ -7690,6 +7845,7 @@ const _HOUR_KEY = (function() { const d = new Date(); return `${d.getFullYear()}
       }
     })
     .catch(function() {
+      _baseScheduleData = [];
       injectAnnivEvents();
       if (typeof buildCalendar === 'function' && curSection === 'schedule') {
         buildCalendar();
@@ -7908,12 +8064,12 @@ function calSelectDate(dateStr) {
       ? ev._memberColor
       : (SCHED_TYPE_COLOR[ev.type] || '#888');
     const dotStyle = `background:${evColor}`;
-    const linkHtml = ev.link ? `<a href="${ev.link}" target="_blank" rel="noopener" class="cal-detail-link">↗ 링크</a>` : '';
+    const linkHtml = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="cal-detail-link">↗ 링크</a>` : '';
     return `<div class="cal-detail-item">
       <div class="cal-dot" style="${dotStyle}"></div>
       <div class="cal-detail-text">
-        <div class="cal-detail-title">${ev.title}</div>
-        ${ev.note ? `<div class="cal-detail-meta">${ev.note}</div>` : ''}
+        <div class="cal-detail-title">${_escHtml(ev.title)}</div>
+        ${ev.note ? `<div class="cal-detail-meta">${_escHtml(ev.note)}</div>` : ''}
       </div>
       ${linkHtml}
     </div>`;
@@ -7997,14 +8153,14 @@ function renderSchedList() {
       const bar = `background:${evColor}`;
       const tl = (typeLabel[ev.type]||{})[lang] || ev.type;
       const tagStyle = `background:color-mix(in srgb, ${evColor} 18%, transparent);color:${evColor}`;
-      const link = ev.link ? `<a href="${ev.link}" target="_blank" rel="noopener" class="sched-item-link">↗ 링크</a>` : '';
+      const link = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="sched-item-link">↗ 링크</a>` : '';
       html += `<div class="sched-item">
         <div class="sched-item-bar" style="${bar}"></div>
         <div class="sched-item-body">
-          <div class="sched-item-title">${ev.title}</div>
+          <div class="sched-item-title">${_escHtml(ev.title)}</div>
           <div class="sched-item-meta">
             <span class="sched-item-type-tag" style="${tagStyle}">${tl}</span>
-            ${ev.note ? `<span>${ev.note}</span>` : ''}
+            ${ev.note ? `<span>${_escHtml(ev.note)}</span>` : ''}
           </div>
         </div>
         ${link}
