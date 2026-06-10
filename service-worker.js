@@ -1,4 +1,4 @@
-const CACHE = 'sceneflix-v2';
+const CACHE = 'sceneflix-v3';
 const SHELL = [
   './',
   './index.html',
@@ -27,6 +27,17 @@ self.addEventListener('fetch', e => {
 
   if (url.hostname.includes('youtube.com') || url.hostname.includes('ytimg.com') || url.hostname.includes('googleapis.com')) {
     e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+    return;
+  }
+
+  if (url.pathname === '/' || url.pathname.endsWith('index.html')) {
+    e.respondWith(
+      fetch(e.request).then(res => {
+        const clone = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, clone));
+        return res;
+      }).catch(() => caches.match(e.request))
+    );
     return;
   }
 
