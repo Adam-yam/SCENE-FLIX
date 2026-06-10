@@ -45,6 +45,20 @@ gtag('config', 'G-05C99P2DB9');
   --c-fullcam:  #d4c84a;
   --c-external: #7aaede;
 
+  --c-music-rgb:     110,198,192;
+  --c-mv-rgb:        192,112,144;
+  --c-itslive-rgb:   160,128,208;
+  --c-content-rgb:   128,184,112;
+  --c-onthespot-rgb: 224,144,80;
+  --c-fullcam-rgb:   212,200,74;
+  --c-external-rgb:  122,174,222;
+
+  --c-wonyi-rgb:  4,160,110;
+  --c-liv-rgb:    220,220,220;
+  --c-minami-rgb: 43,153,196;
+  --c-may-rgb:    236,210,91;
+  --c-zena-rgb:   186,146,219;
+
   --c-sched-broadcast: #a080d0;
   --c-sched-radio:     #7aaede;
   --c-sched-event:     #e09050;
@@ -76,7 +90,7 @@ gtag('config', 'G-05C99P2DB9');
   --border-h:rgba(0,0,0,0.15);
   --accent:  #3a3a3c;
   --text:    #1d1d1f;
-  --muted:   #6e6e73;
+  --muted:   #4a4a50;
   --dim:     #e5e5ea;
 
   --c-music:    #2a9a94;
@@ -105,16 +119,7 @@ gtag('config', 'G-05C99P2DB9');
 }
 
 [data-theme="light"] .wordmark-img {
-  filter: invert(1) drop-shadow(0 0 6px rgba(90,60,20,0.45)) drop-shadow(0 0 18px rgba(160,100,30,0.2));
-}
-
-#headerControls {
-  position: absolute;
-  bottom: 17px;
-  left: 40px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  filter: drop-shadow(0 0 6px rgba(0,0,0,0.45)) drop-shadow(0 0 18px rgba(0,0,0,0.18));
 }
 
 #themeToggle {
@@ -166,11 +171,6 @@ gtag('config', 'G-05C99P2DB9');
 }
 [data-theme="light"] .lang-btn.active {
   background: rgba(90,74,48,0.10);
-}
-@media (max-width: 600px) {
-  #headerControls {
-    display: none;
-  }
 }
 
 #scrollTop {
@@ -267,12 +267,14 @@ gtag('config', 'G-05C99P2DB9');
   padding: 60px 20px;
   color: var(--muted);
 }
-.bm-empty .ico   { font-size: 2rem;   margin-bottom: 14px; opacity: 0.25; }
-.bm-empty p      { font-size: 0.82rem; margin-bottom: 6px; }
-.bm-empty small  { font-size: 0.7rem;  opacity: 0.6; }
-.search-empty .ico { font-size: 1.8rem; margin-bottom: 12px; opacity: 0.25; }
-.search-empty p    { font-size: 0.82rem; margin-bottom: 4px; }
-.search-empty small{ font-size: 0.7rem;  opacity: 0.6; }
+.bm-empty .ico,
+.search-empty .ico,
+.empty .ico { font-size: 2rem; margin-bottom: 12px; opacity: 0.25; }
+.bm-empty p,
+.search-empty p,
+.empty p { font-size: 0.82rem; margin-bottom: 4px; }
+.bm-empty small,
+.search-empty small { font-size: 0.7rem; opacity: 0.6; }
 
 mark.sh {
   background: rgba(255, 210, 80, 0.28);
@@ -286,9 +288,6 @@ mark.sh {
   background: rgba(255, 180, 0, 0.22);
   color: #8a5e00;
 }
-.empty .ico      { font-size: 2rem;   margin-bottom: 12px; opacity: 0.3; }
-.empty p         { font-size: 0.8rem; }
-
 .vcard-tooltip {
   position: fixed;
   background: rgba(15,15,15,0.96);
@@ -418,12 +417,10 @@ header {
 .song-tab.active {
   color: var(--accent);
   border-bottom-color: var(--accent);
+  border-bottom-width: 3px;
   font-weight: 500;
 }
 [data-theme="light"] .song-tab.active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-  border-bottom-width: 3px;
   font-weight: 700;
 }
 @media (min-width: 701px) {
@@ -531,8 +528,16 @@ header {
 .type-btn.active[data-lm="전원"]   { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
 [data-theme="light"] .type-btn.active[data-lm="all"]  { color: var(--text); border-color: rgba(0,0,0,0.35); background: rgba(0,0,0,0.08); }
 [data-theme="light"] .type-btn.active[data-lm="전원"] { color: var(--text); border-color: rgba(0,0,0,0.35); background: rgba(0,0,0,0.08); }
+[data-theme="light"] .type-btn.active[data-t="all"]      { color: var(--accent); border-color: rgba(0,0,0,0.30); background: rgba(0,0,0,0.06); }
+[data-theme="light"] .type-btn.active[data-t="music"]    { background: rgba(42,154,148,0.12); }
+[data-theme="light"] .type-btn.active[data-t="mv"]       { background: rgba(160,64,96,0.12); }
+[data-theme="light"] .type-btn.active[data-t="itslive"]  { background: rgba(112,80,176,0.12); }
+[data-theme="light"] .type-btn.active[data-t="content"]  { background: rgba(74,138,52,0.12); }
+[data-theme="light"] .type-btn.active[data-t="onthespot"]{ background: rgba(192,104,32,0.12); }
+[data-theme="light"] .type-btn.active[data-t="fullcam"]  { background: rgba(168,154,16,0.12); }
 .type-btn.active[data-lm="원이"]   { color: var(--c-wonyi); border-color: var(--c-wonyi-dark); background: rgba(4,90,66,0.15); }
 .type-btn.active[data-lm="리브"]   { color: #e0e0e0; border-color: rgba(220,220,220,0.5); background: rgba(0,0,0,0.35); }
+[data-theme="light"] .type-btn.active[data-lm="리브"]    { color: #444; border-color: rgba(80,80,80,0.50); background: rgba(80,80,80,0.10); }
 .type-btn.active[data-lm="미나미"] { color: var(--c-minami); border-color: var(--c-minami);   background: rgba(43,153,196,0.12); }
 .type-btn.active[data-lm="메이"]   { color: var(--c-mei-dark); border-color: var(--c-mei);    background: rgba(236,210,91,0.12); }
 .type-btn.active[data-lm="제나"]   { color: var(--c-zena); border-color: var(--c-zena);       background: rgba(186,146,219,0.12); }
@@ -697,20 +702,20 @@ header {
     background: var(--card-h);
   }
 
-  .vcard.tb-music:hover   { border-color: rgba(110,198,192,0.5);  box-shadow: 0 4px 24px rgba(110,198,192,0.15), 0 0 0 1px rgba(110,198,192,0.15); }
-  .vcard.tb-mv:hover      { border-color: rgba(192,112,144,0.5);  box-shadow: 0 4px 24px rgba(192,112,144,0.15), 0 0 0 1px rgba(192,112,144,0.15); }
-  .vcard.tb-itslive:hover { border-color: rgba(160,128,208,0.5);  box-shadow: 0 4px 24px rgba(160,128,208,0.15), 0 0 0 1px rgba(160,128,208,0.15); }
-  .vcard.tb-content:hover { border-color: rgba(128,184,112,0.5);  box-shadow: 0 4px 24px rgba(128,184,112,0.15), 0 0 0 1px rgba(128,184,112,0.15); }
-  .vcard.tb-onthespot:hover { border-color: rgba(224,144,80,0.5); box-shadow: 0 4px 24px rgba(224,144,80,0.15), 0 0 0 1px rgba(224,144,80,0.15); }
-  .vcard.tb-fullcam:hover   { border-color: rgba(212,200,74,0.5); box-shadow: 0 4px 24px rgba(212,200,74,0.15), 0 0 0 1px rgba(212,200,74,0.15); }
-  .vcard.tb-external:hover  { border-color: rgba(122,174,222,0.5); box-shadow: 0 4px 24px rgba(122,174,222,0.15), 0 0 0 1px rgba(122,174,222,0.15); }
+  .vcard.tb-music:hover     { border-color: rgba(var(--c-music-rgb),0.5);     box-shadow: 0 4px 24px rgba(var(--c-music-rgb),0.15),     0 0 0 1px rgba(var(--c-music-rgb),0.15); }
+  .vcard.tb-mv:hover        { border-color: rgba(var(--c-mv-rgb),0.5);        box-shadow: 0 4px 24px rgba(var(--c-mv-rgb),0.15),        0 0 0 1px rgba(var(--c-mv-rgb),0.15); }
+  .vcard.tb-itslive:hover   { border-color: rgba(var(--c-itslive-rgb),0.5);   box-shadow: 0 4px 24px rgba(var(--c-itslive-rgb),0.15),   0 0 0 1px rgba(var(--c-itslive-rgb),0.15); }
+  .vcard.tb-content:hover   { border-color: rgba(var(--c-content-rgb),0.5);   box-shadow: 0 4px 24px rgba(var(--c-content-rgb),0.15),   0 0 0 1px rgba(var(--c-content-rgb),0.15); }
+  .vcard.tb-onthespot:hover { border-color: rgba(var(--c-onthespot-rgb),0.5); box-shadow: 0 4px 24px rgba(var(--c-onthespot-rgb),0.15), 0 0 0 1px rgba(var(--c-onthespot-rgb),0.15); }
+  .vcard.tb-fullcam:hover   { border-color: rgba(var(--c-fullcam-rgb),0.5);   box-shadow: 0 4px 24px rgba(var(--c-fullcam-rgb),0.15),   0 0 0 1px rgba(var(--c-fullcam-rgb),0.15); }
+  .vcard.tb-external:hover  { border-color: rgba(var(--c-external-rgb),0.5);  box-shadow: 0 4px 24px rgba(var(--c-external-rgb),0.15),  0 0 0 1px rgba(var(--c-external-rgb),0.15); }
 
-  .vcard.lm-wonyi:hover  { border-color: rgba(4,160,110,0.55);  box-shadow: 0 4px 24px rgba(4,160,110,0.18),  0 0 0 1px rgba(4,160,110,0.18); }
-  .vcard.lm-liv:hover    { border-color: rgba(220,220,220,0.5);  box-shadow: 0 4px 24px rgba(200,200,200,0.15), 0 0 0 1px rgba(200,200,200,0.15); }
-  .vcard.lm-minami:hover { border-color: rgba(43,153,196,0.55);  box-shadow: 0 4px 24px rgba(43,153,196,0.18),  0 0 0 1px rgba(43,153,196,0.18); }
-  .vcard.lm-may:hover    { border-color: rgba(236,210,91,0.55);   box-shadow: 0 4px 24px rgba(236,210,91,0.18),  0 0 0 1px rgba(236,210,91,0.18); }
-  .vcard.lm-zena:hover   { border-color: rgba(186,146,219,0.55);  box-shadow: 0 4px 24px rgba(186,146,219,0.18), 0 0 0 1px rgba(186,146,219,0.18); }
-  .vcard.lm-all:hover    { border-color: rgba(255,255,255,0.3);   box-shadow: 0 4px 24px rgba(255,255,255,0.08), 0 0 0 1px rgba(255,255,255,0.08); }
+  .vcard.lm-wonyi:hover  { border-color: rgba(var(--c-wonyi-rgb),0.55);  box-shadow: 0 4px 24px rgba(var(--c-wonyi-rgb),0.18),  0 0 0 1px rgba(var(--c-wonyi-rgb),0.18); }
+  .vcard.lm-liv:hover    { border-color: rgba(var(--c-liv-rgb),0.5);     box-shadow: 0 4px 24px rgba(var(--c-liv-rgb),0.15),    0 0 0 1px rgba(var(--c-liv-rgb),0.15); }
+  .vcard.lm-minami:hover { border-color: rgba(var(--c-minami-rgb),0.55); box-shadow: 0 4px 24px rgba(var(--c-minami-rgb),0.18), 0 0 0 1px rgba(var(--c-minami-rgb),0.18); }
+  .vcard.lm-may:hover    { border-color: rgba(var(--c-may-rgb),0.55);    box-shadow: 0 4px 24px rgba(var(--c-may-rgb),0.18),    0 0 0 1px rgba(var(--c-may-rgb),0.18); }
+  .vcard.lm-zena:hover   { border-color: rgba(var(--c-zena-rgb),0.55);   box-shadow: 0 4px 24px rgba(var(--c-zena-rgb),0.18),   0 0 0 1px rgba(var(--c-zena-rgb),0.18); }
+  .vcard.lm-all:hover    { border-color: rgba(255,255,255,0.3);          box-shadow: 0 4px 24px rgba(255,255,255,0.08),         0 0 0 1px rgba(255,255,255,0.08); }
 
   .vcard:hover .thumb img { transform: scale(1.04); }
   .vcard:hover .play-ring { opacity: 1; }
@@ -724,13 +729,13 @@ header {
 .vcard.tb-fullcam   { background: rgba(212,200,74,0.13);  border-color: rgba(212,200,74,0.22);  }
 .vcard.tb-external  { background: rgba(122,174,222,0.13); border-color: rgba(122,174,222,0.22); }
 
-[data-theme="light"] .vcard.tb-music     { background: rgba(42,154,148,0.18);  border-color: rgba(42,154,148,0.50); box-shadow: 0 1px 4px rgba(42,154,148,0.10); }
-[data-theme="light"] .vcard.tb-mv        { background: rgba(160,64,96,0.18);   border-color: rgba(160,64,96,0.50);  box-shadow: 0 1px 4px rgba(160,64,96,0.10); }
-[data-theme="light"] .vcard.tb-itslive   { background: rgba(112,80,176,0.18);  border-color: rgba(112,80,176,0.50); box-shadow: 0 1px 4px rgba(112,80,176,0.10); }
-[data-theme="light"] .vcard.tb-content   { background: rgba(74,138,52,0.18);   border-color: rgba(74,138,52,0.50);  box-shadow: 0 1px 4px rgba(74,138,52,0.10); }
-[data-theme="light"] .vcard.tb-onthespot { background: rgba(192,104,32,0.18);  border-color: rgba(192,104,32,0.50); box-shadow: 0 1px 4px rgba(192,104,32,0.10); }
-[data-theme="light"] .vcard.tb-fullcam   { background: rgba(168,154,16,0.18);  border-color: rgba(168,154,16,0.50); box-shadow: 0 1px 4px rgba(168,154,16,0.10); }
-[data-theme="light"] .vcard.tb-external  { background: rgba(58,120,196,0.18);  border-color: rgba(58,120,196,0.50); box-shadow: 0 1px 4px rgba(58,120,196,0.10); }
+[data-theme="light"] .vcard.tb-music     { background: rgba(42,154,148,0.22);  border-color: rgba(42,154,148,0.60); box-shadow: 0 1px 4px rgba(42,154,148,0.12); }
+[data-theme="light"] .vcard.tb-mv        { background: rgba(160,64,96,0.22);   border-color: rgba(160,64,96,0.60);  box-shadow: 0 1px 4px rgba(160,64,96,0.12); }
+[data-theme="light"] .vcard.tb-itslive   { background: rgba(112,80,176,0.22);  border-color: rgba(112,80,176,0.60); box-shadow: 0 1px 4px rgba(112,80,176,0.12); }
+[data-theme="light"] .vcard.tb-content   { background: rgba(74,138,52,0.22);   border-color: rgba(74,138,52,0.60);  box-shadow: 0 1px 4px rgba(74,138,52,0.12); }
+[data-theme="light"] .vcard.tb-onthespot { background: rgba(192,104,32,0.22);  border-color: rgba(192,104,32,0.60); box-shadow: 0 1px 4px rgba(192,104,32,0.12); }
+[data-theme="light"] .vcard.tb-fullcam   { background: rgba(168,154,16,0.22);  border-color: rgba(168,154,16,0.60); box-shadow: 0 1px 4px rgba(168,154,16,0.12); }
+[data-theme="light"] .vcard.tb-external  { background: rgba(58,120,196,0.22);  border-color: rgba(58,120,196,0.60); box-shadow: 0 1px 4px rgba(58,120,196,0.12); }
 
 .vcard.lm-wonyi    { background: rgba(4,90,66,0.18);    border-color: rgba(4,160,110,0.22); }
 .vcard.lm-liv      { background: rgba(200,200,200,0.1);  border-color: rgba(220,220,220,0.2); }
@@ -739,12 +744,12 @@ header {
 .vcard.lm-zena     { background: rgba(186,146,219,0.15); border-color: rgba(186,146,219,0.22); }
 .vcard.lm-all      { background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.12); }
 
-[data-theme="light"] .vcard.lm-wonyi  { background: rgba(4,90,66,0.16);    border-color: rgba(4,160,110,0.45); box-shadow: 0 1px 4px rgba(4,160,110,0.10); }
-[data-theme="light"] .vcard.lm-liv    { background: rgba(80,80,80,0.14);    border-color: rgba(80,80,80,0.40);  box-shadow: 0 1px 4px rgba(80,80,80,0.08); }
-[data-theme="light"] .vcard.lm-minami { background: rgba(43,153,196,0.16);  border-color: rgba(43,153,196,0.45); box-shadow: 0 1px 4px rgba(43,153,196,0.10); }
-[data-theme="light"] .vcard.lm-may    { background: rgba(180,140,0,0.16);   border-color: rgba(180,140,0,0.45); box-shadow: 0 1px 4px rgba(180,140,0,0.10); }
-[data-theme="light"] .vcard.lm-zena   { background: rgba(140,90,200,0.16);  border-color: rgba(140,90,200,0.45); box-shadow: 0 1px 4px rgba(140,90,200,0.10); }
-[data-theme="light"] .vcard.lm-all    { background: rgba(0,0,0,0.04);       border-color: rgba(0,0,0,0.14); }
+[data-theme="light"] .vcard.lm-wonyi  { background: rgba(4,90,66,0.20);    border-color: rgba(4,160,110,0.55); box-shadow: 0 1px 4px rgba(4,160,110,0.12); }
+[data-theme="light"] .vcard.lm-liv    { background: rgba(80,80,80,0.18);    border-color: rgba(80,80,80,0.50);  box-shadow: 0 1px 4px rgba(80,80,80,0.10); }
+[data-theme="light"] .vcard.lm-minami { background: rgba(43,153,196,0.20);  border-color: rgba(43,153,196,0.55); box-shadow: 0 1px 4px rgba(43,153,196,0.12); }
+[data-theme="light"] .vcard.lm-may    { background: rgba(180,140,0,0.20);   border-color: rgba(180,140,0,0.55); box-shadow: 0 1px 4px rgba(180,140,0,0.12); }
+[data-theme="light"] .vcard.lm-zena   { background: rgba(140,90,200,0.20);  border-color: rgba(140,90,200,0.55); box-shadow: 0 1px 4px rgba(140,90,200,0.12); }
+[data-theme="light"] .vcard.lm-all    { background: rgba(0,0,0,0.05);       border-color: rgba(0,0,0,0.18); }
 
 .thumb {
   position: relative;
@@ -1122,123 +1127,7 @@ header {
   .fantube-grid { grid-template-columns: repeat(2, 1fr); }
 }
 
-.member-wrap {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 48px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
-}
 
-.member-desc {
-  font-size: 0.75rem;
-  color: var(--muted);
-  letter-spacing: 0.05em;
-}
-
-.member-btns {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  width: 100%;
-}
-
-.member-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  padding: 0;
-  border-radius: 10px;
-  border: 1px solid var(--border);
-  background: var(--card);
-  color: var(--text);
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  transition: transform 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
-  overflow: hidden;
-  position: relative;
-  animation: fadeUp 0.35s ease both;
-}
-
-@media (hover: hover) {
-  .member-btn:hover {
-    border-color: rgba(224,212,192,0.3);
-    transform: translateY(-3px);
-    background: var(--card-h);
-    box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(224,212,192,0.12);
-  }
-  .member-btn:hover .member-photo {
-    transform: scale(1.06);
-  }
-  .member-btn:hover .member-arrow {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.member-photo-wrap {
-  width: 100%;
-  aspect-ratio: 3/4;
-  overflow: hidden;
-  position: relative;
-}
-
-.member-photo-wrap::after {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 55%;
-  background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.4) 55%, transparent 100%);
-  pointer-events: none;
-}
-
-.member-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
-  display: block;
-}
-
-@media (hover: hover) {
-  .member-photo { transition: transform 0.5s ease; }
-}
-
-.member-name-wrap {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  padding: 14px 14px 14px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-}
-
-.member-name {
-  font-size: 0.88rem;
-  letter-spacing: 0.08em;
-  color: var(--text);
-  font-weight: 500;
-  text-shadow: 0 1px 6px rgba(0,0,0,0.6);
-}
-
-.member-arrow {
-  font-size: 0.65rem;
-  color: var(--accent);
-  opacity: 0;
-  transform: translateX(-4px);
-}
-
-@media (max-width: 700px) {
-  .member-wrap { padding: 28px 16px; }
-  .member-btns { grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .member-name { font-size: 0.75rem; }
-}
-
-@media (max-width: 400px) {
-  .member-btns { grid-template-columns: repeat(2, 1fr); }
-}
 
 .links-wrap {
   max-width: 860px;
@@ -1403,9 +1292,15 @@ header {
     background: var(--card);
   }
   .song-tab.active {
-    background: var(--accent);
-    color: var(--bg);
-    border-color: var(--accent);
+    background: rgba(200,200,204,0.12);
+    color: var(--accent);
+    border-color: rgba(200,200,204,0.45);
+    font-weight: 600;
+  }
+  [data-theme="light"] .song-tab.active {
+    background: rgba(58,58,60,0.10);
+    color: var(--accent);
+    border-color: rgba(58,58,60,0.40);
     font-weight: 600;
   }
   .song-tab .cnt { display: none; }
@@ -1444,8 +1339,6 @@ header {
   .cdate { font-size: 0.6rem; }
   .ctag  { font-size: 0.55rem; padding: 1px 5px; }
   .play-ring svg { width: 32px; height: 32px; padding: 9px 8px 9px 10px; }
-
-  .member-wrap { padding: 24px 12px; }
 
   .links-wrap { padding: 16px 12px calc(60px + var(--safe-bottom)); }
   .links-list { max-width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 7px; }
@@ -1662,7 +1555,7 @@ header {
     width: auto;
     filter: drop-shadow(0 0 4px rgba(255,255,255,0.4));
   }
-  [data-theme="light"] .drawer-logo { filter: invert(1) drop-shadow(0 0 4px rgba(90,60,20,0.4)); }
+  [data-theme="light"] .drawer-logo { filter: drop-shadow(0 0 4px rgba(0,0,0,0.4)); }
 
   .drawer-items {
     flex: 1;
@@ -1751,8 +1644,6 @@ header {
     padding: 3px;
     gap: 2px;
   }
-
-  #headerControls { display: none !important; }
 }
 
 @media (max-width: 700px) and (orientation: landscape) {
@@ -2088,7 +1979,6 @@ header {
   .search-bar,
   .grid-wrap,
   .fantube-wrap,
-  .member-wrap,
   .links-wrap {
     max-width: 1600px;
   }
@@ -2450,7 +2340,6 @@ header {
 .news-header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 .news-header-title { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; color: var(--accent); text-transform: uppercase; }
 .news-updated { font-size: 0.65rem; color: var(--muted); }
-.news-notice { display: flex; align-items: flex-start; gap: 7px; background: var(--surf); border: 1px solid var(--border); border-radius: 8px; padding: 9px 13px; margin-bottom: 22px; font-size: 0.68rem; color: var(--muted); line-height: 1.6; }
 .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
 .news-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: background 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s; cursor: pointer; }
 .news-card:hover { background: var(--card-h); border-color: var(--border-h); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
@@ -3439,7 +3328,6 @@ window._i18n = {
     about_contact2:       'We welcome any suggestions to help improve this page.',
     about_contact3:       'Feel free to share any thoughts or messages for the creator as well.',
     live_year_suffix:     '',
-    live_year_prefix:     '',
     filter_member_woni:   'Woni',
     filter_member_liv:    'Liv',
     filter_member_minami: 'Minami',
@@ -4714,6 +4602,20 @@ function ytUrl(vid) {
 
 const CARD_PREFIXES = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-', 'avc-'];
 
+function _applyLastWatchedBadge(vid) {
+  document.querySelectorAll('.last-watched-badge').forEach(el => el.remove());
+  for (const p of CARD_PREFIXES) {
+    const card = document.getElementById(p + vid);
+    if (card) {
+      const badge = document.createElement('span');
+      badge.className = 'last-watched-badge';
+      badge.textContent = '마지막으로 본 영상';
+      card.querySelector('.thumb').appendChild(badge);
+      break;
+    }
+  }
+}
+
 function openVideo(e, vid) {
   e.preventDefault();
 
@@ -4742,36 +4644,14 @@ function openVideo(e, vid) {
   }
 
   try { localStorage.setItem('rescene-last-watched', vid); } catch {}
-
-  document.querySelectorAll('.last-watched-badge').forEach(el => el.remove());
-
-  for (const p of CARD_PREFIXES) {
-    const card = document.getElementById(p + vid);
-    if (card) {
-      const badge = document.createElement('span');
-      badge.className = 'last-watched-badge';
-      badge.textContent = '마지막으로 본 영상';
-      card.querySelector('.thumb').appendChild(badge);
-      break;
-    }
-  }
+  _applyLastWatchedBadge(vid);
 }
 
 function restoreLastWatched() {
   try {
     const vid = localStorage.getItem('rescene-last-watched');
     if (!vid) return;
-    for (const p of CARD_PREFIXES) {
-      const card = document.getElementById(p + vid);
-      if (card) {
-        document.querySelectorAll('.last-watched-badge').forEach(el => el.remove());
-        const badge = document.createElement('span');
-        badge.className = 'last-watched-badge';
-        badge.textContent = '마지막으로 본 영상';
-        card.querySelector('.thumb').appendChild(badge);
-        break;
-      }
-    }
+    _applyLastWatchedBadge(vid);
   } catch {}
 }
 
@@ -4845,7 +4725,6 @@ const CONTENT_DATA = [
       "https://youtu.be/g-EGc6wVp9I",
     ]
   },
-  
   {
     category: "SCENEDROME",
     urls: [
@@ -4871,16 +4750,7 @@ const CONTENT_DATA = [
       "https://youtu.be/9XttLI0oH0I",
     ]
   },
-
-  
   {
-    category: "기타",
-    urls: [
-      "https://youtu.be/o4ZB_NVoCuw",
-      "https://youtu.be/OQcGGTAGXgE",
-    ]
-  },
-{
     category: "Glow Up",
     urls: [
       "https://youtu.be/e-YOF3n_O6M",
@@ -4895,7 +4765,6 @@ const CONTENT_DATA = [
       "https://youtu.be/h0xUtrb_JBc",
     ]
   },
-
   {
     category: "Dearest",
     urls: [
@@ -4913,7 +4782,6 @@ const CONTENT_DATA = [
       "https://youtu.be/ZbO9PBdFRdc",
     ]
   },
-
   {
     category: "lip bomb",
     urls: [
@@ -4938,7 +4806,6 @@ const CONTENT_DATA = [
       "https://youtu.be/MC6-82GRK5I",
     ]
   },
-
   {
     category: "Runaway",
     urls: [
@@ -4952,7 +4819,7 @@ const CONTENT_DATA = [
       "https://youtu.be/rsZwrTNklos",
     ]
   },
-{
+  {
     category: "BASE NOTES",
     urls: [
       "https://youtu.be/3sFoaAhh6GM",
@@ -5113,6 +4980,13 @@ const CONTENT_DATA = [
       "https://youtu.be/W6F7n8DDgnk",
       "https://youtu.be/N1WckPLsJ3k",
       "https://youtu.be/WkUINlol-OY",
+    ]
+  },
+  {
+    category: "기타",
+    urls: [
+      "https://youtu.be/o4ZB_NVoCuw",
+      "https://youtu.be/OQcGGTAGXgE",
     ]
   },
 ];
@@ -5582,7 +5456,14 @@ const VID_TO_EXTERNAL_KEY = {};
 const EXTERNAL_CATS = {
   song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon','norejalham'] },
   radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae','billie','riswell'] },
-  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: ['anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction','blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium','studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag','offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool','roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging','hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok','dispatch'] },
+  variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: [
+    'anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction',
+    'blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium',
+    'studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag',
+    'offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool',
+    'roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging',
+    'hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok','dispatch',
+  ] },
   interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview','spotify'] },
 };
 const EXTERNAL_CAT_KEYS = Object.keys(EXTERNAL_CATS);
@@ -5678,7 +5559,7 @@ function setContentCat(el, cat) {
 }
 
 function buildContentCard(item, delay) {
-  const dateStr = item.date || DATE_MAP[item.vid] || '';
+  const dateStr = getItemDate(item);
   const channel = item.channel || '';
   const categoryLabel = item.category === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : (item.category || '');
   const titleHtml = item.loaded
@@ -5777,7 +5658,7 @@ function _getExternalCatKeys(cat) {
     .filter(k => EXTERNAL_DATA[k])
     .sort((a, b) => {
       const oldest = key => EXTERNAL_DATA[key].reduce((min, item) => {
-        const d = (item.date || DATE_MAP[item.vid] || '');
+        const d = getItemDate(item);
         return (!min || d < min) ? d : min;
       }, '');
       return oldest(a).localeCompare(oldest(b));
@@ -5857,7 +5738,7 @@ function pickExternal(el, key) {
 }
 
 function buildExternalCard(item, delay) {
-  const dateStr = item.date || DATE_MAP[item.vid] || '';
+  const dateStr = getItemDate(item);
   const channelKey = VID_TO_EXTERNAL_KEY[item.vid] || '';
   const channelLabel = EXTERNAL_LABELS[channelKey] || channelKey;
   const titleHtml = item.loaded
@@ -6240,6 +6121,10 @@ function getLiveCardClass(members) {
   if (members.includes('전원')) return 'lm-all';
   return MEMBER_CLASS[members[0]] || 'lm-all';
 }
+function getItemDate(item) {
+  return item.date || DATE_MAP[item.vid] || '';
+}
+
 function dateStrToNum(dateStr) {
   if (!dateStr) return 0;
   return parseInt(dateStr.replace(/\./g, ''), 10) || 0;
@@ -6247,8 +6132,8 @@ function dateStrToNum(dateStr) {
 
 function sortItemsByDate(items, dir) {
   return [...items].sort((a, b) => {
-    const da = dateStrToNum(DATE_MAP[a.vid] || (a.meta && a.meta.date) || '0');
-    const db = dateStrToNum(DATE_MAP[b.vid] || (b.meta && b.meta.date) || '0');
+    const da = dateStrToNum(getItemDate(a) || (a.meta && a.meta.date) || '0');
+    const db = dateStrToNum(getItemDate(b) || (b.meta && b.meta.date) || '0');
     return dir === 'oldest' ? da - db : db - da;
   });
 }
@@ -6276,9 +6161,8 @@ function formatLiveDate(item) {
   return `${year} · ${monthDay}`;
 }
 
-function buildLiveCard(item, delay) {
-  const t = getCurrentT();
-  const MEMBER_LABEL = {
+function _getMemberLabel(t, m) {
+  const map = {
     '원이':  t.filter_member_woni   || '원이',
     '리브':  t.filter_member_liv    || '리브',
     '미나미':t.filter_member_minami || '미나미',
@@ -6286,8 +6170,13 @@ function buildLiveCard(item, delay) {
     '제나':  t.filter_member_zena   || '제나',
     '전원':  t.filter_all_members   || '전원',
   };
+  return map[m] || m;
+}
+
+function buildLiveCard(item, delay) {
+  const t = getCurrentT();
   const memberBadges = item.members.map(m =>
-    `<span class="ctag ${MEMBER_CLASS[m] || ''}">${MEMBER_LABEL[m] || m}</span>`
+    `<span class="ctag ${MEMBER_CLASS[m] || ''}">${_getMemberLabel(t, m)}</span>`
   ).join('');
   const titleHtml = item.title
     ? `<div class="csong-multi" id="lvc-title-${item.vid}">${item.title}</div>`
@@ -6460,7 +6349,7 @@ function copyShareUrl(e, vid) {
   e.preventDefault();
   e.stopPropagation();
   const url = ytUrl(vid);
-  navigator.clipboard.writeText(url).then(() => {
+  function _afterCopy() {
     for (const p of CARD_PREFIXES) {
       const card = document.getElementById(p + vid);
       if (card) {
@@ -6477,7 +6366,8 @@ function copyShareUrl(e, vid) {
       clearTimeout(_shareToastTimer);
       _shareToastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
     }
-  }).catch(() => {
+  }
+  navigator.clipboard.writeText(url).then(_afterCopy).catch(() => {
     const ta = document.createElement('textarea');
     ta.value = url;
     ta.style.cssText = 'position:fixed;opacity:0';
@@ -6485,22 +6375,7 @@ function copyShareUrl(e, vid) {
     ta.select();
     document.execCommand('copy');
     document.body.removeChild(ta);
-    for (const p of CARD_PREFIXES) {
-      const card = document.getElementById(p + vid);
-      if (card) {
-        const btn = card.querySelector('.share-btn');
-        if (btn) {
-          btn.classList.add('share-done');
-          setTimeout(() => btn.classList.remove('share-done'), 1800);
-        }
-      }
-    }
-    const toast = document.getElementById('share-toast');
-    if (toast) {
-      toast.classList.add('show');
-      clearTimeout(_shareToastTimer);
-      _shareToastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
-    }
+    _afterCopy();
   });
 }
 
@@ -6526,11 +6401,8 @@ function buildBookmarkGrid() {
     return;
   }
 
-  const allVids = buildUnifiedVideoList();
-
-  const items = allVids.filter(i => BOOKMARKS.has(i.vid));
-  const seen = new Set();
-  const unique = items.filter(i => { if (seen.has(i.vid)) return false; seen.add(i.vid); return true; });
+  const seenVids = new Set();
+  const unique = buildUnifiedVideoList().filter(i => BOOKMARKS.has(i.vid) && !seenVids.has(i.vid) && seenVids.add(i.vid));
 
   _elGrid.innerHTML = unique.map((item, idx) => {
     const delay = `${Math.min(idx * (_isMobile ? 0.015 : 0.03), _isMobile ? 0.2 : 0.4)}s`;
@@ -7207,7 +7079,6 @@ function pickSection(section, _fromPopState) {
 
   clearSearch(true);
 
-  if (section === 'member') _replayAnim('.member-btn', i => `${i * 0.06}s`);
   if (section === 'links')  _replayAnim('.link-row',   i => `${Math.min(i * 0.04, 0.5)}s`);
   if (section === 'about')  _replayAnim('#aboutMode .links-wrap > div > *', i => `${i * 0.07}s`, 'fadeUp 0.35s ease both');
 
@@ -7404,16 +7275,19 @@ let curSearchQuery = '';
 let curSort = 'newest';
 let _searchDebounceTimer = null;
 
+function _rebuildCurrentGrid() {
+  if (curSection === 'allvideos') { buildAllVideosGrid(); return; }
+  if (curSection === 'songs' || curSection === 'content') { buildGrid(); return; }
+  if (curSection === 'live') { buildLiveGrid(); return; }
+  if (curSection === 'external') { buildExternalGrid(); return; }
+  if (curSection === 'bookmark') buildBookmarkGrid();
+}
+
 function setSort(dir) {
   curSort = dir;
   _elSortNewest.classList.toggle('active', dir === 'newest');
   _elSortOldest.classList.toggle('active', dir === 'oldest');
-
-  if (curSection === 'allvideos') buildAllVideosGrid();
-  else if (curSection === 'songs' || curSection === 'content') buildGrid();
-  else if (curSection === 'live') buildLiveGrid();
-  else if (curSection === 'external') buildExternalGrid();
-  else if (curSection === 'bookmark') buildBookmarkGrid();
+  _rebuildCurrentGrid();
 }
 
 function onSearch(val) {
@@ -7431,11 +7305,7 @@ function submitSearch() {
   if (!val) {
     const countEl = document.getElementById('searchResultCount');
     if (countEl) countEl.textContent = '';
-    if (curSection === 'allvideos') { buildAllVideosGrid(); return; }
-    if (curSection === 'songs' || curSection === 'content') { buildGrid(); return; }
-    if (curSection === 'live') { buildLiveGrid(); return; }
-    if (curSection === 'external') { buildExternalGrid(); return; }
-    if (curSection === 'bookmark') { buildBookmarkGrid(); return; }
+    _rebuildCurrentGrid();
     return;
   }
   applySearch();
@@ -7467,13 +7337,7 @@ function clearSearch(skipApply) {
   const countEl = document.getElementById('searchResultCount');
   if (countEl) countEl.textContent = '';
   clearTimeout(_searchDebounceTimer);
-  if (!skipApply) {
-    if (curSection === 'allvideos') { buildAllVideosGrid(); return; }
-    if (curSection === 'songs' || curSection === 'content') { buildGrid(); return; }
-    if (curSection === 'live') { buildLiveGrid(); return; }
-    if (curSection === 'external') { buildExternalGrid(); return; }
-    if (curSection === 'bookmark') { buildBookmarkGrid(); return; }
-  }
+  if (!skipApply) _rebuildCurrentGrid();
 }
 
 function normalizeDateQuery(raw) {
@@ -7912,7 +7776,6 @@ const SCHED_TYPE_COLOR = {
 let _calYear  = new Date().getFullYear();
 let _calMonth = new Date().getMonth();
 let _calSelectedDate = null;
-let _calBuilt = false;
 
 const _CAL_MONTH_NAMES = {
   KR: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'],
@@ -7956,9 +7819,11 @@ function renderCalendar() {
     : `${_calYear}년 ${mNames[_calMonth]}`;
   _elCalMonthTitle.textContent = calTitle;
 
-  const firstDay = new Date(_calYear, _calMonth, 1).getDay();
-  const daysInMonth = new Date(_calYear, _calMonth + 1, 0).getDate();
-  const daysInPrev = new Date(_calYear, _calMonth, 0).getDate();
+  const _calFirst    = new Date(_calYear, _calMonth, 1);
+  const _calNextFirst = new Date(_calYear, _calMonth + 1, 1);
+  const firstDay     = _calFirst.getDay();
+  const daysInMonth  = new Date(_calNextFirst - 1).getDate();
+  const daysInPrev   = new Date(_calYear, _calMonth, 0).getDate();
   const today = new Date();
   const todayY = today.getFullYear(), todayM = today.getMonth(), todayD = today.getDate();
 
@@ -8368,7 +8233,7 @@ buildSongNav();
         typeof EXTERNAL_KEYS === 'undefined' || typeof EXTERNAL_LABELS === 'undefined' ||
         typeof ALL_LIVE === 'undefined' || typeof LIVE_DATA_2024 === 'undefined' ||
         typeof LIVE_DATA_2025 === 'undefined' || typeof LIVE_DATA_2026 === 'undefined') {
-      setTimeout(tryBuild, 50);
+      requestAnimationFrame(tryBuild);
       return;
     }
     buildChart();
