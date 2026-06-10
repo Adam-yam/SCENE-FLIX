@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-09T15:00:46Z",
+  "updated": "2026-06-10T03:00:34Z",
   "events": [
     {
       "date": "2026-06-01",
@@ -23,10 +23,24 @@
       "source": "mnetplus"
     },
     {
+      "date": "2026-06-11",
+      "title": "Mnet <M COUNTDOWN> 사후 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
       "date": "2026-06-12",
       "title": "[Runaway] 대면 팬사인회/팬이벤트 by colopl IN TOKYO",
       "detail": "",
       "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-06-17",
+      "title": "SBS <열혈농구단> HALFTIME SHOW",
+      "detail": "",
+      "type": "concert",
       "source": "mnetplus"
     }
   ]
