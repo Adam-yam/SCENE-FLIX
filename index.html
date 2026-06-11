@@ -8469,13 +8469,24 @@ function updateMobileNav(section) {
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js').then(reg => {
+      // 새 SW가 설치 완료(installed)되면 즉시 SKIP_WAITING 신호 보냄
+      // → 새 SW가 바로 activate되고, 페이지를 reload하여 최신버전 적용
       reg.addEventListener('updatefound', () => {
         const newSW = reg.installing;
         newSW.addEventListener('statechange', () => {
-          if (newSW.state === 'activated') {
-            window.location.reload();
+          if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
+            newSW.postMessage('SKIP_WAITING');
           }
         });
+      });
+
+      // SW가 activate 완료되면 페이지 reload
+      let refreshing = false;
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        if (!refreshing) {
+          refreshing = true;
+          window.location.reload();
+        }
       });
     });
   });

@@ -1,4 +1,4 @@
-const CACHE = 'sceneflix-v4';
+const CACHE = 'sceneflix-v5';
 const SHELL = [
   './image/favicon.png',
   './image/icon-192.png',
@@ -20,28 +20,23 @@ self.addEventListener('activate', e => {
   );
 });
 
+self.addEventListener('message', e => {
+  if (e.data === 'SKIP_WAITING') self.skipWaiting();
+});
+
 self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
 
-  // 외부 리소스(YouTube 등)는 Network-First, 오프라인 시 캐시 폴백
+  if (url.pathname.endsWith('/') || url.pathname.endsWith('.html')) {
+    e.respondWith(fetch(e.request));
+    return;
+  }
+
   if (url.hostname !== self.location.hostname) {
     e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
     return;
   }
 
-  // HTML 페이지는 항상 Network-First (최신 콘텐츠 보장)
-  if (url.pathname.endsWith('/') || url.pathname.endsWith('.html')) {
-    e.respondWith(
-      fetch(e.request).then(res => {
-        const clone = res.clone();
-        caches.open(CACHE).then(c => c.put(e.request, clone));
-        return res;
-      }).catch(() => caches.match(e.request))
-    );
-    return;
-  }
-
-  // 이미지, 폰트 등 정적 리소스는 Cache-First
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached;
