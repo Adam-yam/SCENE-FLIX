@@ -517,12 +517,12 @@ header {
 .type-btn[data-lm="제나"]:hover   { border-color: var(--c-zena); }
 
 .type-btn.active[data-t="all"]      { color: var(--text);       border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.05); }
-.type-btn.active[data-t="music"]    { color: var(--c-music);    border-color: var(--c-music);    background: rgba(110,198,192,0.08); }
-.type-btn.active[data-t="mv"]       { color: var(--c-mv);       border-color: var(--c-mv);       background: rgba(192,112,144,0.08); }
-.type-btn.active[data-t="itslive"]  { color: var(--c-itslive);  border-color: var(--c-itslive);  background: rgba(160,128,208,0.08); }
-.type-btn.active[data-t="content"]  { color: var(--c-content);  border-color: var(--c-content);  background: rgba(128,184,112,0.08); }
-.type-btn.active[data-t="onthespot"]{ color: var(--c-onthespot);border-color: var(--c-onthespot);background: rgba(224,144,80,0.08); }
-.type-btn.active[data-t="fullcam"]  { color: var(--c-fullcam);  border-color: var(--c-fullcam);  background: rgba(212,200,74,0.08); }
+.type-btn.active[data-t="music"]    { color: var(--c-music);    border-color: var(--c-music);    background: rgba(var(--c-music-rgb),0.08); }
+.type-btn.active[data-t="mv"]       { color: var(--c-mv);       border-color: var(--c-mv);       background: rgba(var(--c-mv-rgb),0.08); }
+.type-btn.active[data-t="itslive"]  { color: var(--c-itslive);  border-color: var(--c-itslive);  background: rgba(var(--c-itslive-rgb),0.08); }
+.type-btn.active[data-t="content"]  { color: var(--c-content);  border-color: var(--c-content);  background: rgba(var(--c-content-rgb),0.08); }
+.type-btn.active[data-t="onthespot"]{ color: var(--c-onthespot);border-color: var(--c-onthespot);background: rgba(var(--c-onthespot-rgb),0.08); }
+.type-btn.active[data-t="fullcam"]  { color: var(--c-fullcam);  border-color: var(--c-fullcam);  background: rgba(var(--c-fullcam-rgb),0.08); }
 
 .type-btn.active[data-lm="all"]    { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
 .type-btn.active[data-lm="전원"]   { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
@@ -541,7 +541,7 @@ header {
 .type-btn.active[data-lm="미나미"] { color: var(--c-minami); border-color: var(--c-minami);   background: rgba(43,153,196,0.12); }
 .type-btn.active[data-lm="메이"]   { color: var(--c-mei-dark); border-color: var(--c-mei);    background: rgba(236,210,91,0.12); }
 .type-btn.active[data-lm="제나"]   { color: var(--c-zena); border-color: var(--c-zena);       background: rgba(186,146,219,0.12); }
-.type-btn.active[data-ec-ch]       { color: var(--c-external); border-color: var(--c-external); background: rgba(122,174,222,0.15); }
+.type-btn.active[data-ec-ch]       { color: var(--c-external); border-color: var(--c-external); background: rgba(var(--c-external-rgb),0.15); }
 [data-theme="light"] .type-btn.active[data-ec-ch] { color: var(--c-external); border-color: var(--c-external); background: rgba(58,120,196,0.12); }
 
 .search-bar {
@@ -721,13 +721,13 @@ header {
   .vcard:hover .play-ring { opacity: 1; }
 }
 
-.vcard.tb-music     { background: rgba(110,198,192,0.15); border-color: rgba(110,198,192,0.22); }
-.vcard.tb-mv        { background: rgba(192,112,144,0.15); border-color: rgba(192,112,144,0.22); }
-.vcard.tb-itslive   { background: rgba(160,128,208,0.15); border-color: rgba(160,128,208,0.22); }
-.vcard.tb-content   { background: rgba(128,184,112,0.13); border-color: rgba(128,184,112,0.22); }
-.vcard.tb-onthespot { background: rgba(224,144,80,0.15);  border-color: rgba(224,144,80,0.22);  }
-.vcard.tb-fullcam   { background: rgba(212,200,74,0.13);  border-color: rgba(212,200,74,0.22);  }
-.vcard.tb-external  { background: rgba(122,174,222,0.13); border-color: rgba(122,174,222,0.22); }
+.vcard.tb-music     { background: rgba(var(--c-music-rgb),0.15);    border-color: rgba(var(--c-music-rgb),0.22); }
+.vcard.tb-mv        { background: rgba(var(--c-mv-rgb),0.15);       border-color: rgba(var(--c-mv-rgb),0.22); }
+.vcard.tb-itslive   { background: rgba(var(--c-itslive-rgb),0.15);  border-color: rgba(var(--c-itslive-rgb),0.22); }
+.vcard.tb-content   { background: rgba(var(--c-content-rgb),0.13);  border-color: rgba(var(--c-content-rgb),0.22); }
+.vcard.tb-onthespot { background: rgba(var(--c-onthespot-rgb),0.15);border-color: rgba(var(--c-onthespot-rgb),0.22); }
+.vcard.tb-fullcam   { background: rgba(var(--c-fullcam-rgb),0.13);  border-color: rgba(var(--c-fullcam-rgb),0.22); }
+.vcard.tb-external  { background: rgba(var(--c-external-rgb),0.13); border-color: rgba(var(--c-external-rgb),0.22); }
 
 [data-theme="light"] .vcard.tb-music     { background: rgba(42,154,148,0.22);  border-color: rgba(42,154,148,0.60); box-shadow: 0 1px 4px rgba(42,154,148,0.12); }
 [data-theme="light"] .vcard.tb-mv        { background: rgba(160,64,96,0.22);   border-color: rgba(160,64,96,0.60);  box-shadow: 0 1px 4px rgba(160,64,96,0.12); }
@@ -816,13 +816,13 @@ header {
   font-weight: 500;
   backdrop-filter: blur(6px);
 }
-.tb-music   { background: rgba(110,198,192,0.30); color: var(--c-music);    border: 1px solid rgba(110,198,192,0.6); }
-.tb-mv      { background: rgba(192,112,144,0.30); color: var(--c-mv);       border: 1px solid rgba(192,112,144,0.6); }
-.tb-itslive { background: rgba(160,128,208,0.30); color: var(--c-itslive);  border: 1px solid rgba(160,128,208,0.6); }
-.tb-content { background: rgba(128,184,112,0.30); color: var(--c-content);  border: 1px solid rgba(128,184,112,0.6); }
-.tb-onthespot { background: rgba(224,144,80,0.30); color: var(--c-onthespot); border: 1px solid rgba(224,144,80,0.6); }
-.tb-fullcam   { background: rgba(212,200,74,0.30);  color: var(--c-fullcam);  border: 1px solid rgba(212,200,74,0.6); }
-.tb-external  { background: rgba(122,174,222,0.30); color: var(--c-external); border: 1px solid rgba(122,174,222,0.6); }
+.tb-music   { background: rgba(var(--c-music-rgb),0.30);    color: var(--c-music);    border: 1px solid rgba(var(--c-music-rgb),0.6); }
+.tb-mv      { background: rgba(var(--c-mv-rgb),0.30);       color: var(--c-mv);       border: 1px solid rgba(var(--c-mv-rgb),0.6); }
+.tb-itslive { background: rgba(var(--c-itslive-rgb),0.30);  color: var(--c-itslive);  border: 1px solid rgba(var(--c-itslive-rgb),0.6); }
+.tb-content { background: rgba(var(--c-content-rgb),0.30);  color: var(--c-content);  border: 1px solid rgba(var(--c-content-rgb),0.6); }
+.tb-onthespot { background: rgba(var(--c-onthespot-rgb),0.30); color: var(--c-onthespot); border: 1px solid rgba(var(--c-onthespot-rgb),0.6); }
+.tb-fullcam   { background: rgba(var(--c-fullcam-rgb),0.30);   color: var(--c-fullcam);  border: 1px solid rgba(var(--c-fullcam-rgb),0.6); }
+.tb-external  { background: rgba(var(--c-external-rgb),0.30);  color: var(--c-external); border: 1px solid rgba(var(--c-external-rgb),0.6); }
 .tb-songs     { background: rgba(224,212,192,0.18); color: var(--accent);     border: 1px solid rgba(224,212,192,0.5); }
 [data-theme="light"] .tb-songs { background: rgba(90,74,48,0.12); border-color: rgba(90,74,48,0.35); }
 
@@ -905,11 +905,11 @@ header {
 [data-theme="light"] .ctag.lm-may    { background: rgba(180,140,0,0.12);  color: #907000; border-color: rgba(180,140,0,0.35); }
 [data-theme="light"] .ctag.lm-zena   { background: rgba(140,90,200,0.12); color: #8a50c8; border-color: rgba(140,90,200,0.35); }
 
-.ctag.tb-tag-music     { background: rgba(110,198,192,0.15); color: var(--c-music);    border: 1px solid rgba(110,198,192,0.35); }
-.ctag.tb-tag-mv        { background: rgba(192,112,144,0.15); color: var(--c-mv);       border: 1px solid rgba(192,112,144,0.35); }
-.ctag.tb-tag-itslive   { background: rgba(160,128,208,0.15); color: var(--c-itslive);  border: 1px solid rgba(160,128,208,0.35); }
-.ctag.tb-tag-onthespot { background: rgba(224,144,80,0.15);  color: var(--c-onthespot);border: 1px solid rgba(224,144,80,0.35); }
-.ctag.tb-tag-fullcam   { background: rgba(212,200,74,0.13);  color: var(--c-fullcam);  border: 1px solid rgba(212,200,74,0.35); }
+.ctag.tb-tag-music     { background: rgba(var(--c-music-rgb),0.15);    color: var(--c-music);    border: 1px solid rgba(var(--c-music-rgb),0.35); }
+.ctag.tb-tag-mv        { background: rgba(var(--c-mv-rgb),0.15);       color: var(--c-mv);       border: 1px solid rgba(var(--c-mv-rgb),0.35); }
+.ctag.tb-tag-itslive   { background: rgba(var(--c-itslive-rgb),0.15);  color: var(--c-itslive);  border: 1px solid rgba(var(--c-itslive-rgb),0.35); }
+.ctag.tb-tag-onthespot { background: rgba(var(--c-onthespot-rgb),0.15);color: var(--c-onthespot);border: 1px solid rgba(var(--c-onthespot-rgb),0.35); }
+.ctag.tb-tag-fullcam   { background: rgba(var(--c-fullcam-rgb),0.13);  color: var(--c-fullcam);  border: 1px solid rgba(var(--c-fullcam-rgb),0.35); }
 [data-theme="light"] .ctag.tb-tag-music     { background: rgba(42,154,148,0.12);  border-color: rgba(42,154,148,0.35); }
 [data-theme="light"] .ctag.tb-tag-mv        { background: rgba(160,64,96,0.12);   border-color: rgba(160,64,96,0.35);  }
 [data-theme="light"] .ctag.tb-tag-itslive   { background: rgba(112,80,176,0.12);  border-color: rgba(112,80,176,0.35); }
@@ -925,9 +925,9 @@ header {
   letter-spacing: 0.06em;
   padding: 2px 8px 2px 6px;
   border-radius: 3px;
-  background: rgba(122,174,222,0.12);
+  background: rgba(var(--c-external-rgb),0.12);
   color: var(--c-external);
-  border: 1px solid rgba(122,174,222,0.35);
+  border: 1px solid rgba(var(--c-external-rgb),0.35);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -949,9 +949,9 @@ header {
   letter-spacing: 0.06em;
   padding: 2px 8px 2px 6px;
   border-radius: 3px;
-  background: rgba(128,184,112,0.12);
+  background: rgba(var(--c-content-rgb),0.12);
   color: var(--c-content);
-  border: 1px solid rgba(128,184,112,0.35);
+  border: 1px solid rgba(var(--c-content-rgb),0.35);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1097,8 +1097,8 @@ header {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--c-external);
-  background: rgba(122,174,222,0.12);
-  border: 1px solid rgba(122,174,222,0.3);
+  background: rgba(var(--c-external-rgb),0.12);
+  border: 1px solid rgba(var(--c-external-rgb),0.3);
   border-radius: 3px;
   padding: 2px 7px;
   text-align: center;
@@ -1958,12 +1958,12 @@ header {
   }
 
   #subSidebar .type-btn.active[data-t="all"]      { color: var(--text);        border-left-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.05); }
-  #subSidebar .type-btn.active[data-t="music"]    { color: var(--c-music);     border-left-color: var(--c-music);    background: rgba(110,198,192,0.08); }
-  #subSidebar .type-btn.active[data-t="mv"]       { color: var(--c-mv);        border-left-color: var(--c-mv);       background: rgba(192,112,144,0.08); }
-  #subSidebar .type-btn.active[data-t="itslive"]  { color: var(--c-itslive);   border-left-color: var(--c-itslive);  background: rgba(160,128,208,0.08); }
-  #subSidebar .type-btn.active[data-t="content"]  { color: var(--c-content);   border-left-color: var(--c-content);  background: rgba(128,184,112,0.08); }
-  #subSidebar .type-btn.active[data-t="onthespot"]{ color: var(--c-onthespot); border-left-color: var(--c-onthespot);background: rgba(224,144,80,0.08); }
-  #subSidebar .type-btn.active[data-t="fullcam"]  { color: var(--c-fullcam);   border-left-color: var(--c-fullcam);  background: rgba(212,200,74,0.08); }
+  #subSidebar .type-btn.active[data-t="music"]    { color: var(--c-music);     border-left-color: var(--c-music);    background: rgba(var(--c-music-rgb),0.08); }
+  #subSidebar .type-btn.active[data-t="mv"]       { color: var(--c-mv);        border-left-color: var(--c-mv);       background: rgba(var(--c-mv-rgb),0.08); }
+  #subSidebar .type-btn.active[data-t="itslive"]  { color: var(--c-itslive);   border-left-color: var(--c-itslive);  background: rgba(var(--c-itslive-rgb),0.08); }
+  #subSidebar .type-btn.active[data-t="content"]  { color: var(--c-content);   border-left-color: var(--c-content);  background: rgba(var(--c-content-rgb),0.08); }
+  #subSidebar .type-btn.active[data-t="onthespot"]{ color: var(--c-onthespot); border-left-color: var(--c-onthespot);background: rgba(var(--c-onthespot-rgb),0.08); }
+  #subSidebar .type-btn.active[data-t="fullcam"]  { color: var(--c-fullcam);   border-left-color: var(--c-fullcam);  background: rgba(var(--c-fullcam-rgb),0.08); }
 
   #subSidebar .type-btn.active[data-lm="all"]    { color: var(--text);           border-left-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.05); }
   #subSidebar .type-btn.active[data-lm="전원"]   { color: #fff;                  border-left-color: rgba(255,255,255,0.4);  background: rgba(255,255,255,0.07); }
@@ -1973,7 +1973,7 @@ header {
   #subSidebar .type-btn.active[data-lm="메이"]   { color: var(--c-mei-dark);     border-left-color: var(--c-mei);           background: rgba(236,210,91,0.12); }
   #subSidebar .type-btn.active[data-lm="제나"]   { color: var(--c-zena);         border-left-color: var(--c-zena);          background: rgba(186,146,219,0.12); }
 
-  #subSidebar .type-btn.active[data-ec-ch]       { color: var(--c-external); border-left-color: var(--c-external);    background: rgba(122,174,222,0.08); }
+  #subSidebar .type-btn.active[data-ec-ch]       { color: var(--c-external); border-left-color: var(--c-external);    background: rgba(var(--c-external-rgb),0.08); }
 
   .type-bar,
   .search-bar,
@@ -3174,7 +3174,6 @@ window._i18n = {
     tab_external:         '외컨',
     tab_external_full:    '외부 컨텐츠',
     tab_fantube:          '팬튜브',
-    tab_member:           '멤버별 영상',
     tab_links:            'RESCENE 링크',
     tab_about:            'About',
     tab_bookmark:         '즐겨찾기',
@@ -3232,7 +3231,6 @@ window._i18n = {
     tab_external:         '外部',
     tab_external_full:    '外部コンテンツ',
     tab_fantube:          'Fan Tube',
-    tab_member:           'メンバー動画',
     tab_links:            'RESCENEリンク',
     tab_about:            'About',
     tab_bookmark:         'お気に入り',
@@ -3290,7 +3288,6 @@ window._i18n = {
     tab_external:         'External',
     tab_external_full:    'External Content',
     tab_fantube:          'Fan Tube',
-    tab_member:           'By Member',
     tab_links:            'Links',
     tab_about:            'About',
     tab_bookmark:         'Saved',
@@ -3745,6 +3742,42 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  '_GKSineBozo': '2026.06.11',
+  '8dE7DH23Dvs': '2026.06.01',
+  '1EYMmNL0iTw': '2025.04.16',
+  '96adDM-bdus': '2025.04.16',
+  '-7k3YS3ymgE': '2025.02.09',
+  'ZoIojQAZh8U': '2025.06.27',
+  'kf4YG2WqnoI': '2025.02.12',
+  'sVhfgxlwvQo': '2024.05.09',
+  'M7eai65PP_s': '2025.10.28',
+  'MdlgggA5RGk': '2025.10.27',
+  'Y9r4mxqaod0': '2025.12.09',
+  'Nn3RJMVbYxg': '2025.12.09',
+  'lk3wFg47BPI': '2025.12.09',
+  'i77kQSBmeSc': '2025.12.09',
+  'm48LdM3rZ3g': '2025.11.10',
+  'RFu5rFMDLuA': '2025.12.09',
+  'yrXb2R3ii1U': '2025.12.05',
+  'hHIhEkZ-3Fc': '2026.06.01',
+  '1k2oa-2xLW8': '2025.02.06',
+  'u09TMTF38Ok': '2026.06.02',
+  'dNkug2Wbm7w': '2025.03.31',
+  'hZsT7zCSK3M': '2026.04.01',
+  'OyPBAt0ookY': '2026.06.09',
+  'AGn1vGyDP1s': '2025.11.04',
+  'flIs7GK07Fk': '2026.06.05',
+  'ZW1U1DazAB4': '2025.10.29',
+  'fbGzT2yqUsc': '2025.11.04',
+  'CnrJW8ku7Ss': '2025.10.28',
+  'ufFSUOLd_2c': '2025.10.28',
+  'm4bl_pXxCv4': '2025.10.29',
+  'gz9QFkFppfY': '2025.10.29',
+  'O5GxuXRvJeI': '2024.11.06',
+  'SGn22S7-JWw': '2024.11.07',
+  'evfWfg6jRZc': '2026.06.09',
+  'fVpFZAOVuk0': '2026.06.09',
+  '0wUiVwubg7k': '2026.06.10',
   'jcGb3UpbdwI': '2026.06.09',
   'I0JzyK2eTzI': '2026.06.08',
   'EXFdsa8y8os': '6월 8일',
@@ -3944,7 +3977,6 @@ const DATE_MAP = {
   'oM1jshK18xU': '2025.07.03',
   'NeR1lj7DcY0': '2025.07.03',
   '-1Z90SCzObQ': '2026.04.13',
-  '-2v4DGzQCSc': '2026.04.27',
   '-3-uqY7Kpeo': '2024.09.24',
   '-HZ_MU5RB4I': '2024.06.08',
   '-UCU2EBgQ2w': '2024.09.03',
@@ -3959,7 +3991,6 @@ const DATE_MAP = {
   '0V2CripEpK4': '2025.07.18',
   '0bBK49b5yLg': '2025.07.18',
   '0dnlq5r_Lig': '2024.09.03',
-  '0eoxZv29UkA': '2026.04.27',
   '0nIG0brWRao': '2025.12.06',
   '1-IOC-BAHU4': '2025.07.01',
   '1Jms0oQkL2k': '2025.08.21',
@@ -4600,10 +4631,27 @@ function ytUrl(vid) {
   return 'https://www.youtube.com/watch?v=' + vid;
 }
 
+function _oldestDate(key) {
+  return EXTERNAL_DATA[key].reduce((min, item) => {
+    const d = item.date || DATE_MAP[item.vid] || '';
+    return (!min || d < min) ? d : min;
+  }, '');
+}
+
+const _CATEGORY_ALIAS = { '안녕하세요원이입니다잘부탁드립니다': '안원잘부' };
+function getCategoryLabel(cat) {
+  return _CATEGORY_ALIAS[cat] ?? cat ?? '';
+}
+
 const CARD_PREFIXES = ['vc-', 'cvc-', 'evc-', 'lvc-', 'bvc-', 'avc-'];
 
+let _lastWatchedBadgeEl = null;
+
 function _applyLastWatchedBadge(vid) {
-  document.querySelectorAll('.last-watched-badge').forEach(el => el.remove());
+  if (_lastWatchedBadgeEl) {
+    _lastWatchedBadgeEl.remove();
+    _lastWatchedBadgeEl = null;
+  }
   for (const p of CARD_PREFIXES) {
     const card = document.getElementById(p + vid);
     if (card) {
@@ -4611,6 +4659,7 @@ function _applyLastWatchedBadge(vid) {
       badge.className = 'last-watched-badge';
       badge.textContent = '마지막으로 본 영상';
       card.querySelector('.thumb').appendChild(badge);
+      _lastWatchedBadgeEl = badge;
       break;
     }
   }
@@ -5000,8 +5049,45 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함' };
+const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', BAAMBCLIVE: 'BAAMBC LIVE', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소' };
 const EXTERNAL_DATA = {
+  wanguland: [
+    { vid: '_GKSineBozo', url: 'https://youtu.be/_GKSineBozo', date: '2026.06.11' },
+  ],
+  asianmodelawards: [
+    { vid: 'O5GxuXRvJeI', url: 'https://youtu.be/O5GxuXRvJeI', date: '2024.11.06' },
+    { vid: 'SGn22S7-JWw', url: 'https://youtu.be/SGn22S7-JWw', date: '2024.11.07' },
+  ],
+  tbcmusic: [
+    { vid: 'AGn1vGyDP1s', url: 'https://youtu.be/AGn1vGyDP1s', date: '2025.11.04' },
+    { vid: 'flIs7GK07Fk', url: 'https://youtu.be/flIs7GK07Fk', date: '2026.06.05' },
+    { vid: 'ZW1U1DazAB4', url: 'https://youtu.be/ZW1U1DazAB4', date: '2025.10.29' },
+    { vid: 'fbGzT2yqUsc', url: 'https://youtu.be/fbGzT2yqUsc', date: '2025.11.04' },
+    { vid: 'CnrJW8ku7Ss', url: 'https://youtu.be/CnrJW8ku7Ss', date: '2025.10.28' },
+    { vid: 'ufFSUOLd_2c', url: 'https://youtu.be/ufFSUOLd_2c', date: '2025.10.28' },
+    { vid: 'm4bl_pXxCv4', url: 'https://youtu.be/m4bl_pXxCv4', date: '2025.10.29' },
+    { vid: 'gz9QFkFppfY', url: 'https://youtu.be/gz9QFkFppfY', date: '2025.10.29' },
+  ],
+  ebsradiokch: [
+    { vid: 'dNkug2Wbm7w', url: 'https://youtu.be/dNkug2Wbm7w', date: '2025.03.31' },
+  ],
+  BAAMBCLIVE: [
+    { vid: 'M7eai65PP_s', url: 'https://youtu.be/M7eai65PP_s', date: '2025.10.28' },
+    { vid: 'MdlgggA5RGk', url: 'https://youtu.be/MdlgggA5RGk', date: '2025.10.27' },
+    { vid: 'Y9r4mxqaod0', url: 'https://youtu.be/Y9r4mxqaod0', date: '2025.12.09' },
+    { vid: 'Nn3RJMVbYxg', url: 'https://youtu.be/Nn3RJMVbYxg', date: '2025.12.09' },
+    { vid: 'lk3wFg47BPI', url: 'https://youtu.be/lk3wFg47BPI', date: '2025.12.09' },
+    { vid: 'i77kQSBmeSc', url: 'https://youtu.be/i77kQSBmeSc', date: '2025.12.09' },
+    { vid: 'm48LdM3rZ3g', url: 'https://youtu.be/m48LdM3rZ3g', date: '2025.11.10' },
+    { vid: 'RFu5rFMDLuA', url: 'https://youtu.be/RFu5rFMDLuA', date: '2025.12.09' },
+  ],
+  parksohyun: [
+    { vid: '-7k3YS3ymgE', url: 'https://youtu.be/-7k3YS3ymgE', date: '2025.02.09' },
+  ],
+  leeeunji: [
+    { vid: '1EYMmNL0iTw', url: 'https://youtu.be/1EYMmNL0iTw', date: '2025.04.16' },
+    { vid: '96adDM-bdus', url: 'https://youtu.be/96adDM-bdus', date: '2025.04.16' },
+  ],
   norejalham: [
     { vid: 'jR3dAv6Qkfs', url: 'https://youtu.be/jR3dAv6Qkfs', date: '2024.05.17' },
   ],
@@ -5086,6 +5172,7 @@ const EXTERNAL_DATA = {
     { vid: 'ixyiX8s5fvs', url: 'https://youtu.be/ixyiX8s5fvs', date: '2026.06.01' },
   ],
   gotthespot: [
+    { vid: 'OyPBAt0ookY', url: 'https://youtu.be/OyPBAt0ookY', date: '2026.06.09' },
     { vid: 'oIuHNPScq0Y', url: 'https://youtu.be/oIuHNPScq0Y', date: '2026.05.12' },
     { vid: '_Y97E5rPNok', url: 'https://youtu.be/_Y97E5rPNok', date: '2026.05.20' },
     { vid: '3T2nWaMml3M', url: 'https://youtu.be/3T2nWaMml3M', date: '2026.05.28' },
@@ -5198,6 +5285,11 @@ const EXTERNAL_DATA = {
     { vid: 'aDHmmrfizIE', url: 'https://www.youtube.com/watch?v=aDHmmrfizIE', date: '2026.04.13' },
   ],
   baesungjae: [
+    { vid: 'ZoIojQAZh8U', url: 'https://youtu.be/ZoIojQAZh8U', date: '2025.06.27' },
+    { vid: 'yrXb2R3ii1U', url: 'https://youtu.be/yrXb2R3ii1U', date: '2025.12.05' },
+    { vid: 'hHIhEkZ-3Fc', url: 'https://youtu.be/hHIhEkZ-3Fc', date: '2026.06.01' },
+    { vid: '1k2oa-2xLW8', url: 'https://youtu.be/1k2oa-2xLW8', date: '2025.02.06' },
+    { vid: 'hZsT7zCSK3M', url: 'https://youtu.be/hZsT7zCSK3M', date: '2026.04.01' },
     { vid: 'ovilLN09iYE', url: 'https://youtu.be/ovilLN09iYE', date: '2026.06.01' },
     { vid: 'v37MJmFb0bA', url: 'https://youtu.be/v37MJmFb0bA', date: '2026.06.02' },
     { vid: 'QI4o-1Z9p_s', url: 'https://www.youtube.com/watch?v=QI4o-1Z9p_s', date: '2025.01.10' },
@@ -5219,10 +5311,10 @@ const EXTERNAL_DATA = {
     { vid: 'Q3Uy_6Z2cFo', url: 'https://youtu.be/Q3Uy_6Z2cFo', date: '2026.04.13' },
   ],
   soundbomb360: [
+    { vid: 'evfWfg6jRZc', url: 'https://youtu.be/evfWfg6jRZc', date: '2026.06.09' },
+    { vid: 'fVpFZAOVuk0', url: 'https://youtu.be/fVpFZAOVuk0', date: '2026.06.09' },
     { vid: 'NAXYoFYjcfk', url: 'https://youtu.be/NAXYoFYjcfk', date: '2026.04.14' },
     { vid: 'HQQcWMYZNjc', url: 'https://youtu.be/HQQcWMYZNjc', date: '2026.04.21' },
-    { vid: '0eoxZv29UkA', url: 'https://youtu.be/0eoxZv29UkA', date: '2026.04.27' },
-    { vid: '-2v4DGzQCSc', url: 'https://youtu.be/-2v4DGzQCSc', date: '2026.04.27' },
     { vid: 'lCdQIZQQqiQ', url: 'https://youtu.be/lCdQIZQQqiQ', date: '2026.04.28' },
     { vid: '32pQMFj8AOM', url: 'https://youtu.be/32pQMFj8AOM', date: '2026.04.14' },
     { vid: 'APOshkYdTL0', url: 'https://youtu.be/APOshkYdTL0', date: '2026.04.14' },
@@ -5320,6 +5412,7 @@ const EXTERNAL_DATA = {
     { vid: '4-BYDjk5EsI', url: 'https://youtu.be/4-BYDjk5EsI', date: '2025.05.13' },
   ],
   arirangradio: [
+    { vid: 'sVhfgxlwvQo', url: 'https://youtu.be/sVhfgxlwvQo', date: '2024.05.09' },
     { vid: 'NNcBZaJQg1I', url: 'https://youtu.be/NNcBZaJQg1I', date: '2024.05.09' },
     { vid: 'WwGF_sqjH6c', url: 'https://youtu.be/WwGF_sqjH6c', date: '2024.09.20' },
     { vid: 'i7jSnzRA8UI', url: 'https://youtu.be/i7jSnzRA8UI', date: '2024.09.23' },
@@ -5394,12 +5487,15 @@ const EXTERNAL_DATA = {
     { vid: '2S15hwuwMuA', url: 'https://www.youtube.com/watch?v=2S15hwuwMuA', date: '2026.05.15' },
   ],
   bokmenking: [
+    { vid: '8dE7DH23Dvs', url: 'https://youtu.be/8dE7DH23Dvs', date: '2026.06.01' },
     { vid: 'mgfhD9QYb0s', url: 'https://youtu.be/mgfhD9QYb0s', date: '2026.05.29' },
     { vid: 'jt5dpJ1iVoM', url: 'https://youtu.be/jt5dpJ1iVoM', date: '2025.08.03' },
     { vid: 'M-qJ2Bf3FZg', url: 'https://youtu.be/M-qJ2Bf3FZg', date: '2025.08.03' },
     { vid: '9LnzP7fXUS0', url: 'https://youtu.be/9LnzP7fXUS0', date: '2025.08.04' },
   ],
   mbcradio: [
+    { vid: 'kf4YG2WqnoI', url: 'https://youtu.be/kf4YG2WqnoI', date: '2025.02.12' },
+    { vid: 'u09TMTF38Ok', url: 'https://youtu.be/u09TMTF38Ok', date: '2026.06.02' },
     { vid: 'hynwrpzjRFg', url: 'https://youtu.be/hynwrpzjRFg', date: '2026.06.02' },
     { vid: '6Iq7hCk7XgA', url: 'https://youtu.be/6Iq7hCk7XgA', date: '2024.08.13' },
     { vid: 'J19TvSizVl8', url: 'https://www.youtube.com/live/J19TvSizVl8', date: '2024.08.12' },
@@ -5412,6 +5508,7 @@ const EXTERNAL_DATA = {
     { vid: 'JdQ81bhZQyw', url: 'https://youtu.be/JdQ81bhZQyw', date: '2026.04.19' },
   ],
   offair: [
+    { vid: '0wUiVwubg7k', url: 'https://youtu.be/0wUiVwubg7k', date: '2026.06.10' },
     { vid: '8RnNpl1ndJk', url: 'https://youtu.be/8RnNpl1ndJk', date: '2026.03.18' },
     { vid: 'PbzLUakw2BE', url: 'https://youtu.be/PbzLUakw2BE', date: '2026.03.18' },
     { vid: 'daNXoYd3w_w', url: 'https://youtu.be/daNXoYd3w_w', date: '2026.05.06' },
@@ -5454,27 +5551,20 @@ const EXTERNAL_DATA = {
 };
 const VID_TO_EXTERNAL_KEY = {};
 const EXTERNAL_CATS = {
-  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon','norejalham'] },
-  radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae','billie','riswell'] },
+  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon','norejalham','BAAMBCLIVE','tbcmusic','asianmodelawards'] },
+  radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae','billie','riswell','leeeunji','parksohyun','ebsradiokch'] },
   variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: [
     'anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction',
     'blip','moongtness','chan21','mvdream','adoruv','todayjob','dolsilencium',
     'studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag',
     'offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool',
     'roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging',
-    'hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok','dispatch',
-  ] },
+    'hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok','dispatch','wanguland'] },
   interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview','spotify'] },
 };
 const EXTERNAL_CAT_KEYS = Object.keys(EXTERNAL_CATS);
 
-const EXTERNAL_KEYS = Object.keys(EXTERNAL_DATA).sort((a, b) => {
-  const oldest = key => EXTERNAL_DATA[key].reduce((min, item) => {
-    const d = item.date || '';
-    return (!min || d < min) ? d : min;
-  }, '');
-  return oldest(a).localeCompare(oldest(b));
-});
+const EXTERNAL_KEYS = Object.keys(EXTERNAL_DATA).sort((a, b) => _oldestDate(a).localeCompare(_oldestDate(b)));
 for (const key of EXTERNAL_KEYS) {
   for (const item of EXTERNAL_DATA[key]) {
     VID_TO_EXTERNAL_KEY[item.vid] = key;
@@ -5506,6 +5596,7 @@ const _elMobileThemeIcon   = document.getElementById('mobileThemeIcon');
 const _elSortNewest        = document.getElementById('sortNewest');
 const _elSortOldest        = document.getElementById('sortOldest');
 const _elSearchClear       = document.getElementById('searchClear');
+const _elSearchInput       = document.getElementById('searchInput');
 const _elSongNav           = document.getElementById('songNav');
 const _elCalDetail         = document.getElementById('calDetail');
 const _elCalMonthTitle     = document.getElementById('calMonthTitle');
@@ -5561,7 +5652,7 @@ function setContentCat(el, cat) {
 function buildContentCard(item, delay) {
   const dateStr = getItemDate(item);
   const channel = item.channel || '';
-  const categoryLabel = item.category === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : (item.category || '');
+  const categoryLabel = getCategoryLabel(item.category);
   const titleHtml = item.loaded
     ? `<div class="csong-multi" id="cvc-title-${item.vid}">${item.title || item.vid}</div>`
     : `<div class="csong-multi" id="cvc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
@@ -5626,7 +5717,7 @@ async function loadCardMetas(items, mode) {
         }
         const cvcEl = document.getElementById(`cvc-${item.vid}`);
         if (cvcEl) {
-          const categoryLabel = item.category === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : (item.category || '');
+          const categoryLabel = getCategoryLabel(item.category);
           cvcEl.dataset.search = [item.title || '', categoryLabel, item.channel || '', item.date || ''].join(' ').toLowerCase();
         }
       } else {
@@ -5656,13 +5747,7 @@ function _getExternalCatKeys(cat) {
   if (_extChanSortCache[cat]) return _extChanSortCache[cat];
   const sorted = EXTERNAL_CATS[cat].keys
     .filter(k => EXTERNAL_DATA[k])
-    .sort((a, b) => {
-      const oldest = key => EXTERNAL_DATA[key].reduce((min, item) => {
-        const d = getItemDate(item);
-        return (!min || d < min) ? d : min;
-      }, '');
-      return oldest(a).localeCompare(oldest(b));
-    });
+    .sort((a, b) => _oldestDate(a).localeCompare(_oldestDate(b)));
   _extChanSortCache[cat] = sorted;
   return sorted;
 }
@@ -5773,11 +5858,7 @@ function buildExternalGrid() {
       : (EXTERNAL_DATA[curExternal] || []);
   }
 
-  items = [...items].sort((a, b) => {
-    const da = dateStrToNum(a.date || '0');
-    const db = dateStrToNum(b.date || '0');
-    return curSort === 'oldest' ? da - db : db - da;
-  });
+  items = sortItemsByDate(items, curSort);
 
   if (!items.length) {
     _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>링크가 아직 추가되지 않았습니다.</p></div>`;
@@ -5789,8 +5870,7 @@ function buildExternalGrid() {
   _gridSection = 'external';
   _gridLoadFn  = (batch) => loadCardMetas(batch, 'external');
   _elGrid.innerHTML = '';
-  _gridSentinel = document.createElement('div');
-  _gridSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
+  _gridSentinel = _makeSentinel();
   _elGrid.appendChild(_gridSentinel);
   _gridAppendBatch(_elGrid);
   if (_gridLoaded < _gridSorted.length) {
@@ -6222,6 +6302,12 @@ let _liveLoaded   = 0;
 let _liveObserver = null;
 let _liveSentinel = null;
 
+function _makeSentinel() {
+  const el = document.createElement('div');
+  el.style.cssText = 'grid-column:1/-1;height:1px;';
+  return el;
+}
+
 function _liveDisconnect() {
   if (_liveObserver) { _liveObserver.disconnect(); _liveObserver = null; }
   if (_liveSentinel && _liveSentinel.parentNode) _liveSentinel.remove();
@@ -6271,8 +6357,7 @@ function buildLiveGrid() {
   _liveSorted  = items;
   _liveLoaded  = 0;
   grid.innerHTML = '';
-  _liveSentinel = document.createElement('div');
-  _liveSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
+  _liveSentinel = _makeSentinel();
   grid.appendChild(_liveSentinel);
   _liveAppendBatch(grid);
   if (_liveLoaded < _liveSorted.length) {
@@ -6555,11 +6640,7 @@ function buildGrid() {
       ? CONTENT_ITEMS
       : CONTENT_ITEMS.filter(i => i.category === curContentCat);
 
-    items = [...items].sort((a, b) => {
-      const da = dateStrToNum(a.date || '0');
-      const db = dateStrToNum(b.date || '0');
-      return curSort === 'oldest' ? da - db : db - da;
-    });
+    items = sortItemsByDate(items, curSort);
 
     if (!items.length) {
       _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
@@ -6571,8 +6652,7 @@ function buildGrid() {
     _gridSection = 'content';
     _gridLoadFn  = (items) => loadCardMetas(items, 'content');
     _elGrid.innerHTML = '';
-    _gridSentinel = document.createElement('div');
-    _gridSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
+    _gridSentinel = _makeSentinel();
     _elGrid.appendChild(_gridSentinel);
     _gridAppendBatch(_elGrid);
     if (_gridLoaded < _gridSorted.length) {
@@ -6600,8 +6680,7 @@ function buildGrid() {
   _gridSection = 'songs';
   _gridLoadFn  = loadMetas;
   _elGrid.innerHTML = '';
-  _gridSentinel = document.createElement('div');
-  _gridSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
+  _gridSentinel = _makeSentinel();
   _elGrid.appendChild(_gridSentinel);
   _gridAppendBatch(_elGrid);
   if (_gridLoaded < _gridSorted.length) {
@@ -6620,10 +6699,6 @@ let _avObserver  = null;
 let _avSentinel  = null;
 
 let _unifiedVideoListCache = null;
-
-function _invalidateUnifiedCache() {
-  _unifiedVideoListCache = null;
-}
 
 function buildUnifiedVideoList() {
   if (_unifiedVideoListCache) return _unifiedVideoListCache;
@@ -6678,10 +6753,12 @@ function _avAppendNextBatch(grid) {
       item.meta   = item._ref.meta || item.meta;
     }
   });
+  const _avT  = getCurrentT();
+  const _avML = { '원이': _avT.filter_member_woni||'원이', '리브': _avT.filter_member_liv||'리브', '미나미': _avT.filter_member_minami||'미나미', '메이': _avT.filter_member_may||'메이', '제나': _avT.filter_member_zena||'제나', '전원': _avT.filter_all_members||'전원' };
   const wrapper = document.createElement('div');
   wrapper.innerHTML = batch.map((item, i) => {
     const delay = `${Math.min((i % AV_PAGE_SIZE) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
-    return buildAllVideoCard(item, delay);
+    return buildAllVideoCard(item, delay, undefined, _avML);
   }).join('');
   while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
   _avLoaded += batch.length;
@@ -6735,8 +6812,7 @@ function buildAllVideosGrid() {
   }
 
   _elGrid.innerHTML = '';
-  _avSentinel = document.createElement('div');
-  _avSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
+  _avSentinel = _makeSentinel();
   _elGrid.appendChild(_avSentinel);
 
   _avAppendNextBatch(_elGrid);
@@ -6751,7 +6827,7 @@ function buildAllVideosGrid() {
   if (curSearchQuery) applySearch();
 }
 
-function buildAllVideoCard(item, delay, idPrefix) {
+function buildAllVideoCard(item, delay, idPrefix, _ML) {
   const pfx = idPrefix || 'avc';
   const tb = TYPE_BADGE[item.type] || 'tb-content';
   const tl = getTypeLabel(item.type);
@@ -6760,8 +6836,7 @@ function buildAllVideoCard(item, delay, idPrefix) {
   const videoTitle = m.rawTitle || item.song || item.vid;
 
   if (item._src === 'live' && item._liveItem) {
-    const _t2 = getCurrentT();
-    const _ML2 = { '원이': _t2.filter_member_woni||'원이', '리브': _t2.filter_member_liv||'리브', '미나미': _t2.filter_member_minami||'미나미', '메이': _t2.filter_member_may||'메이', '제나': _t2.filter_member_zena||'제나', '전원': _t2.filter_all_members||'전원' };
+    const _ML2 = _ML || (() => { const _t2 = getCurrentT(); return { '원이': _t2.filter_member_woni||'원이', '리브': _t2.filter_member_liv||'리브', '미나미': _t2.filter_member_minami||'미나미', '메이': _t2.filter_member_may||'메이', '제나': _t2.filter_member_zena||'제나', '전원': _t2.filter_all_members||'전원' }; })();
     const memberBadges = item._liveItem.members.map(mm =>
       `<span class="ctag ${MEMBER_CLASS[mm] || ''}">${_ML2[mm] || mm}</span>`
     ).join('');
@@ -6804,7 +6879,7 @@ function buildAllVideoCard(item, delay, idPrefix) {
 
   if (item._src === 'content') {
     const ref = item._ref;
-    const categoryLabel = (ref.category === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : (ref.category || ''));
+    const categoryLabel = getCategoryLabel(ref.category);
     const titleHtml = item.loaded
       ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${videoTitle}</div>`
       : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
@@ -6884,12 +6959,8 @@ function _avUpdateCardSearch(vid, title, date, extra) {
       match = searchText.includes(q);
     }
     cardEl.style.display = match ? '' : 'none';
-    if (match) {
-      _hlClear(cardEl);
-      _hlCard(cardEl, dateNorm || q);
-    } else {
-      _hlClear(cardEl);
-    }
+    _hlClear(cardEl);
+    if (match) _hlCard(cardEl, dateNorm || q);
   });
   if (curSearchQuery) _scheduleCountUpdate();
 }
@@ -6990,6 +7061,7 @@ function replaceSkeleton(item) {
   const vcEl = document.getElementById(`vc-${item.vid}`);
   if (!vcEl) return;
   const m = item.meta;
+  const tl = getTypeLabel(item.type);
   const titleEl = document.getElementById(`vc-title-${item.vid}`);
   const dateEl  = document.getElementById(`vc-date-${item.vid}`);
   const tagsEl  = document.getElementById(`vc-tags-${item.vid}`);
@@ -7007,10 +7079,8 @@ function replaceSkeleton(item) {
     }
   }
   if (tagsEl) {
-    const tl = getTypeLabel(item.type);
     tagsEl.innerHTML = `<span class="ctag tb-tag-${item.type}">♪ ${tl}</span>`;
   }
-  const tl = getTypeLabel(item.type);
   const showLabel = m?.show?.label || '';
   const channel   = m?.channel    || '';
   const dateStr   = m?.date || DATE_MAP[item.vid] || '';
@@ -7026,7 +7096,6 @@ const _PICK_SECTION_MAP = {
   live:     ['liveMode','liveGrid'],
   external: ['externalMode','grid-wrap-el'],
   fantube:  ['fantubeMode'],
-  member:   [],
   links:    ['linksMode'],
   bookmark: ['bookmarkMode','grid-wrap-el'],
   about:    ['aboutMode'],
@@ -7173,7 +7242,7 @@ function renderSubContentTabs() {
   let html = `<button class="song-tab ${curContentCat === 'all' ? 'active' : ''}" onclick="setContentCat(this,'all'); syncSubSidebar();">ALL<span class="cnt">${totalCnt}</span></button>`;
   html += cats.map(c => {
     const cnt = _CONTENT_COUNT_MAP[c] || 0;
-    const label = c === '안녕하세요원이입니다잘부탁드립니다' ? '안원잘부' : c;
+    const label = getCategoryLabel(c);
     return `<button class="song-tab ${curContentCat === c ? 'active' : ''}" onclick="setContentCat(this,'${c.replace(/'/g,"&#39;")}'); syncSubSidebar();">${label}<span class="cnt">${cnt}</span></button>`;
   }).join('');
   return html;
@@ -7273,7 +7342,6 @@ function setLiveMemberFromSub(el, member) {
 
 let curSearchQuery = '';
 let curSort = 'newest';
-let _searchDebounceTimer = null;
 
 function _rebuildCurrentGrid() {
   if (curSection === 'allvideos') { buildAllVideosGrid(); return; }
@@ -7296,12 +7364,10 @@ function onSearch(val) {
 }
 
 function submitSearch() {
-  const inp = document.getElementById('searchInput');
-  if (!inp) return;
-  const val = inp.value.trim();
+  if (!_elSearchInput) return;
+  const val = _elSearchInput.value.trim();
   curSearchQuery = val;
   _elSearchClear.style.display = val ? 'flex' : 'none';
-  clearTimeout(_searchDebounceTimer);
   if (!val) {
     const countEl = document.getElementById('searchResultCount');
     if (countEl) countEl.textContent = '';
@@ -7312,15 +7378,14 @@ function submitSearch() {
 }
 
 (function () {
-  const inp = document.getElementById('searchInput');
-  if (!inp) return;
+  if (!_elSearchInput) return;
   let _composing = false;
-  inp.addEventListener('compositionstart', function () { _composing = true; });
-  inp.addEventListener('compositionend', function () { _composing = false; });
-  inp.addEventListener('input', function (e) {
+  _elSearchInput.addEventListener('compositionstart', function () { _composing = true; });
+  _elSearchInput.addEventListener('compositionend', function () { _composing = false; });
+  _elSearchInput.addEventListener('input', function (e) {
     onSearch(e.target.value);
   });
-  inp.addEventListener('keydown', function (e) {
+  _elSearchInput.addEventListener('keydown', function (e) {
     if (e.key === 'Enter' && !_composing) {
       e.preventDefault();
       submitSearch();
@@ -7330,13 +7395,10 @@ function submitSearch() {
 
 function clearSearch(skipApply) {
   curSearchQuery = '';
-  const inp = document.getElementById('searchInput');
-  if (inp) { inp.value = ''; }
-  const clearBtn = document.getElementById('searchClear');
-  if (clearBtn) clearBtn.style.display = 'none';
+  if (_elSearchInput) _elSearchInput.value = '';
+  _elSearchClear.style.display = 'none';
   const countEl = document.getElementById('searchResultCount');
   if (countEl) countEl.textContent = '';
-  clearTimeout(_searchDebounceTimer);
   if (!skipApply) _rebuildCurrentGrid();
 }
 
@@ -7574,11 +7636,6 @@ function applySearch() {
 
   if (token !== _applySearchToken) return;
   _applySearchFilter(targetGrid, q);
-}
-
-function searchMember(name) {
-  const query = encodeURIComponent('#리센느 ' + name);
-  window.open('https://www.youtube.com/results?search_query=' + query, '_blank', 'noopener');
 }
 
 function pickSong(song) {
@@ -8417,15 +8474,22 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeDrawer();
 });
 
+const _BOTTOM_NAV_MAP = {
+  songs: 'mnSongs', content: 'mnContent', live: 'mnLive',
+  external: 'mnExternal', bookmark: 'mnBookmark'
+};
+const _DRAWER_NAV_MAP = {
+  allvideos: 'dAllVideos',
+  songs: 'dSongs', content: 'dContent', live: 'dLive', external: 'dExternal',
+  fantube: 'dFantube', links: 'dLinks', about: 'dAbout', bookmark: 'dBookmark',
+  schedule: 'dSchedule', news: 'dNews',
+};
+
 function updateMobileNav(section) {
-  const bottomMap = {
-    songs: 'mnSongs', content: 'mnContent', live: 'mnLive',
-    external: 'mnExternal', bookmark: 'mnBookmark'
-  };
   _allMobNavBtns.forEach(b => b.classList.remove('active'));
   const indicator = _elNavIndicator;
-  if (bottomMap[section]) {
-    const btn = document.getElementById(bottomMap[section]);
+  if (_BOTTOM_NAV_MAP[section]) {
+    const btn = document.getElementById(_BOTTOM_NAV_MAP[section]);
     if (btn) {
       btn.classList.add('active');
       if (indicator && _elMobileBottomNav) {
@@ -8442,16 +8506,9 @@ function updateMobileNav(section) {
     if (indicator) indicator.style.opacity = '0';
   }
 
-  const drawerMap = {
-    allvideos: 'dAllVideos',
-    songs: 'dSongs', content: 'dContent', live: 'dLive', external: 'dExternal',
-    fantube: 'dFantube', links: 'dLinks', about: 'dAbout', bookmark: 'dBookmark',
-    schedule: 'dSchedule',
-    news: 'dNews',
-  };
   _allDrawerItems.forEach(b => b.classList.remove('active'));
-  if (drawerMap[section]) {
-    const btn = document.getElementById(drawerMap[section]);
+  if (_DRAWER_NAV_MAP[section]) {
+    const btn = document.getElementById(_DRAWER_NAV_MAP[section]);
     if (btn) btn.classList.add('active');
   }
 }
