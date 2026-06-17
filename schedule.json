@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-17T03:00:38Z",
+  "updated": "2026-06-17T15:00:47Z",
   "events": [
     {
       "date": "2026-06-01",
@@ -41,6 +41,13 @@
       "title": "SBS <열혈농구단> HALFTIME SHOW",
       "detail": "",
       "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-06-18",
+      "title": "Mnet <M COUNTDOWN>",
+      "detail": "",
+      "type": "broadcast",
       "source": "mnetplus"
     }
   ]
