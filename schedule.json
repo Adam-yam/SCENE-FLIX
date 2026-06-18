@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-18T03:00:41Z",
+  "updated": "2026-06-18T15:00:47Z",
   "events": [
     {
       "date": "2026-06-01",
@@ -48,6 +48,13 @@
       "title": "Mnet <M COUNTDOWN>",
       "detail": "",
       "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-06-20",
+      "title": "거제시X전참시 미니 팬미팅",
+      "detail": "",
+      "type": "event",
       "source": "mnetplus"
     }
   ]
