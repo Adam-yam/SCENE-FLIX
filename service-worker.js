@@ -38,15 +38,16 @@ self.addEventListener('fetch', e => {
   }
 
   e.respondWith(
-    caches.match(e.request).then(cached => {
-      if (cached) return cached;
-      return fetch(e.request).then(res => {
-        if (res && res.status === 200 && e.request.method === 'GET') {
-          const clone = res.clone();
-          caches.open(CACHE).then(c => c.put(e.request, clone));
-        }
-        return res;
-      });
-    })
+    caches.open(CACHE).then(cache =>
+      cache.match(e.request).then(cached => {
+        const fetchAndUpdate = fetch(e.request).then(res => {
+          if (res && res.status === 200 && e.request.method === 'GET') {
+            cache.put(e.request, res.clone());
+          }
+          return res;
+        });
+        return cached || fetchAndUpdate;
+      })
+    )
   );
 });
