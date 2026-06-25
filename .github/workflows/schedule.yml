@@ -31,9 +31,8 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git stash
-          git pull --rebase origin main
-          git stash pop
           git add data/
-          git diff --cached --quiet || git commit -m "chore: 스케줄·뉴스·Shorts 자동 업데이트 $(date +'%Y-%m-%d %H:%M')"
+          git diff --cached --quiet && echo "변경사항 없음" && exit 0
+          git commit -m "chore: 스케줄·뉴스·Shorts 자동 업데이트 $(date +'%Y-%m-%d %H:%M')"
+          git pull --rebase origin main
           git push
