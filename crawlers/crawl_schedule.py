@@ -14,6 +14,7 @@ from typing import Optional
 
 import aiohttp
 import requests
+import yt_dlp
 
 ROOT = pathlib.Path(__file__).parent.parent
 
@@ -369,18 +370,128 @@ def run_news_crawler() -> dict:
     return result
 
 
+# ──────────────────────────────────────────────
+# Shorts 크롤러 (yt-dlp)
+# ──────────────────────────────────────────────
+
+SHORTS_CHANNELS = {
+    "official": "https://www.youtube.com/@RESCENE_official/shorts",
+    "woni":     "https://www.youtube.com/@helloiamwoninicetomeetyou/shorts",
+}
+
+SHORTS_JSON_PATH = ROOT / "data" / "shorts.json"
+
+
+def _fmt_date(upload_date: str) -> str:
+    """yt-dlp upload_date (YYYYMMDD) → YYYY.MM.DD"""
+    if not upload_date or len(upload_date) < 8:
+        return ""
+    return f"{upload_date[:4]}.{upload_date[4:6]}.{upload_date[6:8]}"
+
+
+def _load_existing_shorts() -> dict[str, dict]:
+    """기존 shorts.json을 vid → item 딕셔너리로 읽기"""
+    if not SHORTS_JSON_PATH.exists():
+        return {}
+    try:
+        with open(SHORTS_JSON_PATH, encoding="utf-8") as f:
+            data = json.load(f)
+        return {item["vid"]: item for item in data.get("items", [])}
+    except Exception as e:
+        print(f"[Shorts] 기존 파일 읽기 실패: {e}", file=sys.stderr)
+        return {}
+
+
+def crawl_shorts_channel(channel_key: str, url: str, existing: dict[str, dict]) -> list[dict]:
+    """채널 Shorts 탭 전체를 긁어서 반환. 기존 vid는 existing 데이터 유지."""
+    print(f"[Shorts] {channel_key} 크롤링 시작...", file=sys.stderr)
+
+    ydl_opts = {
+        "quiet":        True,
+        "no_warnings":  True,
+        "extract_flat": True,
+        "extractor_args": {"youtubetab": {"skip": ["authcheck"]}},
+    }
+
+    entries = []
+    try:
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=False)
+            entries = info.get("entries", []) if info else []
+    except Exception as e:
+        print(f"[Shorts] {channel_key} 크롤링 실패: {e}", file=sys.stderr)
+        return []
+
+    items = []
+    new_count = 0
+    for entry in entries:
+        vid = entry.get("id", "")
+        if not vid:
+            continue
+
+        if vid in existing:
+            items.append(existing[vid])
+            continue
+
+        date_str = _fmt_date(entry.get("upload_date", ""))
+        title    = entry.get("title", "").strip()
+
+        items.append({
+            "vid":     vid,
+            "channel": channel_key,
+            "date":    date_str,
+            "title":   title,
+        })
+        new_count += 1
+
+    print(
+        f"[Shorts] {channel_key} 완료 — 전체 {len(items)}개 / 신규 {new_count}개",
+        file=sys.stderr,
+    )
+    return items
+
+
+def run_shorts_crawler() -> dict:
+    print("[Shorts] 시작", file=sys.stderr)
+
+    existing = _load_existing_shorts()
+
+    all_items = []
+    for channel_key, url in SHORTS_CHANNELS.items():
+        items = crawl_shorts_channel(channel_key, url, existing)
+        all_items.extend(items)
+        time.sleep(1)
+
+    all_items.sort(key=lambda x: x.get("date", ""), reverse=True)
+
+    result = {
+        "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "items":   all_items,
+    }
+    print(f"[Shorts] 완료 — 총 {len(all_items)}개", file=sys.stderr)
+    return result
+
+
 def main():
+    (ROOT / "data").mkdir(exist_ok=True)
+
     schedule_data = run_schedule_crawler()
-    sched_path = ROOT / "schedule.json"
+    sched_path = ROOT / "data" / "schedule.json"
     with open(sched_path, "w", encoding="utf-8") as f:
         json.dump(schedule_data, f, ensure_ascii=False, indent=2)
     print(f"[완료] schedule.json → {sched_path}", file=sys.stderr)
 
     news_data = run_news_crawler()
-    news_path = ROOT / "news.json"
+    news_path = ROOT / "data" / "news.json"
     with open(news_path, "w", encoding="utf-8") as f:
         json.dump(news_data, f, ensure_ascii=False, indent=2)
     print(f"[완료] news.json → {news_path}", file=sys.stderr)
+
+    shorts_data = run_shorts_crawler()
+    shorts_path = ROOT / "data" / "shorts.json"
+    with open(shorts_path, "w", encoding="utf-8") as f:
+        json.dump(shorts_data, f, ensure_ascii=False, indent=2)
+    print(f"[완료] shorts.json → {shorts_path}", file=sys.stderr)
 
 
 if __name__ == "__main__":
