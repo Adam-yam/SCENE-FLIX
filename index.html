@@ -8280,7 +8280,7 @@ function _appendShortsPage(grid) {
     card.style.animationDelay = delay;
     card.onclick = function(e) { openVideo(e, item.vid); };
     card.innerHTML = `<div class="shorts-thumb-wrap">
-        <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
+        <img src="https://img.youtube.com/vi/${item.vid}/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg';}">
         <div class="shorts-play-ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
         ${label ? `<span class="shorts-channel-badge">${label}</span>` : ''}
       </div>
