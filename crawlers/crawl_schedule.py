@@ -411,6 +411,7 @@ def crawl_shorts_channel(channel_key: str, url: str, existing: dict[str, dict]) 
         "no_warnings":  True,
         "extract_flat": True,
         "extractor_args": {"youtubetab": {"skip": ["authcheck"]}},
+        "http_headers": {"Accept-Language": "ko-KR,ko;q=0.9"},
     }
 
     entries = []
