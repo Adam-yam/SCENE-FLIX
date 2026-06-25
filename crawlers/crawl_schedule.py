@@ -403,13 +403,12 @@ def _load_existing_shorts() -> dict[str, dict]:
 
 
 def crawl_shorts_channel(channel_key: str, url: str, existing: dict[str, dict]) -> list[dict]:
-    """채널 Shorts 탭 전체를 긁어서 반환. 기존 vid는 existing 데이터 유지."""
     print(f"[Shorts] {channel_key} 크롤링 시작...", file=sys.stderr)
 
     ydl_opts = {
         "quiet":        True,
         "no_warnings":  True,
-        "extract_flat": True,
+        "extract_flat": "in_playlist",
         "extractor_args": {
             "youtubetab": {"skip": ["authcheck"]},
             "youtube":    {"lang": ["ko"]},
@@ -426,7 +425,6 @@ def crawl_shorts_channel(channel_key: str, url: str, existing: dict[str, dict]) 
         return []
 
     items = []
-    need_detail = []
     new_count = 0
 
     for entry in entries:
@@ -441,40 +439,13 @@ def crawl_shorts_channel(channel_key: str, url: str, existing: dict[str, dict]) 
         date_str = _fmt_date(entry.get("upload_date", ""))
         title    = entry.get("title", "").strip()
 
-        item = {
+        items.append({
             "vid":     vid,
             "channel": channel_key,
             "date":    date_str,
             "title":   title,
-        }
-        items.append(item)
+        })
         new_count += 1
-
-        if not date_str or not title:
-            need_detail.append(item)
-
-    if need_detail:
-        print(f"[Shorts] {channel_key} 날짜/제목 보완 필요 {len(need_detail)}개 개별 조회...", file=sys.stderr)
-        ydl_detail_opts = {
-            "quiet":       True,
-            "no_warnings": True,
-            "extractor_args": {"youtube": {"lang": ["ko"]}},
-        }
-        with yt_dlp.YoutubeDL(ydl_detail_opts) as ydl:
-            for item in need_detail:
-                try:
-                    detail = ydl.extract_info(
-                        f"https://www.youtube.com/shorts/{item['vid']}",
-                        download=False,
-                    )
-                    if detail:
-                        if not item["date"]:
-                            item["date"] = _fmt_date(detail.get("upload_date", ""))
-                        if not item["title"]:
-                            item["title"] = (detail.get("title") or "").strip()
-                except Exception as e:
-                    print(f"  [Shorts] {item['vid']} 개별 조회 실패: {e}", file=sys.stderr)
-                time.sleep(0.3)
 
     print(
         f"[Shorts] {channel_key} 완료 — 전체 {len(items)}개 / 신규 {new_count}개",
