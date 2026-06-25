@@ -402,6 +402,41 @@ def _load_existing_shorts() -> dict[str, dict]:
         return {}
 
 
+YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", "")
+YOUTUBE_API_BASE = "https://www.googleapis.com/youtube/v3/videos"
+
+
+def _fetch_publish_dates(vids: list[str]) -> dict[str, str]:
+    """YouTube Data API v3로 vid 목록의 publishedAt 날짜 배치 조회 (50개씩)"""
+    if not YOUTUBE_API_KEY or not vids:
+        return {}
+    result = {}
+    for i in range(0, len(vids), 50):
+        batch = vids[i:i + 50]
+        try:
+            resp = requests.get(
+                YOUTUBE_API_BASE,
+                params={
+                    "part":  "snippet",
+                    "id":    ",".join(batch),
+                    "key":   YOUTUBE_API_KEY,
+                    "fields": "items(id,snippet/publishedAt)",
+                },
+                timeout=15,
+            )
+            resp.raise_for_status()
+            for item in resp.json().get("items", []):
+                vid = item.get("id", "")
+                pub = item.get("snippet", {}).get("publishedAt", "")
+                if vid and pub:
+                    m = re.match(r"(\d{4})-(\d{2})-(\d{2})", pub)
+                    if m:
+                        result[vid] = f"{m.group(1)}.{m.group(2)}.{m.group(3)}"
+        except Exception as e:
+            print(f"[Shorts] YouTube API 배치 조회 실패: {e}", file=sys.stderr)
+    return result
+
+
 def crawl_shorts_channel(channel_key: str, url: str, existing: dict[str, dict]) -> list[dict]:
     print(f"[Shorts] {channel_key} 크롤링 시작...", file=sys.stderr)
 
@@ -425,6 +460,7 @@ def crawl_shorts_channel(channel_key: str, url: str, existing: dict[str, dict]) 
         return []
 
     items = []
+    new_items = []
     new_count = 0
 
     for entry in entries:
@@ -436,16 +472,26 @@ def crawl_shorts_channel(channel_key: str, url: str, existing: dict[str, dict]) 
             items.append(existing[vid])
             continue
 
+        title = entry.get("title", "").strip()
         date_str = _fmt_date(entry.get("upload_date", ""))
-        title    = entry.get("title", "").strip()
 
-        items.append({
+        item = {
             "vid":     vid,
             "channel": channel_key,
             "date":    date_str,
             "title":   title,
-        })
+        }
+        items.append(item)
+        new_items.append(item)
         new_count += 1
+
+    need_date = [i for i in new_items if not i["date"]]
+    if need_date:
+        print(f"[Shorts] {channel_key} 날짜 없는 신규 {len(need_date)}개 API 조회...", file=sys.stderr)
+        date_map = _fetch_publish_dates([i["vid"] for i in need_date])
+        for item in need_date:
+            if item["vid"] in date_map:
+                item["date"] = date_map[item["vid"]]
 
     print(
         f"[Shorts] {channel_key} 완료 — 전체 {len(items)}개 / 신규 {new_count}개",
