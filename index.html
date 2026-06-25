@@ -2398,6 +2398,30 @@ header {
 .news-empty .ico { font-size: 2rem; margin-bottom: 14px; opacity: 0.25; }
 .news-empty p { font-size: 0.82rem; }
 @media (max-width: 700px) { .news-wrap { padding: 16px 10px calc(80px + var(--safe-bottom)); } .news-grid { grid-template-columns: 1fr; gap: 12px; } .news-title { font-size: 0.78rem; } }
+#shortsMode { animation: fadeUp 0.32s ease both; }
+.shorts-wrap { max-width: 1400px; margin: 0 auto; padding: 0 28px 80px; }
+.shorts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
+.shorts-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: background 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s; cursor: pointer; }
+.shorts-card:hover { background: var(--card-h); border-color: var(--border-h); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+.shorts-thumb-wrap { position: relative; width: 100%; aspect-ratio: 9/16; background: var(--dim); overflow: hidden; flex-shrink: 0; }
+.shorts-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+.shorts-play-ring { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.15s; }
+.shorts-card:hover .shorts-play-ring { opacity: 1; }
+.shorts-play-ring svg { width: 32px; height: 32px; color: #fff; drop-shadow: 0 2px 8px rgba(0,0,0,0.5); }
+.shorts-channel-badge { position: absolute; top: 7px; left: 7px; font-size: 0.52rem; font-weight: 600; letter-spacing: 0.04em; padding: 2px 6px; border-radius: 4px; background: rgba(0,0,0,0.55); color: #fff; backdrop-filter: blur(4px); }
+.shorts-body { padding: 7px 8px 9px; display: flex; flex-direction: column; gap: 3px; }
+.shorts-title { font-size: 0.68rem; font-weight: 500; line-height: 1.4; color: var(--text); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.shorts-date { font-size: 0.6rem; color: var(--muted); }
+.shorts-empty { grid-column: 1/-1; text-align: center; padding: 60px 20px; color: var(--muted); }
+.shorts-empty .ico { font-size: 2rem; margin-bottom: 14px; opacity: 0.25; }
+.shorts-empty p { font-size: 0.82rem; }
+.shorts-skel { background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+.shorts-skel::before { content: ''; display: block; width: 100%; aspect-ratio: 9/16; background: linear-gradient(90deg, var(--dim) 25%, var(--card-h) 50%, var(--dim) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; }
+.shorts-skel::after { content: ''; display: block; height: 40px; margin: 8px 8px; border-radius: 4px; background: linear-gradient(90deg, var(--dim) 25%, var(--card-h) 50%, var(--dim) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; }
+.shorts-beta { font-size: 0.5rem; font-weight: 600; letter-spacing: 0.06em; color: #ff3b30; vertical-align: middle; margin-left: 3px; }
+@media (max-width: 700px) { .shorts-wrap { padding: 0 10px calc(80px + var(--safe-bottom)); } .shorts-grid { grid-template-columns: repeat(3, 1fr); gap: 7px; } }
+@media (min-width: 1200px) { .shorts-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); } }
+
 .chart-legend-item { display:flex; align-items:center; gap:10px; cursor:pointer; border-radius:8px; padding:6px 8px; transition:background 0.15s; }
 .chart-legend-item:hover { background: var(--card-h); }
 .chart-legend-dot { width:12px; height:12px; border-radius:3px; flex-shrink:0; }
@@ -2489,6 +2513,10 @@ header {
     <button class="drawer-item btn-base" id="dExternal" onclick="closeDrawer(); pickSection('external');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       <span data-i18n="tab_external_full">외부 컨텐츠</span>
+    </button>
+    <button class="drawer-item btn-base" id="dShorts" onclick="closeDrawer(); pickSection('shorts');">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.553-2.276A1 1 0 0 1 21 8.723v6.554a1 1 0 0 1-1.447.894L15 14"/><rect x="2" y="6" width="13" height="12" rx="2"/></svg>
+      <span>Shorts</span><span class="shorts-beta">BETA</span>
     </button>
     <div class="drawer-divider"></div>
     <button class="drawer-item btn-base" id="dSchedule" onclick="closeDrawer(); pickSection('schedule');">
@@ -2639,6 +2667,10 @@ header {
     <button class="section-tab" id="secExternal" onclick="pickSection('external')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       <span data-i18n="tab_external_full">외부 컨텐츠</span>
+    </button>
+    <button class="section-tab" id="secShorts" onclick="pickSection('shorts')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.553-2.276A1 1 0 0 1 21 8.723v6.554a1 1 0 0 1-1.447.894L15 14"/><rect x="2" y="6" width="13" height="12" rx="2"/></svg>
+      <span>Shorts</span><span class="shorts-beta">BETA</span>
     </button>
     <div style="height:1px;background:var(--border);margin:4px 4px;"></div>
     <button class="section-tab" id="secSchedule" onclick="pickSection('schedule')">
@@ -3203,6 +3235,26 @@ header {
     </div>
   </div>
 </div>
+<div id="shortsMode" style="display:none;">
+  <div class="song-nav-inner">
+    <div class="song-nav" id="shortsYearNav"></div>
+  </div>
+  <div class="type-bar">
+    <button class="type-btn active" data-sc="all"      onclick="setShortsChannel(this,'all')">전체</button>
+    <button class="type-btn"        data-sc="official" onclick="setShortsChannel(this,'official')">RESCENE Official</button>
+    <button class="type-btn"        data-sc="woni"     onclick="setShortsChannel(this,'woni')">안녕하세요원이입니다잘부탁드립니다</button>
+  </div>
+  <div class="shorts-wrap">
+    <div class="shorts-grid" id="shortsGrid">
+      <div class="shorts-skel"></div>
+      <div class="shorts-skel"></div>
+      <div class="shorts-skel"></div>
+      <div class="shorts-skel"></div>
+      <div class="shorts-skel"></div>
+      <div class="shorts-skel"></div>
+    </div>
+  </div>
+</div>
 <div class="grid-wrap" id="grid-wrap-el">
   <div class="video-grid" id="grid"></div>
 </div>
@@ -3273,6 +3325,7 @@ window._i18n = {
     ext_cat_radio:        '라디오',
     ext_cat_variety:      '예능',
     ext_cat_interview:    '인터뷰',
+    ext_cat_ad:           '광고·홍보',
   },
   JP: {
     headerTagline:        'RESCENEの映像まとめ SCENE-FLIX',
@@ -3331,6 +3384,7 @@ window._i18n = {
     ext_cat_radio:        'ラジオ',
     ext_cat_variety:      'バラエティ',
     ext_cat_interview:    'インタビュー',
+    ext_cat_ad:           '広告・PR',
   },
   EN: {
     headerTagline:        'RESCENE Video Archive SCENE-FLIX',
@@ -3389,6 +3443,7 @@ window._i18n = {
     ext_cat_radio:        'Radio',
     ext_cat_variety:      'Variety',
     ext_cat_interview:    'Interview',
+    ext_cat_ad:           'AD·PR',
   }
 };
 
@@ -3801,10 +3856,18 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
-  'P0LNFoDtf74': '2026.06.24 19:50',
   'xclVi9zCFdY': '2026.06.24 19:59',
-  'kMl5WRVSEaU': '2026.06.24 18:30',
-  '6xunrScz_5k': '2026.06.24 18:00',
+  'AsSo48oCsj8': '2026.06.24 09:12',
+  'r0LX_fEjUCs': '2026.06.25 12:55',
+  'M6iVmggYBiY': '2026.06.23 18:00',
+  'Is9G26gRqjg': '2026.06.25 15:00',
+  'gaJlFzkZBNE': '2026.06.11 14:33',
+  'r0UJwMtX97I': '2026.06.11 19:16',
+  'Fwq84AVqJ9k': '2026.06.09 19:54',
+  'ZuXVSl-yX9k': '2026.06.19 12:23',
+  'lNIapSGOAHw': '2026.06.19 16:40',
+  'TQnDvlJH4Bk': '2026.06.25 10:15',
+  'e4rq-V5shOA': '2026.06.25 12:01',
   'fvKhUXxe9vE': '2026.06.23 17:00',
   'TAm62eegOD8': '2026.06.21 20:00',
   'n5uCJzThOCM': '2026.06.21 16:12',
@@ -5156,10 +5219,24 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', BAAMBCLIVE: 'BAAMBC LIVE', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', gangnami: '동네친구 강나미' };
+const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', BAAMBCLIVE: 'BAAMBC LIVE', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', casaverdi: '카사베르디', fcmobile: 'FC 모바일', geojesi: '거제시', suwon: '수원시' };
 const EXTERNAL_DATA = {
-  gangnami: [
-    { vid: '6xunrScz_5k', url: 'https://youtu.be/6xunrScz_5k', date: '2026.06.24 18:00' },
+  suwon: [
+    { vid: 'r0LX_fEjUCs', url: 'https://youtu.be/r0LX_fEjUCs', date: '2026.06.25 12:55' },
+  ],
+  geojesi: [
+    { vid: 'AsSo48oCsj8', url: 'https://youtu.be/AsSo48oCsj8', date: '2026.06.24 09:12' },
+  ],
+  fcmobile: [
+    { vid: 'gaJlFzkZBNE', url: 'https://youtu.be/gaJlFzkZBNE', date: '2026.06.11 14:33' },
+    { vid: 'r0UJwMtX97I', url: 'https://youtu.be/r0UJwMtX97I', date: '2026.06.11 19:16' },
+    { vid: 'Fwq84AVqJ9k', url: 'https://youtu.be/Fwq84AVqJ9k', date: '2026.06.09 19:54' },
+    { vid: 'ZuXVSl-yX9k', url: 'https://youtu.be/ZuXVSl-yX9k', date: '2026.06.19 12:23' },
+    { vid: 'lNIapSGOAHw', url: 'https://youtu.be/lNIapSGOAHw', date: '2026.06.19 16:40' },
+  ],
+  casaverdi: [
+    { vid: 'TQnDvlJH4Bk', url: 'https://youtu.be/TQnDvlJH4Bk', date: '2026.06.25 10:15' },
+    { vid: 'e4rq-V5shOA', url: 'https://youtu.be/e4rq-V5shOA', date: '2026.06.25 12:01' },
   ],
   pickcon: [
     { vid: 'TLiLaxZlcsM', url: 'https://youtu.be/TLiLaxZlcsM', date: '2024.03.26' },
@@ -5190,7 +5267,7 @@ const EXTERNAL_DATA = {
     { vid: 'GNTiMc85VTY', url: 'https://youtu.be/GNTiMc85VTY', date: '2025.02.13' },
   ],
   knowingbros: [
-    { vid: 'P0LNFoDtf74', url: 'https://youtu.be/P0LNFoDtf74', date: '2026.06.24 19:50' },
+    { vid: 'M6iVmggYBiY', url: 'https://youtu.be/M6iVmggYBiY', date: '2026.06.23 18:00' },
     { vid: 'TAm62eegOD8', url: 'https://youtu.be/TAm62eegOD8', date: '2026.06.21 20:00' },
     { vid: 'n5uCJzThOCM', url: 'https://youtu.be/n5uCJzThOCM', date: '2026.06.21 16:12' },
     { vid: '37ywjipPqCw', url: 'https://youtu.be/37ywjipPqCw', date: '2026.06.21 10:08' },
@@ -5259,6 +5336,7 @@ const EXTERNAL_DATA = {
     { vid: 'jR3dAv6Qkfs', url: 'https://youtu.be/jR3dAv6Qkfs', date: '2024.05.17' },
   ],
   dispatch: [
+    { vid: 'Is9G26gRqjg', url: 'https://youtu.be/Is9G26gRqjg', date: '2026.06.25 15:00' },
     { vid: '94HN0dQmUB8', url: 'https://youtu.be/94HN0dQmUB8', date: '2026.06.19' },
     { vid: '4cWjPdAfKJE', url: 'https://youtu.be/4cWjPdAfKJE', date: '2026.06.18' },
     { vid: 't11Hd5_h8ks', url: 'https://youtu.be/t11Hd5_h8ks', date: '2026.06.12' },
@@ -5672,7 +5750,6 @@ const EXTERNAL_DATA = {
     { vid: '9LnzP7fXUS0', url: 'https://youtu.be/9LnzP7fXUS0', date: '2025.08.04' },
   ],
   mbcradio: [
-    { vid: 'kMl5WRVSEaU', url: 'https://youtu.be/kMl5WRVSEaU', date: '2026.06.24 18:30' },
     { vid: 'kf4YG2WqnoI', url: 'https://youtu.be/kf4YG2WqnoI', date: '2025.02.12' },
     { vid: 'u09TMTF38Ok', url: 'https://youtu.be/u09TMTF38Ok', date: '2026.06.02' },
     { vid: 'hynwrpzjRFg', url: 'https://youtu.be/hynwrpzjRFg', date: '2026.06.02' },
@@ -5730,7 +5807,7 @@ const EXTERNAL_DATA = {
 };
 const VID_TO_EXTERNAL_KEY = {};
 const EXTERNAL_CATS = {
-  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon','norejalham','BAAMBCLIVE','tbcmusic','asianmodelawards','pickcon','gangnami'] },
+  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon','norejalham','BAAMBCLIVE','tbcmusic','asianmodelawards','pickcon'] },
   radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae','billie','riswell','leeeunji','parksohyun','ebsradiokch'] },
   variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: [
     'anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction',
@@ -5740,6 +5817,7 @@ const EXTERNAL_CATS = {
     'roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging',
     'hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok','dispatch','wanguland','chimtube','leemiju','johnpark','knowingbros','artbox','benstage','gonalisa','kpoponair','tenttalk'] },
   interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview','spotify'] },
+  ad:        { label: '광고·홍보', i18nKey: 'ext_cat_ad',       keys: ['casaverdi','fcmobile','geojesi','suwon'] },
 };
 const EXTERNAL_CAT_KEYS = Object.keys(EXTERNAL_CATS);
 
@@ -5781,7 +5859,7 @@ const _elCalDetail         = document.getElementById('calDetail');
 const _elCalMonthTitle     = document.getElementById('calMonthTitle');
 const _elCalGrid           = document.getElementById('calGrid');
 
-const _SECTION_EL_IDS = ['allvideosMode','archiveMode','songMode','contentMode','liveMode','externalMode','fantubeMode','linksMode','bookmarkMode','aboutMode','scheduleMode','newsMode','grid-wrap-el','liveGrid'];
+const _SECTION_EL_IDS = ['allvideosMode','archiveMode','songMode','contentMode','liveMode','externalMode','shortsMode','fantubeMode','linksMode','bookmarkMode','aboutMode','scheduleMode','newsMode','grid-wrap-el','liveGrid'];
 const _SECTION_EL_CACHE = Object.fromEntries(
   _SECTION_EL_IDS.map(id => [id, document.getElementById(id)])
 );
@@ -7422,7 +7500,7 @@ function replaceSkeleton(item) {
   vcEl.dataset.search = [m?.rawTitle || item.song, tl, showLabel, channel, dateStr].join(' ').toLowerCase();
 }
 
-const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', archive:'secArchive', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', fantube:'secFantube', links:'secLinks', bookmark:'secBookmark', about:'secAbout', schedule:'secSchedule', news:'secNews' };
+const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', archive:'secArchive', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', shorts:'secShorts', fantube:'secFantube', links:'secLinks', bookmark:'secBookmark', about:'secAbout', schedule:'secSchedule', news:'secNews' };
 const _PICK_SECTION_EL_IDS = _SECTION_EL_IDS;
 const _PICK_SECTION_MAP = {
   allvideos:['allvideosMode','grid-wrap-el'],
@@ -7431,6 +7509,7 @@ const _PICK_SECTION_MAP = {
   content:  ['contentMode','grid-wrap-el'],
   live:     ['liveMode','liveGrid'],
   external: ['externalMode','grid-wrap-el'],
+  shorts:   ['shortsMode'],
   fantube:  ['fantubeMode'],
   links:    ['linksMode'],
   bookmark: ['bookmarkMode','grid-wrap-el'],
@@ -7445,8 +7524,9 @@ const _SUB_SECTIONS = {
   content:  { label: '자체 컨텐츠' },
   live:     { label: 'Live' },
   external: { label: '외부 컨텐츠' },
+  shorts:   { label: 'Shorts' },
 };
-const _SUB_TAB_ID_MAP = { archive:'secArchive', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal' };
+const _SUB_TAB_ID_MAP = { archive:'secArchive', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', shorts:'secShorts' };
 
 function _replayAnim(selector, delayFn, animStr = '') {
   const els = Array.from(document.querySelectorAll(selector));
@@ -7504,6 +7584,7 @@ function pickSection(section, _fromPopState) {
     _liveDisconnect();
   }
   if (section === 'external') { buildExternalChanBar(); buildExternalGrid(); }
+  if (section === 'shorts') _initShorts();
   if (section === 'fantube') buildFantubeGrid();
   if (section === 'bookmark') buildBookmarkGrid();
   if (section === 'schedule') buildCalendar();
@@ -7552,6 +7633,8 @@ function updateSubSidebar(section) {
     html += renderSubExternalTabs();
   } else if (section === 'archive') {
     html += renderSubArchiveYearTabs();
+  } else if (section === 'shorts') {
+    html += renderSubShortsTabs();
   }
 
   content.innerHTML = html;
@@ -7623,6 +7706,40 @@ function renderSubArchiveYearTabs() {
   return years.map(y => {
     const total = Object.values(dateMap[y]).reduce((s, a) => s + a.length, 0);
     return `<button class="song-tab${y === _archiveYear ? ' active' : ''}" onclick="setArchiveYearFromSub('${y}')">${y}<span class="cnt">${total}</span></button>`;
+  }).join('');
+}
+
+function buildShortsYearNav() {
+  const nav = document.getElementById('shortsYearNav');
+  if (!nav) return;
+  const years = ['all', '2024', '2025', '2026'];
+  const t = getCurrentT();
+  const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
+  const labels = { all: 'ALL' };
+  years.forEach(y => { if (!labels[y]) labels[y] = window._curLang === 'EN' ? y : y + suffix; });
+  nav.innerHTML = years.map(y => {
+    const base = _curShortsChannel === 'all' ? SHORTS_DATA : SHORTS_DATA.filter(i => i.channel === _curShortsChannel);
+    const count = _shortsLoaded
+      ? (y === 'all' ? base.length : base.filter(i => i.date && i.date.startsWith(y)).length)
+      : null;
+    const cntHtml = count !== null ? `<span class="cnt">${count}</span>` : '';
+    return `<button class="song-tab ${_curShortsYear === y ? 'active' : ''}" onclick="pickShortsYear('${y}')">${labels[y]}${cntHtml}</button>`;
+  }).join('');
+}
+
+function renderSubShortsTabs() {
+  const years = ['all', '2024', '2025', '2026'];
+  const t = getCurrentT();
+  const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
+  const labels = { all: 'ALL' };
+  years.forEach(y => { if (!labels[y]) labels[y] = window._curLang === 'EN' ? y : y + suffix; });
+  return years.map(y => {
+    const base = _curShortsChannel === 'all' ? SHORTS_DATA : SHORTS_DATA.filter(i => i.channel === _curShortsChannel);
+    const count = _shortsLoaded
+      ? (y === 'all' ? base.length : base.filter(i => i.date && i.date.startsWith(y)).length)
+      : null;
+    const cntHtml = count !== null ? `<span class="cnt">${count}</span>` : '';
+    return `<button class="song-tab ${_curShortsYear === y ? 'active' : ''}" onclick="pickShortsYear('${y}')">${labels[y]}${cntHtml}</button>`;
   }).join('');
 }
 
@@ -8046,7 +8163,7 @@ function injectAnnivEvents() {
 const _HOUR_KEY = (function() { const d = new Date(); return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}${String(d.getHours()).padStart(2,'0')}`; })();
 
 (function loadScheduleJson() {
-  fetch('./schedule.json?_=' + _HOUR_KEY)
+  fetch('./data/schedule.json?_=' + _HOUR_KEY)
     .then(function(r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
@@ -8078,7 +8195,7 @@ let NEWS_DATA = [];
 let _newsLoaded = false;
 
 (function loadNewsJson() {
-  fetch('./news.json?_=' + _HOUR_KEY)
+  fetch('./data/news.json?_=' + _HOUR_KEY)
     .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
     .then(function(data) {
       NEWS_DATA = data.articles || [];
@@ -8095,6 +8212,98 @@ let _newsLoaded = false;
     })
     .catch(function() { _newsLoaded = true; if (curSection === 'news') buildNewsGrid(); });
 })();
+
+let SHORTS_DATA = [];
+let _shortsLoaded = false;
+let _curShortsYear = 'all';
+let _curShortsChannel = 'all';
+
+(function loadShortsJson() {
+  fetch('./data/shorts.json?_=' + _HOUR_KEY)
+    .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function(data) {
+      SHORTS_DATA = data.items || [];
+      _shortsLoaded = true;
+      if (curSection === 'shorts') { buildShortsYearNav(); buildShortsGrid(); syncSubSidebar(); }
+    })
+    .catch(function() { _shortsLoaded = true; if (curSection === 'shorts') { buildShortsYearNav(); buildShortsGrid(); syncSubSidebar(); } });
+})();
+
+function setShortsChannel(btn, ch) {
+  _curShortsChannel = ch;
+  document.querySelectorAll('#shortsMode .type-btn[data-sc]').forEach(b => b.classList.toggle('active', b === btn));
+  buildShortsYearNav();
+  buildShortsGrid();
+  syncSubSidebar();
+}
+
+function buildShortsYearNav() {
+  const nav = document.getElementById('shortsYearNav');
+  if (!nav) return;
+  const years = ['all', '2024', '2025', '2026'];
+  const t = getCurrentT();
+  const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
+  const labels = { all: 'ALL' };
+  years.forEach(y => { if (!labels[y]) labels[y] = window._curLang === 'EN' ? y : y + suffix; });
+  nav.innerHTML = years.map(y => {
+    const base = _curShortsChannel === 'all' ? SHORTS_DATA : SHORTS_DATA.filter(i => i.channel === _curShortsChannel);
+    const count = _shortsLoaded
+      ? (y === 'all' ? base.length : base.filter(i => i.date && i.date.startsWith(y)).length)
+      : null;
+    const cntHtml = count !== null ? `<span class="cnt">${count}</span>` : '';
+    return `<button class="song-tab ${_curShortsYear === y ? 'active' : ''}" onclick="pickShortsYear('${y}')">${labels[y]}${cntHtml}</button>`;
+  }).join('');
+}
+
+function pickShortsYear(year) {
+  _curShortsYear = year;
+  buildShortsYearNav();
+  buildShortsGrid();
+  syncSubSidebar();
+}
+
+const _SHORTS_CHANNEL_LABEL = { official: 'RESCENE', woni: '안원잘부' };
+
+function buildShortsGrid() {
+  const grid = document.getElementById('shortsGrid');
+  if (!grid || !_shortsLoaded) return;
+
+  let items = _curShortsChannel === 'all' ? SHORTS_DATA : SHORTS_DATA.filter(i => i.channel === _curShortsChannel);
+  if (_curShortsYear !== 'all') items = items.filter(i => i.date && i.date.startsWith(_curShortsYear));
+
+  if (!items.length) {
+    grid.innerHTML = '<div class="shorts-empty"><div class="ico">🎬</div><p>쇼츠가 없습니다.</p></div>';
+    return;
+  }
+
+  grid.innerHTML = items.map(function(item, i) {
+    const delay = Math.min(i * 0.012, 0.3) + 's';
+    const label = _SHORTS_CHANNEL_LABEL[item.channel] || item.channel || '';
+    const title = item.title ? item.title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : '';
+    const date  = item.date ? item.date.slice(0, 10).replace(/\./g,'.') : '';
+    const ytUrl = 'https://www.youtube.com/shorts/' + item.vid;
+    return `<a class="shorts-card" id="svc-${item.vid}" href="${ytUrl}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}">
+      <div class="shorts-thumb-wrap">
+        <img src="https://img.youtube.com/vi/${item.vid}/mqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/hqdefault.jpg'">
+        <div class="shorts-play-ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
+        ${label ? `<span class="shorts-channel-badge">${label}</span>` : ''}
+      </div>
+      <div class="shorts-body">
+        <div class="shorts-title">${title || item.vid}</div>
+        ${date ? `<div class="shorts-date">${date}</div>` : ''}
+      </div>
+    </a>`;
+  }).join('');
+}
+
+function _initShorts() {
+  document.querySelectorAll('#shortsMode .type-btn[data-sc]').forEach(b => {
+    b.classList.toggle('active', b.getAttribute('data-sc') === _curShortsChannel);
+  });
+  buildShortsYearNav();
+  buildShortsGrid();
+  syncSubSidebar();
+}
 
 function _escHtml(str) {
   if (!str) return '';
@@ -8653,7 +8862,7 @@ const _BOTTOM_NAV_MAP = {
 const _DRAWER_NAV_MAP = {
   allvideos: 'dAllVideos',
   archive:   'dArchive',
-  songs: 'dSongs', content: 'dContent', live: 'dLive', external: 'dExternal',
+  songs: 'dSongs', content: 'dContent', live: 'dLive', external: 'dExternal', shorts: 'dShorts',
   fantube: 'dFantube', links: 'dLinks', about: 'dAbout', bookmark: 'dBookmark',
   schedule: 'dSchedule', news: 'dNews',
 };
