@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T03:00:41Z",
+  "updated": "2026-06-26T15:00:41Z",
   "events": [
     {
       "date": "2026-06-01",
@@ -59,7 +59,21 @@
     },
     {
       "date": "2026-06-20",
-      "title": "JTBC <아는형님>",
+      "title": "JTBC <아는 형님>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-11",
+      "title": "2026 현대 N 페스티벌 Round 3 스페셜 퍼포먼스",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-17",
+      "title": "KBS WORLD <마이데이트립>",
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
