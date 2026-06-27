@@ -1,5 +1,5 @@
 {
-  "updated": "2026-06-26T15:00:41Z",
+  "updated": "2026-06-27T03:00:40Z",
   "events": [
     {
       "date": "2026-06-01",
@@ -62,6 +62,13 @@
       "title": "JTBC <아는 형님>",
       "detail": "",
       "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-06-27",
+      "title": "2026 서든어택 챔피언십 시즌 1 결승전",
+      "detail": "",
+      "type": "event",
       "source": "mnetplus"
     },
     {
