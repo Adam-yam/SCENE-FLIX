@@ -36,15 +36,12 @@ API_BASE = "https://artist.mnetplus.world/svc/stg/rescene-official/space/api/v1/
 def build_params(year: int, month: int) -> dict:
     start_kst = datetime(year, month, 1, 0, 0, 0)
     start_utc = start_kst - timedelta(hours=9)
-
     if month == 12:
         last_day = date(year + 1, 1, 1) - timedelta(days=1)
     else:
         last_day = date(year, month + 1, 1) - timedelta(days=1)
-
     end_kst = datetime(last_day.year, last_day.month, last_day.day, 23, 59, 59)
     end_utc = end_kst - timedelta(hours=9)
-
     return {
         "startAt":          start_utc.strftime("%Y-%m-%dT%H:%M:%SZ"),
         "startAtForAllDay": f"{year}-{month:02d}-01",
@@ -109,7 +106,6 @@ def crawl_schedule_month(year: int, month: int) -> list:
     except Exception as e:
         print(f"[MnetPlus] {year}/{month:02d} API 오류: {e}", file=sys.stderr)
         return []
-
     events = []
     for ev in data.get("events", []):
         d     = extract_date(ev)
@@ -126,25 +122,21 @@ def crawl_schedule_month(year: int, month: int) -> list:
             "type":   classify_type(ev),
             "source": "mnetplus",
         })
-
     print(f"[MnetPlus] {year}/{month:02d} → {len(events)}개", file=sys.stderr)
     return events
 
 
 def run_schedule_crawler() -> dict:
     print("[스케줄] 시작", file=sys.stderr)
-
     today  = date.today()
     months = [(today.year, today.month)]
     if today.month == 12:
         months.append((today.year + 1, 1))
     else:
         months.append((today.year, today.month + 1))
-
     all_events = []
     for y, m in months:
         all_events.extend(crawl_schedule_month(y, m))
-
     seen    = set()
     deduped = []
     for ev in sorted(all_events, key=lambda e: e["date"]):
@@ -152,7 +144,6 @@ def run_schedule_crawler() -> dict:
         if key not in seen:
             seen.add(key)
             deduped.append(ev)
-
     result = {
         "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "events":  deduped,
@@ -178,7 +169,6 @@ FETCH_HEADERS = {
 }
 
 TITLE_KEYWORDS = ["리센느", "rescene"]
-
 SEARCH_QUERIES = ["리센느", "RESCENE"]
 DISPLAY        = 20
 MAX_ARTICLES   = 20
@@ -211,19 +201,13 @@ def title_matches(title: str) -> bool:
 
 def crawl_naver_api(query: str) -> list[dict]:
     url = "https://openapi.naver.com/v1/search/news.json"
-    params = {
-        "query":   query,
-        "display": DISPLAY,
-        "start":   1,
-        "sort":    "date",
-    }
+    params = {"query": query, "display": DISPLAY, "start": 1, "sort": "date"}
     articles = []
     skipped  = 0
     try:
         resp = requests.get(url, headers=NAVER_HEADERS, params=params, timeout=15)
         resp.raise_for_status()
         data = resp.json()
-
         for item in data.get("items", []):
             title        = clean_text(item.get("title", ""))
             naver_link   = item.get("link", "")
@@ -232,11 +216,9 @@ def crawl_naver_api(query: str) -> list[dict]:
             description  = clean_text(item.get("description", ""))
             source_m     = re.search(r"https?://(?:www\.)?([^/]+)", originallink)
             source       = source_m.group(1) if source_m else "네이버뉴스"
-
             if not title_matches(title):
                 skipped += 1
                 continue
-
             if title and naver_link:
                 articles.append({
                     "title":       title,
@@ -246,14 +228,9 @@ def crawl_naver_api(query: str) -> list[dict]:
                     "description": description,
                     "thumbnail":   None,
                 })
-
-        print(
-            f"[Naver] '{query}' → {len(articles)}개 / 제목 불일치 {skipped}개 제외",
-            file=sys.stderr,
-        )
+        print(f"[Naver] '{query}' → {len(articles)}개 / 제목 불일치 {skipped}개 제외", file=sys.stderr)
     except Exception as e:
         print(f"[Naver] '{query}' 오류: {e}", file=sys.stderr)
-
     return articles
 
 
@@ -274,32 +251,23 @@ def merge_articles(lists: list[list[dict]], max_count: int = MAX_ARTICLES) -> li
     return merged[:max_count]
 
 
-async def fetch_og_image(
-    session: aiohttp.ClientSession,
-    article: dict,
-    sem: asyncio.Semaphore,
-):
+async def fetch_og_image(session: aiohttp.ClientSession, article: dict, sem: asyncio.Semaphore):
     if article.get("thumbnail"):
         return
-
     url = article.get("url", "")
     if not url:
         return
-
     async with sem:
         try:
             async with session.get(
-                url,
-                headers=FETCH_HEADERS,
+                url, headers=FETCH_HEADERS,
                 timeout=aiohttp.ClientTimeout(total=THUMB_TIMEOUT),
-                allow_redirects=True,
-                ssl=False,
+                allow_redirects=True, ssl=False,
             ) as resp:
                 if resp.status != 200:
                     return
                 if "html" not in resp.headers.get("Content-Type", ""):
                     return
-
                 text = ""
                 async for chunk in resp.content.iter_chunked(8192):
                     text += chunk.decode("utf-8", errors="ignore")
@@ -307,7 +275,6 @@ async def fetch_og_image(
                         break
                     if "og:image" in text or "twitter:image" in text:
                         break
-
                 patterns = [
                     r'<meta[^>]+property=["\']og:image["\'][^>]+content=["\']([^"\']+)["\']',
                     r'<meta[^>]+content=["\']([^"\']+)["\'][^>]+property=["\']og:image["\']',
@@ -324,7 +291,6 @@ async def fetch_og_image(
                             return
         except Exception:
             pass
-
     print(f"  [없음] {article['title'][:30]}…", file=sys.stderr)
 
 
@@ -343,36 +309,26 @@ async def enrich_thumbnails(articles: list[dict]):
 
 def run_news_crawler() -> dict:
     print("[뉴스] 시작", file=sys.stderr)
-
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:
         print("[뉴스] NAVER 환경변수 없음 — 건너뜀", file=sys.stderr)
         return {"updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "articles": []}
-
     all_articles = []
     for q in SEARCH_QUERIES:
         all_articles += crawl_naver_api(q)
         time.sleep(0.3)
-
     articles = merge_articles([all_articles])
     asyncio.run(enrich_thumbnails(articles))
-
     for a in articles:
         if not a.get("thumbnail"):
             a["thumbnail"] = None
-
     result = {
         "updated":  datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "articles": articles,
     }
-
     filled = sum(1 for a in articles if a.get("thumbnail"))
     print(f"[뉴스] 완료 — {len(articles)}개 / 썸네일 {filled}개", file=sys.stderr)
     return result
 
-
-# ──────────────────────────────────────────────
-# Shorts 크롤러 (yt-dlp)
-# ──────────────────────────────────────────────
 
 SHORTS_CHANNELS = {
     "official": "https://www.youtube.com/@RESCENE_official/shorts",
@@ -380,17 +336,10 @@ SHORTS_CHANNELS = {
 }
 
 SHORTS_JSON_PATH = ROOT / "data" / "shorts.json"
-
-
-def _fmt_date(upload_date: str) -> str:
-    """yt-dlp upload_date (YYYYMMDD) → YYYY.MM.DD"""
-    if not upload_date or len(upload_date) < 8:
-        return ""
-    return f"{upload_date[:4]}.{upload_date[4:6]}.{upload_date[6:8]}"
+YOUTUBE_API_KEY  = os.environ.get("YOUTUBE_API_KEY", "")
 
 
 def _load_existing_shorts() -> dict[str, dict]:
-    """기존 shorts.json을 vid → item 딕셔너리로 읽기"""
     if not SHORTS_JSON_PATH.exists():
         return {}
     try:
@@ -402,24 +351,20 @@ def _load_existing_shorts() -> dict[str, dict]:
         return {}
 
 
-YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", "")
-YOUTUBE_API_BASE = "https://www.googleapis.com/youtube/v3/videos"
-
-
 def _fetch_publish_dates(vids: list[str]) -> dict[str, str]:
-    """YouTube Data API v3로 vid 목록의 publishedAt 날짜 배치 조회 (50개씩)"""
     if not YOUTUBE_API_KEY or not vids:
+        print("[Shorts] YOUTUBE_API_KEY 없음 — 날짜 조회 건너뜀", file=sys.stderr)
         return {}
     result = {}
     for i in range(0, len(vids), 50):
         batch = vids[i:i + 50]
         try:
             resp = requests.get(
-                YOUTUBE_API_BASE,
+                "https://www.googleapis.com/youtube/v3/videos",
                 params={
-                    "part":  "snippet",
-                    "id":    ",".join(batch),
-                    "key":   YOUTUBE_API_KEY,
+                    "part":   "snippet",
+                    "id":     ",".join(batch),
+                    "key":    YOUTUBE_API_KEY,
                     "fields": "items(id,snippet/publishedAt)",
                 },
                 timeout=15,
@@ -432,87 +377,77 @@ def _fetch_publish_dates(vids: list[str]) -> dict[str, str]:
                     m = re.match(r"(\d{4})-(\d{2})-(\d{2})", pub)
                     if m:
                         result[vid] = f"{m.group(1)}.{m.group(2)}.{m.group(3)}"
+            print(f"[Shorts] API 배치 {i//50 + 1} → {len(result)}개 날짜 수집", file=sys.stderr)
         except Exception as e:
             print(f"[Shorts] YouTube API 배치 조회 실패: {e}", file=sys.stderr)
     return result
 
 
-def crawl_shorts_channel(channel_key: str, url: str, existing: dict[str, dict]) -> list[dict]:
-    print(f"[Shorts] {channel_key} 크롤링 시작...", file=sys.stderr)
-
+def _fetch_shorts_vids(url: str) -> list[dict]:
     ydl_opts = {
         "quiet":        True,
         "no_warnings":  True,
-        "extract_flat": "in_playlist",
-        "extractor_args": {
-            "youtubetab": {"skip": ["authcheck"]},
-            "youtube":    {"lang": ["ko"]},
-        },
+        "extract_flat": True,
+        "extractor_args": {"youtubetab": {"skip": ["authcheck"]}},
     }
-
-    entries = []
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
-            entries = info.get("entries", []) if info else []
+            return info.get("entries", []) if info else []
     except Exception as e:
-        print(f"[Shorts] {channel_key} 크롤링 실패: {e}", file=sys.stderr)
+        print(f"[Shorts] yt-dlp 실패: {e}", file=sys.stderr)
         return []
 
-    items = []
+
+def crawl_shorts_channel(channel_key: str, url: str, existing: dict[str, dict]) -> list[dict]:
+    print(f"[Shorts] {channel_key} 크롤링 시작...", file=sys.stderr)
+
+    entries = _fetch_shorts_vids(url)
+    if not entries:
+        return []
+
+    items     = []
     new_items = []
-    new_count = 0
 
     for entry in entries:
         vid = entry.get("id", "")
         if not vid:
             continue
-
         if vid in existing:
             items.append(existing[vid])
             continue
-
-        title = entry.get("title", "").strip()
-        date_str = _fmt_date(entry.get("upload_date", ""))
-
         item = {
             "vid":     vid,
             "channel": channel_key,
-            "date":    date_str,
-            "title":   title,
+            "date":    "",
+            "title":   entry.get("title", "").strip(),
         }
         items.append(item)
         new_items.append(item)
-        new_count += 1
 
-    need_date = [i for i in new_items if not i["date"]]
-    if need_date:
-        print(f"[Shorts] {channel_key} 날짜 없는 신규 {len(need_date)}개 API 조회...", file=sys.stderr)
-        date_map = _fetch_publish_dates([i["vid"] for i in need_date])
-        for item in need_date:
+    if new_items:
+        print(f"[Shorts] {channel_key} 신규 {len(new_items)}개 날짜 조회...", file=sys.stderr)
+        date_map = _fetch_publish_dates([i["vid"] for i in new_items])
+        filled = 0
+        for item in new_items:
             if item["vid"] in date_map:
                 item["date"] = date_map[item["vid"]]
+                filled += 1
+        print(f"[Shorts] {channel_key} 날짜 {filled}/{len(new_items)}개 완료", file=sys.stderr)
 
-    print(
-        f"[Shorts] {channel_key} 완료 — 전체 {len(items)}개 / 신규 {new_count}개",
-        file=sys.stderr,
-    )
+    print(f"[Shorts] {channel_key} 완료 — 전체 {len(items)}개 / 신규 {len(new_items)}개", file=sys.stderr)
     return items
 
 
 def run_shorts_crawler() -> dict:
     print("[Shorts] 시작", file=sys.stderr)
-
     existing = _load_existing_shorts()
-
     all_items = []
     for channel_key, url in SHORTS_CHANNELS.items():
         items = crawl_shorts_channel(channel_key, url, existing)
         all_items.extend(items)
         time.sleep(1)
-
     all_items.sort(key=lambda x: x.get("date", ""), reverse=True)
-
     result = {
         "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "items":   all_items,
@@ -525,22 +460,19 @@ def main():
     (ROOT / "data").mkdir(exist_ok=True)
 
     schedule_data = run_schedule_crawler()
-    sched_path = ROOT / "data" / "schedule.json"
-    with open(sched_path, "w", encoding="utf-8") as f:
+    with open(ROOT / "data" / "schedule.json", "w", encoding="utf-8") as f:
         json.dump(schedule_data, f, ensure_ascii=False, indent=2)
-    print(f"[완료] schedule.json → {sched_path}", file=sys.stderr)
+    print(f"[완료] schedule.json 저장", file=sys.stderr)
 
     news_data = run_news_crawler()
-    news_path = ROOT / "data" / "news.json"
-    with open(news_path, "w", encoding="utf-8") as f:
+    with open(ROOT / "data" / "news.json", "w", encoding="utf-8") as f:
         json.dump(news_data, f, ensure_ascii=False, indent=2)
-    print(f"[완료] news.json → {news_path}", file=sys.stderr)
+    print(f"[완료] news.json 저장", file=sys.stderr)
 
     shorts_data = run_shorts_crawler()
-    shorts_path = ROOT / "data" / "shorts.json"
-    with open(shorts_path, "w", encoding="utf-8") as f:
+    with open(ROOT / "data" / "shorts.json", "w", encoding="utf-8") as f:
         json.dump(shorts_data, f, ensure_ascii=False, indent=2)
-    print(f"[완료] shorts.json → {shorts_path}", file=sys.stderr)
+    print(f"[완료] shorts.json 저장", file=sys.stderr)
 
 
 if __name__ == "__main__":
