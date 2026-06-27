@@ -351,7 +351,7 @@ def _load_existing_shorts() -> dict[str, dict]:
         return {}
 
 
-def _fetch_publish_dates(vids: list[str]) -> dict[str, str]:
+def _fetch_publish_dates(vids: list[str]) -> dict[str, dict]:
     if not YOUTUBE_API_KEY or not vids:
         print("[Shorts] YOUTUBE_API_KEY 없음 — 날짜 조회 건너뜀", file=sys.stderr)
         return {}
@@ -365,19 +365,24 @@ def _fetch_publish_dates(vids: list[str]) -> dict[str, str]:
                     "part":   "snippet",
                     "id":     ",".join(batch),
                     "key":    YOUTUBE_API_KEY,
-                    "fields": "items(id,snippet/publishedAt)",
+                    "fields": "items(id,snippet/publishedAt,snippet/title,snippet/defaultAudioLanguage)",
+                    "hl":     "ko",
                 },
                 timeout=15,
             )
             resp.raise_for_status()
             for item in resp.json().get("items", []):
-                vid = item.get("id", "")
-                pub = item.get("snippet", {}).get("publishedAt", "")
-                if vid and pub:
+                vid     = item.get("id", "")
+                snippet = item.get("snippet", {})
+                pub     = snippet.get("publishedAt", "")
+                title   = snippet.get("title", "")
+                if vid:
                     m = re.match(r"(\d{4})-(\d{2})-(\d{2})", pub)
-                    if m:
-                        result[vid] = f"{m.group(1)}.{m.group(2)}.{m.group(3)}"
-            print(f"[Shorts] API 배치 {i//50 + 1} → {len(result)}개 날짜 수집", file=sys.stderr)
+                    result[vid] = {
+                        "date":  f"{m.group(1)}.{m.group(2)}.{m.group(3)}" if m else "",
+                        "title": title,
+                    }
+            print(f"[Shorts] API 배치 {i//50 + 1} → {len(result)}개 수집", file=sys.stderr)
         except Exception as e:
             print(f"[Shorts] YouTube API 배치 조회 실패: {e}", file=sys.stderr)
     return result
@@ -426,14 +431,16 @@ def crawl_shorts_channel(channel_key: str, url: str, existing: dict[str, dict]) 
         new_items.append(item)
 
     if new_items:
-        print(f"[Shorts] {channel_key} 신규 {len(new_items)}개 날짜 조회...", file=sys.stderr)
-        date_map = _fetch_publish_dates([i["vid"] for i in new_items])
+        print(f"[Shorts] {channel_key} 신규 {len(new_items)}개 날짜/제목 조회...", file=sys.stderr)
+        meta_map = _fetch_publish_dates([i["vid"] for i in new_items])
         filled = 0
         for item in new_items:
-            if item["vid"] in date_map:
-                item["date"] = date_map[item["vid"]]
+            meta = meta_map.get(item["vid"])
+            if meta:
+                item["date"]  = meta["date"]
+                item["title"] = meta["title"] or item["title"]
                 filled += 1
-        print(f"[Shorts] {channel_key} 날짜 {filled}/{len(new_items)}개 완료", file=sys.stderr)
+        print(f"[Shorts] {channel_key} 날짜/제목 {filled}/{len(new_items)}개 완료", file=sys.stderr)
 
     print(f"[Shorts] {channel_key} 완료 — 전체 {len(items)}개 / 신규 {len(new_items)}개", file=sys.stderr)
     return items
