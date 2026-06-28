@@ -3226,6 +3226,20 @@ header {
   </div>
 </div>
 <div id="shortsMode" style="display:none;">
+  <div class="search-bar">
+    <div class="search-bar-inner">
+      <div class="sort-btns">
+        <button class="sort-btn active" id="sortShortsNewest" onclick="setShortsSort('newest')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+          <span data-i18n="sort_newest">최신순</span>
+        </button>
+        <button class="sort-btn" id="sortShortsOldest" onclick="setShortsSort('oldest')">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          <span data-i18n="sort_oldest">오래된순</span>
+        </button>
+      </div>
+    </div>
+  </div>
   <div class="song-nav-inner">
     <div class="song-nav" id="shortsYearNav"></div>
   </div>
@@ -8214,6 +8228,7 @@ let SHORTS_DATA = [];
 let _shortsLoaded = false;
 let _curShortsYear = 'all';
 let _curShortsChannel = 'all';
+let _curShortsSort = 'newest';
 
 (function loadShortsJson() {
   fetch('./data/shorts.json?_=' + _HOUR_KEY)
@@ -8235,6 +8250,13 @@ function setShortsChannel(btn, ch) {
     const content = _elSubSidebarContent;
     if (content) content.innerHTML = renderSubShortsTabs();
   }
+}
+
+function setShortsSort(dir) {
+  _curShortsSort = dir;
+  document.getElementById('sortShortsNewest').classList.toggle('active', dir === 'newest');
+  document.getElementById('sortShortsOldest').classList.toggle('active', dir === 'oldest');
+  buildShortsGrid();
 }
 
 function buildShortsYearNav() {
@@ -8279,6 +8301,7 @@ function buildShortsGrid() {
 
   let items = _curShortsChannel === 'all' ? SHORTS_DATA : SHORTS_DATA.filter(i => i.channel === _curShortsChannel);
   if (_curShortsYear !== 'all') items = items.filter(i => i.date && i.date.startsWith(_curShortsYear));
+  items = sortItemsByDate(items, _curShortsSort);
 
   _shortsFiltered = items;
   _shortsPage = 0;
