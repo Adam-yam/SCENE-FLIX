@@ -167,7 +167,7 @@ gtag('config', 'G-05C99P2DB9');
   display: flex;
   align-items: center;
   gap: 5px;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1);
 }
 #themeToggle:hover { color: var(--text); border-color: var(--border-h); }
 #themeToggle svg { width: 13px; height: 13px; }
@@ -192,7 +192,7 @@ gtag('config', 'G-05C99P2DB9');
   font-family: 'Inter', sans-serif;
   font-weight: 600;
   letter-spacing: 0.08em;
-  transition: color 0.18s, background 0.18s;
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
   position: relative;
   line-height: 1;
 }
@@ -220,7 +220,7 @@ gtag('config', 'G-05C99P2DB9');
   display: none;
   align-items: center;
   justify-content: center;
-  transition: color 0.15s, background 0.15s;
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
   z-index: 100;
   box-shadow: 0 2px 12px rgba(0,0,0,0.3);
 }
@@ -243,7 +243,7 @@ gtag('config', 'G-05C99P2DB9');
   justify-content: center;
   opacity: 0;
   transform: scale(0.85);
-  transition: opacity 0.18s, transform 0.18s, color 0.15s, background 0.15s;
+  transition: opacity 0.2s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.22,1,0.36,1), color 0.15s cubic-bezier(0.4,0,0.2,1), background 0.15s cubic-bezier(0.4,0,0.2,1);
   z-index: 4;
   flex-shrink: 0;
   padding: 0;
@@ -283,7 +283,7 @@ gtag('config', 'G-05C99P2DB9');
   border: 1px solid rgba(255,255,255,0.12);
   pointer-events: none;
   opacity: 0;
-  transition: opacity 0.22s, transform 0.22s;
+  transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1), transform 0.28s cubic-bezier(0.22,1,0.36,1);
   z-index: 9999;
   white-space: nowrap;
 }
@@ -336,7 +336,7 @@ mark.sh {
   z-index: 9999;
   opacity: 0;
   transform: translateY(4px);
-  transition: opacity 0.15s, transform 0.15s;
+  transition: opacity 0.18s cubic-bezier(0.4,0,0.2,1), transform 0.22s cubic-bezier(0.22,1,0.36,1);
   white-space: pre-wrap;
   word-break: break-word;
   box-shadow: 0 4px 16px rgba(0,0,0,0.5);
@@ -354,14 +354,14 @@ html { scroll-behavior: smooth; scrollbar-gutter: stable; }
   100% { background-position:  400px 0; }
 }
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
+  from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0);    }
 }
 .skel {
   border-radius: 4px;
   background: linear-gradient(90deg, var(--dim) 25%, var(--card-h) 50%, var(--dim) 75%);
   background-size: 800px 100%;
-  animation: shimmer 1.4s infinite linear;
+  animation: shimmer 1.6s infinite ease-in-out;
   display: block;
 }
 .skel-title  { height: 13px; width: 85%; margin-bottom: 6px; }
@@ -396,7 +396,7 @@ header {
   display: block;
   margin: 0 auto;
   filter: drop-shadow(0 0 6px rgba(255,255,255,0.55)) drop-shadow(0 0 18px rgba(255,255,255,0.2));
-  transition: filter 0.3s ease;
+  transition: filter 0.35s cubic-bezier(0.4,0,0.2,1);
 }
 
 .tagline {
@@ -450,7 +450,7 @@ header {
   font-family: 'Inter', sans-serif;
   text-transform: uppercase;
   white-space: nowrap;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1);
 }
 .section-tab:hover,
 .song-tab:hover { color: var(--text); }
@@ -693,7 +693,7 @@ header {
   font-size: 0.75rem;
   padding: 8px 46px 8px 36px;
   outline: none;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
   box-sizing: border-box;
   min-width: 0;
   user-select: text;
@@ -716,7 +716,7 @@ header {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  transition: color 0.15s;
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1);
   flex-shrink: 0;
   z-index: 1;
 }
@@ -745,7 +745,7 @@ header {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  transition: opacity 0.15s;
+  transition: opacity 0.2s cubic-bezier(0.4,0,0.2,1);
   z-index: 1;
 }
 #searchSubmit:hover { opacity: 0.85; }
@@ -769,7 +769,7 @@ header {
   cursor: pointer;
   text-decoration: none;
   display: block;
-  animation: fadeUp 0.3s ease both;
+  animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both;
   contain: layout style;
   content-visibility: auto;
   contain-intrinsic-size: 0 260px;
@@ -777,7 +777,7 @@ header {
 
 @media (hover: hover) {
   .vcard:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
     border-color: var(--border-h);
     background: var(--card-h);
   }
@@ -797,7 +797,7 @@ header {
   .vcard.lm-zena:hover   { border-color: rgba(var(--c-zena-rgb),0.55);   box-shadow: 0 4px 24px rgba(var(--c-zena-rgb),0.18),   0 0 0 1px rgba(var(--c-zena-rgb),0.18); }
   .vcard.lm-all:hover    { border-color: rgba(255,255,255,0.3);          box-shadow: 0 4px 24px rgba(255,255,255,0.08),         0 0 0 1px rgba(255,255,255,0.08); }
 
-  .vcard:hover .thumb img { transform: scale(1.04); }
+  .vcard:hover .thumb img { transform: scale(1.06); }
   .vcard:hover .play-ring { opacity: 1; }
 }
 
@@ -846,7 +846,7 @@ header {
 }
 
 @media (hover: hover) {
-  .thumb img { transition: transform 0.4s ease, opacity 0.3s; }
+  .thumb img { transition: transform 0.5s cubic-bezier(0.22,1,0.36,1), opacity 0.3s; }
 }
 
 .last-watched-badge {
@@ -873,7 +873,7 @@ header {
   align-items: center;
   justify-content: center;
   opacity: 0;
-  transition: opacity 0.2s;
+  transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1);
   background: rgba(0,0,0,0.3);
 }
 
@@ -918,25 +918,24 @@ header {
   padding: 10px 12px 12px;
 }
 
-.csong {
-  font-size: 0.82rem;
-  font-weight: 500;
-  color: var(--text);
-  margin-bottom: 4px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
+.csong,
 .csong-multi {
   font-size: 0.82rem;
   font-weight: 500;
   color: var(--text);
   margin-bottom: 4px;
+  overflow: hidden;
+}
+
+.csong {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.csong-multi {
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  overflow: hidden;
   line-height: 1.4;
 }
 
@@ -996,30 +995,7 @@ header {
 [data-theme="light"] .ctag.tb-tag-onthespot { background: rgba(192,104,32,0.12);  border-color: rgba(192,104,32,0.35); }
 [data-theme="light"] .ctag.tb-tag-fullcam   { background: rgba(168,154,16,0.12);  border-color: rgba(168,154,16,0.35); }
 
-.ext-channel-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 7px;
-  font-size: 0.6rem;
-  letter-spacing: 0.06em;
-  padding: 2px 8px 2px 6px;
-  border-radius: 3px;
-  background: rgba(var(--c-external-rgb),0.12);
-  color: var(--c-external);
-  border: 1px solid rgba(var(--c-external-rgb),0.35);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
-}
-.ext-channel-badge::before {
-  content: '▶';
-  font-size: 0.45rem;
-  opacity: 0.7;
-  flex-shrink: 0;
-}
-
+.ext-channel-badge,
 .content-category-badge {
   display: inline-flex;
   align-items: center;
@@ -1029,13 +1005,27 @@ header {
   letter-spacing: 0.06em;
   padding: 2px 8px 2px 6px;
   border-radius: 3px;
-  background: rgba(var(--c-content-rgb),0.12);
-  color: var(--c-content);
-  border: 1px solid rgba(var(--c-content-rgb),0.35);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100%;
+}
+.ext-channel-badge {
+  background: rgba(var(--c-external-rgb),0.12);
+  color: var(--c-external);
+  border: 1px solid rgba(var(--c-external-rgb),0.35);
+}
+.ext-channel-badge::before {
+  content: '▶';
+  font-size: 0.45rem;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.content-category-badge {
+  background: rgba(var(--c-content-rgb),0.12);
+  color: var(--c-content);
+  border: 1px solid rgba(var(--c-content-rgb),0.35);
 }
 .content-category-badge::before {
   content: '✦';
@@ -1081,7 +1071,7 @@ header {
   text-decoration: none;
   color: var(--text);
   cursor: pointer;
-  animation: fadeUp 0.3s ease both;
+  animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both;
   position: relative;
   overflow: hidden;
 }
@@ -1096,13 +1086,13 @@ header {
 
 @media (hover: hover) {
   .ftcard {
-    transition: transform 0.25s, border-color 0.25s, background 0.25s, box-shadow 0.25s;
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), border-color 0.22s cubic-bezier(0.4,0,0.2,1), background 0.22s cubic-bezier(0.4,0,0.2,1), box-shadow 0.3s cubic-bezier(0.22,1,0.36,1);
   }
   .ftcard:hover {
-    transform: translateY(-4px);
+    transform: translateY(-6px);
     border-color: rgba(224,212,192,0.28);
     background: var(--card-h);
-    box-shadow: 0 8px 28px rgba(0,0,0,0.35), 0 0 0 1px rgba(224,212,192,0.1);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(224,212,192,0.1);
   }
   .ftcard:hover .ftcard-avatar {
     border-color: rgba(224,212,192,0.4);
@@ -1191,7 +1181,7 @@ header {
   color: var(--accent);
   opacity: 0;
   transform: translateY(2px);
-  transition: opacity 0.2s, transform 0.2s;
+  transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.22,1,0.36,1);
 }
 
 @media (max-width: 700px) {
@@ -1247,8 +1237,8 @@ header {
   color: var(--text);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  transition: background 0.18s, border-color 0.18s, transform 0.18s;
-  animation: fadeUp 0.35s ease both;
+  transition: background 0.2s cubic-bezier(0.4,0,0.2,1), border-color 0.2s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.22,1,0.36,1);
+  animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both;
   height: 54px;
   box-sizing: border-box;
 }
@@ -1282,7 +1272,7 @@ header {
   justify-content: center;
 }
 @media (hover: hover) {
-  .link-icon { transition: background 0.18s; }
+  .link-icon { transition: background 0.18s cubic-bezier(0.4,0,0.2,1); }
   .link-row:hover .link-icon { background: rgba(255,255,255,0.11); }
   [data-theme="light"] .link-row:hover .link-icon { background: rgba(0,0,0,0.07); }
 }
@@ -1328,7 +1318,7 @@ header {
   flex-shrink: 0;
   color: var(--muted);
   font-size: 0.7rem;
-  transition: color 0.18s, transform 0.18s;
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.22,1,0.36,1);
   opacity: 0.35;
 }
 .link-row:hover .link-arrow {
@@ -1469,7 +1459,7 @@ header {
     height: calc(100% - 12px);
     background: var(--accent);
     border-radius: 999px;
-    transition: left 0.28s cubic-bezier(0.25,0.1,0.25,1), width 0.28s cubic-bezier(0.25,0.1,0.25,1);
+    transition: left 0.3s cubic-bezier(0.22,1,0.36,1), width 0.3s cubic-bezier(0.22,1,0.36,1);
     pointer-events: none;
     z-index: 0;
   }
@@ -1489,7 +1479,7 @@ header {
     font-family: 'Inter', sans-serif;
     font-size: 0.52rem;
     letter-spacing: 0.03em;
-    transition: color 0.22s;
+    transition: color 0.22s cubic-bezier(0.4,0,0.2,1);
     position: relative;
     flex: 1;
     min-width: 48px;
@@ -1500,7 +1490,7 @@ header {
     width: 20px;
     height: 20px;
     flex-shrink: 0;
-    transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1);
+    transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
   }
   .mob-nav-btn span {
     white-space: nowrap;
@@ -1533,7 +1523,7 @@ header {
     justify-content: center;
     cursor: pointer;
     color: var(--muted);
-    transition: color 0.15s, background 0.15s, border-color 0.15s;
+    transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1);
   }
   #mobileMenuBtn:hover { color: var(--text); background: var(--card-h); }
   #mobileMenuBtn svg { width: 18px; height: 18px; }
@@ -1550,7 +1540,7 @@ header {
     backdrop-filter: blur(1px);
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.25s, visibility 0.25s;
+    transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1), visibility 0.22s cubic-bezier(0.4,0,0.2,1);
     pointer-events: none;
   }
   #mobileDrawerOverlay.open {
@@ -1569,7 +1559,7 @@ header {
     background: var(--surf);
     border-right: 1px solid var(--border-h);
     transform: translateX(-100%);
-    transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+    transition: transform 0.32s cubic-bezier(0.22,1,0.36,1);
     display: flex;
     flex-direction: column;
     padding: var(--safe-top) 0 var(--safe-bottom) var(--safe-left);
@@ -1598,7 +1588,7 @@ header {
     color: var(--muted);
     cursor: pointer;
     flex-shrink: 0;
-    transition: color 0.15s, background 0.15s;
+    transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
   }
   .drawer-close-btn:hover { color: var(--text); background: var(--card-h); }
   .drawer-close-btn svg { width: 12px; height: 12px; }
@@ -1626,7 +1616,7 @@ header {
     padding: 5px 12px;
     font-size: 0.72rem;
     font-family: 'Inter', sans-serif;
-    transition: background 0.15s, border-color 0.15s;
+    transition: background 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1);
   }
   .drawer-theme-toggle svg { width: 13px; height: 13px; }
   .drawer-theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
@@ -1656,7 +1646,7 @@ header {
     cursor: pointer;
     width: 100%;
     text-align: left;
-    transition: color 0.15s, background 0.15s;
+    transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
   }
   .drawer-item svg { width: 14px; height: 14px; flex-shrink: 0; }
   .drawer-item:hover { color: var(--text); background: rgba(255,255,255,0.04); }
@@ -1765,7 +1755,7 @@ header {
   background:none;
   cursor:pointer;
   font-family:'Inter',sans-serif;
-  transition: color .15s, background .15s, border-color .15s, opacity .15s;
+  transition: color .18s cubic-bezier(0.4,0,0.2,1), background .18s cubic-bezier(0.4,0,0.2,1), border-color .18s cubic-bezier(0.4,0,0.2,1), opacity .18s cubic-bezier(0.4,0,0.2,1);
 }
 
 .card-base{
@@ -1776,14 +1766,14 @@ header {
 @media (hover: hover) {
   .card-base{
     transition:
-      transform .22s,
-      border-color .22s,
-      background .22s,
-      box-shadow .22s;
+      transform .3s cubic-bezier(0.22,1,0.36,1),
+      border-color .22s cubic-bezier(0.4,0,0.2,1),
+      background .22s cubic-bezier(0.4,0,0.2,1),
+      box-shadow .3s cubic-bezier(0.22,1,0.36,1);
   }
 
   .hover-lift:hover{
-    transform:translateY(-4px);
+    transform:translateY(-6px);
   }
 }
 
@@ -1961,7 +1951,7 @@ header {
     transform: translateX(-100%);
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), opacity 0.15s;
+    transition: transform 0.32s cubic-bezier(0.22,1,0.36,1), opacity 0.2s cubic-bezier(0.4,0,0.2,1);
     box-shadow: 4px 0 32px rgba(0,0,0,0.45), 1px 0 0 var(--border-h);
   }
 
@@ -2027,7 +2017,7 @@ header {
 }
 
 #scheduleMode {
-  animation: fadeUp 0.32s ease both;
+  animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both;
 }
 .schedule-wrap {
   max-width: 1400px;
@@ -2143,7 +2133,7 @@ header {
   gap: 11px;
   padding: 8px 4px 8px 46px;
   border-radius: 8px;
-  transition: background 0.12s;
+  transition: background 0.15s cubic-bezier(0.4,0,0.2,1);
   cursor: default;
   margin-bottom: 2px;
 }
@@ -2190,7 +2180,7 @@ header {
   border-radius: 4px;
   flex-shrink: 0;
   margin-left: auto;
-  transition: color 0.15s, border-color 0.15s;
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1);
   white-space: nowrap;
 }
 .sched-item-link:hover { color: var(--accent); border-color: var(--accent); }
@@ -2226,7 +2216,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.15s, border-color 0.15s, background 0.15s;
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
   flex-shrink: 0;
 }
 .cal-nav-btn svg { width: 14px; height: 14px; }
@@ -2264,7 +2254,7 @@ header {
   flex-direction: column;
   gap: 2px;
   cursor: default;
-  transition: background 0.15s;
+  transition: background 0.18s cubic-bezier(0.4,0,0.2,1);
   position: relative;
   overflow: hidden;
 }
@@ -2339,20 +2329,20 @@ header {
 .cal-more-badge { font-size: 0.52rem; color: var(--muted); margin-top: 1px; padding-left: 2px; }
 
 .cal-detail { margin-top: 14px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: none; }
-.cal-detail.visible { display: block; animation: fadeUp 0.2s ease both; }
+.cal-detail.visible { display: block; animation: fadeUp 0.35s cubic-bezier(0.22,1,0.36,1) both; }
 .cal-detail-header { background: var(--surf); padding: 11px 16px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; color: var(--accent); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
-.cal-detail-close { background: none; border: none; color: var(--muted); cursor: pointer; padding: 0; display: flex; align-items: center; transition: color 0.15s; }
+.cal-detail-close { background: none; border: none; color: var(--muted); cursor: pointer; padding: 0; display: flex; align-items: center; transition: color 0.18s cubic-bezier(0.4,0,0.2,1); }
 .cal-detail-close:hover { color: var(--text); }
 .cal-detail-close svg { width: 14px; height: 14px; }
 .cal-detail-list { background: var(--card); padding: 8px 0; }
-.cal-detail-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 16px; border-bottom: 1px solid var(--border); transition: background 0.12s; }
+.cal-detail-item { display: flex; align-items: flex-start; gap: 10px; padding: 8px 16px; border-bottom: 1px solid var(--border); transition: background 0.15s cubic-bezier(0.4,0,0.2,1); }
 .cal-detail-item:last-child { border-bottom: none; }
 .cal-detail-item:hover { background: var(--card-h); }
 .cal-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
 .cal-detail-text { flex: 1; }
 .cal-detail-title { font-size: 0.8rem; font-weight: 500; color: var(--text); line-height: 1.5; }
 .cal-detail-meta { font-size: 0.67rem; color: var(--muted); margin-top: 2px; }
-.cal-detail-link { color: var(--muted); text-decoration: none; font-size: 0.63rem; letter-spacing: 0.05em; border: 1px solid var(--border); padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; transition: color 0.15s, border-color 0.15s; }
+.cal-detail-link { color: var(--muted); text-decoration: none; font-size: 0.63rem; letter-spacing: 0.05em; border: 1px solid var(--border); padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; transition: color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1); }
 .cal-detail-link:hover { color: var(--accent); border-color: var(--accent); }
 
 .cal-legend { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-top: 14px; padding: 0 2px; }
@@ -2373,13 +2363,13 @@ header {
   .sched-cal-col { flex: none; }
 }
 
-#newsMode { animation: fadeUp 0.32s ease both; }
+#newsMode { animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both; }
 .news-wrap { max-width: 1400px; margin: 0 auto; padding: 28px 28px 80px; }
 .news-header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
 .news-header-title { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; color: var(--accent); text-transform: uppercase; }
 .news-updated { font-size: 0.65rem; color: var(--muted); }
 .news-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
-.news-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: background 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s; cursor: pointer; }
+.news-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: background 0.2s cubic-bezier(0.4,0,0.2,1), border-color 0.2s cubic-bezier(0.4,0,0.2,1), transform 0.28s cubic-bezier(0.22,1,0.36,1), box-shadow 0.28s cubic-bezier(0.22,1,0.36,1); cursor: pointer; }
 .news-card:hover { background: var(--card-h); border-color: var(--border-h); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
 .news-thumb { width: 100%; aspect-ratio: 16/9; object-fit: cover; background: var(--dim); flex-shrink: 0; display: block; }
 .news-thumb-placeholder { width: 100%; aspect-ratio: 16/9; background: var(--dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
@@ -2398,14 +2388,14 @@ header {
 .news-empty .ico { font-size: 2rem; margin-bottom: 14px; opacity: 0.25; }
 .news-empty p { font-size: 0.82rem; }
 @media (max-width: 700px) { .news-wrap { padding: 16px 10px calc(80px + var(--safe-bottom)); } .news-grid { grid-template-columns: 1fr; gap: 12px; } .news-title { font-size: 0.78rem; } }
-#shortsMode { animation: fadeUp 0.32s ease both; }
+#shortsMode { animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both; }
 .shorts-wrap { max-width: 1400px; margin: 0 auto; padding: 20px 40px 80px; }
 .shorts-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; }
-.shorts-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: background 0.15s, border-color 0.15s, transform 0.15s, box-shadow 0.15s; cursor: pointer; }
+.shorts-card { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: background 0.2s cubic-bezier(0.4,0,0.2,1), border-color 0.2s cubic-bezier(0.4,0,0.2,1), transform 0.28s cubic-bezier(0.22,1,0.36,1), box-shadow 0.28s cubic-bezier(0.22,1,0.36,1); cursor: pointer; }
 .shorts-card:hover { background: var(--card-h); border-color: var(--border-h); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
 .shorts-thumb-wrap { position: relative; width: 100%; aspect-ratio: 9/16; background: var(--dim); overflow: hidden; flex-shrink: 0; }
 .shorts-thumb-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
-.shorts-play-ring { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.15s; }
+.shorts-play-ring { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.2s cubic-bezier(0.4,0,0.2,1); }
 .shorts-card:hover .shorts-play-ring { opacity: 1; }
 .shorts-play-ring svg { width: 32px; height: 32px; color: #fff; drop-shadow: 0 2px 8px rgba(0,0,0,0.5); }
 .shorts-channel-badge { position: absolute; top: 7px; left: 7px; font-size: 0.52rem; font-weight: 600; letter-spacing: 0.04em; padding: 2px 6px; border-radius: 4px; background: rgba(0,0,0,0.55); color: #fff; backdrop-filter: blur(4px); }
@@ -2422,7 +2412,7 @@ header {
 @media (max-width: 700px) { .shorts-wrap { padding: 12px 10px calc(80px + var(--safe-bottom)); } .shorts-grid { grid-template-columns: repeat(3, 1fr); gap: 7px; } }
 @media (min-width: 1200px) { .shorts-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); } }
 
-.chart-legend-item { display:flex; align-items:center; gap:10px; cursor:pointer; border-radius:8px; padding:6px 8px; transition:background 0.15s; }
+.chart-legend-item { display:flex; align-items:center; gap:10px; cursor:pointer; border-radius:8px; padding:6px 8px; transition:background 0.18s cubic-bezier(0.4,0,0.2,1); }
 .chart-legend-item:hover { background: var(--card-h); }
 .chart-legend-dot { width:12px; height:12px; border-radius:3px; flex-shrink:0; }
 .chart-legend-name { font-size:0.72rem; font-weight:500; color:var(--text); }
@@ -2442,7 +2432,7 @@ header {
 .chart-row-bar-fill { height:100%; border-radius:2px; }
 .chart-cat-item { border-bottom:1px solid var(--border); }
 .chart-cat-toggle { padding:6px 0; display:flex; align-items:center; cursor:pointer; gap:6px; }
-.chart-cat-arrow { font-size:0.6rem; color:var(--muted); transition:transform 0.18s; display:inline-block; }
+.chart-cat-arrow { font-size:0.6rem; color:var(--muted); transition:transform 0.25s cubic-bezier(0.22,1,0.36,1); display:inline-block; }
 .chart-cat-label { font-size:0.7rem; color:var(--text); flex:1; }
 .chart-cat-count { font-size:0.65rem; color:var(--muted); flex-shrink:0; }
 .chart-ch-item { padding:4px 0 4px 10px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:6px; }
@@ -2618,7 +2608,7 @@ header {
       Quick Links
     </div>
     <a href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener"
-      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family:'Inter',sans-serif;letter-spacing:0.02em;transition:color 0.15s,background 0.15s;margin-bottom:2px;"
+      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family:'Inter',sans-serif;letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);margin-bottom:2px;"
       onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
       onmouseleave="this.style.background='';this.style.color='var(--muted)'">
       <span style="display:flex;align-items:center;gap:8px;">
@@ -2628,7 +2618,7 @@ header {
       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
     </a>
     <a href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener"
-      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family:'Inter',sans-serif;letter-spacing:0.02em;transition:color 0.15s,background 0.15s;"
+      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:7px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family:'Inter',sans-serif;letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);"
       onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
       onmouseleave="this.style.background='';this.style.color='var(--muted)'">
       <span style="display:flex;align-items:center;gap:8px;">
@@ -3099,14 +3089,14 @@ header {
 
         <div style="padding:16px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); background:var(--card);">
           <a href="mailto:sceneflix.may@gmail.com"
-            style="display:inline-flex; align-items:center; gap:9px; font-size:0.82rem; color:var(--text); text-decoration:none; font-weight:500; transition:color 0.15s;"
+            style="display:inline-flex; align-items:center; gap:9px; font-size:0.82rem; color:var(--text); text-decoration:none; font-weight:500; transition:color 0.18s cubic-bezier(0.4,0,0.2,1);"
             onmouseenter="this.style.color='var(--accent)';" onmouseleave="this.style.color='var(--text)';">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="color:var(--muted);flex-shrink:0;"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             <span style="user-select:text; -webkit-user-select:text;">sceneflix.may@gmail.com</span>
           </a>
           <button id="copyMailBtn"
             onclick="navigator.clipboard.writeText('sceneflix.may@gmail.com').then(()=>{const b=document.getElementById('copyMailBtn');b.textContent='✓';b.style.color='var(--accent)';b.style.borderColor='var(--accent)';setTimeout(()=>{b.textContent=getCurrentT().about_copy||'복사';b.style.color='var(--muted)';b.style.borderColor='var(--border-h)';},2000);})"
-            style="font-size:0.6rem; padding:3px 9px; border-radius:5px; border:1px solid var(--border-h); background:transparent; color:var(--muted); cursor:pointer; flex-shrink:0; letter-spacing:0.04em; transition:color 0.15s, border-color 0.15s;" data-i18n="about_copy">복사</button>
+            style="font-size:0.6rem; padding:3px 9px; border-radius:5px; border:1px solid var(--border-h); background:transparent; color:var(--muted); cursor:pointer; flex-shrink:0; letter-spacing:0.04em; transition:color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.15s;" data-i18n="about_copy">복사</button>
         </div>
 
         <div style="padding:16px 20px; background:var(--surf); display:flex; flex-direction:column; gap:7px;">
@@ -3856,6 +3846,10 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'G1qrv_CCyeY': '2026.06.28 15:00',
+  '7RWYsbErDJE': '2026.06.27 12:00',
+  'xLMHRrA0J8U': '2026.06.28 13:33',
+  'wdH5_I7UiHA': '2026.06.28 19:00',
   'VsdN3ZM9fvA': '2026.06.27 21:00',
   'ANI8mql7fxk': '2026.06.26 21:00',
   'xYLNDE4RXsg': '2026.06.26 19:00',
@@ -5232,8 +5226,12 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', BAAMBCLIVE: 'BAAMBC LIVE', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', casaverdi: '카사베르디', fcmobile: 'FC 모바일', suwon: '수원시', geoje: '거제시', gangnami: '동네친구 강나미', jeonpa: '전파상사' };
+const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', BAAMBCLIVE: 'BAAMBC LIVE', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', casaverdi: '카사베르디', fcmobile: 'FC 모바일', suwon: '수원시', geoje: '거제시', gangnami: '동네친구 강나미', jeonpa: '전파상사', whoareyou: '여보세요?' };
 const EXTERNAL_DATA = {
+  whoareyou: [
+    { vid: '7RWYsbErDJE', url: 'https://youtu.be/7RWYsbErDJE', date: '2026.06.27 12:00' },
+    { vid: 'xLMHRrA0J8U', url: 'https://youtu.be/xLMHRrA0J8U', date: '2026.06.28 13:33' },
+  ],
   jeonpa: [
     { vid: 'rirxHEHs1Rw', url: 'https://youtu.be/rirxHEHs1Rw', date: '2025.07.03 19:34' },
   ],
@@ -5360,6 +5358,7 @@ const EXTERNAL_DATA = {
     { vid: 'jR3dAv6Qkfs', url: 'https://youtu.be/jR3dAv6Qkfs', date: '2024.05.17' },
   ],
   dispatch: [
+    { vid: 'G1qrv_CCyeY', url: 'https://youtu.be/G1qrv_CCyeY', date: '2026.06.28 15:00' },
     { vid: 'Is9G26gRqjg', url: 'https://youtu.be/Is9G26gRqjg', date: '2026.06.25 15:00' },
     { vid: '94HN0dQmUB8', url: 'https://youtu.be/94HN0dQmUB8', date: '2026.06.19' },
     { vid: '4cWjPdAfKJE', url: 'https://youtu.be/4cWjPdAfKJE', date: '2026.06.18' },
@@ -5489,6 +5488,7 @@ const EXTERNAL_DATA = {
     { vid: '2VT7VGZckHw', url: 'https://youtu.be/2VT7VGZckHw', date: '2025.07.02' },
   ],
   anwonjal: [
+    { vid: 'wdH5_I7UiHA', url: 'https://youtu.be/wdH5_I7UiHA', date: '2026.06.28 19:00' },
     { vid: 'xYLNDE4RXsg', url: 'https://youtu.be/xYLNDE4RXsg', date: '2026.06.26 19:00' },
     { vid: 'XD3rCGvMPJE', url: 'https://youtu.be/XD3rCGvMPJE', date: '2026.06.19' },
     { vid: '5JZ5biQ_hMI', url: 'https://youtu.be/5JZ5biQ_hMI', date: '2026.06.12' },
@@ -5837,7 +5837,7 @@ const EXTERNAL_DATA = {
 };
 const VID_TO_EXTERNAL_KEY = {};
 const EXTERNAL_CATS = {
-  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon','norejalham','BAAMBCLIVE','tbcmusic','asianmodelawards','pickcon','gangnami'] },
+  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon','norejalham','BAAMBCLIVE','tbcmusic','asianmodelawards','pickcon','gangnami','whoareyou'] },
   radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae','billie','riswell','leeeunji','parksohyun','ebsradiokch'] },
   variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: [
     'anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction',
@@ -6233,11 +6233,7 @@ function buildLiveNav() {
     const cnt2025 = LIVE_DATA_2025.length;
     const cnt2026 = LIVE_DATA_2026.length;
     const t = getCurrentT();
-    const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
-    function yearLabel(y) {
-      if (window._curLang === 'EN') return y;
-      return y + suffix;
-    }
+    function yearLabel(y) { return _getLiveYearLabel(y); }
     let html = `<button class="song-tab" data-ly="all" onclick="pickLiveYear(this,'all')">ALL<span class="cnt">${allCnt}</span></button>`;
     html     += `<button class="song-tab" data-ly="2024" onclick="pickLiveYear(this,'2024')">${yearLabel('2024')}<span class="cnt">${cnt2024}</span></button>`;
     html     += `<button class="song-tab" data-ly="2025" onclick="pickLiveYear(this,'2025')">${yearLabel('2025')}<span class="cnt">${cnt2025}</span></button>`;
@@ -6509,11 +6505,10 @@ function getItemSortKey(item) {
 }
 
 function sortItemsByDate(items, dir) {
-  return [...items].sort((a, b) => {
-    const da = getItemSortKey(a);
-    const db = getItemSortKey(b);
-    return dir === 'oldest' ? da - db : db - da;
-  });
+  return items
+    .map(item => ({ item, key: getItemSortKey(item) }))
+    .sort((a, b) => dir === 'oldest' ? a.key - b.key : b.key - a.key)
+    .map(({ item }) => item);
 }
 
 function sortLiveItemsByDate(items, dir) {
@@ -6823,18 +6818,11 @@ function buildSongNav() {
 const TYPE_BADGE = { music:'tb-music', mv:'tb-mv', itslive:'tb-itslive', content:'tb-content', onthespot:'tb-onthespot', fullcam:'tb-fullcam', external:'tb-external', live:'tb-itslive' };
 const TYPE_LABEL = { music:'음악방송', mv:'뮤직비디오', itslive:"It's Live", content:'자체컨텐츠', onthespot:'온더스팟', fullcam:'풀캠', external:'외부컨텐츠', live:'LIVE' };
 function getTypeLabel(type) {
+  if (type === 'content' || type === 'external' || type === 'live') {
+    return TYPE_LABEL[type] || type;
+  }
   const t = getCurrentT();
-  const map = {
-    music:    t.filter_music    || TYPE_LABEL.music,
-    mv:       t.filter_mv       || TYPE_LABEL.mv,
-    itslive:  t.filter_itslive  || TYPE_LABEL.itslive,
-    onthespot:t.filter_onthespot|| TYPE_LABEL.onthespot,
-    fullcam:  t.filter_fullcam  || TYPE_LABEL.fullcam,
-    content:  TYPE_LABEL.content,
-    external: TYPE_LABEL.external,
-    live:     TYPE_LABEL.live,
-  };
-  return map[type] || TYPE_LABEL[type] || type;
+  return t['filter_' + type] || TYPE_LABEL[type] || type;
 }
 
 const _PLAY_RING_SVG = `<div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>`;
@@ -7036,7 +7024,10 @@ function _buildAvSortedList() {
     const t = (timePart || '').replace(/\D/g, '').padEnd(4, '0').slice(0, 4);
     return parseInt(d + t, 10) || 0;
   };
-  return [...unique].sort((a, b) => curSort === 'oldest' ? dateOf(a) - dateOf(b) : dateOf(b) - dateOf(a));
+  return unique
+    .map(item => ({ item, key: dateOf(item) }))
+    .sort((a, b) => curSort === 'oldest' ? a.key - b.key : b.key - a.key)
+    .map(({ item }) => item);
 }
 
 function _avDisconnectObserver() {
@@ -7105,7 +7096,7 @@ function _getArchiveDateMap() {
 
 function buildArchiveSection() {
   const dateMap = _getArchiveDateMap();
-  const years = Object.keys(dateMap).sort((a, b) => a - b);
+  const years = Object.keys(dateMap).sort((a, b) => Number(a) - Number(b));
 
   if (!_archiveYear || !dateMap[_archiveYear]) {
     _archiveYear = years[years.length - 1] || null;
@@ -7531,7 +7522,7 @@ function replaceSkeleton(item) {
 }
 
 const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', archive:'secArchive', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', shorts:'secShorts', fantube:'secFantube', links:'secLinks', bookmark:'secBookmark', about:'secAbout', schedule:'secSchedule', news:'secNews' };
-const _PICK_SECTION_EL_IDS = _SECTION_EL_IDS;
+
 const _PICK_SECTION_MAP = {
   allvideos:['allvideosMode','grid-wrap-el'],
   archive:  ['archiveMode'],
@@ -7584,7 +7575,7 @@ function pickSection(section, _fromPopState) {
 
   const activeEls = _PICK_SECTION_MAP[section] || ['aboutMode'];
 
-  _PICK_SECTION_EL_IDS.forEach(id => {
+  _SECTION_EL_IDS.forEach(id => {
     const el = _SECTION_EL_CACHE[id];
     if (!el) return;
     el.style.display = activeEls.includes(id) ? '' : 'none';
@@ -7596,7 +7587,7 @@ function pickSection(section, _fromPopState) {
   clearSearch(true);
 
   if (section === 'links')  _replayAnim('.link-row',   i => `${Math.min(i * 0.04, 0.5)}s`);
-  if (section === 'about')  _replayAnim('#aboutMode .links-wrap > div > *', i => `${i * 0.07}s`, 'fadeUp 0.35s ease both');
+  if (section === 'about')  _replayAnim('#aboutMode .links-wrap > div > *', i => `${i * 0.07}s`, 'fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both');
 
   if (section === 'allvideos') { _avLastSort = null; buildAllVideosGrid(); }
   else { _avDisconnectObserver(); }
@@ -7691,9 +7682,7 @@ function renderSubLiveTabs() {
   const cnt2024 = LIVE_DATA_2024.length;
   const cnt2025 = LIVE_DATA_2025.length;
   const cnt2026 = LIVE_DATA_2026.length;
-  const t = getCurrentT();
-  const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
-  function yl(y) { return window._curLang === 'EN' ? y : y + suffix; }
+  function yl(y) { return _getLiveYearLabel(y); }
   let html = `<button class="song-tab ${curLiveYear === 'all'  ? 'active' : ''}" onclick="pickLiveYear(this,'all'); syncSubSidebar();">ALL<span class="cnt">${allCnt}</span></button>`;
   html     += `<button class="song-tab ${curLiveYear === '2024' ? 'active' : ''}" onclick="pickLiveYear(this,'2024'); syncSubSidebar();">${yl('2024')}<span class="cnt">${cnt2024}</span></button>`;
   html     += `<button class="song-tab ${curLiveYear === '2025' ? 'active' : ''}" onclick="pickLiveYear(this,'2025'); syncSubSidebar();">${yl('2025')}<span class="cnt">${cnt2025}</span></button>`;
@@ -7707,57 +7696,32 @@ function renderSubExternalTabs() {
     const key = EXTERNAL_CATS[cat].i18nKey;
     return t[key] || EXTERNAL_CATS[cat].label;
   }
-  let html = `<button class="song-tab ${curExternalCat === 'all' ? 'active' : ''}" onclick="pickExternalCatSub(this,'all')">ALL<span class="cnt">${_EXTERNAL_TOTAL_COUNT}</span></button>`;
+  let html = `<button class="song-tab ${curExternalCat === 'all' ? 'active' : ''}" onclick="pickExternalCat(this,'all')">ALL<span class="cnt">${_EXTERNAL_TOTAL_COUNT}</span></button>`;
   html += EXTERNAL_CAT_KEYS.map(cat => {
     const cnt = _EXTERNAL_CAT_COUNT_MAP[cat] || 0;
-    return `<button class="song-tab ${curExternalCat === cat ? 'active' : ''}" onclick="pickExternalCatSub(this,'${cat}')">${catLabel(cat)}<span class="cnt">${cnt}</span></button>`;
+    return `<button class="song-tab ${curExternalCat === cat ? 'active' : ''}" onclick="pickExternalCat(this,'${cat}')">${catLabel(cat)}<span class="cnt">${cnt}</span></button>`;
   }).join('');
   return html;
 }
 
-function pickExternalCatSub(el, cat) {
-  curExternalCat = cat;
-  curExternal = 'all';
-  buildExternalChanBar();
-  buildExternalGrid();
-  syncSubSidebar();
-}
 
-function pickExternalChanSub(el, key) {
-  curExternal = key;
-  buildExternalChanBar();
-  buildExternalGrid();
-  syncSubSidebar();
-}
 
 function renderSubArchiveYearTabs() {
   const dateMap = _getArchiveDateMap();
-  const years = Object.keys(dateMap).sort((a, b) => a - b);
+  const years = Object.keys(dateMap).sort((a, b) => Number(a) - Number(b));
   return years.map(y => {
     const total = Object.values(dateMap[y]).reduce((s, a) => s + a.length, 0);
     return `<button class="song-tab${y === _archiveYear ? ' active' : ''}" onclick="setArchiveYearFromSub('${y}')">${y}<span class="cnt">${total}</span></button>`;
   }).join('');
 }
 
-function buildShortsYearNav() {
-  const nav = document.getElementById('shortsYearNav');
-  if (!nav) return;
-  const years = ['all', '2024', '2025', '2026'];
+function _getLiveYearLabel(y) {
   const t = getCurrentT();
   const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
-  const labels = { all: 'ALL' };
-  years.forEach(y => { if (!labels[y]) labels[y] = window._curLang === 'EN' ? y : y + suffix; });
-  nav.innerHTML = years.map(y => {
-    const base = _curShortsChannel === 'all' ? SHORTS_DATA : SHORTS_DATA.filter(i => i.channel === _curShortsChannel);
-    const count = _shortsLoaded
-      ? (y === 'all' ? base.length : base.filter(i => i.date && i.date.startsWith(y)).length)
-      : null;
-    const cntHtml = count !== null ? `<span class="cnt">${count}</span>` : '';
-    return `<button class="song-tab ${_curShortsYear === y ? 'active' : ''}" onclick="pickShortsYear('${y}')">${labels[y]}${cntHtml}</button>`;
-  }).join('');
+  return window._curLang === 'EN' ? y : y + suffix;
 }
 
-function renderSubShortsTabs() {
+function _buildShortsYearButtons() {
   const years = ['all', '2024', '2025', '2026'];
   const t = getCurrentT();
   const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
@@ -7771,6 +7735,16 @@ function renderSubShortsTabs() {
     const cntHtml = count !== null ? `<span class="cnt">${count}</span>` : '';
     return `<button class="song-tab ${_curShortsYear === y ? 'active' : ''}" onclick="pickShortsYear('${y}')">${labels[y]}${cntHtml}</button>`;
   }).join('');
+}
+
+function buildShortsYearNav() {
+  const nav = document.getElementById('shortsYearNav');
+  if (!nav) return;
+  nav.innerHTML = _buildShortsYearButtons();
+}
+
+function renderSubShortsTabs() {
+  return _buildShortsYearButtons();
 }
 
 function closeSubSidebar() {
@@ -7784,13 +7758,6 @@ function syncSubSidebar() {
   updateSubSidebar(curSection);
 }
 
-function setLiveMemberFromSub(el, member) {
-  curLiveMember = member;
-  document.querySelectorAll('#liveMode .type-btn[data-lm]').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  buildLiveGrid();
-  syncSubSidebar();
-}
 
 let curSearchQuery = '';
 let curSort = 'newest';
@@ -8401,7 +8368,7 @@ function buildNewsGrid() {
     const delay = Math.min(idx * (_isMobile ? 0.018 : 0.035), _isMobile ? 0.22 : 0.5).toFixed(3);
     const thumb = a.thumbnail ? '<img class="news-thumb" src="'+_escHtml(a.thumbnail)+'" alt="" loading="lazy" decoding="async">' : noThumb;
     const desc = a.description ? '<div class="news-desc">'+_escHtml(a.description)+'</div>' : '';
-    return '<a class="news-card" href="'+_escHtml(a.url)+'" target="_blank" rel="noopener" style="animation:fadeUp 0.3s ease both '+delay+'s;">'
+    return '<a class="news-card" href="'+_escHtml(a.url)+'" target="_blank" rel="noopener" style="animation:fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both '+delay+'s;">'
       +thumb+'<div class="news-body"><div class="news-title">'+_escHtml(a.title)+'</div>'+desc
       +'<div class="news-meta"><span class="news-source">'+_escHtml(a.source||'')+'</span><span class="news-date">'+_escHtml(a.date||'')+'</span></div>'
       +'</div></a>';
@@ -8697,44 +8664,43 @@ function renderSchedList() {
 buildSongNav();
 
 (function () {
-  var _key   = null;
-  var _segs  = [];
-  var _data  = [];
-  var _total = 0;
-  var TYPE_NAMES = { music: 'Music Show', mv: 'MV', itslive: 'ITS LIVE', onthespot: 'On The Spot', fullcam: 'Full Cam' };
-  var SVG_NS = 'http://www.w3.org/2000/svg';
+  let _key   = null;
+  let _segs  = [];
+  let _data  = [];
+  let _total = 0;
+  const TYPE_NAMES = { music: 'Music Show', mv: 'MV', itslive: 'ITS LIVE', onthespot: 'On The Spot', fullcam: 'Full Cam' };
+  const SVG_NS = 'http://www.w3.org/2000/svg';
 
   function pct(a, b) { return b > 0 ? ((a / b) * 100).toFixed(1) : '0.0'; }
 
   function buildData() {
-    var typeCounts = {};
-    for (var i = 0; i < RESCENE_DATA.length; i++) {
-      var vids = RESCENE_DATA[i].videos;
-      var keys = Object.keys(vids);
-      for (var j = 0; j < keys.length; j++) {
-        typeCounts[keys[j]] = (typeCounts[keys[j]] || 0) + vids[keys[j]].length;
+    const typeCounts = {};
+    for (const entry of RESCENE_DATA) {
+      const vids = entry.videos;
+      for (const k of Object.keys(vids)) {
+        typeCounts[k] = (typeCounts[k] || 0) + vids[k].length;
       }
     }
-    var songsCount = Object.keys(typeCounts).reduce(function (s, k) { return s + typeCounts[k]; }, 0);
-    var songsSubs  = Object.keys(typeCounts).map(function (k) { return { label: TYPE_NAMES[k] || k, count: typeCounts[k] }; });
+    const songsCount = Object.values(typeCounts).reduce((s, v) => s + v, 0);
+    const songsSubs  = Object.keys(typeCounts).map(k => ({ label: TYPE_NAMES[k] || k, count: typeCounts[k] }));
 
-    var contentCount = CONTENT_DATA.reduce(function (s, c) { return s + c.urls.length; }, 0);
-    var contentSubs  = CONTENT_DATA.map(function (c) { return { label: c.category, count: c.urls.length }; });
+    const contentCount = CONTENT_DATA.reduce((s, c) => s + c.urls.length, 0);
+    const contentSubs  = CONTENT_DATA.map(c => ({ label: c.category, count: c.urls.length }));
 
-    var liveCount = ALL_LIVE.length;
-    var liveSubs  = [
+    const liveCount = ALL_LIVE.length;
+    const liveSubs  = [
       { label: '2024년', count: LIVE_DATA_2024.length },
       { label: '2025년', count: LIVE_DATA_2025.length },
       { label: '2026년', count: LIVE_DATA_2026.length }
     ];
 
-    var extCount = EXTERNAL_KEYS.reduce(function (s, k) { return s + (EXTERNAL_DATA[k] ? EXTERNAL_DATA[k].length : 0); }, 0);
-    var extSubs  = Object.keys(EXTERNAL_CATS).map(function (ck) {
-      var cat = EXTERNAL_CATS[ck];
-      var cnt = cat.keys.reduce(function (s, k) { return s + (EXTERNAL_DATA[k] ? EXTERNAL_DATA[k].length : 0); }, 0);
-      var chs = cat.keys
-        .filter(function (k) { return EXTERNAL_DATA[k] && EXTERNAL_DATA[k].length > 0; })
-        .map(function (k) { return { label: EXTERNAL_LABELS[k] || k, count: EXTERNAL_DATA[k].length }; });
+    const extCount = EXTERNAL_KEYS.reduce((s, k) => s + (EXTERNAL_DATA[k] ? EXTERNAL_DATA[k].length : 0), 0);
+    const extSubs  = Object.keys(EXTERNAL_CATS).map(ck => {
+      const cat = EXTERNAL_CATS[ck];
+      const cnt = cat.keys.reduce((s, k) => s + (EXTERNAL_DATA[k] ? EXTERNAL_DATA[k].length : 0), 0);
+      const chs = cat.keys
+        .filter(k => EXTERNAL_DATA[k] && EXTERNAL_DATA[k].length > 0)
+        .map(k => ({ label: EXTERNAL_LABELS[k] || k, count: EXTERNAL_DATA[k].length }));
       return { label: cat.label, count: cnt, channels: chs };
     });
 
@@ -8747,30 +8713,29 @@ buildSongNav();
   }
 
   function setCenter(label, count, p) {
-    var el;
+    let el;
     el = document.getElementById('donutCenterLabel'); if (el) el.textContent = label;
     el = document.getElementById('donutCenterCount'); if (el) el.textContent = count;
     el = document.getElementById('donutCenterPct');   if (el) el.textContent = p;
   }
 
   function setOpacity(activeKey) {
-    for (var i = 0; i < _segs.length; i++) {
-      var s = _segs[i];
-      var isActive = s.key === activeKey;
+    for (const s of _segs) {
+      const isActive = s.key === activeKey;
       s.path._selected = isActive;
       s.path.setAttribute('opacity', activeKey === null ? '0.88' : (isActive ? '1' : '0.28'));
     }
   }
 
   function renderRows(subtypes, parentCount, color) {
-    return subtypes.map(function (s) {
-      var sp  = pct(s.count, parentCount);
-      var bar = '<div class="chart-row-bar-wrap"><div class="chart-row-bar-fill" style="width:' + sp + '%;background:' + color + ';"></div></div>';
+    return subtypes.map(s => {
+      const sp  = pct(s.count, parentCount);
+      const bar = '<div class="chart-row-bar-wrap"><div class="chart-row-bar-fill" style="width:' + sp + '%;background:' + color + ';"></div></div>';
       if (s.channels) {
-        var cid = 'extcat_' + s.label.replace(/\s+/g, '_');
-        var chRows = s.channels.map(function (ch) {
-          return '<div class="chart-ch-item"><span class="chart-ch-name">· ' + ch.label + '</span><span class="chart-ch-count">' + ch.count + '개</span></div>';
-        }).join('');
+        const cid = 'extcat_' + s.label.replace(/\s+/g, '_');
+        const chRows = s.channels.map(ch =>
+          '<div class="chart-ch-item"><span class="chart-ch-name">· ' + ch.label + '</span><span class="chart-ch-count">' + ch.count + '개</span></div>'
+        ).join('');
         return '<div class="chart-cat-item">'
           + '<div class="chart-cat-toggle" onclick="(function(el){var c=document.getElementById(\'' + cid + '\');var open=c.style.display!==\'none\';c.style.display=open?\'none\':\'block\';el.querySelector(\'.chart-cat-arrow\').style.transform=open?\'rotate(0deg)\':\'rotate(90deg)\'})(this)">'
           + '<span class="chart-cat-arrow">▶</span>'
@@ -8785,9 +8750,9 @@ buildSongNav();
   }
 
   window.aboutChartSelect = function (key) {
-    var detailEl = document.getElementById('aboutChartDetail');
-    var legendEl = document.getElementById('aboutChartLegend');
-    var innerEl  = document.getElementById('chartDetailInner');
+    const detailEl = document.getElementById('aboutChartDetail');
+    const legendEl = document.getElementById('aboutChartLegend');
+    const innerEl  = document.getElementById('chartDetailInner');
     if (!detailEl || !legendEl || !innerEl || _data.length === 0) return;
 
     if (_key === key) {
@@ -8799,8 +8764,7 @@ buildSongNav();
       return;
     }
 
-    var d = null;
-    for (var i = 0; i < _data.length; i++) { if (_data[i].key === key) { d = _data[i]; break; } }
+    const d = _data.find(item => item.key === key);
     if (!d) return;
 
     _key = key;
@@ -8821,12 +8785,12 @@ buildSongNav();
   };
 
   function buildChart() {
-    var svg      = document.getElementById('aboutDonutSvg');
-    var legendEl = document.getElementById('aboutChartLegend');
+    const svg      = document.getElementById('aboutDonutSvg');
+    const legendEl = document.getElementById('aboutChartLegend');
     if (!svg || !legendEl) return;
 
     _data  = buildData();
-    _total = _data.reduce(function (s, d) { return s + d.count; }, 0);
+    _total = _data.reduce((s, d) => s + d.count, 0);
     if (_total === 0) return;
 
     _key  = null;
@@ -8834,38 +8798,37 @@ buildSongNav();
     svg.innerHTML = '';
     setCenter('전체', _total, '100%');
 
-    var cx = 100, cy = 100, OR = 88, IR = 55, angle = -Math.PI / 2;
+    const cx = 100, cy = 100, OR = 88, IR = 55;
+    let angle = -Math.PI / 2;
 
-    for (var i = 0; i < _data.length; i++) {
-      var d     = _data[i];
-      var sweep = (d.count / _total) * Math.PI * 2;
-      var a0    = angle;
-      var a1    = angle + sweep;
-      angle     = a1;
-      var lg    = sweep > Math.PI ? 1 : 0;
-      var pathD = 'M' + (cx + OR * Math.cos(a0)) + ',' + (cy + OR * Math.sin(a0))
-                + ' A' + OR + ',' + OR + ' 0 ' + lg + ',1 ' + (cx + OR * Math.cos(a1)) + ',' + (cy + OR * Math.sin(a1))
-                + ' L' + (cx + IR * Math.cos(a1)) + ',' + (cy + IR * Math.sin(a1))
-                + ' A' + IR + ',' + IR + ' 0 ' + lg + ',0 ' + (cx + IR * Math.cos(a0)) + ',' + (cy + IR * Math.sin(a0))
-                + ' Z';
-      var p = document.createElementNS(SVG_NS, 'path');
+    for (const d of _data) {
+      const sweep = (d.count / _total) * Math.PI * 2;
+      const a0    = angle;
+      const a1    = angle + sweep;
+      angle       = a1;
+      const lg    = sweep > Math.PI ? 1 : 0;
+      const pathD = 'M' + (cx + OR * Math.cos(a0)) + ',' + (cy + OR * Math.sin(a0))
+                  + ' A' + OR + ',' + OR + ' 0 ' + lg + ',1 ' + (cx + OR * Math.cos(a1)) + ',' + (cy + OR * Math.sin(a1))
+                  + ' L' + (cx + IR * Math.cos(a1)) + ',' + (cy + IR * Math.sin(a1))
+                  + ' A' + IR + ',' + IR + ' 0 ' + lg + ',0 ' + (cx + IR * Math.cos(a0)) + ',' + (cy + IR * Math.sin(a0))
+                  + ' Z';
+      const p = document.createElementNS(SVG_NS, 'path');
       p.setAttribute('d', pathD);
       p.setAttribute('fill', d.color);
       p.setAttribute('opacity', '0.88');
       p.setAttribute('stroke', 'var(--bg)');
       p.setAttribute('stroke-width', '2');
       p.setAttribute('data-key', d.key);
-      p.style.cssText = 'cursor:pointer;transition:opacity 0.2s;';
-      (function (key, path) {
-        path.addEventListener('click',      function () { window.aboutChartSelect(key); });
-        path.addEventListener('mouseenter', function () { if (!path._selected) path.setAttribute('opacity', '1'); });
-        path.addEventListener('mouseleave', function () { if (!path._selected) path.setAttribute('opacity', '0.88'); });
-      })(d.key, p);
+      p.style.cssText = 'cursor:pointer;transition:opacity 0.22s cubic-bezier(0.4,0,0.2,1);';
+      const key = d.key;
+      p.addEventListener('click',      () => { window.aboutChartSelect(key); });
+      p.addEventListener('mouseenter', () => { if (!p._selected) p.setAttribute('opacity', '1'); });
+      p.addEventListener('mouseleave', () => { if (!p._selected) p.setAttribute('opacity', '0.88'); });
       svg.appendChild(p);
       _segs.push({ key: d.key, path: p });
     }
 
-    var hole = document.createElementNS(SVG_NS, 'circle');
+    const hole = document.createElementNS(SVG_NS, 'circle');
     hole.setAttribute('cx', cx);
     hole.setAttribute('cy', cy);
     hole.setAttribute('r', IR - 2);
@@ -8873,8 +8836,8 @@ buildSongNav();
     hole.style.pointerEvents = 'none';
     svg.appendChild(hole);
 
-    legendEl.innerHTML = _data.map(function (d) {
-      var p = pct(d.count, _total);
+    legendEl.innerHTML = _data.map(d => {
+      const p = pct(d.count, _total);
       return '<div class="chart-legend-item" onclick="aboutChartSelect(\'' + d.key + '\')">'
         + '<div class="chart-legend-dot" style="background:' + d.color + ';"></div>'
         + '<div style="flex:1;min-width:0;">'
@@ -8897,7 +8860,7 @@ buildSongNav();
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', function () { requestAnimationFrame(tryBuild); });
+    document.addEventListener('DOMContentLoaded', () => { requestAnimationFrame(tryBuild); });
   } else {
     requestAnimationFrame(tryBuild);
   }
