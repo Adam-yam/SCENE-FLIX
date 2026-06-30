@@ -1,1 +1,1 @@
-<img width="1770" height="422" alt="SCENE-FLIX-LOGO" src="https://github.com/user-attachments/assets/2db86549-ce99-4d94-ab87-c8c8dc9923aa" />
+<img width="1487" height="481" alt="_1" src="https://github.com/user-attachments/assets/000be3bb-b333-456f-ad00-91b2f066c3ac" />
