@@ -6599,6 +6599,7 @@ function buildLiveCard(item, delay) {
     : `<div class="csong-multi" id="lvc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
   const lmClass = getLiveCardClass(item.members);
   const liveDate = formatLiveDateTime(item);
+  const liveDateDisplay = formatLiveDate(item);
   const memberNames = item.members.join(' ');
   const searchText = [item.title || '', memberNames, liveDate].join(' ').toLowerCase();
   return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${searchText}">
@@ -6606,7 +6607,7 @@ function buildLiveCard(item, delay) {
     <div class="cbody">
       ${titleHtml}
       <div class="cmeta">
-        <span class="cdate">${liveDate}</span>
+        <span class="cdate">${liveDateDisplay}</span>
       </div>
       <div class="ctags">${memberBadges}</div>
     </div>
