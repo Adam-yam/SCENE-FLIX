@@ -3860,6 +3860,7 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'd0DjgHztn0Y': '2026.07.02 18:16',
   'Q449zHelmcs': '2026.07.02 12:00',
   'bkxvR913h-g': '2026.07.02 02:28',
   'sZMltKaL75U': '2026.07.01 18:00',
@@ -5307,6 +5308,7 @@ const EXTERNAL_DATA = {
     { vid: 'lNIapSGOAHw', url: 'https://youtu.be/lNIapSGOAHw', date: '2026.06.19 16:40' },
   ],
   casaverdi: [
+    { vid: 'd0DjgHztn0Y', url: 'https://youtu.be/d0DjgHztn0Y', date: '2026.07.02 18:16' },
     { vid: '3DPYToSD6To', url: 'https://youtu.be/3DPYToSD6To', date: '2026.06.30 16:18' },
     { vid: '9i1cbplzxQM', url: 'https://youtu.be/9i1cbplzxQM', date: '2026.06.26 16:53' },
     { vid: 'TQnDvlJH4Bk', url: 'https://youtu.be/TQnDvlJH4Bk', date: '2026.06.25 10:15' },
@@ -6552,11 +6554,6 @@ function getItemDate(item) {
 
 function dateOnly(str) {
   return str ? str.split(' ')[0] : str;
-}
-
-function dateStrToNum(dateStr) {
-  if (!dateStr) return 0;
-  return parseInt(dateStr.replace(/\D/g, ''), 10) || 0;
 }
 
 function getItemSortKey(item) {
@@ -7819,12 +7816,6 @@ function _buildShortsYearButtons() {
   }).join('');
 }
 
-function buildShortsYearNav() {
-  const nav = document.getElementById('shortsYearNav');
-  if (!nav) return;
-  nav.innerHTML = _buildShortsYearButtons();
-}
-
 function renderSubShortsTabs() {
   return _buildShortsYearButtons();
 }
@@ -8330,19 +8321,7 @@ function setShortsSort(dir) {
 function buildShortsYearNav() {
   const nav = document.getElementById('shortsYearNav');
   if (!nav) return;
-  const years = ['all', '2024', '2025', '2026'];
-  const t = getCurrentT();
-  const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
-  const labels = { all: 'ALL' };
-  years.forEach(y => { if (!labels[y]) labels[y] = window._curLang === 'EN' ? y : y + suffix; });
-  nav.innerHTML = years.map(y => {
-    const base = _curShortsChannel === 'all' ? SHORTS_DATA : SHORTS_DATA.filter(i => i.channel === _curShortsChannel);
-    const count = _shortsLoaded
-      ? (y === 'all' ? base.length : base.filter(i => i.date && i.date.startsWith(y)).length)
-      : null;
-    const cntHtml = count !== null ? `<span class="cnt">${count}</span>` : '';
-    return `<button class="song-tab ${_curShortsYear === y ? 'active' : ''}" onclick="pickShortsYear('${y}')">${labels[y]}${cntHtml}</button>`;
-  }).join('');
+  nav.innerHTML = _buildShortsYearButtons();
 }
 
 function pickShortsYear(year) {
