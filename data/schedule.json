@@ -1,6 +1,13 @@
 {
-  "updated": "2026-07-02T03:00:41Z",
+  "updated": "2026-07-02T15:00:47Z",
   "events": [
+    {
+      "date": "2026-07-09",
+      "title": "Mnet <M COUNTDOWN>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
     {
       "date": "2026-07-10",
       "title": "[Pretty Girl] 대면/영상통화 팬사인회 by million music",
@@ -20,6 +27,13 @@
       "title": "KBS WORLD <마이데이트립>",
       "detail": "",
       "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-25",
+      "title": "보령 KBS 슈퍼라이브",
+      "detail": "",
+      "type": "concert",
       "source": "mnetplus"
     },
     {
