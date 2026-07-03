@@ -1,9 +1,23 @@
 {
-  "updated": "2026-07-03T03:00:51Z",
+  "updated": "2026-07-03T15:00:44Z",
   "events": [
+    {
+      "date": "2026-07-06",
+      "title": "SBS <인기가요> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
     {
       "date": "2026-07-09",
       "title": "Mnet <M COUNTDOWN>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-09",
+      "title": "Mnet  <Check-in! 아이돌 빙고>",
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
@@ -32,6 +46,13 @@
     {
       "date": "2026-07-25",
       "title": "보령 KBS 슈퍼라이브",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-26",
+      "title": "별방수면회",
       "detail": "",
       "type": "concert",
       "source": "mnetplus"
