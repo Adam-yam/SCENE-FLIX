@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-04T03:00:46Z",
+  "updated": "2026-07-04T15:00:48Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -34,6 +34,13 @@
       "title": "2026 현대 N 페스티벌 Round 3 스페셜 퍼포먼스",
       "detail": "",
       "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-12",
+      "title": "[Pretty Girl] 대면/영상통화 팬사인회 by million music",
+      "detail": "",
+      "type": "fansign",
       "source": "mnetplus"
     },
     {
