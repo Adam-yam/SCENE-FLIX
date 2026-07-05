@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-05T03:00:52Z",
+  "updated": "2026-07-05T15:00:51Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -34,6 +34,13 @@
       "title": "2026 현대 N 페스티벌 Round 3 스페셜 퍼포먼스",
       "detail": "",
       "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-11",
+      "title": "MBC <전지적 참견 시점>",
+      "detail": "",
+      "type": "broadcast",
       "source": "mnetplus"
     },
     {
