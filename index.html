@@ -6917,6 +6917,8 @@ function buildBookmarkGrid() {
     const delay = `${Math.min(idx * (_isMobile ? 0.015 : 0.03), _isMobile ? 0.2 : 0.4)}s`;
     return buildAllVideoCard(item, delay, 'bvc');
   }).join('');
+
+  loadAllVideosMetas(unique);
 }
 
 const _SONG_COUNT_MAP = {};
@@ -7534,7 +7536,7 @@ async function loadAllVideosMetas(items) {
   const CHUNK = 6;
   const mainUnloaded = items.filter(i => i._src === 'main' && !i.loaded);
   for (let i = 0; i < mainUnloaded.length; i += CHUNK) {
-    if (curSection !== 'allvideos' && curSection !== 'archive') return;
+    if (curSection !== 'allvideos' && curSection !== 'archive' && curSection !== 'bookmark') return;
     const batch = mainUnloaded.slice(i, i + CHUNK);
     await Promise.all(batch.map(async proxy => {
       const ref = proxy._ref;
@@ -7544,10 +7546,10 @@ async function loadAllVideosMetas(items) {
       proxy.meta = ref.meta;
       proxy.loaded = true;
       const tl = getTypeLabel(proxy.type);
-      const titleEl = document.getElementById(`avc-title-${proxy.vid}`) || document.getElementById(`arc-title-${proxy.vid}`);
-      const dateEl  = document.querySelector(`#avc-${proxy.vid} .cdate`) || document.querySelector(`#arc-${proxy.vid} .cdate`);
-      const skelDate = document.querySelector(`#avc-${proxy.vid} .skel-date`) || document.querySelector(`#arc-${proxy.vid} .skel-date`);
-      const tagsEl  = document.querySelector(`#avc-${proxy.vid} .ctags`) || document.querySelector(`#arc-${proxy.vid} .ctags`);
+      const titleEl = document.getElementById(`avc-title-${proxy.vid}`) || document.getElementById(`arc-title-${proxy.vid}`) || document.getElementById(`bvc-title-${proxy.vid}`);
+      const dateEl  = document.querySelector(`#avc-${proxy.vid} .cdate`) || document.querySelector(`#arc-${proxy.vid} .cdate`) || document.querySelector(`#bvc-${proxy.vid} .cdate`);
+      const skelDate = document.querySelector(`#avc-${proxy.vid} .skel-date`) || document.querySelector(`#arc-${proxy.vid} .skel-date`) || document.querySelector(`#bvc-${proxy.vid} .skel-date`);
+      const tagsEl  = document.querySelector(`#avc-${proxy.vid} .ctags`) || document.querySelector(`#arc-${proxy.vid} .ctags`) || document.querySelector(`#bvc-${proxy.vid} .ctags`);
       if (titleEl) titleEl.textContent = ref.meta.rawTitle || ref.song;
       if (dateEl) dateEl.textContent = dateOnly(ref.meta.date) || '';
       else if (skelDate) {
@@ -7566,7 +7568,7 @@ async function loadAllVideosMetas(items) {
 
   const otherUnloaded = items.filter(i => (i._src === 'content' || i._src === 'external') && !i.loaded);
   for (let i = 0; i < otherUnloaded.length; i += CHUNK) {
-    if (curSection !== 'allvideos' && curSection !== 'archive') return;
+    if (curSection !== 'allvideos' && curSection !== 'archive' && curSection !== 'bookmark') return;
     const batch = otherUnloaded.slice(i, i + CHUNK);
     await Promise.all(batch.map(async proxy => {
       const ref = proxy._ref;
@@ -7576,8 +7578,8 @@ async function loadAllVideosMetas(items) {
       ref.loaded = true;
       proxy.meta = { rawTitle: ref.title, date: ref.date, show: fetched.show, channel: fetched.channel || '' };
       proxy.loaded = true;
-      const titleEl = document.getElementById(`avc-title-${proxy.vid}`) || document.getElementById(`arc-title-${proxy.vid}`);
-      const metaEl  = document.querySelector(`#avc-${proxy.vid} .cmeta`) || document.querySelector(`#arc-${proxy.vid} .cmeta`);
+      const titleEl = document.getElementById(`avc-title-${proxy.vid}`) || document.getElementById(`arc-title-${proxy.vid}`) || document.getElementById(`bvc-title-${proxy.vid}`);
+      const metaEl  = document.querySelector(`#avc-${proxy.vid} .cmeta`) || document.querySelector(`#arc-${proxy.vid} .cmeta`) || document.querySelector(`#bvc-${proxy.vid} .cmeta`);
       if (titleEl) titleEl.textContent = ref.title || proxy.vid;
       if (metaEl) metaEl.innerHTML = ref.date ? `<span class="cdate">${dateOnly(ref.date)}</span>` : '';
       const channelKey = VID_TO_EXTERNAL_KEY[proxy.vid] || '';
@@ -7588,7 +7590,7 @@ async function loadAllVideosMetas(items) {
 
   const liveUnloaded = items.filter(i => i._src === 'live' && !i.loaded);
   for (let i = 0; i < liveUnloaded.length; i += CHUNK) {
-    if (curSection !== 'allvideos' && curSection !== 'archive') return;
+    if (curSection !== 'allvideos' && curSection !== 'archive' && curSection !== 'bookmark') return;
     const batch = liveUnloaded.slice(i, i + CHUNK);
     await Promise.all(batch.map(async proxy => {
       const ref = proxy._ref;
@@ -7597,7 +7599,7 @@ async function loadAllVideosMetas(items) {
       if (!ref.title) ref.title = ref.date + ' 라이브';
       proxy.meta.rawTitle = ref.title;
       proxy.loaded = true;
-      const avcTitle = document.getElementById(`avc-title-${proxy.vid}`) || document.getElementById(`arc-title-${proxy.vid}`);
+      const avcTitle = document.getElementById(`avc-title-${proxy.vid}`) || document.getElementById(`arc-title-${proxy.vid}`) || document.getElementById(`bvc-title-${proxy.vid}`);
       if (avcTitle) avcTitle.textContent = ref.title;
       const lvcTitle = document.getElementById(`lvc-title-${proxy.vid}`);
       if (lvcTitle) lvcTitle.textContent = ref.title;
