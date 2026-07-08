@@ -1,9 +1,23 @@
 {
-  "updated": "2026-07-08T03:01:04Z",
+  "updated": "2026-07-08T15:01:04Z",
   "events": [
     {
       "date": "2026-07-06",
       "title": "SBS <인기가요> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-08",
+      "title": "Mnet <M COUNTDOWN> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-09",
+      "title": "MBC <쇼! 음악중심> 사전녹화",
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
@@ -18,6 +32,20 @@
     {
       "date": "2026-07-09",
       "title": "Mnet  <Check-in! 아이돌 빙고>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-09",
+      "title": "KBS2 <뮤직뱅크> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-10",
+      "title": "KBS2 <뮤직뱅크>",
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
@@ -39,6 +67,13 @@
     {
       "date": "2026-07-11",
       "title": "MBC <전지적 참견 시점>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-12",
+      "title": "SBS <인기가요>",
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
