@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-09T03:01:05Z",
+  "updated": "2026-07-09T15:00:57Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -55,6 +55,13 @@
       "title": "[Pretty Girl] 대면/영상통화 팬사인회 by million music",
       "detail": "",
       "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-11",
+      "title": "MBC <쇼! 음악중심>",
+      "detail": "",
+      "type": "broadcast",
       "source": "mnetplus"
     },
     {
