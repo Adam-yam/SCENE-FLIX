@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-10T03:00:56Z",
+  "updated": "2026-07-10T15:00:58Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -118,6 +118,13 @@
       "title": "[Pretty Girl] 대면/영상통화 팬사인회 by PlusChat",
       "detail": "",
       "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-25",
+      "title": "2026 원 유니버스 페스티벌",
+      "detail": "",
+      "type": "concert",
       "source": "mnetplus"
     },
     {
