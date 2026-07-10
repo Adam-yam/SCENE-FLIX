@@ -8482,15 +8482,19 @@ const _SHORTS_CHANNEL_LABEL = {};
 (function loadShortsJson() {
   const btns = [...document.querySelectorAll('#shortsMode .type-bar .type-btn[data-sc]')]
     .filter(b => b.getAttribute('data-sc') !== 'all');
-  const keys = btns.map(b => b.getAttribute('data-sc'));
   btns.forEach(b => { _SHORTS_CHANNEL_LABEL[b.getAttribute('data-sc')] = b.textContent.trim(); });
 
-  Promise.all(keys.map(key =>
-    fetch('./data/' + key + '-shorts.json?_=' + _HOUR_KEY)
-      .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
-      .then(function(data) { return (data.items || []).map(function(it) { return Object.assign({}, it, { channel: key }); }); })
-      .catch(function() { return []; })
-  )).then(function(results) {
+  const legacyPromise = fetch('./data/shorts.json?_=' + _HOUR_KEY)
+    .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function(data) { return data.items || []; })
+    .catch(function() { return []; });
+
+  const extraPromise = fetch('./data/fcmobile-shorts.json?_=' + _HOUR_KEY)
+    .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function(data) { return (data.items || []).map(function(it) { return Object.assign({}, it, { channel: it.channel || 'fcmobile' }); }); })
+    .catch(function() { return []; });
+
+  Promise.all([legacyPromise, extraPromise]).then(function(results) {
     SHORTS_DATA = results.flat();
     _shortsLoaded = true;
     if (curSection === 'shorts') { buildShortsYearNav(); buildShortsGrid(); syncSubSidebar(); }
