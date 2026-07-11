@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-11T03:00:58Z",
+  "updated": "2026-07-11T15:00:57Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -97,6 +97,27 @@
       "title": "[Pretty Girl] 대면/영상통화 팬사인회 by million music",
       "detail": "",
       "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-13",
+      "title": "SBS M <더쇼> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-14",
+      "title": "SBS M <더 쇼>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-14",
+      "title": "SBS M <THE K-POP FANPOPTY> 녹화",
+      "detail": "",
+      "type": "broadcast",
       "source": "mnetplus"
     },
     {
