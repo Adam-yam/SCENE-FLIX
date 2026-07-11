@@ -5043,6 +5043,9 @@ function restoreLastWatched() {
 const _META_CACHE_KEY = 'rescene-meta-v1';
 const _META_CACHE_TTL = 30 * 24 * 60 * 60 * 1000;
 const _isMobile = window.matchMedia('(max-width: 700px)').matches;
+function _cardDelay(i, batchSize = Infinity) {
+  return `${Math.min((i % batchSize) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
+}
 let _metaCache = null;
 
 function _loadMetaCache() {
@@ -6910,7 +6913,7 @@ function _liveAppendBatch(grid) {
   const frag  = document.createDocumentFragment();
   const wrapper = document.createElement('div');
   wrapper.innerHTML = batch.map((item, i) => {
-    const delay = `${Math.min((i % LIVE_BATCH) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
+    const delay = _cardDelay(i, LIVE_BATCH);
     return buildLiveCard(item, delay);
   }).join('');
   while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
@@ -7196,7 +7199,7 @@ function _gridAppendBatch(grid) {
   const frag  = document.createDocumentFragment();
   const wrapper = document.createElement('div');
   wrapper.innerHTML = batch.map((item, i) => {
-    const delay = `${Math.min((i % GRID_BATCH) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
+    const delay = _cardDelay(i, GRID_BATCH);
     if (_gridSection === 'content') return buildContentCard(item, delay);
     if (_gridSection === 'external') return buildExternalCard(item, delay);
     return buildCard(item, delay);
@@ -7316,7 +7319,7 @@ function _buildAvSortedList() {
   const seen = new Set();
   const unique = allVids.filter(i => { if (seen.has(i.vid)) return false; seen.add(i.vid); return true; });
   const dateOf = item => {
-    const full = (item.meta && item.meta.date) || DATE_MAP[item.vid] || '';
+    const full = DATE_MAP[item.vid] || (item.meta && item.meta.date) || '';
     if (!full) return 0;
     const [datePart, timePart] = full.split(' ');
     const d = (datePart || '').replace(/\D/g, '').padEnd(8, '0').slice(0, 8);
@@ -7349,7 +7352,7 @@ function _avAppendNextBatch(grid) {
   const _avML = { '원이': _avT.filter_member_woni||'원이', '리브': _avT.filter_member_liv||'리브', '미나미': _avT.filter_member_minami||'미나미', '메이': _avT.filter_member_may||'메이', '제나': _avT.filter_member_zena||'제나', '전원': _avT.filter_all_members||'전원' };
   const wrapper = document.createElement('div');
   wrapper.innerHTML = batch.map((item, i) => {
-    const delay = `${Math.min((i % AV_PAGE_SIZE) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
+    const delay = _cardDelay(i, AV_PAGE_SIZE);
     return buildAllVideoCard(item, delay, undefined, _avML);
   }).join('');
   while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
@@ -7380,7 +7383,7 @@ function _getArchiveDateMap() {
   for (const item of all) {
     if (seen.has(item.vid)) continue;
     seen.add(item.vid);
-    const d = (item.meta && item.meta.date) || DATE_MAP[item.vid] || '';
+    const d = DATE_MAP[item.vid] || (item.meta && item.meta.date) || '';
     if (!d) continue;
     const m = d.match(/(\d{4})[.\-\/](\d{1,2})/);
     if (!m) continue;
@@ -7504,7 +7507,7 @@ function _renderArchiveGrid(dateMap, year, mo) {
 
   const wrapper = document.createElement('div');
   wrapper.innerHTML = items.map((item, i) => {
-    const delay = `${Math.min(i * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
+    const delay = _cardDelay(i);
     return buildAllVideoCard(item, delay, 'arc', _arML);
   }).join('');
   grid.innerHTML = '';
@@ -7566,7 +7569,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${videoTitle}</div>`
       : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const initialSearch = (videoTitle + ' ' + dateStr + ' live ' + memberNames + ' ' + memberNamesOrig).toLowerCase();
-    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escAttr(initialSearch)}">
+    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
       ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">LIVE</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -7587,7 +7590,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       ? `<div class="ctags"><span class="ctag tb-tag-${item.type}">♪ ${tl}</span></div>`
       : `<div class="ctags"><span class="skel skel-tag"></span></div>`;
     const initialSearch = (videoTitle + ' ' + tl + ' ' + showLabel + ' ' + channel + ' ' + song + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escAttr(initialSearch)}">
+    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
       ${buildThumbHtml(item.vid, `<span class="type-badge tb-songs">Songs</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -7607,7 +7610,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + (ref.category || '') + ' ' + categoryLabel + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift tb-content" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escAttr(initialSearch)}">
+    return `<a class="vcard card-base hover-lift tb-content" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
       ${buildThumbHtml(item.vid, `<span class="type-badge tb-content">${tl}</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -7627,7 +7630,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + channelLabel + ' ' + channelKey + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift tb-external" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escAttr(initialSearch)}">
+    return `<a class="vcard card-base hover-lift tb-external" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
       ${buildThumbHtml(item.vid, `<span class="type-badge tb-external">외부컨텐츠</span>`)}
       <div class="cbody">
         ${titleHtml}
@@ -7638,7 +7641,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
   }
 
   const initialSearch = (videoTitle + ' ' + tl + ' ' + dateStr).toLowerCase();
-  return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escAttr(initialSearch)}">
+  return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
     ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
     <div class="cbody">
       <div class="csong-multi">${videoTitle}</div>
@@ -8129,10 +8132,6 @@ function _hlEscape(s) {
   return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function _escAttr(s) {
-  return s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-}
-
 function _hlApply(el, q) {
   if (!el || el.querySelector('.skel')) return;
   const saved = el.getAttribute('data-hl-orig');
@@ -8184,7 +8183,7 @@ function _flushRemaining(remaining, buildFn, container, sentinel, loadFn) {
   if (!remaining.length) return;
   const wrapper = document.createElement('div');
   wrapper.innerHTML = remaining.map((item, i) => {
-    const delay = `${Math.min((i % 60) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
+    const delay = _cardDelay(i, 60);
     return buildFn(item, delay);
   }).join('');
   const frag = document.createDocumentFragment();
@@ -8589,7 +8588,7 @@ function _appendShortsPage(grid) {
   slice.forEach(function(item, i) {
     const delay = Math.min(i * 0.012, 0.3) + 's';
     const label = _SHORTS_CHANNEL_LABEL[item.channel] || item.channel || '';
-    const title = item.title ? item.title.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : '';
+    const title = item.title ? _escHtml(item.title) : '';
     const date  = item.date || '';
     const ytUrl = 'https://www.youtube.com/shorts/' + item.vid;
     const card  = document.createElement('a');
@@ -8616,8 +8615,7 @@ function _appendShortsPage(grid) {
 
   if (_shortsPage * _SHORTS_PAGE_SIZE >= _shortsFiltered.length) return;
 
-  _shortsSentinel = document.createElement('div');
-  _shortsSentinel.style.cssText = 'grid-column:1/-1;height:1px;';
+  _shortsSentinel = _makeSentinel();
   grid.appendChild(_shortsSentinel);
 
   _shortsObserver = new IntersectionObserver(function(entries) {
