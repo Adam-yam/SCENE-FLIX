@@ -3903,7 +3903,7 @@ const RESCENE_DATA = [
         "https://youtu.be/Esd-KkxROxA",
       ],
           fullcam: [
-        "https://youtu.be/5CXzyiRoS7g",
+        "https://www.youtube.com/watch?v=5CXzyiRoS7g",
         "https://youtu.be/L7OsQMbzmfU",
       ],
     }
@@ -3930,7 +3930,7 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
-  '5CXzyiRoS7g': '2026.07.11 10:04',
+  '5CXzyiRoS7g': '2026.07.11',
   'Ukxm2VLCArs': '2026.07.10 17:04',
   'GE8FCHPGLwE': '2026.07.10 17:30',
   '5spDxl-yzUQ': '2026.07.10 19:00',
@@ -7507,24 +7507,6 @@ function buildAllVideosGrid() {
   if (!_elGrid) return;
 
   const newSorted = _buildAvSortedList();
-
-  if (_avLastSort === curSort && _avSorted.length === newSorted.length && _avLoaded === _avSorted.length) {
-    const grid = _elGrid;
-    const cards = Array.from(grid.querySelectorAll('.vcard[id^="avc-"]'));
-    if (cards.length === newSorted.length) {
-      const order = new Map(newSorted.map((item, i) => [item.vid, i]));
-      const sorted = cards.slice().sort((a, b) => {
-        const ai = order.get(a.id.replace('avc-', '')) ?? 0;
-        const bi = order.get(b.id.replace('avc-', '')) ?? 0;
-        return ai - bi;
-      });
-      const frag = document.createDocumentFragment();
-      sorted.forEach(el => frag.appendChild(el));
-      grid.appendChild(frag);
-      if (curSearchQuery) applySearch();
-      return;
-    }
-  }
 
   _avLastSort = curSort;
   _avDisconnectObserver();
