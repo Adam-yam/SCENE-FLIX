@@ -61,6 +61,30 @@ def extract_date(ev: dict) -> Optional[str]:
     return f"{m.group(1)}-{m.group(2)}-{m.group(3)}" if m else None
 
 
+def extract_time(ev: dict) -> str:
+    """allDay가 아닌 경우 startAt(UTC)을 KST로 변환해 'HH:MM' 반환. 없으면 빈 문자열."""
+    if ev.get("allDay"):
+        return ""
+    raw = ev.get("startAt", "")
+    if not raw:
+        return ""
+    m = re.search(r"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})", str(raw))
+    if not m:
+        return ""
+    try:
+        dt_utc = datetime(
+            int(m.group(1)), int(m.group(2)), int(m.group(3)),
+            int(m.group(4)), int(m.group(5)), tzinfo=timezone.utc,
+        )
+        dt_kst = dt_utc + timedelta(hours=9)
+        # 자정(00:00)은 실질적으로 시간 정보가 없는 종일 일정으로 취급
+        if dt_kst.hour == 0 and dt_kst.minute == 0:
+            return ""
+        return dt_kst.strftime("%H:%M")
+    except Exception:
+        return ""
+
+
 LABEL_MAP = {
     "공연":    "concert",
     "팬사인회": "fansign",
@@ -117,6 +141,7 @@ def crawl_schedule_month(year: int, month: int) -> list:
             continue
         events.append({
             "date":   d,
+            "time":   extract_time(ev),
             "title":  title,
             "detail": "",
             "type":   classify_type(ev),
