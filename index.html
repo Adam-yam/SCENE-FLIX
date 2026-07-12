@@ -2223,6 +2223,12 @@ header {
   padding: 1px 5px;
   border-radius: 3px;
 }
+.sched-item-time {
+  font-size: 0.62rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
 .sched-item-link {
   color: var(--muted);
   text-decoration: none;
@@ -2393,6 +2399,12 @@ header {
 .cal-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
 .cal-detail-text { flex: 1; }
 .cal-detail-title { font-size: 0.8rem; font-weight: 500; color: var(--text); line-height: 1.5; }
+.cal-detail-time {
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  margin-right: 6px;
+}
 .cal-detail-meta { font-size: 0.67rem; color: var(--muted); margin-top: 2px; }
 .cal-detail-link { color: var(--muted); text-decoration: none; font-size: 0.63rem; letter-spacing: 0.05em; border: 1px solid var(--border); padding: 2px 7px; border-radius: 4px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; transition: color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1); }
 .cal-detail-link:hover { color: var(--accent); border-color: var(--accent); }
@@ -8459,6 +8471,7 @@ const _HOUR_KEY = (function() { const d = new Date(); return `${d.getFullYear()}
       _baseScheduleData = (data.events || []).map(function(ev) {
         return {
           date:  ev.date  || '',
+          time:  ev.time  || '',
           title: ev.title || '',
           type:  ev.type  || 'notice',
           note:  ev.detail || ev.note || '',
@@ -8854,10 +8867,11 @@ function calSelectDate(dateStr) {
       : (SCHED_TYPE_COLOR[ev.type] || '#888');
     const dotStyle = `background:${evColor}`;
     const linkHtml = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="cal-detail-link">↗ 링크</a>` : '';
+    const timeHtml = ev.time ? `<span class="cal-detail-time" style="color:${evColor}">${_escHtml(ev.time)}</span>` : '';
     return `<div class="cal-detail-item">
       <div class="cal-dot" style="${dotStyle}"></div>
       <div class="cal-detail-text">
-        <div class="cal-detail-title">${_escHtml(ev.title)}</div>
+        <div class="cal-detail-title">${timeHtml}${_escHtml(ev.title)}</div>
         ${ev.note ? `<div class="cal-detail-meta">${_escHtml(ev.note)}</div>` : ''}
       </div>
       ${linkHtml}
@@ -8943,12 +8957,14 @@ function renderSchedList() {
       const tl = (typeLabel[ev.type]||{})[lang] || ev.type;
       const tagStyle = `background:color-mix(in srgb, ${evColor} 18%, transparent);color:${evColor}`;
       const link = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="sched-item-link">↗ 링크</a>` : '';
+      const timeTag = ev.time ? `<span class="sched-item-time" style="color:${evColor}">${_escHtml(ev.time)}</span>` : '';
       html += `<div class="sched-item">
         <div class="sched-item-bar" style="${bar}"></div>
         <div class="sched-item-body">
           <div class="sched-item-title">${_escHtml(ev.title)}</div>
           <div class="sched-item-meta">
             <span class="sched-item-type-tag" style="${tagStyle}">${tl}</span>
+            ${timeTag}
             ${ev.note ? `<span>${_escHtml(ev.note)}</span>` : ''}
           </div>
         </div>
