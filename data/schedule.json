@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-12T10:05:30Z",
+  "updated": "2026-07-12T15:00:57Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -133,6 +133,14 @@
       "date": "2026-07-14",
       "time": "20:10",
       "title": "SBS M <THE K-POP FANPOPTY> 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-15",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
