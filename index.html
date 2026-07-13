@@ -120,69 +120,6 @@ gtag('config', 'G-05C99P2DB9');
   --safe-right:  env(safe-area-inset-right, 0px);
 }
 
-[data-theme="light"] {
-  --bg:      #f5f5f7;
-  --surf:    #fafafa;
-  --card:    #fafafa;
-  --card-h:  #f0f0f2;
-  --border:  rgba(0,0,0,0.08);
-  --border-h:rgba(0,0,0,0.15);
-  --accent:  #3a3a3c;
-  --text:    #1d1d1f;
-  --muted:   #4a4a50;
-  --dim:     #e5e5ea;
-
-  --c-music:    #2a9a94;
-  --c-mv:       #a04060;
-  --c-itslive:  #7050b0;
-  --c-content:  #4a8a34;
-  --c-onthespot:#c06820;
-  --c-fullcam:  #a89a10;
-  --c-external: #3a78c4;
-
-  --c-sched-broadcast: #6040a0;
-  --c-sched-radio:     #2a68b4;
-  --c-sched-event:     #c06820;
-  --c-sched-fansign:   #a04060;
-  --c-sched-concert:   #3a8860;
-  --c-sched-notice:    #666666;
-  --c-sched-anniv:     #8a6840;
-
-  --c-wonyi:  #04a06e;
-  --c-minami: #2b99c4;
-  --c-mei:    #ecd25b;
-  --c-zena:   #ba92db;
-  --c-wonyi-dark: #045a42;
-  --c-mei-dark:   #c9a800;
-  --c-bm:         #f0c060;
-
-  --glass-fill:      rgba(255,255,255,0.45);
-  --glass-fill-h:    rgba(255,255,255,0.65);
-  --glass-border:    rgba(255,255,255,0.55);
-  --glass-highlight: rgba(255,255,255,0.8);
-  --glass-shadow:    0 8px 28px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.06);
-}
-
-[data-theme="light"] .wordmark-img {
-  filter: drop-shadow(0 0 6px rgba(0,0,0,0.45)) drop-shadow(0 0 18px rgba(0,0,0,0.18));
-}
-
-#themeToggle {
-  background: none;
-  border: 1px solid var(--border-h);
-  border-radius: 20px;
-  color: var(--muted);
-  cursor: pointer;
-  padding: 5px 10px;
-  font-size: 0.7rem;
-  font-family: 'Inter', sans-serif;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  transition: color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1);
-}
-#themeToggle:hover { color: var(--text); border-color: var(--border-h); }
-#themeToggle svg { width: 13px; height: 13px; }
 
 #langSwitcherDesktop {
   display: flex;
@@ -214,10 +151,6 @@ gtag('config', 'G-05C99P2DB9');
   background: rgba(224,212,192,0.13);
   box-shadow: 0 1px 4px rgba(0,0,0,0.18);
 }
-[data-theme="light"] .lang-btn.active {
-  background: rgba(90,74,48,0.10);
-}
-
 #scrollTop {
   position: fixed;
   bottom: calc(28px + var(--safe-bottom));
@@ -330,10 +263,6 @@ mark.sh {
   padding: 0 1px;
   font-style: normal;
   font-weight: inherit;
-}
-[data-theme="light"] mark.sh {
-  background: rgba(255, 180, 0, 0.22);
-  color: #8a5e00;
 }
 .vcard-tooltip {
   position: fixed;
@@ -475,18 +404,6 @@ header {
   border-bottom-width: 3px;
   font-weight: 500;
 }
-[data-theme="light"] .song-tab.active {
-  font-weight: 700;
-}
-@media (min-width: 701px) {
-  [data-theme="light"] .section-tab.active {
-    border-left-color: var(--accent);
-    background: rgba(58,58,60,0.07);
-    font-weight: 700;
-    color: var(--accent);
-  }
-}
-
 .section-tab {
   padding: 14px clamp(8px, 1.3vw, 22px);
   font-size: clamp(0.63rem, 0.82vw, 0.75rem);
@@ -549,9 +466,6 @@ header {
   color: var(--muted);
   font-family: 'Inter', sans-serif;
 }
-[data-theme="light"] .type-btn {
-  border-color: rgba(0,0,0,0.22);
-}
 
 .type-btn[data-t="music"]     { border-color: var(--c-music);     }
 .type-btn[data-t="mv"]        { border-color: var(--c-mv);        }
@@ -581,23 +495,12 @@ header {
 
 .type-btn.active[data-lm="all"]    { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
 .type-btn.active[data-lm="전원"]   { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
-[data-theme="light"] .type-btn.active[data-lm="all"]  { color: var(--text); border-color: rgba(0,0,0,0.35); background: rgba(0,0,0,0.08); }
-[data-theme="light"] .type-btn.active[data-lm="전원"] { color: var(--text); border-color: rgba(0,0,0,0.35); background: rgba(0,0,0,0.08); }
-[data-theme="light"] .type-btn.active[data-t="all"]      { color: var(--accent); border-color: rgba(0,0,0,0.30); background: rgba(0,0,0,0.06); }
-[data-theme="light"] .type-btn.active[data-t="music"]    { background: rgba(42,154,148,0.12); }
-[data-theme="light"] .type-btn.active[data-t="mv"]       { background: rgba(160,64,96,0.12); }
-[data-theme="light"] .type-btn.active[data-t="itslive"]  { background: rgba(112,80,176,0.12); }
-[data-theme="light"] .type-btn.active[data-t="content"]  { background: rgba(74,138,52,0.12); }
-[data-theme="light"] .type-btn.active[data-t="onthespot"]{ background: rgba(192,104,32,0.12); }
-[data-theme="light"] .type-btn.active[data-t="fullcam"]  { background: rgba(168,154,16,0.12); }
 .type-btn.active[data-lm="원이"]   { color: var(--c-wonyi); border-color: var(--c-wonyi-dark); background: rgba(4,90,66,0.15); }
 .type-btn.active[data-lm="리브"]   { color: #e0e0e0; border-color: rgba(220,220,220,0.5); background: rgba(0,0,0,0.35); }
-[data-theme="light"] .type-btn.active[data-lm="리브"]    { color: #444; border-color: rgba(80,80,80,0.50); background: rgba(80,80,80,0.10); }
 .type-btn.active[data-lm="미나미"] { color: var(--c-minami); border-color: var(--c-minami);   background: rgba(43,153,196,0.12); }
 .type-btn.active[data-lm="메이"]   { color: var(--c-mei-dark); border-color: var(--c-mei);    background: rgba(236,210,91,0.12); }
 .type-btn.active[data-lm="제나"]   { color: var(--c-zena); border-color: var(--c-zena);       background: rgba(186,146,219,0.12); }
 .type-btn.active[data-ec-ch]       { color: var(--c-external); border-color: var(--c-external); background: rgba(var(--c-external-rgb),0.15); }
-[data-theme="light"] .type-btn.active[data-ec-ch] { color: var(--c-external); border-color: var(--c-external); background: rgba(58,120,196,0.12); }
 
 .type-btn[data-mo="01"] { border-color: var(--c-mo-01); }
 .type-btn[data-mo="02"] { border-color: var(--c-mo-02); }
@@ -679,9 +582,7 @@ header {
   box-sizing: border-box;
   line-height: 1;
 }
-[data-theme="light"] .sort-btn { border-color: rgba(0,0,0,0.28); }
 .sort-btn:hover { color: var(--text); border-color: rgba(255,255,255,0.55); }
-[data-theme="light"] .sort-btn:hover { border-color: rgba(0,0,0,0.45); }
 .sort-btn.active {
   color: var(--accent);
   border-color: var(--accent);
@@ -830,13 +731,6 @@ header {
 .vcard.tb-fullcam   { background: rgba(var(--c-fullcam-rgb),0.14);   border-color: rgba(var(--c-fullcam-rgb),0.32); }
 .vcard.tb-external  { background: rgba(var(--c-external-rgb),0.14);  border-color: rgba(var(--c-external-rgb),0.32); }
 
-[data-theme="light"] .vcard.tb-music     { background: rgba(42,154,148,0.20);  border-color: rgba(42,154,148,0.5); }
-[data-theme="light"] .vcard.tb-mv        { background: rgba(160,64,96,0.20);   border-color: rgba(160,64,96,0.5); }
-[data-theme="light"] .vcard.tb-itslive   { background: rgba(112,80,176,0.20);  border-color: rgba(112,80,176,0.5); }
-[data-theme="light"] .vcard.tb-content   { background: rgba(74,138,52,0.20);   border-color: rgba(74,138,52,0.5); }
-[data-theme="light"] .vcard.tb-onthespot { background: rgba(192,104,32,0.20);  border-color: rgba(192,104,32,0.5); }
-[data-theme="light"] .vcard.tb-fullcam   { background: rgba(168,154,16,0.20);  border-color: rgba(168,154,16,0.5); }
-[data-theme="light"] .vcard.tb-external  { background: rgba(58,120,196,0.20);  border-color: rgba(58,120,196,0.5); }
 
 .vcard.lm-wonyi    { background: rgba(4,90,66,0.20);    border-color: rgba(4,160,110,0.32); }
 .vcard.lm-liv      { background: rgba(200,200,200,0.12); border-color: rgba(220,220,220,0.28); }
@@ -845,12 +739,6 @@ header {
 .vcard.lm-zena     { background: rgba(186,146,219,0.16); border-color: rgba(186,146,219,0.32); }
 .vcard.lm-all      { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.18); }
 
-[data-theme="light"] .vcard.lm-wonyi  { background: rgba(4,90,66,0.20);    border-color: rgba(4,160,110,0.5); }
-[data-theme="light"] .vcard.lm-liv    { background: rgba(80,80,80,0.16);   border-color: rgba(80,80,80,0.45); }
-[data-theme="light"] .vcard.lm-minami { background: rgba(43,153,196,0.20); border-color: rgba(43,153,196,0.5); }
-[data-theme="light"] .vcard.lm-may    { background: rgba(180,140,0,0.20);  border-color: rgba(180,140,0,0.5); }
-[data-theme="light"] .vcard.lm-zena   { background: rgba(140,90,200,0.20); border-color: rgba(140,90,200,0.5); }
-[data-theme="light"] .vcard.lm-all    { background: rgba(0,0,0,0.05);      border-color: rgba(0,0,0,0.16); }
 
 .thumb {
   position: relative;
@@ -936,15 +824,7 @@ header {
 .tb-fullcam   { background: rgba(var(--c-fullcam-rgb),0.30);   color: var(--c-fullcam);  border: 1px solid rgba(var(--c-fullcam-rgb),0.6); }
 .tb-external  { background: rgba(var(--c-external-rgb),0.30);  color: var(--c-external); border: 1px solid rgba(var(--c-external-rgb),0.6); }
 .tb-songs     { background: rgba(224,212,192,0.18); color: var(--accent);     border: 1px solid rgba(224,212,192,0.5); }
-[data-theme="light"] .tb-songs { background: rgba(90,74,48,0.12); border-color: rgba(90,74,48,0.35); }
 
-[data-theme="light"] .tb-music    { background: rgba(42,154,148,0.22);  border-color: rgba(42,154,148,0.5); }
-[data-theme="light"] .tb-mv       { background: rgba(160,64,96,0.22);   border-color: rgba(160,64,96,0.5);  }
-[data-theme="light"] .tb-itslive  { background: rgba(112,80,176,0.22);  border-color: rgba(112,80,176,0.5); }
-[data-theme="light"] .tb-content  { background: rgba(74,138,52,0.22);   border-color: rgba(74,138,52,0.5);  }
-[data-theme="light"] .tb-onthespot{ background: rgba(192,104,32,0.22);  border-color: rgba(192,104,32,0.5); }
-[data-theme="light"] .tb-fullcam  { background: rgba(168,154,16,0.22);  border-color: rgba(168,154,16,0.5); }
-[data-theme="light"] .tb-external { background: rgba(58,120,196,0.22);  border-color: rgba(58,120,196,0.5); }
 
 .cbody {
   padding: 10px 12px 12px;
@@ -1010,22 +890,12 @@ header {
 .ctag.lm-minami { background: rgba(43,153,196,0.15); color: var(--c-minami); border: 1px solid rgba(43,153,196,0.4); }
 .ctag.lm-may    { background: rgba(236,210,91,0.13); color: var(--c-mei-dark); border: 1px solid rgba(236,210,91,0.4); }
 .ctag.lm-zena   { background: rgba(186,146,219,0.15);color: var(--c-zena); border: 1px solid rgba(186,146,219,0.4); }
-[data-theme="light"] .ctag.lm-wonyi  { background: rgba(4,90,66,0.12);    color: #047a52; border-color: rgba(4,160,110,0.35); }
-[data-theme="light"] .ctag.lm-liv    { background: rgba(80,80,80,0.1);    color: #555;    border-color: rgba(80,80,80,0.3); }
-[data-theme="light"] .ctag.lm-minami { background: rgba(43,153,196,0.12); color: #1a7a9e; border-color: rgba(43,153,196,0.35); }
-[data-theme="light"] .ctag.lm-may    { background: rgba(180,140,0,0.12);  color: #907000; border-color: rgba(180,140,0,0.35); }
-[data-theme="light"] .ctag.lm-zena   { background: rgba(140,90,200,0.12); color: #8a50c8; border-color: rgba(140,90,200,0.35); }
 
 .ctag.tb-tag-music     { background: rgba(var(--c-music-rgb),0.15);    color: var(--c-music);    border: 1px solid rgba(var(--c-music-rgb),0.35); }
 .ctag.tb-tag-mv        { background: rgba(var(--c-mv-rgb),0.15);       color: var(--c-mv);       border: 1px solid rgba(var(--c-mv-rgb),0.35); }
 .ctag.tb-tag-itslive   { background: rgba(var(--c-itslive-rgb),0.15);  color: var(--c-itslive);  border: 1px solid rgba(var(--c-itslive-rgb),0.35); }
 .ctag.tb-tag-onthespot { background: rgba(var(--c-onthespot-rgb),0.15);color: var(--c-onthespot);border: 1px solid rgba(var(--c-onthespot-rgb),0.35); }
 .ctag.tb-tag-fullcam   { background: rgba(var(--c-fullcam-rgb),0.13);  color: var(--c-fullcam);  border: 1px solid rgba(var(--c-fullcam-rgb),0.35); }
-[data-theme="light"] .ctag.tb-tag-music     { background: rgba(42,154,148,0.12);  border-color: rgba(42,154,148,0.35); }
-[data-theme="light"] .ctag.tb-tag-mv        { background: rgba(160,64,96,0.12);   border-color: rgba(160,64,96,0.35);  }
-[data-theme="light"] .ctag.tb-tag-itslive   { background: rgba(112,80,176,0.12);  border-color: rgba(112,80,176,0.35); }
-[data-theme="light"] .ctag.tb-tag-onthespot { background: rgba(192,104,32,0.12);  border-color: rgba(192,104,32,0.35); }
-[data-theme="light"] .ctag.tb-tag-fullcam   { background: rgba(168,154,16,0.12);  border-color: rgba(168,154,16,0.35); }
 
 .ext-channel-badge,
 .content-category-badge {
@@ -1064,10 +934,6 @@ header {
   font-size: 0.4rem;
   opacity: 0.7;
   flex-shrink: 0;
-}
-[data-theme="light"] .content-category-badge {
-  background: rgba(74,138,52,0.1);
-  border-color: rgba(74,138,52,0.3);
 }
 
 .fantube-wrap {
@@ -1281,15 +1147,6 @@ header {
     border-color: rgba(255,255,255,0.16);
     transform: translateY(-2px);
   }
-  [data-theme="light"] .link-row:hover {
-    background: rgba(255,255,255,0.82);
-    border-color: rgba(0,0,0,0.12);
-  }
-}
-
-[data-theme="light"] .link-row {
-  background: rgba(255,255,255,0.55);
-  border-color: rgba(0,0,0,0.07);
 }
 
 .link-icon {
@@ -1306,13 +1163,7 @@ header {
 @media (hover: hover) {
   .link-icon { transition: background 0.18s cubic-bezier(0.4,0,0.2,1); }
   .link-row:hover .link-icon { background: rgba(255,255,255,0.11); }
-  [data-theme="light"] .link-row:hover .link-icon { background: rgba(0,0,0,0.07); }
 }
-[data-theme="light"] .link-icon {
-  background: rgba(0,0,0,0.04);
-  border-color: rgba(0,0,0,0.07);
-}
-
 .link-icon svg {
   width: 15px;
   height: 15px;
@@ -1363,7 +1214,6 @@ header {
   header { padding: 24px 16px 10px; min-height: 117px; display: flex; flex-direction: column; justify-content: space-between; }
   .wordmark-img { width: 100%; height: auto; flex-shrink: 0; object-fit: contain; }
   .tagline { font-size: 0.6rem; margin-top: 0; padding-bottom: 0; flex-shrink: 0; min-height: 0; }
-  #themeToggle { right: 12px; font-size: 0.62rem; padding: 4px 8px; }
   #scrollTop { bottom: 96px; right: 16px; width: 36px; height: 36px; }
 
   .section-nav {
@@ -1397,12 +1247,6 @@ header {
     background: rgba(200,200,204,0.12);
     color: var(--accent);
     border-color: rgba(200,200,204,0.45);
-    font-weight: 600;
-  }
-  [data-theme="light"] .song-tab.active {
-    background: rgba(58,58,60,0.10);
-    color: var(--accent);
-    border-color: rgba(58,58,60,0.40);
     font-weight: 600;
   }
   .song-tab .cnt { display: none; }
@@ -1642,28 +1486,11 @@ header {
     font-size: 0.74rem;
     color: var(--muted);
   }
-  .drawer-theme-toggle {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--dim);
-    border: 1px solid var(--border-h);
-    border-radius: 20px;
-    color: var(--text);
-    cursor: pointer;
-    padding: 5px 12px;
-    font-size: 0.72rem;
-    font-family: 'Inter', sans-serif;
-    transition: background 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1);
-  }
-  .drawer-theme-toggle svg { width: 13px; height: 13px; }
-  .drawer-theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
   .drawer-logo {
     height: 28px;
     width: auto;
     filter: drop-shadow(0 0 4px rgba(255,255,255,0.4));
   }
-  [data-theme="light"] .drawer-logo { filter: drop-shadow(0 0 4px rgba(0,0,0,0.4)); }
 
   .drawer-items {
     flex: 1;
@@ -1788,7 +1615,6 @@ header {
   #mobileMenuBtn { display: none !important; }
   #mobileDrawerOverlay { display: none !important; }
   #mobileDrawer { display: none !important; }
-  #themeToggle { display: flex !important; }
 }
 
 .btn-base{
@@ -2612,28 +2438,6 @@ header {
         <button class="lang-btn btn-base" onclick="setLang('EN')">EN</button>
       </div>
     </div>
-    <div class="drawer-bottom-row">
-      <span class="drawer-settings-name">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0;">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        Theme
-      </span>
-      <button class="drawer-theme-toggle" onclick="toggleTheme()" id="drawerThemeBtn">
-        <span id="mobileThemeLabel">Light</span>
-        <svg id="mobileThemeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-      </button>
-    </div>
   </div>
 </div>
 
@@ -2762,22 +2566,6 @@ header {
         <button class="lang-btn btn-base" onclick="setLang('JP')">JP</button>
         <button class="lang-btn btn-base" onclick="setLang('EN')">EN</button>
       </div>
-    </div>
-    <div class="sb-row">
-      <span class="sb-label">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        Theme
-      </span>
-      <button id="themeToggle" onclick="toggleTheme()" title="다크/라이트 모드 전환">
-        <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        <span id="themeLabel">Light</span>
-      </button>
     </div>
   </div>
 </div>
@@ -6198,10 +5986,6 @@ const _elSubSidebarLabel   = document.getElementById('subSidebarLabel');
 const _elSubSidebarOverlay = document.getElementById('subSidebarOverlay');
 const _elBmCount           = document.getElementById('bmCount');
 const _elDrawerBmCount     = document.getElementById('drawerBmCount');
-const _elThemeLabel        = document.getElementById('themeLabel');
-const _elMobileThemeLabel  = document.getElementById('mobileThemeLabel');
-const _elThemeIcon         = document.getElementById('themeIcon');
-const _elMobileThemeIcon   = document.getElementById('mobileThemeIcon');
 const _elSortNewest        = document.getElementById('sortNewest');
 const _elSortOldest        = document.getElementById('sortOldest');
 const _elSearchClear       = document.getElementById('searchClear');
@@ -9278,46 +9062,6 @@ window.addEventListener('popstate', e => {
 });
 
 document.addEventListener("contextmenu", e => e.preventDefault());
-
-function toggleTheme() {
-  const isLight = document.documentElement.getAttribute('data-theme') === 'light';
-  const next = isLight ? 'dark' : 'light';
-  applyTheme(next);
-  try { localStorage.setItem('rescene-theme', next); } catch {}
-}
-
-const _THEME_ICON_MOON = `<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>`;
-const _THEME_ICON_SUN  = `<circle cx="12" cy="12" r="5"/>
-      <line x1="12" y1="1" x2="12" y2="3"/>
-      <line x1="12" y1="21" x2="12" y2="23"/>
-      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-      <line x1="1" y1="12" x2="3" y2="12"/>
-      <line x1="21" y1="12" x2="23" y2="12"/>
-      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>`;
-
-function applyTheme(theme) {
-  const isLight = theme === 'light';
-  if (isLight) {
-    document.documentElement.setAttribute('data-theme', 'light');
-  } else {
-    document.documentElement.removeAttribute('data-theme');
-  }
-
-  const label = isLight ? 'Dark' : 'Light';
-  const icon  = isLight ? _THEME_ICON_MOON : _THEME_ICON_SUN;
-
-  if (_elThemeLabel) _elThemeLabel.textContent = label;
-  if (_elMobileThemeLabel) _elMobileThemeLabel.textContent = label;
-  if (_elThemeIcon) _elThemeIcon.innerHTML = icon;
-  if (_elMobileThemeIcon) _elMobileThemeIcon.innerHTML = icon;
-}
-
-try {
-  const saved = localStorage.getItem('rescene-theme');
-  if (saved === 'light') applyTheme('light');
-} catch {}
 
 try {
   const savedLang = localStorage.getItem('rescene-lang');
