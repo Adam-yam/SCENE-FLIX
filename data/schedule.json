@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-12T15:00:57Z",
+  "updated": "2026-07-13T03:00:55Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -119,6 +119,14 @@
       "title": "SBS M <더쇼> 사전녹화",
       "detail": "",
       "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-14",
+      "time": "",
+      "title": "KBS <키스 더 라디오>",
+      "detail": "",
+      "type": "radio",
       "source": "mnetplus"
     },
     {
