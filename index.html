@@ -67,7 +67,6 @@ gtag('config', 'G-05C99P2DB9');
   --c-mv:       #c07090;
   --c-itslive:  #a080d0;
   --c-content:  #80b870;
-  --c-onthespot:#e09050;
   --c-fullcam:  #d4c84a;
   --c-external: #7aaede;
 
@@ -75,7 +74,6 @@ gtag('config', 'G-05C99P2DB9');
   --c-mv-rgb:        192,112,144;
   --c-itslive-rgb:   160,128,208;
   --c-content-rgb:   128,184,112;
-  --c-onthespot-rgb: 224,144,80;
   --c-fullcam-rgb:   212,200,74;
   --c-external-rgb:  122,174,222;
 
@@ -471,7 +469,6 @@ header {
 .type-btn[data-t="mv"]        { border-color: var(--c-mv);        }
 .type-btn[data-t="itslive"]   { border-color: var(--c-itslive);   }
 .type-btn[data-t="content"]   { border-color: var(--c-content);   }
-.type-btn[data-t="onthespot"] { border-color: var(--c-onthespot); }
 .type-btn[data-t="fullcam"]   { border-color: var(--c-fullcam);   }
 
 .type-btn[data-lm="원이"]    { border-color: var(--c-wonyi); }
@@ -490,7 +487,6 @@ header {
 .type-btn.active[data-t="mv"]       { color: var(--c-mv);       border-color: var(--c-mv);       background: rgba(var(--c-mv-rgb),0.08); }
 .type-btn.active[data-t="itslive"]  { color: var(--c-itslive);  border-color: var(--c-itslive);  background: rgba(var(--c-itslive-rgb),0.08); }
 .type-btn.active[data-t="content"]  { color: var(--c-content);  border-color: var(--c-content);  background: rgba(var(--c-content-rgb),0.08); }
-.type-btn.active[data-t="onthespot"]{ color: var(--c-onthespot);border-color: var(--c-onthespot);background: rgba(var(--c-onthespot-rgb),0.08); }
 .type-btn.active[data-t="fullcam"]  { color: var(--c-fullcam);  border-color: var(--c-fullcam);  background: rgba(var(--c-fullcam-rgb),0.08); }
 
 .type-btn.active[data-lm="all"]    { color: #fff;    border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
@@ -702,7 +698,6 @@ header {
   .vcard.tb-mv:hover        { border-color: rgba(var(--c-mv-rgb),0.55);        box-shadow: 0 4px 24px rgba(var(--c-mv-rgb),0.18),        0 0 0 1px rgba(var(--c-mv-rgb),0.18), inset 0 1px 0 var(--glass-highlight); }
   .vcard.tb-itslive:hover   { border-color: rgba(var(--c-itslive-rgb),0.55);   box-shadow: 0 4px 24px rgba(var(--c-itslive-rgb),0.18),   0 0 0 1px rgba(var(--c-itslive-rgb),0.18), inset 0 1px 0 var(--glass-highlight); }
   .vcard.tb-content:hover   { border-color: rgba(var(--c-content-rgb),0.55);   box-shadow: 0 4px 24px rgba(var(--c-content-rgb),0.18),   0 0 0 1px rgba(var(--c-content-rgb),0.18), inset 0 1px 0 var(--glass-highlight); }
-  .vcard.tb-onthespot:hover { border-color: rgba(var(--c-onthespot-rgb),0.55); box-shadow: 0 4px 24px rgba(var(--c-onthespot-rgb),0.18), 0 0 0 1px rgba(var(--c-onthespot-rgb),0.18), inset 0 1px 0 var(--glass-highlight); }
   .vcard.tb-fullcam:hover   { border-color: rgba(var(--c-fullcam-rgb),0.55);   box-shadow: 0 4px 24px rgba(var(--c-fullcam-rgb),0.18),   0 0 0 1px rgba(var(--c-fullcam-rgb),0.18), inset 0 1px 0 var(--glass-highlight); }
   .vcard.tb-external:hover  { border-color: rgba(var(--c-external-rgb),0.55);  box-shadow: 0 4px 24px rgba(var(--c-external-rgb),0.18),  0 0 0 1px rgba(var(--c-external-rgb),0.18), inset 0 1px 0 var(--glass-highlight); }
 
@@ -727,7 +722,6 @@ header {
 .vcard.tb-mv        { background: rgba(var(--c-mv-rgb),0.16);        border-color: rgba(var(--c-mv-rgb),0.32); }
 .vcard.tb-itslive   { background: rgba(var(--c-itslive-rgb),0.16);   border-color: rgba(var(--c-itslive-rgb),0.32); }
 .vcard.tb-content   { background: rgba(var(--c-content-rgb),0.14);   border-color: rgba(var(--c-content-rgb),0.32); }
-.vcard.tb-onthespot { background: rgba(var(--c-onthespot-rgb),0.16); border-color: rgba(var(--c-onthespot-rgb),0.32); }
 .vcard.tb-fullcam   { background: rgba(var(--c-fullcam-rgb),0.14);   border-color: rgba(var(--c-fullcam-rgb),0.32); }
 .vcard.tb-external  { background: rgba(var(--c-external-rgb),0.14);  border-color: rgba(var(--c-external-rgb),0.32); }
 
@@ -803,24 +797,10 @@ header {
 }
 .play-ring svg path { fill: #fff; }
 
-.type-badge {
-  position: absolute;
-  top: 8px; left: 8px;
-  font-size: 0.56rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  border-radius: 4px;
-  font-weight: 500;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
-  backdrop-filter: blur(8px) saturate(1.6);
-  -webkit-backdrop-filter: blur(8px) saturate(1.6);
-}
 .tb-music   { background: rgba(var(--c-music-rgb),0.30);    color: var(--c-music);    border: 1px solid rgba(var(--c-music-rgb),0.6); }
 .tb-mv      { background: rgba(var(--c-mv-rgb),0.30);       color: var(--c-mv);       border: 1px solid rgba(var(--c-mv-rgb),0.6); }
 .tb-itslive { background: rgba(var(--c-itslive-rgb),0.30);  color: var(--c-itslive);  border: 1px solid rgba(var(--c-itslive-rgb),0.6); }
 .tb-content { background: rgba(var(--c-content-rgb),0.30);  color: var(--c-content);  border: 1px solid rgba(var(--c-content-rgb),0.6); }
-.tb-onthespot { background: rgba(var(--c-onthespot-rgb),0.30); color: var(--c-onthespot); border: 1px solid rgba(var(--c-onthespot-rgb),0.6); }
 .tb-fullcam   { background: rgba(var(--c-fullcam-rgb),0.30);   color: var(--c-fullcam);  border: 1px solid rgba(var(--c-fullcam-rgb),0.6); }
 .tb-external  { background: rgba(var(--c-external-rgb),0.30);  color: var(--c-external); border: 1px solid rgba(var(--c-external-rgb),0.6); }
 .tb-songs     { background: rgba(224,212,192,0.18); color: var(--accent);     border: 1px solid rgba(224,212,192,0.5); }
@@ -894,7 +874,6 @@ header {
 .ctag.tb-tag-music     { background: rgba(var(--c-music-rgb),0.15);    color: var(--c-music);    border: 1px solid rgba(var(--c-music-rgb),0.35); }
 .ctag.tb-tag-mv        { background: rgba(var(--c-mv-rgb),0.15);       color: var(--c-mv);       border: 1px solid rgba(var(--c-mv-rgb),0.35); }
 .ctag.tb-tag-itslive   { background: rgba(var(--c-itslive-rgb),0.15);  color: var(--c-itslive);  border: 1px solid rgba(var(--c-itslive-rgb),0.35); }
-.ctag.tb-tag-onthespot { background: rgba(var(--c-onthespot-rgb),0.15);color: var(--c-onthespot);border: 1px solid rgba(var(--c-onthespot-rgb),0.35); }
 .ctag.tb-tag-fullcam   { background: rgba(var(--c-fullcam-rgb),0.13);  color: var(--c-fullcam);  border: 1px solid rgba(var(--c-fullcam-rgb),0.35); }
 
 .ext-channel-badge,
@@ -2394,7 +2373,7 @@ header {
     <div class="drawer-divider"></div>
     <button class="drawer-item btn-base" id="dSongs"    onclick="closeDrawer(); pickSection('songs');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-      <span data-i18n="tab_songs">Songs</span>
+      <span data-i18n="tab_songs">음악방송</span>
     </button>
     <button class="drawer-item btn-base" id="dContent"  onclick="closeDrawer(); pickSection('content');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
@@ -2458,7 +2437,7 @@ header {
   <div id="navIndicator"></div>
   <button class="mob-nav-btn btn-base" id="mnSongs" onclick="pickSection('songs')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-    <span data-i18n="tab_songs">Songs</span>
+    <span data-i18n="tab_songs">음악방송</span>
   </button>
   <button class="mob-nav-btn btn-base" id="mnLive" onclick="pickSection('live')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
@@ -2545,7 +2524,7 @@ header {
     <div style="height:1px;background:var(--border);margin:4px 4px;"></div>
     <button class="section-tab" id="secSongs" onclick="pickSection('songs')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
-      <span data-i18n="tab_songs">Songs</span>
+      <span data-i18n="tab_songs">음악방송</span>
     </button>
     <button class="section-tab" id="secContent" onclick="pickSection('content')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
@@ -2661,7 +2640,6 @@ header {
     <button class="type-btn active" data-t="all"        onclick="setType(this,'all')"        data-i18n="filter_all">전체</button>
     <button class="type-btn" data-t="music"      onclick="setType(this,'music')"      data-i18n="filter_music">음악방송</button>
     <button class="type-btn" data-t="mv"         onclick="setType(this,'mv')"         data-i18n="filter_mv">뮤직비디오</button>
-    <button class="type-btn" data-t="onthespot"  onclick="setType(this,'onthespot')"  data-i18n="filter_onthespot">온더스팟</button>
     <button class="type-btn" data-t="fullcam"    onclick="setType(this,'fullcam')"    data-i18n="filter_fullcam">풀캠</button>
   </div>
 </div>
@@ -3143,7 +3121,7 @@ function getCurrentT() {
 window._i18n = {
   KR: {
     headerTagline:        '리센느 영상 모아보기 SCENE-FLIX',
-    tab_songs:            'Songs',
+    tab_songs:            '음악방송',
     tab_allvideos:        '전체 보기',
     tab_archive:          '기간별 보기',
     tab_content:          '자컨',
@@ -3167,7 +3145,6 @@ window._i18n = {
     filter_music:         '음악방송',
     filter_mv:            '뮤직비디오',
     filter_itslive:       "It's Live",
-    filter_onthespot:     '온더스팟',
     filter_fullcam:       '풀캠',
     fantube_desc:         '리센느의 팬 유튜버들의 채널입니다.',
     member_desc:          '멤버를 선택하면 유튜브에서 관련 영상을 검색합니다.',
@@ -3202,7 +3179,7 @@ window._i18n = {
   },
   JP: {
     headerTagline:        'RESCENEの映像まとめ SCENE-FLIX',
-    tab_songs:            'Songs',
+    tab_songs:            '音楽番組',
     tab_allvideos:        '全動画',
     tab_archive:          '期間別',
     tab_content:          '自体',
@@ -3226,7 +3203,6 @@ window._i18n = {
     filter_music:         '音楽番組',
     filter_mv:            'ミュージックビデオ',
     filter_itslive:       "It's Live",
-    filter_onthespot:     'オンザスポット',
     filter_fullcam:       'フルカム',
     fantube_desc:         'RESCENEのファンYouTuberのチャンネルです。',
     member_desc:          'メンバーを選択するとYouTubeで関連動画を検索します。',
@@ -3261,7 +3237,7 @@ window._i18n = {
   },
   EN: {
     headerTagline:        'RESCENE Video Archive SCENE-FLIX',
-    tab_songs:            'Songs',
+    tab_songs:            'Music Show',
     tab_allvideos:        'All Videos',
     tab_archive:          'By Date',
     tab_content:          'Original',
@@ -3285,7 +3261,6 @@ window._i18n = {
     filter_music:         'Music Show',
     filter_mv:            'Music Video',
     filter_itslive:       "It's Live",
-    filter_onthespot:     'On the Spot',
     filter_fullcam:       'Full Cam',
     fantube_desc:         'YouTube channels run by RESCENE fan creators.',
     member_desc:          'Select a member to search for related videos on YouTube.',
@@ -3537,9 +3512,6 @@ const RESCENE_DATA = [
         "https://youtu.be/kpWf5bUP0lU",
         "https://youtu.be/tgktKUesL7Y",
       ],
-      onthespot: [
-        "https://youtu.be/W5PQMyCqeLI",
-      ],
     }
   },
   {
@@ -3655,9 +3627,6 @@ const RESCENE_DATA = [
         "https://www.youtube.com/watch?v=IzekCaFYKKs",
         "https://www.youtube.com/watch?v=Bo6OPsjf4IU",
       ],
-      onthespot: [
-        "https://youtu.be/kjvlrGs5f7c",
-      ],
     }
   },
   {
@@ -3748,6 +3717,8 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'W5PQMyCqeLI': '2025.02.06 18:00',
+  'kjvlrGs5f7c': '2025.11.28 18:00',
   'Wz669ZbgeLA': '2026.07.13 14:39',
   'X1C8_mrFbZk': '2026.07.13 18:24',
   'k5R7QJpwCP0': '2026.07.13 15:45',
@@ -4416,7 +4387,6 @@ const DATE_MAP = {
   'VmK3uTDnIXs': '2025.07.08 18:34',
   'W07b3zKHnL4': '2026.04.17 18:05',
   'W0cpLR0rz0Q': '2026.04.24 18:00',
-  'W5PQMyCqeLI': '2025.02.06 18:00',
   'W6F7n8DDgnk': '2025.11.27 19:59',
   'WQ-yI4llN1w': '2025.06.14 01:28',
   'Wa7Cs87L7SU': '2025.03.26 18:00',
@@ -4534,7 +4504,6 @@ const DATE_MAP = {
   'jd28WtI0GyA': '2026.04.23 00:40',
   'jdqK6LK0TJM': '2025.02.07 21:12',
   'kGe2er0xjGc': '2024.04.10 03:24',
-  'kjvlrGs5f7c': '2025.11.28 18:00',
   'kl0373Z1Wyg': '2025.02.23 18:59',
   'knM9M-eoypw': '2025.03.26 21:53',
   'kp15zTUo5g4': '2026.04.20 16:00',
@@ -5242,8 +5211,12 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { anwonjal: '안녕하세요원이입니다잘부탁드립니다', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', BAAMBCLIVE: 'BAAMBC LIVE', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', casaverdi: '카사베르디', fcmobile: 'FC 모바일', suwon: '수원시', geoje: '거제시', gangnami: '동네친구 강나미', jeonpa: '전파상사', whoareyou: '여보세요?', milkyboys: '밀키보이즈', elite: '엘리트 학생복', cheabing: '체아빙', hyoslevelup: '효연의 레벨업', jeonchamsi: '전지적 참견 시점', geojaecos: '거제 코스', choiwoosusan: '최우수산', tingleroom: '팅글룸', withsheon: '션과 함께', weeklysangam: '위클리상암', yoobyeongjae: '유병재', twinmirrorshow: '트윈 미러쇼', studiodreaming: '스튜디오 드리밍', idolbooth: '아이돌부스', profile: '입덕프로필', beateachergo: '쌤이되려GO', starnews: '스타뉴스', mcountdown: '엠카운트다운', gyeongju: '경주시', joomonara: '술 빚는 윤주모', musinsatv: '무신사TV 성수기', musicbank: '뮤직뱅크', inkigayo: '인기가요' };
+const EXTERNAL_LABELS = { anwonjal: '안원잘', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', BAAMBCLIVE: 'BAAMBC LIVE', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', casaverdi: '카사베르디', fcmobile: 'FC 모바일', suwon: '수원시', geoje: '거제시', gangnami: '동네친구 강나미', jeonpa: '전파상사', whoareyou: '여보세요?', milkyboys: '밀키보이즈', elite: '엘리트 학생복', cheabing: '체아빙', hyoslevelup: '효연의 레벨업', jeonchamsi: '전지적 참견 시점', geojaecos: '거제 코스', choiwoosusan: '최우수산', tingleroom: '팅글룸', withsheon: '션과 함께', weeklysangam: '위클리상암', yoobyeongjae: '유병재', twinmirrorshow: '트윈 미러쇼', studiodreaming: '스튜디오 드리밍', idolbooth: '아이돌부스', profile: '입덕프로필', beateachergo: '쌤이되려GO', starnews: '스타뉴스', mcountdown: '엠카운트다운', gyeongju: '경주시', joomonara: '술 빚는 윤주모', musinsatv: '무신사TV 성수기', musicbank: '뮤직뱅크', inkigayo: '인기가요', onthespot: '온더스팟' };
 const EXTERNAL_DATA = {
+  onthespot: [
+    { vid: 'W5PQMyCqeLI', url: 'https://youtu.be/W5PQMyCqeLI', date: '2025.02.06 18:00' },
+    { vid: 'kjvlrGs5f7c', url: 'https://youtu.be/kjvlrGs5f7c', date: '2025.11.28 18:00' },
+  ],
   inkigayo: [
     { vid: '4-yicCXfEkk', url: 'https://youtu.be/4-yicCXfEkk', date: '2026.07.13 15:30' },
   ],
@@ -5980,7 +5953,7 @@ const EXTERNAL_DATA = {
 };
 const VID_TO_EXTERNAL_KEY = {};
 const EXTERNAL_CATS = {
-  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon','norejalham','BAAMBCLIVE','tbcmusic','asianmodelawards','pickcon','gangnami','whoareyou','studiodreaming','idolbooth'] },
+  song:      { label: '노래',   i18nKey: 'ext_cat_song',      keys: ['itslive','kohnohko','relaydance','kcon','bokmenking','artistcanvas','stagewemake','carplist','pblive','starroom','soundbomb360','idolunplugged','koreauniv','justicebacteria','toon','leemujinservice','train','comebackhome','lionmusic','sooncheon','norejalham','BAAMBCLIVE','tbcmusic','asianmodelawards','pickcon','gangnami','whoareyou','studiodreaming','idolbooth','onthespot'] },
   radio:     { label: '라디오', i18nKey: 'ext_cat_radio',     keys: ['arirangradio','mbcradio','baesungjae','billie','riswell','leeeunji','parksohyun','ebsradiokch'] },
   variety:   { label: '예능',   i18nKey: 'ext_cat_variety',   keys: [
     'anwonjal','fanvatar','physicalgallary20','matkwon','chan19','hifiction',
@@ -6972,8 +6945,8 @@ function buildSongNav() {
   _elSongNav.innerHTML = _buildSongTabsHtml('');
 }
 
-const TYPE_BADGE = { music:'tb-music', mv:'tb-mv', itslive:'tb-itslive', content:'tb-content', onthespot:'tb-onthespot', fullcam:'tb-fullcam', external:'tb-external', live:'tb-itslive' };
-const TYPE_LABEL = { music:'음악방송', mv:'뮤직비디오', itslive:"It's Live", content:'자체컨텐츠', onthespot:'온더스팟', fullcam:'풀캠', external:'외부컨텐츠', live:'LIVE' };
+const TYPE_BADGE = { music:'tb-music', mv:'tb-mv', itslive:'tb-itslive', content:'tb-content', fullcam:'tb-fullcam', external:'tb-external', live:'tb-itslive' };
+const TYPE_LABEL = { music:'음악방송', mv:'뮤직비디오', itslive:"It's Live", content:'자체컨텐츠', fullcam:'풀캠', external:'외부컨텐츠', live:'LIVE' };
 function getTypeLabel(type) {
   if (type === 'content' || type === 'external' || type === 'live') {
     return TYPE_LABEL[type] || type;
@@ -7425,7 +7398,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const initialSearch = (videoTitle + ' ' + dateStr + ' live ' + memberNames + ' ' + memberNamesOrig).toLowerCase();
     return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">LIVE</span>`)}
+      ${buildThumbHtml(item.vid, '')}
       <div class="cbody">
         ${titleHtml}
         <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
@@ -7446,7 +7419,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       : `<div class="ctags"><span class="skel skel-tag"></span></div>`;
     const initialSearch = (videoTitle + ' ' + tl + ' ' + showLabel + ' ' + channel + ' ' + song + ' ' + dateStr).toLowerCase();
     return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, `<span class="type-badge tb-songs">Songs</span>`)}
+      ${buildThumbHtml(item.vid, '')}
       <div class="cbody">
         ${titleHtml}
         <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : item.loaded ? '' : `<span class="skel skel-date"></span>`}</div>
@@ -7466,7 +7439,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + (ref.category || '') + ' ' + categoryLabel + ' ' + dateStr).toLowerCase();
     return `<a class="vcard card-base hover-lift tb-content" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, `<span class="type-badge tb-content">${tl}</span>`)}
+      ${buildThumbHtml(item.vid, '')}
       <div class="cbody">
         ${titleHtml}
         <div class="cmeta">${metaHtml}</div>
@@ -7486,7 +7459,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + channelLabel + ' ' + channelKey + ' ' + dateStr).toLowerCase();
     return `<a class="vcard card-base hover-lift tb-external" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, `<span class="type-badge tb-external">외부컨텐츠</span>`)}
+      ${buildThumbHtml(item.vid, '')}
       <div class="cbody">
         ${titleHtml}
         <div class="cmeta">${metaHtml}</div>
@@ -7497,7 +7470,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
 
   const initialSearch = (videoTitle + ' ' + tl + ' ' + dateStr).toLowerCase();
   return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-    ${buildThumbHtml(item.vid, `<span class="type-badge ${tb}">${tl}</span>`)}
+    ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       <div class="csong-multi">${videoTitle}</div>
       <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
@@ -7680,7 +7653,7 @@ const _PICK_SECTION_MAP = {
 const _PICK_SEARCHABLE = ['allvideos', 'songs', 'content', 'external', 'live', 'bookmark'];
 const _SUB_SECTIONS = {
   archive:  { label: '기간별 보기' },
-  songs:    { label: 'Songs' },
+  songs:    { label: '음악방송' },
   content:  { label: '자체 컨텐츠' },
   live:     { label: 'Live' },
   external: { label: '외부 컨텐츠' },
@@ -8811,7 +8784,7 @@ buildSongNav();
   let _segs  = [];
   let _data  = [];
   let _total = 0;
-  const TYPE_NAMES = { music: 'Music Show', mv: 'MV', itslive: 'ITS LIVE', onthespot: 'On The Spot', fullcam: 'Full Cam' };
+  const TYPE_NAMES = { music: 'Music Show', mv: 'MV', itslive: 'ITS LIVE', fullcam: 'Full Cam' };
   const SVG_NS = 'http://www.w3.org/2000/svg';
 
   function pct(a, b) { return b > 0 ? ((a / b) * 100).toFixed(1) : '0.0'; }
@@ -8848,7 +8821,7 @@ buildSongNav();
     });
 
     return [
-      { key: 'songs',    label: 'Songs',    color: '#c8c8cc', desc: '음악방송 무대 영상 모음입니다.',               count: songsCount,   subtypes: songsSubs   },
+      { key: 'songs',    label: '음악방송', color: '#c8c8cc', desc: '음악방송 무대 영상 모음입니다.',               count: songsCount,   subtypes: songsSubs   },
       { key: 'content',  label: '자체컨텐츠', color: '#80b870', desc: 'RESCENE 공식 채널의 자체 제작 컨텐츠입니다.',  count: contentCount, subtypes: contentSubs },
       { key: 'live',     label: 'Live',     color: '#a080d0', desc: '멤버들의 라이브 방송 영상입니다.',         count: liveCount,    subtypes: liveSubs    },
       { key: 'external', label: '외부컨텐츠', color: '#7aaede', desc: '외부 채널에서 제작된 협업 및 출연 영상입니다.', count: extCount,     subtypes: extSubs     }
