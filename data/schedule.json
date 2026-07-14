@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-14T03:01:08Z",
+  "updated": "2026-07-14T15:01:06Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -170,11 +170,11 @@
       "source": "mnetplus"
     },
     {
-      "date": "2026-07-16",
-      "time": "10:00",
-      "title": "캐릭터 라이선싱 페어 2026",
+      "date": "2026-07-15",
+      "time": "21:00",
+      "title": "MBC FM4U 아이돌라디오",
       "detail": "",
-      "type": "event",
+      "type": "radio",
       "source": "mnetplus"
     },
     {
@@ -183,6 +183,14 @@
       "title": "KBS WORLD <마이데이트립>",
       "detail": "",
       "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-21",
+      "time": "18:30",
+      "title": "KT위즈 시구&시투",
+      "detail": "",
+      "type": "event",
       "source": "mnetplus"
     },
     {
