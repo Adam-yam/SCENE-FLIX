@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-13T15:01:03Z",
+  "updated": "2026-07-14T03:01:08Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -123,14 +123,6 @@
     },
     {
       "date": "2026-07-14",
-      "time": "",
-      "title": "KBS <키스 더 라디오>",
-      "detail": "",
-      "type": "radio",
-      "source": "mnetplus"
-    },
-    {
-      "date": "2026-07-14",
       "time": "18:00",
       "title": "SBS M <더 쇼>",
       "detail": "",
@@ -141,6 +133,30 @@
       "date": "2026-07-14",
       "time": "20:10",
       "title": "SBS M <THE K-POP FANPOPTY> 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-14",
+      "time": "22:30",
+      "title": "KBS <키스 더 라디오>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-14",
+      "time": "05:00",
+      "title": "MBC M <쇼! 챔피언> 사전녹화 1",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-15",
+      "time": "12:50",
+      "title": "MBC M <쇼! 챔피언> 사전녹화 2",
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
@@ -167,14 +183,6 @@
       "title": "KBS WORLD <마이데이트립>",
       "detail": "",
       "type": "broadcast",
-      "source": "mnetplus"
-    },
-    {
-      "date": "2026-07-18",
-      "time": "19:00",
-      "title": "[Pretty Girl] 대면/영상통화 팬사인회 by PlusChat",
-      "detail": "",
-      "type": "fansign",
       "source": "mnetplus"
     },
     {
