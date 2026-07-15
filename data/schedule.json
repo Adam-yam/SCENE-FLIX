@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-14T15:01:06Z",
+  "updated": "2026-07-15T03:01:05Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -175,6 +175,14 @@
       "title": "MBC FM4U 아이돌라디오",
       "detail": "",
       "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-16",
+      "time": "11:00",
+      "title": "캐릭터 라이선싱 페어 2026",
+      "detail": "",
+      "type": "event",
       "source": "mnetplus"
     },
     {
