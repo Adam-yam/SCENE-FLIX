@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-16T09:01:03Z",
+  "updated": "2026-07-16T15:00:53Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -187,10 +187,50 @@
     },
     {
       "date": "2026-07-17",
+      "time": "09:10",
+      "title": "KBS2 <뮤직뱅크> 사전 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-17",
+      "time": "17:15",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-17",
       "time": "18:20",
       "title": "KBS WORLD <마이데이트립>",
       "detail": "",
       "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-17",
+      "time": "08:15",
+      "title": "<쇼음악중심> 사전 녹화(+미니 팬미팅)",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-18",
+      "time": "15:15",
+      "title": "MBC <쇼! 음악중심>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-18",
+      "time": "19:00",
+      "title": "[Pretty Girl] 대면 팬사인회 by PlusChat",
+      "detail": "",
+      "type": "fansign",
       "source": "mnetplus"
     },
     {
