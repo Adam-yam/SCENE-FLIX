@@ -38,6 +38,17 @@ gtag('config', 'G-05C99P2DB9');
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SCENE-FLIX">
 <link rel="apple-touch-icon" href="image/icon-192.png">
+<script>
+(function(){
+  function lockPortrait(){
+    if (screen.orientation && screen.orientation.lock) {
+      screen.orientation.lock('portrait').catch(function(){});
+    }
+  }
+  if (document.readyState === 'complete') lockPortrait();
+  else window.addEventListener('load', lockPortrait);
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://img.youtube.com" crossorigin>
@@ -1563,26 +1574,37 @@ header {
   }
 }
 
-@media (max-width: 700px) and (orientation: landscape) {
-  #mobileBottomNav {
-    bottom: 8px;
-    height: auto;
-    padding: 4px 8px;
-    gap: 0;
-    transform: translateX(-50%) scale(clamp(0.58, calc((100vw - 16px) / 440px), 1));
-    transform-origin: center bottom;
-  }
-  .mob-nav-btn {
-    flex: 1;
-    min-width: 40px;
-    padding: 4px clamp(3px, 1.5vw, 6px);
-    gap: 2px;
-    font-size: 0.46rem;
-  }
-  .mob-nav-btn svg {
-    width: 16px;
-    height: 16px;
-  }
+#orientationLockOverlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999999;
+  background: #0a0a0a;
+  color: #fff;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 16px;
+  padding: 24px;
+}
+#orientationLockOverlay svg {
+  width: 56px;
+  height: 56px;
+  animation: orientationLockSpin 1.6s ease-in-out infinite;
+}
+#orientationLockOverlay p {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0;
+}
+@keyframes orientationLockSpin {
+  0%, 20% { transform: rotate(0deg); }
+  50%, 70% { transform: rotate(-90deg); }
+  100% { transform: rotate(-90deg); }
+}
+@media screen and (orientation: landscape) and (max-height: 700px) {
+  #orientationLockOverlay { display: flex; }
 }
 
 @media (max-width: 700px) {
@@ -2312,6 +2334,14 @@ header {
 </head>
 
 <body>
+
+<div id="orientationLockOverlay">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="5" y="2" width="14" height="20" rx="2"/>
+    <line x1="12" y1="18" x2="12.01" y2="18"/>
+  </svg>
+  <p>화면을 세로로 돌려주세요</p>
+</div>
 
 <button id="mobileMenuBtn" onclick="toggleDrawer()" aria-label="메뉴 열기">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -3737,6 +3767,7 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'XReBEo6w6us': '2026.07.20 18:00',
   'PqpmFwNjDHg': '2026.07.20 17:00',
   'ETPYIjnYWGw': '2026.07.20 16:00',
   'GcKB1ZVz2rE': '2026.07.19 19:19',
@@ -5372,6 +5403,7 @@ const EXTERNAL_DATA = {
     { vid: 'GcKB1ZVz2rE', url: 'https://youtu.be/GcKB1ZVz2rE', date: '2026.07.19 19:19' },
   ],
   zanmangloopy: [
+    { vid: 'XReBEo6w6us', url: 'https://youtu.be/XReBEo6w6us', date: '2026.07.20 18:00' },
     { vid: 'XXtRTxqrjgg', url: 'https://youtu.be/XXtRTxqrjgg', date: '2026.07.18 10:00' },
   ],
   kebongbakdoo: [
