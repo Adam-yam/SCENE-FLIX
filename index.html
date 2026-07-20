@@ -2308,21 +2308,6 @@ header {
 .chart-ch-item { padding:4px 0 4px 10px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:6px; }
 .chart-ch-name { font-size:0.64rem; color:var(--muted); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .chart-ch-count { font-size:0.62rem; color:var(--muted); flex-shrink:0; }
-
-.video-modal { position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center; }
-.video-modal.open { display:flex; }
-.video-modal-backdrop { position:absolute; inset:0; background:rgba(0,0,0,0.78); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); }
-.video-modal-inner { position:relative; width:min(92vw,1100px); z-index:1; animation:vmFadeIn 0.25s cubic-bezier(0.22,1,0.36,1); }
-.video-modal-frame { position:relative; width:100%; padding-top:56.25%; background:#000; border-radius:14px; overflow:hidden; box-shadow:var(--glass-shadow); border:1px solid var(--glass-border); }
-.video-modal-frame iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
-.video-modal-close { position:absolute; top:-42px; right:0; width:34px; height:34px; border:none; border-radius:50%; background:var(--glass-fill); border:1px solid var(--glass-border); color:var(--text); font-size:18px; line-height:1; cursor:pointer; display:flex; align-items:center; justify-content:center; }
-.video-modal-close:hover { background:var(--glass-fill-h); }
-@keyframes vmFadeIn { from { opacity:0; transform:scale(0.96); } to { opacity:1; transform:scale(1); } }
-@media (max-width:700px) {
-  .video-modal-inner { width:100vw; }
-  .video-modal-frame { border-radius:0; }
-  .video-modal-close { top:10px; right:10px; background:rgba(0,0,0,0.55); border-color:rgba(255,255,255,0.2); }
-}
 </style>
 </head>
 
@@ -4973,56 +4958,6 @@ function _applyLastWatchedBadge(vid) {
   }
 }
 
-let _videoModalEl = null;
-let _videoModalIframeEl = null;
-let _lastFocusedBeforeModal = null;
-let _currentModalVid = null;
-
-function openVideoModal(vid) {
-  if (!_videoModalEl) _videoModalEl = document.getElementById('videoModal');
-  if (!_videoModalIframeEl) _videoModalIframeEl = document.getElementById('videoModalIframe');
-  if (!_videoModalEl || !_videoModalIframeEl) return;
-
-  _currentModalVid = vid;
-  _lastFocusedBeforeModal = document.activeElement;
-  const origin = encodeURIComponent(window.location.origin);
-  _videoModalIframeEl.src = `https://www.youtube.com/embed/${vid}?autoplay=1&rel=0&enablejsapi=1&origin=${origin}`;
-  _videoModalEl.classList.add('open');
-  _videoModalEl.setAttribute('aria-hidden', 'false');
-  document.body.style.overflow = 'hidden';
-}
-
-function closeVideoModal() {
-  if (!_videoModalEl) _videoModalEl = document.getElementById('videoModal');
-  if (!_videoModalIframeEl) _videoModalIframeEl = document.getElementById('videoModalIframe');
-  if (!_videoModalEl || !_videoModalIframeEl) return;
-
-  _videoModalEl.classList.remove('open');
-  _videoModalEl.setAttribute('aria-hidden', 'true');
-  _videoModalIframeEl.src = '';
-  _currentModalVid = null;
-  document.body.style.overflow = '';
-  if (_lastFocusedBeforeModal && _lastFocusedBeforeModal.focus) _lastFocusedBeforeModal.focus();
-}
-
-window.addEventListener('message', (e) => {
-  if (e.origin !== 'https://www.youtube.com') return;
-  if (!_currentModalVid) return;
-  let data;
-  try { data = JSON.parse(e.data); } catch { return; }
-  if (data.event === 'onError') {
-    const vid = _currentModalVid;
-    closeVideoModal();
-    window.open(ytUrl(vid), '_blank', 'noopener');
-  }
-});
-
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && _videoModalEl && _videoModalEl.classList.contains('open')) {
-    closeVideoModal();
-  }
-});
-
 function openVideo(e, vid) {
   e.preventDefault();
 
@@ -5033,7 +4968,22 @@ function openVideo(e, vid) {
     return;
   }
 
-  openVideoModal(vid);
+  const webUrl = ytUrl(vid);
+
+  if (!_isMobile) {
+    window.open(webUrl, '_blank', 'noopener');
+  } else {
+    const appUrl = `vnd.youtube://${vid}`;
+    let left = false;
+    let fallbackTimer = null;
+    const onBlur = () => { left = true; clearTimeout(fallbackTimer); };
+    window.addEventListener('blur', onBlur, { once: true });
+    window.location.href = appUrl;
+    fallbackTimer = setTimeout(() => {
+      window.removeEventListener('blur', onBlur);
+      if (!left) window.open(webUrl, '_blank', 'noopener');
+    }, 1200);
+  }
 
   try { localStorage.setItem('rescene-last-watched', vid); } catch {}
   _applyLastWatchedBadge(vid);
@@ -9430,18 +9380,6 @@ document.addEventListener('mouseout', e => {
 </button>
 
 <div id="vcardTooltip" class="vcard-tooltip"></div>
-
-<div id="videoModal" class="video-modal" aria-hidden="true">
-  <div class="video-modal-backdrop" onclick="closeVideoModal()"></div>
-  <div class="video-modal-inner">
-    <button class="video-modal-close" onclick="closeVideoModal()" aria-label="닫기">✕</button>
-    <div class="video-modal-frame">
-      <iframe id="videoModalIframe" src="" title="YouTube video player" frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
-    </div>
-  </div>
-</div>
 
 <script>
 if ('serviceWorker' in navigator) {
