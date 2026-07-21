@@ -38,17 +38,6 @@ gtag('config', 'G-05C99P2DB9');
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="SCENE-FLIX">
 <link rel="apple-touch-icon" href="image/icon-192.png">
-<script>
-(function(){
-  function lockPortrait(){
-    if (screen.orientation && screen.orientation.lock) {
-      screen.orientation.lock('portrait').catch(function(){});
-    }
-  }
-  if (document.readyState === 'complete') lockPortrait();
-  else window.addEventListener('load', lockPortrait);
-})();
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://img.youtube.com" crossorigin>
@@ -1574,39 +1563,6 @@ header {
   }
 }
 
-#orientationLockOverlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 999999;
-  background: #0a0a0a;
-  color: #fff;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  gap: 16px;
-  padding: 24px;
-}
-#orientationLockOverlay svg {
-  width: 56px;
-  height: 56px;
-  animation: orientationLockSpin 1.6s ease-in-out infinite;
-}
-#orientationLockOverlay p {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0;
-}
-@keyframes orientationLockSpin {
-  0%, 20% { transform: rotate(0deg); }
-  50%, 70% { transform: rotate(-90deg); }
-  100% { transform: rotate(-90deg); }
-}
-@media screen and (orientation: landscape) and (max-height: 700px) {
-  #orientationLockOverlay { display: flex; }
-}
-
 @media (max-width: 700px) {
   #subSidebar { display: none !important; }
 }
@@ -2334,14 +2290,6 @@ header {
 </head>
 
 <body>
-
-<div id="orientationLockOverlay">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <rect x="5" y="2" width="14" height="20" rx="2"/>
-    <line x1="12" y1="18" x2="12.01" y2="18"/>
-  </svg>
-  <p>화면을 세로로 돌려주세요</p>
-</div>
 
 <button id="mobileMenuBtn" onclick="toggleDrawer()" aria-label="메뉴 열기">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -3771,6 +3719,7 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'XRcYeXQHzgQ': '2026.07.21 19:08',
   'xomSG8ky0Kg': '2026.07.21 19:00',
   'aPoHgUlXbuw': '2026.07.21 19:30',
   'cltr2QpFEvY': '2026.07.14 21:47',
@@ -5408,8 +5357,11 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { anwonjal: '안원잘', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', BAAMBCLIVE: 'BAAMBC LIVE', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', casaverdi: '카사베르디', fcmobile: 'FC 모바일', suwon: '수원시', geoje: '거제시', gangnami: '동네친구 강나미', jeonpa: '전파상사', whoareyou: '여보세요?', milkyboys: '밀키보이즈', elite: '엘리트 학생복', cheabing: '체아빙', hyoslevelup: '효연의 레벨업', jeonchamsi: '전지적 참견 시점', geojaecos: '거제 코스', choiwoosusan: '최우수산', tingleroom: '팅글룸', withsheon: '션과 함께', weeklysangam: '위클리상암', yoobyeongjae: '유병재', twinmirrorshow: '트윈 미러쇼', studiodreaming: '스튜디오 드리밍', idolbooth: '아이돌부스', profile: '입덕프로필', beateachergo: '쌤이되려GO', starnews: '스타뉴스', mcountdown: '엠카운트다운', gyeongju: '경주시', joomonara: '술 빚는 윤주모', musinsatv: '무신사TV 성수기', musicbank: '뮤직뱅크', inkigayo: '인기가요', onthespot: '온더스팟', inthestudio: '인더스튜디오', kisstheradio: '한해의 키스 더 라디오', showchamp: '쇼챔피언', whenjungmak: '웬만해선 정수를 막을 수 없다', idolradiouniverse: '아이돌 라이브 유니버스', characterliscencing: '캐릭터 라이선싱 페어', dimino: '도미노 피자', solomoncode: '광희랑 딱 30분만!', upsub: '없섭', kebongbakdoo: '케봉박두', zanmangloopy: '잔망루피', fanpopty: 'FANPOPTY', geean84: '기안84' };
+const EXTERNAL_LABELS = { anwonjal: '안원잘', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', BAAMBCLIVE: 'BAAMBC LIVE', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', casaverdi: '카사베르디', fcmobile: 'FC 모바일', suwon: '수원시', geoje: '거제시', gangnami: '동네친구 강나미', jeonpa: '전파상사', whoareyou: '여보세요?', milkyboys: '밀키보이즈', elite: '엘리트 학생복', cheabing: '체아빙', hyoslevelup: '효연의 레벨업', jeonchamsi: '전지적 참견 시점', geojaecos: '거제 코스', choiwoosusan: '최우수산', tingleroom: '팅글룸', withsheon: '션과 함께', weeklysangam: '위클리상암', yoobyeongjae: '유병재', twinmirrorshow: '트윈 미러쇼', studiodreaming: '스튜디오 드리밍', idolbooth: '아이돌부스', profile: '입덕프로필', beateachergo: '쌤이되려GO', starnews: '스타뉴스', mcountdown: '엠카운트다운', gyeongju: '경주시', joomonara: '술 빚는 윤주모', musinsatv: '무신사TV 성수기', musicbank: '뮤직뱅크', inkigayo: '인기가요', onthespot: '온더스팟', inthestudio: '인더스튜디오', kisstheradio: '한해의 키스 더 라디오', showchamp: '쇼챔피언', whenjungmak: '웬만해선 정수를 막을 수 없다', idolradiouniverse: '아이돌 라이브 유니버스', characterliscencing: '캐릭터 라이선싱 페어', dimino: '도미노 피자', solomoncode: '광희랑 딱 30분만!', upsub: '없섭', kebongbakdoo: '케봉박두', zanmangloopy: '잔망루피', fanpopty: 'FANPOPTY', geean84: '기안84', kbo: 'KBO' };
 const EXTERNAL_DATA = {
+  kbo: [
+    { vid: 'XRcYeXQHzgQ', url: 'https://www.youtube.com/watch?v=XRcYeXQHzgQ', date: '2026.07.21 19:08' },
+  ],
   geean84: [
     { vid: '7C9PRXBWWEM', url: 'https://youtu.be/7C9PRXBWWEM', date: '2026.07.21 19:04' },
   ],
@@ -6231,7 +6183,7 @@ const EXTERNAL_CATS = {
     'studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag',
     'offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool',
     'roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging',
-    'hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok','dispatch','wanguland','chimtube','leemiju','johnpark','knowingbros','artbox','benstage','gonalisa','kpoponair','tenttalk','jeonpa','milkyboys','cheabing','hyoslevelup','jeonchamsi','geojaecos','choiwoosusan','tingleroom','withsheon','weeklysangam','yoobyeongjae','twinmirrorshow','profile','beateachergo','joomonara','musinsatv','whenjungmak','solomoncode','upsub','idolbooth','kebongbakdoo','zanmangloopy','fanpopty','geean84'] },
+    'hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok','dispatch','wanguland','chimtube','leemiju','johnpark','knowingbros','artbox','benstage','gonalisa','kpoponair','tenttalk','jeonpa','milkyboys','cheabing','hyoslevelup','jeonchamsi','geojaecos','choiwoosusan','tingleroom','withsheon','weeklysangam','yoobyeongjae','twinmirrorshow','profile','beateachergo','joomonara','musinsatv','whenjungmak','solomoncode','upsub','idolbooth','kebongbakdoo','zanmangloopy','fanpopty','geean84','kbo'] },
   interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview','spotify','starnews','mcountdown','musicbank','inkigayo','showchamp'] },
   ad:        { label: '광고·홍보', i18nKey: 'ext_cat_ad',       keys: ['casaverdi','fcmobile','suwon','geoje','elite','gyeongju','characterliscencing','dimino'] },
 };
