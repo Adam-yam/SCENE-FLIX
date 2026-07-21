@@ -2638,12 +2638,12 @@ header {
       </svg>
       <input type="text" id="searchInput" placeholder="제목, 카테고리, 채널명으로 검색..." autocomplete="off" data-i18n-placeholder="search_placeholder">
       <span id="searchResultCount"></span>
-      <button id="searchClear" onclick="clearSearch()" title="검색어 지우기">
+      <button id="searchClear" onclick="clearSearch()" title="검색어 지우기" aria-label="검색어 지우기">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
-      <button id="searchSubmit" onclick="submitSearch()" title="검색">
+      <button id="searchSubmit" onclick="submitSearch()" title="검색" aria-label="검색">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
@@ -3048,11 +3048,11 @@ header {
     <div class="sched-body">
       <div class="sched-cal-col">
         <div class="cal-header">
-          <button class="cal-nav-btn" id="calPrev" onclick="calNavigate(-1)">
+          <button class="cal-nav-btn" id="calPrev" onclick="calNavigate(-1)" title="이전 달" aria-label="이전 달">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
           <div class="cal-month-title" id="calMonthTitle"></div>
-          <button class="cal-nav-btn" id="calNext" onclick="calNavigate(1)">
+          <button class="cal-nav-btn" id="calNext" onclick="calNavigate(1)" title="다음 달" aria-label="다음 달">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
         </div>
@@ -3333,6 +3333,7 @@ const _I18N_PLACEHOLDER_ELS = Array.from(document.querySelectorAll('[data-i18n-p
 
 function setLang(lang) {
   window._curLang = lang;
+  document.documentElement.lang = lang === 'KR' ? 'ko' : lang === 'JP' ? 'ja' : 'en';
 
   document.querySelectorAll('.lang-btn').forEach(b => {
     b.classList.toggle('active', b.textContent.trim() === lang);
@@ -6310,18 +6311,18 @@ function buildContentCard(item, delay) {
   const channel = item.channel || '';
   const categoryLabel = getCategoryLabel(item.category);
   const titleHtml = item.loaded
-    ? `<div class="csong-multi" id="cvc-title-${item.vid}">${item.title || item.vid}</div>`
+    ? `<div class="csong-multi" id="cvc-title-${item.vid}">${_escHtml(item.title || item.vid)}</div>`
     : `<div class="csong-multi" id="cvc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
   const metaHtml = item.loaded
-    ? (dateStr ? `<span class="cdate">${dateStr}</span>` : (channel && !dateStr ? `<span class="cdate">${channel}</span>` : ''))
+    ? (dateStr ? `<span class="cdate">${dateStr}</span>` : (channel && !dateStr ? `<span class="cdate">${_escHtml(channel)}</span>` : ''))
     : `<span class="skel skel-date"></span>`;
   const searchText = [item.title || '', categoryLabel, channel, dateStr].join(' ').toLowerCase();
-  return `<a class="vcard card-base hover-lift tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-category="${categoryLabel}" data-search="${searchText}">
+  return `<a class="vcard card-base hover-lift tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-category="${_escHtml(categoryLabel)}" data-search="${_escHtml(searchText)}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
       <div class="cmeta" id="cvc-meta-${item.vid}">${metaHtml}</div>
-      ${categoryLabel ? `<div class="content-category-badge">${categoryLabel}</div>` : ''}
+      ${categoryLabel ? `<div class="content-category-badge">${_escHtml(categoryLabel)}</div>` : ''}
     </div>
   </a>`;
 }
@@ -6369,7 +6370,7 @@ async function loadCardMetas(items, mode) {
           const ch = item.channel || '';
           metaEl.innerHTML = dateStr
             ? `<span class="cdate">${dateStr}</span>`
-            : (ch ? `<span class="cdate">${ch}</span>` : '');
+            : (ch ? `<span class="cdate">${_escHtml(ch)}</span>` : '');
         }
         const cvcEl = document.getElementById(`cvc-${item.vid}`);
         if (cvcEl) {
@@ -6479,18 +6480,18 @@ function buildExternalCard(item, delay) {
   const channelKey = VID_TO_EXTERNAL_KEY[item.vid] || '';
   const channelLabel = EXTERNAL_LABELS[channelKey] || channelKey;
   const titleHtml = item.loaded
-    ? `<div class="csong-multi" id="evc-title-${item.vid}">${item.title || item.vid}</div>`
+    ? `<div class="csong-multi" id="evc-title-${item.vid}">${_escHtml(item.title || item.vid)}</div>`
     : `<div class="csong-multi" id="evc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
   const metaHtml = item.loaded
     ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
     : `<span class="skel skel-date"></span>`;
   const searchText = [item.title || '', channelLabel, dateStr].join(' ').toLowerCase();
-  return `<a class="vcard card-base hover-lift tb-external" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-channel="${channelLabel}" data-search="${searchText}">
+  return `<a class="vcard card-base hover-lift tb-external" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-channel="${_escHtml(channelLabel)}" data-search="${_escHtml(searchText)}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
       <div class="cmeta" id="evc-meta-${item.vid}">${metaHtml}</div>
-      ${channelLabel ? `<div class="ext-channel-badge">${channelLabel}</div>` : ''}
+      ${channelLabel ? `<div class="ext-channel-badge">${_escHtml(channelLabel)}</div>` : ''}
     </div>
   </a>`;
 }
@@ -6601,7 +6602,6 @@ function buildLiveNav() {
     const cnt2024 = LIVE_DATA_2024.length;
     const cnt2025 = LIVE_DATA_2025.length;
     const cnt2026 = LIVE_DATA_2026.length;
-    const t = getCurrentT();
     function yearLabel(y) { return _getLiveYearLabel(y); }
     let html = `<button class="song-tab" data-ly="all" onclick="pickLiveYear(this,'all')">ALL<span class="cnt">${allCnt}</span></button>`;
     html     += `<button class="song-tab" data-ly="2024" onclick="pickLiveYear(this,'2024')">${yearLabel('2024')}<span class="cnt">${cnt2024}</span></button>`;
@@ -7232,7 +7232,6 @@ function buildCard(item, delay) {
   const tl = getTypeLabel(item.type);
   const m = item.meta;
   const dateStr = dateOnly(DATE_MAP[item.vid] || m?.date || '');
-  const show = m?.show;
   const channel = m?.channel || '';
   const videoTitle = item.loaded ? (m?.rawTitle || item.song) : null;
   const tags = [];
@@ -7242,7 +7241,7 @@ function buildCard(item, delay) {
 
   const showLabel = m?.show?.label || '';
   const titleHtml = videoTitle
-    ? `<div class="csong-multi" id="vc-title-${item.vid}">${videoTitle}</div>`
+    ? `<div class="csong-multi" id="vc-title-${item.vid}">${_escHtml(videoTitle)}</div>`
     : `<div class="csong-multi" id="vc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
   const dateHtml = dateStr
     ? `<span class="cdate" id="vc-date-${item.vid}">${dateStr}</span>`
@@ -7255,7 +7254,7 @@ function buildCard(item, delay) {
 
   const searchText = [videoTitle || item.song, tl, showLabel, channel, dateStr].join(' ').toLowerCase();
 
-  return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-show="${showLabel}" data-channel="${channel}" data-type="${tl}" data-search="${searchText}">
+  return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-show="${_escHtml(showLabel)}" data-channel="${_escHtml(channel)}" data-type="${_escHtml(tl)}" data-search="${_escHtml(searchText)}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
@@ -7435,7 +7434,7 @@ function _avAppendNextBatch(grid) {
     }
   });
   const _avT  = getCurrentT();
-  const _avML = { '원이': _avT.filter_member_woni||'원이', '리브': _avT.filter_member_liv||'리브', '미나미': _avT.filter_member_minami||'미나미', '메이': _avT.filter_member_may||'메이', '제나': _avT.filter_member_zena||'제나', '전원': _avT.filter_all_members||'전원' };
+  const _avML = { '원이': _getMemberLabel(_avT,'원이'), '리브': _getMemberLabel(_avT,'리브'), '미나미': _getMemberLabel(_avT,'미나미'), '메이': _getMemberLabel(_avT,'메이'), '제나': _getMemberLabel(_avT,'제나'), '전원': _getMemberLabel(_avT,'전원') };
   const wrapper = document.createElement('div');
   wrapper.innerHTML = batch.map((item, i) => {
     const delay = _cardDelay(i, AV_PAGE_SIZE);
@@ -7456,8 +7455,6 @@ function _avAppendNextBatch(grid) {
     _avDisconnectObserver();
   }
 }
-
-let _avLastSort = null;
 
 let _archiveYear = null;
 let _archiveMonth = null;
@@ -7493,7 +7490,6 @@ function buildArchiveSection() {
 
   const yearNav = document.getElementById('archiveYearNav');
   if (yearNav) {
-    const totalAll = Object.values(dateMap).reduce((s, mo) => s + Object.values(mo).reduce((ss, a) => ss + a.length, 0), 0);
     yearNav.innerHTML = years.map(y => {
       const total = Object.values(dateMap[y]).reduce((s, a) => s + a.length, 0);
       return `<button class="song-tab${y === _archiveYear ? ' active' : ''}" data-year="${y}" onclick="setArchiveYear('${y}')">${y}<span class="cnt">${total}</span></button>`;
@@ -7584,7 +7580,7 @@ function _renderArchiveGrid(dateMap, year, mo) {
   });
 
   const _arT  = getCurrentT();
-  const _arML = { '원이': _arT.filter_member_woni||'원이', '리브': _arT.filter_member_liv||'리브', '미나미': _arT.filter_member_minami||'미나미', '메이': _arT.filter_member_may||'메이', '제나': _arT.filter_member_zena||'제나', '전원': _arT.filter_all_members||'전원' };
+  const _arML = { '원이': _getMemberLabel(_arT,'원이'), '리브': _getMemberLabel(_arT,'리브'), '미나미': _getMemberLabel(_arT,'미나미'), '메이': _getMemberLabel(_arT,'메이'), '제나': _getMemberLabel(_arT,'제나'), '전원': _getMemberLabel(_arT,'전원') };
 
   if (!items.length) {
     grid.innerHTML = `<div class="empty"><div class="ico">📅</div><p>이 기간에 업로드된 영상이 없습니다.</p></div>`;
@@ -7607,7 +7603,6 @@ function buildAllVideosGrid() {
 
   const newSorted = _buildAvSortedList();
 
-  _avLastSort = curSort;
   _avDisconnectObserver();
   _avSorted = newSorted;
   _avLoaded = 0;
@@ -7644,15 +7639,15 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
   if (item._src === 'live' && item._liveItem) {
     if (!_ML) {
       const _t2 = getCurrentT();
-      _ML = { '원이': _t2.filter_member_woni||'원이', '리브': _t2.filter_member_liv||'리브', '미나미': _t2.filter_member_minami||'미나미', '메이': _t2.filter_member_may||'메이', '제나': _t2.filter_member_zena||'제나', '전원': _t2.filter_all_members||'전원' };
+      _ML = { '원이': _getMemberLabel(_t2,'원이'), '리브': _getMemberLabel(_t2,'리브'), '미나미': _getMemberLabel(_t2,'미나미'), '메이': _getMemberLabel(_t2,'메이'), '제나': _getMemberLabel(_t2,'제나'), '전원': _getMemberLabel(_t2,'전원') };
     }
     const memberBadges = item._liveItem.members.map(mm =>
-      `<span class="ctag ${MEMBER_CLASS[mm] || ''}">${_ML[mm] || mm}</span>`
+      `<span class="ctag ${MEMBER_CLASS[mm] || ''}">${_escHtml(_ML[mm] || mm)}</span>`
     ).join('');
     const memberNames = item._liveItem.members.map(mm => _ML[mm] || mm).join(' ');
     const memberNamesOrig = item._liveItem.members.join(' ');
     const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${videoTitle}</div>`
+      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${_escHtml(videoTitle)}</div>`
       : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const initialSearch = (videoTitle + ' ' + dateStr + ' live ' + memberNames + ' ' + memberNamesOrig).toLowerCase();
     return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
@@ -7670,7 +7665,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
     const channel = m.channel || '';
     const song = item._ref?.song || item.song || '';
     const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${videoTitle}</div>`
+      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${_escHtml(videoTitle)}</div>`
       : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const tagsHtml = item.loaded
       ? `<div class="ctags"><span class="ctag tb-tag-${item.type}">♪ ${tl}</span></div>`
@@ -7690,7 +7685,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
     const ref = item._ref;
     const categoryLabel = getCategoryLabel(ref.category);
     const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${videoTitle}</div>`
+      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${_escHtml(videoTitle)}</div>`
       : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const metaHtml = item.loaded
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
@@ -7701,7 +7696,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       <div class="cbody">
         ${titleHtml}
         <div class="cmeta">${metaHtml}</div>
-        ${categoryLabel ? `<div class="content-category-badge">${categoryLabel}</div>` : ''}
+        ${categoryLabel ? `<div class="content-category-badge">${_escHtml(categoryLabel)}</div>` : ''}
       </div>
     </a>`;
   }
@@ -7710,7 +7705,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
     const channelKey = VID_TO_EXTERNAL_KEY[item.vid] || '';
     const channelLabel = EXTERNAL_LABELS[channelKey] || channelKey;
     const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${videoTitle}</div>`
+      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${_escHtml(videoTitle)}</div>`
       : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const metaHtml = item.loaded
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
@@ -7721,7 +7716,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       <div class="cbody">
         ${titleHtml}
         <div class="cmeta">${metaHtml}</div>
-        ${channelLabel ? `<div class="ext-channel-badge">${channelLabel}</div>` : ''}
+        ${channelLabel ? `<div class="ext-channel-badge">${_escHtml(channelLabel)}</div>` : ''}
       </div>
     </a>`;
   }
@@ -7730,7 +7725,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
   return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
-      <div class="csong-multi">${videoTitle}</div>
+      <div class="csong-multi">${_escHtml(videoTitle)}</div>
       <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
     </div>
   </a>`;
@@ -7959,7 +7954,7 @@ function pickSection(section, _fromPopState) {
   if (section === 'links')  _replayAnim('.link-row',   i => `${Math.min(i * 0.04, 0.5)}s`);
   if (section === 'about')  _replayAnim('#aboutMode .links-wrap > div > *', i => `${i * 0.07}s`, 'fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both');
 
-  if (section === 'allvideos') { _avLastSort = null; buildAllVideosGrid(); }
+  if (section === 'allvideos') { buildAllVideosGrid(); }
   else { _avDisconnectObserver(); }
   if (section === 'archive') buildArchiveSection();
   if (section === 'content' || section === 'songs') buildGrid();
@@ -8860,8 +8855,7 @@ function renderCalendar() {
     const hasEvents = events.length > 0;
 
     const bdayEv = events.find(e => e._isBirthday);
-    const bdayColor = bdayEv ? bdayEv._memberColor : null;
-    const bdayImg   = bdayEv ? bdayEv._memberImg   : null;
+    const bdayImg = bdayEv ? bdayEv._memberImg : null;
 
     let cellCls = 'cal-cell';
     if (isOther) cellCls += ' other-month';
@@ -8883,9 +8877,9 @@ function renderCalendar() {
       const ev = events[ei];
       if (ev._isBirthday && ev._memberColor) {
         const c = ev._memberColor;
-        pillsHtml += `<div class="cal-event-pill type-anniv" style="background:${c}26;color:${c};border-left-color:${c};">${ev.title}</div>`;
+        pillsHtml += `<div class="cal-event-pill type-anniv" style="background:${c}26;color:${c};border-left-color:${c};">${_escHtml(ev.title)}</div>`;
       } else {
-        pillsHtml += `<div class="cal-event-pill type-${ev.type}">${ev.title}</div>`;
+        pillsHtml += `<div class="cal-event-pill type-${_escHtml(ev.type)}">${_escHtml(ev.title)}</div>`;
       }
     }
     if (events.length > MAX_PILLS) {
@@ -9413,7 +9407,7 @@ document.addEventListener('mouseout', e => {
 
 </script>
 
-<button id="scrollTop" title="맨 위로">
+<button id="scrollTop" title="맨 위로" aria-label="맨 위로">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <polyline points="18 15 12 9 6 15"/>
   </svg>
