@@ -40,12 +40,16 @@ gtag('config', 'G-05C99P2DB9');
 <link rel="apple-touch-icon" href="image/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="preconnect" href="https://img.youtube.com" crossorigin>
 <link rel="preconnect" href="https://yt3.googleusercontent.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.youtube.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
 <style>
 :root {
+  --font-sans: 'Pretendard Variable', 'Noto Sans KR', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
   --bg:      #1c1c1e;
   --surf:    #2c2c2e;
   --card:    #3a3a3c;
@@ -136,7 +140,7 @@ gtag('config', 'G-05C99P2DB9');
   cursor: pointer;
   padding: 5px 11px;
   font-size: 0.62rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   font-weight: 600;
   letter-spacing: 0.08em;
   transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
@@ -267,7 +271,7 @@ mark.sh {
   background: rgba(15,15,15,0.96);
   color: #e8e8e8;
   font-size: 0.72rem;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   line-height: 1.5;
   padding: 7px 11px;
   border-radius: 6px;
@@ -313,7 +317,7 @@ html { scroll-behavior: smooth; scrollbar-gutter: stable; }
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   min-height: 100vh;
   overflow-x: hidden;
   font-size: 14px;
@@ -388,7 +392,7 @@ header {
   border: none;
   border-bottom: 2px solid transparent;
   background: none;
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   text-transform: uppercase;
   white-space: nowrap;
   transition: color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1);
@@ -462,7 +466,7 @@ header {
   border: 1px solid rgba(255,255,255,0.28);
   background: transparent;
   color: var(--muted);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
 }
 
 .type-btn[data-t="music"]     { border-color: var(--c-music);     }
@@ -569,7 +573,7 @@ header {
   border: 1px solid rgba(255,255,255,0.32);
   background: transparent;
   color: var(--muted);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   white-space: nowrap;
   display: flex;
   align-items: center;
@@ -600,7 +604,7 @@ header {
   border: 1px solid var(--border);
   border-radius: 8px;
   color: var(--text);
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-sans);
   font-size: 0.75rem;
   padding: 8px 46px 8px 36px;
   outline: none;
@@ -1359,7 +1363,7 @@ header {
     color: var(--muted);
     cursor: pointer;
     padding: 6px clamp(4px, 2vw, 10px);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.52rem;
     letter-spacing: 0.03em;
     transition: color 0.22s cubic-bezier(0.4,0,0.2,1);
@@ -1512,7 +1516,7 @@ header {
     background: none;
     border: none;
     color: var(--muted);
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-sans);
     font-size: 0.74rem;
     letter-spacing: 0.03em;
     cursor: pointer;
@@ -1606,7 +1610,7 @@ header {
   border:none;
   background:none;
   cursor:pointer;
-  font-family:'Inter',sans-serif;
+  font-family: var(--font-sans);
   transition: color .18s cubic-bezier(0.4,0,0.2,1), background .18s cubic-bezier(0.4,0,0.2,1), border-color .18s cubic-bezier(0.4,0,0.2,1), opacity .18s cubic-bezier(0.4,0,0.2,1);
 }
 
@@ -2471,7 +2475,7 @@ header {
       Other Links
     </div>
     <a href="https://adam-yam.github.io/SCENE-grid/" target="_blank" rel="noopener"
-      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family:'Inter',sans-serif;letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);margin-bottom:2px;"
+      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family: var(--font-sans);letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);margin-bottom:2px;"
       onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
       onmouseleave="this.style.background='';this.style.color='var(--muted)'">
       <span style="display:flex;align-items:center;gap:8px;">
@@ -2484,7 +2488,7 @@ header {
       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
     </a>
     <a href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener"
-      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family:'Inter',sans-serif;letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);margin-bottom:2px;"
+      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family: var(--font-sans);letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);margin-bottom:2px;"
       onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
       onmouseleave="this.style.background='';this.style.color='var(--muted)'">
       <span style="display:flex;align-items:center;gap:8px;">
@@ -2497,7 +2501,7 @@ header {
       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
     </a>
     <a href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener"
-      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family:'Inter',sans-serif;letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);"
+      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family: var(--font-sans);letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);"
       onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
       onmouseleave="this.style.background='';this.style.color='var(--muted)'">
       <span style="display:flex;align-items:center;gap:8px;">
