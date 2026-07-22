@@ -941,23 +941,24 @@ header {
   flex-direction: column;
   align-items: center;
   gap: 12px;
-  padding: 20px 14px 18px;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
+  padding: 22px 16px 20px;
+  background: var(--glass-fill);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
   text-decoration: none;
   color: var(--text);
   cursor: pointer;
   animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both;
   position: relative;
   overflow: hidden;
+  box-shadow: inset 0 1px 0 var(--glass-highlight);
 }
 
 .ftcard::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.025) 0%, transparent 60%);
+  background: linear-gradient(160deg, rgba(255,255,255,0.05) 0%, transparent 45%);
   pointer-events: none;
 }
 
@@ -967,17 +968,25 @@ header {
   }
   .ftcard:hover {
     transform: translateY(-6px);
-    border-color: rgba(224,212,192,0.28);
-    background: var(--card-h);
-    box-shadow: 0 12px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(224,212,192,0.1);
+    border-color: rgba(224,212,192,0.4);
+    background: var(--glass-fill-h);
+    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight), 0 0 0 1px rgba(224,212,192,0.12);
   }
   .ftcard:hover .ftcard-avatar {
-    border-color: rgba(224,212,192,0.4);
+    border-color: rgba(224,212,192,0.45);
+    transform: scale(1.05);
   }
-  .ftcard:hover .ftcard-arrow {
+  .ftcard:hover .ftcard-badge {
     opacity: 1;
-    transform: translateY(0);
+    background: rgba(224,212,192,0.22);
+    border-color: rgba(224,212,192,0.55);
+    transform: scale(1);
   }
+}
+
+.ftcard-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
 }
 
 .ftcard-avatar {
@@ -985,9 +994,10 @@ header {
   height: 72px;
   border-radius: 50%;
   background: var(--surf);
-  border: 2px solid var(--border);
+  border: 2px solid var(--glass-border);
   overflow: hidden;
-  flex-shrink: 0;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.12), 0 2px 10px rgba(0,0,0,0.3);
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), border-color 0.22s cubic-bezier(0.4,0,0.2,1);
 }
 
 .ftcard-avatar img {
@@ -1019,7 +1029,7 @@ header {
 
 .ftcard-name {
   font-size: 0.82rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--text);
   text-align: center;
   letter-spacing: 0.01em;
@@ -1053,12 +1063,28 @@ header {
   margin-top: 1px;
 }
 
-.ftcard-arrow {
-  font-size: 0.62rem;
+.ftcard-badge {
+  position: absolute;
+  right: -3px;
+  bottom: -3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--glass-fill-h);
+  border: 1px solid rgba(224,212,192,0.32);
   color: var(--accent);
-  opacity: 0;
-  transform: translateY(2px);
-  transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.22,1,0.36,1);
+  opacity: 0.8;
+  transform: scale(0.92);
+  transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.22s cubic-bezier(0.4,0,0.2,1), border-color 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+.ftcard-badge svg {
+  width: 11px;
+  height: 11px;
+  flex-shrink: 0;
 }
 
 @media (max-width: 700px) {
@@ -1066,6 +1092,8 @@ header {
   .fantube-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .ftcard { padding: 16px 10px 14px; gap: 9px; }
   .ftcard-avatar { width: 56px; height: 56px; }
+  .ftcard-badge { width: 18px; height: 18px; right: -2px; bottom: -2px; }
+  .ftcard-badge svg { width: 9px; height: 9px; }
   .ftcard-name { font-size: 0.74rem; }
   .ftcard-handle { display: none; }
 }
@@ -2383,10 +2411,6 @@ header {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       <span data-i18n="tab_fantube">팬튜브</span>
     </button>
-    <button class="drawer-item btn-base" id="dLinks"    onclick="closeDrawer(); pickSection('links');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      <span data-i18n="tab_links">RESCENE 링크</span>
-    </button>
     <button class="drawer-item btn-base" id="dAbout"    onclick="closeDrawer(); pickSection('about');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       About
@@ -2534,10 +2558,6 @@ header {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       <span data-i18n="tab_fantube">팬튜브</span>
     </button>
-    <button class="section-tab" id="secLinks" onclick="pickSection('links')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-      <span data-i18n="tab_links">RESCENE 링크</span>
-    </button>
     <button class="section-tab" id="secAbout" onclick="pickSection('about')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <span data-i18n="tab_about">About</span>
@@ -2660,224 +2680,6 @@ header {
   <div class="fantube-wrap">
     <p class="fantube-desc" data-i18n="fantube_desc">리센느의 팬 유튜버들의 채널입니다.</p>
     <div class="fantube-grid" id="fantubeGrid"></div>
-  </div>
-</div>
-
-<div id="linksMode" style="display:none;">
-  <div class="links-wrap">
-
-    <p class="links-section-label" data-i18n="links_official">공식 채널</p>
-    <div class="links-list">
-
-      <a class="link-row card-base" href="https://www.youtube.com/@RESCENE_official" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FF0000"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">Youtube</span>
-          <span class="link-url">@RESCENE_official</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://www.instagram.com/rescene_official" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="ig-grad" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f09433"/><stop offset="25%" style="stop-color:#e6683c"/><stop offset="50%" style="stop-color:#dc2743"/><stop offset="75%" style="stop-color:#cc2366"/><stop offset="100%" style="stop-color:#bc1888"/></linearGradient></defs><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z" fill="url(#ig-grad)"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">Instagram</span>
-          <span class="link-url">@rescene_official</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://x.com/RESCENEofficial" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">X</span>
-          <span class="link-url">@RESCENEofficial</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://www.tiktok.com/@rescene_official" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.95a8.27 8.27 0 0 0 4.84 1.54V7.05a4.85 4.85 0 0 1-1.07-.36z" fill="currentColor"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">TikTok</span>
-          <span class="link-url">@rescene_official</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://www.facebook.com/RESCENE.official/" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z" fill="#1877F2"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">Facebook</span>
-          <span class="link-url">RESCENE.official</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://artist.mnetplus.world/main/stg/rescene-official" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="white"/><text x="3" y="16" font-size="10" font-weight="900" font-family="Arial,sans-serif" fill="#eb0b6d">M</text><text x="13" y="13" font-size="8" font-weight="900" font-family="Arial,sans-serif" fill="#eb0b6d">+</text></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">MnetPlus</span>
-          <span class="link-url">artist.mnetplus.world</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://blip.kr/artists/RESCENE" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#0d1b3e"/><circle cx="12" cy="12" r="7" fill="none" stroke="white" stroke-width="1.8"/><text x="9.5" y="16.5" font-size="10" font-weight="700" font-family="Arial,sans-serif" fill="white">b</text></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">Blip</span>
-          <span class="link-url">blip.kr/artists/RESCENE</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-    </div>
-
-    <p class="links-section-label" data-i18n="links_member_ch">멤버 채널</p>
-    <div class="links-list">
-
-      <a class="link-row card-base" href="https://www.youtube.com/@helloiamwoninicetomeetyou" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="#FF0000"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">안녕하세요원이입니다</span>
-          <span class="link-url">@helloiamwoninicetomeetyou</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://x.com/RESCENE_twt" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" fill="currentColor"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">Member X</span>
-          <span class="link-url">@RESCENE_twt</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-    </div>
-
-    <p class="links-section-label" data-i18n="links_music_platform">음악 플랫폼</p>
-    <div class="links-list">
-
-      <a class="link-row card-base" href="https://music.youtube.com/search?q=%23%EB%A6%AC%EC%84%BC%EB%8A%90" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 14.5a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9zm0-7a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5z" fill="#FF0000"/><path d="M9.5 10.5l5 2.5-5 2.5v-5z" fill="#FF0000"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">YouTube Music</span>
-          <span class="link-url">music.youtube.com</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://www.melon.com/search/total/index.htm?q=%EB%A6%AC%EC%84%BC%EB%8A%90&section=&mwkLogType=T" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><ellipse cx="12" cy="13" rx="8" ry="7" fill="#00CD3C"/><path d="M12 6C12 6 8 3 5 4.5 3 5.5 3.5 8 6 8.5 8 9 10 8.5 12 6z" fill="#00A832"/><circle cx="9" cy="13" r="2" fill="white" opacity="0.3"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">Melon</span>
-          <span class="link-url">melon.com</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://www.genie.co.kr/detail/artistInfo?xxnm=82379125" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="6" fill="#0066FF"/><path d="M12 6a6 6 0 0 0-6 6 6 6 0 0 0 6 6 6 6 0 0 0 6-6h-6V6z" fill="white"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">Genie Music</span>
-          <span class="link-url">genie.co.kr</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://open.spotify.com/artist/5deOsjuFTKrNMJW3rKuL8S" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424a.623.623 0 0 1-.857.207c-2.348-1.435-5.304-1.76-8.785-.964a.623.623 0 1 1-.277-1.215c3.809-.87 7.076-.496 9.712 1.115a.623.623 0 0 1 .207.857zm1.223-2.723a.78.78 0 0 1-1.072.257c-2.687-1.652-6.785-2.131-9.965-1.166a.78.78 0 1 1-.453-1.492c3.633-1.104 8.149-.569 11.233 1.329a.78.78 0 0 1 .257 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71a.937.937 0 1 1-.543-1.793c3.53-1.072 9.404-.865 13.115 1.338a.937.937 0 0 1-.955 1.611z" fill="#1DB954"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">Spotify</span>
-          <span class="link-url">open.spotify.com</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://rescenestream.com/" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6zm-2 16a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill="var(--c-content)"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">음원총공팀</span>
-          <span class="link-url">rescenestream.com</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-    </div>
-
-    <p class="links-section-label" data-i18n="links_fan_community">팬 커뮤니티</p>
-    <div class="links-list">
-
-      <a class="link-row card-base" href="https://gall.dcinside.com/mgallery/board/lists?id=rescene1" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z" fill="var(--accent)"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">마이너 갤러리</span>
-          <span class="link-url">dcinside.com</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-      <a class="link-row card-base" href="https://www.reddit.com/r/rescene/" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="12" fill="#FF4500"/><path d="M20 12a1.5 1.5 0 0 0-2.55-1.07 7.3 7.3 0 0 0-3.93-1.24l.67-3.13 2.17.46a1.1 1.1 0 1 0 .12-.56l-2.43-.52a.25.25 0 0 0-.3.19l-.74 3.49a7.32 7.32 0 0 0-3.96 1.24A1.5 1.5 0 1 0 7.1 13.5a2.87 2.87 0 0 0-.04.46c0 2.33 2.64 4.22 5.9 4.22s5.9-1.89 5.9-4.22a2.87 2.87 0 0 0-.04-.46A1.5 1.5 0 0 0 20 12zm-10.5 1a1 1 0 1 1 1 1 1 1 0 0 1-1-1zm5.6 2.65a3.56 3.56 0 0 1-2.1.55 3.56 3.56 0 0 1-2.1-.55.25.25 0 0 1 .35-.35 3.07 3.07 0 0 0 1.75.42 3.07 3.07 0 0 0 1.75-.42.25.25 0 0 1 .35.35zm-.1-1.65a1 1 0 1 1 1-1 1 1 0 0 1-1 1z" fill="white"/></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">Reddit</span>
-          <span class="link-url">r/rescene</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-    </div>
-
-    <p class="links-section-label" data-i18n="links_etc">기타</p>
-    <div class="links-list">
-
-      <a class="link-row card-base" href="https://namu.wiki/w/RESCENE" target="_blank" rel="noopener">
-        <span class="link-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10" fill="#00A495"/><text x="12" y="16.5" text-anchor="middle" font-size="11" font-weight="bold" font-family="sans-serif" fill="white">나무</text></svg>
-        </span>
-        <span class="link-text">
-          <span class="link-label">나무위키</span>
-          <span class="link-url">namu.wiki</span>
-        </span>
-        <span class="link-arrow">↗</span>
-      </a>
-
-    </div>
-
   </div>
 </div>
 
@@ -3111,7 +2913,6 @@ window._i18n = {
     tab_external:         '외컨',
     tab_external_full:    '외부 컨텐츠',
     tab_fantube:          '팬튜브',
-    tab_links:            'RESCENE 링크',
     tab_about:            'About',
     tab_bookmark:         '즐겨찾기',
     tab_bookmark_full:    '즐겨찾기',
@@ -3129,11 +2930,6 @@ window._i18n = {
     filter_fullcam:       '풀캠',
     fantube_desc:         '리센느의 팬 유튜버들의 채널입니다.',
     member_desc:          '멤버를 선택하면 유튜브에서 관련 영상을 검색합니다.',
-    links_official:       '공식 채널',
-    links_member_ch:      '멤버 채널',
-    links_music_platform: '음악 플랫폼',
-    links_fan_community:  '팬 커뮤니티',
-    links_etc:            '기타',
     about_headline:       '리센느(RESCENE)의 팬 메이드 페이지입니다.',
     about_byline:         'made with love, by May_',
     about_section_info:   '페이지 안내',
@@ -3169,7 +2965,6 @@ window._i18n = {
     tab_external:         '外部',
     tab_external_full:    '外部コンテンツ',
     tab_fantube:          'Fan Tube',
-    tab_links:            'RESCENEリンク',
     tab_about:            'About',
     tab_bookmark:         'お気に入り',
     tab_bookmark_full:    'お気に入り',
@@ -3187,11 +2982,6 @@ window._i18n = {
     filter_fullcam:       'フルカム',
     fantube_desc:         'RESCENEのファンYouTuberのチャンネルです。',
     member_desc:          'メンバーを選択するとYouTubeで関連動画を検索します。',
-    links_official:       '公式チャンネル',
-    links_member_ch:      'メンバーチャンネル',
-    links_music_platform: '音楽プラットフォーム',
-    links_fan_community:  'ファンコミュニティ',
-    links_etc:            'その他',
     about_headline:       'RESCENE のファンメイドページです。',
     about_byline:         'made with love, by May_',
     about_section_info:   'ページ案内',
@@ -3227,7 +3017,6 @@ window._i18n = {
     tab_external:         'External',
     tab_external_full:    'External Content',
     tab_fantube:          'Fan Tube',
-    tab_links:            'Links',
     tab_about:            'About',
     tab_bookmark:         'Saved',
     tab_bookmark_full:    'Saved',
@@ -3245,11 +3034,6 @@ window._i18n = {
     filter_fullcam:       'Full Cam',
     fantube_desc:         'YouTube channels run by RESCENE fan creators.',
     member_desc:          'Select a member to search for related videos on YouTube.',
-    links_official:       'Official Channels',
-    links_member_ch:      'Member Channels',
-    links_music_platform: 'Music Platforms',
-    links_fan_community:  'Fan Community',
-    links_etc:            'Other',
     about_headline:       'A fan-made page dedicated to RESCENE.',
     about_byline:         'made with love, by May_',
     about_section_info:   'Page Info',
@@ -6228,7 +6012,7 @@ const _elCalDetail         = document.getElementById('calDetail');
 const _elCalMonthTitle     = document.getElementById('calMonthTitle');
 const _elCalGrid           = document.getElementById('calGrid');
 
-const _SECTION_EL_IDS = ['allvideosMode','archiveMode','songMode','contentMode','liveMode','externalMode','shortsMode','fantubeMode','linksMode','bookmarkMode','aboutMode','scheduleMode','newsMode','grid-wrap-el','liveGrid'];
+const _SECTION_EL_IDS = ['allvideosMode','archiveMode','songMode','contentMode','liveMode','externalMode','shortsMode','fantubeMode','bookmarkMode','aboutMode','scheduleMode','newsMode','grid-wrap-el','liveGrid'];
 const _SECTION_EL_CACHE = Object.fromEntries(
   _SECTION_EL_IDS.map(id => [id, document.getElementById(id)])
 );
@@ -6533,13 +6317,15 @@ function buildFantubeCard(ch, idx, avatarUrl) {
     ? `<img src="${avatarUrl}" alt="${ch.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'ftcard-avatar-placeholder\\'>▶</div>'">`
     : `<div class="ftcard-avatar-placeholder">▶</div>`;
   return `<a class="ftcard" href="${ch.url}" target="_blank" rel="noopener" style="animation-delay:${delay}">
-    <div class="ftcard-avatar">${avatarHtml}</div>
+    <div class="ftcard-avatar-wrap">
+      <div class="ftcard-avatar">${avatarHtml}</div>
+      <span class="ftcard-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
+    </div>
     <div class="ftcard-info">
       <span class="ftcard-name">${ch.name}</span>
       <span class="ftcard-handle">${ch.handle}</span>
       ${ch.subtitle ? `<span class="ftcard-subtitle">${ch.subtitle}</span>` : ''}
     </div>
-    <span class="ftcard-arrow">↗</span>
   </a>`;
 }
 
@@ -7856,7 +7642,7 @@ function replaceSkeleton(item) {
   vcEl.dataset.search = [m?.rawTitle || item.song, tl, showLabel, channel, dateStr].join(' ').toLowerCase();
 }
 
-const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', archive:'secArchive', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', shorts:'secShorts', fantube:'secFantube', links:'secLinks', bookmark:'secBookmark', about:'secAbout', schedule:'secSchedule', news:'secNews' };
+const _PICK_TAB_ID_MAP = { allvideos:'secAllVideos', archive:'secArchive', songs:'secSongs', content:'secContent', live:'secLive', external:'secExternal', shorts:'secShorts', fantube:'secFantube', bookmark:'secBookmark', about:'secAbout', schedule:'secSchedule', news:'secNews' };
 
 const _PICK_SECTION_MAP = {
   allvideos:['allvideosMode','grid-wrap-el'],
@@ -7867,7 +7653,6 @@ const _PICK_SECTION_MAP = {
   external: ['externalMode','grid-wrap-el'],
   shorts:   ['shortsMode'],
   fantube:  ['fantubeMode'],
-  links:    ['linksMode'],
   bookmark: ['bookmarkMode','grid-wrap-el'],
   about:    ['aboutMode'],
   schedule: ['scheduleMode'],
@@ -7921,7 +7706,6 @@ function pickSection(section, _fromPopState) {
 
   clearSearch(true);
 
-  if (section === 'links')  _replayAnim('.link-row',   i => `${Math.min(i * 0.04, 0.5)}s`);
   if (section === 'about')  _replayAnim('#aboutMode .links-wrap > div > *', i => `${i * 0.07}s`, 'fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both');
 
   if (section === 'allvideos') { buildAllVideosGrid(); }
@@ -9243,7 +9027,7 @@ const _DRAWER_NAV_MAP = {
   allvideos: 'dAllVideos',
   archive:   'dArchive',
   songs: 'dSongs', content: 'dContent', live: 'dLive', external: 'dExternal', shorts: 'dShorts',
-  fantube: 'dFantube', links: 'dLinks', about: 'dAbout', bookmark: 'dBookmark',
+  fantube: 'dFantube', about: 'dAbout', bookmark: 'dBookmark',
   schedule: 'dSchedule', news: 'dNews',
 };
 
