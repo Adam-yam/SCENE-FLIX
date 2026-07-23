@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-23T03:00:48Z",
+  "updated": "2026-07-23T09:00:54Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -253,6 +253,14 @@
       "date": "2026-07-21",
       "time": "18:30",
       "title": "KT위즈 시구&시투",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-24",
+      "time": "16:00",
+      "title": "JUST MAKEUP IN TOKYO 2027",
       "detail": "",
       "type": "event",
       "source": "mnetplus"
