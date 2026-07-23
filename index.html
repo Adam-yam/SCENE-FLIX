@@ -2280,9 +2280,36 @@ header {
 .chart-header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .chart-header-title { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; color: var(--accent); text-transform: uppercase; }
 .chart-updated { font-size: 0.65rem; color: var(--muted); }
-.chart-platform-legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+.chart-platform-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 18px; }
 .chart-platform-chip { display: flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.02em; }
 .chart-platform-chip .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.chart-info-btn { position: relative; display: inline-flex; }
+.chart-info-btn .ico {
+  width: 18px; height: 18px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--muted); font-size: 0.62rem; font-weight: 700;
+  cursor: pointer; user-select: none; flex-shrink: 0;
+  font-family: var(--font-sans);
+  transition: color 0.15s cubic-bezier(0.4,0,0.2,1), background 0.15s cubic-bezier(0.4,0,0.2,1), border-color 0.15s cubic-bezier(0.4,0,0.2,1);
+}
+.chart-info-btn .ico:hover,
+.chart-info-btn.open .ico { color: var(--text); background: var(--card-h); border-color: var(--border-h); }
+.chart-info-pop {
+  position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
+  min-width: 220px; padding: 10px 12px;
+  background: var(--surf); border: 1px solid var(--border-h); border-radius: 10px;
+  box-shadow: var(--glass-shadow);
+  opacity: 0; visibility: hidden; transform: translateY(4px);
+  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1), transform 0.15s cubic-bezier(0.4,0,0.2,1), visibility 0.15s;
+}
+.chart-info-btn:hover .chart-info-pop,
+.chart-info-btn.open .chart-info-pop { opacity: 1; visibility: visible; transform: translateY(0); }
+.chart-info-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 3px 0; font-size: 0.66rem; }
+.chart-info-row + .chart-info-row { border-top: 1px solid var(--border); }
+.chart-info-plat { display: flex; align-items: center; gap: 6px; color: var(--text); font-weight: 600; white-space: nowrap; }
+.chart-info-plat .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.chart-info-name { color: var(--muted); white-space: nowrap; }
 .chart-list { display: flex; flex-direction: column; gap: 8px; }
 .chart-card { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; transition: background 0.2s cubic-bezier(0.4,0,0.2,1), border-color 0.2s cubic-bezier(0.4,0,0.2,1); contain: layout style; content-visibility: auto; contain-intrinsic-size: 0 88px; }
 .chart-card:hover { background: var(--card-h); border-color: var(--border-h); }
@@ -2446,12 +2473,12 @@ header {
     </button>
     <button class="drawer-item btn-base" id="dShorts" onclick="closeDrawer(); pickSection('shorts');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.553-2.276A1 1 0 0 1 21 8.723v6.554a1 1 0 0 1-1.447.894L15 14"/><rect x="2" y="6" width="13" height="12" rx="2"/></svg>
-      <span>Shorts</span><span class="shorts-beta">BETA</span>
+      <span>Shorts</span>
     </button>
     <div class="drawer-divider"></div>
     <button class="drawer-item btn-base" id="dChart" onclick="closeDrawer(); pickSection('chart');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-      <span data-i18n="tab_chart">차트</span>
+      <span data-i18n="tab_chart">차트</span><span class="shorts-beta">BETA</span>
     </button>
     <button class="drawer-item btn-base" id="dSchedule" onclick="closeDrawer(); pickSection('schedule');">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -2597,12 +2624,12 @@ header {
     </button>
     <button class="section-tab" id="secShorts" onclick="pickSection('shorts')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.553-2.276A1 1 0 0 1 21 8.723v6.554a1 1 0 0 1-1.447.894L15 14"/><rect x="2" y="6" width="13" height="12" rx="2"/></svg>
-      <span>Shorts</span><span class="shorts-beta">BETA</span>
+      <span>Shorts</span>
     </button>
     <div style="height:1px;background:var(--border);margin:4px 4px;"></div>
     <button class="section-tab" id="secChart" onclick="pickSection('chart')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-      <span data-i18n="tab_chart">차트</span>
+      <span data-i18n="tab_chart">차트</span><span class="shorts-beta">BETA</span>
     </button>
     <button class="section-tab" id="secSchedule" onclick="pickSection('schedule')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
@@ -2924,6 +2951,17 @@ header {
       <span class="chart-platform-chip"><span class="dot" style="background:var(--c-bugs);"></span>BUGS</span>
       <span class="chart-platform-chip"><span class="dot" style="background:var(--c-youtube-music);"></span>YOUTUBE MUSIC</span>
       <span class="chart-platform-chip"><span class="dot" style="background:var(--c-spotify);"></span>SPOTIFY</span>
+      <span class="chart-info-btn" id="chartInfoBtn">
+        <span class="ico" onclick="event.stopPropagation(); document.getElementById('chartInfoBtn').classList.toggle('open');">?</span>
+        <div class="chart-info-pop">
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-melon);"></span>MELON</span><span class="chart-info-name">실시간 차트</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-genie);"></span>GENIE</span><span class="chart-info-name">실시간 차트</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-vibe);"></span>VIBE</span><span class="chart-info-name">종합 차트</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-bugs);"></span>BUGS</span><span class="chart-info-name">실시간 차트</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-youtube-music);"></span>YOUTUBE MUSIC</span><span class="chart-info-name">인기 뮤직비디오 차트</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-spotify);"></span>SPOTIFY</span><span class="chart-info-name">한국 데일리 차트</span></div>
+        </div>
+      </span>
     </div>
     <div class="chart-list" id="chartList">
       <div class="chart-loading">
@@ -9319,6 +9357,13 @@ window.addEventListener('load', () => {
     _elNavIndicator.style.width = btnRect.width + 'px';
     _elNavIndicator.style.opacity = '1';
     requestAnimationFrame(() => { _elNavIndicator.style.transition = ''; });
+  }
+});
+
+document.addEventListener('click', function(e) {
+  const btn = document.getElementById('chartInfoBtn');
+  if (btn && btn.classList.contains('open') && !btn.contains(e.target)) {
+    btn.classList.remove('open');
   }
 });
 
