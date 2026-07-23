@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-24T02:05:33.383777+09:00",
+  "updatedAt": "2026-07-24T03:05:36.090873+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -97,7 +97,7 @@
       "ranks": {
         "melon": {
           "rank": 59,
-          "previousRank": 60
+          "previousRank": 59
         },
         "bugs": {
           "rank": 30,
