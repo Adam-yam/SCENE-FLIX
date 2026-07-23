@@ -1,10 +1,12 @@
 {
-  "updatedAt": "2026-07-23T19:03:08.055342+09:00",
+  "updatedAt": "2026-07-23T19:30:05.119978+09:00",
   "platforms": [
     "melon",
     "genie",
     "vibe",
-    "bugs"
+    "bugs",
+    "youtube_music",
+    "spotify"
   ],
   "songs": [
     {
@@ -21,6 +23,10 @@
           "previousRank": 2
         },
         "bugs": {
+          "rank": 2,
+          "previousRank": 2
+        },
+        "spotify": {
           "rank": 2,
           "previousRank": 2
         }
@@ -42,6 +48,10 @@
         "bugs": {
           "rank": 8,
           "previousRank": 8
+        },
+        "spotify": {
+          "rank": 3,
+          "previousRank": 3
         }
       }
     },
@@ -61,6 +71,10 @@
         "bugs": {
           "rank": 11,
           "previousRank": 11
+        },
+        "spotify": {
+          "rank": 12,
+          "previousRank": 12
         }
       }
     },
@@ -76,6 +90,21 @@
         "bugs": {
           "rank": 23,
           "previousRank": 33
+        },
+        "spotify": {
+          "rank": 21,
+          "previousRank": 22
+        }
+      }
+    },
+    {
+      "songName": "Pinball",
+      "artistName": "RESCENE",
+      "albumImageUrl": "",
+      "ranks": {
+        "spotify": {
+          "rank": 52,
+          "previousRank": 52
         }
       }
     }
