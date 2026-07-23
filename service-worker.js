@@ -1,4 +1,4 @@
-const CACHE = 'sceneflix-v5';
+const CACHE = 'sceneflix-v6';
 const SHELL = [
   './image/favicon.png',
   './image/icon-192.png',
@@ -28,7 +28,7 @@ self.addEventListener('fetch', e => {
   const url = new URL(e.request.url);
 
   if (url.pathname.endsWith('/') || url.pathname.endsWith('.html')) {
-    e.respondWith(fetch(e.request));
+    e.respondWith(fetch(e.request, { cache: 'no-store' }));
     return;
   }
 
@@ -38,16 +38,12 @@ self.addEventListener('fetch', e => {
   }
 
   e.respondWith(
-    caches.open(CACHE).then(cache =>
-      cache.match(e.request).then(cached => {
-        const fetchAndUpdate = fetch(e.request).then(res => {
-          if (res && res.status === 200 && e.request.method === 'GET') {
-            cache.put(e.request, res.clone());
-          }
-          return res;
-        });
-        return cached || fetchAndUpdate;
-      })
-    )
+    fetch(e.request, { cache: 'no-store' }).then(res => {
+      if (res && res.status === 200 && e.request.method === 'GET') {
+        const resClone = res.clone();
+        caches.open(CACHE).then(cache => cache.put(e.request, resClone));
+      }
+      return res;
+    }).catch(() => caches.match(e.request))
   );
 });
