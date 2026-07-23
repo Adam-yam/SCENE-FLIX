@@ -7,8 +7,11 @@ import re
 import sys
 import urllib.parse
 from datetime import datetime, timedelta, timezone
+from io import StringIO
 
+import pandas as pd
 import requests
+from ytmusicapi import YTMusic
 
 KST = timezone(timedelta(hours=9))
 
@@ -182,18 +185,102 @@ def fetch_bugs():
     return results
 
 
+# 유튜브뮤직은 로그인 없이는 스트리밍 순위(Top songs)를 못 받아오고
+# "인기 뮤직비디오" 차트만 열람 가능해서, 그걸로 대신 순위를 매김
+# (순위 변동 정보는 이 차트에 없어서 previousRank는 항상 None)
+def fetch_youtube_music():
+    try:
+        yt = YTMusic()
+        charts = yt.get_charts(country="KR")
+        items = charts.get("videos", {}).get("items", [])
+    except Exception as e:
+        print(f"[youtube_music] fetch failed: {e}", file=sys.stderr)
+        return []
+
+    results = []
+    for idx, item in enumerate(items, start=1):
+        artists = item.get("artists") or []
+        artist_name = ", ".join(a.get("name", "") for a in artists)
+        if not is_rescene(artist_name):
+            continue
+        thumbnails = item.get("thumbnails") or []
+        album_image = thumbnails[-1]["url"] if thumbnails else ""
+        results.append({
+            "songName": item.get("title", ""),
+            "artistName": artist_name,
+            "albumImageUrl": album_image,
+            "rank": idx,
+            "previousRank": None,
+        })
+    return results
+
+
+# 스포티파이는 공식 API에 차트 엔드포인트가 없어서, kworb.net이 매일 정리해두는
+# 한국 데일리 차트 표를 가져다 씀. 앨범 이미지가 없으니 다른 플랫폼에서 같은 곡이
+# 잡히면 그쪽 이미지를 병합 단계에서 대신 채워 넣게 됨
+def parse_previous_rank(rank, change):
+    change = (change or "").strip()
+    if change in ("", "=", "nan"):
+        return rank
+    if change in ("RE", "NEW"):
+        return None
+    try:
+        return rank - int(change)
+    except ValueError:
+        return None
+
+
+def fetch_spotify():
+    url = "https://kworb.net/spotify/country/kr_daily.html"
+    try:
+        r = requests.get(url, headers=COMMON_HEADERS, timeout=10)
+        r.raise_for_status()
+        tables = pd.read_html(StringIO(r.text))
+        df = tables[0]
+    except Exception as e:
+        print(f"[spotify] fetch failed: {e}", file=sys.stderr)
+        return []
+
+    pos_col, change_col, title_col = df.columns[0], df.columns[1], df.columns[2]
+
+    results = []
+    for _, row in df.iterrows():
+        cell = str(row[title_col])
+        if not is_rescene(cell):
+            continue
+        parts = cell.split(" - ", 1)
+        if len(parts) != 2:
+            continue
+        artist_name = parts[0].strip()
+        song_name = re.sub(r"\s*\(w/.*?\)\s*$", "", parts[1]).strip()
+        try:
+            rank = int(row[pos_col])
+        except (ValueError, TypeError):
+            continue
+        results.append({
+            "songName": song_name,
+            "artistName": artist_name,
+            "albumImageUrl": "",
+            "rank": rank,
+            "previousRank": parse_previous_rank(rank, str(row[change_col])),
+        })
+    return results
+
+
 PLATFORM_FETCHERS = {
     "melon": fetch_melon,
     "genie": fetch_genie,
     "vibe": fetch_vibe,
     "bugs": fetch_bugs,
+    "youtube_music": fetch_youtube_music,
+    "spotify": fetch_spotify,
 }
 
 
 def merge_platform_results(platform_results: dict) -> list:
     # 곡 제목 기준으로 플랫폼별 결과를 하나로 합침
     # 앨범 이미지는 먼저 찾은 플랫폼 것부터 사용 (melon > genie > vibe > bugs)
-    order = ["melon", "genie", "vibe", "bugs"]
+    order = ["melon", "genie", "vibe", "bugs", "youtube_music", "spotify"]
     merged = {}
 
     for platform in order:
