@@ -112,11 +112,20 @@ def fetch_genie():
 
 def fetch_vibe():
     url = "https://apis.naver.com/vibeWeb/musicapiweb/vibe/v1/chart/track/total?start=1&display=100"
-    headers = {**COMMON_HEADERS, "Referer": "https://vibe.naver.com/"}
+    headers = {
+        **COMMON_HEADERS,
+        "Referer": "https://vibe.naver.com/",
+        "Origin": "https://vibe.naver.com",
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
+    }
     try:
         r = requests.get(url, headers=headers, timeout=10)
         print(f"[vibe] status={r.status_code}", file=sys.stderr)
         r.raise_for_status()
+        if not r.text.strip():
+            print("[vibe] empty response body (likely blocked)", file=sys.stderr)
+            return []
         data = r.json()
         tracks = data.get("response", {}).get("result", {}).get("chart", {}).get("items", {}).get("tracks", [])
         print(f"[vibe] parsed track count={len(tracks)}", file=sys.stderr)
@@ -198,10 +207,9 @@ def fetch_youtube_music():
         yt = YTMusic()
         charts = yt.get_charts(country="KR")
         print(f"[youtube_music] top-level keys={list(charts.keys())}", file=sys.stderr)
-        items = charts.get("videos", {}).get("items", [])
+        videos = charts.get("videos", [])
+        items = videos.get("items", []) if isinstance(videos, dict) else videos
         print(f"[youtube_music] item count={len(items)}", file=sys.stderr)
-        if not items:
-            print(f"[youtube_music] videos block={json.dumps(charts.get('videos', {}))[:1000]}", file=sys.stderr)
     except Exception:
         import traceback
         traceback.print_exc(file=sys.stderr)
