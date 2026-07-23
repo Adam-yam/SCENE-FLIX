@@ -95,10 +95,12 @@ gtag('config', 'G-05C99P2DB9');
   --c-sched-notice:    #888888;
   --c-sched-anniv:     #b8a080;
 
-  --c-melon: #7ec488;
-  --c-genie: #6ba0d8;
-  --c-vibe:  #b593d8;
-  --c-bugs:  #d89a5c;
+  --c-melon: #00cd3c;
+  --c-genie: #0095ff;
+  --c-vibe:  #f7015c;
+  --c-bugs:  #f73b31;
+  --c-youtube-music: #f70031;
+  --c-spotify: #1ecf5f;
 
   --c-wonyi:  #04a06e;
   --c-minami: #2b99c4;
@@ -2920,6 +2922,8 @@ header {
       <span class="chart-platform-chip"><span class="dot" style="background:var(--c-genie);"></span>GENIE</span>
       <span class="chart-platform-chip"><span class="dot" style="background:var(--c-vibe);"></span>VIBE</span>
       <span class="chart-platform-chip"><span class="dot" style="background:var(--c-bugs);"></span>BUGS</span>
+      <span class="chart-platform-chip"><span class="dot" style="background:var(--c-youtube-music);"></span>YOUTUBE MUSIC</span>
+      <span class="chart-platform-chip"><span class="dot" style="background:var(--c-spotify);"></span>SPOTIFY</span>
     </div>
     <div class="chart-list" id="chartList">
       <div class="chart-loading">
@@ -8652,6 +8656,8 @@ const _CHART_PLATFORMS = [
   { key: 'genie', label: 'GENIE', color: 'var(--c-genie)' },
   { key: 'vibe',  label: 'VIBE',  color: 'var(--c-vibe)'  },
   { key: 'bugs',  label: 'BUGS',  color: 'var(--c-bugs)'  },
+  { key: 'youtube_music', label: 'YOUTUBE MUSIC', color: 'var(--c-youtube-music)' },
+  { key: 'spotify', label: 'SPOTIFY', color: 'var(--c-spotify)' },
 ];
 
 function _chartRankPillHtml(platform, rankInfo) {
