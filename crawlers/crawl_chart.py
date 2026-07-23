@@ -1,15 +1,5 @@
-"""
-RESCENE(리센느) 음원 차트 크롤러
-
-멜론 / 지니 / 바이브 / 벅스의 비공식 실시간(또는 일간) 차트 JSON 엔드포인트를 직접 호출해서
-리센느 곡만 골라내고, 곡 제목 기준으로 플랫폼별 순위를 하나로 합쳐 ./data/chart.json 으로 저장한다.
-
-주의:
-- 이 엔드포인트들은 각 플랫폼 앱/모바일웹이 내부적으로 쓰는 비공식 API라
-  헤더(User-Agent/Referer)나 응답 스키마가 예고 없이 바뀔 수 있다.
-- 403/변경 감지 시 예외를 삼키고 해당 플랫폼만 빈 리스트로 처리해서
-  다른 플랫폼 크롤링/기존 기능에 영향이 없게 한다.
-"""
+# 멜론/지니/바이브/벅스 실시간 차트에서 리센느 곡만 뽑아서 data/charts/chart.json에 저장
+# 각 플랫폼 API는 비공식이라 언제든 깨질 수 있음 -> 하나 실패해도 나머지는 정상 진행되게 처리
 
 import json
 import os
@@ -22,10 +12,9 @@ import requests
 
 KST = timezone(timedelta(hours=9))
 
-# 리센느로 판단할 아티스트명 키워드 (대소문자 무시, 부분일치)
 ARTIST_KEYWORDS = ["rescene", "리센느"]
 
-OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "data", "chart.json")
+OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "charts", "chart.json")
 
 COMMON_HEADERS = {
     "User-Agent": (
@@ -43,12 +32,12 @@ def is_rescene(artist_name: str) -> bool:
 
 
 def normalize_title(title: str) -> str:
-    """플랫폼마다 제목 표기가 조금씩 달라서(공백/특수문자 등) 매칭 키로 정규화."""
+    # 플랫폼마다 제목 표기가 조금씩 달라서 매칭용으로 공백/괄호 등을 정리
     if not title:
         return ""
     t = title.lower()
-    t = re.sub(r"\(.*?\)", "", t)          # 괄호 부가정보 제거 (feat. 등)
-    t = re.sub(r"[^\w가-힣]+", "", t)       # 공백/특수문자 제거
+    t = re.sub(r"\(.*?\)", "", t)
+    t = re.sub(r"[^\w가-힣]+", "", t)
     return t.strip()
 
 
@@ -61,9 +50,6 @@ def safe_url_decode(value):
         return str(value)
 
 
-# ---------------------------------------------------------------------------
-# 멜론
-# ---------------------------------------------------------------------------
 def fetch_melon():
     url = "https://m2.melon.com/m6/chart/ent/songChartList.json"
     headers = {**COMMON_HEADERS, "Referer": "https://www.melon.com/"}
@@ -94,9 +80,6 @@ def fetch_melon():
     return results
 
 
-# ---------------------------------------------------------------------------
-# 지니
-# ---------------------------------------------------------------------------
 def fetch_genie():
     url = "https://app.genie.co.kr/chart/j_RealTimeRankSongList.json?pg=1&pgsize=100"
     headers = {**COMMON_HEADERS, "Referer": "https://www.genie.co.kr/"}
@@ -124,9 +107,6 @@ def fetch_genie():
     return results
 
 
-# ---------------------------------------------------------------------------
-# 바이브
-# ---------------------------------------------------------------------------
 def fetch_vibe():
     url = "https://apis.naver.com/vibeWeb/musicapiweb/vibe/v1/chart/track/total?start=1&display=100"
     headers = {**COMMON_HEADERS, "Referer": "https://vibe.naver.com/"}
@@ -160,9 +140,6 @@ def fetch_vibe():
     return results
 
 
-# ---------------------------------------------------------------------------
-# 벅스
-# ---------------------------------------------------------------------------
 def fetch_bugs():
     url = "https://m.bugs.co.kr/api/getChartTrack"
     headers = {
@@ -214,12 +191,10 @@ PLATFORM_FETCHERS = {
 
 
 def merge_platform_results(platform_results: dict) -> list:
-    """
-    normalize_title(곡명) 기준으로 여러 플랫폼의 같은 곡을 한 행으로 병합.
-    앨범 이미지는 처음 발견된 값(플랫폼 우선순위: melon > genie > vibe > bugs)을 사용.
-    """
+    # 곡 제목 기준으로 플랫폼별 결과를 하나로 합침
+    # 앨범 이미지는 먼저 찾은 플랫폼 것부터 사용 (melon > genie > vibe > bugs)
     order = ["melon", "genie", "vibe", "bugs"]
-    merged = {}  # key -> song dict
+    merged = {}
 
     for platform in order:
         for entry in platform_results.get(platform, []):
@@ -241,7 +216,8 @@ def merge_platform_results(platform_results: dict) -> list:
             }
 
     songs = list(merged.values())
-    # 정렬 기준: 차트에 들어온 플랫폼 수가 많을수록, 그 다음 최고 순위가 높을수록 위로
+
+    # 차트에 걸린 플랫폼이 많은 곡 우선, 그다음 최고 순위가 높은 곡 우선
     def sort_key(song):
         ranks = [v["rank"] for v in song["ranks"].values() if v.get("rank") is not None]
         return (-len(ranks), min(ranks) if ranks else 9999)
