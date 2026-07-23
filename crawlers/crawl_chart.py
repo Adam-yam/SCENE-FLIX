@@ -115,11 +115,16 @@ def fetch_vibe():
     headers = {**COMMON_HEADERS, "Referer": "https://vibe.naver.com/"}
     try:
         r = requests.get(url, headers=headers, timeout=10)
+        print(f"[vibe] status={r.status_code}", file=sys.stderr)
         r.raise_for_status()
         data = r.json()
         tracks = data.get("response", {}).get("result", {}).get("chart", {}).get("items", {}).get("tracks", [])
-    except Exception as e:
-        print(f"[vibe] fetch failed: {e}", file=sys.stderr)
+        print(f"[vibe] parsed track count={len(tracks)}", file=sys.stderr)
+        if not tracks:
+            print(f"[vibe] response body={json.dumps(data)[:1000]}", file=sys.stderr)
+    except Exception:
+        import traceback
+        traceback.print_exc(file=sys.stderr)
         return []
 
     results = []
@@ -192,9 +197,14 @@ def fetch_youtube_music():
     try:
         yt = YTMusic()
         charts = yt.get_charts(country="KR")
+        print(f"[youtube_music] top-level keys={list(charts.keys())}", file=sys.stderr)
         items = charts.get("videos", {}).get("items", [])
-    except Exception as e:
-        print(f"[youtube_music] fetch failed: {e}", file=sys.stderr)
+        print(f"[youtube_music] item count={len(items)}", file=sys.stderr)
+        if not items:
+            print(f"[youtube_music] videos block={json.dumps(charts.get('videos', {}))[:1000]}", file=sys.stderr)
+    except Exception:
+        import traceback
+        traceback.print_exc(file=sys.stderr)
         return []
 
     results = []
