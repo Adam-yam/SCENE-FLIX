@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-23T21:05:32.353246+09:00",
+  "updatedAt": "2026-07-23T21:58:54.248739+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -43,7 +43,7 @@
         },
         "genie": {
           "rank": 7,
-          "previousRank": 9
+          "previousRank": 7
         },
         "bugs": {
           "rank": 10,
@@ -65,8 +65,8 @@
           "previousRank": 10
         },
         "genie": {
-          "rank": 34,
-          "previousRank": 39
+          "rank": 37,
+          "previousRank": 34
         },
         "bugs": {
           "rank": 11,
