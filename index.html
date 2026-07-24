@@ -2281,9 +2281,8 @@ header {
 .chart-header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .chart-header-title { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; color: var(--accent); text-transform: uppercase; }
 .chart-updated { font-size: 0.65rem; color: var(--muted); }
-.chart-platform-legend { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 18px; }
-.chart-platform-chip { display: flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.02em; }
-.chart-platform-chip .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.chart-platform-legend { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 18px; }
+.chart-update-notice { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.02em; }
 .chart-info-btn { position: relative; display: inline-flex; }
 .chart-info-btn .ico {
   width: 18px; height: 18px; border-radius: 50%;
@@ -2880,7 +2879,7 @@ header {
   <div class="schedule-wrap">
     <div class="sched-notice-top">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0;opacity:0.6;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <span>스케줄은 공식 채널 Mnet Plus 정보를 기반으로 표시됩니다. 또한 SCENE-FLIX 내의 스케줄은 12시간마다 갱신됩니다. 실시간 스케줄 확인은 Mnet Plus에서 가능합니다.</span>
+      <span>스케줄은 공식 채널 Mnet Plus 정보를 기반으로 표시됩니다. 또한 SCENE-FLIX 내의 스케줄은 6시간마다 갱신됩니다. 실시간 스케줄 확인은 Mnet Plus에서 가능합니다.</span>
     </div>
     <div class="sched-body">
       <div class="sched-cal-col">
@@ -2946,13 +2945,7 @@ header {
       <span class="chart-updated" id="chartUpdatedAt"></span>
     </div>
     <div class="chart-platform-legend">
-      <span class="chart-platform-chip"><span class="dot" style="background:var(--c-melon);"></span>MELON</span>
-      <span class="chart-platform-chip"><span class="dot" style="background:var(--c-genie);"></span>GENIE</span>
-      <span class="chart-platform-chip"><span class="dot" style="background:var(--c-vibe);"></span>VIBE</span>
-      <span class="chart-platform-chip"><span class="dot" style="background:var(--c-bugs);"></span>BUGS</span>
-      <span class="chart-platform-chip"><span class="dot" style="background:var(--c-flo);"></span>FLO</span>
-      <span class="chart-platform-chip"><span class="dot" style="background:var(--c-youtube-music);"></span>YOUTUBE MUSIC</span>
-      <span class="chart-platform-chip"><span class="dot" style="background:var(--c-spotify);"></span>SPOTIFY</span>
+      <span class="chart-update-notice">각 차트는 매시간 02분에 자동적으로 갱신됩니다.</span>
       <span class="chart-info-btn" id="chartInfoBtn">
         <span class="ico" onclick="event.stopPropagation(); document.getElementById('chartInfoBtn').classList.toggle('open');">?</span>
         <div class="chart-info-pop">
