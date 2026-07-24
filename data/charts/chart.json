@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-24T15:02:32.375598+09:00",
+  "updatedAt": "2026-07-24T16:02:33.374439+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,8 +28,8 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 2,
-          "previousRank": 3
+          "rank": 3,
+          "previousRank": 2
         },
         "flo": {
           "rank": 1,
@@ -63,8 +63,8 @@
           "previousRank": 6
         },
         "bugs": {
-          "rank": 9,
-          "previousRank": 12
+          "rank": 10,
+          "previousRank": 9
         },
         "flo": {
           "rank": 6,
@@ -90,8 +90,8 @@
           "previousRank": 10
         },
         "genie": {
-          "rank": 49,
-          "previousRank": 45
+          "rank": 46,
+          "previousRank": 49
         },
         "vibe": {
           "rank": 68,
@@ -99,7 +99,7 @@
         },
         "bugs": {
           "rank": 12,
-          "previousRank": 9
+          "previousRank": 12
         },
         "flo": {
           "rank": 8,
@@ -121,16 +121,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 47,
-          "previousRank": 48
+          "rank": 44,
+          "previousRank": 47
         },
         "bugs": {
-          "rank": 73,
-          "previousRank": 18
+          "rank": 27,
+          "previousRank": 73
         },
         "flo": {
-          "rank": 66,
-          "previousRank": 65
+          "rank": 65,
+          "previousRank": 66
         },
         "youtube_music": {
           "rank": 34,
@@ -144,9 +144,13 @@
     },
     {
       "songName": "Pinball",
-      "artistName": "RESCENE",
-      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/43/0b/4c/430b4c8e-3cb8-da27-648f-435ec3b391a6/8804775334160.jpg/600x600bb.jpg",
+      "artistName": "RESCENE (리센느)",
+      "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
+        "bugs": {
+          "rank": 96,
+          "previousRank": 102
+        },
         "youtube_music": {
           "rank": 37,
           "previousRank": 53
