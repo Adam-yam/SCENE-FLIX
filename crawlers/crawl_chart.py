@@ -198,147 +198,42 @@ def fetch_bugs():
     return results
 
 
-# 유튜브뮤직 공식 차트(charts.youtube.com)의 주간 TOP 트랙 차트를 로그인 없이 조회
-# musicAnalyticsSectionRenderer 응답 구조를 그대로 파싱하며, previousPosition이
-# 있어서 previousRank도 채울 수 있음
-# 여기서 쓰는 key는 개인이 발급받는 API 키가 아니라, charts.youtube.com 페이지
-# HTML 안에 공개적으로 박혀있는 내부(innertube) 키라서, 페이지를 한 번 먼저
-# 읽어서 자동으로 뽑아 쓴다 (브라우저가 접속할 때 하는 것과 동일)
-def fetch_youtube_music_charts_api_key():
-    url = "https://charts.youtube.com/charts/TopSongs/kr/weekly"
+# charts.youtube.com은 GitHub Actions IP를 차단해서(캡차/차단 페이지 응답)
+# 직접 크롤링이 불안정함 -> 스포티파이와 같은 방식으로, kworb.net이 정리해두는
+# 한국 유튜브 주간 차트 표를 대신 가져다 씀
+def fetch_youtube_music():
+    url = "https://kworb.net/youtube/insights/kr.html"
     try:
         r = requests.get(url, headers=COMMON_HEADERS, timeout=10)
         r.raise_for_status()
-        match = re.search(r'"INNERTUBE_API_KEY":"([^"]+)"', r.text)
-        if not match:
-            print("[youtube_music] INNERTUBE_API_KEY not found in page", file=sys.stderr)
-            return None
-        return match.group(1)
+        tables = pd.read_html(StringIO(r.text))
+        df = tables[0]
     except Exception as e:
-        print(f"[youtube_music] failed to fetch charts page: {e}", file=sys.stderr)
-        return None
-
-
-def fetch_youtube_music():
-    api_key = fetch_youtube_music_charts_api_key()
-    if not api_key:
+        print(f"[youtube_music] fetch failed: {e}", file=sys.stderr)
         return []
 
-    url = f"https://charts.youtube.com/youtubei/v1/browse?key={api_key}&prettyPrint=false"
-    headers = {
-        **COMMON_HEADERS,
-        "Content-Type": "application/json",
-        "Origin": "https://charts.youtube.com",
-        "Referer": "https://charts.youtube.com/charts/TopSongs/kr/weekly",
-    }
-    payload = {
-        "context": {
-            "client": {
-                "clientName": "WEB_MUSIC_ANALYTICS",
-                "clientVersion": "2.0",
-                "hl": "ko",
-                "gl": "KR",
-                "theme": "MUSIC",
-            },
-            "capabilities": {},
-            "request": {"internalExperimentFlags": []},
-        },
-        "browseId": "FEmusic_analytics_charts_home",
-        "query": (
-            "flags=MusicCharts__enable_apac_and_shorts_charts_expansion"
-            "&perspective=CHART_DETAILS"
-            "&chart_params_country_code=kr"
-            "&chart_params_chart_type=TRACKS"
-            "&chart_params_period_type=WEEKLY"
-        ),
-    }
-
-    try:
-        r = requests.post(url, headers=headers, json=payload, timeout=10)
-        r.raise_for_status()
-        data = r.json()
-        section_contents = data.get("contents", {}).get("sectionListRenderer", {}).get("contents", [])
-        track_types = section_contents[0]["musicAnalyticsSectionRenderer"]["content"]["trackTypes"]
-        track_views = track_types[0].get("trackViews", [])
-        print(f"[youtube_music] track count={len(track_views)}", file=sys.stderr)
-    except Exception:
-        import traceback
-        traceback.print_exc(file=sys.stderr)
-        return []
+    pos_col, change_col, title_col = df.columns[0], df.columns[1], df.columns[2]
 
     results = []
-    for track in track_views:
-        artists = track.get("artists") or []
-        artist_name = ", ".join(a.get("name", "") for a in artists)
-        if not is_rescene(artist_name):
+    for _, row in df.iterrows():
+        cell = str(row[title_col])
+        if not is_rescene(cell):
             continue
-        thumbnails = (track.get("thumbnail") or {}).get("thumbnails") or []
-        album_image = thumbnails[-1]["url"] if thumbnails else ""
-        metadata = track.get("chartEntryMetadata") or {}
-        results.append({
-            "songName": track.get("name", ""),
-            "artistName": artist_name,
-            "albumImageUrl": album_image,
-            "rank": metadata.get("currentPosition"),
-            "previousRank": metadata.get("previousPosition"),
-        })
-    return results
-    headers = {
-        **COMMON_HEADERS,
-        "Content-Type": "application/json",
-        "Origin": "https://charts.youtube.com",
-        "Referer": "https://charts.youtube.com/charts/TopSongs/kr/weekly",
-    }
-    payload = {
-        "context": {
-            "client": {
-                "clientName": "WEB_MUSIC_ANALYTICS",
-                "clientVersion": "2.0",
-                "hl": "ko",
-                "gl": "KR",
-                "theme": "MUSIC",
-            },
-            "capabilities": {},
-            "request": {"internalExperimentFlags": []},
-        },
-        "browseId": "FEmusic_analytics_charts_home",
-        "query": (
-            "flags=MusicCharts__enable_apac_and_shorts_charts_expansion"
-            "&perspective=CHART_DETAILS"
-            "&chart_params_country_code=kr"
-            "&chart_params_chart_type=TRACKS"
-            "&chart_params_period_type=WEEKLY"
-        ),
-    }
-
-    try:
-        r = requests.post(url, headers=headers, json=payload, timeout=10)
-        r.raise_for_status()
-        data = r.json()
-        section_contents = data.get("contents", {}).get("sectionListRenderer", {}).get("contents", [])
-        track_types = section_contents[0]["musicAnalyticsSectionRenderer"]["content"]["trackTypes"]
-        track_views = track_types[0].get("trackViews", [])
-        print(f"[youtube_music] track count={len(track_views)}", file=sys.stderr)
-    except Exception:
-        import traceback
-        traceback.print_exc(file=sys.stderr)
-        return []
-
-    results = []
-    for track in track_views:
-        artists = track.get("artists") or []
-        artist_name = ", ".join(a.get("name", "") for a in artists)
-        if not is_rescene(artist_name):
+        parts = cell.split(" - ", 1)
+        if len(parts) != 2:
             continue
-        thumbnails = (track.get("thumbnail") or {}).get("thumbnails") or []
-        album_image = thumbnails[-1]["url"] if thumbnails else ""
-        metadata = track.get("chartEntryMetadata") or {}
+        artist_name = parts[0].strip()
+        song_name = parts[1].strip()
+        try:
+            rank = int(row[pos_col])
+        except (ValueError, TypeError):
+            continue
         results.append({
-            "songName": track.get("name", ""),
+            "songName": song_name,
             "artistName": artist_name,
-            "albumImageUrl": album_image,
-            "rank": metadata.get("currentPosition"),
-            "previousRank": metadata.get("previousPosition"),
+            "albumImageUrl": "",
+            "rank": rank,
+            "previousRank": parse_previous_rank(rank, str(row[change_col])),
         })
     return results
 
@@ -441,6 +336,51 @@ def merge_platform_results(platform_results: dict) -> list:
     return songs
 
 
+# 바이브/스포티파이/유튜브뮤직(kworb)처럼 앨범 이미지를 안 주는 플랫폼에만 걸린
+# 곡은 표지가 비어있을 수 있음 -> 병합이 끝난 뒤 iTunes를 먼저 찾아보고,
+# 거기에 없으면 Deezer로 한 번 더 찾아서 채움 (둘 다 API 키 불필요)
+def fetch_album_image_itunes(artist_name, song_name):
+    try:
+        params = {"term": f"{artist_name} {song_name}", "entity": "song", "limit": 1}
+        r = requests.get("https://itunes.apple.com/search", params=params, timeout=10)
+        r.raise_for_status()
+        results = r.json().get("results", [])
+        if results:
+            artwork = results[0].get("artworkUrl100", "")
+            return artwork.replace("100x100bb", "600x600bb") if artwork else ""
+    except Exception as e:
+        print(f"[album_image] itunes lookup failed for {artist_name} - {song_name}: {e}", file=sys.stderr)
+    return ""
+
+
+def fetch_album_image_deezer(artist_name, song_name):
+    try:
+        params = {"q": f"{artist_name} {song_name}"}
+        r = requests.get("https://api.deezer.com/search", params=params, timeout=10)
+        r.raise_for_status()
+        data = r.json().get("data", [])
+        if data:
+            album = data[0].get("album", {}) or {}
+            return album.get("cover_xl") or album.get("cover_big") or ""
+    except Exception as e:
+        print(f"[album_image] deezer lookup failed for {artist_name} - {song_name}: {e}", file=sys.stderr)
+    return ""
+
+
+def fill_missing_album_images(songs):
+    for song in songs:
+        if song.get("albumImageUrl"):
+            continue
+        image = fetch_album_image_itunes(song["artistName"], song["songName"])
+        if not image:
+            image = fetch_album_image_deezer(song["artistName"], song["songName"])
+        if image:
+            song["albumImageUrl"] = image
+        else:
+            print(f"[album_image] no cover found for {song['artistName']} - {song['songName']}", file=sys.stderr)
+    return songs
+
+
 def main():
     platform_results = {}
     for name, fetcher in PLATFORM_FETCHERS.items():
@@ -452,6 +392,7 @@ def main():
             platform_results[name] = []
 
     songs = merge_platform_results(platform_results)
+    songs = fill_missing_album_images(songs)
 
     output = {
         "updatedAt": datetime.now(KST).isoformat(),
