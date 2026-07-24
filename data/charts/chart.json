@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-24T10:05:32.061298+09:00",
+  "updatedAt": "2026-07-24T11:05:37.994205+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -27,7 +27,7 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 2,
+          "rank": 4,
           "previousRank": 2
         },
         "spotify": {
@@ -43,19 +43,19 @@
       "ranks": {
         "melon": {
           "rank": 6,
-          "previousRank": 5
+          "previousRank": 6
         },
         "genie": {
-          "rank": 10,
-          "previousRank": 8
+          "rank": 12,
+          "previousRank": 10
         },
         "vibe": {
           "rank": 6,
           "previousRank": 6
         },
         "bugs": {
-          "rank": 9,
-          "previousRank": 8
+          "rank": 10,
+          "previousRank": 9
         },
         "spotify": {
           "rank": 3,
@@ -69,12 +69,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 9,
-          "previousRank": 8
+          "rank": 11,
+          "previousRank": 9
         },
         "genie": {
-          "rank": 34,
-          "previousRank": 24
+          "rank": 39,
+          "previousRank": 34
         },
         "vibe": {
           "rank": 68,
@@ -82,7 +82,7 @@
         },
         "bugs": {
           "rank": 11,
-          "previousRank": 12
+          "previousRank": 11
         },
         "spotify": {
           "rank": 12,
@@ -97,11 +97,11 @@
       "ranks": {
         "melon": {
           "rank": 42,
-          "previousRank": 38
+          "previousRank": 42
         },
         "bugs": {
-          "rank": 21,
-          "previousRank": 26
+          "rank": 33,
+          "previousRank": 21
         },
         "spotify": {
           "rank": 24,
@@ -111,13 +111,9 @@
     },
     {
       "songName": "Pinball",
-      "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
+      "artistName": "RESCENE",
+      "albumImageUrl": "",
       "ranks": {
-        "bugs": {
-          "rank": 90,
-          "previousRank": 70
-        },
         "spotify": {
           "rank": 63,
           "previousRank": 74
