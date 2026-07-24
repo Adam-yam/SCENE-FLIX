@@ -1,4 +1,4 @@
-# 멜론/지니/바이브/벅스 실시간 차트에서 리센느 곡만 뽑아서 data/charts/chart.json에 저장
+# 멜론/지니/바이브/벅스/플로 실시간 차트에서 리센느 곡만 뽑아서 data/charts/chart.json에 저장
 # 각 플랫폼 API는 비공식이라 언제든 깨질 수 있음 -> 하나 실패해도 나머지는 정상 진행되게 처리
 
 import json
@@ -198,7 +198,46 @@ def fetch_bugs():
     return results
 
 
-# charts.youtube.com은 GitHub Actions IP를 차단해서(캡차/차단 페이지 응답)
+# FLO 앱이 내부적으로 쓰는 비공식 차트 API. 로그인 필요 없고 앱 헤더만 있으면 됨
+def fetch_flo():
+    url = "https://api.music-flo.com/display/v1/browser/chart/1/list?mixYn=N"
+    headers = {
+        "User-Agent": "okhttp/4.9.2",
+        "x-gm-app-name": "FLO",
+        "x-gm-app-version": "",
+    }
+    try:
+        r = requests.get(url, headers=headers, timeout=10)
+        r.raise_for_status()
+        data = r.json()
+        tracks = data.get("data", {}).get("trackList", [])
+    except Exception as e:
+        print(f"[flo] fetch failed: {e}", file=sys.stderr)
+        return []
+
+    results = []
+    for index, item in enumerate(tracks):
+        artist_name = (item.get("representationArtist") or {}).get("name", "")
+        if not is_rescene(artist_name):
+            continue
+        rank = index + 1
+        rank_badge = ((item.get("rank") or {}).get("rankBadge"))
+        try:
+            previous_rank = int(rank_badge) + rank if rank_badge is not None else None
+        except (ValueError, TypeError):
+            previous_rank = None
+        img_list = (item.get("album") or {}).get("imgList") or []
+        image_url = img_list[0].get("url", "") if img_list else ""
+        if image_url:
+            image_url = re.sub(r"/dims/resize/(\d+)x(\d+)", "/dims/resize/600x600", image_url)
+        results.append({
+            "songName": item.get("name", ""),
+            "artistName": artist_name,
+            "albumImageUrl": image_url,
+            "rank": rank,
+            "previousRank": previous_rank,
+        })
+    return results
 # 직접 크롤링이 불안정함 -> 스포티파이와 같은 방식으로, kworb.net이 정리해두는
 # 한국 유튜브 주간 차트 표를 대신 가져다 씀
 def fetch_youtube_music():
@@ -295,6 +334,7 @@ PLATFORM_FETCHERS = {
     "genie": fetch_genie,
     "vibe": fetch_vibe,
     "bugs": fetch_bugs,
+    "flo": fetch_flo,
     "youtube_music": fetch_youtube_music,
     "spotify": fetch_spotify,
 }
@@ -302,8 +342,8 @@ PLATFORM_FETCHERS = {
 
 def merge_platform_results(platform_results: dict) -> list:
     # 곡 제목 기준으로 플랫폼별 결과를 하나로 합침
-    # 앨범 이미지는 먼저 찾은 플랫폼 것부터 사용 (melon > genie > vibe > bugs)
-    order = ["melon", "genie", "vibe", "bugs", "youtube_music", "spotify"]
+    # 앨범 이미지는 먼저 찾은 플랫폼 것부터 사용 (melon > genie > vibe > bugs > flo)
+    order = ["melon", "genie", "vibe", "bugs", "flo", "youtube_music", "spotify"]
     merged = {}
 
     for platform in order:
