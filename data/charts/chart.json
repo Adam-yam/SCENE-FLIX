@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-24T11:35:07.261640+09:00",
+  "updatedAt": "2026-07-24T11:49:48.647672+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -30,6 +30,10 @@
           "rank": 4,
           "previousRank": 2
         },
+        "youtube_music": {
+          "rank": 4,
+          "previousRank": 4
+        },
         "spotify": {
           "rank": 2,
           "previousRank": 2
@@ -56,6 +60,10 @@
         "bugs": {
           "rank": 10,
           "previousRank": 9
+        },
+        "youtube_music": {
+          "rank": 3,
+          "previousRank": -2
         },
         "spotify": {
           "rank": 3,
@@ -84,6 +92,10 @@
           "rank": 11,
           "previousRank": 11
         },
+        "youtube_music": {
+          "rank": 10,
+          "previousRank": 6
+        },
         "spotify": {
           "rank": 12,
           "previousRank": 12
@@ -103,6 +115,10 @@
           "rank": 33,
           "previousRank": 21
         },
+        "youtube_music": {
+          "rank": 34,
+          "previousRank": 30
+        },
         "spotify": {
           "rank": 24,
           "previousRank": 27
@@ -112,8 +128,12 @@
     {
       "songName": "Pinball",
       "artistName": "RESCENE",
-      "albumImageUrl": "",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/43/0b/4c/430b4c8e-3cb8-da27-648f-435ec3b391a6/8804775334160.jpg/600x600bb.jpg",
       "ranks": {
+        "youtube_music": {
+          "rank": 37,
+          "previousRank": 21
+        },
         "spotify": {
           "rank": 63,
           "previousRank": 74
@@ -123,10 +143,36 @@
     {
       "songName": "Glow Up",
       "artistName": "RESCENE",
-      "albumImageUrl": "",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
       "ranks": {
+        "youtube_music": {
+          "rank": 51,
+          "previousRank": 22
+        },
         "spotify": {
           "rank": 177,
+          "previousRank": null
+        }
+      }
+    },
+    {
+      "songName": "Bloom",
+      "artistName": "RESCENE",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/91/66/5a/91665a02-b5c1-8336-e973-88746539ab71/8804775401787.jpg/600x600bb.jpg",
+      "ranks": {
+        "youtube_music": {
+          "rank": 54,
+          "previousRank": 10
+        }
+      }
+    },
+    {
+      "songName": "Busy Boy",
+      "artistName": "RESCENE",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/04/87/f4/0487f448-50a5-59d6-fdb5-21e440d969f7/191953518954.jpg/600x600bb.jpg",
+      "ranks": {
+        "youtube_music": {
+          "rank": 70,
           "previousRank": null
         }
       }
