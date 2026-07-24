@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-24T09:05:36.155583+09:00",
+  "updatedAt": "2026-07-24T10:05:32.061298+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,7 +28,7 @@
         },
         "bugs": {
           "rank": 2,
-          "previousRank": 3
+          "previousRank": 2
         },
         "spotify": {
           "rank": 2,
@@ -42,20 +42,20 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 5,
+          "rank": 6,
           "previousRank": 5
         },
         "genie": {
-          "rank": 8,
-          "previousRank": 7
+          "rank": 10,
+          "previousRank": 8
         },
         "vibe": {
           "rank": 6,
           "previousRank": 6
         },
         "bugs": {
-          "rank": 8,
-          "previousRank": 9
+          "rank": 9,
+          "previousRank": 8
         },
         "spotify": {
           "rank": 3,
@@ -69,20 +69,20 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 8,
-          "previousRank": 10
+          "rank": 9,
+          "previousRank": 8
         },
         "genie": {
-          "rank": 24,
-          "previousRank": 34
+          "rank": 34,
+          "previousRank": 24
         },
         "vibe": {
           "rank": 68,
           "previousRank": 67
         },
         "bugs": {
-          "rank": 12,
-          "previousRank": 11
+          "rank": 11,
+          "previousRank": 12
         },
         "spotify": {
           "rank": 12,
@@ -96,12 +96,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 38,
-          "previousRank": 39
+          "rank": 42,
+          "previousRank": 38
         },
         "bugs": {
-          "rank": 26,
-          "previousRank": 22
+          "rank": 21,
+          "previousRank": 26
         },
         "spotify": {
           "rank": 24,
@@ -115,8 +115,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 70,
-          "previousRank": 101
+          "rank": 90,
+          "previousRank": 70
         },
         "spotify": {
           "rank": 63,
