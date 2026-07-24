@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-24T14:02:32.590114+09:00",
+  "updatedAt": "2026-07-24T15:02:32.375598+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,7 +28,7 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 3,
+          "rank": 2,
           "previousRank": 3
         },
         "flo": {
@@ -56,15 +56,15 @@
         },
         "genie": {
           "rank": 11,
-          "previousRank": 12
+          "previousRank": 11
         },
         "vibe": {
           "rank": 6,
           "previousRank": 6
         },
         "bugs": {
-          "rank": 12,
-          "previousRank": 10
+          "rank": 9,
+          "previousRank": 12
         },
         "flo": {
           "rank": 6,
@@ -87,19 +87,19 @@
       "ranks": {
         "melon": {
           "rank": 10,
-          "previousRank": 12
+          "previousRank": 10
         },
         "genie": {
-          "rank": 45,
-          "previousRank": 49
+          "rank": 49,
+          "previousRank": 45
         },
         "vibe": {
           "rank": 68,
           "previousRank": 67
         },
         "bugs": {
-          "rank": 9,
-          "previousRank": 8
+          "rank": 12,
+          "previousRank": 9
         },
         "flo": {
           "rank": 8,
@@ -121,15 +121,15 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 48,
-          "previousRank": 47
-        },
-        "bugs": {
-          "rank": 18,
+          "rank": 47,
           "previousRank": 48
         },
+        "bugs": {
+          "rank": 73,
+          "previousRank": 18
+        },
         "flo": {
-          "rank": 65,
+          "rank": 66,
           "previousRank": 65
         },
         "youtube_music": {
@@ -144,13 +144,9 @@
     },
     {
       "songName": "Pinball",
-      "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
+      "artistName": "RESCENE",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/43/0b/4c/430b4c8e-3cb8-da27-648f-435ec3b391a6/8804775334160.jpg/600x600bb.jpg",
       "ranks": {
-        "bugs": {
-          "rank": 92,
-          "previousRank": 102
-        },
         "youtube_music": {
           "rank": 37,
           "previousRank": 53
