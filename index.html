@@ -2296,20 +2296,20 @@ header {
 .chart-info-btn .ico:hover,
 .chart-info-btn.open .ico { color: var(--text); background: var(--card-h); border-color: var(--border-h); }
 .chart-info-pop {
-  position: absolute; top: calc(100% + 8px); left: 0; z-index: 20;
-  min-width: 220px; padding: 10px 12px;
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 20;
+  width: max-content; max-width: min(220px, calc(100vw - 40px)); padding: 10px 12px;
   background: var(--surf); border: 1px solid var(--border-h); border-radius: 10px;
-  box-shadow: var(--glass-shadow);
+  box-shadow: var(--glass-shadow); box-sizing: border-box;
   opacity: 0; visibility: hidden; transform: translateY(4px);
   transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1), transform 0.15s cubic-bezier(0.4,0,0.2,1), visibility 0.15s;
 }
 .chart-info-btn:hover .chart-info-pop,
 .chart-info-btn.open .chart-info-pop { opacity: 1; visibility: visible; transform: translateY(0); }
-.chart-info-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding: 3px 0; font-size: 0.66rem; }
+.chart-info-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 3px 0; font-size: 0.66rem; }
 .chart-info-row + .chart-info-row { border-top: 1px solid var(--border); }
-.chart-info-plat { display: flex; align-items: center; gap: 6px; color: var(--text); font-weight: 600; white-space: nowrap; }
+.chart-info-plat { display: flex; align-items: center; gap: 6px; color: var(--text); font-weight: 600; }
 .chart-info-plat .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
-.chart-info-name { color: var(--muted); white-space: nowrap; }
+.chart-info-name { color: var(--muted); text-align: right; }
 .chart-list { display: flex; flex-direction: column; gap: 8px; }
 .chart-card { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; transition: background 0.2s cubic-bezier(0.4,0,0.2,1), border-color 0.2s cubic-bezier(0.4,0,0.2,1); contain: layout style; content-visibility: auto; contain-intrinsic-size: 0 88px; }
 .chart-card:hover { background: var(--card-h); border-color: var(--border-h); }
@@ -2945,17 +2945,17 @@ header {
       <span class="chart-updated" id="chartUpdatedAt"></span>
     </div>
     <div class="chart-platform-legend">
-      <span class="chart-update-notice">각 차트는 매시간 02분에 자동적으로 갱신됩니다.</span>
+      <span class="chart-update-notice">각 차트는 매시간 02분에 갱신됩니다.</span>
       <span class="chart-info-btn" id="chartInfoBtn">
         <span class="ico" onclick="event.stopPropagation(); document.getElementById('chartInfoBtn').classList.toggle('open');">?</span>
         <div class="chart-info-pop">
           <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-melon);"></span>MELON</span><span class="chart-info-name">TOP 100</span></div>
-          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-genie);"></span>GENIE</span><span class="chart-info-name">TOP 200</span></div>
-          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-vibe);"></span>VIBE</span><span class="chart-info-name">오늘 TOP 100</span></div>
-          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-bugs);"></span>BUGS</span><span class="chart-info-name">실시간 차트</span></div>
-          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-flo);"></span>FLO</span><span class="chart-info-name">FLO 전체 연령 차트</span></div>
           <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-youtube-music);"></span>YOUTUBE MUSIC</span><span class="chart-info-name">주간 인기곡</span></div>
           <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-spotify);"></span>SPOTIFY</span><span class="chart-info-name">한국 데일리 차트</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-genie);"></span>GENIE</span><span class="chart-info-name">TOP 200</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-flo);"></span>FLO</span><span class="chart-info-name">FLO 전체 연령 차트</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-bugs);"></span>BUGS</span><span class="chart-info-name">실시간 차트</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-vibe);"></span>VIBE</span><span class="chart-info-name">오늘 TOP 100</span></div>
         </div>
       </span>
     </div>
@@ -8697,12 +8697,12 @@ function buildNewsGrid() {
 
 const _CHART_PLATFORMS = [
   { key: 'melon', label: 'MELON', color: 'var(--c-melon)' },
-  { key: 'genie', label: 'GENIE', color: 'var(--c-genie)' },
-  { key: 'vibe',  label: 'VIBE',  color: 'var(--c-vibe)'  },
-  { key: 'bugs',  label: 'BUGS',  color: 'var(--c-bugs)'  },
-  { key: 'flo',   label: 'FLO',   color: 'var(--c-flo)'   },
   { key: 'youtube_music', label: 'YT Music', color: 'var(--c-youtube-music)' },
   { key: 'spotify', label: 'SPOTIFY', color: 'var(--c-spotify)' },
+  { key: 'genie', label: 'GENIE', color: 'var(--c-genie)' },
+  { key: 'flo',   label: 'FLO',   color: 'var(--c-flo)'   },
+  { key: 'bugs',  label: 'BUGS',  color: 'var(--c-bugs)'  },
+  { key: 'vibe',  label: 'VIBE',  color: 'var(--c-vibe)'  },
 ];
 
 function _chartRankPillHtml(platform, rankInfo) {
