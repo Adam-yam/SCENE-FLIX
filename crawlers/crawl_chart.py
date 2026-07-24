@@ -1,6 +1,3 @@
-# 멜론/지니/바이브/벅스/플로 실시간 차트에서 리센느 곡만 뽑아서 data/charts/chart.json에 저장
-# 각 플랫폼 API는 비공식이라 언제든 깨질 수 있음 -> 하나 실패해도 나머지는 정상 진행되게 처리
-
 import json
 import os
 import re
@@ -287,7 +284,7 @@ def parse_previous_rank(rank, change):
     if change in ("RE", "NEW"):
         return None
     try:
-        return rank - int(change)
+        return rank + int(change)
     except ValueError:
         return None
 
