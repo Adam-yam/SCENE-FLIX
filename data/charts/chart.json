@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-26T03:00:52.663457+09:00",
+  "updatedAt": "2026-07-26T04:00:52.313246+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -102,7 +102,7 @@
           "previousRank": 13
         },
         "flo": {
-          "rank": 7,
+          "rank": 8,
           "previousRank": 7
         },
         "youtube_music": {
@@ -160,7 +160,7 @@
     {
       "songName": "Glow Up",
       "artistName": "RESCENE",
-      "albumImageUrl": "https://cdn-images.dzcdn.net/images/cover/8c48d8e7eb632b69b8cfe735eed4cf87/1000x1000-000000-80-0-0.jpg",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
       "ranks": {
         "youtube_music": {
           "rank": 51,
