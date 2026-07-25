@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-26T01:00:47.484826+09:00",
+  "updatedAt": "2026-07-26T02:00:51.288371+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,8 +28,8 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 5,
-          "previousRank": 3
+          "rank": 4,
+          "previousRank": 5
         },
         "flo": {
           "rank": 1,
@@ -63,8 +63,8 @@
           "previousRank": 6
         },
         "bugs": {
-          "rank": 7,
-          "previousRank": 11
+          "rank": 11,
+          "previousRank": 7
         },
         "flo": {
           "rank": 6,
@@ -98,8 +98,8 @@
           "previousRank": 50
         },
         "bugs": {
-          "rank": 13,
-          "previousRank": 14
+          "rank": 15,
+          "previousRank": 13
         },
         "flo": {
           "rank": 7,
@@ -126,11 +126,11 @@
         },
         "bugs": {
           "rank": 36,
-          "previousRank": 55
+          "previousRank": 36
         },
         "flo": {
-          "rank": 58,
-          "previousRank": 57
+          "rank": 65,
+          "previousRank": 58
         },
         "youtube_music": {
           "rank": 34,
@@ -144,13 +144,9 @@
     },
     {
       "songName": "Pinball",
-      "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
+      "artistName": "RESCENE",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/43/0b/4c/430b4c8e-3cb8-da27-648f-435ec3b391a6/8804775334160.jpg/600x600bb.jpg",
       "ranks": {
-        "bugs": {
-          "rank": 94,
-          "previousRank": 107
-        },
         "youtube_music": {
           "rank": 37,
           "previousRank": 53
