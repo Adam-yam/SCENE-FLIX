@@ -4939,9 +4939,10 @@ function openVideo(e, vid) {
 
   const webUrl = ytUrl(vid);
 
-  if (!_isMobile) {
-    window.open(webUrl, '_blank', 'noopener');
-  } else {
+  if (_isAndroid) {
+    const intentUrl = `intent://www.youtube.com/watch?v=${vid}#Intent;package=com.google.android.youtube;scheme=https;S.browser_fallback_url=${encodeURIComponent(webUrl)};end`;
+    window.location.href = intentUrl;
+  } else if (_isIOS) {
     const appUrl = `vnd.youtube://${vid}`;
     let left = false;
     let fallbackTimer = null;
@@ -4952,6 +4953,8 @@ function openVideo(e, vid) {
       window.removeEventListener('blur', onBlur);
       if (!left) window.open(webUrl, '_blank', 'noopener');
     }, 1200);
+  } else {
+    window.open(webUrl, '_blank', 'noopener');
   }
 
   try { localStorage.setItem('rescene-last-watched', vid); } catch {}
@@ -4969,6 +4972,8 @@ function restoreLastWatched() {
 const _META_CACHE_KEY = 'rescene-meta-v1';
 const _META_CACHE_TTL = 30 * 24 * 60 * 60 * 1000;
 const _isMobile = window.matchMedia('(max-width: 700px)').matches;
+const _isAndroid = /Android/i.test(navigator.userAgent);
+const _isIOS = /iPad|iPhone|iPod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 function _cardDelay(i, batchSize = Infinity) {
   return `${Math.min((i % batchSize) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
 }
