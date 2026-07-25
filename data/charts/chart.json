@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-25T21:00:51.033183+09:00",
+  "updatedAt": "2026-07-25T22:00:51.922668+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,8 +28,8 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 4,
-          "previousRank": 3
+          "rank": 3,
+          "previousRank": 4
         },
         "flo": {
           "rank": 1,
@@ -55,7 +55,7 @@
           "previousRank": 6
         },
         "genie": {
-          "rank": 10,
+          "rank": 9,
           "previousRank": 10
         },
         "vibe": {
@@ -63,8 +63,8 @@
           "previousRank": 6
         },
         "bugs": {
-          "rank": 12,
-          "previousRank": 10
+          "rank": 11,
+          "previousRank": 12
         },
         "flo": {
           "rank": 6,
@@ -86,20 +86,20 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 11,
-          "previousRank": 12
+          "rank": 10,
+          "previousRank": 11
         },
         "genie": {
-          "rank": 41,
-          "previousRank": 47
+          "rank": 50,
+          "previousRank": 41
         },
         "vibe": {
           "rank": 59,
           "previousRank": 50
         },
         "bugs": {
-          "rank": 14,
-          "previousRank": 13
+          "rank": 15,
+          "previousRank": 14
         },
         "flo": {
           "rank": 7,
@@ -121,12 +121,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 48,
-          "previousRank": 49
+          "rank": 46,
+          "previousRank": 48
         },
         "bugs": {
-          "rank": 43,
-          "previousRank": 48
+          "rank": 31,
+          "previousRank": 43
         },
         "flo": {
           "rank": 58,
