@@ -6509,17 +6509,17 @@ const FANTUBE_CHANNELS = [
 function buildFantubeCard(ch, idx, avatarUrl) {
   const delay = `${Math.min(idx * 0.04, 0.5)}s`;
   const avatarHtml = avatarUrl
-    ? `<img src="${avatarUrl}" alt="${ch.name}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'ftcard-avatar-placeholder\\'>▶</div>'">`
+    ? `<img src="${_escHtml(avatarUrl)}" alt="${_escHtml(ch.name)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'ftcard-avatar-placeholder\\'>▶</div>'">`
     : `<div class="ftcard-avatar-placeholder">▶</div>`;
-  return `<a class="ftcard" href="${ch.url}" target="_blank" rel="noopener" style="animation-delay:${delay}">
+  return `<a class="ftcard" href="${_escHtml(ch.url)}" target="_blank" rel="noopener" style="animation-delay:${delay}">
     <div class="ftcard-avatar-wrap">
       <div class="ftcard-avatar">${avatarHtml}</div>
       <span class="ftcard-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
     </div>
     <div class="ftcard-info">
-      <span class="ftcard-name">${ch.name}</span>
-      <span class="ftcard-handle">${ch.handle}</span>
-      ${ch.subtitle ? `<span class="ftcard-subtitle">${ch.subtitle}</span>` : ''}
+      <span class="ftcard-name">${_escHtml(ch.name)}</span>
+      <span class="ftcard-handle">${_escHtml(ch.handle)}</span>
+      ${ch.subtitle ? `<span class="ftcard-subtitle">${_escHtml(ch.subtitle)}</span>` : ''}
     </div>
   </a>`;
 }
@@ -6815,13 +6815,17 @@ function dateOnly(str) {
   return str ? str.split(' ')[0] : str;
 }
 
-function getItemSortKey(item) {
-  const full = DATE_MAP[item.vid] || item.date || (item.meta && item.meta.date) || '';
+function _dateStrToSortKey(full) {
   if (!full) return 0;
   const [datePart, timePart] = full.split(' ');
   const d = (datePart || '').replace(/\D/g, '').padEnd(8, '0').slice(0, 8);
   const t = (timePart || '').replace(/\D/g, '').padEnd(4, '0').slice(0, 4);
   return parseInt(d + t, 10) || 0;
+}
+
+function getItemSortKey(item) {
+  const full = DATE_MAP[item.vid] || item.date || (item.meta && item.meta.date) || '';
+  return _dateStrToSortKey(full);
 }
 
 function sortItemsByDate(items, dir) {
@@ -6841,10 +6845,7 @@ function sortLiveItemsByDate(items, dir) {
 function getLiveSortKey(item) {
   const d = item.date || '';
   const fullDt = /^\d{4}\.\d{2}\.\d{2}/.test(d) ? d : liveDateToFull(item);
-  const [datePart, timePart] = fullDt.split(' ');
-  const dk = (datePart || '').replace(/\D/g, '').padEnd(8, '0').slice(0, 8);
-  const tk = (timePart || '').replace(/\D/g, '').padEnd(4, '0').slice(0, 4);
-  return parseInt(dk + tk, 10) || 0;
+  return _dateStrToSortKey(fullDt);
 }
 
 function liveDateToFull(item) {
@@ -6871,8 +6872,8 @@ function formatLiveDateTime(item) {
   return formatLiveDate(item);
 }
 
-function _getMemberLabel(t, m) {
-  const map = {
+function _buildMemberLabelMap(t) {
+  return {
     '원이':  t.filter_member_woni   || '원이',
     '리브':  t.filter_member_liv    || '리브',
     '미나미':t.filter_member_minami || '미나미',
@@ -6880,6 +6881,10 @@ function _getMemberLabel(t, m) {
     '제나':  t.filter_member_zena   || '제나',
     '전원':  t.filter_all_members   || '전원',
   };
+}
+
+function _getMemberLabel(t, m) {
+  const map = _buildMemberLabelMap(t);
   return map[m] || m;
 }
 
@@ -6889,7 +6894,7 @@ function buildLiveCard(item, delay) {
     `<span class="ctag ${MEMBER_CLASS[m] || ''}">${_getMemberLabel(t, m)}</span>`
   ).join('');
   const titleHtml = item.title
-    ? `<div class="csong-multi" id="lvc-title-${item.vid}">${item.title}</div>`
+    ? `<div class="csong-multi" id="lvc-title-${item.vid}">${_escHtml(item.title)}</div>`
     : `<div class="csong-multi" id="lvc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
   const lmClass = getLiveCardClass(item.members);
   const liveDate = formatLiveDateTime(item);
@@ -7355,14 +7360,7 @@ function _buildAvSortedList() {
   const allVids = buildUnifiedVideoList();
   const seen = new Set();
   const unique = allVids.filter(i => { if (seen.has(i.vid)) return false; seen.add(i.vid); return true; });
-  const dateOf = item => {
-    const full = DATE_MAP[item.vid] || (item.meta && item.meta.date) || '';
-    if (!full) return 0;
-    const [datePart, timePart] = full.split(' ');
-    const d = (datePart || '').replace(/\D/g, '').padEnd(8, '0').slice(0, 8);
-    const t = (timePart || '').replace(/\D/g, '').padEnd(4, '0').slice(0, 4);
-    return parseInt(d + t, 10) || 0;
-  };
+  const dateOf = item => _dateStrToSortKey(DATE_MAP[item.vid] || (item.meta && item.meta.date) || '');
   return unique
     .map(item => ({ item, key: dateOf(item) }))
     .sort((a, b) => curSort === 'oldest' ? a.key - b.key : b.key - a.key)
@@ -7386,7 +7384,7 @@ function _avAppendNextBatch(grid) {
     }
   });
   const _avT  = getCurrentT();
-  const _avML = { '원이': _getMemberLabel(_avT,'원이'), '리브': _getMemberLabel(_avT,'리브'), '미나미': _getMemberLabel(_avT,'미나미'), '메이': _getMemberLabel(_avT,'메이'), '제나': _getMemberLabel(_avT,'제나'), '전원': _getMemberLabel(_avT,'전원') };
+  const _avML = _buildMemberLabelMap(_avT);
   const wrapper = document.createElement('div');
   wrapper.innerHTML = batch.map((item, i) => {
     const delay = _cardDelay(i, AV_PAGE_SIZE);
@@ -7532,7 +7530,7 @@ function _renderArchiveGrid(dateMap, year, mo) {
   });
 
   const _arT  = getCurrentT();
-  const _arML = { '원이': _getMemberLabel(_arT,'원이'), '리브': _getMemberLabel(_arT,'리브'), '미나미': _getMemberLabel(_arT,'미나미'), '메이': _getMemberLabel(_arT,'메이'), '제나': _getMemberLabel(_arT,'제나'), '전원': _getMemberLabel(_arT,'전원') };
+  const _arML = _buildMemberLabelMap(_arT);
 
   if (!items.length) {
     grid.innerHTML = `<div class="empty"><div class="ico">📅</div><p>이 기간에 업로드된 영상이 없습니다.</p></div>`;
@@ -8466,12 +8464,20 @@ function injectAnnivEvents() {
 
 const _HOUR_KEY = (function() { const d = new Date(); return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}${String(d.getHours()).padStart(2,'0')}`; })();
 
+function _fetchJson(path) {
+  return fetch(path + '?_=' + _HOUR_KEY).then(function(r) {
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    return r.json();
+  });
+}
+
+function _formatUpdatedAt(d, suffix) {
+  const pad = function(n) { return String(n).padStart(2,'0'); };
+  return d.getFullYear()+'.'+pad(d.getMonth()+1)+'.'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes())+' KST'+suffix;
+}
+
 (function loadScheduleJson() {
-  fetch('./data/schedule.json?_=' + _HOUR_KEY)
-    .then(function(r) {
-      if (!r.ok) throw new Error('HTTP ' + r.status);
-      return r.json();
-    })
+  _fetchJson('./data/schedule.json')
     .then(function(data) {
       _baseScheduleData = (data.events || []).map(function(ev) {
         return {
@@ -8500,17 +8506,14 @@ let NEWS_DATA = [];
 let _newsLoaded = false;
 
 (function loadNewsJson() {
-  fetch('./data/news.json?_=' + _HOUR_KEY)
-    .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  _fetchJson('./data/news.json')
     .then(function(data) {
       NEWS_DATA = data.articles || [];
       _newsLoaded = true;
-      var upEl = document.getElementById('newsUpdatedAt');
+      const upEl = document.getElementById('newsUpdatedAt');
       if (upEl && data.updated) {
         try {
-          var d = new Date(data.updated);
-          var pad = function(n) { return String(n).padStart(2,'0'); };
-          upEl.textContent = d.getFullYear()+'.'+pad(d.getMonth()+1)+'.'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes())+' KST 기준';
+          upEl.textContent = _formatUpdatedAt(new Date(data.updated), ' 기준');
         } catch(e) { upEl.textContent = data.updated; }
       }
       if (curSection === 'news') buildNewsGrid();
@@ -8522,18 +8525,15 @@ let CHART_DATA = null;
 let _chartLoaded = false;
 
 (function loadChartJson() {
-  fetch('./data/charts/chart.json?_=' + _HOUR_KEY)
-    .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  _fetchJson('./data/charts/chart.json')
     .then(function(data) {
       CHART_DATA = data;
       _chartLoaded = true;
-      var upEl = document.getElementById('chartUpdatedAt');
+      const upEl = document.getElementById('chartUpdatedAt');
       if (upEl && data.updatedAt) {
         try {
-          var d = new Date(data.updatedAt);
-          var pad = function(n) { return String(n).padStart(2,'0'); };
-          var suffix = (getCurrentT().chart_updated_suffix || ' 기준');
-          upEl.textContent = d.getFullYear()+'.'+pad(d.getMonth()+1)+'.'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes())+' KST'+suffix;
+          const suffix = (getCurrentT().chart_updated_suffix || ' 기준');
+          upEl.textContent = _formatUpdatedAt(new Date(data.updatedAt), suffix);
         } catch(e) { upEl.textContent = data.updatedAt; }
       }
       if (curSection === 'chart') buildChartGrid();
@@ -8555,14 +8555,12 @@ const _SHORTS_CHANNEL_LABEL = {};
   const keys = btns.map(b => b.getAttribute('data-sc'));
   btns.forEach(b => { _SHORTS_CHANNEL_LABEL[b.getAttribute('data-sc')] = b.textContent.trim(); });
 
-  const legacyPromise = fetch('./data/shorts.json?_=' + _HOUR_KEY)
-    .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+  const legacyPromise = _fetchJson('./data/shorts.json')
     .then(function(data) { return data.items || []; })
     .catch(function() { return []; });
 
   const extraPromises = keys.map(function(key) {
-    return fetch('./data/' + key + '-shorts.json?_=' + _HOUR_KEY)
-      .then(function(r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    return _fetchJson('./data/' + key + '-shorts.json')
       .then(function(data) { return (data.items || []).map(function(it) { return Object.assign({}, it, { channel: it.channel || key }); }); })
       .catch(function() { return []; });
   });
@@ -9041,7 +9039,7 @@ function renderSchedList() {
         <div class="sched-item-body">
           <div class="sched-item-title">${_escHtml(ev.title)}</div>
           <div class="sched-item-meta">
-            <span class="sched-item-type-tag" style="${tagStyle}">${tl}</span>
+            <span class="sched-item-type-tag" style="${tagStyle}">${_escHtml(tl)}</span>
             ${timeTag}
             ${ev.note ? `<span>${_escHtml(ev.note)}</span>` : ''}
           </div>
@@ -9131,7 +9129,7 @@ buildSongNav();
           '<div class="chart-ch-item"><span class="chart-ch-name">· ' + ch.label + '</span><span class="chart-ch-count">' + ch.count + '개</span></div>'
         ).join('');
         return '<div class="chart-cat-item">'
-          + '<div class="chart-cat-toggle" onclick="(function(el){var c=document.getElementById(\'' + cid + '\');var open=c.style.display!==\'none\';c.style.display=open?\'none\':\'block\';el.querySelector(\'.chart-cat-arrow\').style.transform=open?\'rotate(0deg)\':\'rotate(90deg)\'})(this)">'
+          + '<div class="chart-cat-toggle" onclick="(function(el){const c=document.getElementById(\'' + cid + '\');const open=c.style.display!==\'none\';c.style.display=open?\'none\':\'block\';el.querySelector(\'.chart-cat-arrow\').style.transform=open?\'rotate(0deg)\':\'rotate(90deg)\'})(this)">'
           + '<span class="chart-cat-arrow">▶</span>'
           + '<span class="chart-cat-label">' + s.label + '</span>'
           + '<span class="chart-cat-count">' + s.count + '개 · ' + sp + '%</span>'
