@@ -266,6 +266,33 @@ gtag('config', 'G-05C99P2DB9');
 .bm-empty small,
 .search-empty small { font-size: 0.7rem; opacity: 0.6; }
 
+.bm-toolbar .search-bar-inner { gap: 10px; }
+.bm-playlist-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  border: none;
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-sans);
+  font-weight: 600;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 30px;
+  box-sizing: border-box;
+  line-height: 1;
+  transition: opacity 0.2s;
+}
+.bm-playlist-btn:hover { opacity: 0.85; }
+.bm-playlist-note {
+  font-size: 0.68rem;
+  color: var(--muted);
+}
+
 mark.sh {
   background: rgba(255, 210, 80, 0.28);
   color: #ffe799;
@@ -2677,6 +2704,9 @@ header {
 <div class="search-bar" id="searchBar" style="display:none;">
   <div class="search-bar-inner">
     <div class="sort-btns">
+      <button class="sort-btn" id="sortAdded" onclick="setSort('added')" style="display:none;">
+        추가한 순
+      </button>
       <button class="sort-btn active" id="sortNewest" onclick="setSort('newest')">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
         <span data-i18n="sort_newest">최신순</span>
@@ -6200,6 +6230,7 @@ const _elBmCount           = document.getElementById('bmCount');
 const _elDrawerBmCount     = document.getElementById('drawerBmCount');
 const _elSortNewest        = document.getElementById('sortNewest');
 const _elSortOldest        = document.getElementById('sortOldest');
+const _elSortAdded         = document.getElementById('sortAdded');
 const _elSearchClear       = document.getElementById('searchClear');
 const _elSearchInput       = document.getElementById('searchInput');
 const _elSongNav           = document.getElementById('songNav');
@@ -7006,6 +7037,7 @@ function buildLiveGrid() {
 }
 
 let BOOKMARKS = new Set();
+let curBmSort = 'added';
 try {
   const saved = localStorage.getItem('rescene-bookmarks');
   if (saved) BOOKMARKS = new Set(JSON.parse(saved));
@@ -7106,10 +7138,37 @@ function updateBookmarkCounts() {
   if (_elDrawerBmCount) _elDrawerBmCount.textContent = cnt > 0 ? String(cnt) : '';
 }
 
+function _getBookmarkedItems(sort) {
+  sort = sort || curBmSort;
+  const seenVids = new Set();
+  const items = buildUnifiedVideoList().filter(i => BOOKMARKS.has(i.vid) && !seenVids.has(i.vid) && seenVids.add(i.vid));
+
+  if (sort === 'added') {
+    const order = [...BOOKMARKS];
+    const rank = new Map(order.map((vid, idx) => [vid, idx]));
+    return items.sort((a, b) => (rank.get(a.vid) ?? 0) - (rank.get(b.vid) ?? 0));
+  }
+
+  const dateOf = item => _dateStrToSortKey(DATE_MAP[item.vid] || (item.meta && item.meta.date) || '');
+  return items.sort((a, b) => sort === 'oldest' ? dateOf(a) - dateOf(b) : dateOf(b) - dateOf(a));
+}
+
+const BOOKMARK_PLAYLIST_LIMIT = 50;
+
+function playBookmarksAsPlaylist() {
+  const ids = _getBookmarkedItems(curBmSort).slice(0, BOOKMARK_PLAYLIST_LIMIT).map(i => i.vid);
+  if (!ids.length) return;
+  const url = 'https://www.youtube.com/watch_videos?video_ids=' + ids.join(',');
+  window.open(url, '_blank', 'noopener');
+}
+
 function buildBookmarkGrid() {
   if (!_elGrid) return;
 
+  const bmMode = document.getElementById('bookmarkMode');
+
   if (!BOOKMARKS.size) {
+    if (bmMode) bmMode.innerHTML = '';
     const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
     const hint = isTouchDevice
       ? '카드의 ★ 버튼을 눌러 즐겨찾기를 추가하세요.'
@@ -7122,8 +7181,21 @@ function buildBookmarkGrid() {
     return;
   }
 
-  const seenVids = new Set();
-  const unique = buildUnifiedVideoList().filter(i => BOOKMARKS.has(i.vid) && !seenVids.has(i.vid) && seenVids.add(i.vid));
+  const unique = _getBookmarkedItems(curBmSort);
+
+  if (bmMode) {
+    const total = unique.length;
+    const capped = total > BOOKMARK_PLAYLIST_LIMIT;
+    bmMode.innerHTML = `<div class="search-bar bm-toolbar">
+      <div class="search-bar-inner">
+        <button class="bm-playlist-btn" onclick="playBookmarksAsPlaylist()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          재생목록으로 재생
+        </button>
+        ${capped ? `<span class="bm-playlist-note">최대 ${BOOKMARK_PLAYLIST_LIMIT}개까지 재생돼요 (총 ${total}개 중 앞 ${BOOKMARK_PLAYLIST_LIMIT}개)</span>` : ''}
+      </div>
+    </div>`;
+  }
 
   _elGrid.innerHTML = unique.map((item, idx) => {
     const delay = `${Math.min(idx * (_isMobile ? 0.015 : 0.03), _isMobile ? 0.2 : 0.4)}s`;
@@ -7899,6 +7971,18 @@ function pickSection(section, _fromPopState) {
   const isSearchable = _PICK_SEARCHABLE.includes(section);
   _elSearchBar.style.display = isSearchable ? '' : 'none';
 
+  if (section === 'bookmark') {
+    _elSortAdded.style.display = '';
+    _elSortAdded.classList.toggle('active', curBmSort === 'added');
+    _elSortNewest.classList.toggle('active', curBmSort === 'newest');
+    _elSortOldest.classList.toggle('active', curBmSort === 'oldest');
+  } else {
+    _elSortAdded.style.display = 'none';
+    _elSortAdded.classList.remove('active');
+    _elSortNewest.classList.toggle('active', curSort === 'newest');
+    _elSortOldest.classList.toggle('active', curSort === 'oldest');
+  }
+
   clearSearch(true);
 
   if (section === 'about')  _replayAnim('#aboutMode .links-wrap > div > *', i => `${i * 0.07}s`, 'fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both');
@@ -8080,6 +8164,14 @@ function _rebuildCurrentGrid() {
 }
 
 function setSort(dir) {
+  if (curSection === 'bookmark') {
+    curBmSort = dir;
+    _elSortAdded.classList.toggle('active', dir === 'added');
+    _elSortNewest.classList.toggle('active', dir === 'newest');
+    _elSortOldest.classList.toggle('active', dir === 'oldest');
+    buildBookmarkGrid();
+    return;
+  }
   curSort = dir;
   _elSortNewest.classList.toggle('active', dir === 'newest');
   _elSortOldest.classList.toggle('active', dir === 'oldest');
