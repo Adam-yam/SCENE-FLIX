@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-25T09:05:33Z",
+  "updated": "2026-07-25T15:05:28Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -231,6 +231,14 @@
       "title": "[Pretty Girl] 대면 팬사인회 by PlusChat",
       "detail": "",
       "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-19",
+      "time": "09:05",
+      "title": "SBS <인기가요> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
       "source": "mnetplus"
     },
     {
