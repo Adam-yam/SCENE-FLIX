@@ -7163,8 +7163,26 @@ const BOOKMARK_PLAYLIST_LIMIT = 50;
 function playBookmarksAsPlaylist() {
   const ids = _getBookmarkedItems(curBmSort).slice(0, BOOKMARK_PLAYLIST_LIMIT).map(i => i.vid);
   if (!ids.length) return;
-  const url = 'https://www.youtube.com/watch_videos?video_ids=' + ids.join(',');
-  window.open(url, '_blank', 'noopener');
+  const videoIds = ids.join(',');
+  const webUrl = 'https://www.youtube.com/watch_videos?video_ids=' + videoIds;
+  const ua = navigator.userAgent;
+  const isAndroid = /Android/i.test(ua);
+  const isIOS = /iPhone|iPad|iPod/i.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+  if (isAndroid) {
+    const intentUrl = 'intent://www.youtube.com/watch_videos?video_ids=' + videoIds
+      + '#Intent;scheme=https;package=com.google.android.youtube;S.browser_fallback_url='
+      + encodeURIComponent(webUrl) + ';end';
+    window.location.href = intentUrl;
+    return;
+  }
+
+  if (isIOS) {
+    window.location.href = webUrl;
+    return;
+  }
+
+  window.open(webUrl, '_blank', 'noopener');
 }
 
 function buildBookmarkGrid() {
