@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-26T02:00:51.288371+09:00",
+  "updatedAt": "2026-07-26T03:00:52.663457+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -110,8 +110,8 @@
           "previousRank": 14
         },
         "spotify": {
-          "rank": 13,
-          "previousRank": 12
+          "rank": 14,
+          "previousRank": 13
         }
       }
     },
@@ -130,15 +130,15 @@
         },
         "flo": {
           "rank": 65,
-          "previousRank": 58
+          "previousRank": 65
         },
         "youtube_music": {
           "rank": 34,
           "previousRank": 38
         },
         "spotify": {
-          "rank": 21,
-          "previousRank": 24
+          "rank": 27,
+          "previousRank": 21
         }
       }
     },
@@ -152,23 +152,23 @@
           "previousRank": 53
         },
         "spotify": {
-          "rank": 62,
-          "previousRank": 63
+          "rank": 64,
+          "previousRank": 62
         }
       }
     },
     {
       "songName": "Glow Up",
       "artistName": "RESCENE",
-      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
+      "albumImageUrl": "https://cdn-images.dzcdn.net/images/cover/8c48d8e7eb632b69b8cfe735eed4cf87/1000x1000-000000-80-0-0.jpg",
       "ranks": {
         "youtube_music": {
           "rank": 51,
           "previousRank": 80
         },
         "spotify": {
-          "rank": 168,
-          "previousRank": 177
+          "rank": 182,
+          "previousRank": 168
         }
       }
     },
