@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-26T20:00:46.053444+09:00",
+  "updatedAt": "2026-07-26T21:00:48.347507+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,7 +28,7 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 1,
+          "rank": 2,
           "previousRank": 2
         },
         "flo": {
@@ -36,7 +36,7 @@
           "previousRank": 1
         },
         "youtube_music": {
-          "rank": 4,
+          "rank": 1,
           "previousRank": 4
         },
         "spotify": {
@@ -56,23 +56,23 @@
         },
         "genie": {
           "rank": 8,
-          "previousRank": 9
+          "previousRank": 8
         },
         "vibe": {
           "rank": 6,
           "previousRank": 6
         },
         "bugs": {
-          "rank": 6,
-          "previousRank": 6
+          "rank": 10,
+          "previousRank": 8
         },
         "flo": {
           "rank": 6,
           "previousRank": 6
         },
         "youtube_music": {
-          "rank": 3,
-          "previousRank": 8
+          "rank": 4,
+          "previousRank": 3
         },
         "spotify": {
           "rank": 3,
@@ -86,28 +86,28 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 12,
+          "rank": 10,
           "previousRank": 12
         },
         "genie": {
-          "rank": 39,
-          "previousRank": 40
+          "rank": 43,
+          "previousRank": 39
         },
         "vibe": {
           "rank": 60,
           "previousRank": 61
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 10
+          "rank": 11,
+          "previousRank": 12
         },
         "flo": {
           "rank": 8,
           "previousRank": 8
         },
         "youtube_music": {
-          "rank": 10,
-          "previousRank": 14
+          "rank": 9,
+          "previousRank": 10
         },
         "spotify": {
           "rank": 14,
@@ -121,20 +121,20 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 46,
-          "previousRank": 44
+          "rank": 40,
+          "previousRank": 46
         },
         "bugs": {
           "rank": 36,
-          "previousRank": 36
+          "previousRank": 34
         },
         "flo": {
           "rank": 68,
           "previousRank": 68
         },
         "youtube_music": {
-          "rank": 34,
-          "previousRank": 38
+          "rank": 35,
+          "previousRank": 34
         },
         "spotify": {
           "rank": 27,
@@ -148,8 +148,8 @@
       "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/43/0b/4c/430b4c8e-3cb8-da27-648f-435ec3b391a6/8804775334160.jpg/600x600bb.jpg",
       "ranks": {
         "youtube_music": {
-          "rank": 37,
-          "previousRank": 53
+          "rank": 33,
+          "previousRank": 37
         },
         "spotify": {
           "rank": 64,
@@ -163,8 +163,8 @@
       "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
       "ranks": {
         "youtube_music": {
-          "rank": 51,
-          "previousRank": 80
+          "rank": 52,
+          "previousRank": 51
         },
         "spotify": {
           "rank": 182,
@@ -178,8 +178,8 @@
       "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/91/66/5a/91665a02-b5c1-8336-e973-88746539ab71/8804775401787.jpg/600x600bb.jpg",
       "ranks": {
         "youtube_music": {
-          "rank": 54,
-          "previousRank": 98
+          "rank": 60,
+          "previousRank": 54
         }
       }
     },
@@ -189,8 +189,8 @@
       "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/04/87/f4/0487f448-50a5-59d6-fdb5-21e440d969f7/191953518954.jpg/600x600bb.jpg",
       "ranks": {
         "youtube_music": {
-          "rank": 70,
-          "previousRank": null
+          "rank": 79,
+          "previousRank": 70
         }
       }
     }
