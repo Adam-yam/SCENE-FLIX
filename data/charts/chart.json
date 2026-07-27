@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-27T12:00:50.608828+09:00",
+  "updatedAt": "2026-07-27T13:00:54.292029+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -55,7 +55,7 @@
           "previousRank": 6
         },
         "genie": {
-          "rank": 10,
+          "rank": 9,
           "previousRank": 10
         },
         "vibe": {
@@ -64,7 +64,7 @@
         },
         "bugs": {
           "rank": 10,
-          "previousRank": 9
+          "previousRank": 10
         },
         "flo": {
           "rank": 6,
@@ -90,8 +90,8 @@
           "previousRank": 12
         },
         "genie": {
-          "rank": 47,
-          "previousRank": 54
+          "rank": 44,
+          "previousRank": 47
         },
         "vibe": {
           "rank": 54,
@@ -99,7 +99,7 @@
         },
         "bugs": {
           "rank": 9,
-          "previousRank": 10
+          "previousRank": 9
         },
         "flo": {
           "rank": 8,
@@ -121,16 +121,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 45,
-          "previousRank": 44
+          "rank": 46,
+          "previousRank": 45
         },
         "bugs": {
-          "rank": 32,
-          "previousRank": 26
+          "rank": 26,
+          "previousRank": 32
         },
         "flo": {
           "rank": 64,
-          "previousRank": 61
+          "previousRank": 64
         },
         "youtube_music": {
           "rank": 35,
@@ -144,9 +144,13 @@
     },
     {
       "songName": "Pinball",
-      "artistName": "RESCENE",
-      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/43/0b/4c/430b4c8e-3cb8-da27-648f-435ec3b391a6/8804775334160.jpg/600x600bb.jpg",
+      "artistName": "RESCENE (리센느)",
+      "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
+        "bugs": {
+          "rank": 97,
+          "previousRank": 101
+        },
         "youtube_music": {
           "rank": 33,
           "previousRank": 37
