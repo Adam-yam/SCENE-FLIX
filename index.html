@@ -492,6 +492,8 @@ header {
   flex-wrap: wrap;
 }
 
+.chan-bar-toggle { display: none; }
+
 .type-btn {
   padding: 4px 14px;
   border-radius: 8px;
@@ -1317,6 +1319,41 @@ header {
     border-radius: 8px;
   }
 
+  .type-bar.chan-bar {
+    max-height: 38px;
+    overflow: hidden;
+    transition: max-height 0.28s cubic-bezier(0.4,0,0.2,1);
+  }
+  .type-bar.chan-bar.expanded {
+    max-height: 1000px;
+  }
+
+  .chan-bar-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    width: calc(100% - 24px);
+    margin: 0 12px 10px;
+    padding: 6px 0;
+    background: none;
+    border: none;
+    color: var(--muted);
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+  }
+  .chan-bar-toggle.show { display: flex; }
+  .chan-bar-toggle:active { opacity: 0.55; }
+  .chan-bar-toggle-icon {
+    width: 12px;
+    height: 12px;
+    transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+  }
+  .chan-bar-toggle.open .chan-bar-toggle-icon { transform: rotate(180deg); }
+
   .search-bar { padding: 10px 12px 10px; }
   .search-input-wrap { max-width: 100%; }
   #searchSubmit span { display: none; }
@@ -1436,23 +1473,20 @@ header {
     left: calc(16px + var(--safe-left));
     right: auto;
     z-index: 300;
-    width: 38px;
-    height: 38px;
-    background: color-mix(in srgb, var(--surf) 55%, transparent);
-    backdrop-filter: blur(16px) saturate(1.6);
-    -webkit-backdrop-filter: blur(16px) saturate(1.6);
-    border: 1px solid var(--glass-border);
-    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    background: none;
+    border: none;
+    border-radius: 8px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     color: var(--muted);
-    box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-highlight);
-    transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1), transform 0.18s cubic-bezier(0.4,0,0.2,1);
+    transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1), transform 0.18s cubic-bezier(0.4,0,0.2,1);
   }
-  #mobileMenuBtn:hover { color: var(--text); background: color-mix(in srgb, var(--card-h) 65%, transparent); }
-  #mobileMenuBtn:active { transform: scale(0.92); }
-  #mobileMenuBtn svg { width: 18px; height: 18px; }
+  #mobileMenuBtn:hover { color: var(--text); background: var(--glass-fill); }
+  #mobileMenuBtn:active { transform: scale(0.9); background: var(--glass-fill-h); }
+  #mobileMenuBtn svg { width: 20px; height: 20px; }
 
   #mobileMenuBtn.open {
     display: none;
@@ -2789,7 +2823,11 @@ header {
   <div class="song-nav-inner" id="externalCatNavWrap">
     <div class="song-nav" id="externalCatNav"></div>
   </div>
-  <div class="type-bar" id="externalChanBar"></div>
+  <div class="type-bar chan-bar" id="externalChanBar"></div>
+  <button class="chan-bar-toggle" id="externalChanBarToggle" onclick="toggleExternalChanBar()">
+    <span class="chan-bar-toggle-label" data-i18n="chan_more">더보기</span>
+    <svg class="chan-bar-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+  </button>
 </div>
 
 <div id="fantubeMode" style="display:none;">
@@ -3083,6 +3121,8 @@ window._i18n = {
     filter_mv:            '뮤직비디오',
     filter_itslive:       "It's Live",
     filter_fullcam:       '풀캠',
+    chan_more:            '더보기',
+    chan_less:            '접기',
     fantube_desc:         '리센느의 팬 유튜버들의 채널입니다.',
     member_desc:          '멤버를 선택하면 유튜브에서 관련 영상을 검색합니다.',
     about_headline:       '리센느(RESCENE)의 팬 메이드 페이지입니다.',
@@ -3108,6 +3148,7 @@ window._i18n = {
     ext_cat_variety:      '예능',
     ext_cat_interview:    '인터뷰',
     ext_cat_ad:           '광고·홍보',
+    ext_cat_event:        '행사',
   },
   JP: {
     headerTagline:        'RESCENEの映像まとめ SCENE-FLIX',
@@ -3139,6 +3180,8 @@ window._i18n = {
     filter_mv:            'ミュージックビデオ',
     filter_itslive:       "It's Live",
     filter_fullcam:       'フルカム',
+    chan_more:            'もっと見る',
+    chan_less:            '閉じる',
     fantube_desc:         'RESCENEのファンYouTuberのチャンネルです。',
     member_desc:          'メンバーを選択するとYouTubeで関連動画を検索します。',
     about_headline:       'RESCENE のファンメイドページです。',
@@ -3164,6 +3207,7 @@ window._i18n = {
     ext_cat_variety:      'バラエティ',
     ext_cat_interview:    'インタビュー',
     ext_cat_ad:           '広告・PR',
+    ext_cat_event:        'イベント',
   },
   EN: {
     headerTagline:        'RESCENE Video Archive SCENE-FLIX',
@@ -3195,6 +3239,8 @@ window._i18n = {
     filter_mv:            'Music Video',
     filter_itslive:       "It's Live",
     filter_fullcam:       'Full Cam',
+    chan_more:            'Show more',
+    chan_less:            'Show less',
     fantube_desc:         'YouTube channels run by RESCENE fan creators.',
     member_desc:          'Select a member to search for related videos on YouTube.',
     about_headline:       'A fan-made page dedicated to RESCENE.',
@@ -3220,6 +3266,7 @@ window._i18n = {
     ext_cat_variety:      'Variety',
     ext_cat_interview:    'Interview',
     ext_cat_ad:           'AD·PR',
+    ext_cat_event:        'Event',
   }
 };
 
@@ -5386,7 +5433,7 @@ const EXTERNAL_DATA = {
     { vid: 'qUSyUUuYVg0', url: 'https://youtu.be/qUSyUUuYVg0', date: '2026.07.24 18:00' },
   ],
   wouldyourecord: [
-    { vid: '7fJ5Bl--GBc', url: 'https://youtu.be/7fJ5Bl--GBc', date: '2026.07.28 17:59' },
+    { vid: '7fJ5Bl--GBc', url: 'https://www.youtube.com/watch?v=7fJ5Bl--GBc', date: '2026.07.28 17:59' },
     { vid: 'yZqWUDZbGXY', url: 'https://youtu.be/yZqWUDZbGXY', date: '2026.07.28 18:00' },
     { vid: 'jgu7AHj1Z9Q', url: 'https://youtu.be/jgu7AHj1Z9Q', date: '2026.07.28 18:00' },
     { vid: 'SjwO7LIyq2Y', url: 'https://youtu.be/SjwO7LIyq2Y', date: '2026.07.28 18:00' },
@@ -6476,6 +6523,7 @@ function buildExternalChanBar() {
     bar.style.display = 'none';
     _extChanBarCat = null;
     _extChanBarLang = null;
+    updateChanBarToggle(true);
     return;
   }
 
@@ -6496,6 +6544,65 @@ function buildExternalChanBar() {
     `<button class="type-btn${curExternal === key ? ' active' : ''}" data-ec-ch="${key}" onclick="pickExternalChan(this,'${key}')">${EXTERNAL_LABELS[key] || key}</button>`
   ).join('');
   bar.innerHTML = html;
+  updateChanBarToggle();
+}
+
+function updateChanBarToggle(forceHide, preserveState) {
+  const bar    = document.getElementById('externalChanBar');
+  const toggle = document.getElementById('externalChanBarToggle');
+  if (!bar || !toggle) return;
+
+  if (!preserveState) {
+    // Disable the max-height transition just for this reset so we can
+    // measure the TRUE collapsed height synchronously below. Without this,
+    // if the bar was previously expanded, removing 'expanded' here would
+    // still be mid-transition (animating from the tall expanded height down
+    // to the 1-row height) at the moment we measure, making scrollHeight
+    // and clientHeight look equal even though the content really overflows
+    // — which hid the "더보기" button after switching channel categories.
+    bar.style.transition = 'none';
+    bar.classList.remove('expanded');
+    toggle.classList.remove('open');
+    const label = toggle.querySelector('.chan-bar-toggle-label');
+    const t = getCurrentT();
+    if (label) {
+      label.setAttribute('data-i18n', 'chan_more');
+      label.textContent = t.chan_more || '더보기';
+    }
+    void bar.offsetHeight; // force synchronous reflow with transition disabled
+  }
+
+  if (forceHide) {
+    toggle.classList.remove('show');
+    if (!preserveState) bar.style.transition = '';
+    return;
+  }
+
+  const overflowing = bar.classList.contains('expanded')
+    ? true
+    : bar.scrollHeight > bar.clientHeight + 2;
+  toggle.classList.toggle('show', overflowing);
+
+  if (!preserveState) {
+    // Restore the transition so the next user-triggered expand/collapse
+    // (via toggleExternalChanBar) still animates smoothly.
+    bar.style.transition = '';
+  }
+}
+
+function toggleExternalChanBar() {
+  const bar    = document.getElementById('externalChanBar');
+  const toggle = document.getElementById('externalChanBarToggle');
+  if (!bar || !toggle) return;
+
+  const t = getCurrentT();
+  const expanded = bar.classList.toggle('expanded');
+  toggle.classList.toggle('open', expanded);
+  const label = toggle.querySelector('.chan-bar-toggle-label');
+  if (label) {
+    label.setAttribute('data-i18n', expanded ? 'chan_less' : 'chan_more');
+    label.textContent = expanded ? (t.chan_less || '접기') : (t.chan_more || '더보기');
+  }
 }
 
 function pickExternalCat(el, cat) {
@@ -9450,6 +9557,24 @@ _elDrawerOverlay.addEventListener('click', function(e) {
 
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeDrawer();
+});
+
+let _chanBarResizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(_chanBarResizeTimer);
+  _chanBarResizeTimer = setTimeout(() => {
+    // Only re-check when the external channel bar is actually on screen.
+    // Measuring while curSection !== 'external' (e.g. a resize/orientation
+    // change while the user is on a different tab) would read scrollHeight/
+    // clientHeight from a display:none ancestor — both report 0, which looks
+    // like "no overflow" and wrongly clears the 'show' class. Since coming
+    // back to the same category later skips remeasuring (see the
+    // _extChanBarCat/_extChanBarLang shortcut in buildExternalChanBar), that
+    // false negative would permanently hide the 더보기 button.
+    if (curSection !== 'external' || curExternalCat === 'all') return;
+    const bar = document.getElementById('externalChanBar');
+    if (bar && bar.style.display !== 'none') updateChanBarToggle(false, true);
+  }, 150);
 });
 
 const _BOTTOM_NAV_MAP = {
