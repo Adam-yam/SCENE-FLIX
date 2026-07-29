@@ -3671,6 +3671,7 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  '7fJ5Bl--GBc': '2026.07.28 17:59',
   'yZqWUDZbGXY': '2026.07.28 18:00',
   'jgu7AHj1Z9Q': '2026.07.28 18:00',
   'SjwO7LIyq2Y': '2026.07.28 18:00',
@@ -5385,6 +5386,7 @@ const EXTERNAL_DATA = {
     { vid: 'qUSyUUuYVg0', url: 'https://youtu.be/qUSyUUuYVg0', date: '2026.07.24 18:00' },
   ],
   wouldyourecord: [
+    { vid: '7fJ5Bl--GBc', url: 'https://youtu.be/7fJ5Bl--GBc', date: '2026.07.28 17:59' },
     { vid: 'yZqWUDZbGXY', url: 'https://youtu.be/yZqWUDZbGXY', date: '2026.07.28 18:00' },
     { vid: 'jgu7AHj1Z9Q', url: 'https://youtu.be/jgu7AHj1Z9Q', date: '2026.07.28 18:00' },
     { vid: 'SjwO7LIyq2Y', url: 'https://youtu.be/SjwO7LIyq2Y', date: '2026.07.28 18:00' },
@@ -6563,10 +6565,7 @@ function buildExternalGrid() {
   _elGrid.appendChild(_gridSentinel);
   _gridAppendBatch(_elGrid);
   if (_gridLoaded < _gridSorted.length) {
-    _gridObserver = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) _gridAppendBatch(_elGrid);
-    }, { rootMargin: '300px' });
-    _gridObserver.observe(_gridSentinel);
+    _gridObserver = _observeSentinel(_gridSentinel, () => _gridAppendBatch(_elGrid));
   }
   if (curSearchQuery) applySearch();
 }
@@ -7032,6 +7031,25 @@ function _makeSentinel() {
   return el;
 }
 
+function _observeSentinel(sentinel, onIntersect, rootMargin = '300px') {
+  const observer = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) onIntersect();
+  }, { rootMargin });
+  observer.observe(sentinel);
+  return observer;
+}
+
+function _observeSentinelOnce(sentinel, onIntersect, rootMargin = '300px') {
+  const observer = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    observer.disconnect();
+    if (sentinel && sentinel.parentNode) sentinel.parentNode.removeChild(sentinel);
+    onIntersect();
+  }, { rootMargin });
+  observer.observe(sentinel);
+  return observer;
+}
+
 function _liveDisconnect() {
   if (_liveObserver) { _liveObserver.disconnect(); _liveObserver = null; }
   if (_liveSentinel && _liveSentinel.parentNode) _liveSentinel.remove();
@@ -7085,10 +7103,7 @@ function buildLiveGrid() {
   grid.appendChild(_liveSentinel);
   _liveAppendBatch(grid);
   if (_liveLoaded < _liveSorted.length) {
-    _liveObserver = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) _liveAppendBatch(grid);
-    }, { rootMargin: '300px' });
-    _liveObserver.observe(_liveSentinel);
+    _liveObserver = _observeSentinel(_liveSentinel, () => _liveAppendBatch(grid));
   }
   if (curSearchQuery) applySearch();
 }
@@ -7415,10 +7430,7 @@ function buildGrid() {
     _elGrid.appendChild(_gridSentinel);
     _gridAppendBatch(_elGrid);
     if (_gridLoaded < _gridSorted.length) {
-      _gridObserver = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) _gridAppendBatch(_elGrid);
-      }, { rootMargin: '300px' });
-      _gridObserver.observe(_gridSentinel);
+      _gridObserver = _observeSentinel(_gridSentinel, () => _gridAppendBatch(_elGrid));
     }
     if (curSearchQuery) applySearch();
     return;
@@ -7443,10 +7455,7 @@ function buildGrid() {
   _elGrid.appendChild(_gridSentinel);
   _gridAppendBatch(_elGrid);
   if (_gridLoaded < _gridSorted.length) {
-    _gridObserver = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) _gridAppendBatch(_elGrid);
-    }, { rootMargin: '300px' });
-    _gridObserver.observe(_gridSentinel);
+    _gridObserver = _observeSentinel(_gridSentinel, () => _gridAppendBatch(_elGrid));
   }
   if (curSearchQuery) applySearch();
 }
@@ -7698,10 +7707,7 @@ function buildAllVideosGrid() {
   _avAppendNextBatch(_elGrid);
 
   if (_avLoaded < _avSorted.length) {
-    _avObserver = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting) _avAppendNextBatch(_elGrid);
-    }, { rootMargin: '200px' });
-    _avObserver.observe(_avSentinel);
+    _avObserver = _observeSentinel(_avSentinel, () => _avAppendNextBatch(_elGrid), '200px');
   }
 
   if (curSearchQuery) applySearch();
@@ -8331,9 +8337,22 @@ function _hlNode(node, re) {
     const t = node.textContent;
     if (!re.test(t)) return;
     re.lastIndex = 0;
-    const span = document.createElement('span');
-    span.innerHTML = t.replace(re, '<mark class="sh">$1</mark>');
-    node.parentNode.replaceChild(span, node);
+
+    const frag = document.createDocumentFragment();
+    let lastIndex = 0;
+    let m;
+    while ((m = re.exec(t))) {
+      if (m.index > lastIndex) frag.appendChild(document.createTextNode(t.slice(lastIndex, m.index)));
+      const mark = document.createElement('mark');
+      mark.className = 'sh';
+      mark.textContent = m[0];
+      frag.appendChild(mark);
+      lastIndex = m.index + m[0].length;
+      if (m[0].length === 0) re.lastIndex++;
+    }
+    if (lastIndex < t.length) frag.appendChild(document.createTextNode(t.slice(lastIndex)));
+
+    node.parentNode.replaceChild(frag, node);
     return;
   }
   if (node.nodeType === 1 && node.tagName === 'MARK') return;
@@ -8822,15 +8841,10 @@ function _appendShortsPage(grid) {
   _shortsSentinel = _makeSentinel();
   grid.appendChild(_shortsSentinel);
 
-  _shortsObserver = new IntersectionObserver(function(entries) {
-    if (!entries[0].isIntersecting) return;
-    _shortsObserver.disconnect();
+  _shortsObserver = _observeSentinelOnce(_shortsSentinel, () => {
     _shortsObserver = null;
-    if (_shortsSentinel && _shortsSentinel.parentNode) _shortsSentinel.parentNode.removeChild(_shortsSentinel);
     _appendShortsPage(grid);
-  }, { rootMargin: '200px' });
-
-  _shortsObserver.observe(_shortsSentinel);
+  }, '200px');
 }
 
 function _initShorts() {
