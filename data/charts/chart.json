@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-07-31T06:00:50.412310+09:00",
+  "updatedAt": "2026-07-31T07:05:30.867240+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,8 +20,8 @@
           "previousRank": 1
         },
         "genie": {
-          "rank": 17,
-          "previousRank": 1
+          "rank": 2,
+          "previousRank": 17
         },
         "vibe": {
           "rank": 2,
@@ -56,15 +56,15 @@
         },
         "genie": {
           "rank": 24,
-          "previousRank": 21
+          "previousRank": 24
         },
         "vibe": {
           "rank": 6,
           "previousRank": 6
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 11
+          "rank": 11,
+          "previousRank": 10
         },
         "flo": {
           "rank": 6,
@@ -90,20 +90,20 @@
           "previousRank": 12
         },
         "genie": {
-          "rank": 44,
-          "previousRank": 38
+          "rank": 42,
+          "previousRank": 44
         },
         "vibe": {
-          "rank": 45,
-          "previousRank": 43
+          "rank": 41,
+          "previousRank": 37
         },
         "bugs": {
-          "rank": 8,
+          "rank": 6,
           "previousRank": 8
         },
         "flo": {
-          "rank": 8,
-          "previousRank": 8
+          "rank": 9,
+          "previousRank": 9
         },
         "youtube_music": {
           "rank": 9,
@@ -125,11 +125,11 @@
           "previousRank": 69
         },
         "bugs": {
-          "rank": 41,
+          "rank": 38,
           "previousRank": 41
         },
         "flo": {
-          "rank": 68,
+          "rank": 69,
           "previousRank": 68
         },
         "youtube_music": {
@@ -148,8 +148,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 90,
-          "previousRank": 84
+          "rank": 100,
+          "previousRank": 90
         },
         "youtube_music": {
           "rank": 33,
