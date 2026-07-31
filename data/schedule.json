@@ -1,5 +1,5 @@
 {
-  "updated": "2026-07-31T09:05:46Z",
+  "updated": "2026-07-31T15:05:36Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -325,6 +325,22 @@
       "date": "2026-07-31",
       "time": "18:30",
       "title": "롯데자이언츠 시구",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-08-02",
+      "time": "21:00",
+      "title": "2026 영주 시원나잇 페스타",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-08-06",
+      "time": "11:20",
+      "title": "2026 섬의 날 행사",
       "detail": "",
       "type": "event",
       "source": "mnetplus"
