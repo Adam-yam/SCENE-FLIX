@@ -3721,6 +3721,7 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'KBjYld2nKiw': '2026.08.01 19:59',
   '9hVs0VWg3Eo': '2026.08.01 17:05',
   'hzjASfb-88o': '2026.08.01 16:00',
   'jXG-HT3UGFM': '2026.07.31 23:31',
@@ -5071,24 +5072,28 @@ function _cardDelay(i, batchSize = Infinity) {
   return `${Math.min((i % batchSize) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
 }
 let _metaCache = null;
+let _metaCacheCreatedAt = null;
 
 function _loadMetaCache() {
   if (_metaCache) return;
   try {
     const raw = localStorage.getItem(_META_CACHE_KEY);
-    if (!raw) { _metaCache = {}; return; }
-    const { data, savedAt } = JSON.parse(raw);
-    if (Date.now() - savedAt > _META_CACHE_TTL) {
+    if (!raw) { _metaCache = {}; _metaCacheCreatedAt = Date.now(); return; }
+    const { data, savedAt, createdAt } = JSON.parse(raw);
+    const origin = createdAt || savedAt;
+    if (Date.now() - origin > _META_CACHE_TTL) {
       localStorage.removeItem(_META_CACHE_KEY);
       _metaCache = {};
+      _metaCacheCreatedAt = Date.now();
     } else {
       _metaCache = data || {};
+      _metaCacheCreatedAt = origin;
     }
-  } catch { _metaCache = {}; }
+  } catch { _metaCache = {}; _metaCacheCreatedAt = Date.now(); }
 }
 
 function _saveMetaCache() {
-  try { localStorage.setItem(_META_CACHE_KEY, JSON.stringify({ data: _metaCache, savedAt: Date.now() })); }
+  try { localStorage.setItem(_META_CACHE_KEY, JSON.stringify({ data: _metaCache, createdAt: _metaCacheCreatedAt })); }
   catch {}
 }
 
@@ -5234,6 +5239,7 @@ const CONTENT_DATA = [
   {
     category: "BASE NOTES",
     urls: [
+      "https://youtu.be/KBjYld2nKiw",
       "https://youtu.be/sqPUUBJzK1k",
       "https://youtu.be/bd42NE8dFDI",
       "https://youtu.be/XhYthT7FAIY",
@@ -6458,21 +6464,32 @@ function buildContentCard(item, delay) {
   </a>`;
 }
 
-async function _fetchOembed(url, vid) {
+const _pendingOembedFetches = new Map();
+
+function _fetchOembed(url, vid) {
   _loadMetaCache();
   const cacheKey = vid || url;
-  if (_metaCache[cacheKey]) return _metaCache[cacheKey];
-  try {
-    const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);
-    if (!r.ok) return null;
-    const d = await r.json();
-    const result = { rawTitle: d.title, channel: d.author_name, date: parseDate(d.title), show: parseShow(d.title) };
-    _metaCache[cacheKey] = result;
-    _saveMetaCacheDebounced();
-    return result;
-  } catch {
-    return null;
-  }
+  if (_metaCache[cacheKey]) return Promise.resolve(_metaCache[cacheKey]);
+  if (_pendingOembedFetches.has(cacheKey)) return _pendingOembedFetches.get(cacheKey);
+
+  const p = (async () => {
+    try {
+      const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);
+      if (!r.ok) return null;
+      const d = await r.json();
+      const result = { rawTitle: d.title, channel: d.author_name, date: parseDate(d.title), show: parseShow(d.title) };
+      _metaCache[cacheKey] = result;
+      _saveMetaCacheDebounced();
+      return result;
+    } catch {
+      return null;
+    } finally {
+      _pendingOembedFetches.delete(cacheKey);
+    }
+  })();
+
+  _pendingOembedFetches.set(cacheKey, p);
+  return p;
 }
 
 async function loadCardMetas(items, mode) {
