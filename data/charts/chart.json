@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-02T11:00:57.545497+09:00",
+  "updatedAt": "2026-08-02T12:00:56.931573+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -63,12 +63,12 @@
           "previousRank": 6
         },
         "bugs": {
-          "rank": 6,
-          "previousRank": 9
+          "rank": 8,
+          "previousRank": 6
         },
         "flo": {
-          "rank": 7,
-          "previousRank": 8
+          "rank": 6,
+          "previousRank": 7
         },
         "youtube_music": {
           "rank": 4,
@@ -87,11 +87,11 @@
       "ranks": {
         "melon": {
           "rank": 11,
-          "previousRank": 9
+          "previousRank": 11
         },
         "genie": {
-          "rank": 42,
-          "previousRank": 50
+          "rank": 38,
+          "previousRank": 42
         },
         "vibe": {
           "rank": 37,
@@ -99,11 +99,11 @@
         },
         "bugs": {
           "rank": 10,
-          "previousRank": 11
+          "previousRank": 10
         },
         "flo": {
-          "rank": 12,
-          "previousRank": 14
+          "rank": 11,
+          "previousRank": 12
         },
         "youtube_music": {
           "rank": 9,
@@ -121,12 +121,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 56,
-          "previousRank": 54
+          "rank": 55,
+          "previousRank": 56
         },
         "bugs": {
-          "rank": 34,
-          "previousRank": 49
+          "rank": 39,
+          "previousRank": 34
         },
         "flo": {
           "rank": 73,
@@ -148,8 +148,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 87,
-          "previousRank": 96
+          "rank": 100,
+          "previousRank": 87
         },
         "youtube_music": {
           "rank": 33,
