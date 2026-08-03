@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T17:01:01.015486+09:00",
+  "updatedAt": "2026-08-03T18:01:19.933795+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -55,7 +55,7 @@
           "previousRank": 6
         },
         "genie": {
-          "rank": 8,
+          "rank": 7,
           "previousRank": 8
         },
         "vibe": {
@@ -63,8 +63,8 @@
           "previousRank": 4
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 9
+          "rank": 9,
+          "previousRank": 10
         },
         "flo": {
           "rank": 6,
@@ -90,20 +90,20 @@
           "previousRank": 9
         },
         "genie": {
-          "rank": 35,
-          "previousRank": 36
+          "rank": 32,
+          "previousRank": 35
         },
         "vibe": {
           "rank": 34,
           "previousRank": 31
         },
         "bugs": {
-          "rank": 8,
-          "previousRank": 10
+          "rank": 10,
+          "previousRank": 8
         },
         "flo": {
           "rank": 7,
-          "previousRank": 8
+          "previousRank": 7
         },
         "youtube_music": {
           "rank": 10,
@@ -121,16 +121,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 55,
-          "previousRank": 56
+          "rank": 54,
+          "previousRank": 55
         },
         "bugs": {
-          "rank": 35,
-          "previousRank": 36
+          "rank": 51,
+          "previousRank": 35
         },
         "flo": {
           "rank": 71,
-          "previousRank": 71
+          "previousRank": 70
         },
         "spotify": {
           "rank": 32,
@@ -144,8 +144,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 96,
-          "previousRank": 99
+          "rank": 80,
+          "previousRank": 96
         },
         "spotify": {
           "rank": 72,
