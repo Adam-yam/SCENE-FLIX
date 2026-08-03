@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-03T18:01:19.933795+09:00",
+  "updatedAt": "2026-08-03T19:00:49.460646+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,7 +28,7 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 1,
+          "rank": 2,
           "previousRank": 1
         },
         "flo": {
@@ -55,16 +55,16 @@
           "previousRank": 6
         },
         "genie": {
-          "rank": 7,
-          "previousRank": 8
+          "rank": 6,
+          "previousRank": 7
         },
         "vibe": {
           "rank": 5,
           "previousRank": 4
         },
         "bugs": {
-          "rank": 9,
-          "previousRank": 10
+          "rank": 11,
+          "previousRank": 9
         },
         "flo": {
           "rank": 6,
@@ -90,16 +90,16 @@
           "previousRank": 9
         },
         "genie": {
-          "rank": 32,
-          "previousRank": 35
+          "rank": 30,
+          "previousRank": 32
         },
         "vibe": {
           "rank": 34,
           "previousRank": 31
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 8
+          "rank": 12,
+          "previousRank": 10
         },
         "flo": {
           "rank": 7,
@@ -121,12 +121,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 54,
-          "previousRank": 55
+          "rank": 51,
+          "previousRank": 54
         },
         "bugs": {
-          "rank": 51,
-          "previousRank": 35
+          "rank": 38,
+          "previousRank": 51
         },
         "flo": {
           "rank": 71,
@@ -144,8 +144,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 80,
-          "previousRank": 96
+          "rank": 99,
+          "previousRank": 80
         },
         "spotify": {
           "rank": 72,
