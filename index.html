@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0a">
 <title>SCENE-FLIX</title>
 <meta name="description" content="리센느(RESCENE) 영상 모아보기 SCENE-FLIX. 음악방송, 콘텐츠, 라이브 영상을 한 곳에서 모아보는 팬메이드 사이트입니다.">
@@ -206,10 +206,27 @@ gtag('config', 'G-05C99P2DB9');
   padding: 0;
   font-family: inherit;
 }
+.card-overlay-btn::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
+}
 .card-overlay-btn svg { width: 13px; height: 13px; pointer-events: none; display: block; }
 .vcard:hover .card-overlay-btn { opacity: 1; transform: scale(1) translateY(4px); }
 @media (hover: none) {
-  .card-overlay-btn { opacity: 1; transform: scale(1) translateY(4px); }
+  .card-overlay-btn {
+    opacity: 1;
+    transform: scale(1) translateY(4px);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(20,20,20,0.62);
+  }
+  .card-overlay-btn:active { transform: scale(0.88) translateY(4px); background: rgba(0,0,0,0.8); }
+  .vcard:active .thumb img { transform: scale(1.03); }
+  .song-tab:active,
+  .type-btn:active,
+  .sort-btn:active { opacity: 0.6; }
+  .ftcard:active { opacity: 0.85; transform: scale(0.98); }
 }
 .card-overlay-btn:hover { background: rgba(0,0,0,0.65); color: #fff; }
 
@@ -326,8 +343,11 @@ mark.sh {
   transform: translateY(0);
 }
 
-* { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior: smooth; scrollbar-gutter: stable; }
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; scrollbar-gutter: stable; overscroll-behavior-y: contain; }
+.vcard, .card-overlay-btn, .song-tab, .type-btn, .sort-btn, .ftcard, .mob-nav-btn, #mobileMenuBtn, #scrollTop {
+  touch-action: manipulation;
+}
 
 @keyframes shimmer {
   0%   { background-position: -400px 0; }
@@ -355,6 +375,7 @@ body {
   font-family: var(--font-sans);
   min-height: 100vh;
   overflow-x: hidden;
+  overscroll-behavior-y: contain;
   font-size: 14px;
   user-select: none;
   -webkit-user-select: none;
@@ -655,6 +676,9 @@ header {
 #searchInput:focus {
   border-color: var(--border-h);
   background: rgba(255,255,255,0.07);
+}
+@media (max-width: 700px) {
+  #searchInput { font-size: 0.75rem; }
 }
 #searchClear {
   position: absolute;
@@ -2739,7 +2763,7 @@ header {
   <div class="search-bar-inner">
     <div class="sort-btns">
       <button class="sort-btn" id="sortAdded" onclick="setSort('added')" style="display:none;">
-        추가한 순
+        <span data-i18n="sort_added">추가한 순</span>
       </button>
       <button class="sort-btn active" id="sortNewest" onclick="setSort('newest')">
         <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
@@ -3113,6 +3137,7 @@ window._i18n = {
     chart_updated_suffix: ' 기준',
     chart_empty:          '차트 정보를 불러올 수 없습니다.',
     chart_out:            '-',
+    sort_added:           '추가한 순',
     sort_newest:          '최신순',
     sort_oldest:          '오래된순',
     search_placeholder:   '제목, 카테고리, 채널명으로 검색...',
@@ -3151,6 +3176,10 @@ window._i18n = {
     ext_cat_interview:    '인터뷰',
     ext_cat_ad:           '광고·홍보',
     ext_cat_event:        '행사',
+    share_toast_copied:   '🔗 YouTube 링크 복사됨',
+    bm_empty_title:       '즐겨찾기한 영상이 없어요.',
+    bm_empty_hint_touch:  '카드의 ★ 버튼을 눌러 즐겨찾기를 추가하세요.',
+    bm_empty_hint_hover:  '카드에 마우스를 올리면 ★ 버튼이 나타납니다.',
   },
   JP: {
     headerTagline:        'RESCENEの映像まとめ SCENE-FLIX',
@@ -3172,6 +3201,7 @@ window._i18n = {
     chart_updated_suffix: ' 時点',
     chart_empty:          'チャート情報を読み込めません。',
     chart_out:            '-',
+    sort_added:           '追加した順',
     sort_newest:          '新しい順',
     sort_oldest:          '古い順',
     search_placeholder:   'タイトル・カテゴリ・チャンネルで検索...',
@@ -3210,6 +3240,10 @@ window._i18n = {
     ext_cat_interview:    'インタビュー',
     ext_cat_ad:           '広告・PR',
     ext_cat_event:        'イベント',
+    share_toast_copied:   '🔗 YouTubeリンクをコピーしました',
+    bm_empty_title:       'お気に入りの動画がありません。',
+    bm_empty_hint_touch:  'カードの★ボタンを押すとお気に入りに追加できます。',
+    bm_empty_hint_hover:  'カードにマウスを乗せると★ボタンが表示されます。',
   },
   EN: {
     headerTagline:        'RESCENE Video Archive SCENE-FLIX',
@@ -3231,6 +3265,7 @@ window._i18n = {
     chart_updated_suffix: ' KST',
     chart_empty:          'Unable to load chart data.',
     chart_out:            '-',
+    sort_added:           'Date added',
     sort_newest:          'Newest',
     sort_oldest:          'Oldest',
     search_placeholder:   'Search by title, category or channel...',
@@ -3269,6 +3304,10 @@ window._i18n = {
     ext_cat_interview:    'Interview',
     ext_cat_ad:           'AD·PR',
     ext_cat_event:        'Event',
+    share_toast_copied:   '🔗 YouTube link copied',
+    bm_empty_title:       'No bookmarked videos yet.',
+    bm_empty_hint_touch:  'Tap the ★ button on a card to add it to your favorites.',
+    bm_empty_hint_hover:  'Hover over a card to reveal the ★ button.',
   }
 };
 
@@ -3327,6 +3366,8 @@ function setLang(lang) {
     buildAllVideosGrid();
   } else if (curSection === 'archive') {
     buildArchiveSection();
+  } else if (curSection === 'bookmark') {
+    buildBookmarkGrid();
   }
 
   if (curSection === 'live' || curSection === 'songs' || curSection === 'allvideos' || curSection === 'external') {
@@ -5042,20 +5083,11 @@ function openVideo(e, vid) {
 
   const webUrl = ytUrl(vid);
 
-  if (_isAndroid) {
-    const intentUrl = `intent://www.youtube.com/watch?v=${vid}#Intent;package=com.google.android.youtube;scheme=https;S.browser_fallback_url=${encodeURIComponent(webUrl)};end`;
-    window.location.href = intentUrl;
-  } else if (_isIOS) {
-    const appUrl = `vnd.youtube://${vid}`;
-    let left = false;
-    let fallbackTimer = null;
-    const onBlur = () => { left = true; clearTimeout(fallbackTimer); };
-    window.addEventListener('blur', onBlur, { once: true });
-    window.location.href = appUrl;
-    fallbackTimer = setTimeout(() => {
-      window.removeEventListener('blur', onBlur);
-      if (!left) window.open(webUrl, '_blank', 'noopener');
-    }, 1200);
+  if (_isAndroid || _isIOS) {
+    // Android App Links / iOS Universal Links가 youtube.com 링크를 자동 감지해서
+    // 유튜브 앱이 설치돼 있으면 앱으로, 없으면 브라우저로 넘겨준다.
+    // (intent://, vnd.youtube:// 같은 수동 스킴 방식은 더 이상 안정적으로 동작하지 않음)
+    window.location.href = webUrl;
   } else {
     window.open(webUrl, '_blank', 'noopener');
   }
@@ -7375,6 +7407,8 @@ function copyShareUrl(e, vid) {
     }
     const toast = document.getElementById('share-toast');
     if (toast) {
+      const t = getCurrentT();
+      toast.textContent = t.share_toast_copied || '🔗 YouTube 링크 복사됨';
       toast.classList.add('show');
       clearTimeout(_shareToastTimer);
       _shareToastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
@@ -7429,13 +7463,15 @@ function buildBookmarkGrid() {
 
   if (!BOOKMARKS.size) {
     if (bmMode) bmMode.innerHTML = '';
+    const t = getCurrentT();
     const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    const title = t.bm_empty_title || '즐겨찾기한 영상이 없어요.';
     const hint = isTouchDevice
-      ? '카드의 ★ 버튼을 눌러 즐겨찾기를 추가하세요.'
-      : '카드에 마우스를 올리면 ★ 버튼이 나타납니다.';
+      ? (t.bm_empty_hint_touch || '카드의 ★ 버튼을 눌러 즐겨찾기를 추가하세요.')
+      : (t.bm_empty_hint_hover || '카드에 마우스를 올리면 ★ 버튼이 나타납니다.');
     _elGrid.innerHTML = `<div class="bm-empty">
       <div class="ico">★</div>
-      <p>즐겨찾기한 영상이 없어요.</p>
+      <p>${title}</p>
       <small>${hint}</small>
     </div>`;
     return;
@@ -9613,6 +9649,26 @@ const _elDrawer        = document.getElementById('mobileDrawer');
 const _elDrawerOverlay = document.getElementById('mobileDrawerOverlay');
 const _elMenuBtn       = document.getElementById('mobileMenuBtn');
 
+let _drawerScrollY = 0;
+
+function _lockBodyScroll() {
+  _drawerScrollY = window.scrollY || window.pageYOffset || 0;
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${_drawerScrollY}px`;
+  document.body.style.left = '0';
+  document.body.style.right = '0';
+  document.body.style.width = '100%';
+}
+
+function _unlockBodyScroll() {
+  document.body.style.position = '';
+  document.body.style.top = '';
+  document.body.style.left = '';
+  document.body.style.right = '';
+  document.body.style.width = '';
+  window.scrollTo(0, _drawerScrollY);
+}
+
 function toggleDrawer() {
   if (_elDrawer.classList.contains('open')) {
     closeDrawer();
@@ -9620,7 +9676,7 @@ function toggleDrawer() {
     _elDrawer.classList.add('open');
     _elDrawerOverlay.classList.add('open');
     if (_elMenuBtn) _elMenuBtn.classList.add('open');
-    document.body.style.overflow = 'hidden';
+    _lockBodyScroll();
   }
 }
 
@@ -9628,7 +9684,7 @@ function closeDrawer() {
   _elDrawer.classList.remove('open');
   _elDrawerOverlay.classList.remove('open');
   if (_elMenuBtn) _elMenuBtn.classList.remove('open');
-  document.body.style.overflow = '';
+  _unlockBodyScroll();
 }
 
 _elDrawerOverlay.addEventListener('click', function(e) {
@@ -9763,27 +9819,25 @@ document.addEventListener('click', function(e) {
   }
 });
 
-const tooltip = document.getElementById('vcardTooltip');
-let tooltipTimer = null;
+document.addEventListener('DOMContentLoaded', () => {
+  const tooltip = document.getElementById('vcardTooltip');
+  if (!tooltip) return;
+  let tooltipTimer = null;
+  let touchTooltipTimer = null;
 
-document.addEventListener('mouseover', e => {
-  const card = e.target.closest('.vcard');
-  if (!card) return;
-  if (e.target.closest('.bm-btn')) return;
-  if (e.target.closest('.share-btn')) return;
+  function getTruncatedTitle(card) {
+    if (!card) return null;
+    const titleEl = card.querySelector('.csong, .csong-multi');
+    if (!titleEl) return null;
+    if (titleEl.querySelector('.skel')) return null;
+    const fullText = titleEl.textContent.trim();
+    if (!fullText) return null;
+    const isTruncated = titleEl.scrollWidth > titleEl.clientWidth + 2 ||
+      titleEl.scrollHeight > titleEl.clientHeight + 2;
+    return isTruncated ? fullText : null;
+  }
 
-  const titleEl = card.querySelector('.csong, .csong-multi');
-  if (!titleEl) return;
-  if (titleEl.querySelector('.skel')) return;
-  const fullText = titleEl.textContent.trim();
-  if (!fullText) return;
-
-  const isTruncated = titleEl.scrollWidth > titleEl.clientWidth + 2 ||
-    titleEl.scrollHeight > titleEl.clientHeight + 2;
-  if (!isTruncated) return;
-
-  clearTimeout(tooltipTimer);
-  tooltipTimer = setTimeout(() => {
+  function showTooltip(card, fullText) {
     const rect = card.getBoundingClientRect();
     tooltip.textContent = fullText;
     tooltip.classList.add('visible');
@@ -9795,14 +9849,57 @@ document.addEventListener('mouseover', e => {
     if (left < 8) left = 8;
     tooltip.style.top  = top  + 'px';
     tooltip.style.left = left + 'px';
-  }, 400);
-});
+  }
 
-document.addEventListener('mouseout', e => {
-  const card = e.target.closest('.vcard');
-  if (!card) return;
-  clearTimeout(tooltipTimer);
-  tooltip.classList.remove('visible');
+  function hideTooltip() {
+    tooltip.classList.remove('visible');
+  }
+
+  document.addEventListener('mouseover', e => {
+    const card = e.target.closest('.vcard');
+    if (!card) return;
+    if (e.target.closest('.bm-btn') || e.target.closest('.share-btn')) return;
+
+    const fullText = getTruncatedTitle(card);
+    if (!fullText) return;
+
+    clearTimeout(tooltipTimer);
+    tooltipTimer = setTimeout(() => showTooltip(card, fullText), 400);
+  });
+
+  document.addEventListener('mouseout', e => {
+    const card = e.target.closest('.vcard');
+    if (!card) return;
+    clearTimeout(tooltipTimer);
+    hideTooltip();
+  });
+
+  document.addEventListener('touchstart', e => {
+    const card = e.target.closest('.vcard');
+    if (!card) return;
+    if (e.target.closest('.bm-btn') || e.target.closest('.share-btn')) return;
+
+    const fullText = getTruncatedTitle(card);
+    if (!fullText) return;
+
+    clearTimeout(touchTooltipTimer);
+    touchTooltipTimer = setTimeout(() => {
+      showTooltip(card, fullText);
+      const suppressNav = ev => {
+        ev.preventDefault();
+        card.removeEventListener('click', suppressNav, true);
+      };
+      card.addEventListener('click', suppressNav, true);
+      setTimeout(() => {
+        card.removeEventListener('click', suppressNav, true);
+        hideTooltip();
+      }, 2000);
+    }, 450);
+  }, { passive: true });
+
+  ['touchend', 'touchmove', 'touchcancel'].forEach(evt => {
+    document.addEventListener(evt, () => clearTimeout(touchTooltipTimer), { passive: true });
+  });
 });
 
 </script>
@@ -9840,7 +9937,7 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
-<div id="share-toast">🔗 YouTube 링크 복사됨</div>
+<div id="share-toast"></div>
 
 </body>
 </html>
