@@ -160,7 +160,7 @@ def half_key(date_str: str) -> tuple[int, int]:
 
 
 def schedule_json_path(year: int, half: int) -> pathlib.Path:
-    return ROOT / "data" / f"schedule_{year}_h{half}.json"
+    return ROOT / "data" / "schedule" / f"schedule_{year}_h{half}.json"
 
 
 def _load_half_schedule(year: int, half: int) -> list:
@@ -180,7 +180,8 @@ def run_schedule_crawler() -> dict[tuple[int, int], list]:
     """반기 키(year, half)별로 병합·중복제거된 이벤트 리스트를 반환."""
     print("[스케줄] 시작", file=sys.stderr)
     today  = date.today()
-    months = [(today.year, today.month)]
+    # 올해 1월부터 이번달까지 전부 + 다음달(연도 걸치면 내년 1월)
+    months = [(today.year, m) for m in range(1, today.month + 1)]
     if today.month == 12:
         months.append((today.year + 1, 1))
     else:
@@ -525,6 +526,7 @@ def run_shorts_crawler() -> dict:
 
 def main():
     (ROOT / "data").mkdir(exist_ok=True)
+    (ROOT / "data" / "schedule").mkdir(exist_ok=True)
 
     schedule_by_half = run_schedule_crawler()
     updated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
