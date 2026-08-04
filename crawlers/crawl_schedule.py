@@ -180,8 +180,7 @@ def run_schedule_crawler() -> dict[tuple[int, int], list]:
     """반기 키(year, half)별로 병합·중복제거된 이벤트 리스트를 반환."""
     print("[스케줄] 시작", file=sys.stderr)
     today  = date.today()
-    # 올해 1월부터 이번달까지 전부 + 다음달(연도 걸치면 내년 1월)
-    months = [(today.year, m) for m in range(1, today.month + 1)]
+    months = [(today.year, today.month)]
     if today.month == 12:
         months.append((today.year + 1, 1))
     else:
