@@ -1,0 +1,30 @@
+name: Backfill Schedule (one-off)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install aiohttp requests yt-dlp
+
+      - name: Run backfill
+        run: python3 scripts/backfill_schedule_once.py
+
+      - name: Commit and push data/schedule
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/schedule
+          git diff --cached --quiet || git commit -m "chore: backfill schedule data"
+          git push
