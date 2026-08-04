@@ -151,7 +151,33 @@ def crawl_schedule_month(year: int, month: int) -> list:
     return events
 
 
-def run_schedule_crawler() -> dict:
+def half_key(date_str: str) -> tuple[int, int]:
+    """'YYYY-MM-DD' → (year, half) 반기 키. half 1 = 1~6월, half 2 = 7~12월."""
+    year  = int(date_str[0:4])
+    month = int(date_str[5:7])
+    half  = 1 if month <= 6 else 2
+    return year, half
+
+
+def schedule_json_path(year: int, half: int) -> pathlib.Path:
+    return ROOT / "data" / f"schedule_{year}_h{half}.json"
+
+
+def _load_half_schedule(year: int, half: int) -> list:
+    path = schedule_json_path(year, half)
+    if not path.exists():
+        return []
+    try:
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        return data.get("events", [])
+    except Exception as e:
+        print(f"[스케줄] {path.name} 읽기 실패: {e}", file=sys.stderr)
+        return []
+
+
+def run_schedule_crawler() -> dict[tuple[int, int], list]:
+    """반기 키(year, half)별로 병합·중복제거된 이벤트 리스트를 반환."""
     print("[스케줄] 시작", file=sys.stderr)
     today  = date.today()
     months = [(today.year, today.month)]
@@ -159,21 +185,30 @@ def run_schedule_crawler() -> dict:
         months.append((today.year + 1, 1))
     else:
         months.append((today.year, today.month + 1))
-    all_events = []
+
+    new_events = []
     for y, m in months:
-        all_events.extend(crawl_schedule_month(y, m))
-    seen    = set()
-    deduped = []
-    for ev in sorted(all_events, key=lambda e: e["date"]):
-        key = (ev["date"], ev["title"])
-        if key not in seen:
-            seen.add(key)
-            deduped.append(ev)
-    result = {
-        "updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "events":  deduped,
-    }
-    print(f"[스케줄] 완료 — {len(deduped)}개", file=sys.stderr)
+        new_events.extend(crawl_schedule_month(y, m))
+
+    # 새로 크롤링한 이벤트가 걸쳐있는 반기들만 갱신 대상으로 삼는다
+    touched_halves = {half_key(ev["date"]) for ev in new_events}
+
+    result: dict[tuple[int, int], list] = {}
+    for hk in touched_halves:
+        year, half = hk
+        merged = _load_half_schedule(year, half)
+        merged.extend(ev for ev in new_events if half_key(ev["date"]) == hk)
+        seen    = set()
+        deduped = []
+        for ev in sorted(merged, key=lambda e: e["date"]):
+            key = (ev["date"], ev["title"])
+            if key not in seen:
+                seen.add(key)
+                deduped.append(ev)
+        result[hk] = deduped
+        print(f"[스케줄] {year} H{half} → {len(deduped)}개", file=sys.stderr)
+
+    print("[스케줄] 완료", file=sys.stderr)
     return result
 
 
@@ -491,10 +526,13 @@ def run_shorts_crawler() -> dict:
 def main():
     (ROOT / "data").mkdir(exist_ok=True)
 
-    schedule_data = run_schedule_crawler()
-    with open(ROOT / "data" / "schedule.json", "w", encoding="utf-8") as f:
-        json.dump(schedule_data, f, ensure_ascii=False, indent=2)
-    print(f"[완료] schedule.json 저장", file=sys.stderr)
+    schedule_by_half = run_schedule_crawler()
+    updated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    for (year, half), events in schedule_by_half.items():
+        path = schedule_json_path(year, half)
+        with open(path, "w", encoding="utf-8") as f:
+            json.dump({"updated": updated_at, "events": events}, f, ensure_ascii=False, indent=2)
+        print(f"[완료] {path.name} 저장", file=sys.stderr)
 
     news_data = run_news_crawler()
     with open(ROOT / "data" / "news.json", "w", encoding="utf-8") as f:
