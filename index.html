@@ -8833,19 +8833,43 @@ function _formatUpdatedAt(d, suffix) {
   return d.getFullYear()+'.'+pad(d.getMonth()+1)+'.'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes())+' KST'+suffix;
 }
 
+function _scheduleHalfFilePaths() {
+  const y = new Date().getFullYear();
+  const paths = [];
+  for (let year = y - 1; year <= y + 1; year++) {
+    paths.push('./data/schedule_' + year + '_h1.json');
+    paths.push('./data/schedule_' + year + '_h2.json');
+  }
+  return paths;
+}
+
 (function loadScheduleJson() {
-  _fetchJson('./data/schedule.json')
-    .then(function(data) {
-      _baseScheduleData = (data.events || []).map(function(ev) {
-        return {
-          date:  ev.date  || '',
-          time:  ev.time  || '',
-          title: ev.title || '',
-          type:  ev.type  || 'notice',
-          note:  ev.detail || ev.note || '',
-          link:  ev.link  || '',
-        };
-      }).filter(function(ev) { return ev.date && ev.title; });
+  const paths = _scheduleHalfFilePaths();
+  Promise.allSettled(paths.map(_fetchJson))
+    .then(function(results) {
+      const merged = [];
+      const seen = new Set();
+      results.forEach(function(result) {
+        if (result.status !== 'fulfilled') return;
+        const events = result.value.events || [];
+        events.forEach(function(ev) {
+          const mapped = {
+            date:  ev.date  || '',
+            time:  ev.time  || '',
+            title: ev.title || '',
+            type:  ev.type  || 'notice',
+            note:  ev.detail || ev.note || '',
+            link:  ev.link  || '',
+          };
+          if (!mapped.date || !mapped.title) return;
+          const key = mapped.date + '|' + mapped.title;
+          if (seen.has(key)) return;
+          seen.add(key);
+          merged.push(mapped);
+        });
+      });
+      merged.sort(function(a, b) { return a.date.localeCompare(b.date); });
+      _baseScheduleData = merged;
       injectAnnivEvents();
       if (typeof buildCalendar === 'function' && curSection === 'schedule') {
         buildCalendar();
