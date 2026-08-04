@@ -1,0 +1,1197 @@
+{
+  "updated": "2026-08-04T06:32:38Z",
+  "events": [
+    {
+      "date": "2025-07-02",
+      "time": "17:00",
+      "title": "[Dearest] Countdown Live",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-03",
+      "time": "18:00",
+      "title": "Mnet <M COUNTDOWN>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-04",
+      "time": "12:00",
+      "title": "MBC <정오의 희망곡 김신영입니다> (녹)",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-04",
+      "time": "17:10",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-04",
+      "time": "18:30",
+      "title": "KBS WORLD <뮤비드림>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-04",
+      "time": "20:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by MILLIONMUSIC",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-06",
+      "time": "19:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by ARAISE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-07",
+      "time": "18:40",
+      "title": "Arirang TV <Simply K-Pop>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-07",
+      "time": "20:30",
+      "title": "Arirang TV <Simply K-Pop> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-08",
+      "time": "18:00",
+      "title": "SBS M <더쇼>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-09",
+      "time": "14:00",
+      "title": "MBC M <쇼! 챔피언> 사전 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-09",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-09",
+      "time": "00:30",
+      "title": "MBC <웰컴 투 스포츠 : 로드 투 직관>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-10",
+      "time": "18:00",
+      "title": "Mnet <M COUNTDOWN>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-11",
+      "time": "17:20",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-11",
+      "time": "20:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-12",
+      "time": "18:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by MUSIC&DRAMA",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-13",
+      "time": "19:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by MAKESTAR",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-14",
+      "time": "",
+      "title": "FAN-CON [Project 326] 선예매 서베이 마감",
+      "detail": "",
+      "type": "notice",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-14",
+      "time": "16:00",
+      "title": "EBS FM <아이돌 한국어>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-14",
+      "time": "19:30",
+      "title": "TikTok <Teach Me, Idol!>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-15",
+      "time": "18:00",
+      "title": "SBS M <더쇼>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-16",
+      "time": "16:00",
+      "title": "FAN-CON [Project 326] 선예매 사전 인증 오픈",
+      "detail": "",
+      "type": "notice",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-16",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-17",
+      "time": "10:00",
+      "title": "캐릭터 라이선싱 페어 2025 개막식 & 축하 공연",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-17",
+      "time": "20:00",
+      "title": "[Dearest] 영상통화 팬사인회 by Plus Chat",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-18",
+      "time": "17:20",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-18",
+      "time": "20:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by EVERLINE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-20",
+      "time": "12:00",
+      "title": "캐릭터 라이선싱 페어 2025 팬사인회",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-20",
+      "time": "19:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by APPLE MUSIC",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-21",
+      "time": "20:00",
+      "title": "FAN-CON [Project 326] 선예매 오픈",
+      "detail": "",
+      "type": "notice",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-23",
+      "time": "13:00",
+      "title": "MBC M <쇼! 챔피언> 미니 팬미팅",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-23",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-23",
+      "time": "20:00",
+      "title": "FAN-CON [Project 326] 일반 예매 오픈",
+      "detail": "",
+      "type": "notice",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-23",
+      "time": "00:35",
+      "title": "MBC <웰컴 투 스포츠 : 로드 투 직관>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-25",
+      "time": "19:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by BEATROAD",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-27",
+      "time": "18:00",
+      "title": "[Dearest] 포토 이벤트 by Mubeat",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-27",
+      "time": "19:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by Mubeat",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-07-31",
+      "time": "21:00",
+      "title": "19회 철원 화강 다슬기축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-02",
+      "time": "16:30",
+      "title": "컬러풀 페스타 in 오션월드",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-03",
+      "time": "17:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by Airmusic",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-05",
+      "time": "19:00",
+      "title": "대전 힘내YOU 콘서트",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-07",
+      "time": "20:20",
+      "title": "RCY National Camp Performance",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-09",
+      "time": "",
+      "title": "2025 RESCENE 1st FAN-CON : Project 326",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-10",
+      "time": "11:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by fromm",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-11",
+      "time": "20:00",
+      "title": "[Dearest] 영상통화 팬사인회 by EVERLINE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-12",
+      "time": "19:30",
+      "title": "2025 청소년 콘캉스",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-13",
+      "time": "00:35",
+      "title": "MBC <웰컴 투 스포츠 : 로드 투 직관>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-15",
+      "time": "13:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by ARAISE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-16",
+      "time": "13:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by MUSIC&DRAMA",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-16",
+      "time": "18:00",
+      "title": "여르미오페스티벌",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-17",
+      "time": "15:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by Whosfan",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-19",
+      "time": "16:30",
+      "title": "everylive presents LANDCON ANNEX 超SUMMER2025",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-21",
+      "time": "",
+      "title": "[Dearest] Promotional Event by kissent in Tokyo",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-22",
+      "time": "",
+      "title": "[Dearest] Promotional Event by kissent in Tokyo",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-24",
+      "time": "14:05",
+      "title": "KBS WORLD <갓더스팟 in 강남>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-24",
+      "time": "16:30",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by MILLIONMUSIC in CHINA",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-28",
+      "time": "15:00",
+      "title": "뉴시스 한류 엑스포 (2025 K-엑스포)",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-29",
+      "time": "18:00",
+      "title": "it's Live <the Fillin’ Live> 사전녹화",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-29",
+      "time": "18:30",
+      "title": "KBS WORLD <갓더스팟 in 강남>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-30",
+      "time": "12:00",
+      "title": "JAPAN-KOREA Every One Fes in Aichi Sky Expo 2025",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-08-31",
+      "time": "",
+      "title": "[Dearest] Promotional Event by kissent in Aichi",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-05",
+      "time": "18:30",
+      "title": "KBS WORLD <갓더스팟 in 강남>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-05",
+      "time": "20:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by MAKESTAR",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-06",
+      "time": "13:00",
+      "title": "FAN-CON in TAIPEI [RE:MIND] 티켓 오픈",
+      "detail": "",
+      "type": "notice",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-07",
+      "time": "17:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by MILLIONMUSIC",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-10",
+      "time": "20:40",
+      "title": "충남대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-12",
+      "time": "18:30",
+      "title": "KBS WORLD <갓더스팟 in 강남>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-12",
+      "time": "21:00",
+      "title": "전북특별자치도민체육대회 개막 공연",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-13",
+      "time": "11:00",
+      "title": "2025 관악 청소년 축제 청.아.즐",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-13",
+      "time": "19:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by withmuu",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-14",
+      "time": "20:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by BEATROAD",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-15",
+      "time": "21:00",
+      "title": "[Dearest] 영상통화 팬사인회 by ARAISE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-17",
+      "time": "18:00",
+      "title": "OST <고백주파수> 발매 (첫사랑 엔딩 X 리센느)",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-17",
+      "time": "19:00",
+      "title": "KBS <스테이지 W>",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-18",
+      "time": "19:00",
+      "title": "대진대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-19",
+      "time": "17:30",
+      "title": "2025 피크타임 페스티벌",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-20",
+      "time": "19:00",
+      "title": "장수 한우랑 사과랑 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-21",
+      "time": "14:30",
+      "title": "파주 K-CULTURE FESTIVAL",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-25",
+      "time": "19:10",
+      "title": "광주대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-26",
+      "time": "19:30",
+      "title": "2025 양산삽량문화축전 개막식",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-27",
+      "time": "11:00",
+      "title": "전우마라톤 축하공연",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-27",
+      "time": "18:00",
+      "title": "솔모루 하모니 대축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-09-30",
+      "time": "17:00",
+      "title": "조선대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-02",
+      "time": "19:00",
+      "title": "[Dearest] 대면 팬사인회 by WILLMUSIC in TAIPEI",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-03",
+      "time": "",
+      "title": "2025 RESCENE 1st FAN-CON in TAIPEI [RE:MIND]",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-05",
+      "time": "16:00",
+      "title": "[Dearest] 오프라인 럭키드로우 by ARAiSE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-09",
+      "time": "17:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by Mubeat",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-10",
+      "time": "19:00",
+      "title": "나주 영산강 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-11",
+      "time": "13:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-11",
+      "time": "18:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by MUSIC&DRAMA",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-12",
+      "time": "14:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by ARAISE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-12",
+      "time": "18:00",
+      "title": "MBC <복면가왕>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-12",
+      "time": "19:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by Whosfan",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-15",
+      "time": "20:00",
+      "title": "[Dearest] 영상통화 팬사인회 by EVERLINE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-16",
+      "time": "18:00",
+      "title": "[Dearest] 영상통화 팬사인회 by ITTA",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-18",
+      "time": "",
+      "title": "K-Hi MELAKA",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-19",
+      "time": "",
+      "title": "K-Hi MELAKA",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-19",
+      "time": "18:00",
+      "title": "MBC <복면가왕>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-20",
+      "time": "",
+      "title": "K-Hi MELAKA",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-24",
+      "time": "20:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by applemusic",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-24",
+      "time": "22:30",
+      "title": "[Dearest] 영상통화 팬사인회 by StarRiver",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-25",
+      "time": "17:00",
+      "title": "경주 K-EDU EXPO",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-26",
+      "time": "15:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by withmuu",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-28",
+      "time": "",
+      "title": "호서대학교(천안) 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-10-29",
+      "time": "",
+      "title": "목포과학대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-02",
+      "time": "",
+      "title": "2025 서울오픈 국제남자  챌린저 테니스대회",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-02",
+      "time": "13:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by fromm store",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-07",
+      "time": "17:10",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-08",
+      "time": "14:00",
+      "title": "SKF X 리센느 미니 팬사인회",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-08",
+      "time": "17:00",
+      "title": "2025 인천공항 SKY FESTIVAL",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-09",
+      "time": "19:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by ITTA",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-11",
+      "time": "13:30",
+      "title": "SBS M <더쇼> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-11",
+      "time": "18:00",
+      "title": "SBS M <더쇼>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-11",
+      "time": "06:00",
+      "title": "MBC M <쇼! 챔피언> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-12",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-12",
+      "time": "",
+      "title": "KBS Joy <리뷰it>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-14",
+      "time": "17:10",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-19",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-19",
+      "time": "",
+      "title": "KBS Joy <리뷰it>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-21",
+      "time": "17:10",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-21",
+      "time": "20:00",
+      "title": "[Dearest] 대면/영상통화 팬사인회 by MAKESTAR",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-25",
+      "time": "",
+      "title": "[lip bomb] SHOWCASE",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-28",
+      "time": "17:10",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-28",
+      "time": "22:30",
+      "title": "MBC FM4U <Holiday in 친한친구>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-29",
+      "time": "18:00",
+      "title": "[lip bomb] 대면/영상통화 팬사인회 by MUSIC & DRAMA",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-11-30",
+      "time": "12:25",
+      "title": "SBS <인기가요>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-02",
+      "time": "19:00",
+      "title": "제12회 이데일리 문화대상",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-03",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-05",
+      "time": "14:55",
+      "title": "KBS2 <뮤직뱅크> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-05",
+      "time": "17:10",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-05",
+      "time": "22:00",
+      "title": "SBS <배성재의 텐>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-06",
+      "time": "15:20",
+      "title": "MBC <쇼! 음악중심>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-06",
+      "time": "19:00",
+      "title": "[lip bomb] 대면/영상통화 팬사인회 by Whosfan",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-07",
+      "time": "15:25",
+      "title": "SBS <인기가요>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-07",
+      "time": "19:30",
+      "title": "[lip bomb] 대면/영상통화 팬사인회 by my StarGoods",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-09",
+      "time": "14:00",
+      "title": "재외동포청 <K-pop On Air>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-12",
+      "time": "20:00",
+      "title": "[lip bomb] 대면/영상통화 팬사인회 by ARAISE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-13",
+      "time": "09:30",
+      "title": "MBC <쇼! 음악중심> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-13",
+      "time": "15:20",
+      "title": "MBC <쇼! 음악중심>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-14",
+      "time": "19:30",
+      "title": "[lip bomb] 1:1촬영/대면/영상통화 팬사인회 by MUSIC & DRAMA",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-19",
+      "time": "20:00",
+      "title": "[lip bomb] 대면/영상통화 팬사인회 by MAKESTAR",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-20",
+      "time": "09:50",
+      "title": "MBC <쇼! 음악중심> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-20",
+      "time": "15:20",
+      "title": "MBC <쇼! 음악중심>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-20",
+      "time": "20:00",
+      "title": "[lip bomb] 대면/영상통화 팬사인회 by million MUSIC",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-21",
+      "time": "14:00",
+      "title": "SK나이츠 시투/공연",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-21",
+      "time": "19:00",
+      "title": "[lip bomb] 대면/영상통화 팬사인회 by withmuu",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-21",
+      "time": "19:50",
+      "title": "TV조선 <식객 허영만의 백반기행>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-12-23",
+      "time": "14:00",
+      "title": "WINTER GLAM SEOUL",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    }
+  ]
+}
