@@ -1,4 +1,4 @@
-name: 각 음원 플랫폼 차트 크롤링
+name: ■ 각 음원 플랫폼 차트 크롤링
 
 on:
   workflow_dispatch: {}

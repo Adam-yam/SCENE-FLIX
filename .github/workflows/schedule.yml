@@ -1,4 +1,4 @@
-name: 스케줄, 뉴스 크롤링
+name: ■ 공식 스케줄, 네이버 뉴스 크롤링
 
 on:
   workflow_dispatch:

@@ -1,4 +1,4 @@
-name: Shorts 크롤링
+name: ■ 공식채널/안원잘부 쇼츠 크롤링
 
 on:
   workflow_dispatch:
@@ -32,6 +32,6 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/shorts.json
           git diff --cached --quiet && echo "변경사항 없음" && exit 0
-          git commit -m "chore: Shorts 크롤링 data 업데이트 $(date +'%Y-%m-%d %H:%M')"
+          git commit -m "chore: 공식채널/안원잘부 쇼츠 크롤링 크롤링 data 업데이트 $(date +'%Y-%m-%d %H:%M')"
           git pull --rebase origin main
           git push
