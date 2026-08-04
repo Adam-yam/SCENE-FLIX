@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-04T20:00:54.591767+09:00",
+  "updatedAt": "2026-08-04T21:00:56.786910+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -55,16 +55,16 @@
           "previousRank": 6
         },
         "genie": {
-          "rank": 7,
-          "previousRank": 6
+          "rank": 6,
+          "previousRank": 7
         },
         "vibe": {
           "rank": 5,
           "previousRank": 5
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 10
+          "rank": 8,
+          "previousRank": 9
         },
         "flo": {
           "rank": 6,
@@ -90,16 +90,16 @@
           "previousRank": 9
         },
         "genie": {
-          "rank": 30,
-          "previousRank": 28
+          "rank": 28,
+          "previousRank": 30
         },
         "vibe": {
           "rank": 33,
           "previousRank": 32
         },
         "bugs": {
-          "rank": 11,
-          "previousRank": 11
+          "rank": 9,
+          "previousRank": 10
         },
         "flo": {
           "rank": 7,
@@ -121,16 +121,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 54,
-          "previousRank": 53
+          "rank": 52,
+          "previousRank": 54
         },
         "bugs": {
-          "rank": 39,
-          "previousRank": 35
+          "rank": 36,
+          "previousRank": 26
         },
         "flo": {
-          "rank": 67,
-          "previousRank": 74
+          "rank": 66,
+          "previousRank": 67
         },
         "youtube_music": {
           "rank": 44,
@@ -148,8 +148,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 80,
-          "previousRank": 77
+          "rank": 97,
+          "previousRank": 102
         },
         "youtube_music": {
           "rank": 36,
