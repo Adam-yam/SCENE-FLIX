@@ -5084,9 +5084,6 @@ function openVideo(e, vid) {
   const webUrl = ytUrl(vid);
 
   if (_isAndroid || _isIOS) {
-    // Android App Links / iOS Universal Links가 youtube.com 링크를 자동 감지해서
-    // 유튜브 앱이 설치돼 있으면 앱으로, 없으면 브라우저로 넘겨준다.
-    // (intent://, vnd.youtube:// 같은 수동 스킴 방식은 더 이상 안정적으로 동작하지 않음)
     window.location.href = webUrl;
   } else {
     window.open(webUrl, '_blank', 'noopener');
@@ -6664,13 +6661,6 @@ function updateChanBarToggle(forceHide, preserveState) {
   if (!bar || !toggle) return;
 
   if (!preserveState) {
-    // Disable the max-height transition just for this reset so we can
-    // measure the TRUE collapsed height synchronously below. Without this,
-    // if the bar was previously expanded, removing 'expanded' here would
-    // still be mid-transition (animating from the tall expanded height down
-    // to the 1-row height) at the moment we measure, making scrollHeight
-    // and clientHeight look equal even though the content really overflows
-    // — which hid the "더보기" button after switching channel categories.
     bar.style.transition = 'none';
     bar.classList.remove('expanded');
     toggle.classList.remove('open');
@@ -6680,7 +6670,7 @@ function updateChanBarToggle(forceHide, preserveState) {
       label.setAttribute('data-i18n', 'chan_more');
       label.textContent = t.chan_more || '더보기';
     }
-    void bar.offsetHeight; // force synchronous reflow with transition disabled
+    void bar.offsetHeight;  
   }
 
   if (forceHide) {
@@ -6695,8 +6685,6 @@ function updateChanBarToggle(forceHide, preserveState) {
   toggle.classList.toggle('show', overflowing);
 
   if (!preserveState) {
-    // Restore the transition so the next user-triggered expand/collapse
-    // (via toggleExternalChanBar) still animates smoothly.
     bar.style.transition = '';
   }
 }
@@ -9700,14 +9688,6 @@ let _chanBarResizeTimer = null;
 window.addEventListener('resize', () => {
   clearTimeout(_chanBarResizeTimer);
   _chanBarResizeTimer = setTimeout(() => {
-    // Only re-check when the external channel bar is actually on screen.
-    // Measuring while curSection !== 'external' (e.g. a resize/orientation
-    // change while the user is on a different tab) would read scrollHeight/
-    // clientHeight from a display:none ancestor — both report 0, which looks
-    // like "no overflow" and wrongly clears the 'show' class. Since coming
-    // back to the same category later skips remeasuring (see the
-    // _extChanBarCat/_extChanBarLang shortcut in buildExternalChanBar), that
-    // false negative would permanently hide the 더보기 button.
     if (curSection !== 'external' || curExternalCat === 'all') return;
     const bar = document.getElementById('externalChanBar');
     if (bar && bar.style.display !== 'none') updateChanBarToggle(false, true);
@@ -9823,7 +9803,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const tooltip = document.getElementById('vcardTooltip');
   if (!tooltip) return;
   let tooltipTimer = null;
-  let touchTooltipTimer = null;
 
   function getTruncatedTitle(card) {
     if (!card) return null;
@@ -9874,32 +9853,6 @@ document.addEventListener('DOMContentLoaded', () => {
     hideTooltip();
   });
 
-  document.addEventListener('touchstart', e => {
-    const card = e.target.closest('.vcard');
-    if (!card) return;
-    if (e.target.closest('.bm-btn') || e.target.closest('.share-btn')) return;
-
-    const fullText = getTruncatedTitle(card);
-    if (!fullText) return;
-
-    clearTimeout(touchTooltipTimer);
-    touchTooltipTimer = setTimeout(() => {
-      showTooltip(card, fullText);
-      const suppressNav = ev => {
-        ev.preventDefault();
-        card.removeEventListener('click', suppressNav, true);
-      };
-      card.addEventListener('click', suppressNav, true);
-      setTimeout(() => {
-        card.removeEventListener('click', suppressNav, true);
-        hideTooltip();
-      }, 2000);
-    }, 450);
-  }, { passive: true });
-
-  ['touchend', 'touchmove', 'touchcancel'].forEach(evt => {
-    document.addEventListener(evt, () => clearTimeout(touchTooltipTimer), { passive: true });
-  });
 });
 
 </script>
