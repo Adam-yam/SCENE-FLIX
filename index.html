@@ -5083,14 +5083,10 @@ function openVideo(e, vid) {
 
   const webUrl = ytUrl(vid);
 
-  if (_isAndroid) {
-    // intent:// 명시적 딥링크. App Links가 기본 비활성화된 브라우저(Brave 등)에서도
-    // 안정적으로 유튜브 앱을 호출하고, 미설치 시 S.browser_fallback_url로 웹으로 폴백.
-    const intentUrl = `intent://www.youtube.com/watch?v=${vid}#Intent;package=com.google.android.youtube;scheme=https;S.browser_fallback_url=${encodeURIComponent(webUrl)};end`;
-    window.location.href = intentUrl;
-  } else if (_isIOS) {
-    // iOS Universal Links가 youtube.com/youtu.be 링크를 자동으로 감지해서
-    // 유튜브 앱이 설치돼 있으면 앱으로, 없으면 Safari로 넘겨준다.
+  if (_isAndroid || _isIOS) {
+    // Android App Links / iOS Universal Links가 youtube.com 링크를 자동 감지해서
+    // 유튜브 앱이 설치돼 있으면 앱으로, 없으면 브라우저로 넘겨준다.
+    // (intent://, vnd.youtube:// 같은 수동 스킴 방식은 더 이상 안정적으로 동작하지 않음)
     window.location.href = webUrl;
   } else {
     window.open(webUrl, '_blank', 'noopener');
