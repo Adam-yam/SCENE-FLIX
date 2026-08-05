@@ -2333,54 +2333,69 @@ header {
 @media (max-width: 700px) { .news-wrap { padding: 16px 10px calc(80px + var(--safe-bottom)); } .news-grid { grid-template-columns: 1fr; gap: 12px; } .news-title { font-size: 0.78rem; } }
 
 #chartMode { animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both; }
-.chart-wrap { max-width: 640px; margin: 0 auto; padding: 28px 20px 80px; }
-.chart-header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.chart-wrap { max-width: 900px; margin: 0 auto; padding: 28px 28px 80px; }
+.chart-header-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
 .chart-header-title { display: flex; align-items: center; gap: 7px; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; color: var(--accent); text-transform: uppercase; }
 .chart-updated { font-size: 0.65rem; color: var(--muted); }
-.chart-sortbar { display: flex; gap: 8px; overflow-x: auto; padding: 2px 2px 4px; margin-bottom: 14px; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
-.chart-sortbar::-webkit-scrollbar { display: none; }
-.chart-sort-chip { flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); color: var(--muted); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.02em; cursor: pointer; white-space: nowrap; user-select: none; transition: background 0.15s cubic-bezier(0.4,0,0.2,1), border-color 0.15s cubic-bezier(0.4,0,0.2,1), color 0.15s cubic-bezier(0.4,0,0.2,1); }
-.chart-sort-chip .dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: 0.5; flex-shrink: 0; }
-.chart-sort-chip:hover { border-color: var(--border-h); color: var(--text); }
-.chart-sort-chip.active { background: color-mix(in srgb, var(--tc) 16%, var(--card)); border-color: var(--tc); color: var(--tc); }
-.chart-sort-chip.active .dot { background: var(--tc); opacity: 1; }
+.chart-platform-legend { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 18px; }
+.chart-update-notice { font-size: 0.65rem; color: var(--muted); letter-spacing: 0.02em; }
+.chart-info-btn { position: relative; display: inline-flex; }
+.chart-info-btn .ico {
+  width: 18px; height: 18px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--muted); font-size: 0.62rem; font-weight: 700;
+  cursor: pointer; user-select: none; flex-shrink: 0;
+  font-family: var(--font-sans);
+  transition: color 0.15s cubic-bezier(0.4,0,0.2,1), background 0.15s cubic-bezier(0.4,0,0.2,1), border-color 0.15s cubic-bezier(0.4,0,0.2,1);
+}
+.chart-info-btn .ico:hover,
+.chart-info-btn.open .ico { color: var(--text); background: var(--card-h); border-color: var(--border-h); }
+.chart-info-pop {
+  position: absolute; top: calc(100% + 8px); right: 0; z-index: 20;
+  width: max-content; max-width: min(220px, calc(100vw - 40px)); padding: 10px 12px;
+  background: var(--surf); border: 1px solid var(--border-h); border-radius: 10px;
+  box-shadow: var(--glass-shadow); box-sizing: border-box;
+  opacity: 0; visibility: hidden; transform: translateY(4px);
+  transition: opacity 0.15s cubic-bezier(0.4,0,0.2,1), transform 0.15s cubic-bezier(0.4,0,0.2,1), visibility 0.15s;
+}
+.chart-info-btn:hover .chart-info-pop,
+.chart-info-btn.open .chart-info-pop { opacity: 1; visibility: visible; transform: translateY(0); }
+.chart-info-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 3px 0; font-size: 0.66rem; }
+.chart-info-row + .chart-info-row { border-top: 1px solid var(--border); }
+.chart-info-plat { display: flex; align-items: center; gap: 6px; color: var(--text); font-weight: 600; }
+.chart-info-plat .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.chart-info-name { color: var(--muted); text-align: right; }
 .chart-list { display: flex; flex-direction: column; gap: 8px; }
-.chart-row { background: var(--surf); border: 1px solid var(--border); border-radius: 14px; padding: 12px; contain: layout style; content-visibility: auto; contain-intrinsic-size: 0 172px; }
-.chart-row-top { display: flex; align-items: center; gap: 12px; }
-.rank-cluster { display: flex; flex-direction: column; align-items: center; width: 30px; flex-shrink: 0; }
-.rank-cluster .rank-num { font-family: var(--font-mono); font-weight: 700; font-size: 0.92rem; color: var(--text); line-height: 1.2; }
-.rank-cluster .rank-num.r1 { color: var(--accent); font-size: 1.1rem; }
-.rank-cluster .delta { font-size: 0.54rem; line-height: 1; margin-top: 2px; }
-.rank-cluster .delta.up { color: #d97a7a; }
-.rank-cluster .delta.down { color: #6ba0d8; }
-.rank-cluster .delta.new { color: #d4b45a; font-weight: 700; }
-.rank-cluster .delta.same { color: var(--muted); }
-.ct-thumb, .ct-thumb-ph { width: 46px; height: 46px; border-radius: 10px; object-fit: cover; background: var(--dim); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-.ct-thumb-ph svg { width: 18px; height: 18px; opacity: 0.2; }
-.ct-meta { min-width: 0; flex: 1; }
-.ct-title { font-size: 0.82rem; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.ct-artist { font-size: 0.68rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
-.chart-platform-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--border); }
-.cp-cell { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; padding: 6px 2px; border-radius: 9px; background: var(--card); }
-.cp-cell.out { opacity: 0.38; }
-.cp-label { font-size: 0.53rem; font-weight: 700; letter-spacing: 0.02em; color: var(--tc); text-transform: uppercase; }
-.cp-rank { font-family: var(--font-mono); font-weight: 700; font-size: 0.78rem; color: var(--text); line-height: 1.25; }
-.cp-delta { font-size: 0.5rem; line-height: 1; }
-.cp-delta.up { color: #d97a7a; }
-.cp-delta.down { color: #6ba0d8; }
-.cp-delta.new { color: #d4b45a; font-weight: 700; }
-.cp-delta.same { color: var(--muted); }
+.chart-card { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; transition: background 0.2s cubic-bezier(0.4,0,0.2,1), border-color 0.2s cubic-bezier(0.4,0,0.2,1); contain: layout style; content-visibility: auto; contain-intrinsic-size: 0 88px; }
+.chart-card:hover { background: var(--card-h); border-color: var(--border-h); }
+.chart-thumb { width: 52px; height: 52px; border-radius: 8px; object-fit: cover; background: var(--dim); flex-shrink: 0; display: block; }
+.chart-thumb-placeholder { width: 52px; height: 52px; border-radius: 8px; background: var(--dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.chart-thumb-placeholder svg { width: 20px; height: 20px; opacity: 0.2; }
+.chart-info { min-width: 0; flex: 0 1 auto; width: 168px; }
+.chart-song-title { font-size: 0.76rem; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chart-song-artist { font-size: 0.64rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.chart-ranks { display: flex; align-items: center; gap: 6px; margin-left: auto; flex-wrap: wrap; justify-content: flex-end; }
+.chart-rank-pill { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 46px; padding: 4px 8px; border-radius: 8px; background: var(--surf); border: 1px solid var(--border); }
+.chart-rank-pill.out { opacity: 0.35; }
+.chart-rank-pill .plat { font-size: 0.56rem; font-weight: 600; letter-spacing: 0.03em; margin-bottom: 1px; }
+.chart-rank-pill .rankval { font-size: 0.8rem; font-weight: 700; color: var(--text); font-family: var(--font-mono); line-height: 1; }
+.chart-rank-pill .delta { font-size: 0.56rem; margin-top: 2px; line-height: 1; }
+.chart-rank-pill .delta.up { color: #d97a7a; }
+.chart-rank-pill .delta.down { color: #6ba0d8; }
+.chart-rank-pill .delta.new { color: #d4b45a; }
+.chart-rank-pill .delta.same { color: var(--muted); }
 .chart-loading { display: flex; flex-direction: column; gap: 8px; }
-.chart-skel-row { height: 130px; border-radius: 14px; background: linear-gradient(90deg, var(--dim) 25%, var(--card-h) 50%, var(--dim) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; }
+.chart-skel-card { height: 74px; border-radius: 12px; background: linear-gradient(90deg, var(--dim) 25%, var(--card-h) 50%, var(--dim) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; }
 .chart-empty { text-align: center; padding: 60px 20px; color: var(--muted); }
 .chart-empty .ico { font-size: 2rem; margin-bottom: 14px; opacity: 0.25; }
 .chart-empty p { font-size: 0.82rem; }
-@media (min-width: 520px) {
-  .chart-platform-grid { grid-template-columns: repeat(7, 1fr); }
-}
 @media (max-width: 700px) {
   .chart-wrap { padding: 16px 10px calc(80px + var(--safe-bottom)); }
-  .chart-sort-chip { padding: 7px 12px; font-size: 0.66rem; }
+  .chart-info { width: auto; flex: 1 1 auto; }
+  .chart-ranks { width: 100%; margin-left: 0; justify-content: flex-start; }
+  .chart-card { flex-wrap: wrap; }
+  .chart-rank-pill { min-width: 42px; }
 }
 #shortsMode { animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both; }
 .shorts-wrap { max-width: 1400px; margin: 0 auto; padding: 20px 40px 80px; }
@@ -2991,21 +3006,27 @@ header {
       </span>
       <span class="chart-updated" id="chartUpdatedAt"></span>
     </div>
-    <div class="chart-sortbar" id="chartSortbar">
-      <span class="chart-sort-chip active" data-key="overall" style="--tc:var(--accent);"><span class="dot"></span><span data-i18n="chart_overall">종합</span></span>
-      <span class="chart-sort-chip" data-key="melon" style="--tc:var(--c-melon);"><span class="dot"></span>MELON</span>
-      <span class="chart-sort-chip" data-key="youtube_music" style="--tc:var(--c-youtube-music);"><span class="dot"></span>YT Music</span>
-      <span class="chart-sort-chip" data-key="spotify" style="--tc:var(--c-spotify);"><span class="dot"></span>SPOTIFY</span>
-      <span class="chart-sort-chip" data-key="genie" style="--tc:var(--c-genie);"><span class="dot"></span>GENIE</span>
-      <span class="chart-sort-chip" data-key="flo" style="--tc:var(--c-flo);"><span class="dot"></span>FLO</span>
-      <span class="chart-sort-chip" data-key="bugs" style="--tc:var(--c-bugs);"><span class="dot"></span>BUGS</span>
-      <span class="chart-sort-chip" data-key="vibe" style="--tc:var(--c-vibe);"><span class="dot"></span>VIBE</span>
+    <div class="chart-platform-legend">
+      <span class="chart-update-notice">각 차트는 매시간 02분에 갱신됩니다.</span>
+      <span class="chart-info-btn" id="chartInfoBtn">
+        <span class="ico" onclick="event.stopPropagation(); document.getElementById('chartInfoBtn').classList.toggle('open');">?</span>
+        <div class="chart-info-pop">
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-melon);"></span>MELON</span><span class="chart-info-name">TOP 100</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-youtube-music);"></span>YOUTUBE MUSIC</span><span class="chart-info-name">주간 인기곡</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-spotify);"></span>SPOTIFY</span><span class="chart-info-name">한국 데일리 차트</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-genie);"></span>GENIE</span><span class="chart-info-name">TOP 200</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-flo);"></span>FLO</span><span class="chart-info-name">FLO 전체 연령 차트</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-bugs);"></span>BUGS</span><span class="chart-info-name">실시간 차트</span></div>
+          <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:var(--c-vibe);"></span>VIBE</span><span class="chart-info-name">오늘 TOP 100</span></div>
+        </div>
+      </span>
     </div>
     <div class="chart-list" id="chartList">
       <div class="chart-loading">
-        <div class="chart-skel-row"></div>
-        <div class="chart-skel-row"></div>
-        <div class="chart-skel-row"></div>
+        <div class="chart-skel-card"></div>
+        <div class="chart-skel-card"></div>
+        <div class="chart-skel-card"></div>
+        <div class="chart-skel-card"></div>
       </div>
     </div>
   </div>
@@ -3086,7 +3107,6 @@ window._i18n = {
     chart_updated_suffix: ' 기준',
     chart_empty:          '차트 정보를 불러올 수 없습니다.',
     chart_out:            '-',
-    chart_overall:        '종합',
     sort_added:           '추가한 순',
     sort_newest:          '최신순',
     sort_oldest:          '오래된순',
@@ -3150,7 +3170,6 @@ window._i18n = {
     chart_updated_suffix: ' 時点',
     chart_empty:          'チャート情報を読み込めません。',
     chart_out:            '-',
-    chart_overall:        '総合',
     sort_added:           '追加した順',
     sort_newest:          '新しい順',
     sort_oldest:          '古い順',
@@ -3214,7 +3233,6 @@ window._i18n = {
     chart_updated_suffix: ' KST',
     chart_empty:          'Unable to load chart data.',
     chart_out:            '-',
-    chart_overall:        'Overall',
     sort_added:           'Date added',
     sort_newest:          'Newest',
     sort_oldest:          'Oldest',
@@ -9080,106 +9098,55 @@ function buildNewsGrid() {
 
 
 const _CHART_PLATFORMS = [
-  { key: 'melon', label: 'MELON', short: 'MELON', color: 'var(--c-melon)', chartName: 'TOP 100' },
-  { key: 'youtube_music', label: 'YT Music', short: 'YTM', color: 'var(--c-youtube-music)', chartName: '주간 인기곡' },
-  { key: 'spotify', label: 'SPOTIFY', short: 'SPOTIFY', color: 'var(--c-spotify)', chartName: '한국 데일리 차트' },
-  { key: 'genie', label: 'GENIE', short: 'GENIE', color: 'var(--c-genie)', chartName: 'TOP 200' },
-  { key: 'flo',   label: 'FLO',   short: 'FLO',   color: 'var(--c-flo)',   chartName: 'FLO 전체 연령 차트' },
-  { key: 'bugs',  label: 'BUGS',  short: 'BUGS',  color: 'var(--c-bugs)',  chartName: '실시간 차트' },
-  { key: 'vibe',  label: 'VIBE',  short: 'VIBE',  color: 'var(--c-vibe)',  chartName: '오늘 TOP 100' },
+  { key: 'melon', label: 'MELON', color: 'var(--c-melon)' },
+  { key: 'youtube_music', label: 'YT Music', color: 'var(--c-youtube-music)' },
+  { key: 'spotify', label: 'SPOTIFY', color: 'var(--c-spotify)' },
+  { key: 'genie', label: 'GENIE', color: 'var(--c-genie)' },
+  { key: 'flo',   label: 'FLO',   color: 'var(--c-flo)'   },
+  { key: 'bugs',  label: 'BUGS',  color: 'var(--c-bugs)'  },
+  { key: 'vibe',  label: 'VIBE',  color: 'var(--c-vibe)'  },
 ];
 
-let _chartActiveSort = 'overall';
-
-function _chartDeltaHtml(rank, prev, cls) {
-  cls = cls || 'delta';
-  if (prev == null) return '<span class="'+cls+' new">NEW</span>';
-  if (prev === rank) return '<span class="'+cls+' same">-</span>';
-  if (prev > rank) return '<span class="'+cls+' up">▲'+(prev - rank)+'</span>';
-  return '<span class="'+cls+' down">▼'+(rank - prev)+'</span>';
-}
-
-function _chartPlatformCellHtml(platform, rankInfo) {
+function _chartRankPillHtml(platform, rankInfo) {
   if (!rankInfo || rankInfo.rank == null) {
-    return '<span class="cp-cell out" style="--tc:'+platform.color+';"><span class="cp-label">'+platform.short+'</span><span class="cp-rank">'+(getCurrentT().chart_out || '-')+'</span></span>';
+    return '<div class="chart-rank-pill out"><span class="plat" style="color:'+platform.color+';">'+platform.label+'</span><span class="rankval">'+(getCurrentT().chart_out || '-')+'</span></div>';
   }
-  const deltaHtml = _chartDeltaHtml(rankInfo.rank, rankInfo.previousRank, 'cp-delta');
-  return '<span class="cp-cell" style="--tc:'+platform.color+';"><span class="cp-label">'+platform.short+'</span><span class="cp-rank">'+rankInfo.rank+'</span>'+deltaHtml+'</span>';
-}
-
-function _chartAvgRank(song) {
-  const ranks = song.ranks || {};
-  let sum = 0, n = 0;
-  _CHART_PLATFORMS.forEach(p => {
-    const r = ranks[p.key];
-    if (r && r.rank != null) { sum += r.rank; n++; }
-  });
-  return n ? (sum / n) : Infinity;
+  const rank = rankInfo.rank;
+  const prev = rankInfo.previousRank;
+  let deltaHtml;
+  if (prev == null) {
+    deltaHtml = '<span class="delta new">NEW</span>';
+  } else if (prev === rank) {
+    deltaHtml = '<span class="delta same">-</span>';
+  } else if (prev > rank) {
+    deltaHtml = '<span class="delta up">▲'+(prev - rank)+'</span>';
+  } else {
+    deltaHtml = '<span class="delta down">▼'+(rank - prev)+'</span>';
+  }
+  return '<div class="chart-rank-pill"><span class="plat" style="color:'+platform.color+';">'+platform.label+'</span><span class="rankval">'+rank+'</span>'+deltaHtml+'</div>';
 }
 
 function buildChartGrid() {
   const list = document.getElementById('chartList');
   if (!list || !_chartLoaded) return;
-
-  const allSongs = (CHART_DATA && CHART_DATA.songs) || [];
-  let songs, sortPlat = null;
-
-  if (_chartActiveSort === 'overall') {
-    songs = allSongs
-      .filter(s => s.ranks && _CHART_PLATFORMS.some(p => s.ranks[p.key] && s.ranks[p.key].rank != null))
-      .slice()
-      .sort((a, b) => _chartAvgRank(a) - _chartAvgRank(b));
-  } else {
-    sortPlat = _CHART_PLATFORMS.find(p => p.key === _chartActiveSort) || _CHART_PLATFORMS[0];
-    songs = allSongs
-      .filter(s => s.ranks && s.ranks[sortPlat.key] && s.ranks[sortPlat.key].rank != null)
-      .slice()
-      .sort((a, b) => a.ranks[sortPlat.key].rank - b.ranks[sortPlat.key].rank);
-  }
-
+  const songs = (CHART_DATA && CHART_DATA.songs) || [];
   if (!songs.length) {
     list.innerHTML = '<div class="chart-empty"><div class="ico">🎵</div><p>'+(getCurrentT().chart_empty || '차트 정보를 불러올 수 없습니다.')+'</p></div>';
     return;
   }
-  const noThumb = '<div class="ct-thumb-ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>';
+  const noThumb = '<div class="chart-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>';
   list.innerHTML = songs.map((song, idx) => {
-    const thumb = song.albumImageUrl ? '<img class="ct-thumb" src="'+_escHtml(song.albumImageUrl)+'" alt="" loading="lazy" decoding="async">' : noThumb;
+    const delay = Math.min(idx * (_isMobile ? 0.02 : 0.035), _isMobile ? 0.22 : 0.5).toFixed(3);
+    const thumb = song.albumImageUrl ? '<img class="chart-thumb" src="'+_escHtml(song.albumImageUrl)+'" alt="" loading="lazy" decoding="async">' : noThumb;
     const ranks = song.ranks || {};
-    let rank, deltaHtml;
-    if (sortPlat) {
-      const info = ranks[sortPlat.key];
-      rank = info.rank;
-      deltaHtml = _chartDeltaHtml(rank, info.previousRank);
-    } else {
-      rank = idx + 1;
-      deltaHtml = '';
-    }
-    const rankClass = rank === 1 ? 'rank-num r1' : 'rank-num';
-    const cells = _CHART_PLATFORMS.map(p => _chartPlatformCellHtml(p, ranks[p.key])).join('');
-    return '<div class="chart-row">'
-      +'<div class="chart-row-top">'
-        +'<span class="rank-cluster"><span class="'+rankClass+'">'+rank+'</span>'+deltaHtml+'</span>'
-        +thumb
-        +'<div class="ct-meta"><div class="ct-title">'+_escHtml(song.songName)+'</div><div class="ct-artist">'+_escHtml(song.artistName)+'</div></div>'
-      +'</div>'
-      +'<div class="chart-platform-grid">'+cells+'</div>'
+    const pills = _CHART_PLATFORMS.map(p => _chartRankPillHtml(p, ranks[p.key])).join('');
+    return '<div class="chart-card" style="animation:fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both '+delay+'s;">'
+      +thumb
+      +'<div class="chart-info"><div class="chart-song-title">'+_escHtml(song.songName)+'</div><div class="chart-song-artist">'+_escHtml(song.artistName)+'</div></div>'
+      +'<div class="chart-ranks">'+pills+'</div>'
       +'</div>';
   }).join('');
 }
-
-(function() {
-  const bar = document.getElementById('chartSortbar');
-  if (!bar) return;
-  bar.addEventListener('click', function(e) {
-    const btn = e.target.closest('.chart-sort-chip');
-    if (!btn || btn.classList.contains('active')) return;
-    _chartActiveSort = btn.getAttribute('data-key');
-    bar.querySelectorAll('.chart-sort-chip').forEach(t => t.classList.toggle('active', t === btn));
-    buildChartGrid();
-  });
-})();
-
-
 
 const SCHED_TYPE_COLOR = {
   broadcast: 'var(--c-sched-broadcast)',
@@ -9832,6 +9799,12 @@ window.addEventListener('load', () => {
   }
 });
 
+document.addEventListener('click', function(e) {
+  const btn = document.getElementById('chartInfoBtn');
+  if (btn && btn.classList.contains('open') && !btn.contains(e.target)) {
+    btn.classList.remove('open');
+  }
+});
 </script>
 
 <button id="scrollTop" title="맨 위로" aria-label="맨 위로">
