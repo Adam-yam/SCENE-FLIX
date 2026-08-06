@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-06T16:00:56.744501+09:00",
+  "updatedAt": "2026-08-06T17:00:52.764967+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -55,8 +55,8 @@
           "previousRank": 6
         },
         "genie": {
-          "rank": 8,
-          "previousRank": 6
+          "rank": 7,
+          "previousRank": 8
         },
         "vibe": {
           "rank": 5,
@@ -64,7 +64,7 @@
         },
         "bugs": {
           "rank": 11,
-          "previousRank": 10
+          "previousRank": 11
         },
         "flo": {
           "rank": 6,
@@ -90,16 +90,16 @@
           "previousRank": 9
         },
         "genie": {
-          "rank": 33,
-          "previousRank": 31
+          "rank": 31,
+          "previousRank": 33
         },
         "vibe": {
           "rank": 32,
           "previousRank": 31
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 11
+          "rank": 9,
+          "previousRank": 10
         },
         "flo": {
           "rank": 7,
@@ -121,16 +121,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 58,
-          "previousRank": 65
+          "rank": 59,
+          "previousRank": 58
         },
         "bugs": {
-          "rank": 49,
-          "previousRank": 33
+          "rank": 36,
+          "previousRank": 49
         },
         "flo": {
           "rank": 75,
-          "previousRank": 72
+          "previousRank": 75
         },
         "youtube_music": {
           "rank": 44,
@@ -148,11 +148,11 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 92,
-          "previousRank": 96
+          "rank": 99,
+          "previousRank": 92
         },
         "flo": {
-          "rank": 99,
+          "rank": 100,
           "previousRank": 99
         },
         "youtube_music": {
