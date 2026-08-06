@@ -809,6 +809,29 @@ header {
   z-index: 3;
 }
 
+.watched-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(20,120,80,0.55);
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 2px 7px;
+  border-radius: 5px;
+  border: 1px solid rgba(255,255,255,0.28);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.22);
+  backdrop-filter: blur(8px) saturate(1.6);
+  -webkit-backdrop-filter: blur(8px) saturate(1.6);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.watched-badge::before {
+  content: "✓ ";
+}
+
 .play-ring {
   position: absolute;
   inset: 0;
@@ -5044,6 +5067,7 @@ function openVideo(e, vid) {
 
   try { localStorage.setItem('rescene-last-watched', vid); } catch {}
   _applyLastWatchedBadge(vid);
+  markWatched(vid);
 }
 
 function restoreLastWatched() {
@@ -7324,6 +7348,32 @@ function saveBookmarks() {
   try { localStorage.setItem('rescene-bookmarks', JSON.stringify([...BOOKMARKS])); } catch {}
 }
 
+let WATCHED = new Set();
+try {
+  const savedW = localStorage.getItem('rescene-watched');
+  if (savedW) WATCHED = new Set(JSON.parse(savedW));
+} catch {}
+
+function saveWatched() {
+  try { localStorage.setItem('rescene-watched', JSON.stringify([...WATCHED])); } catch {}
+}
+
+function markWatched(vid) {
+  if (WATCHED.has(vid)) return;
+  WATCHED.add(vid);
+  saveWatched();
+  const card = document.getElementById('bvc-' + vid);
+  if (card) {
+    const thumb = card.querySelector('.thumb');
+    if (thumb && !thumb.querySelector('.watched-badge')) {
+      const badge = document.createElement('span');
+      badge.className = 'watched-badge';
+      badge.textContent = '시청함';
+      thumb.appendChild(badge);
+    }
+  }
+}
+
 function toggleBookmark(e, vid) {
   e.preventDefault();
   e.stopPropagation();
@@ -7525,13 +7575,14 @@ function getTypeLabel(type) {
 
 const _PLAY_RING_SVG = `<div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>`;
 
-function buildThumbHtml(vid, badgeHtml) {
+function buildThumbHtml(vid, badgeHtml, watched) {
   return `<div class="thumb">
     <img src="https://img.youtube.com/vi/${vid}/mqdefault.jpg" alt=""
          loading="lazy" decoding="async"
          onerror="this.src='https://img.youtube.com/vi/${vid}/hqdefault.jpg'">
     ${_PLAY_RING_SVG}
     ${badgeHtml}
+    ${watched ? '<span class="watched-badge">시청함</span>' : ''}
     ${shareBtnHtml(vid)}
     ${bmBtnHtml(vid)}
   </div>`;
@@ -7924,6 +7975,7 @@ function buildAllVideosGrid() {
 
 function buildAllVideoCard(item, delay, idPrefix, _ML) {
   const pfx = idPrefix || 'avc';
+  const isWatched = pfx === 'bvc' && WATCHED.has(item.vid);
   const tb = TYPE_BADGE[item.type] || 'tb-content';
   const tl = getTypeLabel(item.type);
   const m = item.meta || {};
@@ -7945,7 +7997,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const initialSearch = (videoTitle + ' ' + dateStr + ' live ' + memberNames + ' ' + memberNamesOrig).toLowerCase();
     return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, '')}
+      ${buildThumbHtml(item.vid, '', isWatched)}
       <div class="cbody">
         ${titleHtml}
         <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
@@ -7966,7 +8018,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       : `<div class="ctags"><span class="skel skel-tag"></span></div>`;
     const initialSearch = (videoTitle + ' ' + tl + ' ' + showLabel + ' ' + channel + ' ' + song + ' ' + dateStr).toLowerCase();
     return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, '')}
+      ${buildThumbHtml(item.vid, '', isWatched)}
       <div class="cbody">
         ${titleHtml}
         <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : item.loaded ? '' : `<span class="skel skel-date"></span>`}</div>
@@ -7986,7 +8038,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + (ref.category || '') + ' ' + categoryLabel + ' ' + dateStr).toLowerCase();
     return `<a class="vcard card-base hover-lift tb-content" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, '')}
+      ${buildThumbHtml(item.vid, '', isWatched)}
       <div class="cbody">
         ${titleHtml}
         <div class="cmeta">${metaHtml}</div>
@@ -8006,7 +8058,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + channelLabel + ' ' + channelKey + ' ' + dateStr).toLowerCase();
     return `<a class="vcard card-base hover-lift tb-external" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, '')}
+      ${buildThumbHtml(item.vid, '', isWatched)}
       <div class="cbody">
         ${titleHtml}
         <div class="cmeta">${metaHtml}</div>
@@ -8017,7 +8069,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
 
   const initialSearch = (videoTitle + ' ' + tl + ' ' + dateStr).toLowerCase();
   return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-    ${buildThumbHtml(item.vid, '')}
+    ${buildThumbHtml(item.vid, '', isWatched)}
     <div class="cbody">
       <div class="csong-multi">${_escHtml(videoTitle)}</div>
       <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
