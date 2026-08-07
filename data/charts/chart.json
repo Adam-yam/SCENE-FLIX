@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08T06:00:55.471626+09:00",
+  "updatedAt": "2026-08-08T07:01:02.254137+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,8 +20,8 @@
           "previousRank": 1
         },
         "genie": {
-          "rank": 18,
-          "previousRank": 2
+          "rank": 3,
+          "previousRank": 18
         },
         "vibe": {
           "rank": 2,
@@ -56,7 +56,7 @@
         },
         "genie": {
           "rank": 23,
-          "previousRank": 10
+          "previousRank": 23
         },
         "vibe": {
           "rank": 5,
@@ -75,8 +75,8 @@
           "previousRank": 4
         },
         "spotify": {
-          "rank": 5,
-          "previousRank": 4
+          "rank": 6,
+          "previousRank": 5
         }
       }
     },
@@ -90,20 +90,20 @@
           "previousRank": 10
         },
         "genie": {
-          "rank": 36,
-          "previousRank": 39
+          "rank": 51,
+          "previousRank": 36
         },
         "vibe": {
           "rank": 30,
-          "previousRank": 28
+          "previousRank": 30
         },
         "bugs": {
           "rank": 11,
           "previousRank": 14
         },
         "flo": {
-          "rank": 8,
-          "previousRank": 7
+          "rank": 9,
+          "previousRank": 8
         },
         "youtube_music": {
           "rank": 10,
@@ -111,7 +111,7 @@
         },
         "spotify": {
           "rank": 12,
-          "previousRank": 13
+          "previousRank": 12
         }
       }
     },
@@ -129,7 +129,7 @@
           "previousRank": 58
         },
         "flo": {
-          "rank": 76,
+          "rank": 77,
           "previousRank": 76
         },
         "youtube_music": {
@@ -137,7 +137,7 @@
           "previousRank": 35
         },
         "spotify": {
-          "rank": 34,
+          "rank": 36,
           "previousRank": 34
         }
       }
@@ -148,7 +148,7 @@
       "albumImageUrl": "https://cdn.music-flo.com/image/v2/album/348/310/28/04/428310348_17ef3214248e8c9b_o.jpg?1724652245498/dims/resize/600x600/quality/90",
       "ranks": {
         "flo": {
-          "rank": 97,
+          "rank": 98,
           "previousRank": 97
         },
         "youtube_music": {
@@ -156,8 +156,8 @@
           "previousRank": 33
         },
         "spotify": {
-          "rank": 64,
-          "previousRank": 63
+          "rank": 63,
+          "previousRank": 64
         }
       }
     },
@@ -171,8 +171,8 @@
           "previousRank": 52
         },
         "spotify": {
-          "rank": 175,
-          "previousRank": 197
+          "rank": 141,
+          "previousRank": 175
         }
       }
     },
