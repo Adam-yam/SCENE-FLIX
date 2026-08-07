@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-07T23:01:04.258723+09:00",
+  "updatedAt": "2026-08-08T00:01:03.239693+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,16 +20,16 @@
           "previousRank": 1
         },
         "genie": {
-          "rank": 1,
-          "previousRank": 2
+          "rank": 2,
+          "previousRank": 1
         },
         "vibe": {
           "rank": 2,
           "previousRank": 2
         },
         "bugs": {
-          "rank": 4,
-          "previousRank": 2
+          "rank": 9,
+          "previousRank": 3
         },
         "flo": {
           "rank": 1,
@@ -55,7 +55,7 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 6,
+          "rank": 10,
           "previousRank": 6
         },
         "vibe": {
@@ -64,7 +64,7 @@
         },
         "bugs": {
           "rank": 13,
-          "previousRank": 11
+          "previousRank": 9
         },
         "flo": {
           "rank": 6,
@@ -91,15 +91,15 @@
         },
         "genie": {
           "rank": 39,
-          "previousRank": 30
+          "previousRank": 39
         },
         "vibe": {
           "rank": 30,
           "previousRank": 28
         },
         "bugs": {
-          "rank": 11,
-          "previousRank": 12
+          "rank": 14,
+          "previousRank": 20
         },
         "flo": {
           "rank": 7,
@@ -121,15 +121,15 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 51,
-          "previousRank": 55
+          "rank": 56,
+          "previousRank": 51
         },
         "bugs": {
-          "rank": 39,
-          "previousRank": 42
+          "rank": 58,
+          "previousRank": 58
         },
         "flo": {
-          "rank": 67,
+          "rank": 69,
           "previousRank": 67
         },
         "youtube_music": {
@@ -145,10 +145,14 @@
     {
       "songName": "Pinball",
       "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://cdn.music-flo.com/image/v2/album/348/310/28/04/428310348_17ef3214248e8c9b_o.jpg?1724652245498/dims/resize/600x600/quality/90",
+      "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
+        "bugs": {
+          "rank": 82,
+          "previousRank": 107
+        },
         "flo": {
-          "rank": 97,
+          "rank": 96,
           "previousRank": 97
         },
         "youtube_music": {
