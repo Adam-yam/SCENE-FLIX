@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-07T15:00:50.183475+09:00",
+  "updatedAt": "2026-08-07T16:01:00.543333+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,7 +28,7 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 2,
+          "rank": 1,
           "previousRank": 2
         },
         "flo": {
@@ -56,7 +56,7 @@
         },
         "genie": {
           "rank": 8,
-          "previousRank": 7
+          "previousRank": 8
         },
         "vibe": {
           "rank": 5,
@@ -64,7 +64,7 @@
         },
         "bugs": {
           "rank": 10,
-          "previousRank": 11
+          "previousRank": 9
         },
         "flo": {
           "rank": 6,
@@ -90,20 +90,20 @@
           "previousRank": 9
         },
         "genie": {
-          "rank": 30,
-          "previousRank": 29
+          "rank": 32,
+          "previousRank": 30
         },
         "vibe": {
           "rank": 30,
           "previousRank": 28
         },
         "bugs": {
-          "rank": 11,
-          "previousRank": 10
+          "rank": 9,
+          "previousRank": 12
         },
         "flo": {
           "rank": 7,
-          "previousRank": 8
+          "previousRank": 7
         },
         "youtube_music": {
           "rank": 10,
@@ -121,15 +121,15 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 65,
-          "previousRank": 62
+          "rank": 58,
+          "previousRank": 65
         },
         "bugs": {
-          "rank": 77,
-          "previousRank": 34
+          "rank": 36,
+          "previousRank": 63
         },
         "flo": {
-          "rank": 76,
+          "rank": 75,
           "previousRank": 76
         },
         "youtube_music": {
@@ -149,7 +149,7 @@
       "ranks": {
         "flo": {
           "rank": 98,
-          "previousRank": 96
+          "previousRank": 98
         },
         "youtube_music": {
           "rank": 36,
