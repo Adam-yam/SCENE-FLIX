@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08T01:00:55.232426+09:00",
+  "updatedAt": "2026-08-08T02:00:52.966285+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -130,7 +130,7 @@
         },
         "flo": {
           "rank": 74,
-          "previousRank": 69
+          "previousRank": 74
         },
         "youtube_music": {
           "rank": 44,
@@ -148,7 +148,7 @@
       "albumImageUrl": "https://cdn.music-flo.com/image/v2/album/348/310/28/04/428310348_17ef3214248e8c9b_o.jpg?1724652245498/dims/resize/600x600/quality/90",
       "ranks": {
         "flo": {
-          "rank": 96,
+          "rank": 95,
           "previousRank": 96
         },
         "youtube_music": {
