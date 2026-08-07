@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-07T16:01:00.543333+09:00",
+  "updatedAt": "2026-08-07T17:01:01.476172+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -29,7 +29,7 @@
         },
         "bugs": {
           "rank": 1,
-          "previousRank": 2
+          "previousRank": 1
         },
         "flo": {
           "rank": 1,
@@ -63,8 +63,8 @@
           "previousRank": 5
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 9
+          "rank": 8,
+          "previousRank": 10
         },
         "flo": {
           "rank": 6,
@@ -90,16 +90,16 @@
           "previousRank": 9
         },
         "genie": {
-          "rank": 32,
-          "previousRank": 30
+          "rank": 33,
+          "previousRank": 32
         },
         "vibe": {
           "rank": 30,
           "previousRank": 28
         },
         "bugs": {
-          "rank": 9,
-          "previousRank": 12
+          "rank": 11,
+          "previousRank": 9
         },
         "flo": {
           "rank": 7,
@@ -121,16 +121,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 58,
-          "previousRank": 65
+          "rank": 63,
+          "previousRank": 58
         },
         "bugs": {
-          "rank": 36,
-          "previousRank": 63
+          "rank": 45,
+          "previousRank": 36
         },
         "flo": {
           "rank": 75,
-          "previousRank": 76
+          "previousRank": 75
         },
         "youtube_music": {
           "rank": 44,
@@ -145,8 +145,12 @@
     {
       "songName": "Pinball",
       "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://cdn.music-flo.com/image/v2/album/348/310/28/04/428310348_17ef3214248e8c9b_o.jpg?1724652245498/dims/resize/600x600/quality/90",
+      "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
+        "bugs": {
+          "rank": 72,
+          "previousRank": 109
+        },
         "flo": {
           "rank": 98,
           "previousRank": 98
