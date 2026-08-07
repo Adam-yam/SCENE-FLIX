@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-07T03:05:28Z",
+  "updated": "2026-08-07T09:05:30Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -455,6 +455,14 @@
       "title": "SPOTV K-POP AWARDS(SKA)",
       "detail": "",
       "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-09-10",
+      "time": "",
+      "title": "Spotify House Seoul",
+      "detail": "",
+      "type": "event",
       "source": "mnetplus"
     },
     {
