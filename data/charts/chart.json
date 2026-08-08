@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-08T23:00:53.637505+09:00",
+  "updatedAt": "2026-08-09T00:00:51.198132+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,7 +28,7 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 2,
+          "rank": 3,
           "previousRank": 2
         },
         "flo": {
@@ -55,7 +55,7 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 6,
+          "rank": 21,
           "previousRank": 6
         },
         "vibe": {
@@ -63,8 +63,8 @@
           "previousRank": 5
         },
         "bugs": {
-          "rank": 8,
-          "previousRank": 11
+          "rank": 13,
+          "previousRank": 8
         },
         "flo": {
           "rank": 6,
@@ -87,18 +87,18 @@
       "ranks": {
         "melon": {
           "rank": 7,
-          "previousRank": 8
+          "previousRank": 7
         },
         "genie": {
           "rank": 39,
-          "previousRank": 30
+          "previousRank": 39
         },
         "vibe": {
           "rank": 30,
           "previousRank": 30
         },
         "bugs": {
-          "rank": 13,
+          "rank": 10,
           "previousRank": 13
         },
         "flo": {
@@ -121,12 +121,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 56,
-          "previousRank": 59
+          "rank": 57,
+          "previousRank": 56
         },
         "bugs": {
-          "rank": 48,
-          "previousRank": 41
+          "rank": 55,
+          "previousRank": 48
         },
         "flo": {
           "rank": 77,
@@ -148,8 +148,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 66,
-          "previousRank": 97
+          "rank": 92,
+          "previousRank": 66
         },
         "flo": {
           "rank": 97,
