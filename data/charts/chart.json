@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-09T06:00:57.149943+09:00",
+  "updatedAt": "2026-08-09T07:00:49.540583+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -21,7 +21,7 @@
         },
         "genie": {
           "rank": 17,
-          "previousRank": 2
+          "previousRank": 17
         },
         "vibe": {
           "rank": 2,
@@ -56,7 +56,7 @@
         },
         "genie": {
           "rank": 22,
-          "previousRank": 21
+          "previousRank": 22
         },
         "vibe": {
           "rank": 5,
@@ -76,7 +76,7 @@
         },
         "spotify": {
           "rank": 6,
-          "previousRank": 5
+          "previousRank": 6
         }
       }
     },
@@ -90,19 +90,19 @@
           "previousRank": 10
         },
         "genie": {
-          "rank": 45,
-          "previousRank": 39
+          "rank": 69,
+          "previousRank": 45
         },
         "vibe": {
-          "rank": 30,
-          "previousRank": 30
+          "rank": 29,
+          "previousRank": 28
         },
         "bugs": {
           "rank": 13,
           "previousRank": 10
         },
         "flo": {
-          "rank": 8,
+          "rank": 9,
           "previousRank": 8
         },
         "youtube_music": {
@@ -110,7 +110,7 @@
           "previousRank": 9
         },
         "spotify": {
-          "rank": 12,
+          "rank": 13,
           "previousRank": 12
         }
       }
@@ -129,7 +129,7 @@
           "previousRank": 55
         },
         "flo": {
-          "rank": 79,
+          "rank": 81,
           "previousRank": 79
         },
         "youtube_music": {
@@ -138,7 +138,7 @@
         },
         "spotify": {
           "rank": 36,
-          "previousRank": 34
+          "previousRank": 36
         }
       }
     },
@@ -156,8 +156,8 @@
           "previousRank": 33
         },
         "spotify": {
-          "rank": 63,
-          "previousRank": 64
+          "rank": 58,
+          "previousRank": 63
         }
       }
     },
@@ -171,8 +171,8 @@
           "previousRank": 52
         },
         "spotify": {
-          "rank": 141,
-          "previousRank": 175
+          "rank": 155,
+          "previousRank": 141
         }
       }
     },
