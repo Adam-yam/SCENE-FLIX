@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-08T15:05:33Z",
+  "updated": "2026-08-08T21:05:30Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -399,6 +399,14 @@
       "title": "KCON LA 2026",
       "detail": "",
       "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-08-15",
+      "time": "19:30",
+      "title": "tvN <놀라운 토요일>",
+      "detail": "",
+      "type": "broadcast",
       "source": "mnetplus"
     },
     {
