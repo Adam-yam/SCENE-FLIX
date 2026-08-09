@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-10T00:00:51.057688+09:00",
+  "updatedAt": "2026-08-10T01:00:50.891571+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,8 +20,8 @@
           "previousRank": 1
         },
         "genie": {
-          "rank": 2,
-          "previousRank": 1
+          "rank": 17,
+          "previousRank": 2
         },
         "vibe": {
           "rank": 2,
@@ -51,12 +51,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 4,
-          "previousRank": 4
+          "rank": 6,
+          "previousRank": 6
         },
         "genie": {
           "rank": 20,
-          "previousRank": 6
+          "previousRank": 20
         },
         "vibe": {
           "rank": 5,
@@ -86,11 +86,11 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 7,
-          "previousRank": 7
+          "rank": 9,
+          "previousRank": 9
         },
         "genie": {
-          "rank": 33,
+          "rank": 40,
           "previousRank": 33
         },
         "vibe": {
@@ -121,8 +121,8 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 48,
-          "previousRank": 51
+          "rank": 73,
+          "previousRank": 73
         },
         "bugs": {
           "rank": 26,
@@ -130,7 +130,7 @@
         },
         "flo": {
           "rank": 73,
-          "previousRank": 74
+          "previousRank": 73
         },
         "youtube_music": {
           "rank": 51,
@@ -152,8 +152,8 @@
           "previousRank": 60
         },
         "flo": {
-          "rank": 90,
-          "previousRank": 94
+          "rank": 91,
+          "previousRank": 90
         },
         "youtube_music": {
           "rank": 34,
