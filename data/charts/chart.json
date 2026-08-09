@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-09T20:01:00.311823+09:00",
+  "updatedAt": "2026-08-09T21:00:49.246113+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -29,14 +29,14 @@
         },
         "bugs": {
           "rank": 2,
-          "previousRank": 2
+          "previousRank": 1
         },
         "flo": {
           "rank": 1,
           "previousRank": 1
         },
         "youtube_music": {
-          "rank": 1,
+          "rank": 2,
           "previousRank": 1
         },
         "spotify": {
@@ -55,7 +55,7 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 7,
+          "rank": 6,
           "previousRank": 7
         },
         "vibe": {
@@ -63,8 +63,8 @@
           "previousRank": 5
         },
         "bugs": {
-          "rank": 9,
-          "previousRank": 11
+          "rank": 14,
+          "previousRank": 13
         },
         "flo": {
           "rank": 6,
@@ -72,7 +72,7 @@
         },
         "youtube_music": {
           "rank": 6,
-          "previousRank": 4
+          "previousRank": 6
         },
         "spotify": {
           "rank": 6,
@@ -90,16 +90,16 @@
           "previousRank": 8
         },
         "genie": {
-          "rank": 29,
-          "previousRank": 28
+          "rank": 28,
+          "previousRank": 29
         },
         "vibe": {
           "rank": 29,
           "previousRank": 28
         },
         "bugs": {
-          "rank": 8,
-          "previousRank": 10
+          "rank": 11,
+          "previousRank": 11
         },
         "flo": {
           "rank": 7,
@@ -107,7 +107,7 @@
         },
         "youtube_music": {
           "rank": 10,
-          "previousRank": 9
+          "previousRank": 10
         },
         "spotify": {
           "rank": 13,
@@ -121,20 +121,20 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 61,
+          "rank": 58,
           "previousRank": 61
         },
         "bugs": {
-          "rank": 44,
-          "previousRank": 36
+          "rank": 41,
+          "previousRank": 43
         },
         "flo": {
           "rank": 74,
-          "previousRank": 75
+          "previousRank": 74
         },
         "youtube_music": {
-          "rank": 44,
-          "previousRank": 35
+          "rank": 51,
+          "previousRank": 44
         },
         "spotify": {
           "rank": 36,
@@ -148,16 +148,16 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 89,
-          "previousRank": 97
+          "rank": 88,
+          "previousRank": 100
         },
         "flo": {
-          "rank": 92,
-          "previousRank": 94
+          "rank": 93,
+          "previousRank": 92
         },
         "youtube_music": {
-          "rank": 36,
-          "previousRank": 33
+          "rank": 34,
+          "previousRank": 36
         },
         "spotify": {
           "rank": 58,
@@ -171,8 +171,8 @@
       "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
       "ranks": {
         "youtube_music": {
-          "rank": 58,
-          "previousRank": 52
+          "rank": 63,
+          "previousRank": 58
         },
         "spotify": {
           "rank": 155,
@@ -186,19 +186,8 @@
       "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/91/66/5a/91665a02-b5c1-8336-e973-88746539ab71/8804775401787.jpg/600x600bb.jpg",
       "ranks": {
         "youtube_music": {
-          "rank": 60,
+          "rank": 62,
           "previousRank": 60
-        }
-      }
-    },
-    {
-      "songName": "Busy Boy",
-      "artistName": "RESCENE",
-      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/04/87/f4/0487f448-50a5-59d6-fdb5-21e440d969f7/191953518954.jpg/600x600bb.jpg",
-      "ranks": {
-        "youtube_music": {
-          "rank": 95,
-          "previousRank": 79
         }
       }
     }
