@@ -330,25 +330,65 @@ html { scroll-behavior: smooth; scrollbar-gutter: stable; overscroll-behavior-y:
   position: fixed;
   top: calc(var(--safe-top) + 10px);
   left: 50%;
-  width: 34px;
-  height: 34px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: var(--card-h);
-  border: 1px solid var(--border);
-  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  background: color-mix(in srgb, var(--surf) 78%, transparent);
+  backdrop-filter: blur(14px) saturate(1.6);
+  -webkit-backdrop-filter: blur(14px) saturate(1.6);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.28), inset 0 1px 0 var(--glass-highlight);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 700;
   opacity: 0;
-  transform: translate(-50%, -56px) rotate(0deg);
+  transform: translate(-50%, -58px);
   pointer-events: none;
   will-change: transform, opacity;
 }
-#ptrIndicator.ptr-anim { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), opacity 0.2s ease; }
-#ptrIndicator.ptr-spin svg { animation: ptr-spin 0.7s linear infinite; }
-#ptrIndicator svg { width: 17px; height: 17px; color: var(--accent); display: block; }
-@keyframes ptr-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+#ptrIndicator.ptr-anim { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), opacity 0.2s ease, border-color 0.2s ease; }
+#ptrIndicator.ptr-ready { border-color: color-mix(in srgb, var(--accent) 55%, var(--glass-border)); }
+
+#ptrArrow {
+  width: 16px;
+  height: 16px;
+  color: var(--muted);
+  transition: transform 0.2s cubic-bezier(0.22,1,0.36,1), color 0.2s ease;
+}
+#ptrIndicator.ptr-ready #ptrArrow { color: var(--accent); }
+#ptrIndicator.ptr-loading #ptrArrow { display: none; }
+
+.ptr-spinner {
+  position: relative;
+  width: 17px;
+  height: 17px;
+  display: none;
+}
+#ptrIndicator.ptr-loading .ptr-spinner {
+  display: block;
+  animation: ptr-spin 0.8s steps(8) infinite;
+}
+.ptr-spinner i {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 1.6px;
+  height: 5px;
+  margin-left: -0.8px;
+  border-radius: 1px;
+  background: var(--accent);
+  transform-origin: 0.8px 8.5px;
+}
+.ptr-spinner i:nth-child(1) { transform: rotate(0deg);   opacity: 1;    }
+.ptr-spinner i:nth-child(2) { transform: rotate(45deg);  opacity: 0.85; }
+.ptr-spinner i:nth-child(3) { transform: rotate(90deg);  opacity: 0.7;  }
+.ptr-spinner i:nth-child(4) { transform: rotate(135deg); opacity: 0.55; }
+.ptr-spinner i:nth-child(5) { transform: rotate(180deg); opacity: 0.4;  }
+.ptr-spinner i:nth-child(6) { transform: rotate(225deg); opacity: 0.28; }
+.ptr-spinner i:nth-child(7) { transform: rotate(270deg); opacity: 0.18; }
+.ptr-spinner i:nth-child(8) { transform: rotate(315deg); opacity: 0.12; }
+@keyframes ptr-spin { to { transform: rotate(360deg); } }
 
 @keyframes shimmer {
   0%   { background-position: -400px 0; }
@@ -9967,9 +10007,12 @@ document.addEventListener('click', function(e) {
 </button>
 
 <div id="ptrIndicator" aria-hidden="true">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <svg id="ptrArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <polyline points="6 9 12 15 18 9"/>
   </svg>
+  <div class="ptr-spinner">
+    <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+  </div>
 </div>
 
 
@@ -10007,6 +10050,7 @@ if ('serviceWorker' in navigator) {
 
   var el = document.getElementById('ptrIndicator');
   if (!el) return;
+  var arrow = document.getElementById('ptrArrow');
 
   var EXCLUDE_SELECTOR = '#mobileDrawer, #subSidebar, .song-nav-outer, .sched-list-col, .drawer-items';
   var THRESHOLD = 68;
@@ -10016,6 +10060,7 @@ if ('serviceWorker' in navigator) {
   var pulling = false;
   var dragging = false;
   var refreshing = false;
+  var ready = false;
 
   function pageScrollTop() {
     return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -10029,32 +10074,36 @@ if ('serviceWorker' in navigator) {
     return true;
   }
 
-  function setIndicator(dist, animated) {
+  function setIndicator(dist) {
     var ratio = Math.min(dist / THRESHOLD, 1);
     var travel = Math.min(dist, MAX_PULL) * 0.72;
-    el.classList.toggle('ptr-anim', !!animated);
+    el.classList.remove('ptr-anim');
     el.style.opacity = String(Math.min(ratio * 1.1, 1));
-    el.style.transform = 'translate(-50%, ' + (-56 + travel) + 'px) rotate(' + (ratio * 200) + 'deg)';
+    el.style.transform = 'translate(-50%, ' + (-58 + travel) + 'px)';
+    arrow.style.transform = 'rotate(' + (ratio * 180) + 'deg)';
+    ready = ratio >= 1;
+    el.classList.toggle('ptr-ready', ready);
   }
 
   function reset() {
     el.classList.add('ptr-anim');
-    el.classList.remove('ptr-spin');
+    el.classList.remove('ptr-ready', 'ptr-loading');
     el.style.opacity = '0';
-    el.style.transform = 'translate(-50%, -56px) rotate(0deg)';
+    el.style.transform = 'translate(-50%, -58px)';
+    arrow.style.transform = 'rotate(0deg)';
     pulling = false;
     dragging = false;
+    ready = false;
   }
 
   function doRefresh() {
     refreshing = true;
-    el.classList.add('ptr-anim');
-    el.classList.add('ptr-spin');
+    el.classList.add('ptr-anim', 'ptr-loading');
     el.style.opacity = '1';
-    el.style.transform = 'translate(-50%, 24px) rotate(0deg)';
+    el.style.transform = 'translate(-50%, 24px)';
     setTimeout(function() {
       window.location.reload();
-    }, 300);
+    }, 350);
   }
 
   document.addEventListener('touchstart', function(e) {
@@ -10075,14 +10124,13 @@ if ('serviceWorker' in navigator) {
     }
     dragging = true;
     if (e.cancelable) e.preventDefault();
-    setIndicator(dist, false);
+    setIndicator(dist);
   }, { passive: false });
 
   document.addEventListener('touchend', function() {
     if (!pulling) return;
     if (dragging) {
-      var ratio = parseFloat(el.style.opacity || '0');
-      if (ratio >= 1) {
+      if (ready) {
         doRefresh();
       } else {
         reset();
