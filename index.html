@@ -326,6 +326,30 @@ html { scroll-behavior: smooth; scrollbar-gutter: stable; overscroll-behavior-y:
   touch-action: manipulation;
 }
 
+#ptrIndicator {
+  position: fixed;
+  top: calc(var(--safe-top) + 10px);
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--card-h);
+  border: 1px solid var(--border);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 700;
+  opacity: 0;
+  transform: translate(-50%, -56px) rotate(0deg);
+  pointer-events: none;
+  will-change: transform, opacity;
+}
+#ptrIndicator.ptr-anim { transition: transform 0.25s cubic-bezier(0.22,1,0.36,1), opacity 0.2s ease; }
+#ptrIndicator.ptr-spin svg { animation: ptr-spin 0.7s linear infinite; }
+#ptrIndicator svg { width: 17px; height: 17px; color: var(--accent); display: block; }
+@keyframes ptr-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
 @keyframes shimmer {
   0%   { background-position: -400px 0; }
   100% { background-position:  400px 0; }
@@ -9942,6 +9966,12 @@ document.addEventListener('click', function(e) {
   </svg>
 </button>
 
+<div id="ptrIndicator" aria-hidden="true">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="6 9 12 15 18 9"/>
+  </svg>
+</div>
+
 
 <script>
 if ('serviceWorker' in navigator) {
@@ -9969,6 +9999,106 @@ if ('serviceWorker' in navigator) {
 </script>
 
 <div id="share-toast"></div>
+
+<script>
+(function() {
+  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if (!isTouchDevice) return;
+
+  var el = document.getElementById('ptrIndicator');
+  if (!el) return;
+
+  var EXCLUDE_SELECTOR = '#mobileDrawer, #subSidebar, .song-nav-outer, .sched-list-col, .drawer-items';
+  var THRESHOLD = 68;
+  var MAX_PULL = 110;
+
+  var startY = 0;
+  var pulling = false;
+  var dragging = false;
+  var refreshing = false;
+
+  function pageScrollTop() {
+    return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  }
+
+  function canStartPull(target) {
+    if (refreshing) return false;
+    if (document.body.style.position === 'fixed') return false;
+    if (pageScrollTop() > 0) return false;
+    if (target && target.closest && target.closest(EXCLUDE_SELECTOR)) return false;
+    return true;
+  }
+
+  function setIndicator(dist, animated) {
+    var ratio = Math.min(dist / THRESHOLD, 1);
+    var travel = Math.min(dist, MAX_PULL) * 0.72;
+    el.classList.toggle('ptr-anim', !!animated);
+    el.style.opacity = String(Math.min(ratio * 1.1, 1));
+    el.style.transform = 'translate(-50%, ' + (-56 + travel) + 'px) rotate(' + (ratio * 200) + 'deg)';
+  }
+
+  function reset() {
+    el.classList.add('ptr-anim');
+    el.classList.remove('ptr-spin');
+    el.style.opacity = '0';
+    el.style.transform = 'translate(-50%, -56px) rotate(0deg)';
+    pulling = false;
+    dragging = false;
+  }
+
+  function doRefresh() {
+    refreshing = true;
+    el.classList.add('ptr-anim');
+    el.classList.add('ptr-spin');
+    el.style.opacity = '1';
+    el.style.transform = 'translate(-50%, 24px) rotate(0deg)';
+    setTimeout(function() {
+      window.location.reload();
+    }, 300);
+  }
+
+  document.addEventListener('touchstart', function(e) {
+    if (e.touches.length !== 1) return;
+    if (!canStartPull(e.target)) { pulling = false; return; }
+    startY = e.touches[0].clientY;
+    pulling = true;
+    dragging = false;
+  }, { passive: true });
+
+  document.addEventListener('touchmove', function(e) {
+    if (!pulling || refreshing) return;
+    if (pageScrollTop() > 0) { pulling = false; dragging = false; reset(); return; }
+    var dist = e.touches[0].clientY - startY;
+    if (dist <= 0) {
+      if (dragging) reset();
+      return;
+    }
+    dragging = true;
+    if (e.cancelable) e.preventDefault();
+    setIndicator(dist, false);
+  }, { passive: false });
+
+  document.addEventListener('touchend', function() {
+    if (!pulling) return;
+    if (dragging) {
+      var ratio = parseFloat(el.style.opacity || '0');
+      if (ratio >= 1) {
+        doRefresh();
+      } else {
+        reset();
+      }
+    }
+    pulling = false;
+    dragging = false;
+  }, { passive: true });
+
+  document.addEventListener('touchcancel', function() {
+    pulling = false;
+    dragging = false;
+    reset();
+  }, { passive: true });
+})();
+</script>
 
 </body>
 </html>
