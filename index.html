@@ -326,6 +326,39 @@ html { scroll-behavior: smooth; scrollbar-gutter: stable; overscroll-behavior-y:
   touch-action: manipulation;
 }
 
+#offlineBanner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: calc(var(--safe-top) + 9px) 16px 9px;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  color: #1c1c1e;
+  background: #f0c060;
+  transform: translateY(-100%);
+  transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), background 0.25s ease, color 0.25s ease;
+  will-change: transform;
+}
+#offlineBanner.show { transform: translateY(0); }
+#offlineBanner.online { background: #7de8a0; }
+#offlineBanner .ob-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.75;
+  flex-shrink: 0;
+}
+#offlineBanner.offline .ob-dot { animation: ob-pulse 1.4s ease-in-out infinite; }
+@keyframes ob-pulse { 0%,100% { opacity: 0.4; } 50% { opacity: 1; } }
+
 #ptrIndicator {
   position: fixed;
   top: calc(var(--safe-top) + 10px);
@@ -1492,6 +1525,10 @@ header {
     width: calc(100vw - 24px);
     max-width: 400px;
     will-change: transform;
+    transition: transform 0.3s cubic-bezier(0.22,1,0.36,1);
+  }
+  #mobileBottomNav.nav-hidden {
+    transform: translateX(-50%) translateY(calc(100% + 32px + var(--safe-bottom))) translateZ(0);
   }
 
   #navIndicator {
@@ -1564,11 +1601,12 @@ header {
     justify-content: center;
     cursor: pointer;
     color: var(--muted);
-    transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1), transform 0.18s cubic-bezier(0.4,0,0.2,1);
+    transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1), transform 0.28s cubic-bezier(0.22,1,0.36,1), opacity 0.24s ease;
   }
   #mobileMenuBtn:hover { color: var(--text); background: var(--glass-fill); }
   #mobileMenuBtn:active { transform: scale(0.9); background: var(--glass-fill-h); }
   #mobileMenuBtn svg { width: 20px; height: 20px; }
+  #mobileMenuBtn.nav-hidden { transform: translateY(-64px); opacity: 0; pointer-events: none; }
 
   #mobileMenuBtn.open {
     display: none;
@@ -3234,6 +3272,8 @@ window._i18n = {
     ext_cat_ad:           '광고·홍보',
     ext_cat_event:        '행사',
     share_toast_copied:   '🔗 YouTube 링크 복사됨',
+    offline_banner:       '인터넷 연결이 끊겼어요',
+    offline_reconnected:  '다시 연결됐어요',
     bm_empty_title:       '즐겨찾기한 영상이 없어요.',
     bm_empty_hint_touch:  '카드의 ★ 버튼을 눌러 즐겨찾기를 추가하세요.',
     bm_empty_hint_hover:  '카드에 마우스를 올리면 ★ 버튼이 나타납니다.',
@@ -3297,6 +3337,8 @@ window._i18n = {
     ext_cat_ad:           '広告・PR',
     ext_cat_event:        'イベント',
     share_toast_copied:   '🔗 YouTubeリンクをコピーしました',
+    offline_banner:       'インターネット接続が切れました',
+    offline_reconnected:  '再接続しました',
     bm_empty_title:       'お気に入りの動画がありません。',
     bm_empty_hint_touch:  'カードの★ボタンを押すとお気に入りに追加できます。',
     bm_empty_hint_hover:  'カードにマウスを乗せると★ボタンが表示されます。',
@@ -3360,6 +3402,8 @@ window._i18n = {
     ext_cat_ad:           'AD·PR',
     ext_cat_event:        'Event',
     share_toast_copied:   '🔗 YouTube link copied',
+    offline_banner:       'You\u2019re offline',
+    offline_reconnected:  'Back online',
     bm_empty_title:       'No bookmarked videos yet.',
     bm_empty_hint_touch:  'Tap the ★ button on a card to add it to your favorites.',
     bm_empty_hint_hover:  'Hover over a card to reveal the ★ button.',
@@ -9967,12 +10011,31 @@ updateBookmarkCounts();
 window.addEventListener('load', () => {
   const scrollTopBtn = document.getElementById('scrollTop');
   if (!scrollTopBtn) return;
+  const _navMenuBtn = document.getElementById('mobileMenuBtn');
+  const _navBottomBar = document.getElementById('mobileBottomNav');
   let _scrollTicking = false;
+  let _lastScrollY = window.scrollY;
   window.addEventListener('scroll', () => {
     if (_scrollTicking) return;
     _scrollTicking = true;
     requestAnimationFrame(() => {
-      scrollTopBtn.style.display = window.scrollY > 400 ? 'flex' : 'none';
+      const y = window.scrollY;
+      scrollTopBtn.style.display = y > 400 ? 'flex' : 'none';
+
+      const locked = document.body.style.position === 'fixed';
+      if (!locked) {
+        const goingDown = y > _lastScrollY + 4;
+        const goingUp = y < _lastScrollY - 4;
+        const shouldHide = goingDown && y > 90;
+        if (shouldHide) {
+          if (_navMenuBtn) _navMenuBtn.classList.add('nav-hidden');
+          if (_navBottomBar) _navBottomBar.classList.add('nav-hidden');
+        } else if (goingUp || y <= 90) {
+          if (_navMenuBtn) _navMenuBtn.classList.remove('nav-hidden');
+          if (_navBottomBar) _navBottomBar.classList.remove('nav-hidden');
+        }
+      }
+      _lastScrollY = y;
       _scrollTicking = false;
     });
   }, { passive: true });
@@ -10005,6 +10068,11 @@ document.addEventListener('click', function(e) {
     <polyline points="18 15 12 9 6 15"/>
   </svg>
 </button>
+
+<div id="offlineBanner" role="status" aria-live="polite">
+  <span class="ob-dot"></span>
+  <span id="offlineBannerText"></span>
+</div>
 
 <div id="ptrIndicator" aria-hidden="true">
   <svg id="ptrArrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -10044,6 +10112,55 @@ if ('serviceWorker' in navigator) {
 <div id="share-toast"></div>
 
 <script>
+(function() {
+  var banner = document.getElementById('offlineBanner');
+  var textEl = document.getElementById('offlineBannerText');
+  if (!banner || !textEl) return;
+
+  var wasOffline = false;
+  var hideTimer = null;
+
+  function label(key, fallback) {
+    try {
+      var t = getCurrentT();
+      return (t && t[key]) || fallback;
+    } catch (e) {
+      return fallback;
+    }
+  }
+
+  function showOffline() {
+    clearTimeout(hideTimer);
+    wasOffline = true;
+    banner.classList.remove('online');
+    banner.classList.add('offline');
+    textEl.textContent = label('offline_banner', '인터넷 연결이 끊겼어요');
+    banner.classList.add('show');
+  }
+
+  function showReconnected() {
+    clearTimeout(hideTimer);
+    banner.classList.remove('offline');
+    banner.classList.add('online');
+    textEl.textContent = label('offline_reconnected', '다시 연결됐어요');
+    banner.classList.add('show');
+    hideTimer = setTimeout(function() {
+      banner.classList.remove('show');
+      setTimeout(function() { window.location.reload(); }, 350);
+    }, 1400);
+  }
+
+  window.addEventListener('offline', showOffline);
+  window.addEventListener('online', function() {
+    if (wasOffline) {
+      showReconnected();
+      wasOffline = false;
+    }
+  });
+
+  if (!navigator.onLine) showOffline();
+})();
+
 (function() {
   var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
   if (!isTouchDevice) return;
