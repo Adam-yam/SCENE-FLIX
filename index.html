@@ -2578,7 +2578,7 @@ header {
 
 <body>
 
-<button id="mobileMenuBtn" onclick="toggleDrawer()" aria-label="메뉴 열기">
+<button id="mobileMenuBtn" onclick="toggleDrawer()" aria-label="메뉴 열기" data-i18n-aria="menu_open">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <line x1="3" y1="6" x2="21" y2="6"/>
     <line x1="3" y1="12" x2="21" y2="12"/>
@@ -2591,7 +2591,7 @@ header {
 <div id="mobileDrawer">
   <div class="drawer-header">
     <img src="image/Logo.png" alt="RESCENE" class="drawer-logo" onclick="closeDrawer(); pickSection('about');" style="cursor:pointer;">
-    <button class="drawer-close-btn" onclick="closeDrawer()" aria-label="닫기">
+    <button class="drawer-close-btn" onclick="closeDrawer()" aria-label="닫기" data-i18n-aria="btn_close">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
         <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
@@ -2876,12 +2876,12 @@ header {
       </svg>
       <input type="text" id="searchInput" placeholder="제목, 카테고리, 채널명으로 검색..." autocomplete="off" data-i18n-placeholder="search_placeholder">
       <span id="searchResultCount"></span>
-      <button id="searchClear" onclick="clearSearch()" title="검색어 지우기" aria-label="검색어 지우기">
+      <button id="searchClear" onclick="clearSearch()" title="검색어 지우기" aria-label="검색어 지우기" data-i18n-title="search_clear" data-i18n-aria="search_clear">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
           <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
         </svg>
       </button>
-      <button id="searchSubmit" onclick="submitSearch()" title="검색" aria-label="검색">
+      <button id="searchSubmit" onclick="submitSearch()" title="검색" aria-label="검색" data-i18n-title="search_btn" data-i18n-aria="search_btn">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
         </svg>
@@ -3071,11 +3071,11 @@ header {
     <div class="sched-body">
       <div class="sched-cal-col">
         <div class="cal-header">
-          <button class="cal-nav-btn" id="calPrev" onclick="calNavigate(-1)" title="이전 달" aria-label="이전 달">
+          <button class="cal-nav-btn" id="calPrev" onclick="calNavigate(-1)" title="이전 달" aria-label="이전 달" data-i18n-title="cal_prev" data-i18n-aria="cal_prev">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
           <div class="cal-month-title" id="calMonthTitle"></div>
-          <button class="cal-nav-btn" id="calNext" onclick="calNavigate(1)" title="다음 달" aria-label="다음 달">
+          <button class="cal-nav-btn" id="calNext" onclick="calNavigate(1)" title="다음 달" aria-label="다음 달" data-i18n-title="cal_next" data-i18n-aria="cal_next">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
         </div>
@@ -3277,6 +3277,28 @@ window._i18n = {
     bm_empty_title:       '즐겨찾기한 영상이 없어요.',
     bm_empty_hint_touch:  '카드의 ★ 버튼을 눌러 즐겨찾기를 추가하세요.',
     bm_empty_hint_hover:  '카드에 마우스를 올리면 ★ 버튼이 나타납니다.',
+    bm_add:               '즐겨찾기 추가',
+    bm_remove:            '즐겨찾기 해제',
+    share_copy_link:      'YouTube 링크 복사',
+    last_watched_badge:   '마지막으로 본 영상',
+    watched_badge:        '시청함',
+    search_clear:         '검색어 지우기',
+    cal_prev:             '이전 달',
+    cal_next:             '다음 달',
+    btn_close:            '닫기',
+    menu_open:            '메뉴 열기',
+    scroll_top:           '맨 위로',
+    empty_no_videos:      '영상이 없습니다.',
+    empty_no_links:       '링크가 아직 추가되지 않았습니다.',
+    empty_no_live:        '해당 라이브가 없습니다.',
+    empty_no_period:      '이 기간에 업로드된 영상이 없습니다.',
+    live_title_suffix:    ' 라이브',
+    about_chart_total:    '전체',
+    about_chart_songs_desc:    '음악방송 무대 영상 모음입니다.',
+    about_chart_content_desc:  'RESCENE 공식 채널의 자체 제작 컨텐츠입니다.',
+    about_chart_live_desc:     '멤버들의 라이브 방송 영상입니다.',
+    about_chart_external_desc: '외부 채널에서 제작된 협업 및 출연 영상입니다.',
+    chart_count_unit:     '개',
   },
   JP: {
     headerTagline:        'RESCENEの映像まとめ SCENE-FLIX',
@@ -3342,6 +3364,28 @@ window._i18n = {
     bm_empty_title:       'お気に入りの動画がありません。',
     bm_empty_hint_touch:  'カードの★ボタンを押すとお気に入りに追加できます。',
     bm_empty_hint_hover:  'カードにマウスを乗せると★ボタンが表示されます。',
+    bm_add:               'お気に入りに追加',
+    bm_remove:            'お気に入り解除',
+    share_copy_link:      'YouTubeリンクをコピー',
+    last_watched_badge:   '最後に見た動画',
+    watched_badge:        '視聴済み',
+    search_clear:         '検索語を消す',
+    cal_prev:             '前の月',
+    cal_next:             '次の月',
+    btn_close:            '閉じる',
+    menu_open:            'メニューを開く',
+    scroll_top:           'トップへ戻る',
+    empty_no_videos:      '動画がありません。',
+    empty_no_links:       'リンクはまだ追加されていません。',
+    empty_no_live:        '該当するライブがありません。',
+    empty_no_period:      'この期間にアップロードされた動画がありません。',
+    live_title_suffix:    ' ライブ',
+    about_chart_total:    '全体',
+    about_chart_songs_desc:    '音楽番組のステージ映像まとめです。',
+    about_chart_content_desc:  'RESCENE公式チャンネルの自体制作コンテンツです。',
+    about_chart_live_desc:     'メンバーのライブ配信映像です。',
+    about_chart_external_desc: '外部チャンネルで制作されたコラボ・出演映像です。',
+    chart_count_unit:     '件',
   },
   EN: {
     headerTagline:        'RESCENE Video Archive SCENE-FLIX',
@@ -3407,6 +3451,28 @@ window._i18n = {
     bm_empty_title:       'No bookmarked videos yet.',
     bm_empty_hint_touch:  'Tap the ★ button on a card to add it to your favorites.',
     bm_empty_hint_hover:  'Hover over a card to reveal the ★ button.',
+    bm_add:               'Add to favorites',
+    bm_remove:            'Remove from favorites',
+    share_copy_link:      'Copy YouTube link',
+    last_watched_badge:   'Last watched',
+    watched_badge:        'Watched',
+    search_clear:         'Clear search',
+    cal_prev:             'Previous month',
+    cal_next:             'Next month',
+    btn_close:            'Close',
+    menu_open:            'Open menu',
+    scroll_top:           'Back to top',
+    empty_no_videos:      'No videos found.',
+    empty_no_links:       'No links added yet.',
+    empty_no_live:        'No live streams found.',
+    empty_no_period:      'No videos uploaded during this period.',
+    live_title_suffix:    ' Live',
+    about_chart_total:    'Total',
+    about_chart_songs_desc:    'A collection of music show stage videos.',
+    about_chart_content_desc:  "Original content produced by RESCENE's official channel.",
+    about_chart_live_desc:     'Live broadcast videos from the members.',
+    about_chart_external_desc: 'Collaboration and guest appearance videos from external channels.',
+    chart_count_unit:     '',
   }
 };
 
@@ -3441,6 +3507,16 @@ function setLang(lang) {
     if (key in t) el.placeholder = t[key];
   });
 
+  document.querySelectorAll('[data-i18n-title]').forEach(el => {
+    const key = el.getAttribute('data-i18n-title');
+    if (key in t) el.title = t[key];
+  });
+
+  document.querySelectorAll('[data-i18n-aria]').forEach(el => {
+    const key = el.getAttribute('data-i18n-aria');
+    if (key in t) el.setAttribute('aria-label', t[key]);
+  });
+
   const tagline = document.getElementById('headerTagline');
   if (tagline) tagline.textContent = t.headerTagline;
 
@@ -3467,6 +3543,10 @@ function setLang(lang) {
     buildArchiveSection();
   } else if (curSection === 'bookmark') {
     buildBookmarkGrid();
+  }
+
+  if (typeof window._aboutRebuildChart === 'function') {
+    window._aboutRebuildChart();
   }
 
   if (curSection === 'live' || curSection === 'songs' || curSection === 'allvideos' || curSection === 'external') {
@@ -3828,6 +3908,9 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'T5WiUqlMpbg': '2026.08.10 17:19',
+  'mpYfXG72ZZY': '2026.08.10 11:13',
+  'PRlxmG5YJSA': '2026.08.10 17:00',
   'YCBH298cRQM': '2026.08.10 10:40',
   'OFmE8s3lpQE': '2026.08.09 15:32',
   'Dwp2x53fj0g': '2026.08.09 13:50',
@@ -5177,7 +5260,7 @@ function _applyLastWatchedBadge(vid) {
     if (card) {
       const badge = document.createElement('span');
       badge.className = 'last-watched-badge';
-      badge.textContent = '마지막으로 본 영상';
+      badge.textContent = getCurrentT().last_watched_badge || '마지막으로 본 영상';
       card.querySelector('.thumb').appendChild(badge);
       _lastWatchedBadgeEl = badge;
       break;
@@ -5695,6 +5778,7 @@ const EXTERNAL_DATA = {
     { vid: 'ytkFeaFXV1Y', url: 'https://youtu.be/ytkFeaFXV1Y', date: '2025.07.05 18:01' },
   ],
   coupangplay: [
+    { vid: 'T5WiUqlMpbg', url: 'https://www.youtube.com/watch?v=T5WiUqlMpbg', date: '2026.08.10 17:19' },
     { vid: 'A8Ba20oXQUE', url: 'https://youtu.be/A8Ba20oXQUE', date: '2026.08.07 16:51' },
     { vid: 'uWbwYIFeq48', url: 'https://youtu.be/uWbwYIFeq48', date: '2026.07.25 19:01' },
   ],
@@ -5883,6 +5967,8 @@ const EXTERNAL_DATA = {
     { vid: 'YV9Q9fBNzLs', url: 'https://youtu.be/YV9Q9fBNzLs', date: '2026.07.03 18:06' },
   ],
   jeonchamsi: [
+    { vid: 'mpYfXG72ZZY', url: 'https://www.youtube.com/watch?v=mpYfXG72ZZY', date: '2026.08.10 11:13' },
+    { vid: 'PRlxmG5YJSA', url: 'https://youtu.be/PRlxmG5YJSA', date: '2026.08.10 17:00' },
     { vid: 'YCBH298cRQM', url: 'https://www.youtube.com/watch?v=YCBH298cRQM', date: '2026.08.10 10:40' },
     { vid: 'OFmE8s3lpQE', url: 'https://youtu.be/OFmE8s3lpQE', date: '2026.08.09 15:32' },
     { vid: 'Dwp2x53fj0g', url: 'https://www.youtube.com/watch?v=Dwp2x53fj0g', date: '2026.08.09 13:50' },
@@ -6950,7 +7036,7 @@ function buildExternalGrid() {
   items = sortItemsByDate(items, curSort);
 
   if (!items.length) {
-    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>링크가 아직 추가되지 않았습니다.</p></div>`;
+    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>${getCurrentT().empty_no_links || '링크가 아직 추가되지 않았습니다.'}</p></div>`;
     return;
   }
 
@@ -7407,7 +7493,7 @@ async function loadLiveTitles(items) {
     await Promise.all(toLoad.slice(i, i + CHUNK).map(async item => {
       const d = await _fetchOembed(item.url, item.vid);
       if (d) item.title = d.rawTitle;
-      if (!item.title) item.title = item.date + ' 라이브';
+      if (!item.title) item.title = item.date + (getCurrentT().live_title_suffix || ' 라이브');
       const el = document.getElementById(`lvc-title-${item.vid}`);
       if (el) el.textContent = item.title;
       const lvcEl = document.getElementById(`lvc-${item.vid}`);
@@ -7492,7 +7578,7 @@ function buildLiveGrid() {
   items = sortLiveItemsByDate(items, curSort);
 
   if (!items.length) {
-    grid.innerHTML = `<div class="empty"><div class="ico">📺</div><p>해당 라이브가 없습니다.</p></div>`;
+    grid.innerHTML = `<div class="empty"><div class="ico">📺</div><p>${getCurrentT().empty_no_live || '해당 라이브가 없습니다.'}</p></div>`;
     return;
   }
 
@@ -7568,18 +7654,23 @@ function toggleBookmark(e, vid) {
 function updateBmBtn(card, vid) {
   const btn = card.querySelector('.bm-btn');
   if (!btn) return;
+  const t = getCurrentT();
   if (BOOKMARKS.has(vid)) {
     btn.classList.add('bm-active');
-    btn.title = '즐겨찾기 해제';
+    btn.title = t.bm_remove || '즐겨찾기 해제';
+    btn.setAttribute('aria-label', t.bm_remove || '즐겨찾기 해제');
   } else {
     btn.classList.remove('bm-active');
-    btn.title = '즐겨찾기 추가';
+    btn.title = t.bm_add || '즐겨찾기 추가';
+    btn.setAttribute('aria-label', t.bm_add || '즐겨찾기 추가');
   }
 }
 
 function bmBtnHtml(vid) {
   const active = BOOKMARKS.has(vid);
-  return `<button class="card-overlay-btn bm-btn ${active ? 'bm-active' : ''}" title="${active ? '즐겨찾기 해제' : '즐겨찾기 추가'}" aria-label="${active ? '즐겨찾기 해제' : '즐겨찾기 추가'}" onclick="toggleBookmark(event,'${vid}')">
+  const t = getCurrentT();
+  const label = active ? (t.bm_remove || '즐겨찾기 해제') : (t.bm_add || '즐겨찾기 추가');
+  return `<button class="card-overlay-btn bm-btn ${active ? 'bm-active' : ''}" title="${label}" aria-label="${label}" onclick="toggleBookmark(event,'${vid}')">
     <svg viewBox="2 2 20 19.02" fill="${active ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
     </svg>
@@ -7587,7 +7678,9 @@ function bmBtnHtml(vid) {
 }
 
 function shareBtnHtml(vid) {
-  return `<button class="card-overlay-btn share-btn" title="YouTube 링크 복사" aria-label="YouTube 링크 복사" onclick="copyShareUrl(event,'${vid}')">
+  const t = getCurrentT();
+  const label = t.share_copy_link || 'YouTube 링크 복사';
+  return `<button class="card-overlay-btn share-btn" title="${label}" aria-label="${label}" onclick="copyShareUrl(event,'${vid}')">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
       <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
@@ -7747,13 +7840,14 @@ function getTypeLabel(type) {
 const _PLAY_RING_SVG = `<div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>`;
 
 function buildThumbHtml(vid, badgeHtml, watched) {
+  const watchedLabel = getCurrentT().watched_badge || '시청함';
   return `<div class="thumb">
     <img src="https://img.youtube.com/vi/${vid}/mqdefault.jpg" alt=""
          loading="lazy" decoding="async"
          onerror="this.src='https://img.youtube.com/vi/${vid}/hqdefault.jpg'">
     ${_PLAY_RING_SVG}
     ${badgeHtml}
-    ${watched ? '<span class="watched-badge">시청함</span>' : ''}
+    ${watched ? `<span class="watched-badge">${watchedLabel}</span>` : ''}
     ${shareBtnHtml(vid)}
     ${bmBtnHtml(vid)}
   </div>`;
@@ -7848,7 +7942,7 @@ function buildGrid() {
     items = sortItemsByDate(items, curSort);
 
     if (!items.length) {
-      _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
+      _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>${getCurrentT().empty_no_videos || '영상이 없습니다.'}</p></div>`;
       return;
     }
 
@@ -7873,7 +7967,7 @@ function buildGrid() {
   items = sortItemsByDate(items, curSort);
 
   if (!items.length) {
-    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
+    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>${getCurrentT().empty_no_videos || '영상이 없습니다.'}</p></div>`;
     return;
   }
 
@@ -8102,7 +8196,7 @@ function _renderArchiveGrid(dateMap, year, mo) {
   const _arML = _buildMemberLabelMap(_arT);
 
   if (!items.length) {
-    grid.innerHTML = `<div class="empty"><div class="ico">📅</div><p>이 기간에 업로드된 영상이 없습니다.</p></div>`;
+    grid.innerHTML = `<div class="empty"><div class="ico">📅</div><p>${getCurrentT().empty_no_period || '이 기간에 업로드된 영상이 없습니다.'}</p></div>`;
     return;
   }
 
@@ -8127,7 +8221,7 @@ function buildAllVideosGrid() {
   _avLoaded = 0;
 
   if (!_avSorted.length) {
-    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>영상이 없습니다.</p></div>`;
+    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>${getCurrentT().empty_no_videos || '영상이 없습니다.'}</p></div>`;
     return;
   }
 
@@ -8345,7 +8439,7 @@ async function loadAllVideosMetas(items) {
       const ref = proxy._ref;
       const d = await _fetchOembed(ref.url, proxy.vid);
       if (d) ref.title = d.rawTitle;
-      if (!ref.title) ref.title = ref.date + ' 라이브';
+      if (!ref.title) ref.title = ref.date + (getCurrentT().live_title_suffix || ' 라이브');
       proxy.meta.rawTitle = ref.title;
       proxy.loaded = true;
       const avcTitle = document.getElementById(`avc-title-${proxy.vid}`) || document.getElementById(`arc-title-${proxy.vid}`) || document.getElementById(`bvc-title-${proxy.vid}`);
@@ -9684,7 +9778,24 @@ buildSongNav();
 
   function pct(a, b) { return b > 0 ? ((a / b) * 100).toFixed(1) : '0.0'; }
 
+  function fmtCount(n) {
+    return n + (getCurrentT().chart_count_unit || '');
+  }
+
+  function fmtCountPct(n, p) {
+    return fmtCount(n) + ' · ' + p + '%';
+  }
+
+  function fmtDetailTotal(n, p) {
+    const t = getCurrentT();
+    const lang = window._curLang || 'KR';
+    if (lang === 'EN') return fmtCount(n) + ' total · ' + p + '% of all';
+    if (lang === 'JP') return '計' + fmtCount(n) + ' · ' + (t.about_chart_total || '全体') + 'の' + p + '%';
+    return '총 ' + fmtCount(n) + ' · ' + (t.about_chart_total || '전체') + '의 ' + p + '%';
+  }
+
   function buildData() {
+    const t = getCurrentT();
     const typeCounts = {};
     for (const entry of RESCENE_DATA) {
       const vids = entry.videos;
@@ -9699,10 +9810,11 @@ buildSongNav();
     const contentSubs  = CONTENT_DATA.map(c => ({ label: c.category, count: c.urls.length }));
 
     const liveCount = ALL_LIVE.length;
+    const yearSuffix = t.live_year_suffix || '';
     const liveSubs  = [
-      { label: '2024년', count: LIVE_DATA_2024.length },
-      { label: '2025년', count: LIVE_DATA_2025.length },
-      { label: '2026년', count: LIVE_DATA_2026.length }
+      { label: '2024' + yearSuffix, count: LIVE_DATA_2024.length },
+      { label: '2025' + yearSuffix, count: LIVE_DATA_2025.length },
+      { label: '2026' + yearSuffix, count: LIVE_DATA_2026.length }
     ];
 
     const extCount = EXTERNAL_KEYS.reduce((s, k) => s + (EXTERNAL_DATA[k] ? EXTERNAL_DATA[k].length : 0), 0);
@@ -9712,14 +9824,15 @@ buildSongNav();
       const chs = cat.keys
         .filter(k => EXTERNAL_DATA[k] && EXTERNAL_DATA[k].length > 0)
         .map(k => ({ label: EXTERNAL_LABELS[k] || k, count: EXTERNAL_DATA[k].length }));
-      return { label: cat.label, count: cnt, channels: chs };
+      const catLabel = t[cat.i18nKey] || cat.label;
+      return { label: catLabel, count: cnt, channels: chs };
     });
 
     return [
-      { key: 'songs',    label: '음악방송', color: '#c8c8cc', desc: '음악방송 무대 영상 모음입니다.',               count: songsCount,   subtypes: songsSubs   },
-      { key: 'content',  label: '자체컨텐츠', color: '#80b870', desc: 'RESCENE 공식 채널의 자체 제작 컨텐츠입니다.',  count: contentCount, subtypes: contentSubs },
-      { key: 'live',     label: 'Live',     color: '#a080d0', desc: '멤버들의 라이브 방송 영상입니다.',         count: liveCount,    subtypes: liveSubs    },
-      { key: 'external', label: '외부컨텐츠', color: '#7aaede', desc: '외부 채널에서 제작된 협업 및 출연 영상입니다.', count: extCount,     subtypes: extSubs     }
+      { key: 'songs',    label: t.tab_songs || '음악방송',            color: '#c8c8cc', desc: t.about_chart_songs_desc    || '음악방송 무대 영상 모음입니다.',               count: songsCount,   subtypes: songsSubs   },
+      { key: 'content',  label: t.tab_content_full || '자체컨텐츠',    color: '#80b870', desc: t.about_chart_content_desc  || 'RESCENE 공식 채널의 자체 제작 컨텐츠입니다.',  count: contentCount, subtypes: contentSubs },
+      { key: 'live',     label: t.tab_live || 'Live',                 color: '#a080d0', desc: t.about_chart_live_desc     || '멤버들의 라이브 방송 영상입니다.',         count: liveCount,    subtypes: liveSubs    },
+      { key: 'external', label: t.tab_external_full || '외부컨텐츠',   color: '#7aaede', desc: t.about_chart_external_desc || '외부 채널에서 제작된 협업 및 출연 영상입니다.', count: extCount,     subtypes: extSubs     }
     ];
   }
 
@@ -9745,18 +9858,18 @@ buildSongNav();
       if (s.channels) {
         const cid = 'extcat_' + s.label.replace(/\s+/g, '_');
         const chRows = s.channels.map(ch =>
-          '<div class="chart-ch-item"><span class="chart-ch-name">· ' + ch.label + '</span><span class="chart-ch-count">' + ch.count + '개</span></div>'
+          '<div class="chart-ch-item"><span class="chart-ch-name">· ' + ch.label + '</span><span class="chart-ch-count">' + fmtCount(ch.count) + '</span></div>'
         ).join('');
         return '<div class="chart-cat-item">'
           + '<div class="chart-cat-toggle" onclick="(function(el){const c=document.getElementById(\'' + cid + '\');const open=c.style.display!==\'none\';c.style.display=open?\'none\':\'block\';el.querySelector(\'.chart-cat-arrow\').style.transform=open?\'rotate(0deg)\':\'rotate(90deg)\'})(this)">'
           + '<span class="chart-cat-arrow">▶</span>'
           + '<span class="chart-cat-label">' + s.label + '</span>'
-          + '<span class="chart-cat-count">' + s.count + '개 · ' + sp + '%</span>'
+          + '<span class="chart-cat-count">' + fmtCountPct(s.count, sp) + '</span>'
           + '</div>' + bar
           + '<div id="' + cid + '" style="display:none;">' + chRows + '</div>'
           + '</div>';
       }
-      return '<div class="chart-row-item"><div class="chart-row-head"><span class="chart-row-name">' + s.label + '</span><span class="chart-row-count">' + s.count + '개 · ' + sp + '%</span></div>' + bar + '</div>';
+      return '<div class="chart-row-item"><div class="chart-row-head"><span class="chart-row-name">' + s.label + '</span><span class="chart-row-count">' + fmtCountPct(s.count, sp) + '</span></div>' + bar + '</div>';
     }).join('');
   }
 
@@ -9771,7 +9884,7 @@ buildSongNav();
       setOpacity(null);
       detailEl.style.display = 'none';
       legendEl.style.display = 'flex';
-      setCenter('전체', _total, '100%');
+      setCenter(getCurrentT().about_chart_total || '전체', _total, '100%');
       return;
     }
 
@@ -9788,16 +9901,17 @@ buildSongNav();
         '<div class="chart-detail-header">'
       + '<div class="chart-detail-dot" style="background:' + d.color + ';"></div>'
       + '<span class="chart-detail-label">' + d.label + '</span>'
-      + '<button class="chart-detail-close-btn" onclick="aboutChartSelect(\'' + key + '\')" title="닫기">✕</button>'
+      + '<button class="chart-detail-close-btn" onclick="aboutChartSelect(\'' + key + '\')" title="' + (getCurrentT().btn_close || '닫기') + '">✕</button>'
       + '</div>'
       + '<div class="chart-detail-desc">' + d.desc + '</div>'
-      + '<div class="chart-detail-total" style="color:' + d.color + ';">총 ' + d.count + '개 · 전체의 ' + pct(d.count, _total) + '%</div>'
+      + '<div class="chart-detail-total" style="color:' + d.color + ';">' + fmtDetailTotal(d.count, pct(d.count, _total)) + '</div>'
       + renderRows(d.subtypes, d.count, d.color);
   };
 
   function buildChart() {
     const svg      = document.getElementById('aboutDonutSvg');
     const legendEl = document.getElementById('aboutChartLegend');
+    const detailEl = document.getElementById('aboutChartDetail');
     if (!svg || !legendEl) return;
 
     _data  = buildData();
@@ -9807,7 +9921,9 @@ buildSongNav();
     _key  = null;
     _segs = [];
     svg.innerHTML = '';
-    setCenter('전체', _total, '100%');
+    setCenter(getCurrentT().about_chart_total || '전체', _total, '100%');
+    if (detailEl) detailEl.style.display = 'none';
+    legendEl.style.display = 'flex';
 
     const cx = 100, cy = 100, OR = 88, IR = 55;
     let angle = -Math.PI / 2;
@@ -9853,10 +9969,11 @@ buildSongNav();
         + '<div class="chart-legend-dot" style="background:' + d.color + ';"></div>'
         + '<div style="flex:1;min-width:0;">'
         + '<div class="chart-legend-name">' + d.label + '</div>'
-        + '<div class="chart-legend-sub">' + d.count + '개 · ' + p + '%</div>'
+        + '<div class="chart-legend-sub">' + fmtCountPct(d.count, p) + '</div>'
         + '</div></div>';
     }).join('');
   }
+  window._aboutRebuildChart = buildChart;
 
   function tryBuild() {
     if (typeof RESCENE_DATA === 'undefined' || typeof CONTENT_DATA === 'undefined' ||
@@ -10063,7 +10180,7 @@ document.addEventListener('click', function(e) {
 });
 </script>
 
-<button id="scrollTop" title="맨 위로" aria-label="맨 위로">
+<button id="scrollTop" title="맨 위로" aria-label="맨 위로" data-i18n-title="scroll_top" data-i18n-aria="scroll_top">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <polyline points="18 15 12 9 6 15"/>
   </svg>
