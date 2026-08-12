@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-12T16:00:53.401491+09:00",
+  "updatedAt": "2026-08-12T17:00:52.219623+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,16 +20,16 @@
           "previousRank": 1
         },
         "genie": {
-          "rank": 2,
-          "previousRank": 1
+          "rank": 1,
+          "previousRank": 2
         },
         "vibe": {
           "rank": 2,
           "previousRank": 2
         },
         "bugs": {
-          "rank": 2,
-          "previousRank": 2
+          "rank": 1,
+          "previousRank": 1
         },
         "flo": {
           "rank": 1,
@@ -63,8 +63,8 @@
           "previousRank": 5
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 10
+          "rank": 9,
+          "previousRank": 7
         },
         "flo": {
           "rank": 6,
@@ -90,16 +90,16 @@
           "previousRank": 7
         },
         "genie": {
-          "rank": 22,
-          "previousRank": 21
+          "rank": 23,
+          "previousRank": 22
         },
         "vibe": {
           "rank": 26,
           "previousRank": 25
         },
         "bugs": {
-          "rank": 11,
-          "previousRank": 11
+          "rank": 10,
+          "previousRank": 8
         },
         "flo": {
           "rank": 7,
@@ -122,11 +122,11 @@
       "ranks": {
         "melon": {
           "rank": 57,
-          "previousRank": 60
+          "previousRank": 57
         },
         "bugs": {
-          "rank": 52,
-          "previousRank": 72
+          "rank": 53,
+          "previousRank": 47
         },
         "flo": {
           "rank": 74,
@@ -148,12 +148,12 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 84,
-          "previousRank": 92
+          "rank": 59,
+          "previousRank": 61
         },
         "flo": {
-          "rank": 96,
-          "previousRank": 93
+          "rank": 95,
+          "previousRank": 96
         },
         "youtube_music": {
           "rank": 34,
