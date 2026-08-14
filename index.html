@@ -2519,35 +2519,38 @@ header {
 .chart-info-plat .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
 .chart-info-name { color: var(--muted); text-align: right; }
 .chart-list { display: flex; flex-direction: column; gap: 8px; }
-.chart-card { display: flex; align-items: center; gap: 12px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; transition: background 0.2s cubic-bezier(0.4,0,0.2,1), border-color 0.2s cubic-bezier(0.4,0,0.2,1); contain: layout style; content-visibility: auto; contain-intrinsic-size: 0 88px; }
+.chart-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; transition: background 0.2s cubic-bezier(0.4,0,0.2,1), border-color 0.2s cubic-bezier(0.4,0,0.2,1); contain: layout style; content-visibility: auto; contain-intrinsic-size: 0 96px; }
 .chart-card:hover { background: var(--card-h); border-color: var(--border-h); }
-.chart-thumb { width: 52px; height: 52px; border-radius: 8px; object-fit: cover; background: var(--dim); flex-shrink: 0; display: block; }
-.chart-thumb-placeholder { width: 52px; height: 52px; border-radius: 8px; background: var(--dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-.chart-thumb-placeholder svg { width: 20px; height: 20px; opacity: 0.2; }
-.chart-info { min-width: 0; flex: 0 1 auto; width: 168px; }
-.chart-song-title { font-size: 0.76rem; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.chart-song-artist { font-size: 0.64rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
-.chart-ranks { display: flex; align-items: center; gap: 6px; margin-left: auto; flex-wrap: wrap; justify-content: flex-end; }
-.chart-rank-pill { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 46px; padding: 4px 8px; border-radius: 8px; background: var(--surf); border: 1px solid var(--border); }
-.chart-rank-pill.out { opacity: 0.35; }
-.chart-rank-pill .plat { font-size: 0.56rem; font-weight: 600; letter-spacing: 0.03em; margin-bottom: 1px; }
-.chart-rank-pill .rankval { font-size: 0.8rem; font-weight: 700; color: var(--text); font-family: var(--font-mono); line-height: 1; }
-.chart-rank-pill .delta { font-size: 0.56rem; margin-top: 2px; line-height: 1; }
-.chart-rank-pill .delta.up { color: #d97a7a; }
-.chart-rank-pill .delta.down { color: #6ba0d8; }
-.chart-rank-pill .delta.new { color: #d4b45a; }
-.chart-rank-pill .delta.same { color: var(--muted); }
+.chart-card-top { display: flex; align-items: center; gap: 10px; }
+.chart-rank-num { flex-shrink: 0; width: 22px; text-align: center; font-family: var(--font-mono); font-size: 0.82rem; font-weight: 700; color: var(--muted); }
+.chart-rank-num.top1 { color: #e0b84a; }
+.chart-rank-num.top2 { color: #c7c7cf; }
+.chart-rank-num.top3 { color: #c78a5a; }
+.chart-thumb { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; background: var(--dim); flex-shrink: 0; display: block; }
+.chart-thumb-placeholder { width: 44px; height: 44px; border-radius: 8px; background: var(--dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.chart-thumb-placeholder svg { width: 18px; height: 18px; opacity: 0.2; }
+.chart-info { min-width: 0; flex: 1 1 auto; }
+.chart-song-title { font-size: 0.78rem; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chart-song-artist { font-size: 0.65rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
+.chart-platforms { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 8px; }
+.chart-chip { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 4px 2px; border-radius: 7px; background: var(--surf); }
+.chart-chip.out { opacity: 0.3; }
+.chart-chip .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.chart-chip .val { font-size: 0.66rem; font-weight: 700; color: var(--text); font-family: var(--font-mono); line-height: 1; white-space: nowrap; }
+.chart-chip .val.up { color: #d97a7a; }
+.chart-chip .val.down { color: #6ba0d8; }
+.chart-chip .val.new { color: #d4b45a; }
+.chart-chip .val.same { color: var(--text); }
 .chart-loading { display: flex; flex-direction: column; gap: 8px; }
-.chart-skel-card { height: 74px; border-radius: 12px; background: linear-gradient(90deg, var(--dim) 25%, var(--card-h) 50%, var(--dim) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; }
+.chart-skel-card { height: 96px; border-radius: 12px; background: linear-gradient(90deg, var(--dim) 25%, var(--card-h) 50%, var(--dim) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; }
 .chart-empty { text-align: center; padding: 60px 20px; color: var(--muted); }
 .chart-empty .ico { font-size: 2rem; margin-bottom: 14px; opacity: 0.25; }
 .chart-empty p { font-size: 0.82rem; }
 @media (max-width: 700px) {
   .chart-wrap { padding: 16px 10px calc(80px + var(--safe-bottom)); }
-  .chart-info { width: auto; flex: 1 1 auto; }
-  .chart-ranks { width: 100%; margin-left: 0; justify-content: flex-start; }
-  .chart-card { flex-wrap: wrap; }
-  .chart-rank-pill { min-width: 42px; }
+  .chart-platforms { gap: 3px; }
+  .chart-chip { padding: 3px 1px; }
+  .chart-chip .val { font-size: 0.6rem; }
 }
 #shortsMode { animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both; }
 .shorts-wrap { max-width: 1400px; margin: 0 auto; padding: 20px 40px 80px; }
@@ -10945,23 +10948,23 @@ const _CHART_PLATFORMS = [
   { key: 'vibe',  label: 'VIBE',  color: 'var(--c-vibe)'  },
 ];
 
-function _chartRankPillHtml(platform, rankInfo) {
+function _chartChipHtml(platform, rankInfo) {
   if (!rankInfo || rankInfo.rank == null) {
-    return '<div class="chart-rank-pill out"><span class="plat" style="color:'+platform.color+';">'+platform.label+'</span><span class="rankval">'+(getCurrentT().chart_out || '-')+'</span></div>';
+    return '<div class="chart-chip out" title="'+platform.label+' '+(getCurrentT().chart_out || '차트 아웃')+'"><span class="dot" style="background:'+platform.color+';"></span><span class="val">'+(getCurrentT().chart_out || '-')+'</span></div>';
   }
   const rank = rankInfo.rank;
   const prev = rankInfo.previousRank;
-  let deltaHtml;
+  let cls, title;
   if (prev == null) {
-    deltaHtml = '<span class="delta new">NEW</span>';
+    cls = 'new'; title = platform.label+' '+rank+'위 (NEW)';
   } else if (prev === rank) {
-    deltaHtml = '<span class="delta same">-</span>';
+    cls = 'same'; title = platform.label+' '+rank+'위 (-)';
   } else if (prev > rank) {
-    deltaHtml = '<span class="delta up">▲'+(prev - rank)+'</span>';
+    cls = 'up'; title = platform.label+' '+rank+'위 (▲'+(prev - rank)+')';
   } else {
-    deltaHtml = '<span class="delta down">▼'+(rank - prev)+'</span>';
+    cls = 'down'; title = platform.label+' '+rank+'위 (▼'+(rank - prev)+')';
   }
-  return '<div class="chart-rank-pill"><span class="plat" style="color:'+platform.color+';">'+platform.label+'</span><span class="rankval">'+rank+'</span>'+deltaHtml+'</div>';
+  return '<div class="chart-chip" title="'+_escHtml(title)+'"><span class="dot" style="background:'+platform.color+';"></span><span class="val '+cls+'">'+rank+'</span></div>';
 }
 
 function buildChartGrid() {
@@ -10977,11 +10980,16 @@ function buildChartGrid() {
     const delay = Math.min(idx * (_isMobile ? 0.02 : 0.035), _isMobile ? 0.22 : 0.5).toFixed(3);
     const thumb = song.albumImageUrl ? '<img class="chart-thumb" src="'+_escHtml(song.albumImageUrl)+'" alt="" loading="lazy" decoding="async">' : noThumb;
     const ranks = song.ranks || {};
-    const pills = _CHART_PLATFORMS.map(p => _chartRankPillHtml(p, ranks[p.key])).join('');
+    const chips = _CHART_PLATFORMS.map(p => _chartChipHtml(p, ranks[p.key])).join('');
+    const rankNum = idx + 1;
+    const rankCls = rankNum === 1 ? ' top1' : rankNum === 2 ? ' top2' : rankNum === 3 ? ' top3' : '';
     return '<div class="chart-card" style="animation:fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both '+delay+'s;">'
-      +thumb
-      +'<div class="chart-info"><div class="chart-song-title">'+_escHtml(song.songName)+'</div><div class="chart-song-artist">'+_escHtml(song.artistName)+'</div></div>'
-      +'<div class="chart-ranks">'+pills+'</div>'
+      +'<div class="chart-card-top">'
+        +'<div class="chart-rank-num'+rankCls+'">'+rankNum+'</div>'
+        +thumb
+        +'<div class="chart-info"><div class="chart-song-title">'+_escHtml(song.songName)+'</div><div class="chart-song-artist">'+_escHtml(song.artistName)+'</div></div>'
+      +'</div>'
+      +'<div class="chart-platforms">'+chips+'</div>'
       +'</div>';
   }).join('');
 }
