@@ -2533,14 +2533,15 @@ header {
 .chart-song-title { font-size: 0.78rem; font-weight: 500; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .chart-song-artist { font-size: 0.65rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 2px; }
 .chart-platforms { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-top: 8px; }
-.chart-chip { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; padding: 4px 2px; border-radius: 7px; background: var(--surf); }
-.chart-chip.out { opacity: 0.3; }
-.chart-chip .dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
-.chart-chip .val { font-size: 0.66rem; font-weight: 700; color: var(--text); font-family: var(--font-mono); line-height: 1; white-space: nowrap; }
-.chart-chip .val.up { color: #d97a7a; }
-.chart-chip .val.down { color: #6ba0d8; }
-.chart-chip .val.new { color: #d4b45a; }
-.chart-chip .val.same { color: var(--text); }
+.chart-chip { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; padding: 4px 2px; border-radius: 7px; background: var(--surf); }
+.chart-chip.out { opacity: 0.32; }
+.chart-chip .plat { font-size: 0.5rem; font-weight: 700; letter-spacing: 0.02em; line-height: 1; }
+.chart-chip .val { font-size: 0.76rem; font-weight: 700; color: var(--text); font-family: var(--font-mono); line-height: 1.3; white-space: nowrap; }
+.chart-chip .delta { font-size: 0.52rem; font-weight: 600; line-height: 1; white-space: nowrap; }
+.chart-chip .delta.up { color: #d97a7a; }
+.chart-chip .delta.down { color: #6ba0d8; }
+.chart-chip .delta.new { color: #d4b45a; }
+.chart-chip .delta.same { color: var(--muted); }
 .chart-loading { display: flex; flex-direction: column; gap: 8px; }
 .chart-skel-card { height: 96px; border-radius: 12px; background: linear-gradient(90deg, var(--dim) 25%, var(--card-h) 50%, var(--dim) 75%); background-size: 800px 100%; animation: shimmer 1.4s infinite linear; }
 .chart-empty { text-align: center; padding: 60px 20px; color: var(--muted); }
@@ -2550,7 +2551,12 @@ header {
   .chart-wrap { padding: 16px 10px calc(80px + var(--safe-bottom)); }
   .chart-platforms { gap: 3px; }
   .chart-chip { padding: 3px 1px; }
-  .chart-chip .val { font-size: 0.6rem; }
+  .chart-chip .plat { font-size: 0.44rem; }
+  .chart-chip .val { font-size: 0.66rem; }
+  .chart-chip .delta { font-size: 0.46rem; }
+}
+@media (max-width: 360px) {
+  .chart-chip .plat { display: none; }
 }
 #shortsMode { animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both; }
 .shorts-wrap { max-width: 1400px; margin: 0 auto; padding: 20px 40px 80px; }
@@ -10939,32 +10945,33 @@ function buildNewsGrid() {
 
 
 const _CHART_PLATFORMS = [
-  { key: 'melon', label: 'MELON', color: 'var(--c-melon)' },
-  { key: 'youtube_music', label: 'YT Music', color: 'var(--c-youtube-music)' },
-  { key: 'spotify', label: 'SPOTIFY', color: 'var(--c-spotify)' },
-  { key: 'genie', label: 'GENIE', color: 'var(--c-genie)' },
-  { key: 'flo',   label: 'FLO',   color: 'var(--c-flo)'   },
-  { key: 'bugs',  label: 'BUGS',  color: 'var(--c-bugs)'  },
-  { key: 'vibe',  label: 'VIBE',  color: 'var(--c-vibe)'  },
+  { key: 'melon', label: 'MELON', abbr: 'MELON', color: 'var(--c-melon)' },
+  { key: 'youtube_music', label: 'YT Music', abbr: 'YT', color: 'var(--c-youtube-music)' },
+  { key: 'spotify', label: 'SPOTIFY', abbr: 'SPOTI', color: 'var(--c-spotify)' },
+  { key: 'genie', label: 'GENIE', abbr: 'GENIE', color: 'var(--c-genie)' },
+  { key: 'flo',   label: 'FLO',   abbr: 'FLO',   color: 'var(--c-flo)'   },
+  { key: 'bugs',  label: 'BUGS',  abbr: 'BUGS',  color: 'var(--c-bugs)'  },
+  { key: 'vibe',  label: 'VIBE',  abbr: 'VIBE',  color: 'var(--c-vibe)'  },
 ];
 
 function _chartChipHtml(platform, rankInfo) {
+  const platHtml = '<span class="plat" style="color:'+platform.color+';">'+platform.abbr+'</span>';
   if (!rankInfo || rankInfo.rank == null) {
-    return '<div class="chart-chip out" title="'+platform.label+' '+(getCurrentT().chart_out || '차트 아웃')+'"><span class="dot" style="background:'+platform.color+';"></span><span class="val">'+(getCurrentT().chart_out || '-')+'</span></div>';
+    return '<div class="chart-chip out" title="'+platform.label+' '+(getCurrentT().chart_out || '차트 아웃')+'">'+platHtml+'<span class="val">'+(getCurrentT().chart_out || '-')+'</span></div>';
   }
   const rank = rankInfo.rank;
   const prev = rankInfo.previousRank;
-  let cls, title;
+  let cls, deltaText, title;
   if (prev == null) {
-    cls = 'new'; title = platform.label+' '+rank+'위 (NEW)';
+    cls = 'new'; deltaText = 'NEW'; title = platform.label+' '+rank+'위 (NEW)';
   } else if (prev === rank) {
-    cls = 'same'; title = platform.label+' '+rank+'위 (-)';
+    cls = 'same'; deltaText = '-'; title = platform.label+' '+rank+'위 (변동없음)';
   } else if (prev > rank) {
-    cls = 'up'; title = platform.label+' '+rank+'위 (▲'+(prev - rank)+')';
+    cls = 'up'; deltaText = '▲'+(prev - rank); title = platform.label+' '+rank+'위 (▲'+(prev - rank)+')';
   } else {
-    cls = 'down'; title = platform.label+' '+rank+'위 (▼'+(rank - prev)+')';
+    cls = 'down'; deltaText = '▼'+(rank - prev); title = platform.label+' '+rank+'위 (▼'+(rank - prev)+')';
   }
-  return '<div class="chart-chip" title="'+_escHtml(title)+'"><span class="dot" style="background:'+platform.color+';"></span><span class="val '+cls+'">'+rank+'</span></div>';
+  return '<div class="chart-chip" title="'+_escHtml(title)+'">'+platHtml+'<span class="val">'+rank+'</span><span class="delta '+cls+'">'+deltaText+'</span></div>';
 }
 
 function buildChartGrid() {
