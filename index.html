@@ -1418,25 +1418,43 @@ header {
 
   #secAbout { margin-left: 0; }
 
+  .song-nav-inner {
+    position: relative;
+  }
+  .song-nav-inner::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0;
+    width: 26px;
+    background: linear-gradient(to right, transparent, var(--surf));
+    pointer-events: none;
+  }
   .song-nav {
     padding: 10px 12px;
-    flex-wrap: wrap;
-    overflow-x: visible;
-    gap: 6px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    gap: 7px;
   }
   .song-nav::-webkit-scrollbar { display: none; }
   .song-tab {
-    padding: 6px 13px;
-    font-size: 0.65rem;
+    padding: 7px 15px;
+    font-size: 0.67rem;
     border-bottom: none;
     border: 1px solid var(--border);
-    border-radius: 8px;
+    border-radius: 999px;
     background: var(--card);
+    flex-shrink: 0;
+    white-space: nowrap;
+    transition: background 0.15s cubic-bezier(0.4,0,0.2,1), border-color 0.15s cubic-bezier(0.4,0,0.2,1), color 0.15s cubic-bezier(0.4,0,0.2,1);
   }
+  .song-tab:active { transform: scale(0.96); }
   .song-tab.active {
-    background: rgba(200,200,204,0.12);
-    color: var(--accent);
-    border-color: rgba(200,200,204,0.45);
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
     font-weight: 600;
   }
   .song-tab .cnt { display: none; }
