@@ -11066,6 +11066,7 @@ function openShortsCard(e, vid) {
 }
 
 let _shortsPlayerIndex = -1;
+let _shortsPlayerHistoryPushed = false;
 function openShortsPlayer(vid) {
   const modal = document.getElementById('shortsPlayerModal');
   const wrap = document.getElementById('sfpIframeWrap');
@@ -11075,15 +11076,24 @@ function openShortsPlayer(vid) {
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
   _updateShortsPlayerNav();
+  if (!_shortsPlayerHistoryPushed) {
+    history.pushState({ tab: curSection, shortsPlayerOpen: true }, '', location.href);
+    _shortsPlayerHistoryPushed = true;
+  }
 }
 
-function closeShortsPlayer() {
+function closeShortsPlayer(fromPopstate) {
   const modal = document.getElementById('shortsPlayerModal');
   const wrap = document.getElementById('sfpIframeWrap');
-  if (!modal || !wrap) return;
+  if (!modal) return;
+  const wasOpen = modal.classList.contains('open');
   modal.classList.remove('open');
-  wrap.innerHTML = '';
+  if (wrap) wrap.innerHTML = '';
   document.body.style.overflow = '';
+  if (_shortsPlayerHistoryPushed) {
+    _shortsPlayerHistoryPushed = false;
+    if (wasOpen && !fromPopstate) history.back();
+  }
 }
 
 function _updateShortsPlayerNav() {
@@ -11809,6 +11819,9 @@ function updateMobileNav(section) {
 })();
 
 window.addEventListener('popstate', e => {
+  if (_shortsPlayerHistoryPushed && !(e.state && e.state.shortsPlayerOpen)) {
+    closeShortsPlayer(true);
+  }
   const tab = (e.state && e.state.tab) || 'about';
   pickSection(tab, true);
 });
