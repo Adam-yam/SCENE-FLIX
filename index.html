@@ -124,6 +124,8 @@ gtag('config', 'G-05C99P2DB9');
   --c-mo-11: #D4A44B; --c-mo-11-rgb: 212,164,75;
   --c-mo-12: #4C5C7A; --c-mo-12-rgb: 76,92,122;
 
+  --c-shorts-ch: #8A7BB8; --c-shorts-ch-rgb: 138,123,184;
+
   --safe-bottom: env(safe-area-inset-bottom, 0px);
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-left:   env(safe-area-inset-left, 0px);
@@ -670,6 +672,12 @@ header {
 .type-btn.active[data-mo="10"] { color: var(--c-mo-10); border-color: var(--c-mo-10); background: rgba(var(--c-mo-10-rgb),0.10); }
 .type-btn.active[data-mo="11"] { color: var(--c-mo-11); border-color: var(--c-mo-11); background: rgba(var(--c-mo-11-rgb),0.10); }
 .type-btn.active[data-mo="12"] { color: var(--c-mo-12); border-color: var(--c-mo-12); background: rgba(var(--c-mo-12-rgb),0.10); }
+
+.type-btn[data-sc]:not([data-sc="all"])        { border-color: var(--c-shorts-ch); }
+.type-btn[data-sc]:not([data-sc="all"]):hover  { border-color: var(--c-shorts-ch); color: var(--c-shorts-ch); }
+
+.type-btn.active[data-sc="all"]                { color: #fff; border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.12); }
+.type-btn.active[data-sc]:not([data-sc="all"]) { color: var(--c-shorts-ch); border-color: var(--c-shorts-ch); background: rgba(var(--c-shorts-ch-rgb),0.15); }
 
 .search-bar {
   max-width: 1280px;
@@ -2583,6 +2591,37 @@ header {
 @media (min-width: 1200px) { .shorts-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); } }
 @media (min-width: 701px) { .shorts-grid { grid-template-columns: repeat(9, 1fr); } .shorts-wrap { max-width: 1600px; } }
 
+.shorts-flix-toggle { display: flex; align-items: center; gap: 7px; margin-left: 10px; padding-left: 10px; border-left: 1px solid var(--border); flex-shrink: 0; }
+.shorts-flix-toggle .sft-label { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.02em; white-space: nowrap; cursor: pointer; user-select: none; }
+.sft-switch { position: relative; width: 34px; height: 20px; border-radius: 10px; background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.26); cursor: pointer; flex-shrink: 0; transition: background 0.2s cubic-bezier(0.4,0,0.2,1), border-color 0.2s cubic-bezier(0.4,0,0.2,1); padding: 0; }
+.sft-switch::after { content: ''; position: absolute; top: 1px; left: 1px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform 0.2s cubic-bezier(0.4,0,0.2,1); box-shadow: 0 1px 3px rgba(0,0,0,0.35); }
+.sft-switch.on { background: var(--accent); border-color: var(--accent); }
+.sft-switch.on::after { transform: translateX(14px); }
+@media (max-width: 700px) {
+  .shorts-flix-toggle { margin-left: 6px; padding-left: 8px; gap: 5px; }
+  .shorts-flix-toggle .sft-label { font-size: 0.62rem; }
+  .sft-switch { width: 30px; height: 18px; }
+  .sft-switch::after { width: 14px; height: 14px; }
+  .sft-switch.on::after { transform: translateX(12px); }
+}
+
+#shortsPlayerModal { position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.9); backdrop-filter: blur(6px); }
+#shortsPlayerModal.open { display: flex; }
+.sfp-inner { position: relative; width: min(94vw, 420px); height: min(88vh, 746px); aspect-ratio: 9/16; background: #000; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.6); animation: fadeUp 0.3s cubic-bezier(0.22,1,0.36,1) both; }
+.sfp-inner iframe { width: 100%; height: 100%; border: 0; display: block; }
+.sfp-close { position: absolute; top: -44px; right: 0; width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
+.sfp-close:hover { background: rgba(255,255,255,0.22); }
+.sfp-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 38px; height: 38px; border-radius: 50%; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.22); color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 2; }
+.sfp-nav:hover { background: rgba(255,255,255,0.22); }
+.sfp-nav.prev { left: -50px; }
+.sfp-nav.next { right: -50px; }
+@media (max-width: 700px) {
+  .sfp-inner { width: 100vw; height: 100vh; max-height: 100vh; border-radius: 0; aspect-ratio: auto; }
+  .sfp-close { top: calc(10px + var(--safe-top)); right: 10px; background: rgba(0,0,0,0.45); }
+  .sfp-nav.prev { left: 8px; }
+  .sfp-nav.next { right: 8px; }
+}
+
 .chart-legend-item { display:flex; align-items:center; gap:10px; cursor:pointer; border-radius:8px; padding:6px 8px; transition:background 0.18s cubic-bezier(0.4,0,0.2,1); }
 .chart-legend-item:hover { background: var(--card-h); }
 .chart-legend-dot { width:12px; height:12px; border-radius:3px; flex-shrink:0; }
@@ -3209,6 +3248,10 @@ header {
           <span data-i18n="sort_oldest">오래된순</span>
         </button>
       </div>
+      <div class="shorts-flix-toggle">
+        <span class="sft-label" id="sftLabel" onclick="toggleShortsFlixMode()" data-i18n="shorts_flix_toggle">SCENE-FLIX에서 보기</span>
+        <button class="sft-switch" id="sftSwitch" onclick="toggleShortsFlixMode()" aria-label="SCENE-FLIX에서 보기" role="switch" aria-checked="false"></button>
+      </div>
     </div>
   </div>
   <div class="song-nav-inner">
@@ -3348,6 +3391,7 @@ window._i18n = {
     bm_playlist_play:     '재생목록으로 재생',
     bm_playlist_note:     '최대 {limit}개까지 재생돼요 (총 {total}개 중 앞 {limit}개)',
     empty_no_shorts:      '쇼츠가 없습니다.',
+    shorts_flix_toggle:   'SCENE-FLIX에서 보기',
     empty_no_news:        '뉴스를 불러올 수 없습니다.',
     sub_label_archive:    '기간별 보기',
     sub_label_songs:      '음악방송',
@@ -3449,6 +3493,7 @@ window._i18n = {
     bm_playlist_play:     '再生リストで再生',
     bm_playlist_note:     '最大{limit}件まで再生されます（全{total}件中、先頭{limit}件）',
     empty_no_shorts:      'ショートがありません。',
+    shorts_flix_toggle:   'SCENE-FLIXで見る',
     empty_no_news:        'ニュースを読み込めません。',
     sub_label_archive:    '期間別ビュー',
     sub_label_songs:      '音楽番組',
@@ -3550,6 +3595,7 @@ window._i18n = {
     bm_playlist_play:     'Play as playlist',
     bm_playlist_note:     'Plays up to {limit} videos ({total} total, first {limit} shown)',
     empty_no_shorts:      'No shorts found.',
+    shorts_flix_toggle:   'Watch on SCENE-FLIX',
     empty_no_news:        'Unable to load news.',
     sub_label_archive:    'By Period',
     sub_label_songs:      'Music Show',
@@ -10955,7 +11001,7 @@ function _appendShortsPage(grid) {
     card.target = '_blank';
     card.rel = 'noopener';
     card.style.animationDelay = delay;
-    card.onclick = function(e) { openVideo(e, item.vid); };
+    card.onclick = function(e) { openShortsCard(e, item.vid); };
     card.innerHTML = `<div class="shorts-thumb-wrap">
         <img src="https://img.youtube.com/vi/${item.vid}/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg';}">
         <div class="shorts-play-ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
@@ -10985,6 +11031,73 @@ function _initShorts() {
   buildShortsYearNav();
   buildShortsGrid();
   syncSubSidebar();
+  _applyShortsFlixToggleUI();
+}
+
+const _SHORTS_FLIX_KEY = 'rescene-shorts-flix-mode';
+let _shortsFlixMode = false;
+try { _shortsFlixMode = localStorage.getItem(_SHORTS_FLIX_KEY) === '1'; } catch {}
+
+function _applyShortsFlixToggleUI() {
+  const sw = document.getElementById('sftSwitch');
+  if (!sw) return;
+  sw.classList.toggle('on', _shortsFlixMode);
+  sw.setAttribute('aria-checked', _shortsFlixMode ? 'true' : 'false');
+}
+
+function toggleShortsFlixMode() {
+  _shortsFlixMode = !_shortsFlixMode;
+  try { localStorage.setItem(_SHORTS_FLIX_KEY, _shortsFlixMode ? '1' : '0'); } catch {}
+  _applyShortsFlixToggleUI();
+}
+
+function openShortsCard(e, vid) {
+  if (_shortsFlixMode) {
+    e.preventDefault();
+    if (e.target.closest('.bm-btn') || e.target.closest('.share-btn')) return;
+    openShortsPlayer(vid);
+    try { localStorage.setItem('rescene-last-watched', vid); } catch {}
+    _applyLastWatchedBadge(vid);
+    markWatched(vid);
+    return;
+  }
+  openVideo(e, vid);
+}
+
+let _shortsPlayerIndex = -1;
+function openShortsPlayer(vid) {
+  const modal = document.getElementById('shortsPlayerModal');
+  const wrap = document.getElementById('sfpIframeWrap');
+  if (!modal || !wrap) return;
+  _shortsPlayerIndex = _shortsFiltered.findIndex(i => i.vid === vid);
+  wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  _updateShortsPlayerNav();
+}
+
+function closeShortsPlayer() {
+  const modal = document.getElementById('shortsPlayerModal');
+  const wrap = document.getElementById('sfpIframeWrap');
+  if (!modal || !wrap) return;
+  modal.classList.remove('open');
+  wrap.innerHTML = '';
+  document.body.style.overflow = '';
+}
+
+function _updateShortsPlayerNav() {
+  const prev = document.getElementById('sfpPrev');
+  const next = document.getElementById('sfpNext');
+  if (!prev || !next) return;
+  prev.style.visibility = _shortsPlayerIndex > 0 ? 'visible' : 'hidden';
+  next.style.visibility = (_shortsPlayerIndex >= 0 && _shortsPlayerIndex < _shortsFiltered.length - 1) ? 'visible' : 'hidden';
+}
+
+function _shortsPlayerStep(dir) {
+  const nextIndex = _shortsPlayerIndex + dir;
+  if (nextIndex < 0 || nextIndex >= _shortsFiltered.length) return;
+  const item = _shortsFiltered[nextIndex];
+  openShortsPlayer(item.vid);
 }
 
 function _escHtml(str) {
@@ -11632,7 +11745,7 @@ _elDrawerOverlay.addEventListener('click', function(e) {
 });
 
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeDrawer();
+  if (e.key === 'Escape') { closeDrawer(); closeShortsPlayer(); }
 });
 
 let _chanBarResizeTimer = null;
@@ -11817,6 +11930,20 @@ if ('serviceWorker' in navigator) {
 </script>
 
 <div id="share-toast"></div>
+<div id="shortsPlayerModal" onclick="if(event.target===this) closeShortsPlayer();">
+  <div class="sfp-inner">
+    <button class="sfp-close" onclick="closeShortsPlayer()" aria-label="close">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="sfp-nav prev" id="sfpPrev" onclick="_shortsPlayerStep(-1)" aria-label="prev">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="sfp-nav next" id="sfpNext" onclick="_shortsPlayerStep(1)" aria-label="next">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div id="sfpIframeWrap"></div>
+  </div>
+</div>
 
 <script>
 (function() {
