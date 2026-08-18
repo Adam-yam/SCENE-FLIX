@@ -11182,14 +11182,14 @@ function clearShortsSearch() {
   if (countEl) countEl.textContent = '';
   _rebuildShortsGridKeepScroll();
   const input2 = document.getElementById('shortsSearchInput');
-  if (input2 && document.getElementById('shortsSearchBarInner')?.classList.contains('ssb-open')) input2.focus();
+  if (input2 && document.getElementById('shortsSearchBarInner')?.classList.contains('ssb-open')) input2.focus({ preventScroll: true });
 }
 
 function openShortsSearch() {
   const bar = document.getElementById('shortsSearchBarInner');
   if (bar) bar.classList.add('ssb-open');
   const input = document.getElementById('shortsSearchInput');
-  if (input) setTimeout(() => input.focus(), 50);
+  if (input) setTimeout(() => input.focus({ preventScroll: true }), 50);
 }
 
 function closeShortsSearch() {
