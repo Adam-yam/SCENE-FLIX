@@ -11189,15 +11189,24 @@ function buildShortsGrid() {
   _appendShortsPage(grid);
 }
 
+function _shortsHl(text, q) {
+  const escaped = _escHtml(text || '');
+  if (!q) return escaped;
+  const re = new RegExp('(' + _hlEscape(q) + ')', 'gi');
+  return escaped.replace(re, '<mark class="sh">$1</mark>');
+}
+
 function _appendShortsPage(grid) {
   const start = _shortsPage * _SHORTS_PAGE_SIZE;
   const slice = _shortsFiltered.slice(start, start + _SHORTS_PAGE_SIZE);
   if (!slice.length) return;
 
+  const hlq = curShortsSearchQuery;
+
   slice.forEach(function(item, i) {
     const delay = Math.min(i * 0.012, 0.3) + 's';
     const label = _SHORTS_CHANNEL_LABEL[item.channel] || item.channel || '';
-    const title = item.title ? _escHtml(item.title) : '';
+    const title = item.title ? _shortsHl(item.title, hlq) : '';
     const date  = item.date || '';
     const ytUrl = 'https://www.youtube.com/shorts/' + item.vid;
     const card  = document.createElement('a');
@@ -11211,10 +11220,10 @@ function _appendShortsPage(grid) {
     card.innerHTML = `<div class="shorts-thumb-wrap">
         <img src="https://img.youtube.com/vi/${item.vid}/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg';}">
         <div class="shorts-play-ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-        ${label ? `<span class="shorts-channel-badge">${label}</span>` : ''}
+        ${label ? `<span class="shorts-channel-badge">${_shortsHl(label, hlq)}</span>` : ''}
       </div>
       <div class="shorts-body">
-        <div class="shorts-title">${title || item.vid}</div>
+        <div class="shorts-title">${title || _escHtml(item.vid)}</div>
         ${date ? `<div class="shorts-date">${date}</div>` : ''}
       </div>`;
     grid.appendChild(card);
