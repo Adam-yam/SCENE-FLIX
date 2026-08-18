@@ -2605,6 +2605,116 @@ header {
   .sft-switch.on::after { transform: translateX(12px); }
 }
 
+.shorts-search-wrap { display: flex; align-items: center; margin-left: auto; flex: 0 1 320px; min-width: 0; }
+.shorts-search-icon-btn { display: none; }
+.shorts-search-back-btn { display: none; }
+.shorts-search-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.shorts-search-input-wrap .ssiw-ico {
+  position: absolute;
+  left: 13px;
+  width: 15px;
+  height: 15px;
+  color: var(--muted);
+  pointer-events: none;
+  flex-shrink: 0;
+  z-index: 1;
+}
+#shortsSearchInput {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  padding: 8px 32px 8px 36px;
+  outline: none;
+  transition: border-color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
+  box-sizing: border-box;
+  min-width: 0;
+  user-select: text;
+  -webkit-user-select: text;
+}
+#shortsSearchInput::placeholder { color: var(--muted); }
+#shortsSearchInput:focus { border-color: var(--border-h); background: rgba(255,255,255,0.07); }
+#shortsSearchClear {
+  position: absolute;
+  right: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 4px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1);
+  flex-shrink: 0;
+  z-index: 1;
+}
+#shortsSearchClear:hover { color: var(--text); }
+#shortsSearchClear svg { width: 12px; height: 12px; display: block; }
+#shortsSearchResultCount {
+  position: absolute;
+  right: 30px;
+  font-size: 0.65rem;
+  color: var(--muted);
+  pointer-events: none;
+  white-space: nowrap;
+}
+@media (max-width: 700px) {
+  .shorts-search-wrap { flex: 0 0 auto; margin-left: auto; }
+  .shorts-search-icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 7px;
+    border: 1px solid rgba(255,255,255,0.32);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    flex-shrink: 0;
+    padding: 0;
+  }
+  .shorts-search-icon-btn svg { width: 14px; height: 14px; }
+  .shorts-search-icon-btn:active { color: var(--text); border-color: rgba(255,255,255,0.55); }
+  .shorts-search-input-wrap { display: none; }
+
+  #shortsSearchBarInner.ssb-open { flex-wrap: nowrap; }
+  #shortsSearchBarInner.ssb-open .sort-btns,
+  #shortsSearchBarInner.ssb-open .shorts-flix-toggle { display: none; }
+  #shortsSearchBarInner.ssb-open .shorts-search-wrap { flex: 1 1 auto; width: 100%; }
+  #shortsSearchBarInner.ssb-open .shorts-search-icon-btn { display: none; }
+  #shortsSearchBarInner.ssb-open .shorts-search-input-wrap { display: flex; }
+
+  .shorts-search-back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    margin-right: 2px;
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 0;
+    z-index: 1;
+  }
+  .shorts-search-back-btn:active { color: var(--text); }
+  .shorts-search-input-wrap .ssiw-ico { display: none; }
+  #shortsSearchInput { padding-left: 8px; font-size: 0.75rem; }
+}
+
 #shortsPlayerModal { position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.9); backdrop-filter: blur(6px); }
 #shortsPlayerModal.open { display: flex; }
 .sfp-inner { position: relative; width: min(94vw, 420px); height: min(88vh, 746px); aspect-ratio: 9/16; background: #000; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.6); animation: fadeUp 0.3s cubic-bezier(0.22,1,0.36,1) both; }
@@ -3238,7 +3348,7 @@ header {
 </div>
 <div id="shortsMode" style="display:none;">
   <div class="search-bar">
-    <div class="search-bar-inner">
+    <div class="search-bar-inner" id="shortsSearchBarInner">
       <div class="sort-btns">
         <button class="sort-btn active" id="sortShortsNewest" onclick="setShortsSort('newest')">
           <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
@@ -3252,6 +3362,22 @@ header {
       <div class="shorts-flix-toggle">
         <span class="sft-label" id="sftLabel" onclick="toggleShortsFlixMode()" data-i18n="shorts_flix_toggle">SCENE-FLIX에서 보기</span>
         <button class="sft-switch" id="sftSwitch" onclick="toggleShortsFlixMode()" aria-label="SCENE-FLIX에서 보기" role="switch" aria-checked="false"></button>
+      </div>
+      <div class="shorts-search-wrap" id="shortsSearchWrap">
+        <button class="shorts-search-icon-btn" id="shortsSearchIconBtn" onclick="openShortsSearch()" title="검색" aria-label="검색" data-i18n-title="search_btn" data-i18n-aria="search_btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </button>
+        <div class="shorts-search-input-wrap" id="shortsSearchInputWrap">
+          <button class="shorts-search-back-btn" id="shortsSearchBackBtn" onclick="closeShortsSearch()" title="검색 닫기" aria-label="검색 닫기" data-i18n-title="btn_close" data-i18n-aria="btn_close">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <svg class="ssiw-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="shortsSearchInput" placeholder="제목으로 검색..." autocomplete="off" data-i18n-placeholder="shorts_search_placeholder">
+          <span id="shortsSearchResultCount"></span>
+          <button id="shortsSearchClear" onclick="clearShortsSearch()" title="검색어 지우기" aria-label="검색어 지우기" data-i18n-title="search_clear" data-i18n-aria="search_clear">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -3393,6 +3519,7 @@ window._i18n = {
     bm_playlist_note:     '최대 {limit}개까지 재생돼요 (총 {total}개 중 앞 {limit}개)',
     empty_no_shorts:      '쇼츠가 없습니다.',
     shorts_flix_toggle:   'SCENE-FLIX에서 보기',
+    shorts_search_placeholder: '제목으로 검색...',
     empty_no_news:        '뉴스를 불러올 수 없습니다.',
     sub_label_archive:    '기간별 보기',
     sub_label_songs:      '음악방송',
@@ -3495,6 +3622,7 @@ window._i18n = {
     bm_playlist_note:     '最大{limit}件まで再生されます（全{total}件中、先頭{limit}件）',
     empty_no_shorts:      'ショートがありません。',
     shorts_flix_toggle:   'SCENE-FLIXで見る',
+    shorts_search_placeholder: 'タイトルで検索...',
     empty_no_news:        'ニュースを読み込めません。',
     sub_label_archive:    '期間別ビュー',
     sub_label_songs:      '音楽番組',
@@ -3597,6 +3725,7 @@ window._i18n = {
     bm_playlist_note:     'Plays up to {limit} videos ({total} total, first {limit} shown)',
     empty_no_shorts:      'No shorts found.',
     shorts_flix_toggle:   'Watch on SCENE-FLIX',
+    shorts_search_placeholder: 'Search by title...',
     empty_no_news:        'Unable to load news.',
     sub_label_archive:    'By Period',
     sub_label_songs:      'Music Show',
@@ -10203,6 +10332,7 @@ function pickSection(section, _fromPopState) {
   }
 
   clearSearch(true);
+  if (section !== 'shorts') resetShortsSearchUi(true);
 
   if (section === 'about')  _replayAnim('#aboutMode .links-wrap > div > *', i => `${i * 0.07}s`, 'fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both');
 
@@ -10961,6 +11091,63 @@ let _shortsSentinel = null;
 let _shortsPage = 0;
 let _shortsFiltered = [];
 
+let curShortsSearchQuery = '';
+
+function onShortsSearchInput(val) {
+  curShortsSearchQuery = val.trim();
+  const clearBtn = document.getElementById('shortsSearchClear');
+  if (clearBtn) clearBtn.style.display = curShortsSearchQuery ? 'flex' : 'none';
+  buildShortsGrid();
+}
+
+function clearShortsSearch() {
+  curShortsSearchQuery = '';
+  const input = document.getElementById('shortsSearchInput');
+  if (input) input.value = '';
+  const clearBtn = document.getElementById('shortsSearchClear');
+  if (clearBtn) clearBtn.style.display = 'none';
+  const countEl = document.getElementById('shortsSearchResultCount');
+  if (countEl) countEl.textContent = '';
+  buildShortsGrid();
+  const input2 = document.getElementById('shortsSearchInput');
+  if (input2 && document.getElementById('shortsSearchBarInner')?.classList.contains('ssb-open')) input2.focus();
+}
+
+function openShortsSearch() {
+  const bar = document.getElementById('shortsSearchBarInner');
+  if (bar) bar.classList.add('ssb-open');
+  const input = document.getElementById('shortsSearchInput');
+  if (input) setTimeout(() => input.focus(), 50);
+}
+
+function closeShortsSearch() {
+  const bar = document.getElementById('shortsSearchBarInner');
+  if (bar) bar.classList.remove('ssb-open');
+  clearShortsSearch();
+}
+
+function resetShortsSearchUi(skipRebuild) {
+  curShortsSearchQuery = '';
+  const input = document.getElementById('shortsSearchInput');
+  if (input) input.value = '';
+  const clearBtn = document.getElementById('shortsSearchClear');
+  if (clearBtn) clearBtn.style.display = 'none';
+  const countEl = document.getElementById('shortsSearchResultCount');
+  if (countEl) countEl.textContent = '';
+  const bar = document.getElementById('shortsSearchBarInner');
+  if (bar) bar.classList.remove('ssb-open');
+  if (!skipRebuild) buildShortsGrid();
+}
+
+(function () {
+  const input = document.getElementById('shortsSearchInput');
+  if (!input) return;
+  input.addEventListener('input', function (e) { onShortsSearchInput(e.target.value); });
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { e.target.blur(); if (!e.target.value) closeShortsSearch(); }
+  });
+})();
+
 function buildShortsGrid() {
   const grid = document.getElementById('shortsGrid');
   if (!grid || !_shortsLoaded) return;
@@ -10970,14 +11157,32 @@ function buildShortsGrid() {
 
   let items = _curShortsChannel === 'all' ? SHORTS_DATA : SHORTS_DATA.filter(i => i.channel === _curShortsChannel);
   if (_curShortsYear !== 'all') items = items.filter(i => i.date && i.date.startsWith(_curShortsYear));
+
+  const q = curShortsSearchQuery.toLowerCase();
+  if (q) {
+    items = items.filter(i => {
+      const title = (i.title || '').toLowerCase();
+      const label = (_SHORTS_CHANNEL_LABEL[i.channel] || i.channel || '').toLowerCase();
+      return title.includes(q) || label.includes(q);
+    });
+  }
+
   items = sortItemsByDate(items, _curShortsSort);
 
   _shortsFiltered = items;
   _shortsPage = 0;
   grid.innerHTML = '';
 
+  const countEl = document.getElementById('shortsSearchResultCount');
+  if (countEl) countEl.textContent = q ? `${items.length}${getCurrentT().search_result_unit || ''}` : '';
+
   if (!items.length) {
-    grid.innerHTML = `<div class="shorts-empty"><div class="ico">🎬</div><p>${getCurrentT().empty_no_shorts || '쇼츠가 없습니다.'}</p></div>`;
+    if (q) {
+      const t = getCurrentT();
+      grid.innerHTML = `<div class="search-empty"><div class="ico">🔍</div><p>${t.search_empty_prefix || ''}"${_escHtml(curShortsSearchQuery)}"${t.search_empty_suffix || ''}</p><small>${t.search_empty_hint || ''}</small></div>`;
+    } else {
+      grid.innerHTML = `<div class="shorts-empty"><div class="ico">🎬</div><p>${getCurrentT().empty_no_shorts || '쇼츠가 없습니다.'}</p></div>`;
+    }
     return;
   }
 
