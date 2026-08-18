@@ -2128,6 +2128,58 @@ header {
   color: var(--muted);
   line-height: 1.6;
 }
+.sched-search-bar {
+  margin-bottom: 18px;
+}
+.sched-search-input-wrap {
+  max-width: 420px;
+}
+#schedSearchInput {
+  width: 100%;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  padding: 9px 32px 9px 36px;
+  outline: none;
+  transition: border-color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
+  box-sizing: border-box;
+  min-width: 0;
+  user-select: text;
+  -webkit-user-select: text;
+}
+#schedSearchInput::placeholder { color: var(--muted); }
+#schedSearchInput:focus { border-color: var(--border-h); background: rgba(255,255,255,0.07); }
+#schedSearchClear {
+  position: absolute;
+  right: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  padding: 4px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1);
+  flex-shrink: 0;
+  z-index: 1;
+}
+#schedSearchClear:hover { color: var(--text); }
+#schedSearchClear svg { width: 12px; height: 12px; display: block; }
+#schedSearchResultCount {
+  position: absolute;
+  right: 30px;
+  font-size: 0.65rem;
+  color: var(--muted);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.sched-group-date-clickable { cursor: pointer; }
+.sched-group-date-clickable:hover .sched-group-day-num { color: var(--accent); }
 .sched-body {
   display: flex;
   gap: 28px;
@@ -3258,6 +3310,16 @@ header {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0;opacity:0.6;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
       <span>스케줄은 공식 채널 Mnet Plus 정보를 기반으로 표시됩니다. 또한 SCENE-FLIX 내의 스케줄은 6시간마다 갱신됩니다. 실시간 스케줄 확인은 Mnet Plus에서 가능합니다.</span>
     </div>
+    <div class="sched-search-bar">
+      <div class="search-input-wrap sched-search-input-wrap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="schedSearchInput" placeholder="일정 제목으로 검색... (예: 콘서트, 팬사인회)" autocomplete="off" data-i18n-placeholder="sched_search_placeholder">
+        <span id="schedSearchResultCount"></span>
+        <button id="schedSearchClear" onclick="clearSchedSearch()" title="검색어 지우기" aria-label="검색어 지우기" data-i18n-title="search_clear" data-i18n-aria="search_clear">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
     <div class="sched-body">
       <div class="sched-cal-col">
         <div class="cal-header">
@@ -3520,6 +3582,7 @@ window._i18n = {
     empty_no_shorts:      '쇼츠가 없습니다.',
     shorts_flix_toggle:   'SCENE-FLIX에서 보기',
     shorts_search_placeholder: '제목으로 검색...',
+    sched_search_placeholder: '일정 제목으로 검색... (예: 콘서트, 팬사인회)',
     empty_no_news:        '뉴스를 불러올 수 없습니다.',
     sub_label_archive:    '기간별 보기',
     sub_label_songs:      '음악방송',
@@ -3623,6 +3686,7 @@ window._i18n = {
     empty_no_shorts:      'ショートがありません。',
     shorts_flix_toggle:   'SCENE-FLIXで見る',
     shorts_search_placeholder: 'タイトルで検索...',
+    sched_search_placeholder: 'イベント名で検索...（例：コンサート、ファンサイン）',
     empty_no_news:        'ニュースを読み込めません。',
     sub_label_archive:    '期間別ビュー',
     sub_label_songs:      '音楽番組',
@@ -3726,6 +3790,7 @@ window._i18n = {
     empty_no_shorts:      'No shorts found.',
     shorts_flix_toggle:   'Watch on SCENE-FLIX',
     shorts_search_placeholder: 'Search by title...',
+    sched_search_placeholder: 'Search event title... (e.g. concert, fan sign)',
     empty_no_news:        'Unable to load news.',
     sub_label_archive:    'By Period',
     sub_label_songs:      'Music Show',
@@ -10333,6 +10398,7 @@ function pickSection(section, _fromPopState) {
 
   clearSearch(true);
   if (section !== 'shorts') resetShortsSearchUi(true);
+  if (section !== 'schedule') resetSchedSearchUi(true);
 
   if (section === 'about')  _replayAnim('#aboutMode .links-wrap > div > *', i => `${i * 0.07}s`, 'fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both');
 
@@ -11305,8 +11371,11 @@ function closeShortsPlayer(fromPopstate) {
   if (wrap) wrap.innerHTML = '';
   document.body.style.overflow = '';
   if (_shortsPlayerHistoryPushed) {
-    _shortsPlayerHistoryPushed = false;
-    if (wasOpen && !fromPopstate) history.back();
+    if (wasOpen && !fromPopstate) {
+      history.back();
+    } else {
+      _shortsPlayerHistoryPushed = false;
+    }
   }
 }
 
@@ -11444,12 +11513,12 @@ function calNavigate(dir) {
   _calSelectedDate = null;
   _elCalDetail.classList.remove('visible');
   renderCalendar();
-  renderSchedList();
+  updateSchedList();
 }
 
 function buildCalendar() {
   renderCalendar();
-  renderSchedList();
+  updateSchedList();
 }
 
 let _calEvMapCache = null;
@@ -11606,17 +11675,50 @@ function calCloseDetail() {
   document.querySelectorAll('.cal-cell.selected').forEach(el => el.classList.remove('selected'));
 }
 
+const _SCHED_TYPE_LABEL = {
+  broadcast: { KR:'방송',    JP:'放送',       EN:'Broadcast' },
+  radio:     { KR:'라디오',  JP:'ラジオ',     EN:'Radio' },
+  event:     { KR:'행사',    JP:'イベント',   EN:'Event' },
+  fansign:   { KR:'팬사인회', JP:'ファンサイン', EN:'Fan Sign' },
+  concert:   { KR:'공연',    JP:'公演',       EN:'Concert' },
+  notice:    { KR:'공지',    JP:'お知らせ',   EN:'Notice' },
+  anniv:     { KR:'기념일',  JP:'記念日',     EN:'Anniversary' },
+};
+
+function _kwHl(text, q) {
+  const escaped = _escHtml(text || '');
+  if (!q) return escaped;
+  const re = new RegExp('(' + _hlEscape(q) + ')', 'gi');
+  return escaped.replace(re, '<mark class="sh">$1</mark>');
+}
+
+function _schedItemHtml(ev, lang, hlq) {
+  const evColor = (ev._isBirthday && ev._memberColor)
+    ? ev._memberColor
+    : (SCHED_TYPE_COLOR[ev.type] || '#888');
+  const bar = `background:${evColor}`;
+  const tl = (_SCHED_TYPE_LABEL[ev.type]||{})[lang] || ev.type;
+  const tagStyle = `background:color-mix(in srgb, ${evColor} 18%, transparent);color:${evColor}`;
+  const link = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="sched-item-link">↗ 링크</a>` : '';
+  const timeTag = ev.time ? `<span class="sched-item-time" style="color:${evColor}">${_escHtml(ev.time)}</span>` : '';
+  const titleHtml = hlq ? _kwHl(ev.title, hlq) : _escHtml(ev.title);
+  const noteHtml  = ev.note ? (hlq ? _kwHl(ev.note, hlq) : _escHtml(ev.note)) : '';
+  return `<div class="sched-item">
+        <div class="sched-item-bar" style="${bar}"></div>
+        <div class="sched-item-body">
+          <div class="sched-item-title">${titleHtml}</div>
+          <div class="sched-item-meta">
+            <span class="sched-item-type-tag" style="${tagStyle}">${_escHtml(tl)}</span>
+            ${timeTag}
+            ${noteHtml ? `<span>${noteHtml}</span>` : ''}
+          </div>
+        </div>
+        ${link}
+      </div>`;
+}
+
 function renderSchedList() {
   const lang = window._curLang || 'KR';
-  const typeLabel = {
-    broadcast: { KR:'방송',    JP:'放送',       EN:'Broadcast' },
-    radio:     { KR:'라디오',  JP:'ラジオ',     EN:'Radio' },
-    event:     { KR:'행사',    JP:'イベント',   EN:'Event' },
-    fansign:   { KR:'팬사인회', JP:'ファンサイン', EN:'Fan Sign' },
-    concert:   { KR:'공연',    JP:'公演',       EN:'Concert' },
-    notice:    { KR:'공지',    JP:'お知らせ',   EN:'Notice' },
-    anniv:     { KR:'기념일',  JP:'記念日',     EN:'Anniversary' },
-  };
 
   const monthStr = `${_calYear}-${String(_calMonth+1).padStart(2,'0')}`;
   const monthEvents = SCHEDULE_DATA.filter(e => e.date.startsWith(monthStr));
@@ -11666,33 +11768,120 @@ function renderSchedList() {
         </div>
       </div>`;
 
-    for (const ev of evs) {
-      const evColor = (ev._isBirthday && ev._memberColor)
-        ? ev._memberColor
-        : (SCHED_TYPE_COLOR[ev.type] || '#888');
-      const bar = `background:${evColor}`;
-      const tl = (typeLabel[ev.type]||{})[lang] || ev.type;
-      const tagStyle = `background:color-mix(in srgb, ${evColor} 18%, transparent);color:${evColor}`;
-      const link = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="sched-item-link">↗ 링크</a>` : '';
-      const timeTag = ev.time ? `<span class="sched-item-time" style="color:${evColor}">${_escHtml(ev.time)}</span>` : '';
-      html += `<div class="sched-item">
-        <div class="sched-item-bar" style="${bar}"></div>
-        <div class="sched-item-body">
-          <div class="sched-item-title">${_escHtml(ev.title)}</div>
-          <div class="sched-item-meta">
-            <span class="sched-item-type-tag" style="${tagStyle}">${_escHtml(tl)}</span>
-            ${timeTag}
-            ${ev.note ? `<span>${_escHtml(ev.note)}</span>` : ''}
-          </div>
-        </div>
-        ${link}
-      </div>`;
-    }
+    for (const ev of evs) html += _schedItemHtml(ev, lang, null);
     html += `</div>`;
   }
 
   listEl.innerHTML = html;
 }
+
+let curSchedSearchQuery = '';
+
+function _schedSearchMatch(ev, q) {
+  const title = (ev.title || '').toLowerCase();
+  const note  = (ev.note  || '').toLowerCase();
+  return title.includes(q) || note.includes(q);
+}
+
+function onSchedSearchInput(val) {
+  curSchedSearchQuery = val.trim();
+  const clearBtn = document.getElementById('schedSearchClear');
+  if (clearBtn) clearBtn.style.display = curSchedSearchQuery ? 'flex' : 'none';
+  updateSchedList();
+}
+
+function clearSchedSearch() {
+  curSchedSearchQuery = '';
+  const input = document.getElementById('schedSearchInput');
+  if (input) input.value = '';
+  const clearBtn = document.getElementById('schedSearchClear');
+  if (clearBtn) clearBtn.style.display = 'none';
+  updateSchedList();
+}
+
+function resetSchedSearchUi(skipRebuild) {
+  curSchedSearchQuery = '';
+  const input = document.getElementById('schedSearchInput');
+  if (input) input.value = '';
+  const clearBtn = document.getElementById('schedSearchClear');
+  if (clearBtn) clearBtn.style.display = 'none';
+  if (!skipRebuild) updateSchedList();
+}
+
+function updateSchedList() {
+  if (curSchedSearchQuery) renderSchedSearchResults();
+  else renderSchedList();
+}
+
+function renderSchedSearchResults() {
+  const lang = window._curLang || 'KR';
+  const q = curSchedSearchQuery.toLowerCase();
+  const matches = SCHEDULE_DATA.filter(ev => _schedSearchMatch(ev, q));
+  matches.sort((a,b) => a.date.localeCompare(b.date));
+
+  const listEl = document.getElementById('schedList');
+  const countEl = document.getElementById('schedListCount');
+  const titleEl = document.getElementById('schedListTitle');
+  if (!listEl) return;
+
+  if (titleEl) titleEl.textContent = lang==='EN' ? 'Search Results' : lang==='JP' ? '検索結果' : '검색 결과';
+  if (countEl) countEl.textContent = matches.length ? `${matches.length}${getCurrentT().search_result_unit || ''}` : '';
+
+  if (!matches.length) {
+    const t = getCurrentT();
+    listEl.innerHTML = `<div class="sched-list-empty">${t.search_empty_prefix || ''}"${_escHtml(curSchedSearchQuery)}"${t.search_empty_suffix || ''}</div>`;
+    return;
+  }
+
+  const groups = {};
+  for (const ev of matches) {
+    if (!groups[ev.date]) groups[ev.date] = [];
+    groups[ev.date].push(ev);
+  }
+
+  let html = '';
+  for (const [dateStr, evs] of Object.entries(groups)) {
+    const parts = dateStr.split('-');
+    const Y = parts[0];
+    const D = parseInt(parts[2]);
+    const dow = new Date(dateStr).getDay();
+    const mN = (_CAL_MONTH_NAMES_SHORT[lang] || _CAL_MONTH_NAMES_SHORT.KR)[parseInt(parts[1])-1];
+    const dowN = (_CAL_DOW_NAMES[lang] || _CAL_DOW_NAMES.KR)[dow];
+
+    html += `<div class="sched-group">
+      <div class="sched-group-date sched-group-date-clickable" onclick="jumpToSchedDate('${dateStr}')" title="캘린더에서 보기">
+        <div class="sched-group-day-num">${D}</div>
+        <div class="sched-group-day-info">
+          <span class="sched-group-dow">${dowN}</span>
+          <span class="sched-group-month">${Y}.${mN}</span>
+        </div>
+      </div>`;
+
+    for (const ev of evs) html += _schedItemHtml(ev, lang, curSchedSearchQuery);
+    html += `</div>`;
+  }
+
+  listEl.innerHTML = html;
+}
+
+function jumpToSchedDate(dateStr) {
+  const parts = dateStr.split('-');
+  _calYear = parseInt(parts[0]);
+  _calMonth = parseInt(parts[1]) - 1;
+  renderCalendar();
+  calSelectDate(dateStr);
+  const gridEl = document.getElementById('calGrid');
+  if (gridEl) gridEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+(function () {
+  const input = document.getElementById('schedSearchInput');
+  if (!input) return;
+  input.addEventListener('input', function (e) { onSchedSearchInput(e.target.value); });
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { e.target.blur(); if (!e.target.value) clearSchedSearch(); }
+  });
+})();
 
 buildSongNav();
 
