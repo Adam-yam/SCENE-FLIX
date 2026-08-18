@@ -11819,10 +11819,12 @@ function updateMobileNav(section) {
 })();
 
 window.addEventListener('popstate', e => {
-  if (_shortsPlayerHistoryPushed && !(e.state && e.state.shortsPlayerOpen)) {
-    closeShortsPlayer(true);
-  }
+  const wasShortsPlayerOpen = _shortsPlayerHistoryPushed;
   const tab = (e.state && e.state.tab) || 'about';
+  if (wasShortsPlayerOpen && !(e.state && e.state.shortsPlayerOpen)) {
+    closeShortsPlayer(true);
+    if (tab === curSection) return;
+  }
   pickSection(tab, true);
 });
 
