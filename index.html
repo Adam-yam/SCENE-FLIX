@@ -11468,7 +11468,7 @@ function _chartChipHtml(platform, rankInfo) {
   const rank = rankInfo.rank;
   const prev = rankInfo.previousRank;
   let cls, deltaText, title;
-  if (prev == null) {
+  if (prev == null || prev <= 0) {
     cls = 'new'; deltaText = 'NEW'; title = platform.label+' '+rank+'위 (NEW)';
   } else if (prev === rank) {
     cls = 'same'; deltaText = '-'; title = platform.label+' '+rank+'위 (변동없음)';
