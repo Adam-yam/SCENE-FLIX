@@ -67,19 +67,19 @@ gtag('config', 'G-05C99P2DB9');
   --glass-highlight: rgba(255,255,255,0.18);
   --glass-shadow:    0 8px 28px rgba(0,0,0,0.32), 0 2px 6px rgba(0,0,0,0.18);
 
-  --c-music:    #6ec6c0;
+  --c-music:    #e96387;
   --c-mv:       #c07090;
   --c-itslive:  #a080d0;
-  --c-content:  #80b870;
-  --c-fullcam:  #d4c84a;
-  --c-external: #7aaede;
+  --c-content:  #47d19a;
+  --c-fullcam:  #ecb055;
+  --c-external: #55a1e7;
 
-  --c-music-rgb:     110,198,192;
+  --c-music-rgb:     233,99,135;
   --c-mv-rgb:        192,112,144;
   --c-itslive-rgb:   160,128,208;
-  --c-content-rgb:   128,184,112;
-  --c-fullcam-rgb:   212,200,74;
-  --c-external-rgb:  122,174,222;
+  --c-content-rgb:   71,209,154;
+  --c-fullcam-rgb:   236,176,85;
+  --c-external-rgb:  85,161,231;
 
   --c-wonyi-rgb:  4,160,110;
   --c-liv-rgb:    220,220,220;
@@ -2811,10 +2811,28 @@ header {
 .chart-ch-item { padding:4px 0 4px 10px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:6px; }
 .chart-ch-name { font-size:0.64rem; color:var(--muted); flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .chart-ch-count { font-size:0.62rem; color:var(--muted); flex-shrink:0; }
+
+.u-flex-col-tight { display:flex; flex-direction:column; gap:0px; }
+.u-mini-note { font-size:0.58rem; opacity:0.55; letter-spacing:0.01em; }
+.u-accent-strong { color:var(--accent); font-weight:600; }
+.u-accent-strong-underline { color:var(--accent); font-weight:600; text-decoration:underline; text-underline-offset:2px; }
+.u-link-pad { text-decoration:none; padding:7px 16px; }
+.u-hr-line { height:1px; background:var(--border); margin:4px 4px; }
+.u-hr-flex { flex:1; height:1px; background:var(--border); }
+.u-about-desc { font-size:0.74rem; color:var(--muted); line-height:1.75; margin:0; }
+.u-section-label-sm { font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+.u-icon-60 { flex-shrink:0; opacity:0.6; }
+.u-icon-35 { flex-shrink:0; opacity:0.35; }
+.u-flex-gap8 { display:flex; align-items:center; gap:8px; }
+.u-flex-gap11-start { display:flex; gap:11px; align-items:flex-start; }
+.u-flex-gap10-mb20 { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
+.u-bullet-icon { color:var(--accent); margin-top:3px; flex-shrink:0; font-size:0.6rem; line-height:1; }
 </style>
 </head>
 
 <body>
+<svg style="display:none" aria-hidden="true"><symbol id="ic1" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol><symbol id="ic2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></symbol><symbol id="ic3" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol><symbol id="ic4" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></symbol><symbol id="ic5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></symbol><symbol id="ic6" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></symbol><symbol id="ic7" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol><symbol id="ic8" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 3H8"/><path d="M12 3v4"/></symbol><symbol id="ic9" viewBox="0 0 24 24"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><line x1="10" y1="12" x2="14" y2="12"/></symbol><symbol id="ic10" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0 1 21 8.723v6.554a1 1 0 0 1-1.447.894L15 14"/><rect x="2" y="6" width="13" height="12" rx="2"/></symbol><symbol id="ic11" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol><symbol id="ic12" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol><symbol id="ic13" viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6z"/></symbol><symbol id="ic14" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol><symbol id="ic15" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol><symbol id="ic16" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></symbol><symbol id="ic17" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol><symbol id="ic18" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol><symbol id="ic19" viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></symbol></svg>
+
 
 <button id="mobileMenuBtn" onclick="toggleDrawer()" aria-label="메뉴 열기" data-i18n-aria="menu_open">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -2836,84 +2854,84 @@ header {
     </button>
   </div>
 
-  <a class="drawer-item btn-base" href="https://adam-yam.github.io/SCENE-grid/" target="_blank" rel="noopener" onclick="closeDrawer()" style="text-decoration:none;padding:7px 16px;">
+  <a class="drawer-item btn-base u-link-pad" href="https://adam-yam.github.io/SCENE-grid/" target="_blank" rel="noopener" onclick="closeDrawer()">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-    <span style="display:flex;flex-direction:column;gap:0px;">
+    <span class="u-flex-col-tight">
       <span>SCENE-grid</span>
-      <span style="font-size:0.58rem;opacity:0.55;letter-spacing:0.01em;">for Galaxy users</span>
+      <span class="u-mini-note">for Galaxy users</span>
     </span>
   </a>
-  <a class="drawer-item btn-base" href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener" onclick="closeDrawer()" style="text-decoration:none;padding:7px 16px;">
+  <a class="drawer-item btn-base u-link-pad" href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener" onclick="closeDrawer()">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-    <span style="display:flex;flex-direction:column;gap:0px;">
+    <span class="u-flex-col-tight">
       <span>SCENE-BOARD</span>
-      <span style="font-size:0.58rem;opacity:0.55;letter-spacing:0.01em;">to check schedules</span>
+      <span class="u-mini-note">to check schedules</span>
     </span>
   </a>
-  <a class="drawer-item btn-base" href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener" onclick="closeDrawer()" style="text-decoration:none;padding:7px 16px;">
+  <a class="drawer-item btn-base u-link-pad" href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener" onclick="closeDrawer()">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-    <span style="display:flex;flex-direction:column;gap:0px;">
+    <span class="u-flex-col-tight">
       <span>ABOUT RESCENE</span>
-      <span style="font-size:0.58rem;opacity:0.55;letter-spacing:0.01em;">to know about RESCENE</span>
+      <span class="u-mini-note">to know about RESCENE</span>
     </span>
   </a>
   <div class="drawer-divider"></div>
 
   <div class="drawer-items">
     <button class="drawer-item btn-base" id="dAllVideos" onclick="closeDrawer(); pickSection('allvideos');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 3H8"/><path d="M12 3v4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic8"/></svg>
       <span data-i18n="tab_allvideos">전체 보기</span>
     </button>
     <button class="drawer-item btn-base" id="dArchive" onclick="closeDrawer(); pickSection('archive');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic9"/></svg>
       <span data-i18n="tab_archive">기간별 보기</span>
     </button>
     <button class="drawer-item btn-base" id="dBookmark" onclick="closeDrawer(); pickSection('bookmark');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic2"/></svg>
       <span data-i18n="tab_bookmark_full">즐겨찾기</span>
       <span class="drawer-badge" id="drawerBmCount"></span>
     </button>
     <div class="drawer-divider"></div>
     <button class="drawer-item btn-base" id="dSongs"    onclick="closeDrawer(); pickSection('songs');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic3"/></svg>
       <span data-i18n="tab_songs">음악방송</span>
     </button>
     <button class="drawer-item btn-base" id="dContent"  onclick="closeDrawer(); pickSection('content');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic4"/></svg>
       <span data-i18n="tab_content_full">자체 컨텐츠</span>
     </button>
     <button class="drawer-item btn-base" id="dLive"     onclick="closeDrawer(); pickSection('live');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic5"/></svg>
       <span data-i18n="tab_live">Live</span>
     </button>
     <button class="drawer-item btn-base" id="dExternal" onclick="closeDrawer(); pickSection('external');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic1"/></svg>
       <span data-i18n="tab_external_full">외부 컨텐츠</span>
     </button>
     <button class="drawer-item btn-base" id="dShorts" onclick="closeDrawer(); pickSection('shorts');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.553-2.276A1 1 0 0 1 21 8.723v6.554a1 1 0 0 1-1.447.894L15 14"/><rect x="2" y="6" width="13" height="12" rx="2"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic10"/></svg>
       <span>Shorts</span>
     </button>
     <div class="drawer-divider"></div>
     <button class="drawer-item btn-base" id="dChart" onclick="closeDrawer(); pickSection('chart');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic11"/></svg>
       <span data-i18n="tab_chart">차트</span><span class="shorts-beta">BETA</span>
     </button>
     <button class="drawer-item btn-base" id="dSchedule" onclick="closeDrawer(); pickSection('schedule');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic12"/></svg>
       <span data-i18n="tab_schedule">스케줄</span>
     </button>
     <button class="drawer-item btn-base" id="dNews" onclick="closeDrawer(); pickSection('news');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic13"/></svg>
       <span data-i18n="tab_news">뉴스</span>
     </button>
     <div class="drawer-divider"></div>
     <button class="drawer-item btn-base" id="dFantube"  onclick="closeDrawer(); pickSection('fantube');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic14"/></svg>
       <span data-i18n="tab_fantube">팬튜브</span>
     </button>
     <button class="drawer-item btn-base" id="dAbout"    onclick="closeDrawer(); pickSection('about');">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic15"/></svg>
       About
     </button>
   </div>
@@ -2939,23 +2957,23 @@ header {
 <nav id="mobileBottomNav">
   <div id="navIndicator"></div>
   <button class="mob-nav-btn btn-base" id="mnSongs" onclick="pickSection('songs')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic3"/></svg>
     <span data-i18n="tab_songs">음악방송</span>
   </button>
   <button class="mob-nav-btn btn-base" id="mnLive" onclick="pickSection('live')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic5"/></svg>
     <span data-i18n="tab_live">Live</span>
   </button>
   <button class="mob-nav-btn btn-base" id="mnBookmark" onclick="pickSection('bookmark')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic2"/></svg>
     <span data-i18n="tab_bookmark">즐겨찾기</span>
   </button>
   <button class="mob-nav-btn btn-base" id="mnContent" onclick="pickSection('content')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic4"/></svg>
     <span data-i18n="tab_content">자체</span>
   </button>
   <button class="mob-nav-btn btn-base" id="mnExternal" onclick="pickSection('external')">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic1"/></svg>
     <span data-i18n="tab_external">외부</span>
   </button>
 </nav>
@@ -2975,96 +2993,96 @@ header {
       style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family: var(--font-sans);letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);margin-bottom:2px;"
       onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
       onmouseleave="this.style.background='';this.style.color='var(--muted)'">
-      <span style="display:flex;align-items:center;gap:8px;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.6;"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
-        <span style="display:flex;flex-direction:column;gap:0px;">
+      <span class="u-flex-gap8">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="u-icon-60"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        <span class="u-flex-col-tight">
           <span>SCENE-grid</span>
-          <span style="font-size:0.58rem;opacity:0.55;letter-spacing:0.01em;">for Galaxy users</span>
+          <span class="u-mini-note">for Galaxy users</span>
         </span>
       </span>
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="u-icon-35"><use href="#ic6"/></svg>
     </a>
     <a href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener"
       style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family: var(--font-sans);letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);margin-bottom:2px;"
       onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
       onmouseleave="this.style.background='';this.style.color='var(--muted)'">
-      <span style="display:flex;align-items:center;gap:8px;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.6;"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-        <span style="display:flex;flex-direction:column;gap:0px;">
+      <span class="u-flex-gap8">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="u-icon-60"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span class="u-flex-col-tight">
           <span>SCENE-BOARD</span>
-          <span style="font-size:0.58rem;opacity:0.55;letter-spacing:0.01em;">to check schedules</span>
+          <span class="u-mini-note">to check schedules</span>
         </span>
       </span>
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="u-icon-35"><use href="#ic6"/></svg>
     </a>
     <a href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener"
       style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family: var(--font-sans);letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);"
       onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
       onmouseleave="this.style.background='';this.style.color='var(--muted)'">
-      <span style="display:flex;align-items:center;gap:8px;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.6;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-        <span style="display:flex;flex-direction:column;gap:0px;">
+      <span class="u-flex-gap8">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="u-icon-60"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span class="u-flex-col-tight">
           <span>ABOUT RESCENE</span>
-          <span style="font-size:0.58rem;opacity:0.55;letter-spacing:0.01em;">to know about RESCENE</span>
+          <span class="u-mini-note">to know about RESCENE</span>
         </span>
       </span>
-      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;opacity:0.35;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="u-icon-35"><use href="#ic6"/></svg>
     </a>
   </div>
   <div class="section-nav" id="sectionNav">
     <button class="section-tab" id="secAllVideos" onclick="pickSection('allvideos')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="15" rx="2"/><path d="M16 3H8"/><path d="M12 3v4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic8"/></svg>
       <span data-i18n="tab_allvideos">전체 보기</span>
     </button>
     <button class="section-tab" id="secArchive" onclick="pickSection('archive')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8v13H3V8"/><path d="M1 3h22v5H1z"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic9"/></svg>
       <span data-i18n="tab_archive">기간별 보기</span>
     </button>
     <button class="section-tab" id="secBookmark" onclick="pickSection('bookmark')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic2"/></svg>
       <span data-i18n="tab_bookmark">즐겨찾기</span><span id="bmCount"></span>
     </button>
-    <div style="height:1px;background:var(--border);margin:4px 4px;"></div>
+    <div class="u-hr-line"></div>
     <button class="section-tab" id="secSongs" onclick="pickSection('songs')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic3"/></svg>
       <span data-i18n="tab_songs">음악방송</span>
     </button>
     <button class="section-tab" id="secContent" onclick="pickSection('content')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic4"/></svg>
       <span data-i18n="tab_content_full">자체 컨텐츠</span>
     </button>
     <button class="section-tab" id="secLive" onclick="pickSection('live')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49M7.76 16.24a6 6 0 0 1 0-8.49M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic5"/></svg>
       <span data-i18n="tab_live">Live</span>
     </button>
     <button class="section-tab" id="secExternal" onclick="pickSection('external')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic1"/></svg>
       <span data-i18n="tab_external_full">외부 컨텐츠</span>
     </button>
     <button class="section-tab" id="secShorts" onclick="pickSection('shorts')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 10l4.553-2.276A1 1 0 0 1 21 8.723v6.554a1 1 0 0 1-1.447.894L15 14"/><rect x="2" y="6" width="13" height="12" rx="2"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic10"/></svg>
       <span>Shorts</span>
     </button>
-    <div style="height:1px;background:var(--border);margin:4px 4px;"></div>
+    <div class="u-hr-line"></div>
     <button class="section-tab" id="secChart" onclick="pickSection('chart')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic11"/></svg>
       <span data-i18n="tab_chart">차트</span><span class="shorts-beta">BETA</span>
     </button>
     <button class="section-tab" id="secSchedule" onclick="pickSection('schedule')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic12"/></svg>
       <span data-i18n="tab_schedule">스케줄</span>
     </button>
     <button class="section-tab" id="secNews" onclick="pickSection('news')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6z"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic13"/></svg>
       <span data-i18n="tab_news">뉴스</span>
     </button>
-    <div style="height:1px;background:var(--border);margin:4px 4px;"></div>
+    <div class="u-hr-line"></div>
     <button class="section-tab" id="secFantube" onclick="pickSection('fantube')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic14"/></svg>
       <span data-i18n="tab_fantube">팬튜브</span>
     </button>
     <button class="section-tab" id="secAbout" onclick="pickSection('about')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic15"/></svg>
       <span data-i18n="tab_about">About</span>
     </button>
   </div>
@@ -3072,7 +3090,7 @@ header {
   <div id="sidebarBottom">
     <div class="sb-col">
       <span class="sb-label">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic1"/></svg>
         Language
       </span>
       <div id="langSwitcherDesktop">
@@ -3100,11 +3118,11 @@ header {
         <span data-i18n="sort_added">추가한 순</span>
       </button>
       <button class="sort-btn active" id="sortNewest" onclick="setSort('newest')">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#ic16"/></svg>
         <span data-i18n="sort_newest">최신순</span>
       </button>
       <button class="sort-btn" id="sortOldest" onclick="setSort('oldest')">
-        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#ic17"/></svg>
         <span data-i18n="sort_oldest">오래된순</span>
       </button>
     </div>
@@ -3217,9 +3235,9 @@ header {
     </div>
 
     <div style="margin-bottom:36px;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
-        <span style="font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); font-weight:500;">Contact</span>
-        <div style="flex:1; height:1px; background:var(--border);"></div>
+      <div class="u-flex-gap10-mb20">
+        <span class="u-section-label-sm">Contact</span>
+        <div class="u-hr-flex"></div>
       </div>
       <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden;">
 
@@ -3236,17 +3254,17 @@ header {
         </div>
 
         <div style="padding:16px 20px; background:var(--surf); display:flex; flex-direction:column; gap:7px;">
-          <p style="font-size:0.74rem; color:var(--muted); line-height:1.75; margin:0;" data-i18n="about_contact1">버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.</p>
-          <p style="font-size:0.74rem; color:var(--muted); line-height:1.75; margin:0;" data-i18n="about_contact2">더 좋은 페이지를 만들기 위해 리마인 여러분의 건의사항을 기다리고 있습니다.</p>
-          <p style="font-size:0.74rem; color:var(--muted); line-height:1.75; margin:0;" data-i18n="about_contact3">또한, 제작자에게 전하고 싶은 말이나 의견이 있다면 자유롭게 남겨주세요.</p>
+          <p class="u-about-desc" data-i18n="about_contact1">버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.</p>
+          <p class="u-about-desc" data-i18n="about_contact2">더 좋은 페이지를 만들기 위해 리마인 여러분의 건의사항을 기다리고 있습니다.</p>
+          <p class="u-about-desc" data-i18n="about_contact3">또한, 제작자에게 전하고 싶은 말이나 의견이 있다면 자유롭게 남겨주세요.</p>
         </div>
       </div>
     </div>
 
     <div id="aboutChartSection" style="margin-bottom:36px;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
-        <span style="font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); font-weight:500;">Video Stats</span>
-        <div style="flex:1; height:1px; background:var(--border);"></div>
+      <div class="u-flex-gap10-mb20">
+        <span class="u-section-label-sm">Video Stats</span>
+        <div class="u-hr-flex"></div>
       </div>
       <div style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;">
         <div style="flex-shrink:0; position:relative; width:200px; height:200px; margin:0 auto;">
@@ -3266,21 +3284,21 @@ header {
     </div>
 
     <div style="margin-bottom:28px;">
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:20px;">
-        <span style="font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); font-weight:500;" data-i18n="about_section_info">페이지 안내</span>
-        <div style="flex:1; height:1px; background:var(--border);"></div>
+      <div class="u-flex-gap10-mb20">
+        <span class="u-section-label-sm" data-i18n="about_section_info">페이지 안내</span>
+        <div class="u-hr-flex"></div>
       </div>
       <div style="display:flex; flex-direction:column; gap:12px; font-size:0.8rem; line-height:1.8; color:var(--text);">
-        <div style="display:flex; gap:11px; align-items:flex-start;">
-          <span style="color:var(--accent); margin-top:3px; flex-shrink:0; font-size:0.6rem; line-height:1;">✦</span>
+        <div class="u-flex-gap11-start">
+          <span class="u-bullet-icon">✦</span>
           <span data-i18n="about_bullet1">이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다. 오직 팬들을 위해 만들어졌습니다.</span>
         </div>
-        <div style="display:flex; gap:11px; align-items:flex-start;">
-          <span style="color:var(--accent); margin-top:3px; flex-shrink:0; font-size:0.6rem; line-height:1;">✦</span>
+        <div class="u-flex-gap11-start">
+          <span class="u-bullet-icon">✦</span>
           <span data-i18n="about_bullet2">이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국, <strong style="color:var(--accent); font-weight:600;">더뮤즈 엔터테인먼트</strong>, 그리고 <strong style="color:var(--accent); font-weight:600;">리센느(RESCENE)</strong>에게 있습니다.</span>
         </div>
-        <div style="display:flex; gap:11px; align-items:flex-start;">
-          <span style="color:var(--accent); margin-top:3px; flex-shrink:0; font-size:0.6rem; line-height:1;">✦</span>
+        <div class="u-flex-gap11-start">
+          <span class="u-bullet-icon">✦</span>
           <span data-i18n="about_bullet3">저작권자의 요청이 있을 경우, 해당 영상은 수정 또는 삭제될 수 있습니다.</span>
         </div>
 
@@ -3312,11 +3330,11 @@ header {
     </div>
     <div class="sched-search-bar">
       <div class="search-input-wrap sched-search-input-wrap">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic18"/></svg>
         <input type="text" id="schedSearchInput" placeholder="일정 제목으로 검색... (예: 콘서트, 팬사인회)" autocomplete="off" data-i18n-placeholder="sched_search_placeholder">
         <span id="schedSearchResultCount"></span>
         <button id="schedSearchClear" onclick="clearSchedSearch()" title="검색어 지우기" aria-label="검색어 지우기" data-i18n-title="search_clear" data-i18n-aria="search_clear">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><use href="#ic7"/></svg>
         </button>
       </div>
     </div>
@@ -3324,7 +3342,7 @@ header {
       <div class="sched-cal-col">
         <div class="cal-header">
           <button class="cal-nav-btn" id="calPrev" onclick="calNavigate(-1)" title="이전 달" aria-label="이전 달" data-i18n-title="cal_prev" data-i18n-aria="cal_prev">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#ic19"/></svg>
           </button>
           <div class="cal-month-title" id="calMonthTitle"></div>
           <button class="cal-nav-btn" id="calNext" onclick="calNavigate(1)" title="다음 달" aria-label="다음 달" data-i18n-title="cal_next" data-i18n-aria="cal_next">
@@ -3413,11 +3431,11 @@ header {
     <div class="search-bar-inner" id="shortsSearchBarInner">
       <div class="sort-btns">
         <button class="sort-btn active" id="sortShortsNewest" onclick="setShortsSort('newest')">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#ic16"/></svg>
           <span data-i18n="sort_newest">최신순</span>
         </button>
         <button class="sort-btn" id="sortShortsOldest" onclick="setShortsSort('oldest')">
-          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#ic17"/></svg>
           <span data-i18n="sort_oldest">오래된순</span>
         </button>
       </div>
@@ -3427,17 +3445,17 @@ header {
       </div>
       <div class="shorts-search-wrap" id="shortsSearchWrap">
         <button class="shorts-search-icon-btn" id="shortsSearchIconBtn" onclick="openShortsSearch()" title="검색" aria-label="검색" data-i18n-title="search_btn" data-i18n-aria="search_btn">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic18"/></svg>
         </button>
         <div class="shorts-search-input-wrap" id="shortsSearchInputWrap">
           <button class="shorts-search-back-btn" id="shortsSearchBackBtn" onclick="closeShortsSearch()" title="검색 닫기" aria-label="검색 닫기" data-i18n-title="btn_close" data-i18n-aria="btn_close">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#ic19"/></svg>
           </button>
           <svg class="ssiw-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           <input type="text" id="shortsSearchInput" placeholder="제목으로 검색..." autocomplete="off" data-i18n-placeholder="shorts_search_placeholder">
           <span id="shortsSearchResultCount"></span>
           <button id="shortsSearchClear" onclick="clearShortsSearch()" title="검색어 지우기" aria-label="검색어 지우기" data-i18n-title="search_clear" data-i18n-aria="search_clear">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><use href="#ic7"/></svg>
           </button>
         </div>
       </div>
@@ -3522,10 +3540,10 @@ window._i18n = {
     about_headline:       '리센느(RESCENE)의 팬 메이드 페이지입니다.',
     about_byline:         'made with love, by May_',
     about_notice:         '거제에 내린 큰비로 많은 분들이 어려움을 겪고 있습니다.<br>피해를 입으신 모든 분들의 안전과 빠른 일상 회복을 간절히 바랍니다.',
-    about_donate_desc:    '희망브리지 전국재해구호협회를 통해 리마인의 이름으로 기부할 수 있는 <a href="https://donate.hopebridge.or.kr/api/hopebridge.or.kr/1/Gift/Gift?fundid=4242&gifttypeid=56&" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:2px;">링크</a>입니다.',
+    about_donate_desc:    '희망브리지 전국재해구호협회를 통해 리마인의 이름으로 기부할 수 있는 <a href="https://donate.hopebridge.or.kr/api/hopebridge.or.kr/1/Gift/Gift?fundid=4242&gifttypeid=56&" target="_blank" rel="noopener noreferrer" class="u-accent-strong-underline">링크</a>입니다.',
     about_section_info:   '페이지 안내',
     about_bullet1:        '이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다. 오직 팬들을 위해 만들어졌습니다.',
-    about_bullet2:        '이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국, <strong style="color:var(--accent);font-weight:600;">더뮤즈 엔터테인먼트</strong>, 그리고 <strong style="color:var(--accent);font-weight:600;">리센느(RESCENE)</strong>에게 있습니다.',
+    about_bullet2:        '이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국, <strong class="u-accent-strong">더뮤즈 엔터테인먼트</strong>, 그리고 <strong class="u-accent-strong">리센느(RESCENE)</strong>에게 있습니다.',
     about_bullet3:        '저작권자의 요청이 있을 경우, 해당 영상은 수정 또는 삭제될 수 있습니다.',
     about_rescene_sub:    '리센느 소개 페이지 (팬 제작)',
     about_goto:           '바로가기',
@@ -3626,10 +3644,10 @@ window._i18n = {
     about_headline:       'RESCENE のファンメイドページです。',
     about_byline:         'made with love, by May_',
     about_notice:         '巨済（コジェ）に降った大雨で、多くの方が困難な状況に置かれています。<br>被害に遭われたすべての方の安全と、一日も早い日常の回復を心よりお祈りいたします。',
-    about_donate_desc:    '希望ブリッジ全国災害救護協会を通じて、リマインの名前で寄付ができる<a href="https://donate.hopebridge.or.kr/api/hopebridge.or.kr/1/Gift/Gift?fundid=4242&gifttypeid=56&" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:2px;">リンク</a>です。',
+    about_donate_desc:    '希望ブリッジ全国災害救護協会を通じて、リマインの名前で寄付ができる<a href="https://donate.hopebridge.or.kr/api/hopebridge.or.kr/1/Gift/Gift?fundid=4242&gifttypeid=56&" target="_blank" rel="noopener noreferrer" class="u-accent-strong-underline">リンク</a>です。',
     about_section_info:   'ページ案内',
     about_bullet1:        'このページは収益を目的とせず、広告追加の予定は一切ありません。ファンのためだけに作られました。',
-    about_bullet2:        'このページに掲載された各動画の著作権は、各音楽番組の放送局、<strong style="color:var(--accent);font-weight:600;">The Muze Entertainment</strong>、および<strong style="color:var(--accent);font-weight:600;">RESCENE</strong>に帰属します。',
+    about_bullet2:        'このページに掲載された各動画の著作権は、各音楽番組の放送局、<strong class="u-accent-strong">The Muze Entertainment</strong>、および<strong class="u-accent-strong">RESCENE</strong>に帰属します。',
     about_bullet3:        '著作権者の要請があった場合、該当動画は修正または削除される場合があります。',
     about_rescene_sub:    'RESCENEの紹介ページ（ファン制作）',
     about_goto:           '移動する',
@@ -3730,10 +3748,10 @@ window._i18n = {
     about_headline:       'A fan-made page dedicated to RESCENE.',
     about_byline:         'made with love, by May_',
     about_notice:         'Heavy rain in Geoje has caused hardship for many.<br>We sincerely hope for the safety of everyone affected and a swift return to everyday life.',
-    about_donate_desc:    'This is a <a href="https://donate.hopebridge.or.kr/api/hopebridge.or.kr/1/Gift/Gift?fundid=4242&gifttypeid=56&" target="_blank" rel="noopener noreferrer" style="color:var(--accent);font-weight:600;text-decoration:underline;text-underline-offset:2px;">link</a> where you can donate in the name of Remain, through the Hope Bridge National Disaster Relief Association.',
+    about_donate_desc:    'This is a <a href="https://donate.hopebridge.or.kr/api/hopebridge.or.kr/1/Gift/Gift?fundid=4242&gifttypeid=56&" target="_blank" rel="noopener noreferrer" class="u-accent-strong-underline">link</a> where you can donate in the name of Remain, through the Hope Bridge National Disaster Relief Association.',
     about_section_info:   'Page Info',
     about_bullet1:        'This page is non-commercial and has no plans to include ads. It was made purely for fans.',
-    about_bullet2:        'All video rights belong to their respective broadcasting stations, <strong style="color:var(--accent);font-weight:600;">The Muze Entertainment</strong>, and <strong style="color:var(--accent);font-weight:600;">RESCENE</strong>.',
+    about_bullet2:        'All video rights belong to their respective broadcasting stations, <strong class="u-accent-strong">The Muze Entertainment</strong>, and <strong class="u-accent-strong">RESCENE</strong>.',
     about_bullet3:        'Videos may be modified or removed upon request from the copyright holders.',
     about_rescene_sub:    'RESCENE Introduction Page (Fan-made)',
     about_goto:           'Visit',
@@ -5595,7 +5613,6 @@ const DATE_MAP = {
   'Kw_x_EcgCLU': '2026.05.15 18:00',
 };
 
-// vid -> 'm:ss' or 'h:mm:ss', 채워지는 곳: 관리.html에서 영상 추가/백필 시 자동 기록
 const DURATION_MAP = {
   '_zTSCOy5iFc': '13:48',
   'ez6tOkXsIBM': '6:29',
@@ -8647,25 +8664,42 @@ function setContentCat(el, cat) {
   syncSubSidebar();
 }
 
-function buildContentCard(item, delay) {
+function _buildLabeledVideoCard(item, delay, cfg) {
   const dateStr = getItemDate(item);
-  const channel = item.channel || '';
-  const categoryLabel = getCategoryLabel(item.category);
+  const label = cfg.getLabel(item);
+  const channel = cfg.getChannel(item);
+  const idPrefix = cfg.idPrefix;
   const titleHtml = item.loaded
-    ? `<div class="csong-multi" id="cvc-title-${item.vid}">${_escHtml(item.title || item.vid)}</div>`
-    : `<div class="csong-multi" id="cvc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+    ? `<div class="csong-multi" id="${idPrefix}-title-${item.vid}">${_escHtml(item.title || item.vid)}</div>`
+    : `<div class="csong-multi" id="${idPrefix}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
   const metaHtml = item.loaded
-    ? (dateStr ? `<span class="cdate">${dateStr}</span>` : (channel && !dateStr ? `<span class="cdate">${_escHtml(channel)}</span>` : ''))
+    ? (dateStr ? `<span class="cdate">${dateStr}</span>` : (cfg.metaChannelFallback && channel ? `<span class="cdate">${_escHtml(channel)}</span>` : ''))
     : `<span class="skel skel-date"></span>`;
-  const searchText = [item.title || '', categoryLabel, channel, dateStr].join(' ').toLowerCase();
-  return `<a class="vcard card-base hover-lift tb-content" id="cvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-category="${_escHtml(categoryLabel)}" data-search="${_escHtml(searchText)}">
+  const searchFields = [item.title || '', label];
+  if (cfg.includeChannelInSearch) searchFields.push(channel);
+  searchFields.push(dateStr);
+  const searchText = searchFields.join(' ').toLowerCase();
+  return `<a class="vcard card-base hover-lift ${cfg.tbClass}" id="${idPrefix}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-${cfg.dataAttr}="${_escHtml(label)}" data-search="${_escHtml(searchText)}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
-      <div class="cmeta" id="cvc-meta-${item.vid}">${metaHtml}</div>
-      ${categoryLabel ? `<div class="content-category-badge">${_escHtml(categoryLabel)}</div>` : ''}
+      <div class="cmeta" id="${idPrefix}-meta-${item.vid}">${metaHtml}</div>
+      ${label ? `<div class="${cfg.badgeClass}">${_escHtml(label)}</div>` : ''}
     </div>
   </a>`;
+}
+
+function buildContentCard(item, delay) {
+  return _buildLabeledVideoCard(item, delay, {
+    idPrefix: 'cvc',
+    tbClass: 'tb-content',
+    dataAttr: 'category',
+    badgeClass: 'content-category-badge',
+    metaChannelFallback: true,
+    includeChannelInSearch: true,
+    getLabel: it => getCategoryLabel(it.category),
+    getChannel: it => it.channel || ''
+  });
 }
 
 const _pendingOembedFetches = new Map();
@@ -8881,24 +8915,19 @@ function pickExternalChan(el, key) {
 }
 
 function buildExternalCard(item, delay) {
-  const dateStr = getItemDate(item);
-  const channelKey = VID_TO_EXTERNAL_KEY[item.vid] || '';
-  const channelLabel = EXTERNAL_LABELS[channelKey] || channelKey;
-  const titleHtml = item.loaded
-    ? `<div class="csong-multi" id="evc-title-${item.vid}">${_escHtml(item.title || item.vid)}</div>`
-    : `<div class="csong-multi" id="evc-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
-  const metaHtml = item.loaded
-    ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
-    : `<span class="skel skel-date"></span>`;
-  const searchText = [item.title || '', channelLabel, dateStr].join(' ').toLowerCase();
-  return `<a class="vcard card-base hover-lift tb-external" id="evc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-channel="${_escHtml(channelLabel)}" data-search="${_escHtml(searchText)}">
-    ${buildThumbHtml(item.vid, '')}
-    <div class="cbody">
-      ${titleHtml}
-      <div class="cmeta" id="evc-meta-${item.vid}">${metaHtml}</div>
-      ${channelLabel ? `<div class="ext-channel-badge">${_escHtml(channelLabel)}</div>` : ''}
-    </div>
-  </a>`;
+  return _buildLabeledVideoCard(item, delay, {
+    idPrefix: 'evc',
+    tbClass: 'tb-external',
+    dataAttr: 'channel',
+    badgeClass: 'ext-channel-badge',
+    metaChannelFallback: false,
+    includeChannelInSearch: false,
+    getLabel: it => {
+      const channelKey = VID_TO_EXTERNAL_KEY[it.vid] || '';
+      return EXTERNAL_LABELS[channelKey] || channelKey;
+    },
+    getChannel: () => ''
+  });
 }
 
 function buildExternalGrid() {
@@ -9697,18 +9726,19 @@ for (const item of CONTENT_ITEMS) {
   _CONTENT_COUNT_MAP[item.category] = (_CONTENT_COUNT_MAP[item.category] || 0) + 1;
 }
 
+function _tabButtonHtml(opt) {
+  const cntHtml = (opt.count === null || opt.count === undefined) ? '' : `<span class="cnt">${opt.count}</span>`;
+  return `<button class="song-tab${opt.active ? ' active' : ''}" onclick="${opt.onClick}">${opt.label}${cntHtml}</button>`;
+}
+
 function _buildSongTabsHtml(onClickSuffix) {
-  const allCnt = ALL_ITEMS.length;
-  let html = `<button class="song-tab ${curSong === 'all' ? 'active' : ''}" onclick="pickSong('all')${onClickSuffix}">All<span class="cnt">${allCnt}</span></button>`;
-  html += RESCENE_DATA.map(e => {
+  const items = [{ active: curSong === 'all', onClick: `pickSong('all')${onClickSuffix}`, label: 'All', count: ALL_ITEMS.length }];
+  RESCENE_DATA.forEach(e => {
     const cnt = _SONG_COUNT_MAP[e.song] || 0;
-    if (cnt === 0) return '';
-    return `<button class="song-tab ${e.song === curSong ? 'active' : ''}"
-      onclick="pickSong('${e.song.replace(/'/g,"&#39;")}')${onClickSuffix}">
-      ${e.song}<span class="cnt">${cnt}</span>
-    </button>`;
-  }).join('');
-  return html;
+    if (cnt === 0) return;
+    items.push({ active: e.song === curSong, onClick: `pickSong('${e.song.replace(/'/g,"&#39;")}')${onClickSuffix}`, label: e.song, count: cnt });
+  });
+  return items.map(_tabButtonHtml).join('');
 }
 
 function buildSongNav() {
@@ -10548,50 +10578,48 @@ function renderSubSongTabs() {
 }
 
 function renderSubContentTabs() {
-  const cats = CONTENT_DATA.map(c => c.category);
-  const totalCnt = CONTENT_ITEMS.length;
-  let html = `<button class="song-tab ${curContentCat === 'all' ? 'active' : ''}" onclick="setContentCat(this,'all'); syncSubSidebar();">ALL<span class="cnt">${totalCnt}</span></button>`;
-  html += cats.map(c => {
-    const cnt = _CONTENT_COUNT_MAP[c] || 0;
-    const label = getCategoryLabel(c);
-    return `<button class="song-tab ${curContentCat === c ? 'active' : ''}" onclick="setContentCat(this,'${c.replace(/'/g,"&#39;")}'); syncSubSidebar();">${label}<span class="cnt">${cnt}</span></button>`;
-  }).join('');
-  return html;
+  const items = [{ active: curContentCat === 'all', onClick: `setContentCat(this,'all'); syncSubSidebar();`, label: 'ALL', count: CONTENT_ITEMS.length }];
+  CONTENT_DATA.map(c => c.category).forEach(c => {
+    items.push({ active: curContentCat === c, onClick: `setContentCat(this,'${c.replace(/'/g,"&#39;")}'); syncSubSidebar();`, label: getCategoryLabel(c), count: _CONTENT_COUNT_MAP[c] || 0 });
+  });
+  return items.map(_tabButtonHtml).join('');
 }
 
 function renderSubLiveTabs() {
-  const allCnt  = ALL_LIVE.length;
-  const cnt2024 = LIVE_DATA_2024.length;
-  const cnt2025 = LIVE_DATA_2025.length;
-  const cnt2026 = LIVE_DATA_2026.length;
-  function yl(y) { return _getLiveYearLabel(y); }
-  let html = `<button class="song-tab ${curLiveYear === 'all'  ? 'active' : ''}" onclick="pickLiveYear(this,'all'); syncSubSidebar();">ALL<span class="cnt">${allCnt}</span></button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2024' ? 'active' : ''}" onclick="pickLiveYear(this,'2024'); syncSubSidebar();">${yl('2024')}<span class="cnt">${cnt2024}</span></button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2025' ? 'active' : ''}" onclick="pickLiveYear(this,'2025'); syncSubSidebar();">${yl('2025')}<span class="cnt">${cnt2025}</span></button>`;
-  html     += `<button class="song-tab ${curLiveYear === '2026' ? 'active' : ''}" onclick="pickLiveYear(this,'2026'); syncSubSidebar();">${yl('2026')}<span class="cnt">${cnt2026}</span></button>`;
-  return html;
+  const years = [
+    { key: 'all',  data: ALL_LIVE },
+    { key: '2024', data: LIVE_DATA_2024 },
+    { key: '2025', data: LIVE_DATA_2025 },
+    { key: '2026', data: LIVE_DATA_2026 },
+  ];
+  const items = years.map(y => ({
+    active: curLiveYear === y.key,
+    onClick: `pickLiveYear(this,'${y.key}'); syncSubSidebar();`,
+    label: y.key === 'all' ? 'ALL' : _getLiveYearLabel(y.key),
+    count: y.data.length
+  }));
+  return items.map(_tabButtonHtml).join('');
 }
 
 function renderSubExternalTabs() {
   const t = getCurrentT();
-  const catLabel = cat => _externalCatLabel(t, cat);
-  let html = `<button class="song-tab ${curExternalCat === 'all' ? 'active' : ''}" onclick="pickExternalCat(this,'all')">ALL<span class="cnt">${_EXTERNAL_TOTAL_COUNT}</span></button>`;
-  html += EXTERNAL_CAT_KEYS.map(cat => {
-    const cnt = _EXTERNAL_CAT_COUNT_MAP[cat] || 0;
-    return `<button class="song-tab ${curExternalCat === cat ? 'active' : ''}" onclick="pickExternalCat(this,'${cat}')">${catLabel(cat)}<span class="cnt">${cnt}</span></button>`;
-  }).join('');
-  return html;
+  const items = [{ active: curExternalCat === 'all', onClick: `pickExternalCat(this,'all')`, label: 'ALL', count: _EXTERNAL_TOTAL_COUNT }];
+  EXTERNAL_CAT_KEYS.forEach(cat => {
+    items.push({ active: curExternalCat === cat, onClick: `pickExternalCat(this,'${cat}')`, label: _externalCatLabel(t, cat), count: _EXTERNAL_CAT_COUNT_MAP[cat] || 0 });
+  });
+  return items.map(_tabButtonHtml).join('');
 }
-
-
 
 function renderSubArchiveYearTabs() {
   const dateMap = _getArchiveDateMap();
   const years = Object.keys(dateMap).sort((a, b) => Number(a) - Number(b));
-  return years.map(y => {
-    const total = Object.values(dateMap[y]).reduce((s, a) => s + a.length, 0);
-    return `<button class="song-tab${y === _archiveYear ? ' active' : ''}" onclick="setArchiveYearFromSub('${y}')">${y}<span class="cnt">${total}</span></button>`;
-  }).join('');
+  const items = years.map(y => ({
+    active: y === _archiveYear,
+    onClick: `setArchiveYearFromSub('${y}')`,
+    label: y,
+    count: Object.values(dateMap[y]).reduce((s, a) => s + a.length, 0)
+  }));
+  return items.map(_tabButtonHtml).join('');
 }
 
 function _getLiveYearLabel(y) {
@@ -10606,14 +10634,14 @@ function _buildShortsYearButtons() {
   const suffix = t.live_year_suffix !== undefined ? t.live_year_suffix : '년';
   const labels = { all: 'ALL' };
   years.forEach(y => { if (!labels[y]) labels[y] = window._curLang === 'EN' ? y : y + suffix; });
-  return years.map(y => {
+  const items = years.map(y => {
     const base = _curShortsChannel === 'all' ? SHORTS_DATA : SHORTS_DATA.filter(i => i.channel === _curShortsChannel);
     const count = _shortsLoaded
       ? (y === 'all' ? base.length : base.filter(i => i.date && i.date.startsWith(y)).length)
       : null;
-    const cntHtml = count !== null ? `<span class="cnt">${count}</span>` : '';
-    return `<button class="song-tab ${_curShortsYear === y ? 'active' : ''}" onclick="pickShortsYear('${y}')">${labels[y]}${cntHtml}</button>`;
-  }).join('');
+    return { active: _curShortsYear === y, onClick: `pickShortsYear('${y}')`, label: labels[y], count };
+  });
+  return items.map(_tabButtonHtml).join('');
 }
 
 function renderSubShortsTabs() {
@@ -11735,7 +11763,7 @@ function calSelectDate(dateStr) {
     </div>`;
   }).join('');
 
-  _elCalDetail.innerHTML = `<div class="cal-detail-header"><span>${dateLabel}</span><button class="cal-detail-close" onclick="calCloseDetail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button></div><div class="cal-detail-list">${itemsHtml}</div>`;
+  _elCalDetail.innerHTML = `<div class="cal-detail-header"><span>${dateLabel}</span><button class="cal-detail-close" onclick="calCloseDetail()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><use href="#ic7"/></svg></button></div><div class="cal-detail-list">${itemsHtml}</div>`;
   _elCalDetail.classList.add('visible');
   _elCalDetail.scrollIntoView({ behavior:'smooth', block:'nearest' });
 }
@@ -12018,9 +12046,9 @@ buildSongNav();
 
     return [
       { key: 'songs',    label: t.tab_songs || '음악방송',            color: '#c8c8cc', desc: t.about_chart_songs_desc    || '음악방송 무대 영상 모음입니다.',               count: songsCount,   subtypes: songsSubs   },
-      { key: 'content',  label: t.tab_content_full || '자체컨텐츠',    color: '#80b870', desc: t.about_chart_content_desc  || 'RESCENE 공식 채널의 자체 제작 컨텐츠입니다.',  count: contentCount, subtypes: contentSubs },
+      { key: 'content',  label: t.tab_content_full || '자체컨텐츠',    color: '#47d19a', desc: t.about_chart_content_desc  || 'RESCENE 공식 채널의 자체 제작 컨텐츠입니다.',  count: contentCount, subtypes: contentSubs },
       { key: 'live',     label: t.tab_live || 'Live',                 color: '#a080d0', desc: t.about_chart_live_desc     || '멤버들의 라이브 방송 영상입니다.',         count: liveCount,    subtypes: liveSubs    },
-      { key: 'external', label: t.tab_external_full || '외부컨텐츠',   color: '#7aaede', desc: t.about_chart_external_desc || '외부 채널에서 제작된 협업 및 출연 영상입니다.', count: extCount,     subtypes: extSubs     }
+      { key: 'external', label: t.tab_external_full || '외부컨텐츠',   color: '#55a1e7', desc: t.about_chart_external_desc || '외부 채널에서 제작된 협업 및 출연 영상입니다.', count: extCount,     subtypes: extSubs     }
     ];
   }
 
