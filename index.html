@@ -4247,6 +4247,7 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'WyS3ejyWi8o': '2026.08.19 20:30',
   '_zTSCOy5iFc': '2026.08.20 19:00',
   'ez6tOkXsIBM': '2026.08.20 10:00',
   'xx7MyFWM12o': '2025.02.11 09:00',
@@ -5614,6 +5615,7 @@ const DATE_MAP = {
 };
 
 const DURATION_MAP = {
+  'WyS3ejyWi8o': '0:57',
   '_zTSCOy5iFc': '13:48',
   'ez6tOkXsIBM': '6:29',
   'xx7MyFWM12o': '4:49',
@@ -7529,6 +7531,7 @@ const EXTERNAL_DATA = {
     { vid: 'sC445t1GalE', url: 'https://youtu.be/sC445t1GalE', date: '2025.05.30 14:53' },
   ],
   aspect: [
+    { vid: 'WyS3ejyWi8o', url: 'https://youtu.be/WyS3ejyWi8o', date: '2026.08.19 20:30' },
     { vid: '-DnG1qEu_d8', url: 'https://youtu.be/-DnG1qEu_d8', date: '2026.08.12 17:00' },
   ],
   principalresearch: [
@@ -10686,16 +10689,49 @@ function setSort(dir) {
   _rebuildCurrentGrid();
 }
 
+function _debounce(fn, ms) {
+  let timer = null;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn.apply(this, args), ms);
+  };
+}
+
+function _toggleClearBtn(btnOrId, hasVal) {
+  const btn = typeof btnOrId === 'string' ? document.getElementById(btnOrId) : btnOrId;
+  if (btn) btn.style.display = hasVal ? 'flex' : 'none';
+}
+
+function _bindSearchInput(inputOrId, { onInput, onEnter, onEscapeClear, debounceMs } = {}) {
+  const input = typeof inputOrId === 'string' ? document.getElementById(inputOrId) : inputOrId;
+  if (!input) return;
+  let composing = false;
+  input.addEventListener('compositionstart', function () { composing = true; });
+  input.addEventListener('compositionend', function () { composing = false; });
+  const handleInput = debounceMs && onInput ? _debounce(onInput, debounceMs) : onInput;
+  if (handleInput) {
+    input.addEventListener('input', function (e) { handleInput(e.target.value); });
+  }
+  input.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !composing && onEnter) {
+      e.preventDefault();
+      onEnter();
+    } else if (e.key === 'Escape') {
+      e.target.blur();
+      if (!e.target.value && onEscapeClear) onEscapeClear();
+    }
+  });
+}
+
 function onSearch(val) {
-  const hasVal = val.trim().length > 0;
-  _elSearchClear.style.display = hasVal ? 'flex' : 'none';
+  _toggleClearBtn(_elSearchClear, val.trim().length > 0);
 }
 
 function submitSearch() {
   if (!_elSearchInput) return;
   const val = _elSearchInput.value.trim();
   curSearchQuery = val;
-  _elSearchClear.style.display = val ? 'flex' : 'none';
+  _toggleClearBtn(_elSearchClear, !!val);
   if (!val) {
     const countEl = document.getElementById('searchResultCount');
     if (countEl) countEl.textContent = '';
@@ -10705,30 +10741,20 @@ function submitSearch() {
   applySearch();
 }
 
-(function () {
-  if (!_elSearchInput) return;
-  let _composing = false;
-  _elSearchInput.addEventListener('compositionstart', function () { _composing = true; });
-  _elSearchInput.addEventListener('compositionend', function () { _composing = false; });
-  _elSearchInput.addEventListener('input', function (e) {
-    onSearch(e.target.value);
-  });
-  _elSearchInput.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' && !_composing) {
-      e.preventDefault();
-      submitSearch();
-    }
-  });
-})();
-
 function clearSearch(skipApply) {
   curSearchQuery = '';
   if (_elSearchInput) _elSearchInput.value = '';
-  _elSearchClear.style.display = 'none';
+  _toggleClearBtn(_elSearchClear, false);
   const countEl = document.getElementById('searchResultCount');
   if (countEl) countEl.textContent = '';
   if (!skipApply) _rebuildCurrentGrid();
 }
+
+_bindSearchInput(_elSearchInput, {
+  onInput: onSearch,
+  onEnter: submitSearch,
+  onEscapeClear: () => clearSearch(),
+});
 
 function normalizeDateQuery(raw) {
   const q = raw.trim();
@@ -11258,24 +11284,23 @@ function _rebuildShortsGridKeepScroll() {
   window.scrollTo({ top: y, behavior: 'instant' });
 }
 
+const _debouncedShortsRebuild = _debounce(_rebuildShortsGridKeepScroll, 150);
+
 function onShortsSearchInput(val) {
   curShortsSearchQuery = val.trim();
-  const clearBtn = document.getElementById('shortsSearchClear');
-  if (clearBtn) clearBtn.style.display = curShortsSearchQuery ? 'flex' : 'none';
-  _rebuildShortsGridKeepScroll();
+  _toggleClearBtn('shortsSearchClear', !!curShortsSearchQuery);
+  _debouncedShortsRebuild();
 }
 
 function clearShortsSearch() {
   curShortsSearchQuery = '';
   const input = document.getElementById('shortsSearchInput');
   if (input) input.value = '';
-  const clearBtn = document.getElementById('shortsSearchClear');
-  if (clearBtn) clearBtn.style.display = 'none';
+  _toggleClearBtn('shortsSearchClear', false);
   const countEl = document.getElementById('shortsSearchResultCount');
   if (countEl) countEl.textContent = '';
   _rebuildShortsGridKeepScroll();
-  const input2 = document.getElementById('shortsSearchInput');
-  if (input2 && document.getElementById('shortsSearchBarInner')?.classList.contains('ssb-open')) input2.focus();
+  if (input && document.getElementById('shortsSearchBarInner')?.classList.contains('ssb-open')) input.focus();
 }
 
 function openShortsSearch() {
@@ -11295,8 +11320,7 @@ function resetShortsSearchUi(skipRebuild) {
   curShortsSearchQuery = '';
   const input = document.getElementById('shortsSearchInput');
   if (input) input.value = '';
-  const clearBtn = document.getElementById('shortsSearchClear');
-  if (clearBtn) clearBtn.style.display = 'none';
+  _toggleClearBtn('shortsSearchClear', false);
   const countEl = document.getElementById('shortsSearchResultCount');
   if (countEl) countEl.textContent = '';
   const bar = document.getElementById('shortsSearchBarInner');
@@ -11304,14 +11328,10 @@ function resetShortsSearchUi(skipRebuild) {
   if (!skipRebuild) buildShortsGrid();
 }
 
-(function () {
-  const input = document.getElementById('shortsSearchInput');
-  if (!input) return;
-  input.addEventListener('input', function (e) { onShortsSearchInput(e.target.value); });
-  input.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { e.target.blur(); if (!e.target.value) closeShortsSearch(); }
-  });
-})();
+_bindSearchInput('shortsSearchInput', {
+  onInput: onShortsSearchInput,
+  onEscapeClear: closeShortsSearch,
+});
 
 function buildShortsGrid() {
   const grid = document.getElementById('shortsGrid');
@@ -11882,19 +11902,19 @@ function _schedSearchMatch(ev, q) {
   return title.includes(q) || note.includes(q);
 }
 
+const _debouncedSchedUpdate = _debounce(updateSchedList, 150);
+
 function onSchedSearchInput(val) {
   curSchedSearchQuery = val.trim();
-  const clearBtn = document.getElementById('schedSearchClear');
-  if (clearBtn) clearBtn.style.display = curSchedSearchQuery ? 'flex' : 'none';
-  updateSchedList();
+  _toggleClearBtn('schedSearchClear', !!curSchedSearchQuery);
+  _debouncedSchedUpdate();
 }
 
 function clearSchedSearch() {
   curSchedSearchQuery = '';
   const input = document.getElementById('schedSearchInput');
   if (input) input.value = '';
-  const clearBtn = document.getElementById('schedSearchClear');
-  if (clearBtn) clearBtn.style.display = 'none';
+  _toggleClearBtn('schedSearchClear', false);
   updateSchedList();
 }
 
@@ -11902,8 +11922,7 @@ function resetSchedSearchUi(skipRebuild) {
   curSchedSearchQuery = '';
   const input = document.getElementById('schedSearchInput');
   if (input) input.value = '';
-  const clearBtn = document.getElementById('schedSearchClear');
-  if (clearBtn) clearBtn.style.display = 'none';
+  _toggleClearBtn('schedSearchClear', false);
   if (!skipRebuild) updateSchedList();
 }
 
@@ -11973,14 +11992,10 @@ function jumpToSchedDate(dateStr) {
   if (gridEl) gridEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
-(function () {
-  const input = document.getElementById('schedSearchInput');
-  if (!input) return;
-  input.addEventListener('input', function (e) { onSchedSearchInput(e.target.value); });
-  input.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') { e.target.blur(); if (!e.target.value) clearSchedSearch(); }
-  });
-})();
+_bindSearchInput('schedSearchInput', {
+  onInput: onSchedSearchInput,
+  onEscapeClear: clearSchedSearch,
+});
 
 buildSongNav();
 
@@ -12465,16 +12480,16 @@ if ('serviceWorker' in navigator) {
 
 <script>
 (function() {
-  var banner = document.getElementById('offlineBanner');
-  var textEl = document.getElementById('offlineBannerText');
+  const banner = document.getElementById('offlineBanner');
+  const textEl = document.getElementById('offlineBannerText');
   if (!banner || !textEl) return;
 
-  var wasOffline = false;
-  var hideTimer = null;
+  let wasOffline = false;
+  let hideTimer = null;
 
   function label(key, fallback) {
     try {
-      var t = getCurrentT();
+      const t = getCurrentT();
       return (t && t[key]) || fallback;
     } catch (e) {
       return fallback;
@@ -12514,22 +12529,22 @@ if ('serviceWorker' in navigator) {
 })();
 
 (function() {
-  var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
   if (!isTouchDevice) return;
 
-  var el = document.getElementById('ptrIndicator');
+  const el = document.getElementById('ptrIndicator');
   if (!el) return;
-  var arrow = document.getElementById('ptrArrow');
+  const arrow = document.getElementById('ptrArrow');
 
-  var EXCLUDE_SELECTOR = '#mobileDrawer, #subSidebar, .song-nav-outer, .sched-list-col, .drawer-items';
-  var THRESHOLD = 68;
-  var MAX_PULL = 110;
+  const EXCLUDE_SELECTOR = '#mobileDrawer, #subSidebar, .song-nav-outer, .sched-list-col, .drawer-items';
+  const THRESHOLD = 68;
+  const MAX_PULL = 110;
 
-  var startY = 0;
-  var pulling = false;
-  var dragging = false;
-  var refreshing = false;
-  var ready = false;
+  let startY = 0;
+  let pulling = false;
+  let dragging = false;
+  let refreshing = false;
+  let ready = false;
 
   function pageScrollTop() {
     return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
@@ -12544,8 +12559,8 @@ if ('serviceWorker' in navigator) {
   }
 
   function setIndicator(dist) {
-    var ratio = Math.min(dist / THRESHOLD, 1);
-    var travel = Math.min(dist, MAX_PULL) * 0.72;
+    const ratio = Math.min(dist / THRESHOLD, 1);
+    const travel = Math.min(dist, MAX_PULL) * 0.72;
     el.classList.remove('ptr-anim');
     el.style.opacity = String(Math.min(ratio * 1.1, 1));
     el.style.transform = 'translate(-50%, ' + (-58 + travel) + 'px)';
@@ -12586,7 +12601,7 @@ if ('serviceWorker' in navigator) {
   document.addEventListener('touchmove', function(e) {
     if (!pulling || refreshing) return;
     if (pageScrollTop() > 0) { pulling = false; dragging = false; reset(); return; }
-    var dist = e.touches[0].clientY - startY;
+    const dist = e.touches[0].clientY - startY;
     if (dist <= 0) {
       if (dragging) reset();
       return;
