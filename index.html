@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0a">
 <title>SCENE-FLIX</title>
 <meta name="description" content="리센느(RESCENE) 영상 모아보기 SCENE-FLIX. 음악방송, 콘텐츠, 라이브 영상을 한 곳에서 모아보는 팬메이드 사이트입니다.">
@@ -270,6 +270,7 @@ gtag('config', 'G-05C99P2DB9');
 
 .bm-empty,
 .search-empty,
+.sched-list-empty,
 .empty {
   grid-column: 1/-1;
   text-align: center;
@@ -278,12 +279,16 @@ gtag('config', 'G-05C99P2DB9');
 }
 .bm-empty .ico,
 .search-empty .ico,
+.sched-list-empty .ico,
 .empty .ico { font-size: 2rem; margin-bottom: 12px; opacity: 0.25; }
 .bm-empty p,
 .search-empty p,
+.sched-list-empty p,
 .empty p { font-size: 0.82rem; margin-bottom: 4px; }
 .bm-empty small,
-.search-empty small { font-size: 0.7rem; opacity: 0.6; }
+.search-empty small,
+.sched-list-empty small { font-size: 0.7rem; opacity: 0.6; }
+.sched-list-empty { padding: 40px 0; }
 
 .bm-toolbar .search-bar-inner { gap: 10px; }
 .bm-playlist-btn {
@@ -324,6 +329,23 @@ mark.sh {
 
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
 html { scroll-behavior: smooth; scrollbar-gutter: stable; overscroll-behavior-y: contain; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+.vcard:focus-visible,
+.ftcard:focus-visible,
+.type-btn:focus-visible,
+.sort-btn:focus-visible,
+.song-tab:focus-visible,
+.mob-nav-btn:focus-visible,
+.card-overlay-btn:focus-visible,
+.drawer-item:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
 .vcard, .card-overlay-btn, .song-tab, .type-btn, .sort-btn, .ftcard, .mob-nav-btn, #mobileMenuBtn, #scrollTop {
   touch-action: manipulation;
 }
@@ -1590,8 +1612,8 @@ header {
     cursor: pointer;
     padding: 6px clamp(4px, 2vw, 10px);
     font-family: var(--font-sans);
-    font-size: 0.52rem;
-    letter-spacing: 0.03em;
+    font-size: 0.64rem;
+    letter-spacing: 0.02em;
     transition: color 0.22s cubic-bezier(0.4,0,0.2,1);
     position: relative;
     flex: 1;
@@ -2333,12 +2355,6 @@ header {
   white-space: nowrap;
 }
 .sched-item-link:hover { color: var(--accent); border-color: var(--accent); }
-.sched-list-empty {
-  padding: 40px 0;
-  text-align: center;
-  color: var(--muted);
-  font-size: 0.78rem;
-}
 
 .cal-header {
   display: flex;
@@ -3130,7 +3146,7 @@ header {
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
       </svg>
-      <input type="text" id="searchInput" placeholder="제목, 카테고리, 채널명으로 검색..." autocomplete="off" data-i18n-placeholder="search_placeholder">
+      <input type="text" id="searchInput" placeholder="제목, 카테고리, 채널명으로 검색..." autocomplete="off" data-i18n-placeholder="search_placeholder" aria-label="영상 검색" data-i18n-aria="search_input_aria">
       <span id="searchResultCount"></span>
       <button id="searchClear" onclick="clearSearch()" title="검색어 지우기" aria-label="검색어 지우기" data-i18n-title="search_clear" data-i18n-aria="search_clear">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
@@ -3331,7 +3347,7 @@ header {
     <div class="sched-search-bar">
       <div class="search-input-wrap sched-search-input-wrap">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic18"/></svg>
-        <input type="text" id="schedSearchInput" placeholder="일정 제목으로 검색... (예: 콘서트, 팬사인회)" autocomplete="off" data-i18n-placeholder="sched_search_placeholder">
+        <input type="text" id="schedSearchInput" placeholder="일정 제목으로 검색... (예: 콘서트, 팬사인회)" autocomplete="off" data-i18n-placeholder="sched_search_placeholder" aria-label="일정 검색" data-i18n-aria="sched_search_input_aria">
         <span id="schedSearchResultCount"></span>
         <button id="schedSearchClear" onclick="clearSchedSearch()" title="검색어 지우기" aria-label="검색어 지우기" data-i18n-title="search_clear" data-i18n-aria="search_clear">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><use href="#ic7"/></svg>
@@ -3452,7 +3468,7 @@ header {
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><use href="#ic19"/></svg>
           </button>
           <svg class="ssiw-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="shortsSearchInput" placeholder="제목으로 검색..." autocomplete="off" data-i18n-placeholder="shorts_search_placeholder">
+          <input type="text" id="shortsSearchInput" placeholder="제목으로 검색..." autocomplete="off" data-i18n-placeholder="shorts_search_placeholder" aria-label="쇼츠 검색" data-i18n-aria="shorts_search_input_aria">
           <span id="shortsSearchResultCount"></span>
           <button id="shortsSearchClear" onclick="clearShortsSearch()" title="검색어 지우기" aria-label="검색어 지우기" data-i18n-title="search_clear" data-i18n-aria="search_clear">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><use href="#ic7"/></svg>
@@ -3527,6 +3543,7 @@ window._i18n = {
     sort_newest:          '최신순',
     sort_oldest:          '오래된순',
     search_placeholder:   '제목, 카테고리, 채널명으로 검색...',
+    search_input_aria:    '영상 검색',
     search_btn:           '검색',
     filter_all:           '전체',
     filter_all_members:   '전원',
@@ -3584,6 +3601,7 @@ window._i18n = {
     empty_no_links:       '링크가 아직 추가되지 않았습니다.',
     empty_no_live:        '해당 라이브가 없습니다.',
     empty_no_period:      '이 기간에 업로드된 영상이 없습니다.',
+    empty_no_schedule:    '이번 달 등록된 스케줄이 없습니다.',
     live_title_suffix:    ' 라이브',
     about_chart_total:    '전체',
     about_chart_songs_desc:    '음악방송 무대 영상 모음입니다.',
@@ -3600,7 +3618,9 @@ window._i18n = {
     empty_no_shorts:      '쇼츠가 없습니다.',
     shorts_flix_toggle:   'SCENE-FLIX에서 보기',
     shorts_search_placeholder: '제목으로 검색...',
+    shorts_search_input_aria: '쇼츠 검색',
     sched_search_placeholder: '일정 제목으로 검색... (예: 콘서트, 팬사인회)',
+    sched_search_input_aria: '일정 검색',
     empty_no_news:        '뉴스를 불러올 수 없습니다.',
     sub_label_archive:    '기간별 보기',
     sub_label_songs:      '음악방송',
@@ -3631,6 +3651,7 @@ window._i18n = {
     sort_newest:          '新しい順',
     sort_oldest:          '古い順',
     search_placeholder:   'タイトル・カテゴリ・チャンネルで検索...',
+    search_input_aria:    '動画検索',
     search_btn:           '検索',
     filter_all:           '全て',
     filter_all_members:   '全員',
@@ -3688,6 +3709,7 @@ window._i18n = {
     empty_no_links:       'リンクはまだ追加されていません。',
     empty_no_live:        '該当するライブがありません。',
     empty_no_period:      'この期間にアップロードされた動画がありません。',
+    empty_no_schedule:    '今月登録されたスケジュールがありません。',
     live_title_suffix:    ' ライブ',
     about_chart_total:    '全体',
     about_chart_songs_desc:    '音楽番組のステージ映像まとめです。',
@@ -3704,7 +3726,9 @@ window._i18n = {
     empty_no_shorts:      'ショートがありません。',
     shorts_flix_toggle:   'SCENE-FLIXで見る',
     shorts_search_placeholder: 'タイトルで検索...',
+    shorts_search_input_aria: 'ショート検索',
     sched_search_placeholder: 'イベント名で検索...（例：コンサート、ファンサイン）',
+    sched_search_input_aria: 'イベント検索',
     empty_no_news:        'ニュースを読み込めません。',
     sub_label_archive:    '期間別ビュー',
     sub_label_songs:      '音楽番組',
@@ -3735,6 +3759,7 @@ window._i18n = {
     sort_newest:          'Newest',
     sort_oldest:          'Oldest',
     search_placeholder:   'Search by title, category or channel...',
+    search_input_aria:    'Search videos',
     search_btn:           'Search',
     filter_all:           'All',
     filter_all_members:   'All Members',
@@ -3792,6 +3817,7 @@ window._i18n = {
     empty_no_links:       'No links added yet.',
     empty_no_live:        'No live streams found.',
     empty_no_period:      'No videos uploaded during this period.',
+    empty_no_schedule:    'No schedules registered this month.',
     live_title_suffix:    ' Live',
     about_chart_total:    'Total',
     about_chart_songs_desc:    'A collection of music show stage videos.',
@@ -3808,7 +3834,9 @@ window._i18n = {
     empty_no_shorts:      'No shorts found.',
     shorts_flix_toggle:   'Watch on SCENE-FLIX',
     shorts_search_placeholder: 'Search by title...',
+    shorts_search_input_aria: 'Search shorts',
     sched_search_placeholder: 'Search event title... (e.g. concert, fan sign)',
+    sched_search_input_aria: 'Search schedule',
     empty_no_news:        'Unable to load news.',
     sub_label_archive:    'By Period',
     sub_label_songs:      'Music Show',
@@ -7090,6 +7118,17 @@ function openVideo(e, vid) {
   markWatched(vid);
 }
 
+document.addEventListener('click', function(e) {
+  const bmBtn = e.target.closest('.bm-btn');
+  if (bmBtn) { toggleBookmark(e, bmBtn.dataset.vid); return; }
+
+  const shareBtn = e.target.closest('.share-btn');
+  if (shareBtn) { copyShareUrl(e, shareBtn.dataset.vid); return; }
+
+  const vcard = e.target.closest('.vcard');
+  if (vcard && vcard.dataset.vid) { openVideo(e, vcard.dataset.vid); }
+});
+
 function restoreLastWatched() {
   try {
     const vid = localStorage.getItem('rescene-last-watched');
@@ -8696,7 +8735,7 @@ function _buildLabeledVideoCard(item, delay, cfg) {
   if (cfg.includeChannelInSearch) searchFields.push(channel);
   searchFields.push(dateStr);
   const searchText = searchFields.join(' ').toLowerCase();
-  return `<a class="vcard card-base hover-lift ${cfg.tbClass}" id="${idPrefix}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-${cfg.dataAttr}="${_escHtml(label)}" data-search="${_escHtml(searchText)}">
+  return `<a class="vcard card-base hover-lift ${cfg.tbClass}" id="${idPrefix}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-${cfg.dataAttr}="${_escHtml(label)}" data-search="${_escHtml(searchText)}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
@@ -8965,7 +9004,7 @@ function buildExternalGrid() {
   items = sortItemsByDate(items, curSort);
 
   if (!items.length) {
-    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>${getCurrentT().empty_no_links || '링크가 아직 추가되지 않았습니다.'}</p></div>`;
+    _elGrid.innerHTML = _emptyStateHtml('empty', '🎬', getCurrentT().empty_no_links || '링크가 아직 추가되지 않았습니다.');
     return;
   }
 
@@ -9404,7 +9443,7 @@ function buildLiveCard(item, delay) {
   const liveDateDisplay = formatLiveDate(item);
   const memberNames = item.members.join(' ');
   const searchText = [item.title || '', memberNames, liveDate].join(' ').toLowerCase();
-  return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${searchText}">
+  return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${searchText}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
@@ -9508,7 +9547,7 @@ function buildLiveGrid() {
   items = sortLiveItemsByDate(items, curSort);
 
   if (!items.length) {
-    grid.innerHTML = `<div class="empty"><div class="ico">📺</div><p>${getCurrentT().empty_no_live || '해당 라이브가 없습니다.'}</p></div>`;
+    grid.innerHTML = _emptyStateHtml('empty', '📺', getCurrentT().empty_no_live || '해당 라이브가 없습니다.');
     return;
   }
 
@@ -9600,7 +9639,7 @@ function bmBtnHtml(vid) {
   const active = BOOKMARKS.has(vid);
   const t = getCurrentT();
   const label = active ? (t.bm_remove || '즐겨찾기 해제') : (t.bm_add || '즐겨찾기 추가');
-  return `<button class="card-overlay-btn bm-btn ${active ? 'bm-active' : ''}" title="${label}" aria-label="${label}" onclick="toggleBookmark(event,'${vid}')">
+  return `<button class="card-overlay-btn bm-btn ${active ? 'bm-active' : ''}" title="${label}" aria-label="${label}" data-vid="${vid}">
     <svg viewBox="2 2 20 19.02" fill="${active ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
     </svg>
@@ -9610,7 +9649,7 @@ function bmBtnHtml(vid) {
 function shareBtnHtml(vid) {
   const t = getCurrentT();
   const label = t.share_copy_link || 'YouTube 링크 복사';
-  return `<button class="card-overlay-btn share-btn" title="${label}" aria-label="${label}" onclick="copyShareUrl(event,'${vid}')">
+  return `<button class="card-overlay-btn share-btn" title="${label}" aria-label="${label}" data-vid="${vid}">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
       <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
@@ -9698,11 +9737,7 @@ function buildBookmarkGrid() {
     const hint = isTouchDevice
       ? (t.bm_empty_hint_touch || '카드의 ★ 버튼을 눌러 즐겨찾기를 추가하세요.')
       : (t.bm_empty_hint_hover || '카드에 마우스를 올리면 ★ 버튼이 나타납니다.');
-    _elGrid.innerHTML = `<div class="bm-empty">
-      <div class="ico">★</div>
-      <p>${title}</p>
-      <small>${hint}</small>
-    </div>`;
+    _elGrid.innerHTML = _emptyStateHtml('bm-empty', '★', title, hint);
     return;
   }
 
@@ -9816,7 +9851,7 @@ function buildCard(item, delay) {
 
   const searchText = [videoTitle || item.song, tl, showLabel, channel, dateStr].join(' ').toLowerCase();
 
-  return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-show="${_escHtml(showLabel)}" data-channel="${_escHtml(channel)}" data-type="${_escHtml(tl)}" data-search="${_escHtml(searchText)}">
+  return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-show="${_escHtml(showLabel)}" data-channel="${_escHtml(channel)}" data-type="${_escHtml(tl)}" data-search="${_escHtml(searchText)}">
     ${buildThumbHtml(item.vid, '')}
     <div class="cbody">
       ${titleHtml}
@@ -9878,7 +9913,7 @@ function buildGrid() {
     items = sortItemsByDate(items, curSort);
 
     if (!items.length) {
-      _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>${getCurrentT().empty_no_videos || '영상이 없습니다.'}</p></div>`;
+      _elGrid.innerHTML = _emptyStateHtml('empty', '🎬', getCurrentT().empty_no_videos || '영상이 없습니다.');
       return;
     }
 
@@ -9903,7 +9938,7 @@ function buildGrid() {
   items = sortItemsByDate(items, curSort);
 
   if (!items.length) {
-    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>${getCurrentT().empty_no_videos || '영상이 없습니다.'}</p></div>`;
+    _elGrid.innerHTML = _emptyStateHtml('empty', '🎬', getCurrentT().empty_no_videos || '영상이 없습니다.');
     return;
   }
 
@@ -10132,7 +10167,7 @@ function _renderArchiveGrid(dateMap, year, mo) {
   const _arML = _buildMemberLabelMap(_arT);
 
   if (!items.length) {
-    grid.innerHTML = `<div class="empty"><div class="ico">📅</div><p>${getCurrentT().empty_no_period || '이 기간에 업로드된 영상이 없습니다.'}</p></div>`;
+    grid.innerHTML = _emptyStateHtml('empty', '📅', getCurrentT().empty_no_period || '이 기간에 업로드된 영상이 없습니다.');
     return;
   }
 
@@ -10157,7 +10192,7 @@ function buildAllVideosGrid() {
   _avLoaded = 0;
 
   if (!_avSorted.length) {
-    _elGrid.innerHTML = `<div class="empty"><div class="ico">🎬</div><p>${getCurrentT().empty_no_videos || '영상이 없습니다.'}</p></div>`;
+    _elGrid.innerHTML = _emptyStateHtml('empty', '🎬', getCurrentT().empty_no_videos || '영상이 없습니다.');
     return;
   }
 
@@ -10197,7 +10232,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${_escHtml(videoTitle)}</div>`
       : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const initialSearch = (videoTitle + ' ' + dateStr + ' live ' + memberNames + ' ' + memberNamesOrig).toLowerCase();
-    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
+    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
       ${buildThumbHtml(item.vid, '', isWatched)}
       <div class="cbody">
         ${titleHtml}
@@ -10218,7 +10253,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       ? `<div class="ctags"><span class="ctag tb-tag-${item.type}">♪ ${tl}</span></div>`
       : `<div class="ctags"><span class="skel skel-tag"></span></div>`;
     const initialSearch = (videoTitle + ' ' + tl + ' ' + showLabel + ' ' + channel + ' ' + song + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
+    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
       ${buildThumbHtml(item.vid, '', isWatched)}
       <div class="cbody">
         ${titleHtml}
@@ -10238,7 +10273,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + (ref.category || '') + ' ' + categoryLabel + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift tb-content" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
+    return `<a class="vcard card-base hover-lift tb-content" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
       ${buildThumbHtml(item.vid, '', isWatched)}
       <div class="cbody">
         ${titleHtml}
@@ -10258,7 +10293,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + channelLabel + ' ' + channelKey + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift tb-external" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
+    return `<a class="vcard card-base hover-lift tb-external" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
       ${buildThumbHtml(item.vid, '', isWatched)}
       <div class="cbody">
         ${titleHtml}
@@ -10269,7 +10304,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
   }
 
   const initialSearch = (videoTitle + ' ' + tl + ' ' + dateStr).toLowerCase();
-  return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" onclick="openVideo(event,'${item.vid}')" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
+  return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
     ${buildThumbHtml(item.vid, '', isWatched)}
     <div class="cbody">
       <div class="csong-multi">${_escHtml(videoTitle)}</div>
@@ -11351,6 +11386,14 @@ function buildShortsGrid() {
   const grid = document.getElementById('shortsGrid');
   if (!grid || !_shortsLoaded) return;
 
+  if (!grid.dataset.delegated) {
+    grid.dataset.delegated = '1';
+    grid.addEventListener('click', function(e) {
+      const card = e.target.closest('.shorts-card');
+      if (card) openShortsCard(e, card.dataset.vid);
+    });
+  }
+
   if (_shortsObserver) { _shortsObserver.disconnect(); _shortsObserver = null; }
   if (_shortsSentinel && _shortsSentinel.parentNode) _shortsSentinel.parentNode.removeChild(_shortsSentinel);
 
@@ -11378,7 +11421,7 @@ function buildShortsGrid() {
   if (!items.length) {
     if (q) {
       const t = getCurrentT();
-      grid.innerHTML = `<div class="search-empty"><div class="ico">🔍</div><p>${t.search_empty_prefix || ''}"${_escHtml(curShortsSearchQuery)}"${t.search_empty_suffix || ''}</p><small>${t.search_empty_hint || ''}</small></div>`;
+      grid.innerHTML = _emptyStateHtml('search-empty', '🔍', `${t.search_empty_prefix || ''}"${_escHtml(curShortsSearchQuery)}"${t.search_empty_suffix || ''}`, t.search_empty_hint || '');
     } else {
       grid.innerHTML = `<div class="shorts-empty"><div class="ico">🎬</div><p>${getCurrentT().empty_no_shorts || '쇼츠가 없습니다.'}</p></div>`;
     }
@@ -11415,7 +11458,7 @@ function _appendShortsPage(grid) {
     card.target = '_blank';
     card.rel = 'noopener';
     card.style.animationDelay = delay;
-    card.onclick = function(e) { openShortsCard(e, item.vid); };
+    card.dataset.vid = item.vid;
     card.innerHTML = `<div class="shorts-thumb-wrap">
         <img src="https://img.youtube.com/vi/${item.vid}/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg';}">
         <div class="shorts-play-ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
@@ -11525,6 +11568,10 @@ function _shortsPlayerStep(dir) {
   if (nextIndex < 0 || nextIndex >= _shortsFiltered.length) return;
   const item = _shortsFiltered[nextIndex];
   openShortsPlayer(item.vid);
+}
+
+function _emptyStateHtml(cls, icon, message, hint) {
+  return `<div class="${cls}"><div class="ico">${icon}</div><p>${message}</p>${hint ? `<small>${hint}</small>` : ''}</div>`;
 }
 
 function _escHtml(str) {
@@ -11867,7 +11914,7 @@ function renderSchedList() {
   if (countEl) countEl.textContent = monthEvents.length ? `${monthEvents.length}개` : '';
 
   if (!monthEvents.length) {
-    listEl.innerHTML = `<div class="sched-list-empty">이번 달 등록된 스케줄이 없습니다.</div>`;
+    listEl.innerHTML = _emptyStateHtml('sched-list-empty', '📅', getCurrentT().empty_no_schedule || '이번 달 등록된 스케줄이 없습니다.');
     return;
   }
 
@@ -11961,7 +12008,7 @@ function renderSchedSearchResults() {
 
   if (!matches.length) {
     const t = getCurrentT();
-    listEl.innerHTML = `<div class="sched-list-empty">${t.search_empty_prefix || ''}"${_escHtml(curSchedSearchQuery)}"${t.search_empty_suffix || ''}</div>`;
+    listEl.innerHTML = _emptyStateHtml('sched-list-empty', '🔍', `${t.search_empty_prefix || ''}"${_escHtml(curSchedSearchQuery)}"${t.search_empty_suffix || ''}`, t.search_empty_hint || '');
     return;
   }
 
