@@ -1607,8 +1607,6 @@ header {
     pointer-events: none;
     z-index: 0;
   }
-  .mob-nav-btn { z-index: 1; }
-
   .mob-nav-btn {
     display: flex;
     flex-direction: column;
@@ -1629,6 +1627,7 @@ header {
     min-width: 48px;
     border-radius: 999px;
     white-space: nowrap;
+    z-index: 1;
   }
   .mob-nav-btn svg {
     width: 20px;
@@ -1848,9 +1847,7 @@ header {
     padding: 3px;
     gap: 2px;
   }
-}
 
-@media (max-width: 700px) {
   #subSidebar { display: none !important; }
 }
 
@@ -1913,9 +1910,6 @@ header {
     backdrop-filter: blur(28px) saturate(1.7);
     -webkit-backdrop-filter: blur(28px) saturate(1.7);
     box-shadow: inset -1px 0 0 var(--glass-highlight), 4px 0 24px rgba(0,0,0,0.12);
-  }
-
-  .song-nav-outer {
     display: flex;
     flex-direction: column;
   }
@@ -3358,7 +3352,7 @@ header {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#ic18"/></svg>
         <input type="text" id="schedSearchInput" placeholder="일정 제목으로 검색... (예: 콘서트, 팬사인회)" autocomplete="off" data-i18n-placeholder="sched_search_placeholder" aria-label="일정 검색" data-i18n-aria="sched_search_input_aria">
         <span id="schedSearchResultCount"></span>
-        <button id="schedSearchClear" onclick="clearSchedSearch()" title="검색어 지우기" aria-label="검색어 지우기" data-i18n-title="search_clear" data-i18n-aria="search_clear">
+        <button id="schedSearchClear" onclick="resetSchedSearchUi()" title="검색어 지우기" aria-label="검색어 지우기" data-i18n-title="search_clear" data-i18n-aria="search_clear">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><use href="#ic7"/></svg>
         </button>
       </div>
@@ -3635,6 +3629,8 @@ window._i18n = {
     sub_label_songs:      '음악방송',
     sub_label_content:    '자체 컨텐츠',
     sub_label_external:   '외부 컨텐츠',
+    cal_link_label:       '↗ 링크',
+    search_results_title: '검색 결과',
   },
   JP: {
     headerTagline:        'RESCENEの映像まとめ SCENE-FLIX',
@@ -3743,6 +3739,8 @@ window._i18n = {
     sub_label_songs:      '音楽番組',
     sub_label_content:    '自体コンテンツ',
     sub_label_external:   '外部コンテンツ',
+    cal_link_label:       '↗ リンク',
+    search_results_title: '検索結果',
   },
   EN: {
     headerTagline:        'RESCENE Video Archive SCENE-FLIX',
@@ -3851,6 +3849,8 @@ window._i18n = {
     sub_label_songs:      'Music Show',
     sub_label_content:    'Original Content',
     sub_label_external:   'External Content',
+    cal_link_label:       '↗ Link',
+    search_results_title: 'Search Results',
   }
 };
 
@@ -4284,6 +4284,7 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'QDkBLWkwqhw': '2026.08.23 01:38',
   '6AH2QF3SSXE': '2026.08.22 10:30',
   'ZUJGS617-IE': '2026.06.27 08:25',
   'stKrFApdfYY': '2026.08.22 00:01',
@@ -5665,6 +5666,7 @@ const DATE_MAP = {
 };
 
 const DURATION_MAP = {
+  'QDkBLWkwqhw': '54:13',
   '6AH2QF3SSXE': '17:15',
   'ZUJGS617-IE': '13:23',
   'stKrFApdfYY': '1:03',
@@ -9041,24 +9043,7 @@ function buildExternalGrid() {
   }
 
   items = sortItemsByDate(items, curSort);
-
-  if (!items.length) {
-    _elGrid.innerHTML = _emptyStateHtml('empty', '🎬', getCurrentT().empty_no_links || '링크가 아직 추가되지 않았습니다.');
-    return;
-  }
-
-  _gridSorted  = items;
-  _gridLoaded  = 0;
-  _gridSection = 'external';
-  _gridLoadFn  = (batch) => loadCardMetas(batch, 'external');
-  _elGrid.innerHTML = '';
-  _gridSentinel = _makeSentinel();
-  _elGrid.appendChild(_gridSentinel);
-  _gridAppendBatch(_elGrid);
-  if (_gridLoaded < _gridSorted.length) {
-    _gridObserver = _observeSentinel(_gridSentinel, () => _gridAppendBatch(_elGrid));
-  }
-  if (curSearchQuery) applySearch();
+  _mountGridBatch(items, 'external', (batch) => loadCardMetas(batch, 'external'), getCurrentT().empty_no_links || '링크가 아직 추가되지 않았습니다.');
 }
 
 const FANTUBE_CHANNELS = [
@@ -9328,6 +9313,7 @@ const LIVE_DATA_2025 = [
 ];
 
 const LIVE_DATA_2026 = [
+  { vid:'QDkBLWkwqhw', url:'https://youtu.be/QDkBLWkwqhw', date:'2026.08.23 01:38', members:['제나'], year:'2026' },
   { vid:'tFF93tMIgTQ', url:'https://youtu.be/tFF93tMIgTQ', date:'2026.08.22 00:46', members:['원이'], year:'2026' },
   { vid:'ccnNVyPu2Gw', url:'https://youtu.be/ccnNVyPu2Gw', date:'2026.08.19 17:07', members:['메이'], year:'2026' },
   { vid:'dgUOLHElpJg', url:'https://youtu.be/dgUOLHElpJg', date:'2026.08.03 18:42', members:['원이','리브','메이'], year:'2026' },
@@ -9545,6 +9531,19 @@ function _observeSentinelOnce(sentinel, onIntersect, rootMargin = '300px') {
   return observer;
 }
 
+function _appendCardBatch(container, items, sentinel, buildFn, loadFn) {
+  const wrapper = document.createElement('div');
+  wrapper.innerHTML = items.map((item, i) => buildFn(item, i)).join('');
+  const frag = document.createDocumentFragment();
+  while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
+  if (sentinel && sentinel.parentNode) {
+    container.insertBefore(frag, sentinel);
+  } else {
+    container.appendChild(frag);
+  }
+  if (loadFn) loadFn(items);
+}
+
 function _liveDisconnect() {
   if (_liveObserver) { _liveObserver.disconnect(); _liveObserver = null; }
   if (_liveSentinel && _liveSentinel.parentNode) _liveSentinel.remove();
@@ -9554,22 +9553,8 @@ function _liveDisconnect() {
 function _liveAppendBatch(grid) {
   if (_liveLoaded >= _liveSorted.length) return;
   const batch = _liveSorted.slice(_liveLoaded, _liveLoaded + LIVE_BATCH);
-  const frag  = document.createDocumentFragment();
-  const wrapper = document.createElement('div');
-  wrapper.innerHTML = batch.map((item, i) => {
-    const delay = _cardDelay(i, LIVE_BATCH);
-    return buildLiveCard(item, delay);
-  }).join('');
-  while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
+  _appendCardBatch(grid, batch, _liveSentinel, (item, i) => buildLiveCard(item, _cardDelay(i, LIVE_BATCH)), loadLiveTitles);
   _liveLoaded += batch.length;
-
-  if (_liveSentinel && _liveSentinel.parentNode) {
-    grid.insertBefore(frag, _liveSentinel);
-  } else {
-    grid.appendChild(frag);
-  }
-
-  loadLiveTitles(batch);
 
   if (_liveLoaded >= _liveSorted.length) {
     _liveDisconnect();
@@ -9634,7 +9619,7 @@ function markWatched(vid) {
     if (thumb && !thumb.querySelector('.watched-badge')) {
       const badge = document.createElement('span');
       badge.className = 'watched-badge';
-      badge.textContent = '시청함';
+      badge.textContent = getCurrentT().watched_badge || '시청함';
       thumb.appendChild(badge);
     }
   }
@@ -9918,28 +9903,36 @@ function _gridDisconnect() {
 function _gridAppendBatch(grid) {
   if (_gridLoaded >= _gridSorted.length) return;
   const batch = _gridSorted.slice(_gridLoaded, _gridLoaded + GRID_BATCH);
-  const frag  = document.createDocumentFragment();
-  const wrapper = document.createElement('div');
-  wrapper.innerHTML = batch.map((item, i) => {
+  _appendCardBatch(grid, batch, _gridSentinel, (item, i) => {
     const delay = _cardDelay(i, GRID_BATCH);
     if (_gridSection === 'content') return buildContentCard(item, delay);
     if (_gridSection === 'external') return buildExternalCard(item, delay);
     return buildCard(item, delay);
-  }).join('');
-  while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
+  }, _gridLoadFn);
   _gridLoaded += batch.length;
-
-  if (_gridSentinel && _gridSentinel.parentNode) {
-    grid.insertBefore(frag, _gridSentinel);
-  } else {
-    grid.appendChild(frag);
-  }
-
-  if (_gridLoadFn) _gridLoadFn(batch);
 
   if (_gridLoaded >= _gridSorted.length) {
     _gridDisconnect();
   }
+}
+
+function _mountGridBatch(items, section, loadFn, emptyMsg) {
+  if (!items.length) {
+    _elGrid.innerHTML = _emptyStateHtml('empty', '🎬', emptyMsg);
+    return;
+  }
+  _gridSorted  = items;
+  _gridLoaded  = 0;
+  _gridSection = section;
+  _gridLoadFn  = loadFn;
+  _elGrid.innerHTML = '';
+  _gridSentinel = _makeSentinel();
+  _elGrid.appendChild(_gridSentinel);
+  _gridAppendBatch(_elGrid);
+  if (_gridLoaded < _gridSorted.length) {
+    _gridObserver = _observeSentinel(_gridSentinel, () => _gridAppendBatch(_elGrid));
+  }
+  if (curSearchQuery) applySearch();
 }
 
 function buildGrid() {
@@ -9951,24 +9944,7 @@ function buildGrid() {
       : CONTENT_ITEMS.filter(i => i.category === curContentCat);
 
     items = sortItemsByDate(items, curSort);
-
-    if (!items.length) {
-      _elGrid.innerHTML = _emptyStateHtml('empty', '🎬', getCurrentT().empty_no_videos || '영상이 없습니다.');
-      return;
-    }
-
-    _gridSorted  = items;
-    _gridLoaded  = 0;
-    _gridSection = 'content';
-    _gridLoadFn  = (items) => loadCardMetas(items, 'content');
-    _elGrid.innerHTML = '';
-    _gridSentinel = _makeSentinel();
-    _elGrid.appendChild(_gridSentinel);
-    _gridAppendBatch(_elGrid);
-    if (_gridLoaded < _gridSorted.length) {
-      _gridObserver = _observeSentinel(_gridSentinel, () => _gridAppendBatch(_elGrid));
-    }
-    if (curSearchQuery) applySearch();
+    _mountGridBatch(items, 'content', (items) => loadCardMetas(items, 'content'), getCurrentT().empty_no_videos || '영상이 없습니다.');
     return;
   }
 
@@ -9976,24 +9952,7 @@ function buildGrid() {
   if (curSong !== 'all') items = items.filter(i => i.song === curSong);
   if (curType !== 'all') items = items.filter(i => i.type === curType);
   items = sortItemsByDate(items, curSort);
-
-  if (!items.length) {
-    _elGrid.innerHTML = _emptyStateHtml('empty', '🎬', getCurrentT().empty_no_videos || '영상이 없습니다.');
-    return;
-  }
-
-  _gridSorted  = items;
-  _gridLoaded  = 0;
-  _gridSection = 'songs';
-  _gridLoadFn  = loadMetas;
-  _elGrid.innerHTML = '';
-  _gridSentinel = _makeSentinel();
-  _elGrid.appendChild(_gridSentinel);
-  _gridAppendBatch(_elGrid);
-  if (_gridLoaded < _gridSorted.length) {
-    _gridObserver = _observeSentinel(_gridSentinel, () => _gridAppendBatch(_elGrid));
-  }
-  if (curSearchQuery) applySearch();
+  _mountGridBatch(items, 'songs', loadMetas, getCurrentT().empty_no_videos || '영상이 없습니다.');
 }
 
 const AV_PAGE_SIZE = 40;
@@ -10050,7 +10009,6 @@ function _avDisconnectObserver() {
 function _avAppendNextBatch(grid) {
   if (_avLoaded >= _avSorted.length) return;
   const batch = _avSorted.slice(_avLoaded, _avLoaded + AV_PAGE_SIZE);
-  const frag  = document.createDocumentFragment();
   batch.forEach((item) => {
     if (item._ref && item._ref.loaded && !item.loaded) {
       item.loaded = true;
@@ -10059,21 +10017,8 @@ function _avAppendNextBatch(grid) {
   });
   const _avT  = getCurrentT();
   const _avML = _buildMemberLabelMap(_avT);
-  const wrapper = document.createElement('div');
-  wrapper.innerHTML = batch.map((item, i) => {
-    const delay = _cardDelay(i, AV_PAGE_SIZE);
-    return buildAllVideoCard(item, delay, undefined, _avML);
-  }).join('');
-  while (wrapper.firstElementChild) frag.appendChild(wrapper.firstElementChild);
+  _appendCardBatch(grid, batch, _avSentinel, (item, i) => buildAllVideoCard(item, _cardDelay(i, AV_PAGE_SIZE), undefined, _avML), loadAllVideosMetas);
   _avLoaded += batch.length;
-
-  if (_avSentinel && _avSentinel.parentNode) {
-    grid.insertBefore(frag, _avSentinel);
-  } else {
-    grid.appendChild(frag);
-  }
-
-  loadAllVideosMetas(batch);
 
   if (_avLoaded >= _avSorted.length) {
     _avDisconnectObserver();
@@ -10168,17 +10113,6 @@ function setArchiveMonth(year, mo) {
   _renderArchiveGrid(dateMap, year, mo);
 }
 
-function setArchiveYearFromSub(y) {
-  _archiveYear = y;
-  _archiveMonth = null;
-  document.querySelectorAll('#archiveYearNav .song-tab').forEach(b => {
-    b.classList.toggle('active', b.dataset.year === y);
-  });
-  const dateMap = _getArchiveDateMap();
-  _renderArchiveMonths(dateMap, y);
-  syncSubSidebar();
-}
-
 function _renderArchiveGrid(dateMap, year, mo) {
   let gridWrap = document.getElementById('archiveGridWrap');
   if (!gridWrap) {
@@ -10249,6 +10183,21 @@ function buildAllVideosGrid() {
   if (curSearchQuery) applySearch();
 }
 
+function _avcTitleHtml(item, pfx, videoTitle) {
+  return item.loaded
+    ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${_escHtml(videoTitle)}</div>`
+    : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
+}
+
+function _avcCardHtml(tbClass, pfx, item, delay, isWatched, initialSearch, bodyHtml) {
+  return `<a class="vcard card-base hover-lift ${tbClass}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
+    ${buildThumbHtml(item.vid, '', isWatched)}
+    <div class="cbody">
+      ${bodyHtml}
+    </div>
+  </a>`;
+}
+
 function buildAllVideoCard(item, delay, idPrefix, _ML) {
   const pfx = idPrefix || 'avc';
   const isWatched = pfx === 'bvc' && WATCHED.has(item.vid);
@@ -10257,6 +10206,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
   const m = item.meta || {};
   const dateStr = dateOnly(DATE_MAP[item.vid] || m.date || '');
   const videoTitle = m.rawTitle || item.song || item.vid;
+  const titleHtml = _avcTitleHtml(item, pfx, videoTitle);
 
   if (item._src === 'live' && item._liveItem) {
     if (!_ML) {
@@ -10268,89 +10218,57 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
     ).join('');
     const memberNames = item._liveItem.members.map(mm => _ML[mm] || mm).join(' ');
     const memberNamesOrig = item._liveItem.members.join(' ');
-    const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${_escHtml(videoTitle)}</div>`
-      : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const initialSearch = (videoTitle + ' ' + dateStr + ' live ' + memberNames + ' ' + memberNamesOrig).toLowerCase();
-    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, '', isWatched)}
-      <div class="cbody">
-        ${titleHtml}
+    const bodyHtml = `${titleHtml}
         <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
-        <div class="ctags">${memberBadges}</div>
-      </div>
-    </a>`;
+        <div class="ctags">${memberBadges}</div>`;
+    return _avcCardHtml(tb, pfx, item, delay, isWatched, initialSearch, bodyHtml);
   }
 
   if (item._src === 'main') {
     const showLabel = m.show?.label || '';
     const channel = m.channel || '';
     const song = item._ref?.song || item.song || '';
-    const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${_escHtml(videoTitle)}</div>`
-      : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const tagsHtml = item.loaded
       ? `<div class="ctags"><span class="ctag tb-tag-${item.type}">♪ ${tl}</span></div>`
       : `<div class="ctags"><span class="skel skel-tag"></span></div>`;
     const initialSearch = (videoTitle + ' ' + tl + ' ' + showLabel + ' ' + channel + ' ' + song + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, '', isWatched)}
-      <div class="cbody">
-        ${titleHtml}
+    const bodyHtml = `${titleHtml}
         <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : item.loaded ? '' : `<span class="skel skel-date"></span>`}</div>
-        ${tagsHtml}
-      </div>
-    </a>`;
+        ${tagsHtml}`;
+    return _avcCardHtml(tb, pfx, item, delay, isWatched, initialSearch, bodyHtml);
   }
 
   if (item._src === 'content') {
     const ref = item._ref;
     const categoryLabel = getCategoryLabel(ref.category);
-    const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${_escHtml(videoTitle)}</div>`
-      : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const metaHtml = item.loaded
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + (ref.category || '') + ' ' + categoryLabel + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift tb-content" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, '', isWatched)}
-      <div class="cbody">
-        ${titleHtml}
+    const bodyHtml = `${titleHtml}
         <div class="cmeta">${metaHtml}</div>
-        ${categoryLabel ? `<div class="content-category-badge">${_escHtml(categoryLabel)}</div>` : ''}
-      </div>
-    </a>`;
+        ${categoryLabel ? `<div class="content-category-badge">${_escHtml(categoryLabel)}</div>` : ''}`;
+    return _avcCardHtml('tb-content', pfx, item, delay, isWatched, initialSearch, bodyHtml);
   }
 
   if (item._src === 'external') {
     const channelKey = VID_TO_EXTERNAL_KEY[item.vid] || '';
     const channelLabel = EXTERNAL_LABELS[channelKey] || channelKey;
-    const titleHtml = item.loaded
-      ? `<div class="csong-multi" id="${pfx}-title-${item.vid}">${_escHtml(videoTitle)}</div>`
-      : `<div class="csong-multi" id="${pfx}-title-${item.vid}"><span class="skel skel-title"></span><span class="skel skel-title2"></span></div>`;
     const metaHtml = item.loaded
       ? (dateStr ? `<span class="cdate">${dateStr}</span>` : '')
       : `<span class="skel skel-date"></span>`;
     const initialSearch = (videoTitle + ' ' + channelLabel + ' ' + channelKey + ' ' + dateStr).toLowerCase();
-    return `<a class="vcard card-base hover-lift tb-external" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-      ${buildThumbHtml(item.vid, '', isWatched)}
-      <div class="cbody">
-        ${titleHtml}
+    const bodyHtml = `${titleHtml}
         <div class="cmeta">${metaHtml}</div>
-        ${channelLabel ? `<div class="ext-channel-badge">${_escHtml(channelLabel)}</div>` : ''}
-      </div>
-    </a>`;
+        ${channelLabel ? `<div class="ext-channel-badge">${_escHtml(channelLabel)}</div>` : ''}`;
+    return _avcCardHtml('tb-external', pfx, item, delay, isWatched, initialSearch, bodyHtml);
   }
 
   const initialSearch = (videoTitle + ' ' + tl + ' ' + dateStr).toLowerCase();
-  return `<a class="vcard card-base hover-lift ${tb}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
-    ${buildThumbHtml(item.vid, '', isWatched)}
-    <div class="cbody">
-      <div class="csong-multi">${_escHtml(videoTitle)}</div>
-      <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>
-    </div>
-  </a>`;
+  const bodyHtml = `<div class="csong-multi">${_escHtml(videoTitle)}</div>
+      <div class="cmeta">${dateStr ? `<span class="cdate">${dateStr}</span>` : ''}</div>`;
+  return _avcCardHtml(tb, pfx, item, delay, isWatched, initialSearch, bodyHtml);
 }
 
 let _countUpdateRaf = null;
@@ -10707,7 +10625,7 @@ function renderSubArchiveYearTabs() {
   const years = Object.keys(dateMap).sort((a, b) => Number(a) - Number(b));
   const items = years.map(y => ({
     active: y === _archiveYear,
-    onClick: `setArchiveYearFromSub('${y}')`,
+    onClick: `setArchiveYear('${y}')`,
     label: y,
     count: Object.values(dateMap[y]).reduce((s, a) => s + a.length, 0)
   }));
@@ -11471,13 +11389,6 @@ function buildShortsGrid() {
   _appendShortsPage(grid);
 }
 
-function _shortsHl(text, q) {
-  const escaped = _escHtml(text || '');
-  if (!q) return escaped;
-  const re = new RegExp('(' + _hlEscape(q) + ')', 'gi');
-  return escaped.replace(re, '<mark class="sh">$1</mark>');
-}
-
 function _appendShortsPage(grid) {
   const start = _shortsPage * _SHORTS_PAGE_SIZE;
   const slice = _shortsFiltered.slice(start, start + _SHORTS_PAGE_SIZE);
@@ -11488,7 +11399,7 @@ function _appendShortsPage(grid) {
   slice.forEach(function(item, i) {
     const delay = Math.min(i * 0.012, 0.3) + 's';
     const label = _SHORTS_CHANNEL_LABEL[item.channel] || item.channel || '';
-    const title = item.title ? _shortsHl(item.title, hlq) : '';
+    const title = item.title ? _kwHl(item.title, hlq) : '';
     const date  = item.date || '';
     const ytUrl = 'https://www.youtube.com/shorts/' + item.vid;
     const card  = document.createElement('a');
@@ -11502,7 +11413,7 @@ function _appendShortsPage(grid) {
     card.innerHTML = `<div class="shorts-thumb-wrap">
         <img src="https://img.youtube.com/vi/${item.vid}/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg';}">
         <div class="shorts-play-ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
-        ${label ? `<span class="shorts-channel-badge">${_shortsHl(label, hlq)}</span>` : ''}
+        ${label ? `<span class="shorts-channel-badge">${_kwHl(label, hlq)}</span>` : ''}
       </div>
       <div class="shorts-body">
         <div class="shorts-title">${title || _escHtml(item.vid)}</div>
@@ -11726,6 +11637,18 @@ const _CAL_DOW_NAMES = {
   EN: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
 };
 
+function _calYearMonthTitle(lang, year, monthName) {
+  if (lang === 'EN') return `${monthName} ${year}`;
+  if (lang === 'JP') return `${year}年 ${monthName}`;
+  return `${year}년 ${monthName}`;
+}
+
+function _calFullDateLabel(lang, year, monthName, day) {
+  if (lang === 'EN') return `${monthName} ${day}, ${year}`;
+  if (lang === 'JP') return `${year}年 ${monthName}${day}日`;
+  return `${year}년 ${monthName} ${day}일`;
+}
+
 function calNavigate(dir) {
   _calMonth += dir;
   if (_calMonth > 11) { _calMonth = 0; _calYear++; }
@@ -11760,12 +11683,7 @@ function renderCalendar() {
   const lang = window._curLang || 'KR';
   const mNames = _CAL_MONTH_NAMES[lang] || _CAL_MONTH_NAMES.KR;
   const dNames = _CAL_DOW_NAMES[lang] || _CAL_DOW_NAMES.KR;
-  const calTitle = lang === 'EN'
-    ? `${mNames[_calMonth]} ${_calYear}`
-    : lang === 'JP'
-    ? `${_calYear}年 ${mNames[_calMonth]}`
-    : `${_calYear}년 ${mNames[_calMonth]}`;
-  _elCalMonthTitle.textContent = calTitle;
+  _elCalMonthTitle.textContent = _calYearMonthTitle(lang, _calYear, mNames[_calMonth]);
 
   const _calFirst    = new Date(_calYear, _calMonth, 1);
   const _calNextFirst = new Date(_calYear, _calMonth + 1, 1);
@@ -11865,14 +11783,15 @@ function calSelectDate(dateStr) {
   const parts = dateStr.split('-');
   const Y = parseInt(parts[0]), M = parseInt(parts[1])-1, D = parseInt(parts[2]);
   const mName = (_CAL_MONTH_NAMES[lang] || _CAL_MONTH_NAMES.KR)[M];
-  const dateLabel = lang==='EN' ? `${mName} ${D}, ${Y}` : `${Y}년 ${mName} ${D}일`;
+  const dateLabel = _calFullDateLabel(lang, Y, mName, D);
+  const linkLabel = getCurrentT().cal_link_label || '↗ 링크';
 
   const itemsHtml = events.map(ev => {
     const evColor = (ev._isBirthday && ev._memberColor)
       ? ev._memberColor
       : (SCHED_TYPE_COLOR[ev.type] || '#888');
     const dotStyle = `background:${evColor}`;
-    const linkHtml = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="cal-detail-link">↗ 링크</a>` : '';
+    const linkHtml = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="cal-detail-link">${linkLabel}</a>` : '';
     const timeHtml = ev.time ? `<span class="cal-detail-time" style="color:${evColor}">${_escHtml(ev.time)}</span>` : '';
     return `<div class="cal-detail-item">
       <div class="cal-dot" style="${dotStyle}"></div>
@@ -11919,7 +11838,7 @@ function _schedItemHtml(ev, lang, hlq) {
   const bar = `background:${evColor}`;
   const tl = (_SCHED_TYPE_LABEL[ev.type]||{})[lang] || ev.type;
   const tagStyle = `background:color-mix(in srgb, ${evColor} 18%, transparent);color:${evColor}`;
-  const link = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="sched-item-link">↗ 링크</a>` : '';
+  const link = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="sched-item-link">${getCurrentT().cal_link_label || '↗ 링크'}</a>` : '';
   const timeTag = ev.time ? `<span class="sched-item-time" style="color:${evColor}">${_escHtml(ev.time)}</span>` : '';
   const titleHtml = hlq ? _kwHl(ev.title, hlq) : _escHtml(ev.title);
   const noteHtml  = ev.note ? (hlq ? _kwHl(ev.note, hlq) : _escHtml(ev.note)) : '';
@@ -11937,6 +11856,63 @@ function _schedItemHtml(ev, lang, hlq) {
       </div>`;
 }
 
+function _groupScheduleByDate(items) {
+  const groups = {};
+  for (const ev of items) {
+    if (!groups[ev.date]) groups[ev.date] = [];
+    groups[ev.date].push(ev);
+  }
+  return groups;
+}
+
+function _schedGroupHtml(dateStr, evs, lang, opts) {
+  const parts = dateStr.split('-');
+  const D = parseInt(parts[2]);
+  const dow = new Date(dateStr).getDay();
+  const mN = (_CAL_MONTH_NAMES_SHORT[lang] || _CAL_MONTH_NAMES_SHORT.KR)[parseInt(parts[1])-1];
+  const dowN = (_CAL_DOW_NAMES[lang] || _CAL_DOW_NAMES.KR)[dow];
+
+  let dateCls, dateAttrs, dowSpan, monthSpan;
+  if (opts.clickable) {
+    const Y = parts[0];
+    dateCls = 'sched-group-date sched-group-date-clickable';
+    dateAttrs = ` onclick="jumpToSchedDate('${dateStr}')" title="캘린더에서 보기"`;
+    dowSpan = dowN;
+    monthSpan = `${Y}.${mN}`;
+  } else {
+    const isToday = dateStr === opts.todayStr;
+    const isSun = dow === 0, isSat = dow === 6;
+    const todayCls = isToday ? ' today-group' : '';
+    const dowCls = isSun ? ' sun-group' : isSat ? ' sat-group' : '';
+    dateCls = `sched-group-date${todayCls}${dowCls}`;
+    dateAttrs = '';
+    dowSpan = `${dowN}${isToday ? (lang==='KR'?' · 오늘':lang==='JP'?' · 今日':' · Today') : ''}`;
+    monthSpan = mN;
+  }
+
+  let html = `<div class="sched-group">
+      <div class="${dateCls}"${dateAttrs}>
+        <div class="sched-group-day-num">${D}</div>
+        <div class="sched-group-day-info">
+          <span class="sched-group-dow">${dowSpan}</span>
+          <span class="sched-group-month">${monthSpan}</span>
+        </div>
+      </div>`;
+
+  for (const ev of evs) html += _schedItemHtml(ev, lang, opts.hlq);
+  html += `</div>`;
+  return html;
+}
+
+function _renderSchedGroupsHtml(items, lang, opts) {
+  const groups = _groupScheduleByDate(items);
+  let html = '';
+  for (const [dateStr, evs] of Object.entries(groups)) {
+    html += _schedGroupHtml(dateStr, evs, lang, opts);
+  }
+  return html;
+}
+
 function renderSchedList() {
   const lang = window._curLang || 'KR';
 
@@ -11950,8 +11926,8 @@ function renderSchedList() {
   if (!listEl) return;
 
   const mName = (_CAL_MONTH_NAMES_SHORT[lang] || _CAL_MONTH_NAMES_SHORT.KR)[_calMonth];
-  if (titleEl) titleEl.textContent = lang==='EN' ? `${mName} ${_calYear}` : `${_calYear}년 ${mName}`;
-  if (countEl) countEl.textContent = monthEvents.length ? `${monthEvents.length}개` : '';
+  if (titleEl) titleEl.textContent = _calYearMonthTitle(lang, _calYear, mName);
+  if (countEl) countEl.textContent = monthEvents.length ? `${monthEvents.length}${getCurrentT().search_result_unit || ''}` : '';
 
   if (!monthEvents.length) {
     listEl.innerHTML = _emptyStateHtml('sched-list-empty', '📅', getCurrentT().empty_no_schedule || '이번 달 등록된 스케줄이 없습니다.');
@@ -11961,38 +11937,7 @@ function renderSchedList() {
   const today = new Date();
   const todayStr = `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
 
-  const groups = {};
-  for (const ev of monthEvents) {
-    if (!groups[ev.date]) groups[ev.date] = [];
-    groups[ev.date].push(ev);
-  }
-
-  let html = '';
-  for (const [dateStr, evs] of Object.entries(groups)) {
-    const parts = dateStr.split('-');
-    const D = parseInt(parts[2]);
-    const dow = new Date(dateStr).getDay();
-    const mN = (_CAL_MONTH_NAMES_SHORT[lang] || _CAL_MONTH_NAMES_SHORT.KR)[parseInt(parts[1])-1];
-    const dowN = (_CAL_DOW_NAMES[lang] || _CAL_DOW_NAMES.KR)[dow];
-    const isToday = dateStr === todayStr;
-    const isSun = dow === 0, isSat = dow === 6;
-    const todayCls = isToday ? ' today-group' : '';
-    const dowCls = isSun ? ' sun-group' : isSat ? ' sat-group' : '';
-
-    html += `<div class="sched-group">
-      <div class="sched-group-date${todayCls}${dowCls}">
-        <div class="sched-group-day-num">${D}</div>
-        <div class="sched-group-day-info">
-          <span class="sched-group-dow">${dowN}${isToday ? (lang==='KR'?' · 오늘':lang==='JP'?' · 今日':' · Today') : ''}</span>
-          <span class="sched-group-month">${mN}</span>
-        </div>
-      </div>`;
-
-    for (const ev of evs) html += _schedItemHtml(ev, lang, null);
-    html += `</div>`;
-  }
-
-  listEl.innerHTML = html;
+  listEl.innerHTML = _renderSchedGroupsHtml(monthEvents, lang, { clickable: false, todayStr, hlq: null });
 }
 
 let curSchedSearchQuery = '';
@@ -12009,14 +11954,6 @@ function onSchedSearchInput(val) {
   curSchedSearchQuery = val.trim();
   _toggleClearBtn('schedSearchClear', !!curSchedSearchQuery);
   _debouncedSchedUpdate();
-}
-
-function clearSchedSearch() {
-  curSchedSearchQuery = '';
-  const input = document.getElementById('schedSearchInput');
-  if (input) input.value = '';
-  _toggleClearBtn('schedSearchClear', false);
-  updateSchedList();
 }
 
 function resetSchedSearchUi(skipRebuild) {
@@ -12043,7 +11980,7 @@ function renderSchedSearchResults() {
   const titleEl = document.getElementById('schedListTitle');
   if (!listEl) return;
 
-  if (titleEl) titleEl.textContent = lang==='EN' ? 'Search Results' : lang==='JP' ? '検索結果' : '검색 결과';
+  if (titleEl) titleEl.textContent = getCurrentT().search_results_title || '검색 결과';
   if (countEl) countEl.textContent = matches.length ? `${matches.length}${getCurrentT().search_result_unit || ''}` : '';
 
   if (!matches.length) {
@@ -12052,35 +11989,7 @@ function renderSchedSearchResults() {
     return;
   }
 
-  const groups = {};
-  for (const ev of matches) {
-    if (!groups[ev.date]) groups[ev.date] = [];
-    groups[ev.date].push(ev);
-  }
-
-  let html = '';
-  for (const [dateStr, evs] of Object.entries(groups)) {
-    const parts = dateStr.split('-');
-    const Y = parts[0];
-    const D = parseInt(parts[2]);
-    const dow = new Date(dateStr).getDay();
-    const mN = (_CAL_MONTH_NAMES_SHORT[lang] || _CAL_MONTH_NAMES_SHORT.KR)[parseInt(parts[1])-1];
-    const dowN = (_CAL_DOW_NAMES[lang] || _CAL_DOW_NAMES.KR)[dow];
-
-    html += `<div class="sched-group">
-      <div class="sched-group-date sched-group-date-clickable" onclick="jumpToSchedDate('${dateStr}')" title="캘린더에서 보기">
-        <div class="sched-group-day-num">${D}</div>
-        <div class="sched-group-day-info">
-          <span class="sched-group-dow">${dowN}</span>
-          <span class="sched-group-month">${Y}.${mN}</span>
-        </div>
-      </div>`;
-
-    for (const ev of evs) html += _schedItemHtml(ev, lang, curSchedSearchQuery);
-    html += `</div>`;
-  }
-
-  listEl.innerHTML = html;
+  listEl.innerHTML = _renderSchedGroupsHtml(matches, lang, { clickable: true, hlq: curSchedSearchQuery });
 }
 
 function jumpToSchedDate(dateStr) {
@@ -12095,7 +12004,7 @@ function jumpToSchedDate(dateStr) {
 
 _bindSearchInput('schedSearchInput', {
   onInput: onSchedSearchInput,
-  onEscapeClear: clearSchedSearch,
+  onEscapeClear: resetSchedSearchUi,
 });
 
 buildSongNav();
