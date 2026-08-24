@@ -76,7 +76,6 @@ gtag('config', 'G-05C99P2DB9');
   --c-live:     #99ce64;
 
   --c-music-rgb:     233,99,135;
-  --c-mv-rgb:        192,112,144;
   --c-itslive-rgb:   160,128,208;
   --c-content-rgb:   71,209,154;
   --c-fullcam-rgb:   218,129,203;
@@ -132,6 +131,20 @@ gtag('config', 'G-05C99P2DB9');
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-left:   env(safe-area-inset-left, 0px);
   --safe-right:  env(safe-area-inset-right, 0px);
+
+  --z-fab: 100;
+  --z-topbar: 100;
+  --z-sidebar: 130;
+  --z-subsidebar-overlay: 124;
+  --z-subsidebar: 125;
+  --z-bottomnav: 200;
+  --z-drawer-overlay: 250;
+  --z-drawer: 260;
+  --z-menu-btn: 300;
+  --z-ptr-indicator: 700;
+  --z-offline-banner: 800;
+  --z-toast: 9999;
+  --z-modal: 10000;
 }
 
 
@@ -180,7 +193,7 @@ gtag('config', 'G-05C99P2DB9');
   align-items: center;
   justify-content: center;
   transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
-  z-index: 100;
+  z-index: var(--z-fab);
   box-shadow: 0 2px 12px rgba(0,0,0,0.3);
 }
 #scrollTop:hover { color: var(--text); background: var(--card-h); }
@@ -262,7 +275,7 @@ gtag('config', 'G-05C99P2DB9');
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1), transform 0.28s cubic-bezier(0.22,1,0.36,1);
-  z-index: 9999;
+  z-index: var(--z-toast);
   white-space: nowrap;
 }
 #share-toast.show {
@@ -357,7 +370,7 @@ input:focus-visible,
   top: 0;
   left: 0;
   right: 0;
-  z-index: 800;
+  z-index: var(--z-offline-banner);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -400,7 +413,7 @@ input:focus-visible,
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 700;
+  z-index: var(--z-ptr-indicator);
   opacity: 0;
   transform: translate(-50%, -58px);
   pointer-events: none;
@@ -522,7 +535,7 @@ header {
 .song-nav-outer {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: var(--z-topbar);
   background: color-mix(in srgb, var(--bg) 95%, transparent);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -1574,7 +1587,7 @@ header {
     bottom: calc(20px + var(--safe-bottom));
     left: 50%;
     transform: translateX(-50%) translateZ(0);
-    z-index: 200;
+    z-index: var(--z-bottomnav);
     background: color-mix(in srgb, var(--surf) 70%, transparent);
     backdrop-filter: blur(12px) saturate(1.4);
     -webkit-backdrop-filter: blur(12px) saturate(1.4);
@@ -1656,7 +1669,7 @@ header {
     top: calc(16px + var(--safe-top));
     left: calc(16px + var(--safe-left));
     right: auto;
-    z-index: 300;
+    z-index: var(--z-menu-btn);
     width: 34px;
     height: 34px;
     background: none;
@@ -1680,7 +1693,7 @@ header {
   #mobileDrawerOverlay {
     position: fixed;
     inset: 0;
-    z-index: 250;
+    z-index: var(--z-drawer-overlay);
     background: rgba(0,0,0,0.55);
     backdrop-filter: blur(1px);
     opacity: 0;
@@ -1700,7 +1713,7 @@ header {
     left: 0;
     bottom: 0;
     width: 220px;
-    z-index: 260;
+    z-index: var(--z-drawer);
     background: color-mix(in srgb, var(--surf) 72%, transparent);
     backdrop-filter: blur(26px) saturate(1.7);
     -webkit-backdrop-filter: blur(26px) saturate(1.7);
@@ -1903,7 +1916,7 @@ header {
     height: 100vh;
     overflow-y: auto;
     overflow-x: visible;
-    z-index: 130;
+    z-index: var(--z-sidebar);
     border-right: 1px solid var(--glass-border);
     border-bottom: none;
     background: color-mix(in srgb, var(--bg) 68%, transparent);
@@ -2037,7 +2050,7 @@ header {
     left: 420px;
     right: 0;
     bottom: 0;
-    z-index: 124;
+    z-index: var(--z-subsidebar-overlay);
     pointer-events: none;
   }
   #subSidebarOverlay.open {
@@ -2053,7 +2066,7 @@ header {
     overflow-y: auto;
     scrollbar-width: none;
     overscroll-behavior: contain;
-    z-index: 125;
+    z-index: var(--z-subsidebar);
     border-right: 1px solid var(--glass-border);
     background: color-mix(in srgb, var(--bg) 70%, transparent);
     backdrop-filter: blur(30px) saturate(1.7);
@@ -2786,7 +2799,7 @@ header {
   #shortsSearchInput { padding-left: 8px; font-size: 0.75rem; }
 }
 
-#shortsPlayerModal { position: fixed; inset: 0; z-index: 10000; display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.9); backdrop-filter: blur(6px); }
+#shortsPlayerModal { position: fixed; inset: 0; z-index: var(--z-modal); display: none; align-items: center; justify-content: center; background: rgba(0,0,0,0.9); backdrop-filter: blur(6px); }
 #shortsPlayerModal.open { display: flex; }
 .sfp-inner { position: relative; width: min(94vw, 420px); height: min(88vh, 746px); aspect-ratio: 9/16; background: #000; border-radius: 14px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.6); animation: fadeUp 0.3s cubic-bezier(0.22,1,0.36,1) both; }
 .sfp-inner iframe { width: 100%; height: 100%; border: 0; display: block; }
@@ -2846,6 +2859,10 @@ header {
 .u-flex-gap11-start { display:flex; gap:11px; align-items:flex-start; }
 .u-flex-gap10-mb20 { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
 .u-bullet-icon { color:var(--accent); margin-top:3px; flex-shrink:0; font-size:0.6rem; line-height:1; }
+
+.other-link-item { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:5px 10px; border-radius:7px; text-decoration:none; color:var(--muted); font-size:0.72rem; font-family:var(--font-sans); letter-spacing:0.02em; transition:color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1); margin-bottom:2px; }
+.other-link-item:last-child { margin-bottom:0; }
+.other-link-item:hover, .other-link-item:focus-visible { background:rgba(255,255,255,0.05); color:var(--text); }
 
 .about-hero { padding:8px 0 30px; border-bottom:1px solid var(--border); margin-bottom:32px; }
 .about-hero-eyebrow { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
@@ -3038,10 +3055,7 @@ header {
     <div style="font-size:0.62rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px;padding:0 2px;">
       Other Links
     </div>
-    <a href="https://adam-yam.github.io/SCENE-grid/" target="_blank" rel="noopener"
-      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family: var(--font-sans);letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);margin-bottom:2px;"
-      onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
-      onmouseleave="this.style.background='';this.style.color='var(--muted)'">
+    <a href="https://adam-yam.github.io/SCENE-grid/" target="_blank" rel="noopener" class="other-link-item">
       <span class="u-flex-gap8">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="u-icon-60"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         <span class="u-flex-col-tight">
@@ -3051,10 +3065,7 @@ header {
       </span>
       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="u-icon-35"><use href="#ic6"/></svg>
     </a>
-    <a href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener"
-      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family: var(--font-sans);letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);margin-bottom:2px;"
-      onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
-      onmouseleave="this.style.background='';this.style.color='var(--muted)'">
+    <a href="https://adam-yam.github.io/SCENE-BOARD/" target="_blank" rel="noopener" class="other-link-item">
       <span class="u-flex-gap8">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="u-icon-60"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
         <span class="u-flex-col-tight">
@@ -3064,10 +3075,7 @@ header {
       </span>
       <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="u-icon-35"><use href="#ic6"/></svg>
     </a>
-    <a href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener"
-      style="display:flex;align-items:center;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;text-decoration:none;color:var(--muted);font-size:0.72rem;font-family: var(--font-sans);letter-spacing:0.02em;transition:color 0.18s cubic-bezier(0.4,0,0.2,1),background 0.18s cubic-bezier(0.4,0,0.2,1);"
-      onmouseenter="this.style.background='rgba(255,255,255,0.05)';this.style.color='var(--text)'"
-      onmouseleave="this.style.background='';this.style.color='var(--muted)'">
+    <a href="https://adam-yam.github.io/Introduce-RESCENE/" target="_blank" rel="noopener" class="other-link-item">
       <span class="u-flex-gap8">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="u-icon-60"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         <span class="u-flex-col-tight">
