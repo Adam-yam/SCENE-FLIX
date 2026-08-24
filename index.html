@@ -2153,14 +2153,30 @@ header {
   margin: 0 auto;
   padding: 28px 28px 80px;
 }
+.sched-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.sched-header-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--accent);
+  text-transform: uppercase;
+}
+.sched-updated {
+  font-size: 0.65rem;
+  color: var(--muted);
+}
 .sched-notice-top {
   display: flex;
   align-items: flex-start;
   gap: 7px;
-  background: var(--surf);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 9px 13px;
   margin-bottom: 22px;
   font-size: 0.68rem;
   color: var(--muted);
@@ -3390,9 +3406,15 @@ header {
 
 <div id="scheduleMode" style="display:none;">
   <div class="schedule-wrap">
+    <div class="sched-header-bar">
+      <span class="sched-header-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;flex-shrink:0;"><use href="#ic12"/></svg>
+        SCHEDULE
+      </span>
+      <span class="sched-updated" id="schedUpdatedAt"></span>
+    </div>
     <div class="sched-notice-top">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;flex-shrink:0;opacity:0.6;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-      <span>스케줄은 공식 채널 Mnet Plus 정보를 기반으로 표시됩니다. 또한 SCENE-FLIX 내의 스케줄은 6시간마다 갱신됩니다. 실시간 스케줄 확인은 Mnet Plus에서 가능합니다.</span>
+      <span>스케줄은 공식 채널 Mnet Plus의 정보를 바탕으로 제공되며, SCENE-FLIX에서는 6시간마다 자동으로 갱신됩니다. 최신 스케줄은 Mnet Plus에서 실시간으로 확인하실 수 있습니다.</span>
     </div>
     <div class="sched-search-bar">
       <div class="search-input-wrap sched-search-input-wrap">
@@ -3468,7 +3490,7 @@ header {
       <span class="chart-updated" id="chartUpdatedAt"></span>
     </div>
     <div class="chart-platform-legend">
-      <span class="chart-update-notice">각 차트는 매시간 02분에 갱신됩니다.</span>
+      <span class="chart-update-notice">각 차트 데이터는 매시간 정각에 갱신됩니다.</span>
       <span class="chart-info-btn" id="chartInfoBtn">
         <span class="ico" onclick="event.stopPropagation(); document.getElementById('chartInfoBtn').classList.toggle('open');">?</span>
         <div class="chart-info-pop">
@@ -11203,6 +11225,18 @@ function _formatUpdatedAt(d, suffix) {
   return d.getFullYear()+'.'+pad(d.getMonth()+1)+'.'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes())+' KST'+suffix;
 }
 
+function _setSchedUpdatedAt() {
+  const upEl = document.getElementById('schedUpdatedAt');
+  if (!upEl) return;
+  const now = new Date();
+  const refreshed = new Date(now);
+  refreshed.setHours(Math.floor(now.getHours() / 6) * 6, 0, 0, 0);
+  try {
+    const suffix = (getCurrentT().chart_updated_suffix || '');
+    upEl.textContent = _formatUpdatedAt(refreshed, suffix);
+  } catch(e) { upEl.textContent = ''; }
+}
+
 function _scheduleHalfFilePaths() {
   const y = new Date().getFullYear();
   const paths = [];
@@ -11241,6 +11275,7 @@ function _scheduleHalfFilePaths() {
       merged.sort(function(a, b) { return a.date.localeCompare(b.date); });
       _baseScheduleData = merged;
       injectAnnivEvents();
+      _setSchedUpdatedAt();
       if (typeof buildCalendar === 'function' && curSection === 'schedule') {
         buildCalendar();
       }
@@ -11248,6 +11283,7 @@ function _scheduleHalfFilePaths() {
     .catch(function() {
       _baseScheduleData = [];
       injectAnnivEvents();
+      _setSchedUpdatedAt();
       if (typeof buildCalendar === 'function' && curSection === 'schedule') {
         buildCalendar();
       }
