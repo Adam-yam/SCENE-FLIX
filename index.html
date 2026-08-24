@@ -2846,6 +2846,36 @@ header {
 .u-flex-gap11-start { display:flex; gap:11px; align-items:flex-start; }
 .u-flex-gap10-mb20 { display:flex; align-items:center; gap:10px; margin-bottom:20px; }
 .u-bullet-icon { color:var(--accent); margin-top:3px; flex-shrink:0; font-size:0.6rem; line-height:1; }
+
+.about-hero { padding:8px 0 30px; border-bottom:1px solid var(--border); margin-bottom:32px; }
+.about-hero-eyebrow { display:flex; align-items:center; gap:10px; margin-bottom:16px; }
+.about-hero-eyebrow .line { height:1px; width:24px; background:var(--accent); opacity:0.5; }
+.about-hero-eyebrow span { font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); font-weight:500; }
+.about-hero-headline { font-size:1.22rem; font-weight:600; color:var(--text); line-height:1.6; letter-spacing:-0.01em; margin:0 0 8px; word-break:keep-all; }
+.about-hero-byline { font-size:0.76rem; color:var(--muted); font-weight:400; letter-spacing:0.02em; }
+
+.about-notice { display:flex; gap:12px; align-items:flex-start; padding:16px 18px; border-radius:14px; background:var(--surf); border:1px solid var(--border); border-left:3px solid var(--accent); margin-bottom:32px; }
+.about-notice-ico { flex-shrink:0; width:17px; height:17px; color:var(--accent); margin-top:2px; }
+.about-notice-body p { margin:0; }
+.about-notice-body p:first-child { font-size:0.86rem; font-weight:500; color:var(--text); line-height:1.75; word-break:keep-all; }
+.about-notice-body p.about-notice-sub { font-size:0.74rem; color:var(--muted); line-height:1.75; word-break:keep-all; margin-top:8px; }
+
+.about-section { margin-bottom:32px; }
+.about-section-head { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+.about-section-head .lbl { font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); font-weight:500; white-space:nowrap; }
+.about-card { border:1px solid var(--border); border-radius:14px; background:var(--card); overflow:hidden; }
+.about-card-pad { padding:20px; }
+
+.about-info-row { display:flex; gap:13px; align-items:flex-start; padding:15px 20px; }
+.about-info-row + .about-info-row { border-top:1px solid var(--border); }
+.about-info-dot { flex-shrink:0; width:6px; height:6px; border-radius:50%; background:var(--accent); margin-top:8px; opacity:0.85; }
+.about-info-row span { font-size:0.8rem; line-height:1.75; color:var(--text); word-break:keep-all; }
+
+.about-footer { display:flex; flex-direction:column; align-items:center; gap:6px; margin-top:8px; }
+.about-footer-div { display:flex; align-items:center; gap:8px; opacity:0.3; }
+.about-footer-div .ln { height:1px; width:20px; background:var(--muted); }
+.about-footer-div .dot { font-size:0.5rem; letter-spacing:0.15em; }
+.about-footer p { font-size:0.64rem; color:var(--muted); line-height:1.9; text-align:center; opacity:0.55; margin:4px 0 0; }
 </style>
 </head>
 
@@ -3237,30 +3267,31 @@ header {
 <div class="links-wrap">
   <div style="max-width:520px; margin:0 auto; padding:28px 0 72px; color:var(--text);">
 
-    <p style="font-size:0.94rem; color:var(--text); font-weight:500; line-height:1.85; letter-spacing:0; word-break:keep-all; margin:0 0 26px; padding-bottom:22px; border-bottom:1px solid var(--border);" data-i18n="about_notice">거제에 내린 큰비로 많은 분들이 어려움을 겪고 있습니다.<br>피해를 입으신 모든 분들의 안전과 빠른 일상 회복을 간절히 바랍니다.</p>
-
-    <p style="font-size:0.78rem; color:var(--muted); line-height:1.8; word-break:keep-all; margin:0 0 26px;" data-i18n="about_donate_desc">희망브리지 전국재해구호협회를 통해 리마인의 이름으로 기부할 수 있는 <a href="https://donate.hopebridge.or.kr/api/hopebridge.or.kr/1/Gift/Gift?fundid=4242&gifttypeid=56&" target="_blank" rel="noopener noreferrer" style="color:var(--accent); font-weight:600; text-decoration:underline; text-underline-offset:2px;">링크</a>입니다.</p>
-
-    <div style="margin-bottom:10px; padding-bottom:18px; position:relative;">
-
-      <div style="display:flex; align-items:center; gap:10px; margin-bottom:18px;">
-        <div style="height:1px; width:28px; background:var(--accent); opacity:0.5;"></div>
-        <span style="font-size:0.58rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); font-weight:500;">Scene-Flix</span>
+    <div class="about-notice">
+      <svg class="about-notice-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div class="about-notice-body">
+        <p data-i18n="about_notice">거제에 내린 큰비로 많은 분들이 어려움을 겪고 있습니다.<br>피해를 입으신 모든 분들의 안전과 빠른 일상 회복을 간절히 바랍니다.</p>
+        <p class="about-notice-sub" data-i18n="about_donate_desc">희망브리지 전국재해구호협회를 통해 리마인의 이름으로 기부할 수 있는 <a href="https://donate.hopebridge.or.kr/api/hopebridge.or.kr/1/Gift/Gift?fundid=4242&gifttypeid=56&" target="_blank" rel="noopener noreferrer" class="u-accent-strong-underline">링크</a>입니다.</p>
       </div>
-      <p style="font-size:1.15rem; font-weight:500; color:var(--accent); line-height:1.65; margin:0 0 6px;" data-i18n="about_headline">
-        리센느(RESCENE)의 팬 메이드 페이지입니다.
-      </p>
-      <p style="font-size:0.78rem; color:var(--muted); font-weight:400; letter-spacing:0.03em;" data-i18n="about_byline">made with love, by May_</p>
     </div>
 
-    <div style="margin-bottom:36px;">
-      <div class="u-flex-gap10-mb20">
-        <span class="u-section-label-sm">Contact</span>
+    <div class="about-hero">
+      <div class="about-hero-eyebrow">
+        <div class="line"></div>
+        <span>Scene-Flix</span>
+      </div>
+      <p class="about-hero-headline" data-i18n="about_headline">리센느(RESCENE)의 팬 메이드 페이지입니다.</p>
+      <p class="about-hero-byline" data-i18n="about_byline">made with love, by May_</p>
+    </div>
+
+    <div class="about-section">
+      <div class="about-section-head">
+        <span class="lbl">Contact</span>
         <div class="u-hr-flex"></div>
       </div>
-      <div style="border:1px solid var(--border); border-radius:12px; overflow:hidden;">
+      <div class="about-card">
 
-        <div style="padding:16px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); background:var(--card);">
+        <div style="padding:16px 20px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--border); background:var(--surf);">
           <a href="mailto:sceneflix.may@gmail.com"
             style="display:inline-flex; align-items:center; gap:9px; font-size:0.82rem; color:var(--text); text-decoration:none; font-weight:500; transition:color 0.18s cubic-bezier(0.4,0,0.2,1);"
             onmouseenter="this.style.color='var(--accent)';" onmouseleave="this.style.color='var(--text)';">
@@ -3272,7 +3303,7 @@ header {
             style="font-size:0.6rem; padding:3px 9px; border-radius:5px; border:1px solid var(--border-h); background:transparent; color:var(--muted); cursor:pointer; flex-shrink:0; letter-spacing:0.04em; transition:color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.15s;" data-i18n="about_copy">복사</button>
         </div>
 
-        <div style="padding:16px 20px; background:var(--surf); display:flex; flex-direction:column; gap:7px;">
+        <div style="padding:16px 20px; display:flex; flex-direction:column; gap:7px;">
           <p class="u-about-desc" data-i18n="about_contact1">버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.</p>
           <p class="u-about-desc" data-i18n="about_contact2">더 좋은 페이지를 만들기 위해 리마인 여러분의 건의사항을 기다리고 있습니다.</p>
           <p class="u-about-desc" data-i18n="about_contact3">또한, 제작자에게 전하고 싶은 말이나 의견이 있다면 자유롭게 남겨주세요.</p>
@@ -3280,57 +3311,64 @@ header {
       </div>
     </div>
 
-    <div id="aboutChartSection" style="margin-bottom:36px;">
-      <div class="u-flex-gap10-mb20">
-        <span class="u-section-label-sm">Video Stats</span>
+    <div id="aboutChartSection" class="about-section">
+      <div class="about-section-head">
+        <span class="lbl">Video Stats</span>
         <div class="u-hr-flex"></div>
       </div>
-      <div style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap;">
-        <div style="flex-shrink:0; position:relative; width:200px; height:200px; margin:0 auto;">
-          <svg id="aboutDonutSvg" width="200" height="200" viewBox="0 0 200 200" style="cursor:pointer; display:block;"></svg>
-          <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; pointer-events:none;">
-            <div id="donutCenterLabel" style="font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); line-height:1.3;">전체</div>
-            <div id="donutCenterCount" style="font-size:1.3rem; font-weight:700; color:var(--accent); line-height:1.2;">—</div>
-            <div id="donutCenterPct" style="font-size:0.62rem; color:var(--muted);">100%</div>
+      <div class="about-card about-card-pad">
+        <div style="display:flex; gap:24px; align-items:flex-start; flex-wrap:wrap;">
+          <div style="flex-shrink:0; position:relative; width:180px; height:180px; margin:0 auto;">
+            <svg id="aboutDonutSvg" width="180" height="180" viewBox="0 0 200 200" style="cursor:pointer; display:block;"></svg>
+            <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); text-align:center; pointer-events:none;">
+              <div id="donutCenterLabel" style="font-size:0.6rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); line-height:1.3;">전체</div>
+              <div id="donutCenterCount" style="font-size:1.25rem; font-weight:700; color:var(--accent); line-height:1.2;">—</div>
+              <div id="donutCenterPct" style="font-size:0.6rem; color:var(--muted);">100%</div>
+            </div>
+          </div>
+          <div id="aboutChartDetail" style="flex:1; min-width:160px; background:var(--surf); border:1px solid var(--border); border-radius:12px; padding:16px; display:none;">
+            <div id="chartDetailInner"></div>
+          </div>
+          <div id="aboutChartLegend" style="flex:1; min-width:160px; display:flex; flex-direction:column; gap:10px; justify-content:center;"></div>
+        </div>
+        <div style="margin-top:16px; padding-top:14px; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;">
+          <span style="font-size:0.66rem; color:var(--muted); opacity:0.85;">각 항목을 클릭하면 상세 정보를 볼 수 있습니다.</span>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <span style="font-size:0.7rem; color:var(--muted); font-weight:500;" id="aboutTotalDurationLabel">전체 영상 길이</span>
+            <span id="aboutTotalDurationVal" style="font-size:0.78rem; font-weight:700; color:var(--accent);">—</span>
           </div>
         </div>
-        <div id="aboutChartDetail" style="flex:1; min-width:160px; background:var(--card); border:1px solid var(--border); border-radius:12px; padding:16px; display:none;">
-          <div id="chartDetailInner"></div>
-        </div>
-        <div id="aboutChartLegend" style="flex:1; min-width:160px; display:flex; flex-direction:column; gap:10px; justify-content:center;"></div>
       </div>
-      <p style="font-size:0.66rem; color:var(--muted); margin-top:12px; opacity:0.7;">각 항목을 클릭하면 상세 정보를 볼 수 있습니다.</p>
     </div>
 
-    <div style="margin-bottom:28px;">
-      <div class="u-flex-gap10-mb20">
-        <span class="u-section-label-sm" data-i18n="about_section_info">페이지 안내</span>
+    <div class="about-section" style="margin-bottom:28px;">
+      <div class="about-section-head">
+        <span class="lbl" data-i18n="about_section_info">페이지 안내</span>
         <div class="u-hr-flex"></div>
       </div>
-      <div style="display:flex; flex-direction:column; gap:12px; font-size:0.8rem; line-height:1.8; color:var(--text);">
-        <div class="u-flex-gap11-start">
-          <span class="u-bullet-icon">✦</span>
-          <span data-i18n="about_bullet1">이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다. 오직 팬들을 위해 만들어졌습니다.</span>
+      <div class="about-card">
+        <div class="about-info-row">
+          <span class="about-info-dot"></span>
+          <span data-i18n="about_bullet1">이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다.<br>오직 팬들을 위해 만들어졌습니다.</span>
         </div>
-        <div class="u-flex-gap11-start">
-          <span class="u-bullet-icon">✦</span>
-          <span data-i18n="about_bullet2">이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국, <strong style="color:var(--accent); font-weight:600;">더뮤즈 엔터테인먼트</strong>, 그리고 <strong style="color:var(--accent); font-weight:600;">리센느(RESCENE)</strong>에게 있습니다.</span>
+        <div class="about-info-row">
+          <span class="about-info-dot"></span>
+          <span data-i18n="about_bullet2">이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국,<br><strong style="color:var(--accent); font-weight:600;">더뮤즈 엔터테인먼트</strong>, 그리고 <strong style="color:var(--accent); font-weight:600;">리센느(RESCENE)</strong>에게 있습니다.</span>
         </div>
-        <div class="u-flex-gap11-start">
-          <span class="u-bullet-icon">✦</span>
+        <div class="about-info-row">
+          <span class="about-info-dot"></span>
           <span data-i18n="about_bullet3">저작권자의 요청이 있을 경우, 해당 영상은 수정 또는 삭제될 수 있습니다.</span>
         </div>
-
       </div>
     </div>
 
-    <div style="display:flex; flex-direction:column; align-items:center; gap:6px;">
-      <div style="display:flex; align-items:center; gap:8px; opacity:0.3;">
-        <div style="height:1px; width:20px; background:var(--muted);"></div>
-        <span style="font-size:0.5rem; letter-spacing:0.15em;">✦</span>
-        <div style="height:1px; width:20px; background:var(--muted);"></div>
+    <div class="about-footer">
+      <div class="about-footer-div">
+        <div class="ln"></div>
+        <span class="dot">✦</span>
+        <div class="ln"></div>
       </div>
-      <p style="font-size:0.64rem; color:var(--muted); line-height:1.9; text-align:center; opacity:0.55; margin:4px 0 0;">
+      <p>
         © 2025 May_ · Fan-made, non-commercial · All rights belong to their respective owners<br>
         © The Muze Entertainment · © RESCENE<br>
       </p>
@@ -3338,6 +3376,7 @@ header {
 
   </div>
 </div>
+
 
 </div>
 
@@ -3562,8 +3601,8 @@ window._i18n = {
     about_notice:         '거제에 내린 큰비로 많은 분들이 어려움을 겪고 있습니다.<br>피해를 입으신 모든 분들의 안전과 빠른 일상 회복을 간절히 바랍니다.',
     about_donate_desc:    '희망브리지 전국재해구호협회를 통해 리마인의 이름으로 기부할 수 있는 <a href="https://donate.hopebridge.or.kr/api/hopebridge.or.kr/1/Gift/Gift?fundid=4242&gifttypeid=56&" target="_blank" rel="noopener noreferrer" class="u-accent-strong-underline">링크</a>입니다.',
     about_section_info:   '페이지 안내',
-    about_bullet1:        '이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다. 오직 팬들을 위해 만들어졌습니다.',
-    about_bullet2:        '이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국, <strong class="u-accent-strong">더뮤즈 엔터테인먼트</strong>, 그리고 <strong class="u-accent-strong">리센느(RESCENE)</strong>에게 있습니다.',
+    about_bullet1:        '이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다.<br>오직 팬들을 위해 만들어졌습니다.',
+    about_bullet2:        '이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국,<br><strong class="u-accent-strong">더뮤즈 엔터테인먼트</strong>, 그리고 <strong class="u-accent-strong">리센느(RESCENE)</strong>에게 있습니다.',
     about_bullet3:        '저작권자의 요청이 있을 경우, 해당 영상은 수정 또는 삭제될 수 있습니다.',
     about_rescene_sub:    '리센느 소개 페이지 (팬 제작)',
     about_goto:           '바로가기',
@@ -3611,6 +3650,10 @@ window._i18n = {
     about_chart_content_desc:  'RESCENE 공식 채널의 자체 제작 컨텐츠입니다.',
     about_chart_live_desc:     '멤버들의 라이브 방송 영상입니다.',
     about_chart_external_desc: '외부 채널에서 제작된 협업 및 출연 영상입니다.',
+    about_chart_duration_label: '전체 영상 길이',
+    unit_hour: '시간',
+    unit_min:  '분',
+    unit_sec:  '초',
     chart_count_unit:     '개',
     search_result_unit:   '개',
     search_empty_prefix:  '',
@@ -3673,7 +3716,7 @@ window._i18n = {
     about_donate_desc:    '希望ブリッジ全国災害救護協会を通じて、リマインの名前で寄付ができる<a href="https://donate.hopebridge.or.kr/api/hopebridge.or.kr/1/Gift/Gift?fundid=4242&gifttypeid=56&" target="_blank" rel="noopener noreferrer" class="u-accent-strong-underline">リンク</a>です。',
     about_section_info:   'ページ案内',
     about_bullet1:        'このページは収益を目的とせず、広告追加の予定は一切ありません。ファンのためだけに作られました。',
-    about_bullet2:        'このページに掲載された各動画の著作権は、各音楽番組の放送局、<strong class="u-accent-strong">The Muze Entertainment</strong>、および<strong class="u-accent-strong">RESCENE</strong>に帰属します。',
+    about_bullet2:        'このページに掲載された各動画の著作権は、各音楽番組の放送局、<br><strong class="u-accent-strong">The Muze Entertainment</strong>、および<strong class="u-accent-strong">RESCENE</strong>に帰属します。',
     about_bullet3:        '著作権者の要請があった場合、該当動画は修正または削除される場合があります。',
     about_rescene_sub:    'RESCENEの紹介ページ（ファン制作）',
     about_goto:           '移動する',
@@ -3721,6 +3764,10 @@ window._i18n = {
     about_chart_content_desc:  'RESCENE公式チャンネルの自体制作コンテンツです。',
     about_chart_live_desc:     'メンバーのライブ配信映像です。',
     about_chart_external_desc: '外部チャンネルで制作されたコラボ・出演映像です。',
+    about_chart_duration_label: '全動画の総再生時間',
+    unit_hour: '時間',
+    unit_min:  '分',
+    unit_sec:  '秒',
     chart_count_unit:     '件',
     search_result_unit:   '件',
     search_empty_prefix:  '',
@@ -3783,7 +3830,7 @@ window._i18n = {
     about_donate_desc:    'This is a <a href="https://donate.hopebridge.or.kr/api/hopebridge.or.kr/1/Gift/Gift?fundid=4242&gifttypeid=56&" target="_blank" rel="noopener noreferrer" class="u-accent-strong-underline">link</a> where you can donate in the name of Remain, through the Hope Bridge National Disaster Relief Association.',
     about_section_info:   'Page Info',
     about_bullet1:        'This page is non-commercial and has no plans to include ads. It was made purely for fans.',
-    about_bullet2:        'All video rights belong to their respective broadcasting stations, <strong class="u-accent-strong">The Muze Entertainment</strong>, and <strong class="u-accent-strong">RESCENE</strong>.',
+    about_bullet2:        'All video rights belong to their respective broadcasting stations,<br><strong class="u-accent-strong">The Muze Entertainment</strong>, and <strong class="u-accent-strong">RESCENE</strong>.',
     about_bullet3:        'Videos may be modified or removed upon request from the copyright holders.',
     about_rescene_sub:    'RESCENE Introduction Page (Fan-made)',
     about_goto:           'Visit',
@@ -3831,6 +3878,10 @@ window._i18n = {
     about_chart_content_desc:  "Original content produced by RESCENE's official channel.",
     about_chart_live_desc:     'Live broadcast videos from the members.',
     about_chart_external_desc: 'Collaboration and guest appearance videos from external channels.',
+    about_chart_duration_label: 'Total Watch Time',
+    unit_hour: 'h',
+    unit_min:  'm',
+    unit_sec:  's',
     chart_count_unit:     '',
     search_result_unit:   '',
     search_empty_prefix:  'No results found for ',
@@ -4284,6 +4335,9 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'LE1PUDrROf0': '2026.08.23 23:17',
+  'WojiC2ZPpk8': '2024.10.23 20:00',
+  'guiFwLRcFS0': '2024.10.16 21:00',
   'ZWYlC5GSTOs': '2026.08.23 12:00',
   'QDkBLWkwqhw': '2026.08.23 01:38',
   '6AH2QF3SSXE': '2026.08.22 10:30',
@@ -5667,6 +5721,9 @@ const DATE_MAP = {
 };
 
 const DURATION_MAP = {
+  'LE1PUDrROf0': '1:27',
+  'WojiC2ZPpk8': '1:04:41',
+  'guiFwLRcFS0': '3:06',
   'ZWYlC5GSTOs': '6:55',
   'QDkBLWkwqhw': '54:13',
   '6AH2QF3SSXE': '17:15',
@@ -7572,8 +7629,15 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { anwonjal: '안원잘', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', casaverdi: '카사베르디', fcmobile: 'FC 모바일', suwon: '수원시', geoje: '거제시', gangnami: '동네친구 강나미', jeonpa: '전파상사', whoareyou: '여보세요?', milkyboys: '밀키보이즈', elite: '엘리트 학생복', cheabing: '체아빙', hyoslevelup: '효연의 레벨업', jeonchamsi: '전지적 참견 시점', geojaecos: '거제 코스', choiwoosusan: '최우수산', tingleroom: '팅글룸', withsheon: '션과 함께', weeklysangam: '위클리상암', yoobyeongjae: '유병재', twinmirrorshow: '트윈 미러쇼', studiodreaming: '스튜디오 드리밍', idolbooth: '아이돌부스', profile: '입덕프로필', beateachergo: '쌤이되려GO', starnews: '스타뉴스', mcountdown: '엠카운트다운', gyeongju: '경주시', joomonara: '술 빚는 윤주모', musinsatv: '무신사TV 성수기', musicbank: '뮤직뱅크', inkigayo: '인기가요', onthespot: '온더스팟', inthestudio: '인더스튜디오', kisstheradio: '한해의 키스 더 라디오', showchamp: '쇼챔피언', whenjungmak: '웬만해선 정수를 막을 수 없다', idolradiouniverse: '아이돌 라이브 유니버스', characterliscencing: '캐릭터 라이선싱 페어', dimino: '도미노 피자', solomoncode: '광희랑 딱 30분만!', upsub: '없섭', kebongbakdoo: '케봉박두', zanmangloopy: '잔망루피', fanpopty: 'FANPOPTY', geean84: '기안84', kbo: 'KBO', jungilyoung: '악성 내성인 정일영', asiangame: '아시안 게임', mcadream: '엠카드림', nfestival: 'N페스티벌', islandday: '섬의 날', zipds: '집대성', wouldyourecord: '우쥬레코드', newbooth: '신상부스', coupangplay: '쿠팡 플레이', movetoperformance: 'MOVE TO PERFORMANCE', risingeagles14: '열혈농구단', salondrip: '살롱드립', luckybag: '복주머니', ktwiz: 'KT위즈', kartsgifted: 'K예술영재', suddenattack: '서든어택', babytouho: '엉아유호', marketgayo: '인기가요끝나면매점가요', idle: 'i-dle (아이들)', everline: 'EVERLINE', idol24: 'IDOL24', magenta: '마젠타', heyday: '헤이데이', kiwoomheroes: '키움 히어로즈', ansan: '안산그리너스FC', jeongdawoonandboys: '정다쌤과 아이들', ggangsian: '깡시안', chuucandoit: '지켜츄', arirangkpop: 'SPOTLIGHT Rookies', prettyskin: '프리티스킨', boryeong: '보령머드축제', kdwa: 'K-World Dream Awards', narangde: '나랑드사이다', yangsansabryang: '양산삽량문화축전', amazingsaturday: '놀라운 토요일', principalresearch: '수석연구회', aspect: '세계관충돌', looksam: '룩삼', clean: 'CLEAN', busanuniv: '부산대학교', kukminuniv: '국민대학교', southseouluniv: '남서울대학교', upcono: 'UP코노', lottegiants: '롯데자이언츠', hongssntv: '홍쓴TV', biodance: '바이오던스', iamfirefly: '나는 반딧불', koyanara: '한국청소년연맹', hanskin: '한스킨', happytogether: '해피투게더', samrichards: '샘 리처드', sstw: '사심터뷰' };
+const EXTERNAL_LABELS = { anwonjal: '안원잘', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', casaverdi: '카사베르디', fcmobile: 'FC 모바일', suwon: '수원시', geoje: '거제시', gangnami: '동네친구 강나미', jeonpa: '전파상사', whoareyou: '여보세요?', milkyboys: '밀키보이즈', elite: '엘리트 학생복', cheabing: '체아빙', hyoslevelup: '효연의 레벨업', jeonchamsi: '전지적 참견 시점', geojaecos: '거제 코스', choiwoosusan: '최우수산', tingleroom: '팅글룸', withsheon: '션과 함께', weeklysangam: '위클리상암', yoobyeongjae: '유병재', twinmirrorshow: '트윈 미러쇼', studiodreaming: '스튜디오 드리밍', idolbooth: '아이돌부스', profile: '입덕프로필', beateachergo: '쌤이되려GO', starnews: '스타뉴스', mcountdown: '엠카운트다운', gyeongju: '경주시', joomonara: '술 빚는 윤주모', musinsatv: '무신사TV 성수기', musicbank: '뮤직뱅크', inkigayo: '인기가요', onthespot: '온더스팟', inthestudio: '인더스튜디오', kisstheradio: '한해의 키스 더 라디오', showchamp: '쇼챔피언', whenjungmak: '웬만해선 정수를 막을 수 없다', idolradiouniverse: '아이돌 라이브 유니버스', characterliscencing: '캐릭터 라이선싱 페어', dimino: '도미노 피자', solomoncode: '광희랑 딱 30분만!', upsub: '없섭', kebongbakdoo: '케봉박두', zanmangloopy: '잔망루피', fanpopty: 'FANPOPTY', geean84: '기안84', kbo: 'KBO', jungilyoung: '악성 내성인 정일영', asiangame: '아시안 게임', mcadream: '엠카드림', nfestival: 'N페스티벌', islandday: '섬의 날', zipds: '집대성', wouldyourecord: '우쥬레코드', newbooth: '신상부스', coupangplay: '쿠팡 플레이', movetoperformance: 'MOVE TO PERFORMANCE', risingeagles14: '열혈농구단', salondrip: '살롱드립', luckybag: '복주머니', ktwiz: 'KT위즈', kartsgifted: 'K예술영재', suddenattack: '서든어택', babytouho: '엉아유호', marketgayo: '인기가요끝나면매점가요', idle: 'i-dle (아이들)', everline: 'EVERLINE', idol24: 'IDOL24', magenta: '마젠타', heyday: '헤이데이', kiwoomheroes: '키움 히어로즈', ansan: '안산그리너스FC', jeongdawoonandboys: '정다쌤과 아이들', ggangsian: '깡시안', chuucandoit: '지켜츄', arirangkpop: 'SPOTLIGHT Rookies', prettyskin: '프리티스킨', boryeong: '보령머드축제', kdwa: 'K-World Dream Awards', narangde: '나랑드사이다', yangsansabryang: '양산삽량문화축전', amazingsaturday: '놀라운 토요일', principalresearch: '수석연구회', aspect: '세계관충돌', looksam: '룩삼', clean: 'CLEAN', busanuniv: '부산대학교', kukminuniv: '국민대학교', southseouluniv: '남서울대학교', upcono: 'UP코노', lottegiants: '롯데자이언츠', hongssntv: '홍쓴TV', biodance: '바이오던스', iamfirefly: '나는 반딧불', koyanara: '한국청소년연맹', hanskin: '한스킨', happytogether: '해피투게더', samrichards: '샘 리처드', sstw: '사심터뷰', mylittleoldboy: '미운 우리 새끼', koreanet: 'K-POP STAR SHOWCASE' };
 const EXTERNAL_DATA = {
+  koreanet: [
+    { vid: 'WojiC2ZPpk8', url: 'https://youtu.be/WojiC2ZPpk8', date: '2024.10.23 20:00' },
+    { vid: 'guiFwLRcFS0', url: 'https://youtu.be/guiFwLRcFS0', date: '2024.10.16 21:00' },
+  ],
+  mylittleoldboy: [
+    { vid: 'LE1PUDrROf0', url: 'https://www.youtube.com/watch?v=LE1PUDrROf0', date: '2026.08.23 23:17' },
+  ],
   sstw: [
     { vid: 'ZWYlC5GSTOs', url: 'https://youtu.be/ZWYlC5GSTOs', date: '2026.08.23 12:00' },
   ],
@@ -8677,7 +8741,7 @@ const EXTERNAL_CATS = {
     'studiokkok','idolbackstage','baekbanjourneys','daytripjeongseon','dontlookbag',
     'offair','veryhealthy','dolbagi','ggon','ingimajjip','imbank','todayschool',
     'roadtosee','gotthespot','newpick','weltodong','madein','yoohoo','woojeonging',
-    'hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok','dispatch','wanguland','chimtube','leemiju','johnpark','knowingbros','artbox','benstage','gonalisa','kpoponair','tenttalk','jeonpa','milkyboys','cheabing','hyoslevelup','jeonchamsi','geojaecos','choiwoosusan','tingleroom','withsheon','weeklysangam','yoobyeongjae','twinmirrorshow','profile','beateachergo','joomonara','musinsatv','whenjungmak','solomoncode','upsub','idolbooth','kebongbakdoo','zanmangloopy','fanpopty','geean84','jungilyoung','mcadream','zipds','newbooth','salondrip','luckybag','babytouho','marketgayo','idle','everline','idol24','magenta','heyday','ggangsian','chuucandoit','arirangkpop','prettyskin','amazingsaturday','principalresearch','aspect','looksam','upcono','hongssntv','happytogether','samrichards','sstw'] },
+    'hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok','dispatch','wanguland','chimtube','leemiju','johnpark','knowingbros','artbox','benstage','gonalisa','kpoponair','tenttalk','jeonpa','milkyboys','cheabing','hyoslevelup','jeonchamsi','geojaecos','choiwoosusan','tingleroom','withsheon','weeklysangam','yoobyeongjae','twinmirrorshow','profile','beateachergo','joomonara','musinsatv','whenjungmak','solomoncode','upsub','idolbooth','kebongbakdoo','zanmangloopy','fanpopty','geean84','jungilyoung','mcadream','zipds','newbooth','salondrip','luckybag','babytouho','marketgayo','idle','everline','idol24','magenta','heyday','ggangsian','chuucandoit','arirangkpop','prettyskin','amazingsaturday','principalresearch','aspect','looksam','upcono','hongssntv','happytogether','samrichards','sstw','mylittleoldboy','koreanet'] },
   interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview','spotify','starnews','mcountdown','musicbank','inkigayo','showchamp'] },
   ad:        { label: '광고·홍보', i18nKey: 'ext_cat_ad',       keys: ['casaverdi','fcmobile','suwon','geoje','elite','gyeongju','characterliscencing','dimino','asiangame','islandday','suddenattack','narangde','clean','biodance','iamfirefly','koyanara','hanskin'] },
   event: { label: '행사', i18nKey: 'ext_cat_event', keys: ['nfestival','sooncheon','koreauniv','tbcmusic','asianmodelawards','coupangplay','risingeagles14','ktwiz','kartsgifted','kbo','kiwoomheroes','ansan','boryeong','kdwa','yangsansabryang','busanuniv','kukminuniv','southseouluniv','lottegiants'] },
@@ -12024,6 +12088,53 @@ buildSongNav();
 
   function pct(a, b) { return b > 0 ? ((a / b) * 100).toFixed(1) : '0.0'; }
 
+  function parseDurToSec(str) {
+    if (!str) return 0;
+    const parts = str.split(':').map(n => parseInt(n, 10) || 0);
+    let sec = 0;
+    for (const p of parts) sec = sec * 60 + p;
+    return sec;
+  }
+
+  function collectAllVids() {
+    const set = new Set();
+    for (const item of ALL_ITEMS)    if (item.vid) set.add(item.vid);
+    for (const item of CONTENT_ITEMS) if (item.vid) set.add(item.vid);
+    for (const item of ALL_LIVE)      if (item.vid) set.add(item.vid);
+    for (const key of EXTERNAL_KEYS) {
+      for (const item of EXTERNAL_DATA[key]) if (item.vid) set.add(item.vid);
+    }
+    return set;
+  }
+
+  function fmtTotalDuration(totalSec) {
+    const t = getCurrentT();
+    const uh = t.unit_hour || '시간';
+    const um = t.unit_min  || '분';
+    const us = t.unit_sec  || '초';
+    const h = Math.floor(totalSec / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+    const numSpan = n => '<span style="font-family:var(--font-mono);">' + n + '</span>';
+    const bits = [];
+    if (h > 0) bits.push(numSpan(h) + uh);
+    if (h > 0 || m > 0) bits.push(numSpan(m) + um);
+    bits.push(numSpan(s) + us);
+    return bits.join(' ');
+  }
+
+  function renderTotalDuration() {
+    const labelEl = document.getElementById('aboutTotalDurationLabel');
+    const valEl   = document.getElementById('aboutTotalDurationVal');
+    if (!valEl) return;
+    const t = getCurrentT();
+    if (labelEl) labelEl.textContent = t.about_chart_duration_label || '전체 영상 길이';
+    let totalSec = 0;
+    const vids = collectAllVids();
+    for (const vid of vids) totalSec += parseDurToSec(DURATION_MAP[vid]);
+    valEl.innerHTML = fmtTotalDuration(totalSec);
+  }
+
   function fmtCount(n) {
     return n + (getCurrentT().chart_count_unit || '');
   }
@@ -12075,7 +12186,7 @@ buildSongNav();
     });
 
     return [
-      { key: 'songs',    label: t.tab_songs || '음악방송',            color: '#c8c8cc', desc: t.about_chart_songs_desc    || '음악방송 무대 영상 모음입니다.',               count: songsCount,   subtypes: songsSubs   },
+      { key: 'songs',    label: t.tab_songs || '음악방송',            color: 'var(--c-music)', desc: t.about_chart_songs_desc    || '음악방송 무대 영상 모음입니다.',               count: songsCount,   subtypes: songsSubs   },
       { key: 'content',  label: t.tab_content_full || '자체컨텐츠',    color: '#47d19a', desc: t.about_chart_content_desc  || 'RESCENE 공식 채널의 자체 제작 컨텐츠입니다.',  count: contentCount, subtypes: contentSubs },
       { key: 'live',     label: t.tab_live || 'Live',                 color: '#99ce64', desc: t.about_chart_live_desc     || '멤버들의 라이브 방송 영상입니다.',         count: liveCount,    subtypes: liveSubs    },
       { key: 'external', label: t.tab_external_full || '외부컨텐츠',   color: '#818fda', desc: t.about_chart_external_desc || '외부 채널에서 제작된 협업 및 출연 영상입니다.', count: extCount,     subtypes: extSubs     }
@@ -12218,6 +12329,8 @@ buildSongNav();
         + '<div class="chart-legend-sub">' + fmtCountPct(d.count, p) + '</div>'
         + '</div></div>';
     }).join('');
+
+    renderTotalDuration();
   }
   window._aboutRebuildChart = buildChart;
 
