@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-25T08:00:50.147861+09:00",
+  "updatedAt": "2026-08-25T09:00:53.088901+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -21,7 +21,7 @@
         },
         "genie": {
           "rank": 2,
-          "previousRank": 1
+          "previousRank": 2
         },
         "vibe": {
           "rank": 1,
@@ -55,8 +55,8 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 7,
-          "previousRank": 23
+          "rank": 6,
+          "previousRank": 7
         },
         "vibe": {
           "rank": 8,
@@ -67,8 +67,8 @@
           "previousRank": 20
         },
         "flo": {
-          "rank": 9,
-          "previousRank": 8
+          "rank": 8,
+          "previousRank": 9
         },
         "youtube_music": {
           "rank": 6,
@@ -90,8 +90,8 @@
           "previousRank": 7
         },
         "genie": {
-          "rank": 13,
-          "previousRank": 30
+          "rank": 12,
+          "previousRank": 13
         },
         "vibe": {
           "rank": 24,
@@ -102,7 +102,7 @@
           "previousRank": 13
         },
         "flo": {
-          "rank": 10,
+          "rank": 9,
           "previousRank": 10
         },
         "youtube_music": {
@@ -121,7 +121,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 45,
+          "rank": 51,
           "previousRank": 45
         },
         "bugs": {
@@ -129,7 +129,7 @@
           "previousRank": 64
         },
         "flo": {
-          "rank": 71,
+          "rank": 70,
           "previousRank": 71
         },
         "youtube_music": {
@@ -152,8 +152,8 @@
           "previousRank": 60
         },
         "flo": {
-          "rank": 79,
-          "previousRank": 77
+          "rank": 77,
+          "previousRank": 79
         },
         "youtube_music": {
           "rank": 26,
