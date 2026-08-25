@@ -2277,100 +2277,108 @@ header {
 }
 
 .sched-group {
-  border-bottom: 1px solid var(--border);
+  background: var(--surf);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px 4px;
+  margin-bottom: 12px;
+  transition: border-color 0.18s cubic-bezier(0.4,0,0.2,1);
 }
-.sched-group:last-child { border-bottom: none; }
+.sched-group:last-child { margin-bottom: 0; }
 .sched-group-date {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 14px 4px 6px;
+  gap: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid var(--border);
 }
+.sched-group-date-clickable { cursor: pointer; }
+.sched-group-date-clickable:hover .sched-group-day-num { background: var(--card-h); }
 .sched-group-day-num {
-  font-size: 1.4rem;
+  font-size: 1.15rem;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--text);
   line-height: 1;
-  min-width: 32px;
-  text-align: right;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--card);
+  border-radius: 10px;
+  transition: background 0.18s cubic-bezier(0.4,0,0.2,1);
 }
 .sched-group-day-info {
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  gap: 2px;
 }
 .sched-group-dow {
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
 }
 .sched-group-month {
   font-size: 0.62rem;
   color: var(--muted);
-  opacity: 0.7;
 }
 .sched-group-date.today-group .sched-group-day-num {
   color: var(--bg);
   background: var(--accent);
-  border-radius: 6px;
-  width: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.1rem;
 }
+.sched-group-date.today-group .sched-group-dow { color: var(--accent); }
 .sched-group-date.sun-group .sched-group-day-num { color: var(--c-mv); }
 .sched-group-date.sat-group .sched-group-day-num { color: var(--c-external); }
 
 .sched-item {
   display: flex;
   align-items: flex-start;
-  gap: 11px;
-  padding: 8px 4px 8px 46px;
+  gap: 10px;
+  padding: 10px 2px;
   border-radius: 8px;
   transition: background 0.15s cubic-bezier(0.4,0,0.2,1);
   cursor: default;
-  margin-bottom: 2px;
 }
+.sched-item + .sched-item { border-top: 1px solid var(--border); }
 .sched-item:hover { background: var(--card-h); }
 .sched-item-bar {
-  width: 3px;
-  min-height: 36px;
-  border-radius: 2px;
+  width: 4px;
+  align-self: stretch;
+  min-height: 32px;
+  border-radius: 3px;
   flex-shrink: 0;
-  margin-top: 2px;
 }
 .sched-item-body { flex: 1; min-width: 0; }
 .sched-item-title {
-  font-size: 0.82rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 600;
   color: var(--text);
-  line-height: 1.5;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.4;
+  white-space: normal;
+  word-break: break-word;
 }
 .sched-item-meta {
-  font-size: 0.67rem;
+  font-size: 0.68rem;
   color: var(--muted);
-  margin-top: 2px;
+  margin-top: 5px;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   flex-wrap: wrap;
 }
 .sched-item-type-tag {
-  font-size: 0.58rem;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  padding: 1px 5px;
-  border-radius: 3px;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 20px;
 }
 .sched-item-time {
-  font-size: 0.62rem;
-  font-weight: 600;
+  font-size: 0.67rem;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   letter-spacing: 0.02em;
 }
@@ -2379,9 +2387,10 @@ header {
   text-decoration: none;
   font-size: 0.62rem;
   border: 1px solid var(--border);
-  padding: 2px 7px;
-  border-radius: 4px;
+  padding: 4px 9px;
+  border-radius: 20px;
   flex-shrink: 0;
+  align-self: center;
   margin-left: auto;
   transition: color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1);
   white-space: nowrap;
@@ -2564,6 +2573,8 @@ header {
   .cal-month-title { font-size: 0.95rem; }
   .sched-notice-top { font-size: 0.63rem; }
   .sched-cal-col { flex: none; }
+  .sched-group { padding: 10px 10px 2px; border-radius: 12px; }
+  .sched-group-day-num { width: 34px; height: 34px; font-size: 1rem; }
 }
 
 #newsMode { animation: fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both; }
