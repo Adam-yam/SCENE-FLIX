@@ -1209,12 +1209,6 @@ header {
     border-color: rgba(224,212,192,0.45);
     transform: scale(1.05);
   }
-  .ftcard:hover .ftcard-badge {
-    opacity: 1;
-    background: rgba(224,212,192,0.22);
-    border-color: rgba(224,212,192,0.55);
-    transform: scale(1);
-  }
 }
 
 .ftcard-avatar-wrap {
@@ -1296,28 +1290,38 @@ header {
   margin-top: 1px;
 }
 
-.ftcard-badge {
-  position: absolute;
-  right: -3px;
-  bottom: -3px;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
+.ftcard-goto {
   display: flex;
   align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  padding-top: 8px;
+  width: 100%;
   justify-content: center;
-  background: var(--glass-fill-h);
-  border: 1px solid rgba(224,212,192,0.32);
-  color: var(--accent);
-  opacity: 0.8;
-  transform: scale(0.92);
-  transition: opacity 0.22s cubic-bezier(0.4,0,0.2,1), transform 0.25s cubic-bezier(0.22,1,0.36,1), background 0.22s cubic-bezier(0.4,0,0.2,1), border-color 0.22s cubic-bezier(0.4,0,0.2,1);
+  border-top: 1px solid rgba(224,212,192,0.14);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color 0.22s cubic-bezier(0.4,0,0.2,1), border-color 0.22s cubic-bezier(0.4,0,0.2,1);
 }
 
-.ftcard-badge svg {
-  width: 11px;
-  height: 11px;
+.ftcard-goto svg {
+  width: 10px;
+  height: 10px;
   flex-shrink: 0;
+  transition: transform 0.25s cubic-bezier(0.22,1,0.36,1);
+}
+
+@media (hover: hover) {
+  .ftcard:hover .ftcard-goto {
+    color: var(--accent);
+    border-color: rgba(224,212,192,0.32);
+  }
+  .ftcard:hover .ftcard-goto svg {
+    transform: translateX(2px);
+  }
 }
 
 @media (max-width: 700px) {
@@ -1325,10 +1329,9 @@ header {
   .fantube-grid { grid-template-columns: repeat(3, 1fr); gap: 8px; }
   .ftcard { padding: 16px 10px 14px; gap: 9px; }
   .ftcard-avatar { width: 56px; height: 56px; }
-  .ftcard-badge { width: 18px; height: 18px; right: -2px; bottom: -2px; }
-  .ftcard-badge svg { width: 9px; height: 9px; }
   .ftcard-name { font-size: 0.74rem; }
   .ftcard-handle { display: none; }
+  .ftcard-goto { font-size: 0.56rem; padding-top: 6px; }
 }
 
 @media (max-width: 400px) {
@@ -3995,6 +3998,10 @@ function setLang(lang) {
     if (key in t) el.setAttribute('aria-label', t[key]);
   });
 
+  document.querySelectorAll('.ftcard-goto-label').forEach(el => {
+    if ('about_goto' in t) el.textContent = t.about_goto;
+  });
+
   const tagline = document.getElementById('headerTagline');
   if (tagline) tagline.textContent = t.headerTagline;
 
@@ -4384,6 +4391,9 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  '-55bUrG1qjg': '2025.02.05 18:30',
+  'n4V9YxSyxfs': '2025.04.04 20:30',
+  'zW5BaHgazMo': '2024.09.27 20:30',
   '7JdiToiEFH8': '2026.08.25 18:01',
   'q9jcGDrWrlY': '2026.08.25 13:31',
   'dGyQN7GoYSY': '2026.08.25 13:44',
@@ -5775,6 +5785,9 @@ const DATE_MAP = {
 };
 
 const DURATION_MAP = {
+  '-55bUrG1qjg': '3:42',
+  'n4V9YxSyxfs': '2:52',
+  'zW5BaHgazMo': '21:09',
   '7JdiToiEFH8': '0:41',
   'q9jcGDrWrlY': '0:33',
   'dGyQN7GoYSY': '0:07',
@@ -7391,6 +7404,7 @@ const CONTENT_DATA = [
 {
     category: "SCENEDROME",
     urls: [
+      "https://www.youtube.com/watch?v=n4V9YxSyxfs",
       "https://youtu.be/ou2Y2vGKCyY",
       "https://youtu.be/u6J30_AMrT8",
       "https://youtu.be/9eevQUsyYSg",
@@ -7417,6 +7431,7 @@ const CONTENT_DATA = [
   {
     category: "Glow Up",
     urls: [
+      "https://youtu.be/-55bUrG1qjg",
       "https://youtu.be/e-YOF3n_O6M",
       "https://youtu.be/GWcHydWnbxs",
       "https://youtu.be/aTbwfDwH3n4",
@@ -7486,6 +7501,7 @@ const CONTENT_DATA = [
   {
     category: "BASE NOTES",
     urls: [
+      "https://youtu.be/zW5BaHgazMo",
       "https://www.youtube.com/watch?v=QhenoMw_wHU",
       "https://youtu.be/1oa2lvQAfUM",
       "https://youtu.be/KBjYld2nKiw",
@@ -9201,18 +9217,19 @@ const FANTUBE_CHANNELS = [
 
 function buildFantubeCard(ch, idx, avatarUrl) {
   const delay = `${Math.min(idx * 0.04, 0.5)}s`;
+  const gotoLabel = (getCurrentT().about_goto) || '바로가기';
   const avatarHtml = avatarUrl
     ? `<img src="${_escHtml(avatarUrl)}" alt="${_escHtml(ch.name)}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'ftcard-avatar-placeholder\\'>▶</div>'">`
     : `<div class="ftcard-avatar-placeholder">▶</div>`;
   return `<a class="ftcard" href="${_escHtml(ch.url)}" target="_blank" rel="noopener" style="animation-delay:${delay}">
     <div class="ftcard-avatar-wrap">
       <div class="ftcard-avatar">${avatarHtml}</div>
-      <span class="ftcard-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
     </div>
     <div class="ftcard-info">
       <span class="ftcard-name">${_escHtml(ch.name)}</span>
       <span class="ftcard-handle">${_escHtml(ch.handle)}</span>
       ${ch.subtitle ? `<span class="ftcard-subtitle">${_escHtml(ch.subtitle)}</span>` : ''}
+      <span class="ftcard-goto"><span class="ftcard-goto-label">${_escHtml(gotoLabel)}</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></span>
     </div>
   </a>`;
 }
