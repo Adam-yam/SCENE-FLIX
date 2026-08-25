@@ -2182,6 +2182,13 @@ header {
   color: var(--muted);
   line-height: 1.6;
 }
+.sched-notice-link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1);
+}
+.sched-notice-link:hover { color: var(--text); }
 .sched-search-bar {
   margin-bottom: 18px;
 }
@@ -2415,19 +2422,19 @@ header {
 .cal-nav-btn {
   width: 32px;
   height: 32px;
-  border-radius: 50%;
+  border-radius: 8px;
   background: none;
-  border: 1px solid var(--border-h);
+  border: none;
   color: var(--muted);
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.18s cubic-bezier(0.4,0,0.2,1), border-color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
+  transition: color 0.18s cubic-bezier(0.4,0,0.2,1), background 0.18s cubic-bezier(0.4,0,0.2,1);
   flex-shrink: 0;
 }
-.cal-nav-btn svg { width: 14px; height: 14px; }
-.cal-nav-btn:hover { color: var(--text); background: var(--card); border-color: var(--border-h); }
+.cal-nav-btn svg { width: 20px; height: 20px; }
+.cal-nav-btn:hover { color: var(--text); background: var(--card); }
 
 .cal-grid {
   display: grid;
@@ -3426,7 +3433,7 @@ header {
       <span class="sched-updated" id="schedUpdatedAt"></span>
     </div>
     <div class="sched-notice-top">
-      <span>스케줄은 공식 채널 Mnet Plus의 정보를 바탕으로 제공되며, SCENE-FLIX에서는 6시간마다 자동으로 갱신됩니다. 최신 스케줄은 Mnet Plus에서 실시간으로 확인하실 수 있습니다.</span>
+      <span>스케줄은 공식 채널 Mnet Plus의 정보를 바탕으로 제공되며, SCENE-FLIX에서는 6시간마다 자동으로 갱신됩니다. 최신 스케줄은 <a href="https://artist.mnetplus.world/main/stg/rescene-official/schedule" target="_blank" rel="noopener" class="sched-notice-link">Mnet Plus</a>에서 실시간으로 확인하실 수 있습니다.</span>
     </div>
     <div class="sched-search-bar">
       <div class="search-input-wrap sched-search-input-wrap">
