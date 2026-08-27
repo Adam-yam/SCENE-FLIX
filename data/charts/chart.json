@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-28T03:01:00.310578+09:00",
+  "updatedAt": "2026-08-28T04:00:55.345831+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -75,8 +75,8 @@
           "previousRank": 5
         },
         "spotify": {
-          "rank": 8,
-          "previousRank": 7
+          "rank": 6,
+          "previousRank": 8
         }
       }
     },
@@ -110,8 +110,8 @@
           "previousRank": 9
         },
         "spotify": {
-          "rank": 10,
-          "previousRank": 11
+          "rank": 12,
+          "previousRank": 10
         }
       }
     },
@@ -122,22 +122,22 @@
       "ranks": {
         "melon": {
           "rank": 66,
-          "previousRank": 67
+          "previousRank": 66
         },
         "bugs": {
           "rank": 54,
           "previousRank": 44
         },
         "flo": {
-          "rank": 72,
-          "previousRank": 71
+          "rank": 70,
+          "previousRank": 72
         },
         "youtube_music": {
           "rank": 51,
           "previousRank": 53
         },
         "spotify": {
-          "rank": 26,
+          "rank": 34,
           "previousRank": 26
         }
       }
@@ -160,23 +160,8 @@
           "previousRank": 30
         },
         "spotify": {
-          "rank": 54,
-          "previousRank": 52
-        }
-      }
-    },
-    {
-      "songName": "Glow Up",
-      "artistName": "RESCENE",
-      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
-      "ranks": {
-        "youtube_music": {
-          "rank": 54,
-          "previousRank": 61
-        },
-        "spotify": {
-          "rank": 190,
-          "previousRank": 173
+          "rank": 55,
+          "previousRank": 54
         }
       }
     },
@@ -188,6 +173,17 @@
         "youtube_music": {
           "rank": 53,
           "previousRank": 64
+        }
+      }
+    },
+    {
+      "songName": "Glow Up",
+      "artistName": "RESCENE",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
+      "ranks": {
+        "youtube_music": {
+          "rank": 54,
+          "previousRank": 61
         }
       }
     },
