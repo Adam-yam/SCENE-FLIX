@@ -62,23 +62,24 @@
 - **Data Management** - JSON 기반 영상 데이터
 - **Automation** - GitHub Actions를 통한 자동 업데이트
 - **PWA** - Service Worker, Manifest.json으로 오프라인 지원
-
+- 
+---
 ## 🗂️ 프로젝트 구조
 SCENE-FLIX/
 ├── index.html              # 메인 사이트 (단일 HTML 앱)
-├── manifest.json            # PWA manifest
-├── service-worker.js        # PWA 서비스 워커
-├── image/                   # 로고, 아이콘, 멤버 이미지 등
-├── data/                    # 크롤링된 데이터 (JSON)
-│   ├── charts/               # 음원 차트 데이터
-│   ├── schedule/              # 스케줄 데이터
-│   ├── shorts.json            # 쇼츠 데이터
-│   ├── news.json              # 뉴스 데이터
-│   └── *-shorts.json          # 팬 채널별 쇼츠 데이터
+├── manifest.json           # PWA manifest
+├── service-worker.js       # PWA 서비스 워커
+├── image/                  # 로고, 아이콘, 멤버 이미지 등
+├── data/                   # 크롤링된 데이터 (JSON)
+│   ├── charts/             # 음원 차트 데이터
+│   ├── schedule/           # 스케줄 데이터
+│   ├── shorts.json         # 쇼츠 데이터
+│   ├── news.json           # 뉴스 데이터
+│   └── *-shorts.json       # 팬 채널별 쇼츠 데이터
 ├── crawlers/                # 데이터 자동 수집 스크립트 (Python)
-│   ├── crawl_chart.py         # 음원 플랫폼 차트 크롤링
-│   ├── crawl_schedule.py      # 공식 스케줄 · 네이버 뉴스 크롤링
-│   ├── crawl_shorts.py        # 공식/팬 채널 쇼츠 크롤링
+│   ├── crawl_chart.py      # 음원 플랫폼 차트 크롤링
+│   ├── crawl_schedule.py   # 공식 스케줄 · 네이버 뉴스 크롤링
+│   ├── crawl_shorts.py     # 공식/팬 채널 쇼츠 크롤링
 │   └── requirements.txt
 └── .github/workflows/       # GitHub Actions 자동화
     ├── chart-crawl.yml
