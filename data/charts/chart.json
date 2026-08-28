@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-29T06:02:54.332183+09:00",
+  "updatedAt": "2026-08-29T07:00:54.572738+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,8 +20,8 @@
           "previousRank": 1
         },
         "genie": {
-          "rank": 12,
-          "previousRank": 1
+          "rank": 1,
+          "previousRank": 12
         },
         "vibe": {
           "rank": 1,
@@ -29,7 +29,7 @@
         },
         "bugs": {
           "rank": 4,
-          "previousRank": 6
+          "previousRank": 4
         },
         "flo": {
           "rank": 1,
@@ -55,16 +55,16 @@
           "previousRank": 6
         },
         "genie": {
-          "rank": 23,
-          "previousRank": 11
+          "rank": 9,
+          "previousRank": 23
         },
         "vibe": {
           "rank": 7,
-          "previousRank": 6
+          "previousRank": 7
         },
         "bugs": {
-          "rank": 14,
-          "previousRank": 19
+          "rank": 16,
+          "previousRank": 14
         },
         "flo": {
           "rank": 11,
@@ -90,16 +90,16 @@
           "previousRank": 9
         },
         "genie": {
-          "rank": 31,
-          "previousRank": 28
+          "rank": 16,
+          "previousRank": 31
         },
         "vibe": {
           "rank": 23,
           "previousRank": 23
         },
         "bugs": {
-          "rank": 12,
-          "previousRank": 20
+          "rank": 13,
+          "previousRank": 12
         },
         "flo": {
           "rank": 9,
@@ -125,8 +125,8 @@
           "previousRank": 70
         },
         "bugs": {
-          "rank": 41,
-          "previousRank": 46
+          "rank": 52,
+          "previousRank": 41
         },
         "flo": {
           "rank": 81,
@@ -148,8 +148,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 62,
-          "previousRank": 57
+          "rank": 84,
+          "previousRank": 62
         },
         "flo": {
           "rank": 84,
