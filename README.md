@@ -64,8 +64,9 @@
 - **PWA** - Service Worker, Manifest.json으로 오프라인 지원
 - 
 ---
-```
+
 ## 🗂️ 프로젝트 구조
+```
 SCENE-FLIX/
 ├── index.html              # 메인 사이트 (단일 HTML 앱)
 ├── manifest.json           # PWA manifest
