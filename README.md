@@ -25,7 +25,9 @@
 ## 📸 스크린샷
 
 ### 💻 PC 버전
-![SCENE-FLIX PC 버전](./image/pc-screenshot.png)
+<div align=center>
+<img width="800" height="387" alt="pc-screenshot" src="https://github.com/user-attachments/assets/bf461c1f-0c57-4db2-bce7-bf2b35b305f8" />
+</div>
 
 ### 📱 모바일 버전
 <div align=center>
