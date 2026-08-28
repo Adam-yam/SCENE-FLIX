@@ -64,6 +64,7 @@
 - **PWA** - Service Worker, Manifest.json으로 오프라인 지원
 - 
 ---
+```
 ## 🗂️ 프로젝트 구조
 SCENE-FLIX/
 ├── index.html              # 메인 사이트 (단일 HTML 앱)
@@ -85,6 +86,7 @@ SCENE-FLIX/
     ├── chart-crawl.yml
     ├── crawl-shorts.yml
     └── schedule.yml
+```
 ---
 
 ## 📋 라이선스 및 저작권
