@@ -44,6 +44,17 @@
 - **뉴스** - 리센느의 네이버 연예 기사 등
 
 ---
+## ⚙️ 자동화 (GitHub Actions)
+
+데이터는 GitHub Actions 워크플로우로 주기적으로 수집되어 저장소에 자동 커밋됩니다.
+
+| 워크플로우 | 설명 | 사용 API/시크릿 |
+|---|---|---|
+| `chart-crawl.yml` | 각 음원 플랫폼 차트 크롤링 | - |
+| `crawl-shorts.yml` | 공식 채널 및 팬 채널 쇼츠 크롤링 | `YOUTUBE_API_KEY` |
+| `schedule.yml` | 공식 스케줄, 네이버 뉴스 크롤링 | `NAVER_CLIENT_ID`, `NAVER_CLIENT_SECRET`, `YOUTUBE_API_KEY` |
+
+---
 
 ## 🛠️ 기술 스택
 
@@ -52,22 +63,27 @@
 - **Automation** - GitHub Actions를 통한 자동 업데이트
 - **PWA** - Service Worker, Manifest.json으로 오프라인 지원
 
-### 디렉토리 구조
+## 🗂️ 프로젝트 구조
 SCENE-FLIX/
 ├── index.html              # 메인 사이트 (단일 HTML 앱)
 ├── manifest.json            # PWA manifest
 ├── service-worker.js        # PWA 서비스 워커
-├── image/                   # 로고, 아이콘, 이미지 등
+├── image/                   # 로고, 아이콘, 멤버 이미지 등
 ├── data/                    # 크롤링된 데이터 (JSON)
 │   ├── charts/               # 음원 차트 데이터
 │   ├── schedule/              # 스케줄 데이터
 │   ├── shorts.json            # 쇼츠 데이터
 │   ├── news.json              # 뉴스 데이터
+│   └── *-shorts.json          # 팬 채널별 쇼츠 데이터
 ├── crawlers/                # 데이터 자동 수집 스크립트 (Python)
 │   ├── crawl_chart.py         # 음원 플랫폼 차트 크롤링
 │   ├── crawl_schedule.py      # 공식 스케줄 · 네이버 뉴스 크롤링
 │   ├── crawl_shorts.py        # 공식/팬 채널 쇼츠 크롤링
 │   └── requirements.txt
+└── .github/workflows/       # GitHub Actions 자동화
+    ├── chart-crawl.yml
+    ├── crawl-shorts.yml
+    └── schedule.yml
 ---
 
 ## 📋 라이선스 및 저작권
@@ -98,3 +114,8 @@ SCENE-FLIX/
 
 © 2025 SCENE-FLIX · Fan-made, non-commercial · All rights belong to their respective owners
 © The Muze Entertainment · © RESCENE
+
+<div align="center">
+<sub>본 사이트는 리센느(RESCENE)를 응원하는 팬메이드 프로젝트이며, 공식 사이트가 아닙니다.</sub>
+</div>
+
