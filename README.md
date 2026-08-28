@@ -1,6 +1,7 @@
 <div align=center>
 <img width="1089" height="229" alt="LOGO-removebg-preview" src="https://github.com/user-attachments/assets/95ea760f-c025-49f7-9f80-2f2f178cfd37" />
 </div>
+
 # 🎬 SCENE-FLIX
 
 > **리센느(RESCENE) 팬 메이드 영상 모아보기 사이트**
