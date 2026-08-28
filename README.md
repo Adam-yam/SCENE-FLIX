@@ -29,9 +29,8 @@
 
 ### 📱 모바일 버전
 <div align=center>
-![SCENE-FLIX 모바일 버전](./image/mobile-screenshot.png)
+<img width="264" height="500" alt="mobile-screenshot" src="https://github.com/user-attachments/assets/1e5e3918-e072-4bfe-9695-a018c6490c5d" />
 </div>
-
 
 ---
 
