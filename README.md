@@ -28,7 +28,10 @@
 ![SCENE-FLIX PC 버전](./image/pc-screenshot.png)
 
 ### 📱 모바일 버전
+<div align=center>
 ![SCENE-FLIX 모바일 버전](./image/mobile-screenshot.png)
+</div>
+
 
 ---
 
