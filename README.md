@@ -26,11 +26,9 @@
 
 ### 💻 PC 버전
 ![SCENE-FLIX PC 버전](./image/pc-screenshot.png)
-*메인 페이지 - 전체 영상 그리드 뷰*
 
 ### 📱 모바일 버전
 ![SCENE-FLIX 모바일 버전](./image/mobile-screenshot.png)
-*모바일 최적화 - 터치 친화적 인터페이스*
 
 ---
 
@@ -56,13 +54,20 @@
 
 ### 디렉토리 구조
 SCENE-FLIX/
-├── index.html              # 메인 페이지
-├── manifest.json           # PWA 설정
-├── service-worker.js       # 오프라인 캐싱
-├── README.md              # 이 파일
-├── data/                  # 영상 데이터
-├── image/                 # 이미지 자산
-└── crawlers/              # 자동 크롤링 스크립트
+├── index.html              # 메인 사이트 (단일 HTML 앱)
+├── manifest.json            # PWA manifest
+├── service-worker.js        # PWA 서비스 워커
+├── image/                   # 로고, 아이콘, 이미지 등
+├── data/                    # 크롤링된 데이터 (JSON)
+│   ├── charts/               # 음원 차트 데이터
+│   ├── schedule/              # 스케줄 데이터
+│   ├── shorts.json            # 쇼츠 데이터
+│   ├── news.json              # 뉴스 데이터
+├── crawlers/                # 데이터 자동 수집 스크립트 (Python)
+│   ├── crawl_chart.py         # 음원 플랫폼 차트 크롤링
+│   ├── crawl_schedule.py      # 공식 스케줄 · 네이버 뉴스 크롤링
+│   ├── crawl_shorts.py        # 공식/팬 채널 쇼츠 크롤링
+│   └── requirements.txt
 ---
 
 ## 📋 라이선스 및 저작권
