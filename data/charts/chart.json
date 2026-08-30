@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-08-31T02:00:52.790227+09:00",
+  "updatedAt": "2026-08-31T03:00:51.573499+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -86,7 +86,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 10,
+          "rank": 9,
           "previousRank": 10
         },
         "genie": {
@@ -129,8 +129,8 @@
           "previousRank": 28
         },
         "flo": {
-          "rank": 76,
-          "previousRank": 75
+          "rank": 75,
+          "previousRank": 76
         },
         "spotify": {
           "rank": 37,
