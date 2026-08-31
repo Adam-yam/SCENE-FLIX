@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-01T05:00:52.169446+09:00",
+  "updatedAt": "2026-09-01T06:00:52.083611+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -67,8 +67,8 @@
           "previousRank": 23
         },
         "flo": {
-          "rank": 8,
-          "previousRank": 7
+          "rank": 10,
+          "previousRank": 8
         },
         "youtube_music": {
           "rank": 6,
@@ -76,7 +76,7 @@
         },
         "spotify": {
           "rank": 6,
-          "previousRank": 8
+          "previousRank": 6
         }
       }
     },
@@ -102,16 +102,16 @@
           "previousRank": 14
         },
         "flo": {
-          "rank": 7,
-          "previousRank": 6
+          "rank": 8,
+          "previousRank": 7
         },
         "youtube_music": {
           "rank": 8,
           "previousRank": 8
         },
         "spotify": {
-          "rank": 11,
-          "previousRank": 10
+          "rank": 10,
+          "previousRank": 11
         }
       }
     },
@@ -122,7 +122,7 @@
       "ranks": {
         "melon": {
           "rank": 63,
-          "previousRank": 62
+          "previousRank": 63
         },
         "bugs": {
           "rank": 50,
@@ -130,15 +130,15 @@
         },
         "flo": {
           "rank": 75,
-          "previousRank": 74
+          "previousRank": 75
         },
         "youtube_music": {
           "rank": 53,
           "previousRank": 51
         },
         "spotify": {
-          "rank": 36,
-          "previousRank": 37
+          "rank": 40,
+          "previousRank": 36
         }
       }
     },
@@ -152,16 +152,16 @@
           "previousRank": 69
         },
         "flo": {
-          "rank": 76,
-          "previousRank": 75
+          "rank": 77,
+          "previousRank": 76
         },
         "youtube_music": {
           "rank": 25,
           "previousRank": 26
         },
         "spotify": {
-          "rank": 68,
-          "previousRank": 69
+          "rank": 66,
+          "previousRank": 68
         }
       }
     },
