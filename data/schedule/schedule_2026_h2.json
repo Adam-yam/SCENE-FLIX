@@ -1,5 +1,5 @@
 {
-  "updated": "2026-08-31T21:05:30Z",
+  "updated": "2026-09-01T03:05:29Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -517,6 +517,30 @@
       "date": "2026-09-27",
       "time": "19:00",
       "title": "OBJET K-POP FESTA 2026 (OKF2026) - 인천",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "",
+      "title": "2026 입크페스티벌",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-11",
+      "time": "",
+      "title": "2026 GHOST (경기 한류 OST 뮤직페스티벌)",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-17",
+      "time": "",
+      "title": "NOL FESTIVAL - 고양",
       "detail": "",
       "type": "concert",
       "source": "mnetplus"
