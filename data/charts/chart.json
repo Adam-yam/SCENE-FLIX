@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-02T06:00:50.913615+09:00",
+  "updatedAt": "2026-09-02T07:00:54.135546+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,8 +20,8 @@
           "previousRank": 1
         },
         "genie": {
-          "rank": 16,
-          "previousRank": 2
+          "rank": 1,
+          "previousRank": 16
         },
         "vibe": {
           "rank": 1,
@@ -55,20 +55,20 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 25,
-          "previousRank": 22
+          "rank": 24,
+          "previousRank": 25
         },
         "vibe": {
           "rank": 6,
           "previousRank": 6
         },
         "bugs": {
-          "rank": 15,
-          "previousRank": 21
+          "rank": 20,
+          "previousRank": 15
         },
         "flo": {
-          "rank": 10,
-          "previousRank": 8
+          "rank": 19,
+          "previousRank": 10
         },
         "youtube_music": {
           "rank": 6,
@@ -94,16 +94,16 @@
           "previousRank": 29
         },
         "vibe": {
-          "rank": 21,
-          "previousRank": 19
+          "rank": 22,
+          "previousRank": 23
         },
         "bugs": {
-          "rank": 9,
-          "previousRank": 8
+          "rank": 10,
+          "previousRank": 9
         },
         "flo": {
-          "rank": 9,
-          "previousRank": 7
+          "rank": 12,
+          "previousRank": 9
         },
         "youtube_music": {
           "rank": 8,
@@ -121,16 +121,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 63,
-          "previousRank": 64
+          "rank": 64,
+          "previousRank": 63
         },
         "bugs": {
-          "rank": 31,
-          "previousRank": 30
+          "rank": 40,
+          "previousRank": 31
         },
         "flo": {
-          "rank": 79,
-          "previousRank": 80
+          "rank": 82,
+          "previousRank": 79
         },
         "youtube_music": {
           "rank": 53,
@@ -148,12 +148,12 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 28,
-          "previousRank": 39
+          "rank": 38,
+          "previousRank": 28
         },
         "flo": {
-          "rank": 83,
-          "previousRank": 84
+          "rank": 85,
+          "previousRank": 83
         },
         "youtube_music": {
           "rank": 25,
