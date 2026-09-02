@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-02T09:00:51.416362+09:00",
+  "updatedAt": "2026-09-02T10:00:51.955931+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -55,8 +55,8 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 7,
-          "previousRank": 9
+          "rank": 9,
+          "previousRank": 7
         },
         "vibe": {
           "rank": 6,
@@ -67,8 +67,8 @@
           "previousRank": 17
         },
         "flo": {
-          "rank": 11,
-          "previousRank": 23
+          "rank": 8,
+          "previousRank": 11
         },
         "youtube_music": {
           "rank": 6,
@@ -86,11 +86,11 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 8,
-          "previousRank": 7
+          "rank": 7,
+          "previousRank": 8
         },
         "genie": {
-          "rank": 12,
+          "rank": 16,
           "previousRank": 12
         },
         "vibe": {
@@ -102,8 +102,8 @@
           "previousRank": 8
         },
         "flo": {
-          "rank": 9,
-          "previousRank": 22
+          "rank": 6,
+          "previousRank": 9
         },
         "youtube_music": {
           "rank": 8,
@@ -121,16 +121,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 54,
-          "previousRank": 50
+          "rank": 59,
+          "previousRank": 54
         },
         "bugs": {
           "rank": 32,
           "previousRank": 30
         },
         "flo": {
-          "rank": 81,
-          "previousRank": 82
+          "rank": 80,
+          "previousRank": 81
         },
         "youtube_music": {
           "rank": 53,
@@ -152,8 +152,8 @@
           "previousRank": 31
         },
         "flo": {
-          "rank": 82,
-          "previousRank": 84
+          "rank": 81,
+          "previousRank": 82
         },
         "youtube_music": {
           "rank": 25,
