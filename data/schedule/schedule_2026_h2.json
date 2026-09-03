@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-03T03:05:27Z",
+  "updated": "2026-09-03T09:05:33Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -482,6 +482,14 @@
       "source": "mnetplus"
     },
     {
+      "date": "2026-09-04",
+      "time": "20:30",
+      "title": "2026 살람서울페스티벌",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
       "date": "2026-09-05",
       "time": "19:30",
       "title": "원 썸머 나잇 위드 케이팝 시즌 2",
@@ -501,6 +509,22 @@
       "date": "2026-09-10",
       "time": "",
       "title": "Spotify House Seoul",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "",
+      "title": "동국대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-09-18",
+      "time": "",
+      "title": "인하대학교 축제",
       "detail": "",
       "type": "event",
       "source": "mnetplus"
@@ -535,6 +559,22 @@
       "title": "2026 입크페스티벌",
       "detail": "",
       "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "",
+      "title": "공주 백제문화제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-10",
+      "time": "",
+      "title": "2026 대전 동구동락 축제",
+      "detail": "",
+      "type": "event",
       "source": "mnetplus"
     },
     {
