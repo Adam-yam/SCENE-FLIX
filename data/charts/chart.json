@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-06T20:00:49.992351+09:00",
+  "updatedAt": "2026-09-06T21:00:49.794657+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -36,8 +36,8 @@
           "previousRank": 1
         },
         "youtube_music": {
-          "rank": 4,
-          "previousRank": 2
+          "rank": 3,
+          "previousRank": 4
         },
         "spotify": {
           "rank": 3,
@@ -55,8 +55,8 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 7,
-          "previousRank": 5
+          "rank": 6,
+          "previousRank": 7
         },
         "vibe": {
           "rank": 6,
@@ -106,7 +106,7 @@
           "previousRank": 7
         },
         "youtube_music": {
-          "rank": 8,
+          "rank": 9,
           "previousRank": 8
         },
         "spotify": {
@@ -121,7 +121,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 59,
+          "rank": 54,
           "previousRank": 59
         },
         "bugs": {
@@ -129,12 +129,8 @@
           "previousRank": 46
         },
         "flo": {
-          "rank": 82,
-          "previousRank": 81
-        },
-        "youtube_music": {
-          "rank": 53,
-          "previousRank": 51
+          "rank": 81,
+          "previousRank": 82
         },
         "spotify": {
           "rank": 39,
@@ -153,37 +149,11 @@
         },
         "flo": {
           "rank": 80,
-          "previousRank": 79
-        },
-        "youtube_music": {
-          "rank": 25,
-          "previousRank": 26
+          "previousRank": 80
         },
         "spotify": {
           "rank": 59,
           "previousRank": 58
-        }
-      }
-    },
-    {
-      "songName": "Bloom",
-      "artistName": "RESCENE",
-      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/91/66/5a/91665a02-b5c1-8336-e973-88746539ab71/8804775401787.jpg/600x600bb.jpg",
-      "ranks": {
-        "youtube_music": {
-          "rank": 68,
-          "previousRank": 53
-        }
-      }
-    },
-    {
-      "songName": "Glow Up",
-      "artistName": "RESCENE",
-      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
-      "ranks": {
-        "youtube_music": {
-          "rank": 69,
-          "previousRank": 54
         }
       }
     }
