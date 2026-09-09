@@ -87,7 +87,7 @@ SCENE-FLIX에서는 콘텐츠를 다음과 같이 구분해 제공합니다.
 
 ## 🚀 사용 방법
 
-1. **[SCENE-FLIX](https://adam-yam.github.io/SCENE-FLIX/)**에 접속합니다.
+1. **[SCENE-FLIX]**(https://adam-yam.github.io/SCENE-FLIX/)에 접속합니다.
 2. 상단 또는 하단 메뉴에서 원하는 카테고리를 선택합니다.
 3. 검색과 필터를 이용해 원하는 콘텐츠를 찾습니다.
 4. 영상을 선택하면 해당 콘텐츠를 바로 시청할 수 있습니다.
@@ -205,5 +205,5 @@ SCENE-FLIX는 **RESCENE을 응원하기 위해 제작된 비공식 팬메이드 
 
 <div align="center">
   <strong>SCENE-FLIX</strong><br />
-  <sub>Made for RESCENE · Fan-made & Non-commercial</sub>
+  <sub>Made for RESCENE and REMINE · Fan-made & Non-commercial</sub>
 </div>
