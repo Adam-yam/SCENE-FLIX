@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-10T00:00:59.829766+09:00",
+  "updatedAt": "2026-09-10T01:01:00.521866+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -21,15 +21,15 @@
         },
         "genie": {
           "rank": 16,
-          "previousRank": 1
+          "previousRank": 16
         },
         "vibe": {
           "rank": 1,
           "previousRank": 1
         },
         "bugs": {
-          "rank": 3,
-          "previousRank": 2
+          "rank": 2,
+          "previousRank": 3
         },
         "flo": {
           "rank": 1,
@@ -46,12 +46,47 @@
       }
     },
     {
+      "songName": "Pretty Girl",
+      "artistName": "RESCENE (리센느)",
+      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
+      "ranks": {
+        "melon": {
+          "rank": 5,
+          "previousRank": 5
+        },
+        "genie": {
+          "rank": 26,
+          "previousRank": 23
+        },
+        "vibe": {
+          "rank": 6,
+          "previousRank": 6
+        },
+        "bugs": {
+          "rank": 13,
+          "previousRank": 13
+        },
+        "flo": {
+          "rank": 6,
+          "previousRank": 6
+        },
+        "youtube_music": {
+          "rank": 6,
+          "previousRank": 6
+        },
+        "spotify": {
+          "rank": 7,
+          "previousRank": 8
+        }
+      }
+    },
+    {
       "songName": "Deja Vu",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 14,
+          "rank": 7,
           "previousRank": 7
         },
         "genie": {
@@ -81,55 +116,20 @@
       }
     },
     {
-      "songName": "Pretty Girl",
-      "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
-      "ranks": {
-        "melon": {
-          "rank": 12,
-          "previousRank": 5
-        },
-        "genie": {
-          "rank": 23,
-          "previousRank": 22
-        },
-        "vibe": {
-          "rank": 6,
-          "previousRank": 6
-        },
-        "bugs": {
-          "rank": 13,
-          "previousRank": 12
-        },
-        "flo": {
-          "rank": 6,
-          "previousRank": 6
-        },
-        "youtube_music": {
-          "rank": 6,
-          "previousRank": 6
-        },
-        "spotify": {
-          "rank": 7,
-          "previousRank": 8
-        }
-      }
-    },
-    {
       "songName": "Runaway",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 59,
-          "previousRank": 56
+          "rank": 68,
+          "previousRank": 68
         },
         "bugs": {
-          "rank": 32,
-          "previousRank": 53
+          "rank": 46,
+          "previousRank": 32
         },
         "flo": {
-          "rank": 81,
+          "rank": 80,
           "previousRank": 81
         },
         "youtube_music": {
@@ -148,12 +148,12 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 24,
-          "previousRank": 26
+          "rank": 27,
+          "previousRank": 24
         },
         "flo": {
-          "rank": 76,
-          "previousRank": 77
+          "rank": 75,
+          "previousRank": 76
         },
         "youtube_music": {
           "rank": 28,
