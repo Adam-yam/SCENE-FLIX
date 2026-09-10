@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-10T13:58:28Z",
+  "updated": "2026-09-10T15:58:30Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -517,6 +517,14 @@
       "date": "2026-09-17",
       "time": "",
       "title": "동국대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-09-17",
+      "time": "21:00",
+      "title": "서울대학교 축제",
       "detail": "",
       "type": "event",
       "source": "mnetplus"
