@@ -3931,6 +3931,7 @@ const _I18N_ELS = Array.from(document.querySelectorAll('[data-i18n]'));
 const _I18N_PLACEHOLDER_ELS = Array.from(document.querySelectorAll('[data-i18n-placeholder]'));
 
 function setLang(lang) {
+  if (!Object.hasOwn(window._i18n, lang)) return;
   window._curLang = lang;
   document.documentElement.lang = lang === 'KR' ? 'ko' : lang === 'JP' ? 'ja' : 'en';
 
@@ -4361,6 +4362,11 @@ function parseShow(title) {
 }
 
 const DATE_MAP = {
+  'Q0dz0n5BOFY': '2026.09.08 08:24',
+  'QKa1dXnEN9I': '2026.09.10 10:43',
+  'HTAw4_qcvFU': '2026.09.09 19:00',
+  'bPt3J89dWsI': '2026.09.09 19:07',
+  'KeGZn740Bso': '2026.09.09 19:14',
   'DBhLrwux7Kg': '2026.09.09 14:30',
   'VtgZrAD_h5A': '2026.09.08 17:00',
   'VbuSCfQlu2A': '2026.09.08 10:00',
@@ -5814,6 +5820,11 @@ const DATE_MAP = {
 };
 
 const DURATION_MAP = {
+  'Q0dz0n5BOFY': '2:09',
+  'QKa1dXnEN9I': '1:08',
+  'HTAw4_qcvFU': '3:07',
+  'bPt3J89dWsI': '3:31',
+  'KeGZn740Bso': '2:55',
   'DBhLrwux7Kg': '5:21',
   'VtgZrAD_h5A': '0:31',
   'VbuSCfQlu2A': '0:43',
@@ -7274,6 +7285,7 @@ const _RX_DATE_KO  = /(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/;
 const _RX_DATE6    = /(?<![\d])(\d{2})(\d{2})(\d{2})(?![\d])/;
 
 function parseDate(title) {
+  if (typeof title !== 'string') return null;
   for (const p of [_RX_DATE8, _RX_DATE_SEP, _RX_DATE_KO]) {
     const m = title.match(p);
     if (m) {
@@ -7293,16 +7305,22 @@ function parseDate(title) {
   return null;
 }
 
-const _RX_VID_PS = [
-  /youtu\.be\/([^?&\s]+)/,
-  /[?&]v=([^?&\s]+)/,
-  /youtube\.com\/embed\/([^?&\s]+)/,
-  /youtube\.com\/shorts\/([^?&\s]+)/,
-];
+const _VIDEO_ID_RE = /^[A-Za-z0-9_-]{11}$/;
 
-function getVid(url) {
-  for (const p of _RX_VID_PS) { const m = url.match(p); if (m) return m[1]; }
-  return null;
+function getVid(value) {
+  try {
+    const url = new URL(value);
+    if (!['https:', 'http:'].includes(url.protocol)) return null;
+    const host = url.hostname.toLowerCase();
+    let vid = null;
+    if (host === 'youtu.be') vid = url.pathname.split('/')[1];
+    else if (['youtube.com', 'www.youtube.com', 'm.youtube.com', 'music.youtube.com', 'www.youtube-nocookie.com'].includes(host)) {
+      const parts = url.pathname.split('/');
+      vid = url.pathname === '/watch' ? url.searchParams.get('v')
+        : ['embed', 'shorts', 'live'].includes(parts[1]) ? parts[2] : null;
+    }
+    return typeof vid === 'string' && _VIDEO_ID_RE.test(vid) ? vid : null;
+  } catch { return null; }
 }
 
 function ytUrl(vid) {
@@ -7336,7 +7354,9 @@ function _applyLastWatchedBadge(vid) {
       const badge = document.createElement('span');
       badge.className = 'last-watched-badge';
       badge.textContent = getCurrentT().last_watched_badge || '마지막으로 본 영상';
-      card.querySelector('.thumb').appendChild(badge);
+      const thumb = card.querySelector('.thumb');
+      if (!thumb) continue;
+      thumb.appendChild(badge);
       _lastWatchedBadgeEl = badge;
       break;
     }
@@ -7344,7 +7364,9 @@ function _applyLastWatchedBadge(vid) {
 }
 
 function openVideo(e, vid) {
+  if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || (e.button != null && e.button !== 0)) return;
   e.preventDefault();
+  if (!_VIDEO_ID_RE.test(vid)) return;
 
   if (e.target.closest('.bm-btn') || e.target.closest('.share-btn')) return;
 
@@ -7403,12 +7425,14 @@ function _loadMetaCache() {
     if (!raw) { _metaCache = {}; _metaCacheCreatedAt = Date.now(); return; }
     const { data, savedAt, createdAt } = JSON.parse(raw);
     const origin = createdAt || savedAt;
-    if (Date.now() - origin > _META_CACHE_TTL) {
+    if (!Number.isFinite(origin) || origin > Date.now() || !data || typeof data !== 'object' || Array.isArray(data) || Date.now() - origin > _META_CACHE_TTL) {
       localStorage.removeItem(_META_CACHE_KEY);
       _metaCache = {};
       _metaCacheCreatedAt = Date.now();
     } else {
-      _metaCache = data || {};
+      _metaCache = Object.fromEntries(Object.entries(data).filter(([, value]) =>
+        value && typeof value.rawTitle === 'string' && typeof value.channel === 'string'
+      ));
       _metaCacheCreatedAt = origin;
     }
   } catch { _metaCache = {}; _metaCacheCreatedAt = Date.now(); }
@@ -7797,8 +7821,13 @@ for (const cat of CONTENT_DATA) {
   }
 }
 
-const EXTERNAL_LABELS = { anwonjal: '안원잘', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', casaverdi: '카사베르디', fcmobile: 'FC 모바일', suwon: '수원시', geoje: '거제시', gangnami: '동네친구 강나미', jeonpa: '전파상사', whoareyou: '여보세요?', milkyboys: '밀키보이즈', elite: '엘리트 학생복', cheabing: '체아빙', hyoslevelup: '효연의 레벨업', jeonchamsi: '전지적 참견 시점', geojaecos: '거제 코스', choiwoosusan: '최우수산', tingleroom: '팅글룸', withsheon: '션과 함께', weeklysangam: '위클리상암', yoobyeongjae: '유병재', twinmirrorshow: '트윈 미러쇼', studiodreaming: '스튜디오 드리밍', idolbooth: '아이돌부스', profile: '입덕프로필', beateachergo: '쌤이되려GO', starnews: '스타뉴스', mcountdown: '엠카운트다운', gyeongju: '경주시', joomonara: '술 빚는 윤주모', musinsatv: '무신사TV 성수기', musicbank: '뮤직뱅크', inkigayo: '인기가요', onthespot: '온더스팟', inthestudio: '인더스튜디오', kisstheradio: '한해의 키스 더 라디오', showchamp: '쇼챔피언', whenjungmak: '웬만해선 정수를 막을 수 없다', idolradiouniverse: '아이돌 라이브 유니버스', characterliscencing: '캐릭터 라이선싱 페어', dimino: '도미노 피자', solomoncode: '광희랑 딱 30분만!', upsub: '없섭', kebongbakdoo: '케봉박두', zanmangloopy: '잔망루피', fanpopty: 'FANPOPTY', geean84: '기안84', kbo: 'KBO', jungilyoung: '악성 내성인 정일영', asiangame: '아시안 게임', mcadream: '엠카드림', nfestival: 'N페스티벌', islandday: '섬의 날', zipds: '집대성', wouldyourecord: '우쥬레코드', newbooth: '신상부스', coupangplay: '쿠팡 플레이', movetoperformance: 'MOVE TO PERFORMANCE', risingeagles14: '열혈농구단', salondrip: '살롱드립', luckybag: '복주머니', ktwiz: 'KT위즈', kartsgifted: 'K예술영재', suddenattack: '서든어택', babytouho: '엉아유호', marketgayo: '인기가요끝나면매점가요', idle: 'i-dle (아이들)', everline: 'EVERLINE', idol24: 'IDOL24', magenta: '마젠타', heyday: '헤이데이', kiwoomheroes: '키움 히어로즈', ansan: '안산그리너스FC', jeongdawoonandboys: '정다쌤과 아이들', ggangsian: '깡시안', chuucandoit: '지켜츄', arirangkpop: 'SPOTLIGHT Rookies', prettyskin: '프리티스킨', boryeong: '보령머드축제', kdwa: 'K-World Dream Awards', narangde: '나랑드사이다', yangsansabryang: '양산삽량문화축전', amazingsaturday: '놀라운 토요일', principalresearch: '수석연구회', aspect: '세계관충돌', looksam: '룩삼', clean: 'CLEAN', busanuniv: '부산대학교', kukminuniv: '국민대학교', southseouluniv: '남서울대학교', upcono: 'UP코노', lottegiants: '롯데자이언츠', hongssntv: '홍쓴TV', biodance: '바이오던스', iamfirefly: '나는 반딧불', koyanara: '한국청소년연맹', hanskin: '한스킨', happytogether: '해피투게더', samrichards: '샘 리처드', sstw: '사심터뷰', mylittleoldboy: '미운 우리 새끼', koreanet: 'K-POP STAR SHOWCASE', hollys: '할리스커피', kstarnews: '케이스타뉴스', cu: 'CU', mtg: '방과후 설렘', jeondosa: '전도사', withmuuu: '위드뮤', kakao: '카카오', mlb: 'MLB', sanas: '사나의 냉터뷰', koreabroadawards: '한국방송대상', Uiryeong: '의령 리치리치', izna: 'izna' };
+const EXTERNAL_LABELS = { anwonjal: '안원잘', itslive: "It's Live", bokmenking: '복면가왕', adoruv: '아두럽', baekbanjourneys: '백반기행', baesungjae: '배성재의 텐', relaydance: '릴레이댄스', soundbomb360: 'SoundBomb360', blip: 'Blip', dontlookbag: "Don't Look Bag", interview: 'Interview', artistcanvas: 'The Artist Canvas', daytripjeongseon: 'My Daytrip', pblive: 'PB Live', idolbackstage: '아이돌 백스테이지', idolunplugged: 'IDOL UNPLUGGED', dolsilencium: '돌들의 침묵', dingo: 'Dingo', arirangradio: 'Arirang Radio', matkwon: '맛객권리', dolbagi: '돌박이일', starroom: '별이 부르는 방에', hifiction: '하이픽션', chan19: '도시직썰', physicalgallary20: 'Physical Gallery', chan21: '벨리곰', studiokkok: '스튜디오ㅋㅇㅋ', mbcradio: 'Mhz : MBC Radio', offair: 'OFF Air', kohnohko: '코없코', ingimajjip: '인기맛집', fanvatar: '팬바타', kcon: 'K-CON', todayjob: '오늘부터 출근', mvdream: '뮤비드림', veryhealthy: '제일건강합니다', carplist: 'Car!Plist', stagewemake: 'STAGE WE MAKE', moongtness: '뭉트니스', ggon: '꼰대희', koreauniv: '고려대학교', spotify: 'Spotify', billie: '빌리의 아이돌 사랑방', imbank: 'iM파인다이닝', justicebacteria: 'justicebacteria', todayschool: '오늘우리학교는', roadtosee: '로드투직관', toon: 'Toon Studio', riswell: 'RISWELL', leemujinservice: '리무진서비스', gotthespot: 'Got the Spot', train: '위문열차', newpick: 'NewPick', weltodong: '웰투동', comebackhome: '컴백홈', madein: 'MADEIN', yoohoo: '유후의 피아노래', woojeonging: '우정잉', hobby: '취미명세서', studiocake: '스튜디오 케이크', lionmusic: 'LionMusic', sooncheon: '국립순천대학교', roka: '국방홍보원', koreaheritage: '국가유산청', idolpumpking: '아이돌 펌프킹', mmtg: '문명특급', dadok: '다독다독 콘서트', dispatch: 'EXCLUSIVE', norejalham: '전부 노래 잘함', leeeunji: '이은지의 가요광장', parksohyun: '박소현의 러브게임', ebsradiokch: 'EBS 경청', tbcmusic: 'TBC Music', asianmodelawards: '아시아모델어워즈', wanguland: '왕구랜드 절친소', chimtube: '침착맨', leemiju: '그냥 이미주', johnpark: '존이냐박이냐', knowingbros: '아는형님', artbox: '아트박스', benstage: '벤스테이지', gonalisa: '고나리자', kpoponair: 'K-pop On Air', tenttalk: 'TentTalk', pickcon: 'PICKCON', casaverdi: '카사베르디', fcmobile: 'FC 모바일', suwon: '수원시', geoje: '거제시', gangnami: '동네친구 강나미', jeonpa: '전파상사', whoareyou: '여보세요?', milkyboys: '밀키보이즈', elite: '엘리트 학생복', cheabing: '체아빙', hyoslevelup: '효연의 레벨업', jeonchamsi: '전지적 참견 시점', geojaecos: '거제 코스', choiwoosusan: '최우수산', tingleroom: '팅글룸', withsheon: '션과 함께', weeklysangam: '위클리상암', yoobyeongjae: '유병재', twinmirrorshow: '트윈 미러쇼', studiodreaming: '스튜디오 드리밍', idolbooth: '아이돌부스', profile: '입덕프로필', beateachergo: '쌤이되려GO', starnews: '스타뉴스', mcountdown: '엠카운트다운', gyeongju: '경주시', joomonara: '술 빚는 윤주모', musinsatv: '무신사TV 성수기', musicbank: '뮤직뱅크', inkigayo: '인기가요', onthespot: '온더스팟', inthestudio: '인더스튜디오', kisstheradio: '한해의 키스 더 라디오', showchamp: '쇼챔피언', whenjungmak: '웬만해선 정수를 막을 수 없다', idolradiouniverse: '아이돌 라이브 유니버스', characterliscencing: '캐릭터 라이선싱 페어', dimino: '도미노 피자', solomoncode: '광희랑 딱 30분만!', upsub: '없섭', kebongbakdoo: '케봉박두', zanmangloopy: '잔망루피', fanpopty: 'FANPOPTY', geean84: '기안84', kbo: 'KBO', jungilyoung: '악성 내성인 정일영', asiangame: '아시안 게임', mcadream: '엠카드림', nfestival: 'N페스티벌', islandday: '섬의 날', zipds: '집대성', wouldyourecord: '우쥬레코드', newbooth: '신상부스', coupangplay: '쿠팡 플레이', movetoperformance: 'MOVE TO PERFORMANCE', risingeagles14: '열혈농구단', salondrip: '살롱드립', luckybag: '복주머니', ktwiz: 'KT위즈', kartsgifted: 'K예술영재', suddenattack: '서든어택', babytouho: '엉아유호', marketgayo: '인기가요끝나면매점가요', idle: 'i-dle (아이들)', everline: 'EVERLINE', idol24: 'IDOL24', magenta: '마젠타', heyday: '헤이데이', kiwoomheroes: '키움 히어로즈', ansan: '안산그리너스FC', jeongdawoonandboys: '정다쌤과 아이들', ggangsian: '깡시안', chuucandoit: '지켜츄', arirangkpop: 'SPOTLIGHT Rookies', prettyskin: '프리티스킨', boryeong: '보령머드축제', kdwa: 'K-World Dream Awards', narangde: '나랑드사이다', yangsansabryang: '양산삽량문화축전', amazingsaturday: '놀라운 토요일', principalresearch: '수석연구회', aspect: '세계관충돌', looksam: '룩삼', clean: 'CLEAN', busanuniv: '부산대학교', kukminuniv: '국민대학교', southseouluniv: '남서울대학교', upcono: 'UP코노', lottegiants: '롯데자이언츠', hongssntv: '홍쓴TV', biodance: '바이오던스', iamfirefly: '나는 반딧불', koyanara: '한국청소년연맹', hanskin: '한스킨', happytogether: '해피투게더', samrichards: '샘 리처드', sstw: '사심터뷰', mylittleoldboy: '미운 우리 새끼', koreanet: 'K-POP STAR SHOWCASE', hollys: '할리스커피', kstarnews: '케이스타뉴스', cu: 'CU', mtg: '방과후 설렘', jeondosa: '전도사', withmuuu: '위드뮤', kakao: '카카오', mlb: 'MLB', sanas: '사나의 냉터뷰', koreabroadawards: '한국방송대상', Uiryeong: '의령 리치리치', izna: 'izna', spotvkpopawards: 'SPOTV K-POP AWARDS' };
 const EXTERNAL_DATA = {
+  spotvkpopawards: [
+    { vid: 'HTAw4_qcvFU', url: 'https://www.youtube.com/watch?v=HTAw4_qcvFU', date: '2026.09.09 19:00' },
+    { vid: 'bPt3J89dWsI', url: 'https://www.youtube.com/watch?v=bPt3J89dWsI', date: '2026.09.09 19:07' },
+    { vid: 'KeGZn740Bso', url: 'https://www.youtube.com/watch?v=KeGZn740Bso', date: '2026.09.09 19:14' },
+  ],
   izna: [
     { vid: 'Rd156jgP9bI', url: 'https://www.youtube.com/watch?v=Rd156jgP9bI', date: '2026.09.07 20:00' },
   ],
@@ -7844,6 +7873,7 @@ const EXTERNAL_DATA = {
     { vid: 'SZ_UF1C1c5g', url: 'https://youtu.be/SZ_UF1C1c5g', date: '2026.08.26 11:28' },
   ],
   hollys: [
+    { vid: 'Q0dz0n5BOFY', url: 'https://www.youtube.com/watch?v=Q0dz0n5BOFY', date: '2026.09.08 08:24' },
     { vid: 'DBhLrwux7Kg', url: 'https://youtu.be/DBhLrwux7Kg', date: '2026.09.09 14:30' },
     { vid: '0_1dV02TA3Y', url: 'https://youtu.be/0_1dV02TA3Y', date: '2026.08.26 09:00' },
     { vid: '-Y8mgIOHOVo', url: 'https://youtu.be/-Y8mgIOHOVo', date: '2026.08.26 09:00' },
@@ -8316,6 +8346,7 @@ const EXTERNAL_DATA = {
     { vid: '6xunrScz_5k', url: 'https://youtu.be/6xunrScz_5k', date: '2026.06.24 18:00' },
   ],
   geoje: [
+    { vid: 'QKa1dXnEN9I', url: 'https://youtu.be/QKa1dXnEN9I', date: '2026.09.10 10:43' },
     { vid: 'AsSo48oCsj8', url: 'https://youtu.be/AsSo48oCsj8', date: '2026.06.24 09:12' },
   ],
   suwon: [
@@ -8988,7 +9019,7 @@ const EXTERNAL_CATS = {
     'hobby','studiocake','roka','koreaheritage','idolpumpking','mmtg','dadok','dispatch','wanguland','chimtube','leemiju','johnpark','knowingbros','artbox','benstage','gonalisa','kpoponair','tenttalk','jeonpa','milkyboys','cheabing','hyoslevelup','jeonchamsi','geojaecos','choiwoosusan','tingleroom','withsheon','weeklysangam','yoobyeongjae','twinmirrorshow','profile','beateachergo','joomonara','musinsatv','whenjungmak','solomoncode','upsub','idolbooth','kebongbakdoo','zanmangloopy','fanpopty','geean84','jungilyoung','mcadream','zipds','newbooth','salondrip','luckybag','babytouho','marketgayo','idle','everline','idol24','magenta','heyday','ggangsian','chuucandoit','arirangkpop','prettyskin','amazingsaturday','principalresearch','aspect','looksam','upcono','hongssntv','happytogether','samrichards','sstw','mylittleoldboy','koreanet','mtg','jeondosa','sanas','izna'] },
   interview: { label: '인터뷰', i18nKey: 'ext_cat_interview', keys: ['interview','spotify','starnews','mcountdown','musicbank','inkigayo','showchamp','kstarnews'] },
   ad:        { label: '광고·홍보', i18nKey: 'ext_cat_ad',       keys: ['casaverdi','fcmobile','suwon','geoje','elite','gyeongju','characterliscencing','dimino','asiangame','islandday','suddenattack','narangde','clean','biodance','iamfirefly','koyanara','hanskin','hollys','cu','withmuuu','kakao','mlb'] },
-  event: { label: '행사', i18nKey: 'ext_cat_event', keys: ['nfestival','sooncheon','koreauniv','tbcmusic','asianmodelawards','coupangplay','risingeagles14','ktwiz','kartsgifted','kbo','kiwoomheroes','ansan','boryeong','kdwa','yangsansabryang','busanuniv','kukminuniv','southseouluniv','lottegiants','koreabroadawards','Uiryeong'] },
+  event: { label: '행사', i18nKey: 'ext_cat_event', keys: ['nfestival','sooncheon','koreauniv','tbcmusic','asianmodelawards','coupangplay','risingeagles14','ktwiz','kartsgifted','kbo','kiwoomheroes','ansan','boryeong','kdwa','yangsansabryang','busanuniv','kukminuniv','southseouluniv','lottegiants','koreabroadawards','Uiryeong','spotvkpopawards'] },
 };
 const EXTERNAL_CAT_KEYS = Object.keys(EXTERNAL_CATS);
 
@@ -9117,14 +9148,15 @@ const _pendingOembedFetches = new Map();
 function _fetchOembed(url, vid) {
   _loadMetaCache();
   const cacheKey = vid || url;
-  if (_metaCache[cacheKey]) return Promise.resolve(_metaCache[cacheKey]);
+  if (Object.hasOwn(_metaCache, cacheKey)) return Promise.resolve(_metaCache[cacheKey]);
   if (_pendingOembedFetches.has(cacheKey)) return _pendingOembedFetches.get(cacheKey);
 
   const p = (async () => {
     try {
-      const r = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);
+      const r = await _fetchWithTimeout(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`);
       if (!r.ok) return null;
       const d = await r.json();
+      if (!d || typeof d.title !== 'string' || typeof d.author_name !== 'string') return null;
       const result = { rawTitle: d.title, channel: d.author_name, date: parseDate(d.title), show: parseShow(d.title) };
       _metaCache[cacheKey] = result;
       _saveMetaCacheDebounced();
@@ -9906,22 +9938,21 @@ function buildLiveGrid() {
   if (curSearchQuery) applySearch();
 }
 
-let BOOKMARKS = new Set();
+function _readVideoIdSet(key) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key));
+    return new Set(Array.isArray(value) ? value.filter(id => typeof id === 'string' && _VIDEO_ID_RE.test(id)) : []);
+  } catch { return new Set(); }
+}
+
+let BOOKMARKS = _readVideoIdSet('rescene-bookmarks');
 let curBmSort = 'added';
-try {
-  const saved = localStorage.getItem('rescene-bookmarks');
-  if (saved) BOOKMARKS = new Set(JSON.parse(saved));
-} catch {}
 
 function saveBookmarks() {
   try { localStorage.setItem('rescene-bookmarks', JSON.stringify([...BOOKMARKS])); } catch {}
 }
 
-let WATCHED = new Set();
-try {
-  const savedW = localStorage.getItem('rescene-watched');
-  if (savedW) WATCHED = new Set(JSON.parse(savedW));
-} catch {}
+let WATCHED = _readVideoIdSet('rescene-watched');
 
 function saveWatched() {
   try { localStorage.setItem('rescene-watched', JSON.stringify([...WATCHED])); } catch {}
@@ -9967,7 +9998,11 @@ function updateBmBtn(card, vid) {
   const btn = card.querySelector('.bm-btn');
   if (!btn) return;
   const t = getCurrentT();
-  if (BOOKMARKS.has(vid)) {
+  const active = BOOKMARKS.has(vid);
+  btn.setAttribute('aria-pressed', String(active));
+  const icon = btn.querySelector('svg');
+  if (icon) icon.setAttribute('fill', active ? 'currentColor' : 'none');
+  if (active) {
     btn.classList.add('bm-active');
     btn.title = t.bm_remove || '즐겨찾기 해제';
     btn.setAttribute('aria-label', t.bm_remove || '즐겨찾기 해제');
@@ -9982,7 +10017,7 @@ function bmBtnHtml(vid) {
   const active = BOOKMARKS.has(vid);
   const t = getCurrentT();
   const label = active ? (t.bm_remove || '즐겨찾기 해제') : (t.bm_add || '즐겨찾기 추가');
-  return `<button class="card-overlay-btn bm-btn ${active ? 'bm-active' : ''}" title="${label}" aria-label="${label}" data-vid="${vid}">
+  return `<button class="card-overlay-btn bm-btn ${active ? 'bm-active' : ''}" aria-pressed="${active}" title="${label}" aria-label="${label}" data-vid="${vid}">
     <svg viewBox="2 2 20 19.02" fill="${active ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
     </svg>
@@ -10001,7 +10036,7 @@ function shareBtnHtml(vid) {
 }
 
 let _shareToastTimer = null;
-function copyShareUrl(e, vid) {
+async function copyShareUrl(e, vid) {
   e.preventDefault();
   e.stopPropagation();
   const url = ytUrl(vid);
@@ -10025,16 +10060,29 @@ function copyShareUrl(e, vid) {
       _shareToastTimer = setTimeout(() => toast.classList.remove('show'), 2200);
     }
   }
-  navigator.clipboard.writeText(url).then(_afterCopy).catch(() => {
+  try {
+    if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+    await navigator.clipboard.writeText(url);
+  } catch {
+    const previousFocus = document.activeElement;
     const ta = document.createElement('textarea');
     ta.value = url;
     ta.style.cssText = 'position:fixed;opacity:0';
     document.body.appendChild(ta);
-    ta.select();
-    document.execCommand('copy');
-    document.body.removeChild(ta);
-    _afterCopy();
-  });
+    let copied = false;
+    try {
+      ta.select();
+      copied = document.execCommand('copy');
+    } catch {} finally {
+      ta.remove();
+      if (previousFocus instanceof HTMLElement) previousFocus.focus({ preventScroll: true });
+    }
+    if (!copied) {
+      window.prompt(getCurrentT().share_copy_link || 'YouTube 링크 복사', url);
+      return;
+    }
+  }
+  _afterCopy();
 }
 
 function updateBookmarkCounts() {
@@ -10157,7 +10205,7 @@ function buildThumbHtml(vid, badgeHtml, watched) {
   return `<div class="thumb">
     <img src="https://img.youtube.com/vi/${vid}/mqdefault.jpg" alt=""
          loading="lazy" decoding="async"
-         onerror="this.src='https://img.youtube.com/vi/${vid}/hqdefault.jpg'">
+         onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${vid}/hqdefault.jpg'">
     ${_PLAY_RING_SVG}
     ${badgeHtml}
     ${watched ? `<span class="watched-badge">${watchedLabel}</span>` : ''}
@@ -10528,8 +10576,7 @@ function buildAllVideoCard(item, delay, idPrefix, _ML) {
 
   if (item._src === 'live' && item._liveItem) {
     if (!_ML) {
-      const _t2 = getCurrentT();
-      _ML = { '원이': _getMemberLabel(_t2,'원이'), '리브': _getMemberLabel(_t2,'리브'), '미나미': _getMemberLabel(_t2,'미나미'), '메이': _getMemberLabel(_t2,'메이'), '제나': _getMemberLabel(_t2,'제나'), '전원': _getMemberLabel(_t2,'전원') };
+      _ML = _buildMemberLabelMap(getCurrentT());
     }
     const memberBadges = item._liveItem.members.map(mm =>
       `<span class="ctag ${MEMBER_CLASS[mm] || ''}">${_escHtml(_ML[mm] || mm)}</span>`
@@ -10775,16 +10822,16 @@ const _SUB_TAB_ID_MAP = { archive:'secArchive', songs:'secSongs', content:'secCo
 function _replayAnim(selector, delayFn, animStr = '') {
   const els = Array.from(document.querySelectorAll(selector));
   if (!els.length) return;
-  els.forEach((el, i) => {
-    el.style.animationDelay = delayFn(i);
+  els.forEach(el => {
     el.style.animation = 'none';
   });
   void document.body.offsetWidth;
-  els.forEach(el => { el.style.animation = animStr; });
+  els.forEach((el, i) => { el.style.animation = animStr; el.style.animationDelay = delayFn(i); });
 }
 
 let _restoreLastWatchedTimer = null;
 function pickSection(section, _fromPopState) {
+  if (!Object.hasOwn(_PICK_SECTION_MAP, section)) section = 'about';
   curSection = section;
   if (!_fromPopState) {
     const url = section === 'about' ? location.pathname : `${location.pathname}?tab=${section}`;
@@ -10842,6 +10889,12 @@ function pickSection(section, _fromPopState) {
   }
   if (section === 'external') { buildExternalChanBar(); buildExternalGrid(); }
   if (section === 'shorts') _initShorts();
+  else {
+    if (_shortsObserver) _shortsObserver.disconnect();
+    _shortsObserver = null;
+    if (_shortsSentinel) _shortsSentinel.remove();
+    _shortsSentinel = null;
+  }
   if (section === 'fantube') buildFantubeGrid();
   if (section === 'bookmark') buildBookmarkGrid();
   if (section === 'schedule') buildCalendar();
@@ -11032,13 +11085,16 @@ function _bindSearchInput(inputOrId, { onInput, onEnter, onEscapeClear, debounce
   if (!input) return;
   let composing = false;
   input.addEventListener('compositionstart', function () { composing = true; });
-  input.addEventListener('compositionend', function () { composing = false; });
+  input.addEventListener('compositionend', function () {
+    composing = false;
+    if (handleInput) handleInput(input.value);
+  });
   const handleInput = debounceMs && onInput ? _debounce(onInput, debounceMs) : onInput;
   if (handleInput) {
-    input.addEventListener('input', function (e) { handleInput(e.target.value); });
+    input.addEventListener('input', function (e) { if (!composing && !e.isComposing) handleInput(e.target.value); });
   }
   input.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' && !composing && onEnter) {
+    if (e.key === 'Enter' && !composing && !e.isComposing && onEnter) {
       e.preventDefault();
       onEnter();
     } else if (e.key === 'Escape') {
@@ -11429,24 +11485,38 @@ function injectAnnivEvents() {
 
 const _HOUR_KEY = (function() { const d = new Date(); return `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}${String(d.getHours()).padStart(2,'0')}`; })();
 
+// Bound both connection and body-read time; stalled requests must not block a batch.
+async function _fetchWithTimeout(url, timeoutMs = 12000) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(url, { signal: controller.signal });
+    const body = await response.text();
+    return { ok: response.ok, status: response.status, json: async () => JSON.parse(body) };
+  } finally { clearTimeout(timer); }
+}
+
 function _fetchJson(path) {
-  return fetch(path + '?_=' + _HOUR_KEY).then(function(r) {
+  return _fetchWithTimeout(path + '?_=' + _HOUR_KEY).then(function(r) {
     if (!r.ok) throw new Error('HTTP ' + r.status);
     return r.json();
   });
 }
 
-function _formatUpdatedAt(d, suffix) {
-  const pad = function(n) { return String(n).padStart(2,'0'); };
-  return d.getFullYear()+'.'+pad(d.getMonth()+1)+'.'+pad(d.getDate())+' '+pad(d.getHours())+':'+pad(d.getMinutes())+' KST'+suffix;
+function _formatUpdatedAt(d, suffix = '') {
+  if (!Number.isFinite(d.getTime())) return '';
+  const kst = new Date(d.getTime() + 9 * 60 * 60 * 1000);
+  const pad = n => String(n).padStart(2, '0');
+  return `${kst.getUTCFullYear()}.${pad(kst.getUTCMonth()+1)}.${pad(kst.getUTCDate())} ${pad(kst.getUTCHours())}:${pad(kst.getUTCMinutes())} KST${suffix}`;
 }
 
 function _setSchedUpdatedAt() {
   const upEl = document.getElementById('schedUpdatedAt');
   if (!upEl) return;
   const now = new Date();
-  const refreshed = new Date(now);
-  refreshed.setHours(Math.floor(now.getHours() / 6) * 6, 0, 0, 0);
+  const interval = 6 * 60 * 60 * 1000;
+  const kstOffset = 9 * 60 * 60 * 1000;
+  const refreshed = new Date(Math.floor((now.getTime() + kstOffset) / interval) * interval - kstOffset);
   try {
     const suffix = (getCurrentT().chart_updated_suffix || '');
     upEl.textContent = _formatUpdatedAt(refreshed, suffix);
@@ -11471,18 +11541,19 @@ function _scheduleHalfFilePaths() {
       const seen = new Set();
       results.forEach(function(result) {
         if (result.status !== 'fulfilled') return;
-        const events = result.value.events || [];
+        const events = Array.isArray(result.value?.events) ? result.value.events : [];
         events.forEach(function(ev) {
+          if (!ev || typeof ev.title !== 'string' || typeof ev.date !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(ev.date)) return;
           const mapped = {
             date:  ev.date  || '',
-            time:  ev.time  || '',
+            time:  typeof ev.time === 'string' ? ev.time : '',
             title: ev.title || '',
-            type:  ev.type  || 'notice',
-            note:  ev.detail || ev.note || '',
-            link:  ev.link  || '',
+            type:  typeof ev.type === 'string' ? ev.type : 'notice',
+            note:  String(ev.detail || ev.note || ''),
+            link:  _safeHttpUrl(ev.link),
           };
           if (!mapped.date || !mapped.title) return;
-          const key = mapped.date + '|' + mapped.title;
+          const key = JSON.stringify([mapped.date, mapped.time, mapped.title, mapped.type]);
           if (seen.has(key)) return;
           seen.add(key);
           merged.push(mapped);
@@ -11511,7 +11582,7 @@ let _newsLoaded = false;
 (function loadNewsJson() {
   _fetchJson('./data/news.json')
     .then(function(data) {
-      NEWS_DATA = data.articles || [];
+      NEWS_DATA = (Array.isArray(data?.articles) ? data.articles : []).filter(a => a && typeof a.title === 'string' && _safeHttpUrl(a.url));
       _newsLoaded = true;
       const upEl = document.getElementById('newsUpdatedAt');
       if (upEl && data.updated) {
@@ -11559,17 +11630,22 @@ const _SHORTS_CHANNEL_LABEL = {};
   btns.forEach(b => { _SHORTS_CHANNEL_LABEL[b.getAttribute('data-sc')] = b.textContent.trim(); });
 
   const legacyPromise = _fetchJson('./data/shorts.json')
-    .then(function(data) { return data.items || []; })
+    .then(function(data) { return Array.isArray(data?.items) ? data.items : []; })
     .catch(function() { return []; });
 
   const extraPromises = keys.map(function(key) {
     return _fetchJson('./data/' + key + '-shorts.json')
-      .then(function(data) { return (data.items || []).map(function(it) { return Object.assign({}, it, { channel: it.channel || key }); }); })
+      .then(function(data) { return (Array.isArray(data?.items) ? data.items : []).filter(it => it && typeof it === 'object').map(function(it) { return Object.assign({}, it, { channel: it.channel || key }); }); })
       .catch(function() { return []; });
   });
 
   Promise.all([legacyPromise].concat(extraPromises)).then(function(results) {
-    SHORTS_DATA = results.flat();
+    const seen = new Set();
+    SHORTS_DATA = results.flat().filter(item => {
+      if (!item || typeof item.vid !== 'string' || !_VIDEO_ID_RE.test(item.vid) || seen.has(item.vid)) return false;
+      seen.add(item.vid);
+      return true;
+    }).map(item => ({ ...item, title: String(item.title || ''), date: String(item.date || ''), channel: String(item.channel || '') }));
     _shortsLoaded = true;
     if (curSection === 'shorts') { buildShortsYearNav(); buildShortsGrid(); syncSubSidebar(); }
 
@@ -11743,13 +11819,13 @@ function _appendShortsPage(grid) {
     card.style.animationDelay = delay;
     card.dataset.vid = item.vid;
     card.innerHTML = `<div class="shorts-thumb-wrap">
-        <img src="https://img.youtube.com/vi/${item.vid}/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/sddefault.jpg';this.onerror=function(){this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg';}">
+        <img src="https://img.youtube.com/vi/${item.vid}/maxresdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.src='https://img.youtube.com/vi/${item.vid}/sddefault.jpg';this.onerror=function(){this.onerror=null;this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg';}">
         <div class="shorts-play-ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
         ${label ? `<span class="shorts-channel-badge">${_kwHl(label, hlq)}</span>` : ''}
       </div>
       <div class="shorts-body">
         <div class="shorts-title">${title || _escHtml(item.vid)}</div>
-        ${date ? `<div class="shorts-date">${date}</div>` : ''}
+        ${date ? `<div class="shorts-date">${_escHtml(date)}</div>` : ''}
       </div>`;
     grid.appendChild(card);
   });
@@ -11792,6 +11868,7 @@ function toggleShortsFlixMode() {
 }
 
 function openShortsCard(e, vid) {
+  if (e.ctrlKey || e.metaKey || e.shiftKey || e.altKey) return;
   if (_shortsFlixMode) {
     e.preventDefault();
     if (e.target.closest('.bm-btn') || e.target.closest('.share-btn')) return;
@@ -11807,11 +11884,12 @@ function openShortsCard(e, vid) {
 let _shortsPlayerIndex = -1;
 let _shortsPlayerHistoryPushed = false;
 function openShortsPlayer(vid) {
+  if (!_VIDEO_ID_RE.test(vid)) return;
   const modal = document.getElementById('shortsPlayerModal');
   const wrap = document.getElementById('sfpIframeWrap');
   if (!modal || !wrap) return;
   _shortsPlayerIndex = _shortsFiltered.findIndex(i => i.vid === vid);
-  wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${vid}?autoplay=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
+  wrap.innerHTML = `<iframe title="YouTube Shorts" src="https://www.youtube.com/embed/${vid}?autoplay=1&playsinline=1&rel=0" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>`;
   modal.classList.add('open');
   document.body.style.overflow = 'hidden';
   _updateShortsPlayerNav();
@@ -11858,8 +11936,17 @@ function _emptyStateHtml(cls, icon, message, hint) {
 }
 
 function _escHtml(str) {
-  if (!str) return '';
+  if (str == null) return '';
   return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// Escaping HTML does not make javascript: and other URL schemes safe.
+function _safeHttpUrl(value) {
+  if (typeof value !== 'string' || !value.trim()) return '';
+  try {
+    const url = new URL(value, location.href);
+    return ['http:', 'https:'].includes(url.protocol) ? url.href : '';
+  } catch { return ''; }
 }
 
 function buildNewsGrid() {
@@ -11872,9 +11959,9 @@ function buildNewsGrid() {
   const noThumb = '<div class="news-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>';
   grid.innerHTML = NEWS_DATA.map((a, idx) => {
     const delay = Math.min(idx * (_isMobile ? 0.018 : 0.035), _isMobile ? 0.22 : 0.5).toFixed(3);
-    const thumb = a.thumbnail ? '<img class="news-thumb" src="'+_escHtml(a.thumbnail)+'" alt="" loading="lazy" decoding="async">' : noThumb;
+    const thumb = a.thumbnail ? '<img class="news-thumb" src="'+_escHtml(_safeHttpUrl(a.thumbnail))+'" alt="" loading="lazy" decoding="async">' : noThumb;
     const desc = a.description ? '<div class="news-desc">'+_escHtml(a.description)+'</div>' : '';
-    return '<a class="news-card" href="'+_escHtml(a.url)+'" target="_blank" rel="noopener" style="animation:fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both '+delay+'s;">'
+    return '<a class="news-card" href="'+_escHtml(_safeHttpUrl(a.url))+'" target="_blank" rel="noopener" style="animation:fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both '+delay+'s;">'
       +thumb+'<div class="news-body"><div class="news-title">'+_escHtml(a.title)+'</div>'+desc
       +'<div class="news-meta"><span class="news-source">'+_escHtml(a.source||'')+'</span><span class="news-date">'+_escHtml(a.date||'')+'</span></div>'
       +'</div></a>';
@@ -11897,8 +11984,9 @@ function _chartChipHtml(platform, rankInfo) {
   if (!rankInfo || rankInfo.rank == null) {
     return '<div class="chart-chip out" title="'+platform.label+' '+(getCurrentT().chart_out || '차트 아웃')+'">'+platHtml+'<span class="val">'+(getCurrentT().chart_out || '-')+'</span></div>';
   }
-  const rank = rankInfo.rank;
-  const prev = rankInfo.previousRank;
+  const rank = Number(rankInfo.rank);
+  if (!Number.isFinite(rank) || rank <= 0) return _chartChipHtml(platform, null);
+  const prev = rankInfo.previousRank == null ? null : Number(rankInfo.previousRank);
   let cls, deltaText, title;
   if (prev == null || prev <= 0) {
     cls = 'new'; deltaText = 'NEW'; title = platform.label+' '+rank+'위 (NEW)';
@@ -11915,7 +12003,7 @@ function _chartChipHtml(platform, rankInfo) {
 function buildChartGrid() {
   const list = document.getElementById('chartList');
   if (!list || !_chartLoaded) return;
-  const songs = (CHART_DATA && CHART_DATA.songs) || [];
+  const songs = (Array.isArray(CHART_DATA?.songs) ? CHART_DATA.songs : []).filter(song => song && typeof song === 'object');
   if (!songs.length) {
     list.innerHTML = '<div class="chart-empty"><div class="ico">🎵</div><p>'+(getCurrentT().chart_empty || '차트 정보를 불러올 수 없습니다.')+'</p></div>';
     return;
@@ -11923,7 +12011,7 @@ function buildChartGrid() {
   const noThumb = '<div class="chart-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>';
   list.innerHTML = songs.map((song, idx) => {
     const delay = Math.min(idx * (_isMobile ? 0.02 : 0.035), _isMobile ? 0.22 : 0.5).toFixed(3);
-    const thumb = song.albumImageUrl ? '<img class="chart-thumb" src="'+_escHtml(song.albumImageUrl)+'" alt="" loading="lazy" decoding="async">' : noThumb;
+    const thumb = song.albumImageUrl ? '<img class="chart-thumb" src="'+_escHtml(_safeHttpUrl(song.albumImageUrl))+'" alt="" loading="lazy" decoding="async">' : noThumb;
     const ranks = song.ranks || {};
     const chips = _CHART_PLATFORMS.map(p => _chartChipHtml(p, ranks[p.key])).join('');
     const rankNum = idx + 1;
@@ -12123,7 +12211,7 @@ function calSelectDate(dateStr) {
       ? ev._memberColor
       : (SCHED_TYPE_COLOR[ev.type] || '#888');
     const dotStyle = `background:${evColor}`;
-    const linkHtml = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="cal-detail-link">${linkLabel}</a>` : '';
+    const linkHtml = ev.link ? `<a href="${_escHtml(_safeHttpUrl(ev.link))}" target="_blank" rel="noopener" class="cal-detail-link">${linkLabel}</a>` : '';
     const timeHtml = ev.time ? `<span class="cal-detail-time" style="color:${evColor}">${_escHtml(ev.time)}</span>` : '';
     return `<div class="cal-detail-item">
       <div class="cal-dot" style="${dotStyle}"></div>
@@ -12157,10 +12245,16 @@ const _SCHED_TYPE_LABEL = {
 };
 
 function _kwHl(text, q) {
-  const escaped = _escHtml(text || '');
-  if (!q) return escaped;
-  const re = new RegExp('(' + _hlEscape(q) + ')', 'gi');
-  return escaped.replace(re, '<mark class="sh">$1</mark>');
+  const value = String(text ?? '');
+  if (!q) return _escHtml(value);
+  // Match raw text first so highlighting cannot split an HTML entity.
+  const re = new RegExp(_hlEscape(q), 'gi');
+  let html = '', offset = 0;
+  for (const match of value.matchAll(re)) {
+    html += _escHtml(value.slice(offset, match.index)) + '<mark class="sh">' + _escHtml(match[0]) + '</mark>';
+    offset = match.index + match[0].length;
+  }
+  return html + _escHtml(value.slice(offset));
 }
 
 function _schedItemHtml(ev, lang, hlq) {
@@ -12170,7 +12264,7 @@ function _schedItemHtml(ev, lang, hlq) {
   const bar = `background:${evColor}`;
   const tl = (_SCHED_TYPE_LABEL[ev.type]||{})[lang] || ev.type;
   const tagStyle = `background:color-mix(in srgb, ${evColor} 18%, transparent);color:${evColor}`;
-  const link = ev.link ? `<a href="${_escHtml(ev.link)}" target="_blank" rel="noopener" class="sched-item-link">${getCurrentT().cal_link_label || '↗ 링크'}</a>` : '';
+  const link = ev.link ? `<a href="${_escHtml(_safeHttpUrl(ev.link))}" target="_blank" rel="noopener" class="sched-item-link">${getCurrentT().cal_link_label || '↗ 링크'}</a>` : '';
   const timeTag = ev.time ? `<span class="sched-item-time" style="color:${evColor}">${_escHtml(ev.time)}</span>` : '';
   const titleHtml = hlq ? _kwHl(ev.title, hlq) : _escHtml(ev.title);
   const noteHtml  = ev.note ? (hlq ? _kwHl(ev.note, hlq) : _escHtml(ev.note)) : '';
@@ -12200,7 +12294,7 @@ function _groupScheduleByDate(items) {
 function _schedGroupHtml(dateStr, evs, lang, opts) {
   const parts = dateStr.split('-');
   const D = parseInt(parts[2]);
-  const dow = new Date(dateStr).getDay();
+  const dow = new Date(Number(parts[0]), Number(parts[1]) - 1, Number(parts[2])).getDay();
   const mN = (_CAL_MONTH_NAMES_SHORT[lang] || _CAL_MONTH_NAMES_SHORT.KR)[parseInt(parts[1])-1];
   const dowN = (_CAL_DOW_NAMES[lang] || _CAL_DOW_NAMES.KR)[dow];
 
@@ -12597,23 +12691,7 @@ buildSongNav();
   }
   window._aboutRebuildChart = buildChart;
 
-  function tryBuild() {
-    if (typeof RESCENE_DATA === 'undefined' || typeof CONTENT_DATA === 'undefined' ||
-        typeof EXTERNAL_DATA === 'undefined' || typeof EXTERNAL_CATS === 'undefined' ||
-        typeof EXTERNAL_KEYS === 'undefined' || typeof EXTERNAL_LABELS === 'undefined' ||
-        typeof ALL_LIVE === 'undefined' || typeof LIVE_DATA_2024 === 'undefined' ||
-        typeof LIVE_DATA_2025 === 'undefined' || typeof LIVE_DATA_2026 === 'undefined') {
-      requestAnimationFrame(tryBuild);
-      return;
-    }
-    buildChart();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => { requestAnimationFrame(tryBuild); });
-  } else {
-    requestAnimationFrame(tryBuild);
-  }
+  requestAnimationFrame(buildChart);
 })();
 
 const _elDrawer        = document.getElementById('mobileDrawer');
@@ -12652,6 +12730,7 @@ function toggleDrawer() {
 }
 
 function closeDrawer() {
+  if (!_elDrawer.classList.contains('open')) return;
   _elDrawer.classList.remove('open');
   _elDrawerOverlay.classList.remove('open');
   if (_elMenuBtn) _elMenuBtn.classList.remove('open');
@@ -12834,6 +12913,7 @@ if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('./service-worker.js').then(reg => {
       reg.addEventListener('updatefound', () => {
         const newSW = reg.installing;
+        if (!newSW) return;
         newSW.addEventListener('statechange', () => {
           if (newSW.state === 'installed' && navigator.serviceWorker.controller) {
             newSW.postMessage('SKIP_WAITING');
@@ -12853,7 +12933,7 @@ if ('serviceWorker' in navigator) {
 }
 </script>
 
-<div id="share-toast"></div>
+<div id="share-toast" role="status" aria-live="polite"></div>
 <div id="shortsPlayerModal" onclick="if(event.target===this) closeShortsPlayer();">
   <div class="sfp-inner">
     <button class="sfp-close" onclick="closeShortsPlayer()" aria-label="close">
@@ -12927,7 +13007,7 @@ if ('serviceWorker' in navigator) {
   if (!el) return;
   const arrow = document.getElementById('ptrArrow');
 
-  const EXCLUDE_SELECTOR = '#mobileDrawer, #subSidebar, .song-nav-outer, .sched-list-col, .drawer-items';
+  const EXCLUDE_SELECTOR = '#mobileDrawer, #shortsPlayerModal, #subSidebar, .song-nav-outer, .sched-list-col, .drawer-items';
   const THRESHOLD = 68;
   const MAX_PULL = 110;
 
@@ -12991,6 +13071,7 @@ if ('serviceWorker' in navigator) {
 
   document.addEventListener('touchmove', function(e) {
     if (!pulling || refreshing) return;
+    if (e.touches.length !== 1) { reset(); return; }
     if (pageScrollTop() > 0) { pulling = false; dragging = false; reset(); return; }
     const dist = e.touches[0].clientY - startY;
     if (dist <= 0) {
