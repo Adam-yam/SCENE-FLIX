@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-11T08:00:54.897758+09:00",
+  "updatedAt": "2026-09-11T09:00:59.979182+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -16,12 +16,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 1,
+          "rank": 2,
           "previousRank": 1
         },
         "genie": {
           "rank": 2,
-          "previousRank": 14
+          "previousRank": 2
         },
         "vibe": {
           "rank": 1,
@@ -55,8 +55,8 @@
           "previousRank": 7
         },
         "genie": {
-          "rank": 10,
-          "previousRank": 26
+          "rank": 9,
+          "previousRank": 10
         },
         "vibe": {
           "rank": 7,
@@ -67,8 +67,8 @@
           "previousRank": 17
         },
         "flo": {
-          "rank": 24,
-          "previousRank": 23
+          "rank": 25,
+          "previousRank": 24
         },
         "youtube_music": {
           "rank": 6,
@@ -90,8 +90,8 @@
           "previousRank": 8
         },
         "genie": {
-          "rank": 15,
-          "previousRank": 30
+          "rank": 12,
+          "previousRank": 15
         },
         "vibe": {
           "rank": 19,
@@ -102,7 +102,7 @@
           "previousRank": 13
         },
         "flo": {
-          "rank": 21,
+          "rank": 22,
           "previousRank": 21
         },
         "youtube_music": {
@@ -129,8 +129,8 @@
           "previousRank": 36
         },
         "flo": {
-          "rank": 89,
-          "previousRank": 90
+          "rank": 88,
+          "previousRank": 89
         },
         "youtube_music": {
           "rank": 60,
@@ -152,8 +152,8 @@
           "previousRank": 35
         },
         "flo": {
-          "rank": 81,
-          "previousRank": 78
+          "rank": 79,
+          "previousRank": 81
         },
         "youtube_music": {
           "rank": 28,
