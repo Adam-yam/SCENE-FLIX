@@ -3056,36 +3056,7 @@ header {
   overflow: hidden;
 }
 .menu-info-label { display:flex; align-items:center; justify-content:space-between; font-size:.6rem; letter-spacing:.14em; color:var(--muted); opacity:.75; }
-#menuWeatherPause {
-  border:0; background:transparent; color:var(--muted); cursor:pointer; letter-spacing:0;
-  width: 20px; height: 20px; border-radius: 50%; padding: 0;
-  display: flex; align-items: center; justify-content: center; font-size: .58rem;
-  transition: background .15s ease, color .15s ease;
-}
-#menuWeatherPause:hover { background: var(--glass-fill-h); color: var(--text); }
-.menu-weather {
-  overflow: hidden; min-width: 0; font-size:.8rem; margin-top: 5px;
-}
-.menu-weather-track {
-  display: flex; align-items: stretch; width: 100%;
-  transition: transform .65s cubic-bezier(.22,.61,.36,1);
-}
-.menu-weather-slide {
-  display:flex; flex: 0 0 100%; min-width:0; box-sizing:border-box;
-  flex-direction:column; align-items:flex-start; gap:1px;
-}
-.menu-weather span {
-  font-size: .64rem; color: var(--muted); font-weight: 500; letter-spacing: .02em;
-}
-.menu-weather strong { display:flex; align-items:center; gap:6px; font-size: 1.12rem; font-weight:700; color: var(--text); letter-spacing: -0.01em; line-height: 1.2; }
-.menu-weather-icon { width:24px; height:24px; flex-shrink:0; color:var(--accent); opacity:.95; }
-
-.menu-weather-source {
-  display:block; width:fit-content; color:var(--muted); font-size:.55rem; text-decoration:none;
-  margin-top: 3px; opacity: .45; transition: opacity .15s ease;
-}
-.menu-weather-source:hover { opacity: .85; }
-.menu-schedule-label { margin: 13px 0 8px; padding-top: 12px; border-top: 1px solid var(--glass-border); }
+.menu-schedule-label { margin: 0 0 8px; }
 #menuSchedule { font-size:.78rem; color:var(--muted); }
 .menu-schedule-date {
   display: flex; align-items: center; gap: 6px;
@@ -3104,7 +3075,6 @@ header {
 .menu-schedule-event:hover { background: var(--glass-fill-h); border-left-color: var(--accent); padding-left: 10px; }
 .menu-schedule-event time { flex-shrink:0; color:var(--muted); font-size:.62rem; letter-spacing:.03em; opacity:.8; }
 .menu-schedule-event-title { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-@media (prefers-reduced-motion:reduce) { .menu-weather-track { transition:none; } }
 
 
 @media (max-width:700px) {
@@ -3256,10 +3226,7 @@ header {
 </header>
 
 <div class="song-nav-outer">
-  <aside class="menu-today" aria-label="날씨와 가까운 스케줄">
-    <div class="menu-info-label">WEATHER <button id="menuWeatherPause" type="button" aria-label="날씨 자동 전환 일시정지" aria-pressed="false">Ⅱ</button></div>
-    <div id="menuWeather" class="menu-weather"><span>서울</span><strong>불러오는 중…</strong></div>
-    <a class="menu-weather-source" href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a>
+  <aside class="menu-today" aria-label="가까운 스케줄">
     <div class="menu-info-label menu-schedule-label">UPCOMING</div>
     <div id="menuSchedule" aria-live="polite">스케줄 불러오는 중…</div>
   </aside>
@@ -4196,7 +4163,7 @@ SCHEDULE_DATA.sort((a,b)=>a.date.localeCompare(b.date));if(typeof renderMenuSche
 async function _fetchWithTimeout(url,timeoutMs=12000){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),timeoutMs);try{const response=await fetch(url,{signal:controller.signal});const body=await response.text();return{ok:response.ok,status:response.status,json:async()=>JSON.parse(body)};}finally{clearTimeout(timer);}}
 function _fetchJson(path){return _fetchWithTimeout(path+'?_='+Math.floor(Date.now()/3600000)).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();});}
 function _formatUpdatedAt(d,suffix=''){if(!Number.isFinite(d.getTime()))return'';const kst=new Date(d.getTime()+9*60*60*1000);const pad=n=>String(n).padStart(2,'0');return`${kst.getUTCFullYear()}.${pad(kst.getUTCMonth()+1)}.${pad(kst.getUTCDate())} ${pad(kst.getUTCHours())}:${pad(kst.getUTCMinutes())} KST${suffix}`;}
-let _scheduleState='loading';let _scheduleFetchedAt=null;let _scheduleBusy=false;let _scheduleLastAttempt=0;const _scheduleFiles=new Map();function _menuText(){return({KR:{loading:'스케줄 불러오는 중…',failed:'스케줄을 불러오지 못했습니다.',partial:'일부 일정 확인 불가',stale:'이전 데이터 표시 중',empty:'예정된 스케줄이 없습니다.',today:'오늘',fetched:'불러온 시각',cities:['서울','대구','대전','부산'],weather:['맑음','구름 조금','흐림','안개','이슬비','비','눈','뇌우','날씨 정보 없음'],weatherLoading:'불러오는 중…',weatherFailed:'날씨 연결 실패',pause:'날씨 자동 전환 일시정지',play:'날씨 자동 전환 재생'},EN:{loading:'Loading schedules…',failed:'Unable to load schedules.',partial:'Some schedules unavailable',stale:'Showing previous data',empty:'No upcoming schedules.',today:'Today',fetched:'Loaded at',cities:['Seoul','Daegu','Daejeon','Busan'],weather:['Clear','Partly cloudy','Cloudy','Fog','Drizzle','Rain','Snow','Thunderstorm','Unavailable'],weatherLoading:'Loading…',weatherFailed:'Weather unavailable',pause:'Pause weather rotation',play:'Resume weather rotation'},JP:{loading:'予定を読み込み中…',failed:'予定を取得できませんでした。',partial:'一部の予定を取得できません',stale:'前回のデータを表示中',empty:'今後の予定はありません。',today:'今日',fetched:'取得日時',cities:['ソウル','テグ','テジョン','プサン'],weather:['晴れ','晴れ時々曇り','曇り','霧','霧雨','雨','雪','雷雨','情報なし'],weatherLoading:'読み込み中…',weatherFailed:'天気を取得できません',pause:'天気の自動切替を停止',play:'天気の自動切替を再開'}})[window._curLang||'KR'];}
+let _scheduleState='loading';let _scheduleFetchedAt=null;let _scheduleBusy=false;let _scheduleLastAttempt=0;const _scheduleFiles=new Map();function _menuText(){return({KR:{loading:'스케줄 불러오는 중…',failed:'스케줄을 불러오지 못했습니다.',partial:'일부 일정 확인 불가',empty:'예정된 스케줄이 없습니다.',today:'오늘',fetched:'불러온 시각'},EN:{loading:'Loading schedules…',failed:'Unable to load schedules.',partial:'Some schedules unavailable',empty:'No upcoming schedules.',today:'Today',fetched:'Loaded at'},JP:{loading:'予定を読み込み中…',failed:'予定を取得できませんでした。',partial:'一部の予定を取得できません',empty:'今後の予定はありません。',today:'今日',fetched:'取得日時'}})[window._curLang||'KR'];}
 function _setSchedUpdatedAt(){const el=document.getElementById('schedUpdatedAt');if(!el)return;const t=_menuText();const status=_scheduleState==='failed'?t.failed:'';el.textContent=[status,_scheduleFetchedAt?t.fetched+' '+_formatUpdatedAt(_scheduleFetchedAt):''].filter(Boolean).join(' · ');}
 function _scheduleHalfFilePaths(){const y=_kstDate().getFullYear();const paths=[];for(let year=y-1;year<=y+1;year++){paths.push('./data/schedule/schedule_'+year+'_h1.json');paths.push('./data/schedule/schedule_'+year+'_h2.json');}
 return paths;}
@@ -4430,30 +4397,11 @@ const dist=e.touches[0].clientY-startY;if(dist<=0){if(dragging)reset();return;}
 dragging=true;if(e.cancelable)e.preventDefault();setIndicator(dist);},{passive:false});document.addEventListener('touchend',function(){if(!pulling)return;if(dragging){if(ready){doRefresh();}else{reset();}}
 pulling=false;dragging=false;},{passive:true});document.addEventListener('touchcancel',function(){pulling=false;dragging=false;reset();},{passive:true});})();</script>
 
-<script>const MENU_WEATHER_ROTATE_MS=5000;var _menuScheduleKey;function renderMenuSchedule(){const root=document.getElementById('menuSchedule');if(!root)return;const today=_dateStr(_kstDate());const t=_menuText();const upcoming=SCHEDULE_DATA.filter(e=>e.date>=today).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||'').localeCompare(b.time||''));const nearest=upcoming.filter(e=>e.date===upcoming[0]?.date);const key=JSON.stringify([today,window._curLang,_scheduleState,nearest]);if(_menuScheduleKey===key)return;_menuScheduleKey=key;const focused=root.contains(document.activeElement)?Array.from(root.querySelectorAll('button')).indexOf(document.activeElement):-1;root.replaceChildren();if(_scheduleState==='loading'||_scheduleState==='failed'){const status=document.createElement('div');status.textContent=_scheduleState==='loading'?t.loading:t.failed;root.append(status);}
+<script>var _menuScheduleKey;function renderMenuSchedule(){const root=document.getElementById('menuSchedule');if(!root)return;const today=_dateStr(_kstDate());const t=_menuText();const upcoming=SCHEDULE_DATA.filter(e=>e.date>=today).sort((a,b)=>a.date.localeCompare(b.date)||(a.time||'').localeCompare(b.time||''));const nearest=upcoming.filter(e=>e.date===upcoming[0]?.date);const key=JSON.stringify([today,window._curLang,_scheduleState,nearest]);if(_menuScheduleKey===key)return;_menuScheduleKey=key;const focused=root.contains(document.activeElement)?Array.from(root.querySelectorAll('button')).indexOf(document.activeElement):-1;root.replaceChildren();if(_scheduleState==='loading'||_scheduleState==='failed'){const status=document.createElement('div');status.textContent=_scheduleState==='loading'?t.loading:t.failed;root.append(status);}
 if(!upcoming.length){if(_scheduleState==='ready')root.textContent=t.empty;return;}
 const date=upcoming[0].date;const label=document.createElement('div');label.className='menu-schedule-date';label.textContent=(date===today?t.today+' · ':'')+date.replaceAll('-','.');root.append(label);[upcoming[0]].forEach(ev=>{const button=document.createElement('button');button.type='button';button.className='menu-schedule-event';if(ev.time){const time=document.createElement('time');time.textContent=ev.time;button.append(time);}
 const title=document.createElement('span');title.className='menu-schedule-event-title';title.textContent=ev.title;button.append(title);button.addEventListener('click',()=>{pickSection('schedule');jumpToSchedDate(date);});root.append(button);});if(focused>=0)root.querySelectorAll('button')[focused]?.focus({preventScroll:true});}
-(function initMenuWeather(){const cities=[['서울',37.5665,126.9780],['대구',35.8714,128.6014],['대전',36.3504,127.3845],['부산',35.1796,129.0756]];const root=document.getElementById('menuWeather');const pause=document.getElementById('menuWeatherPause');let lastWeatherAttempt=0;let index=0,paused=false,busy=false,readings=[],failed=false;const track=document.createElement('div');track.className='menu-weather-track';const slides=[...cities,cities[0]].map(city=>{const slide=document.createElement('div');slide.className='menu-weather-slide';const label=document.createElement('span');label.textContent=city[0];const value=document.createElement('strong');value.textContent='불러오는 중…';slide.append(label,value);track.append(slide);return slide;});root.replaceChildren(track);const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');let sliding=false,slideTimer;function markActive(){slides.forEach((slide,i)=>slide.setAttribute('aria-hidden',String(i!==index)));}
-function finishSlide(){if(!sliding)return;clearTimeout(slideTimer);if(index===cities.length){track.style.transition='none';index=0;track.style.transform='translateX(0)';void track.offsetWidth;track.style.transition='';}
-sliding=false;markActive();}
-track.addEventListener('transitionend',event=>{if(event.target===track&&event.propertyName==='transform')finishSlide();});markActive();function weatherGroupIndex(code){const groups=[[0],[1,2],[3],[45,48],[51,53,55,56,57],[61,63,65,66,67,80,81,82],[71,73,75,77,85,86],[95,96,99]];const i=groups.findIndex(group=>group.includes(code));return i<0?8:i;}
-const WEATHER_ICONS=[
-'<circle cx="12" cy="12" r="4.2"/><line x1="12" y1="2.5" x2="12" y2="4.3"/><line x1="12" y1="19.7" x2="12" y2="21.5"/><line x1="4.3" y1="12" x2="2.5" y2="12"/><line x1="21.5" y1="12" x2="19.7" y2="12"/><line x1="5.6" y1="5.6" x2="6.9" y2="6.9"/><line x1="17.1" y1="17.1" x2="18.4" y2="18.4"/><line x1="5.6" y1="18.4" x2="6.9" y2="17.1"/><line x1="17.1" y1="6.9" x2="18.4" y2="5.6"/>',
-'<circle cx="8.3" cy="8.3" r="2.6"/><line x1="8.3" y1="2.6" x2="8.3" y2="4" /><line x1="2.6" y1="8.3" x2="4" y2="8.3"/><line x1="4.3" y1="4.3" x2="5.3" y2="5.3"/><path d="M7.8 20h9.7a3.6 3.6 0 0 0 .5-7.16A5.2 5.2 0 0 0 8.2 12.8 3.2 3.2 0 0 0 7.8 20z"/>',
-'<path d="M6 19h11.2a4 4 0 0 0 .55-7.96A5.6 5.6 0 0 0 6.6 12.1 3.5 3.5 0 0 0 6 19z"/>',
-'<path d="M6.5 10.3h10.7a3.1 3.1 0 0 0-.4-6.18A4.6 4.6 0 0 0 7.9 5.1a2.9 2.9 0 0 0-1.4 5.2z" opacity=".55"/><line x1="4" y1="14.2" x2="20" y2="14.2"/><line x1="6" y1="18" x2="18" y2="18"/>',
-'<path d="M6 12.5h11a4 4 0 0 0 .55-7.96A5.6 5.6 0 0 0 6.6 5.6 3.5 3.5 0 0 0 6 12.5z"/><line x1="8" y1="16.3" x2="8" y2="18.1"/><line x1="12" y1="17.3" x2="12" y2="19.1"/><line x1="16" y1="16.3" x2="16" y2="18.1"/>',
-'<path d="M6 12h11a4 4 0 0 0 .55-7.96A5.6 5.6 0 0 0 6.6 5.1 3.5 3.5 0 0 0 6 12z"/><line x1="8.3" y1="15.3" x2="6.6" y2="19.3"/><line x1="12.3" y1="15.3" x2="10.6" y2="19.3"/><line x1="16.3" y1="15.3" x2="14.6" y2="19.3"/>',
-'<path d="M6 11.5h11a4 4 0 0 0 .55-7.96A5.6 5.6 0 0 0 6.6 4.6 3.5 3.5 0 0 0 6 11.5z"/><circle cx="8" cy="16.6" r=".55" fill="currentColor" stroke="none"/><circle cx="12" cy="18.1" r=".55" fill="currentColor" stroke="none"/><circle cx="16" cy="16.6" r=".55" fill="currentColor" stroke="none"/><circle cx="10" cy="19.6" r=".55" fill="currentColor" stroke="none"/><circle cx="14" cy="19.6" r=".55" fill="currentColor" stroke="none"/>',
-'<path d="M6 11h11a4 4 0 0 0 .55-7.96A5.6 5.6 0 0 0 6.6 4.1 3.5 3.5 0 0 0 6 11z"/><polyline points="13.3 12.8 10.3 17.6 13.3 17.6 11 21.9"/>',
-'<path d="M6 17h11.2a4 4 0 0 0 .55-7.96A5.6 5.6 0 0 0 6.6 10.1 3.5 3.5 0 0 0 6 17z" opacity=".5"/>'
-];function weatherIcon(code){return'<svg class="menu-weather-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">'+WEATHER_ICONS[weatherGroupIndex(code)]+'</svg>';}
-function weatherLabel(code){return _menuText().weather[weatherGroupIndex(code)];}
-function paint(){const t=_menuText();pause.setAttribute('aria-label',paused?t.play:t.pause);slides.forEach((slide,i)=>{const current=readings[i%cities.length]?.current;slide.children[0].textContent=t.cities[i%cities.length];slide.children[1].innerHTML=current?weatherIcon(current.weather_code)+'<span>'+weatherLabel(current.weather_code)+' '+Math.round(current.temperature_2m)+'°</span>':'<span>'+(failed?t.weatherFailed:t.weatherLoading)+'</span>';slide.title=failed&&current?t.stale:'';});}
-async function refresh(){if(busy||Date.now()-lastWeatherAttempt<(failed?60000:10*60000))return;lastWeatherAttempt=Date.now();busy=true;try{const url='https://api.open-meteo.com/v1/forecast?latitude='+cities.map(c=>c[1]).join(',')+'&longitude='+cities.map(c=>c[2]).join(',')+'&current=temperature_2m,weather_code&timezone=Asia%2FSeoul';const response=await _fetchWithTimeout(url);if(!response.ok)throw new Error('Weather request failed');const data=await response.json();if(!Array.isArray(data)||data.length!==cities.length||data.some(d=>!d||!Number.isFinite(d.current?.temperature_2m)||!Number.isInteger(d.current?.weather_code)))throw new Error('Invalid weather data');readings=data;failed=false;}catch(_){failed=true;}
-finally{busy=false;paint();}}
-pause.addEventListener('click',()=>{paused=!paused;pause.textContent=paused?'▶':'Ⅱ';pause.setAttribute('aria-pressed',String(paused));pause.setAttribute('aria-label',paused?_menuText().play:_menuText().pause);});setInterval(()=>{if(paused||sliding||document.hidden||root.matches(':hover'))return;sliding=true;index+=1;track.style.transform=`translateX(-${index * 100}%)`;markActive();if(reducedMotion.matches)finishSlide();else slideTimer=setTimeout(finishSlide,750);},MENU_WEATHER_ROTATE_MS);paint();document.addEventListener('menulanguagechange',()=>{paint();renderMenuSchedule();_setSchedUpdatedAt();});refresh();setInterval(()=>{if(!document.hidden)refresh();},10*60*1000);window.addEventListener('online',()=>{lastWeatherAttempt=0;refresh();});document.addEventListener('visibilitychange',()=>{if(!document.hidden){refresh();renderMenuSchedule();}});setInterval(()=>{if(!document.hidden)renderMenuSchedule();},60000);})();</script>
+document.addEventListener('menulanguagechange',()=>{renderMenuSchedule();_setSchedUpdatedAt();});document.addEventListener('visibilitychange',()=>{if(!document.hidden){renderMenuSchedule();}});setInterval(()=>{if(!document.hidden)renderMenuSchedule();},60000);</script>
 <script>(function(){let lastAttempt=Date.now(),busy=false;let day=_dateStr(_kstDate());async function refreshPageData(force=false){if(document.hidden||busy)return;const nextDay=_dateStr(_kstDate());if(nextDay!==day){day=nextDay;injectAnnivEvents();if(curSection==='schedule')buildCalendar();}
 if(!force&&Date.now()-lastAttempt<10*60000)return;busy=true;lastAttempt=Date.now();try{await Promise.allSettled([loadScheduleJson(force),...[..._visitedDataSections].map(section=>_ensureSectionData(section,force))]);}
 finally{busy=false;}}
