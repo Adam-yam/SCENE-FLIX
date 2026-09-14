@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-14T05:58:28Z",
+  "updated": "2026-09-14T07:58:29Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -511,6 +511,14 @@
       "title": "Spotify House Seoul",
       "detail": "",
       "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "22:30",
+      "title": "MBC 라디오스타",
+      "detail": "",
+      "type": "broadcast",
       "source": "mnetplus"
     },
     {
