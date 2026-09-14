@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-14T15:00:57.364052+09:00",
+  "updatedAt": "2026-09-14T16:00:55.836943+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,8 +28,8 @@
           "previousRank": 1
         },
         "bugs": {
-          "rank": 4,
-          "previousRank": 5
+          "rank": 2,
+          "previousRank": 4
         },
         "flo": {
           "rank": 1,
@@ -63,11 +63,11 @@
           "previousRank": 5
         },
         "bugs": {
-          "rank": 19,
-          "previousRank": 16
+          "rank": 16,
+          "previousRank": 19
         },
         "flo": {
-          "rank": 14,
+          "rank": 15,
           "previousRank": 14
         },
         "youtube_music": {
@@ -91,7 +91,7 @@
         },
         "genie": {
           "rank": 13,
-          "previousRank": 15
+          "previousRank": 13
         },
         "vibe": {
           "rank": 20,
@@ -99,7 +99,7 @@
         },
         "bugs": {
           "rank": 8,
-          "previousRank": 6
+          "previousRank": 8
         },
         "flo": {
           "rank": 9,
@@ -121,16 +121,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 71,
-          "previousRank": 68
+          "rank": 67,
+          "previousRank": 71
         },
         "bugs": {
-          "rank": 29,
-          "previousRank": 17
+          "rank": 32,
+          "previousRank": 29
         },
         "flo": {
-          "rank": 82,
-          "previousRank": 80
+          "rank": 83,
+          "previousRank": 82
         },
         "spotify": {
           "rank": 39,
@@ -144,11 +144,11 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 48,
-          "previousRank": 72
+          "rank": 28,
+          "previousRank": 48
         },
         "flo": {
-          "rank": 69,
+          "rank": 70,
           "previousRank": 69
         },
         "spotify": {
