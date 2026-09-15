@@ -1524,7 +1524,7 @@ header {
 @media (min-width: 701px) {
 
   body {
-    padding-left: 200px;
+    padding-left: 190px;
   }
 
   #externalCatNavWrap {
@@ -1535,7 +1535,7 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    width: 200px;
+    width: 190px;
     height: 100vh;
     overflow-y: auto;
     overflow-x: visible;
@@ -1670,7 +1670,7 @@ header {
   #subSidebarOverlay {
     position: fixed;
     top: 0;
-    left: 420px;
+    left: 380px;
     right: 0;
     bottom: 0;
     z-index: var(--z-subsidebar-overlay);
@@ -1683,8 +1683,8 @@ header {
   #subSidebar {
     position: fixed;
     top: 0;
-    left: 200px;
-    width: 220px;
+    left: 190px;
+    width: 190px;
     height: 100vh;
     overflow-y: auto;
     scrollbar-width: none;
@@ -1983,6 +1983,11 @@ header {
   flex-shrink: 0;
 }
 .sched-item-body { flex: 1; min-width: 0; }
+.sched-item-title-row {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
 .sched-item-title {
   font-size: 0.85rem;
   font-weight: 600;
@@ -1990,6 +1995,30 @@ header {
   line-height: 1.4;
   white-space: normal;
   word-break: break-word;
+  flex: 1;
+  min-width: 0;
+}
+.sched-item-search-btn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-right: 6px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  border-radius: 5px;
+  transition: color 0.15s cubic-bezier(0.4,0,0.2,1), background 0.15s cubic-bezier(0.4,0,0.2,1);
+}
+.sched-item-search-btn:hover,
+.sched-item-search-btn:focus-visible {
+  color: var(--accent);
+  background: var(--card-h);
+  outline: none;
 }
 .sched-item-meta {
   font-size: 0.68rem;
@@ -3811,6 +3840,7 @@ try{localStorage.setItem('rescene-last-watched',vid);}catch{}
 _applyLastWatchedBadge(vid);markWatched(vid);}
 document.addEventListener('click',function(e){const bmBtn=e.target.closest('.bm-btn');if(bmBtn){toggleBookmark(e,bmBtn.dataset.vid);return;}
 const shareBtn=e.target.closest('.share-btn');if(shareBtn){copyShareUrl(e,shareBtn.dataset.vid);return;}
+const schedSearchBtn=e.target.closest('.sched-item-search-btn');if(schedSearchBtn){e.stopPropagation();window.open('https://www.google.com/search?q='+encodeURIComponent(schedSearchBtn.dataset.title||''),'_blank','noopener');return;}
 const vcard=e.target.closest('.vcard');if(vcard&&vcard.dataset.vid){openVideo(e,vcard.dataset.vid);}});function restoreLastWatched(){try{const vid=localStorage.getItem('rescene-last-watched');if(!vid)return;_applyLastWatchedBadge(vid);}catch{}}
 const _META_CACHE_KEY='rescene-meta-v1';const _META_CACHE_TTL=30*24*60*60*1000;const _isMobile=window.matchMedia('(max-width: 700px)').matches;const _isAndroid=/Android/i.test(navigator.userAgent);const _isIOS=/iPad|iPhone|iPod/i.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);function _cardDelay(i,batchSize=Infinity){return`${Math.min((i % batchSize) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;}
 let _metaCache=null;let _metaCacheCreatedAt=null;function _loadMetaCache(){if(_metaCache)return;try{const raw=localStorage.getItem(_META_CACHE_KEY);if(!raw){_metaCache={};_metaCacheCreatedAt=Date.now();return;}
@@ -4245,10 +4275,13 @@ _calSelectedDate=dateStr;document.querySelectorAll('.cal-cell.selected').forEach
 function calCloseDetail(){_calSelectedDate=null;_elCalDetail.classList.remove('visible');document.querySelectorAll('.cal-cell.selected').forEach(el=>el.classList.remove('selected'));}
 const _SCHED_TYPE_LABEL={broadcast:{KR:'방송',JP:'放送',EN:'Broadcast'},radio:{KR:'라디오',JP:'ラジオ',EN:'Radio'},event:{KR:'행사',JP:'イベント',EN:'Event'},fansign:{KR:'팬사인회',JP:'ファンサイン',EN:'Fan Sign'},concert:{KR:'공연',JP:'公演',EN:'Concert'},notice:{KR:'공지',JP:'お知らせ',EN:'Notice'},anniv:{KR:'기념일',JP:'記念日',EN:'Anniversary'},};function _kwHl(text,q){const value=String(text??'');if(!q)return _escHtml(value);const re=new RegExp(_hlEscape(q),'gi');let html='',offset=0;for(const match of value.matchAll(re)){html+=_escHtml(value.slice(offset,match.index))+'<mark class="sh">'+_escHtml(match[0])+'</mark>';offset=match.index+match[0].length;}
 return html+_escHtml(value.slice(offset));}
-function _schedItemHtml(ev,lang,hlq){const evColor=(ev._isBirthday&&ev._memberColor)?ev._memberColor:(SCHED_TYPE_COLOR[ev.type]||'#888');const bar=`background:${evColor}`;const tl=(_SCHED_TYPE_LABEL[ev.type]||{})[lang]||ev.type;const tagStyle=`background:color-mix(in srgb, ${evColor} 18%, transparent);color:${evColor}`;const link=ev.link?`<a href="${_escHtml(_safeHttpUrl(ev.link))}" target="_blank" rel="noopener" class="sched-item-link">${getCurrentT().cal_link_label || '↗ 링크'}</a>`:'';const timeTag=ev.time?`<span class="sched-item-time" style="color:${evColor}">${_escHtml(ev.time)}</span>`:'';const titleHtml=hlq?_kwHl(ev.title,hlq):_escHtml(ev.title);const noteHtml=ev.note?(hlq?_kwHl(ev.note,hlq):_escHtml(ev.note)):'';return`<div class="sched-item">
+function _schedItemHtml(ev,lang,hlq){const evColor=(ev._isBirthday&&ev._memberColor)?ev._memberColor:(SCHED_TYPE_COLOR[ev.type]||'#888');const bar=`background:${evColor}`;const tl=(_SCHED_TYPE_LABEL[ev.type]||{})[lang]||ev.type;const tagStyle=`background:color-mix(in srgb, ${evColor} 18%, transparent);color:${evColor}`;const link=ev.link?`<a href="${_escHtml(_safeHttpUrl(ev.link))}" target="_blank" rel="noopener" class="sched-item-link">${getCurrentT().cal_link_label || '↗ 링크'}</a>`:'';const timeTag=ev.time?`<span class="sched-item-time" style="color:${evColor}">${_escHtml(ev.time)}</span>`:'';const titleHtml=hlq?_kwHl(ev.title,hlq):_escHtml(ev.title);const noteHtml=ev.note?(hlq?_kwHl(ev.note,hlq):_escHtml(ev.note)):'';const searchBtn=`<button type="button" class="sched-item-search-btn" data-title="${_escHtml(ev.title)}" title="Google에서 검색" aria-label="Google에서 검색"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>`;return`<div class="sched-item">
         <div class="sched-item-bar" style="${bar}"></div>
         <div class="sched-item-body">
-          <div class="sched-item-title">${titleHtml}</div>
+          <div class="sched-item-title-row">
+            <div class="sched-item-title">${titleHtml}</div>
+            ${searchBtn}
+          </div>
           <div class="sched-item-meta">
             <span class="sched-item-type-tag" style="${tagStyle}">${_escHtml(tl)}</span>
             ${timeTag}
