@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-16T21:00:48.987539+09:00",
+  "updatedAt": "2026-09-16T22:00:55.045846+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -29,7 +29,7 @@
         },
         "bugs": {
           "rank": 6,
-          "previousRank": 6
+          "previousRank": 5
         },
         "flo": {
           "rank": 1,
@@ -56,15 +56,15 @@
         },
         "genie": {
           "rank": 8,
-          "previousRank": 9
+          "previousRank": 8
         },
         "vibe": {
           "rank": 8,
           "previousRank": 9
         },
         "bugs": {
-          "rank": 21,
-          "previousRank": 19
+          "rank": 14,
+          "previousRank": 17
         },
         "flo": {
           "rank": 10,
@@ -90,7 +90,7 @@
           "previousRank": 9
         },
         "genie": {
-          "rank": 12,
+          "rank": 15,
           "previousRank": 12
         },
         "vibe": {
@@ -98,8 +98,8 @@
           "previousRank": 20
         },
         "bugs": {
-          "rank": 11,
-          "previousRank": 11
+          "rank": 10,
+          "previousRank": 10
         },
         "flo": {
           "rank": 8,
@@ -122,14 +122,14 @@
       "ranks": {
         "melon": {
           "rank": 62,
-          "previousRank": 60
+          "previousRank": 62
         },
         "bugs": {
-          "rank": 44,
-          "previousRank": 38
+          "rank": 46,
+          "previousRank": 48
         },
         "flo": {
-          "rank": 87,
+          "rank": 86,
           "previousRank": 87
         },
         "youtube_music": {
@@ -148,8 +148,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 32,
-          "previousRank": 28
+          "rank": 30,
+          "previousRank": 35
         },
         "flo": {
           "rank": 59,
