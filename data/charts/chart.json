@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-17T23:00:59.026084+09:00",
+  "updatedAt": "2026-09-18T00:00:55.251251+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,7 +20,7 @@
           "previousRank": 1
         },
         "genie": {
-          "rank": 2,
+          "rank": 17,
           "previousRank": 2
         },
         "vibe": {
@@ -28,8 +28,8 @@
           "previousRank": 3
         },
         "bugs": {
-          "rank": 6,
-          "previousRank": 7
+          "rank": 3,
+          "previousRank": 6
         },
         "flo": {
           "rank": 1,
@@ -46,60 +46,25 @@
       }
     },
     {
-      "songName": "Pretty Girl",
-      "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
-      "ranks": {
-        "melon": {
-          "rank": 7,
-          "previousRank": 7
-        },
-        "genie": {
-          "rank": 23,
-          "previousRank": 9
-        },
-        "vibe": {
-          "rank": 8,
-          "previousRank": 8
-        },
-        "bugs": {
-          "rank": 19,
-          "previousRank": 19
-        },
-        "flo": {
-          "rank": 11,
-          "previousRank": 11
-        },
-        "youtube_music": {
-          "rank": 7,
-          "previousRank": 6
-        },
-        "spotify": {
-          "rank": 10,
-          "previousRank": 7
-        }
-      }
-    },
-    {
       "songName": "Deja Vu",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 8,
+          "rank": 7,
           "previousRank": 8
         },
         "genie": {
-          "rank": 28,
-          "previousRank": 15
+          "rank": 26,
+          "previousRank": 28
         },
         "vibe": {
           "rank": 19,
           "previousRank": 18
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 11
+          "rank": 14,
+          "previousRank": 10
         },
         "flo": {
           "rank": 8,
@@ -116,17 +81,52 @@
       }
     },
     {
+      "songName": "Pretty Girl",
+      "artistName": "RESCENE (리센느)",
+      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
+      "ranks": {
+        "melon": {
+          "rank": 10,
+          "previousRank": 7
+        },
+        "genie": {
+          "rank": 23,
+          "previousRank": 23
+        },
+        "vibe": {
+          "rank": 8,
+          "previousRank": 8
+        },
+        "bugs": {
+          "rank": 32,
+          "previousRank": 19
+        },
+        "flo": {
+          "rank": 10,
+          "previousRank": 11
+        },
+        "youtube_music": {
+          "rank": 7,
+          "previousRank": 6
+        },
+        "spotify": {
+          "rank": 10,
+          "previousRank": 7
+        }
+      }
+    },
+    {
       "songName": "Runaway",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 57,
-          "previousRank": 61
+          "rank": 56,
+          "previousRank": 57
         },
         "bugs": {
-          "rank": 32,
-          "previousRank": 49
+          "rank": 54,
+          "previousRank": 32
         },
         "flo": {
           "rank": 86,
@@ -148,11 +148,11 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 39,
-          "previousRank": 32
+          "rank": 44,
+          "previousRank": 39
         },
         "flo": {
-          "rank": 59,
+          "rank": 57,
           "previousRank": 59
         },
         "youtube_music": {
