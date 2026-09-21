@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-21T20:00:52.257549+09:00",
+  "updatedAt": "2026-09-21T21:00:56.436310+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -29,7 +29,7 @@
         },
         "bugs": {
           "rank": 5,
-          "previousRank": 3
+          "previousRank": 5
         },
         "flo": {
           "rank": 2,
@@ -63,15 +63,15 @@
           "previousRank": 17
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 12
+          "rank": 13,
+          "previousRank": 10
         },
         "flo": {
           "rank": 7,
           "previousRank": 7
         },
         "youtube_music": {
-          "rank": 10,
+          "rank": 12,
           "previousRank": 11
         },
         "spotify": {
@@ -86,7 +86,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 6,
+          "rank": 5,
           "previousRank": 6
         },
         "genie": {
@@ -98,8 +98,8 @@
           "previousRank": 5
         },
         "bugs": {
-          "rank": 20,
-          "previousRank": 16
+          "rank": 18,
+          "previousRank": 20
         },
         "flo": {
           "rank": 11,
@@ -121,16 +121,20 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 53,
-          "previousRank": 55
+          "rank": 55,
+          "previousRank": 53
         },
         "bugs": {
-          "rank": 38,
-          "previousRank": 51
+          "rank": 47,
+          "previousRank": 38
         },
         "flo": {
           "rank": 85,
-          "previousRank": 86
+          "previousRank": 85
+        },
+        "youtube_music": {
+          "rank": 53,
+          "previousRank": 54
         },
         "spotify": {
           "rank": 39,
@@ -144,16 +148,64 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 27,
-          "previousRank": 38
+          "rank": 32,
+          "previousRank": 27
         },
         "flo": {
-          "rank": 55,
-          "previousRank": 58
+          "rank": 54,
+          "previousRank": 55
+        },
+        "youtube_music": {
+          "rank": 28,
+          "previousRank": 28
         },
         "spotify": {
           "rank": 57,
           "previousRank": 57
+        }
+      }
+    },
+    {
+      "songName": "YoYo",
+      "artistName": "RESCENE",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/a7/bd/34/a7bd3420-de02-6bdc-f40f-6a75764a9a3f/cover_KM0019543_1.jpg/600x600bb.jpg",
+      "ranks": {
+        "youtube_music": {
+          "rank": 36,
+          "previousRank": null
+        }
+      }
+    },
+    {
+      "songName": "Heart Drop",
+      "artistName": "RESCENE",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/a9/fa/b3/a9fab349-c8a1-0c65-80a8-7fa84a683aff/cover_KM0023659_1.jpg/600x600bb.jpg",
+      "ranks": {
+        "youtube_music": {
+          "rank": 83,
+          "previousRank": null
+        }
+      }
+    },
+    {
+      "songName": "Bloom",
+      "artistName": "RESCENE",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/91/66/5a/91665a02-b5c1-8336-e973-88746539ab71/8804775401787.jpg/600x600bb.jpg",
+      "ranks": {
+        "youtube_music": {
+          "rank": 86,
+          "previousRank": 68
+        }
+      }
+    },
+    {
+      "songName": "Glow Up",
+      "artistName": "RESCENE",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
+      "ranks": {
+        "youtube_music": {
+          "rank": 92,
+          "previousRank": 82
         }
       }
     }
