@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/32547771/README.md)
 <div align="center">
   <img src="image/logo.png" alt="SCENE-FLIX" width="420" />
   <p><strong>리센느의 영상과 소식을 한곳에서.</strong></p>
@@ -26,16 +25,17 @@
 
 ## 미리보기
 
+### PC
+
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/bf461c1f-0c57-4db2-bce7-bf2b35b305f8" alt="SCENE-FLIX PC 화면" width="800" />
+  <img src="docs/images/desktop.jpg" alt="SCENE-FLIX 전체 영상 화면" width="1000" />
 </p>
 
-<details>
-  <summary>모바일 화면 보기</summary>
-  <p align="center">
-    <img src="https://github.com/user-attachments/assets/1e5e3918-e072-4bfe-9695-a018c6490c5d" alt="SCENE-FLIX 모바일 화면" width="280" />
-  </p>
-</details>
+### 모바일
+
+<p align="center">
+  <img src="docs/images/mobile.png" alt="SCENE-FLIX 모바일 화면" width="320" />
+</p>
 
 ## 이용 방법
 
