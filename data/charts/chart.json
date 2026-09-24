@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-24T10:00:56.867441+09:00",
+  "updatedAt": "2026-09-24T11:01:22.833023+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -29,7 +29,7 @@
         },
         "bugs": {
           "rank": 2,
-          "previousRank": 3
+          "previousRank": 2
         },
         "flo": {
           "rank": 2,
@@ -46,47 +46,12 @@
       }
     },
     {
-      "songName": "Deja Vu",
-      "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
-      "ranks": {
-        "melon": {
-          "rank": 4,
-          "previousRank": 4
-        },
-        "genie": {
-          "rank": 11,
-          "previousRank": 12
-        },
-        "vibe": {
-          "rank": 17,
-          "previousRank": 16
-        },
-        "bugs": {
-          "rank": 9,
-          "previousRank": 7
-        },
-        "flo": {
-          "rank": 7,
-          "previousRank": 8
-        },
-        "youtube_music": {
-          "rank": 12,
-          "previousRank": 11
-        },
-        "spotify": {
-          "rank": 7,
-          "previousRank": 7
-        }
-      }
-    },
-    {
       "songName": "Pretty Girl",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 5,
+          "rank": 4,
           "previousRank": 5
         },
         "genie": {
@@ -98,12 +63,12 @@
           "previousRank": 6
         },
         "bugs": {
-          "rank": 20,
+          "rank": 17,
           "previousRank": 20
         },
         "flo": {
-          "rank": 11,
-          "previousRank": 11
+          "rank": 7,
+          "previousRank": 10
         },
         "youtube_music": {
           "rank": 6,
@@ -116,17 +81,52 @@
       }
     },
     {
+      "songName": "Deja Vu",
+      "artistName": "RESCENE (리센느)",
+      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
+      "ranks": {
+        "melon": {
+          "rank": 5,
+          "previousRank": 4
+        },
+        "genie": {
+          "rank": 12,
+          "previousRank": 11
+        },
+        "vibe": {
+          "rank": 17,
+          "previousRank": 16
+        },
+        "bugs": {
+          "rank": 10,
+          "previousRank": 9
+        },
+        "flo": {
+          "rank": 6,
+          "previousRank": 6
+        },
+        "youtube_music": {
+          "rank": 12,
+          "previousRank": 11
+        },
+        "spotify": {
+          "rank": 7,
+          "previousRank": 7
+        }
+      }
+    },
+    {
       "songName": "Runaway",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 64,
+          "rank": 57,
           "previousRank": 64
         },
         "bugs": {
-          "rank": 47,
-          "previousRank": 32
+          "rank": 38,
+          "previousRank": 47
         },
         "flo": {
           "rank": 89,
@@ -148,8 +148,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 32,
-          "previousRank": 33
+          "rank": 31,
+          "previousRank": 32
         },
         "flo": {
           "rank": 67,
