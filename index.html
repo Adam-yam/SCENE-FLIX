@@ -21502,7 +21502,10 @@
         return str ? str.split(" ")[0] : str;
       }
       function _dateStrToSortKey(full) {
-        if (!full) return 0;
+        // 날짜 정보가 아직 없는 영상(방금 추가되어 DATE_MAP/메타 파싱이
+        // 안 된 경우)은 0(가장 오래됨)이 아니라 "지금"으로 취급해
+        // 최신순 정렬 시 맨 위로, 오래된순 정렬 시 맨 아래로 오게 한다.
+        if (!full) return Date.now();
         const [datePart, timePart] = full.split(" ");
         const d = (datePart || "")
           .replace(/\D/g, "")
@@ -22862,7 +22865,7 @@
               if (!ref.title || ref._metaFailed) ref.title = fetched.rawTitle;
               ref._metaFailed = !!fetched._metaFailed;
               proxy._metaFailed = ref._metaFailed;
-              ref.date = DATE_MAP[ref.vid] || fetched.date || ref.date || null;
+              ref.date = DATE_MAP[ref.vid] || ref.date || fetched.date || null;
               ref.loaded = true;
               proxy.meta = {
                 rawTitle: ref.title,
