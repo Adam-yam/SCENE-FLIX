@@ -65,6 +65,8 @@
       content="black-translucent"
     />
     <meta name="apple-mobile-web-app-title" content="SCENE-FLIX" />
+    <link rel="manifest" href="manifest.json" />
+    <link rel="apple-touch-icon" href="image/icon-192.png" />
 
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
     <link rel="preconnect" href="https://img.youtube.com" crossorigin />
@@ -8685,6 +8687,44 @@
             </div>
           </div>
 
+          <div id="installSection" class="ab-section" style="display: none">
+            <div class="ab-group-title">앱으로 사용하기</div>
+            <div class="ab-group">
+              <div class="ab-row">
+                <div class="ab-row-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 3v12" />
+                    <path d="m7 10 5 5 5-5" />
+                    <path d="M5 21h14" />
+                  </svg>
+                </div>
+                <div class="ab-row-body">
+                  <div class="ab-row-label">앱으로 설치하기</div>
+                </div>
+                <button
+                  id="installAppBtn"
+                  class="ab-chip"
+                  onclick="handleInstallClick()"
+                >
+                  설치
+                </button>
+              </div>
+              <div id="installIosNote" class="ab-note" style="display: none">
+                <p>
+                  Safari 하단의 공유 버튼을 누른 뒤, "홈 화면에 추가"를
+                  선택해주세요.
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div id="aboutChartSection" class="ab-section">
             <div class="ab-group-title">Video Stats</div>
             <div class="ab-group">
@@ -13536,7 +13576,8 @@
   "1mG07rXW1hM": "21:37",
   "b4Row-W-hH0": "31:52",
   "2Ohraw5_W9Y": "21:45",
-  "--s_1b5--w0": "1:05"
+  "--s_1b5--w0": "1:05",
+  "mhp01rN8DpU": "3:35"
 };
       const _RX_DATE8 = /(\d{4})(\d{2})(\d{2})/;
       const _RX_DATE_SEP = /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/;
@@ -14375,6 +14416,11 @@
     }
   ],
   "ladejavu": [
+    {
+      "vid": "mhp01rN8DpU",
+      "url": "https://youtu.be/mhp01rN8DpU",
+      "date": "2026.09.25 18:00"
+    },
     {
       "vid": "oU_Oqx71HFc",
       "url": "https://www.youtube.com/watch?v=oU_Oqx71HFc",
@@ -26544,6 +26590,85 @@
         syncTheme();
         syncSidebar();
       })();
+    </script>
+    <script>
+      (function () {
+        const isIOS =
+          /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+        const isStandalone =
+          window.matchMedia("(display-mode: standalone)").matches ||
+          window.navigator.standalone === true;
+        const section = document.getElementById("installSection");
+        const btn = document.getElementById("installAppBtn");
+        const iosNote = document.getElementById("installIosNote");
+        let deferredPrompt = null;
+
+        if (isStandalone || !section || !btn) return;
+
+        if (isIOS) {
+          section.style.display = "";
+          btn.textContent = "설치 방법 보기";
+        } else {
+          window.addEventListener("beforeinstallprompt", (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            section.style.display = "";
+            btn.textContent = "설치";
+          });
+          window.addEventListener("appinstalled", () => {
+            section.style.display = "none";
+            deferredPrompt = null;
+          });
+        }
+
+        window.handleInstallClick = async function () {
+          if (isIOS) {
+            iosNote.style.display =
+              iosNote.style.display === "none" ? "" : "none";
+            return;
+          }
+          if (!deferredPrompt) return;
+          deferredPrompt.prompt();
+          const choice = await deferredPrompt.userChoice;
+          if (choice.outcome === "accepted") {
+            section.style.display = "none";
+          }
+          deferredPrompt = null;
+        };
+      })();
+    </script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("./service-worker.js")
+            .then((reg) => {
+              reg.addEventListener("updatefound", () => {
+                const newSW = reg.installing;
+                if (!newSW) return;
+                newSW.addEventListener("statechange", () => {
+                  if (
+                    newSW.state === "installed" &&
+                    navigator.serviceWorker.controller
+                  ) {
+                    newSW.postMessage("SKIP_WAITING");
+                  }
+                });
+              });
+              let refreshing = false;
+              navigator.serviceWorker.addEventListener(
+                "controllerchange",
+                () => {
+                  if (!refreshing) {
+                    refreshing = true;
+                    window.location.reload();
+                  }
+                }
+              );
+            })
+            .catch(() => {});
+        });
+      }
     </script>
   </body>
 </html>
