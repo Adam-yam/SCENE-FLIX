@@ -20,5 +20,55 @@
       "type": "image/png",
       "purpose": "any maskable"
     }
+  ],
+  "shortcuts": [
+    {
+      "name": "전체 보기",
+      "short_name": "전체보기",
+      "url": "./?tab=allvideos",
+      "icons": [
+        {
+          "src": "image/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Shorts",
+      "short_name": "Shorts",
+      "url": "./?tab=shorts",
+      "icons": [
+        {
+          "src": "image/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "차트",
+      "short_name": "차트",
+      "url": "./?tab=chart",
+      "icons": [
+        {
+          "src": "image/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "스케줄",
+      "short_name": "스케줄",
+      "url": "./?tab=schedule",
+      "icons": [
+        {
+          "src": "image/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
   ]
 }
