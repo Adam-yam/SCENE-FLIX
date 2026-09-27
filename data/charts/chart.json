@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-27T15:00:51.496667+09:00",
+  "updatedAt": "2026-09-27T16:00:45.734472+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -29,7 +29,7 @@
         },
         "bugs": {
           "rank": 3,
-          "previousRank": 2
+          "previousRank": 3
         },
         "flo": {
           "rank": 2,
@@ -51,7 +51,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 3,
+          "rank": 4,
           "previousRank": 3
         },
         "genie": {
@@ -67,8 +67,8 @@
           "previousRank": 13
         },
         "flo": {
-          "rank": 10,
-          "previousRank": 18
+          "rank": 9,
+          "previousRank": 10
         },
         "youtube_music": {
           "rank": 6,
@@ -98,12 +98,12 @@
           "previousRank": 12
         },
         "bugs": {
-          "rank": 12,
-          "previousRank": 11
+          "rank": 11,
+          "previousRank": 12
         },
         "flo": {
           "rank": 8,
-          "previousRank": 11
+          "previousRank": 8
         },
         "youtube_music": {
           "rank": 12,
@@ -121,16 +121,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 50,
-          "previousRank": 53
+          "rank": 49,
+          "previousRank": 50
         },
         "bugs": {
-          "rank": 49,
-          "previousRank": 22
+          "rank": 29,
+          "previousRank": 49
         },
         "flo": {
           "rank": 91,
-          "previousRank": 90
+          "previousRank": 91
         },
         "youtube_music": {
           "rank": 53,
@@ -148,11 +148,11 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 37,
-          "previousRank": 35
+          "rank": 41,
+          "previousRank": 37
         },
         "flo": {
-          "rank": 72,
+          "rank": 71,
           "previousRank": 72
         },
         "youtube_music": {
