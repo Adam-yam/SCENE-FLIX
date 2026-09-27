@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-27T13:58:27Z",
+  "updated": "2026-09-27T15:58:28Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -621,6 +621,22 @@
       "date": "2026-09-30",
       "time": "",
       "title": "을지대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "20:00",
+      "title": "계명대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-01",
+      "time": "21:30",
+      "title": "대구보건대학교 축제",
       "detail": "",
       "type": "event",
       "source": "mnetplus"
