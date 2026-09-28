@@ -1959,13 +1959,12 @@
         }
 
         .type-bar.chan-bar {
-          max-height: 38px;
+          max-height: var(--chan-collapsed-height, 44px);
           overflow: hidden;
-          transition: max-height 0.28s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .type-bar.chan-bar.expanded {
-          max-height: 1000px;
+          max-height: none;
         }
 
         .chan-bar-toggle {
@@ -6554,6 +6553,15 @@
           border-radius: 999px;
         }
 
+        .type-bar .type-btn,
+        .song-nav .song-tab {
+          box-sizing: border-box;
+          min-width: 0;
+          max-width: 100%;
+          white-space: normal;
+          overflow-wrap: anywhere;
+        }
+
         .grid-wrap {
           padding: 6px 14px calc(60px + var(--safe-bottom));
         }
@@ -6761,27 +6769,9 @@
           contain-intrinsic-size: auto 236px;
         }
 
-        .cbody .ext-channel-badge,
-        .cbody .content-category-badge {
-          font-size: 0.8125rem;
-          line-height: 18px;
-        }
-
         .cbody .ext-channel-badge::before,
         .cbody .content-category-badge::before {
-          margin-right: 6px;
-        }
-
-        @container (max-width: 270px) {
-          .cbody .ext-channel-badge,
-          .cbody .content-category-badge,
-          .cbody > .ctags {
-            font-size: 0.8125rem;
-          }
-
-          .cbody .ctags .ctag[class*="lm-"] {
-            font-size: 0.8125rem;
-          }
+          margin-right: 4px;
         }
       }
 
@@ -19703,6 +19693,18 @@
         const bar = document.getElementById("externalChanBar");
         const toggle = document.getElementById("externalChanBarToggle");
         if (!bar || !toggle) return;
+        toggle.setAttribute("aria-controls", bar.id);
+        if (bar.getClientRects().length && bar.firstElementChild) {
+          const firstTop = bar.firstElementChild.offsetTop;
+          let firstRowHeight = 0;
+          for (const button of bar.children) {
+            if (Math.abs(button.offsetTop - firstTop) > 1) break;
+            firstRowHeight = Math.max(firstRowHeight, button.offsetHeight);
+          }
+          const style = getComputedStyle(bar);
+          const height = firstRowHeight + parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+          bar.style.setProperty("--chan-collapsed-height", `${Math.ceil(height)}px`);
+        }
         if (!preserveState) {
           bar.style.transition = "none";
           bar.classList.remove("expanded");
@@ -19715,6 +19717,7 @@
           }
           void bar.offsetHeight;
         }
+        toggle.setAttribute("aria-expanded", String(bar.classList.contains("expanded")));
         if (forceHide) {
           toggle.classList.remove("show");
           if (!preserveState) bar.style.transition = "";
@@ -19734,6 +19737,7 @@
         if (!bar || !toggle) return;
         const t = getCurrentT();
         const expanded = bar.classList.toggle("expanded");
+        toggle.setAttribute("aria-expanded", String(expanded));
         toggle.classList.toggle("open", expanded);
         const label = toggle.querySelector(".chan-bar-toggle-label");
         if (label) {
