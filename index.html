@@ -4619,6 +4619,18 @@
         box-shadow: var(--glass-shadow);
       }
 
+      @media (min-width: 769px) {
+        #aboutMode .ab-wrap > * {
+          animation: none !important;
+        }
+
+        #aboutMode .ab-group {
+          background: var(--surf);
+          -webkit-backdrop-filter: none;
+          backdrop-filter: none;
+        }
+      }
+
       .ab-row {
         display: flex;
         align-items: center;
@@ -4660,7 +4672,7 @@
         transition: color 0.15s ease;
       }
 
-      .ab-row-label:hover {
+      a.ab-row-label:hover {
         color: var(--accent);
       }
 
@@ -13723,12 +13735,7 @@
           closeDrawer();
           return;
         }
-        const webUrl = ytUrl(vid);
-        if (_isAndroid || _isIOS) {
-          window.location.href = webUrl;
-        } else {
-          window.open(webUrl, "_blank", "noopener");
-        }
+        _openYouTubeApp(vid);
         try {
           localStorage.setItem("rescene-last-watched", vid);
         } catch {}
@@ -13772,10 +13779,52 @@
       const _META_CACHE_KEY = "rescene-meta-v1";
       const _META_CACHE_TTL = 30 * 24 * 60 * 60 * 1000;
       const _isMobile = window.matchMedia("(max-width: 700px)").matches;
-      const _isAndroid = /Android/i.test(navigator.userAgent);
+      const _deviceUA = navigator.userAgent || "";
+      const _devicePlatform = navigator.userAgentData?.platform || navigator.platform || "";
       const _isIOS =
-        /iPad|iPhone|iPod/i.test(navigator.userAgent) ||
-        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        /iPad|iPhone|iPod/i.test(_deviceUA) ||
+        (/Mac/i.test(_devicePlatform + " " + _deviceUA) && navigator.maxTouchPoints > 1);
+      const _isAndroid =
+        /Android/i.test(_deviceUA + " " + _devicePlatform) ||
+        (!_isIOS && /Linux/i.test(_deviceUA + " " + _devicePlatform) &&
+          !/CrOS/i.test(_deviceUA) && navigator.maxTouchPoints > 1 &&
+          window.matchMedia("(any-pointer: coarse)").matches);
+      let _cancelYouTubeLaunch = null;
+      function _openYouTubeApp(vid) {
+        if (!_VIDEO_ID_RE.test(vid)) return;
+        if (_cancelYouTubeLaunch) _cancelYouTubeLaunch();
+        const webUrl = ytUrl(vid);
+        if (_isAndroid) {
+          window.location.href =
+            "intent://www.youtube.com/watch?v=" + vid +
+            "#Intent;scheme=https;package=com.google.android.youtube;" +
+            "S.browser_fallback_url=" + encodeURIComponent(webUrl) + ";end";
+          return;
+        }
+        if (!_isIOS) {
+          window.open(webUrl, "_blank", "noopener");
+          return;
+        }
+        let timer;
+        const cancel = () => {
+          clearTimeout(timer);
+          document.removeEventListener("visibilitychange", onVisibility);
+          window.removeEventListener("pagehide", cancel);
+          if (_cancelYouTubeLaunch === cancel) _cancelYouTubeLaunch = null;
+        };
+        const onVisibility = () => {
+          if (document.visibilityState === "hidden") cancel();
+        };
+        _cancelYouTubeLaunch = cancel;
+        document.addEventListener("visibilitychange", onVisibility);
+        window.addEventListener("pagehide", cancel);
+        timer = setTimeout(() => {
+          const visible = document.visibilityState === "visible";
+          cancel();
+          if (visible) window.location.href = webUrl;
+        }, 2500);
+        window.location.href = "youtube://www.youtube.com/watch?v=" + vid;
+      }
       function _cardDelay(i, batchSize = Infinity) {
         return `${Math.min((i % batchSize) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
       }
@@ -19751,6 +19800,17 @@
         );
       }
       const FANTUBE_CHANNELS = [
+  {
+    "name": "우이",
+    "url": "https://www.youtube.com/@%EC%9A%B0%EC%9D%B4_wooyee",
+    "handle": "@우이_wooyee",
+    "avatar": "https://yt3.ggpht.com/emxKvboAypxRy370xb105adcKSqKqHXzuJPpqZ_1sf3KMPrYxdan37MnrQZj9ikgxFzxAQ1P=s800-c-k-c0x00ffffff-no-rj",
+    "subtitle": "",
+    "tags": [
+      "롱폼",
+      "숏폼"
+    ]
+  },
   {
     "name": "후반부의악마진경은",
     "url": "https://www.youtube.com/@%ED%9B%84%EB%B0%98%EB%B6%80%EC%9D%98%EC%95%85%EB%A7%88%EC%A7%84%EA%B2%BD%EC%9D%80",
