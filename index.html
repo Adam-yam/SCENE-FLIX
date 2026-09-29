@@ -4336,17 +4336,23 @@
         color: var(--muted);
       }
 
-      #aboutChartDetail {
-        transition:
-          opacity 0.28s ease,
-          transform 0.28s ease;
-        opacity: 0;
-        transform: translateY(6px);
-      }
-
-      #aboutChartDetail.ab-detail-visible {
-        opacity: 1;
-        transform: translateY(0);
+      #aboutChartDetail { min-width: 0 !important; }
+      .ab-stat-top { overflow-anchor: none; }
+      #aboutChartLegend { min-width: 0 !important; }
+      .chart-legend-item { width: 100%; border: 0; background: transparent; text-align: left; font: inherit; }
+      .chart-legend-item:focus-visible,
+      .chart-detail-close-btn:focus-visible,
+      .chart-cat-toggle:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+      .chart-detail-close-btn { min-width: 32px; min-height: 32px; }
+      .chart-cat-toggle { width: 100%; border: 0; background: transparent; text-align: left; font: inherit; }
+      .ab-row-body { min-width: 0; overflow-wrap: anywhere; }
+      .ab-install-head { flex-wrap: wrap; }
+      @media (max-width: 540px) {
+        .ab-stat-top { flex-direction: column; align-items: stretch; gap: 20px; }
+        #aboutChartDetail, #aboutChartLegend { width: 100%; box-sizing: border-box; flex: auto !important; }
+        .ab-stat-card { padding: 16px; }
+        .chart-cat-label { min-width: 0; overflow-wrap: anywhere; }
+        .chart-ch-name { white-space: normal; overflow-wrap: anywhere; }
       }
 
       .chart-detail-header {
@@ -4721,6 +4727,104 @@
         word-break: keep-all;
       }
 
+      .ab-chip-accent {
+        color: var(--accent);
+        border-color: rgba(var(--accent-rgb), 0.4);
+      }
+
+      #installSection {
+        padding-top: 16px;
+        padding-bottom: 16px;
+      }
+
+      .ab-install-head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px 16px;
+        min-height: 30px;
+      }
+
+      .ab-install-head .ab-row-label {
+        word-break: keep-all;
+      }
+
+      .ab-seg {
+        display: inline-flex;
+        flex-shrink: 0;
+        gap: 2px;
+        padding: 2px;
+        border-radius: 20px;
+        border: 1px solid var(--border-h);
+      }
+
+      .ab-seg-btn {
+        font-size: 0.66rem;
+        line-height: 1;
+        padding: 6px 12px;
+        border-radius: 18px;
+        border: 0;
+        background: transparent;
+        color: var(--muted);
+        cursor: pointer;
+        transition:
+          color 0.18s cubic-bezier(0.4, 0, 0.2, 1),
+          background-color 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .ab-seg-btn.active {
+        color: var(--accent);
+        background: rgba(var(--accent-rgb), 0.14);
+      }
+
+      .ab-seg-btn:focus-visible,
+      .ab-chip:focus-visible {
+        outline: 2px solid rgba(var(--accent-rgb), 0.5);
+        outline-offset: 1px;
+      }
+
+      .ab-steps {
+        list-style: none;
+        margin: 12px 0 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        counter-reset: step;
+      }
+
+      .ab-steps li {
+        counter-increment: step;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.74rem;
+        line-height: 1.5;
+        color: var(--muted);
+        word-break: keep-all;
+      }
+
+      .ab-steps li::before {
+        content: counter(step);
+        flex-shrink: 0;
+        width: 18px;
+        height: 18px;
+        margin-top: 1px;
+        border-radius: 50%;
+        background: rgba(var(--accent-rgb), 0.12);
+        color: var(--accent);
+        font-size: 0.62rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .ab-steps b {
+        font-weight: 500;
+        color: var(--text);
+      }
+
       .ab-stat-card {
         padding: 20px;
       }
@@ -4760,22 +4864,6 @@
         flex-wrap: wrap;
       }
 
-      .ab-bullet-dot {
-        flex-shrink: 0;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--accent);
-        margin-top: 8px;
-        opacity: 0.85;
-      }
-
-      .ab-bullet-text {
-        font-size: 0.8rem;
-        line-height: 1.75;
-        color: var(--text);
-        word-break: keep-all;
-      }
 
       .ab-footer {
         display: flex;
@@ -4791,13 +4879,21 @@
         background: var(--border-h);
       }
 
-      .ab-footer p {
+            .ab-footer p {
         font-size: 0.64rem;
         color: var(--muted);
         line-height: 1.9;
         text-align: center;
         opacity: 0.55;
         margin: 0;
+      }
+
+      .ab-footer .ab-info {
+        max-width: 440px;
+        font-size: 0.7rem;
+        line-height: 1.8;
+        opacity: 0.8;
+        word-break: keep-all;
       }
 
       .projects-wrap {
@@ -8691,128 +8787,8 @@
             </p>
           </div>
 
-          <div class="ab-section">
-            <div class="ab-group-title">Contact</div>
-            <div class="ab-group">
-              <div class="ab-row">
-                <div class="ab-row-icon">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <rect x="2" y="4" width="20" height="16" rx="2" />
-                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
-                  </svg>
-                </div>
-                <div class="ab-row-body">
-                  <a
-                    href="mailto:sceneflix.may@gmail.com"
-                    class="ab-row-label"
-                    style="
-                      text-decoration: none;
-                      user-select: text;
-                      -webkit-user-select: text;
-                    "
-                    >sceneflix.may@gmail.com</a
-                  >
-                </div>
-                <button
-                  id="copyMailBtn"
-                  class="ab-chip"
-                  data-i18n="about_copy"
-                  onclick="
-                    navigator.clipboard
-                      .writeText('sceneflix.may@gmail.com')
-                      .then(() => {
-                        const b = document.getElementById('copyMailBtn');
-                        b.textContent = '✓';
-                        b.style.color = 'var(--accent)';
-                        b.style.borderColor = 'var(--accent)';
-                        setTimeout(() => {
-                          b.textContent = getCurrentT().about_copy || '복사';
-                          b.style.color = 'var(--muted)';
-                          b.style.borderColor = 'var(--border-h)';
-                        }, 2000);
-                      })
-                  "
-                >
-                  복사
-                </button>
-              </div>
-              <div class="ab-note">
-                <p data-i18n="about_contact1">
-                  버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로
-                  연락주세요.
-                </p>
-                <p data-i18n="about_contact2">
-                  더 좋은 페이지를 만들기 위해 리마인 여러분의 건의사항을
-                  기다리고 있습니다.
-                </p>
-                <p data-i18n="about_contact3">
-                  또한, 제작자에게 전하고 싶은 말이나 의견이 있다면 자유롭게
-                  남겨주세요.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div id="installSection" class="ab-section" style="display: none">
-            <div class="ab-group-title">앱으로 사용하기</div>
-            <div class="ab-group">
-              <div class="ab-row" style="align-items: flex-start">
-                <div class="ab-row-icon">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M12 3v12" />
-                    <path d="m7 10 5 5 5-5" />
-                    <path d="M5 21h14" />
-                  </svg>
-                </div>
-                <div class="ab-row-body">
-                  <div class="ab-row-label">아이폰(Safari)</div>
-                  <div class="ab-row-desc">
-                    공유 버튼 선택 후 "홈 화면에 추가"를 눌러주시기 바랍니다.
-                  </div>
-                </div>
-              </div>
-              <div class="ab-row" style="align-items: flex-start">
-                <div class="ab-row-icon">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path d="M12 3v12" />
-                    <path d="m7 10 5 5 5-5" />
-                    <path d="M5 21h14" />
-                  </svg>
-                </div>
-                <div class="ab-row-body">
-                  <div class="ab-row-label">갤럭시(Chrome)</div>
-                  <div class="ab-row-desc">
-                    메뉴(⋮)에서 "설치 및 바로가기" 선택 후 "설치"를
-                    눌러주시기 바랍니다.
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
           <div id="aboutChartSection" class="ab-section">
-            <div class="ab-group-title">Video Stats</div>
+            <div class="ab-group-title">Stats</div>
             <div class="ab-group">
               <div class="ab-stat-card">
                 <div class="ab-stat-top">
@@ -8889,7 +8865,7 @@
                       color: var(--muted);
                       opacity: 0.85;
                     "
-                    >각 항목을 클릭하면 상세 정보를 볼 수 있습니다.</span
+                    >각 항목을 선택하면 세부 분류와 비율을 확인할 수 있습니다.</span
                   >
                   <div style="display: flex; align-items: center; gap: 8px">
                     <span
@@ -8917,42 +8893,123 @@
           </div>
 
           <div class="ab-section">
-            <div class="ab-group-title" data-i18n="about_section_info">
-              페이지 안내
-            </div>
+            <div class="ab-group-title">App</div>
             <div class="ab-group">
-              <div class="ab-row" style="align-items: flex-start">
-                <span class="ab-bullet-dot"></span>
-                <span class="ab-bullet-text" data-i18n="about_bullet1"
-                  >이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이
-                  전혀 없습니다.<br />오직 팬들을 위해 만들어졌습니다.</span
+              <div class="ab-row">
+                <div class="ab-row-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="18" cy="5" r="3" />
+                    <circle cx="6" cy="12" r="3" />
+                    <circle cx="18" cy="19" r="3" />
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+                  </svg>
+                </div>
+                <div class="ab-row-body">
+                  <div class="ab-row-label" data-i18n="about_share_label">
+                    SCENE-FLIX 공유하기
+                  </div>
+                  <div class="ab-row-desc" data-i18n="about_share_desc">
+                    카카오톡, X, 페이스북 등으로 SCENE-FLIX를 공유할 수 있습니다.
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  id="shareSiteBtn"
+                  class="ab-chip ab-chip-accent"
+                  data-i18n="about_share_btn"
+                  onclick="shareSceneFlix()"
                 >
+                  공유
+                </button>
               </div>
-              <div class="ab-row" style="align-items: flex-start">
-                <span class="ab-bullet-dot"></span>
-                <span class="ab-bullet-text" data-i18n="about_bullet2"
-                  >이 페이지에 게시된 각 영상의 저작권은 해당 음악방송
-                  방송국,<br /><strong
-                    style="color: var(--accent); font-weight: 600"
-                    >더뮤즈 엔터테인먼트</strong
-                  >, 그리고
-                  <strong style="color: var(--accent); font-weight: 600"
-                    >리센느(RESCENE)</strong
-                  >에게 있습니다.</span
-                >
+              <div id="installSection" class="ab-row" style="display: none; align-items: flex-start">
+                <div class="ab-row-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M12 3v12" />
+                    <path d="m7 10 5 5 5-5" />
+                    <path d="M5 21h14" />
+                  </svg>
+                </div>
+                <div class="ab-row-body">
+                  <div class="ab-install-head">
+                    <div class="ab-row-label">홈 화면에 추가</div>
+                    <div class="ab-seg" role="group" aria-label="기기 선택">
+                      <button type="button" class="ab-seg-btn" data-os="ios" aria-pressed="false">iPhone</button>
+                      <button type="button" class="ab-seg-btn" data-os="android" aria-pressed="false">Galaxy</button>
+                    </div>
+                  </div>
+                  <ol class="ab-steps" id="installDesc"></ol>
+                </div>
               </div>
-              <div class="ab-row" style="align-items: flex-start">
-                <span class="ab-bullet-dot"></span>
-                <span class="ab-bullet-text" data-i18n="about_bullet3"
-                  >저작권자의 요청이 있을 경우, 해당 영상은 수정 또는 삭제될 수
-                  있습니다.</span
+            </div>
+          </div>
+
+          <div class="ab-section">
+            <div class="ab-group-title">Contact</div>
+            <div class="ab-group">
+              <div class="ab-row">
+                <div class="ab-row-icon">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                    <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+                  </svg>
+                </div>
+                <div class="ab-row-body">
+                  <a
+                    href="mailto:sceneflix.may@gmail.com"
+                    class="ab-row-label"
+                    style="
+                      text-decoration: none;
+                      user-select: text;
+                      -webkit-user-select: text;
+                    "
+                    >sceneflix.may@gmail.com</a
+                  >
+                </div>
+                <button
+                  id="copyMailBtn"
+                  class="ab-chip"
+                  data-i18n="about_copy"
+                  onclick="copyContactEmail()"
                 >
+                  복사
+                </button>
+              </div>
+              <div class="ab-note">
+                <p data-i18n="about_contact1">
+                  오류 제보, 영상 추가·삭제 요청 및 운영 관련 문의는 위 이메일로 접수합니다.
+                </p>
               </div>
             </div>
           </div>
 
           <div class="ab-footer">
             <div class="ab-footer-line"></div>
+            <p class="ab-info" data-i18n="about_info">
+              SCENE-FLIX는 비영리 팬 페이지로, 광고 게재 계획이 없습니다. 게시된 영상의 저작권은 각 권리자에게 있으며, 권리자의 요청에 따라 게시물을 수정하거나 삭제합니다.
+            </p>
             <p>
               © 2025 May_ · Fan-made, non-commercial · All rights belong to
               their respective owners<br />
@@ -10009,22 +10066,18 @@
           member_desc: "멤버를 선택하면 유튜브에서 관련 영상을 검색합니다.",
           about_headline: "리센느(RESCENE)의 팬 메이드 페이지입니다.",
           about_byline: "made with love, by Adam",
-          about_section_info: "페이지 안내",
-          about_bullet1:
-            "이 페이지는 수익을 목적으로 하지 않으며, 광고 추가 계획이 전혀 없습니다.<br>오직 팬들을 위해 만들어졌습니다.",
-          about_bullet2:
-            '이 페이지에 게시된 각 영상의 저작권은 해당 음악방송 방송국,<br><strong class="u-accent-strong">더뮤즈 엔터테인먼트</strong>, 그리고 <strong class="u-accent-strong">리센느(RESCENE)</strong>에게 있습니다.',
-          about_bullet3:
-            "저작권자의 요청이 있을 경우, 해당 영상은 수정 또는 삭제될 수 있습니다.",
           about_rescene_sub: "리센느 소개 페이지 (팬 제작)",
           about_goto: "바로가기",
           about_copy: "복사",
+          about_share_label: "SCENE-FLIX 공유하기",
+          about_share_desc: "카카오톡, X, 페이스북 등으로 SCENE-FLIX를 공유할 수 있습니다.",
+          about_share_btn: "공유",
+          about_share_text: "리센느(RESCENE) 영상 모아보기 SCENE-FLIX",
+          about_share_copied: "🔗 SCENE-FLIX 링크 복사됨",
           about_contact1:
-            "버그 제보, 추가 및 삭제 요청 등은 합당한 사유와 함께 위 메일로 연락주세요.",
-          about_contact2:
-            "더 좋은 페이지를 만들기 위해 리마인 여러분의 건의사항을 기다리고 있습니다.",
-          about_contact3:
-            "또한, 제작자에게 전하고 싶은 말이나 의견이 있다면 자유롭게 남겨주세요.",
+            "오류 제보, 영상 추가·삭제 요청 및 운영 관련 문의는 위 이메일로 접수합니다.",
+          about_info:
+            "SCENE-FLIX는 비영리 팬 페이지로, 광고 게재 계획이 없습니다. 게시된 영상의 저작권은 각 권리자에게 있으며, 권리자의 요청에 따라 게시물을 수정하거나 삭제합니다.",
           live_year_suffix: "년",
           filter_member_woni: "원이",
           filter_member_liv: "리브",
@@ -10132,22 +10185,18 @@
           member_desc: "メンバーを選択するとYouTubeで関連動画を検索します。",
           about_headline: "RESCENE のファンメイドページです。",
           about_byline: "made with love, by Adam",
-          about_section_info: "ページ案内",
-          about_bullet1:
-            "このページは収益を目的とせず、広告追加の予定は一切ありません。ファンのためだけに作られました。",
-          about_bullet2:
-            'このページに掲載された各動画の著作権は、各音楽番組の放送局、<br><strong class="u-accent-strong">The Muze Entertainment</strong>、および<strong class="u-accent-strong">RESCENE</strong>に帰属します。',
-          about_bullet3:
-            "著作権者の要請があった場合、該当動画は修正または削除される場合があります。",
           about_rescene_sub: "RESCENEの紹介ページ（ファン制作）",
           about_goto: "移動する",
           about_copy: "コピー",
+          about_share_label: "SCENE-FLIXをシェア",
+          about_share_desc: "KakaoTalk、X、FacebookなどでSCENE-FLIXを共有できます。",
+          about_share_btn: "共有",
+          about_share_text: "RESCENE 映像まとめ SCENE-FLIX",
+          about_share_copied: "🔗 SCENE-FLIXのリンクをコピーしました",
           about_contact1:
-            "バグ報告、追加・削除のリクエストは、正当な理由と共に上記メールにてご連絡ください。",
-          about_contact2:
-            "より良いページを作るため、リマインのみなさんのご意見をお待ちしています。",
-          about_contact3:
-            "また、制作者に伝えたいことやご意見があれば、お気軽にどうぞ。",
+            "バグ報告、追加・削除のご依頼、ご意見・ご要望は上記メールまでお送りください。",
+          about_info:
+            "非営利のファンページで、広告の予定はありません。掲載動画の著作権は各放送局、The Muze Entertainment、RESCENEに帰属し、著作権者の要請により修正または削除される場合があります。",
           live_year_suffix: "年",
           filter_member_woni: "Woni",
           filter_member_liv: "Liv",
@@ -10258,22 +10307,18 @@
             "Select a member to search for related videos on YouTube.",
           about_headline: "A fan-made page dedicated to RESCENE.",
           about_byline: "made with love, by Adam",
-          about_section_info: "Page Info",
-          about_bullet1:
-            "This page is non-commercial and has no plans to include ads. It was made purely for fans.",
-          about_bullet2:
-            'All video rights belong to their respective broadcasting stations,<br><strong class="u-accent-strong">The Muze Entertainment</strong>, and <strong class="u-accent-strong">RESCENE</strong>.',
-          about_bullet3:
-            "Videos may be modified or removed upon request from the copyright holders.",
           about_rescene_sub: "RESCENE Introduction Page (Fan-made)",
           about_goto: "Visit",
           about_copy: "Copy",
+          about_share_label: "Share SCENE-FLIX",
+          about_share_desc: "Send it to friends via KakaoTalk, X, Facebook and more.",
+          about_share_btn: "Share",
+          about_share_text: "RESCENE video collection, SCENE-FLIX",
+          about_share_copied: "🔗 SCENE-FLIX link copied",
           about_contact1:
-            "For bug reports or add/remove requests, please contact us at the email above with a valid reason.",
-          about_contact2:
-            "We welcome any suggestions to help improve this page.",
-          about_contact3:
-            "Feel free to share any thoughts or messages for the creator as well.",
+            "Bug reports, add/remove requests, and suggestions are all welcome at the email above.",
+          about_info:
+            "A non-commercial fan page with no plans for ads. Video rights belong to their broadcasters, The Muze Entertainment, and RESCENE, and may be modified or removed upon request.",
           live_year_suffix: "",
           filter_member_woni: "Woni",
           filter_member_liv: "Liv",
@@ -13800,7 +13845,9 @@
   "Q-IwQKrDc18": "9:25",
   "IOlC8p0WpgM": "6:17",
   "uSH_g1iFuFA": "19:52",
-  "o5tyYQ1dM0E": "1:18:30"
+  "o5tyYQ1dM0E": "1:18:30",
+  "ijpfQgYxGI8": "25:17",
+  "hpuepug5RsI": "3:22"
 };
       const _RX_DATE8 = /(\d{4})(\d{2})(\d{2})/;
       const _RX_DATE_SEP = /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/;
@@ -14653,7 +14700,8 @@
   "thefactmusicawards": "The FACT Music Awards",
   "suwonuniv": "수원대학교",
   "youthfestival": "대한민국청소년박람회",
-  "extreme": "익스트림 경찰과도둑"
+  "extreme": "익스트림 경찰과도둑",
+  "dancear": "dancEAR"
 };
       const EXTERNAL_DATA = {
   "suwonuniv": [
@@ -14719,6 +14767,11 @@
     }
   ],
   "radiostar": [
+    {
+      "vid": "ijpfQgYxGI8",
+      "url": "https://youtu.be/ijpfQgYxGI8",
+      "date": "2026.09.28 20:00"
+    },
     {
       "vid": "2Ohraw5_W9Y",
       "url": "https://www.youtube.com/watch?v=2Ohraw5_W9Y",
@@ -19255,6 +19308,13 @@
       "url": "https://www.youtube.com/watch?v=94Np31U8QNI",
       "date": "2026.09.23 13:37"
     }
+  ],
+  "dancear": [
+    {
+      "vid": "hpuepug5RsI",
+      "url": "https://youtu.be/hpuepug5RsI",
+      "date": "2024.09.04 20:00"
+    }
   ]
 };
       const VID_TO_EXTERNAL_KEY = {};
@@ -19291,7 +19351,8 @@
       "dingo",
       "wouldyourecord",
       "movetoperformance",
-      "jeongdawoonandboys"
+      "jeongdawoonandboys",
+      "dancear"
     ]
   },
   "radio": {
@@ -25919,7 +25980,7 @@
             {
               key: "content",
               label: t.tab_content_full || "자체컨텐츠",
-              color: "#47d19a",
+              color: "var(--c-content)",
               desc:
                 t.about_chart_content_desc ||
                 "RESCENE 공식 채널의 자체 제작 컨텐츠입니다.",
@@ -25929,7 +25990,7 @@
             {
               key: "live",
               label: t.tab_live || "Live",
-              color: "#99ce64",
+              color: "var(--c-live)",
               desc:
                 t.about_chart_live_desc || "멤버들의 라이브 방송 영상입니다.",
               count: liveCount,
@@ -25938,7 +25999,7 @@
             {
               key: "external",
               label: t.tab_external_full || "외부컨텐츠",
-              color: "#818fda",
+              color: "var(--c-external)",
               desc:
                 t.about_chart_external_desc ||
                 "외부 채널에서 제작된 협업 및 출연 영상입니다.",
@@ -25960,6 +26021,7 @@
           for (const s of _segs) {
             const isActive = s.key === activeKey;
             s.path._selected = isActive;
+            s.path.setAttribute("aria-pressed", String(isActive));
             s.path.setAttribute(
               "opacity",
               activeKey === null ? "0.88" : isActive ? "1" : "0.28",
@@ -26022,34 +26084,28 @@
             })
             .join("");
         }
+        let statsHeightAnimation = null;
+        let statsFadeAnimation = null;
         window.aboutChartSelect = function (key) {
           const detailEl = document.getElementById("aboutChartDetail");
           const legendEl = document.getElementById("aboutChartLegend");
           const innerEl = document.getElementById("chartDetailInner");
-          if (!detailEl || !legendEl || !innerEl || _data.length === 0) return;
-          if (_key === key) {
-            _key = null;
-            setOpacity(null);
-            detailEl.classList.remove("ab-detail-visible");
-            legendEl.style.display = "flex";
-            setCenter(
-              getCurrentT().about_chart_total || "전체",
-              _total,
-              "100%",
-            );
-            window.setTimeout(() => {
-              if (_key === null) detailEl.style.display = "none";
-            }, 280);
-            return;
-          }
+          if (!detailEl || !legendEl || !innerEl || !_data.length) return;
           const d = _data.find((item) => item.key === key);
           if (!d) return;
-          const wasVisible = detailEl.classList.contains("ab-detail-visible");
-          _key = key;
-          setOpacity(key);
-          setCenter(d.label, d.count, pct(d.count, _total) + "%");
-          detailEl.style.display = "block";
-          legendEl.style.display = "none";
+          const top = detailEl.parentElement;
+          const previousHeight = top.getBoundingClientRect().height;
+          if (statsHeightAnimation) statsHeightAnimation.cancel();
+          if (statsFadeAnimation) statsFadeAnimation.cancel();
+          const closing = _key === key;
+          _key = closing ? null : key;
+          setOpacity(_key);
+          detailEl.style.display = closing ? "none" : "block";
+          legendEl.style.display = closing ? "flex" : "none";
+          if (closing) {
+            setCenter(getCurrentT().about_chart_total || "전체", _total, "100%");
+          } else {
+            setCenter(d.label, d.count, pct(d.count, _total) + "%");
           innerEl.innerHTML =
             '<div class="chart-detail-header">' +
             '<div class="chart-detail-dot" style="background:' +
@@ -26073,12 +26129,19 @@
             fmtDetailTotal(d.count, pct(d.count, _total)) +
             "</div>" +
             renderRows(d.subtypes, d.count, d.color);
-          if (!wasVisible) {
-            requestAnimationFrame(() => {
-              requestAnimationFrame(() => {
-                detailEl.classList.add("ab-detail-visible");
-              });
-            });
+          }
+          const nextHeight = top.getBoundingClientRect().height;
+          if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches && top.animate) {
+            statsHeightAnimation = top.animate(
+              [{ height: previousHeight + "px", overflow: "clip" }, { height: nextHeight + "px", overflow: "clip" }],
+              { duration: 240, easing: "cubic-bezier(0.22, 1, 0.36, 1)" }
+            );
+            statsFadeAnimation = (closing ? legendEl : innerEl).animate(
+              [{ opacity: 0 }, { opacity: 1 }], { duration: 180, easing: "ease-out" }
+            );
+          }
+          if (closing && detailEl.contains(document.activeElement)) {
+            legendEl.querySelector("button")?.focus({ preventScroll: true });
           }
         };
         function buildChart() {
@@ -26086,6 +26149,8 @@
           const legendEl = document.getElementById("aboutChartLegend");
           const detailEl = document.getElementById("aboutChartDetail");
           if (!svg || !legendEl) return;
+          if (statsHeightAnimation) statsHeightAnimation.cancel();
+          if (statsFadeAnimation) statsFadeAnimation.cancel();
           _data = buildData();
           _total = _data.reduce((s, d) => s + d.count, 0);
           if (_total === 0) return;
@@ -26146,6 +26211,16 @@
             p.setAttribute("stroke", "var(--bg)");
             p.setAttribute("stroke-width", "2");
             p.setAttribute("data-key", d.key);
+            p.setAttribute("role", "button");
+            p.setAttribute("tabindex", "0");
+            p.setAttribute("aria-label", d.label + " " + pct(d.count, _total) + "%");
+            p.setAttribute("aria-pressed", "false");
+            p.addEventListener("keydown", (event) => {
+              if (event.key === "Enter" || event.key === " ") {
+                event.preventDefault();
+                window.aboutChartSelect(d.key);
+              }
+            });
             p.style.cssText = "cursor:pointer;";
             const key = d.key;
             p.addEventListener("click", () => {
@@ -26165,7 +26240,7 @@
             .map((d) => {
               const p = pct(d.count, _total);
               return (
-                '<div class="chart-legend-item" onclick="aboutChartSelect(\'' +
+                '<button type="button" class="chart-legend-item" onclick="aboutChartSelect(\'' +
                 d.key +
                 "')\">" +
                 '<div class="chart-legend-dot" style="background:' +
@@ -26178,7 +26253,7 @@
                 '<div class="chart-legend-sub">' +
                 fmtCountPct(d.count, p) +
                 "</div>" +
-                "</div></div>"
+                "</div></button>"
               );
             })
             .join("");
@@ -26903,10 +26978,120 @@
           window.navigator.standalone === true;
         const section = document.getElementById("installSection");
         if (isStandalone || !section) return;
+        const ua = navigator.userAgent || "";
+        const isIOS =
+          /iPad|iPhone|iPod/.test(ua) ||
+          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        const descs = {
+          ios: [
+            "Safari에서 <b>공유</b> 버튼 탭",
+            "<b>홈 화면에 추가</b> 선택",
+          ],
+          android: [
+            "Chrome 우측 상단 <b>⋮</b> 메뉴 열기",
+            "<b>설치 및 바로가기 만들기</b> → <b>설치</b>",
+          ],
+        };
+        const btns = section.querySelectorAll(".ab-seg-btn");
+        const desc = document.getElementById("installDesc");
+        function select(os) {
+          btns.forEach((b) => {
+            const on = b.dataset.os === os;
+            b.classList.toggle("active", on);
+            b.setAttribute("aria-pressed", on ? "true" : "false");
+          });
+          if (desc) desc.innerHTML = descs[os].map((t) => "<li>" + t + "</li>").join("");
+        }
+        btns.forEach((b) =>
+          b.addEventListener("click", () => select(b.dataset.os)),
+        );
+        select(isIOS ? "ios" : "android");
         section.style.display = "";
         window.addEventListener("appinstalled", () => {
           section.style.display = "none";
         });
+      })();
+      (function () {
+        let timer = null;
+        function siteUrl() {
+          const c = document.querySelector('link[rel="canonical"]');
+          return (c && c.href) || "https://adam-yam.github.io/SCENE-FLIX/";
+        }
+        function showToast(msg) {
+          const toast = document.getElementById("share-toast");
+          if (!toast) return;
+          toast.textContent = msg;
+          toast.classList.add("show");
+          clearTimeout(timer);
+          timer = setTimeout(() => toast.classList.remove("show"), 2200);
+        }
+        async function copyText(text) {
+          try {
+            if (!navigator.clipboard || !navigator.clipboard.writeText)
+              throw new Error("unavailable");
+            await navigator.clipboard.writeText(text);
+            return true;
+          } catch {
+            const prev = document.activeElement;
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.cssText = "position:fixed;opacity:0;top:0;left:0";
+            document.body.appendChild(ta);
+            let ok = false;
+            try {
+              ta.select();
+              ok = document.execCommand("copy");
+            } catch {
+            } finally {
+              ta.remove();
+              if (prev instanceof HTMLElement)
+                prev.focus({ preventScroll: true });
+            }
+            return ok;
+          }
+        }
+        let contactCopyTimer = null;
+        window.copyContactEmail = async function () {
+          const email = "sceneflix.may@gmail.com";
+          if (!(await copyText(email))) {
+            window.prompt(getCurrentT().about_copy || "복사", email);
+            return;
+          }
+          const button = document.getElementById("copyMailBtn");
+          if (!button) return;
+          clearTimeout(contactCopyTimer);
+          button.textContent = "✓";
+          button.style.color = "var(--accent)";
+          button.style.borderColor = "var(--accent)";
+          contactCopyTimer = setTimeout(() => {
+            button.textContent = getCurrentT().about_copy || "복사";
+            button.style.color = "";
+            button.style.borderColor = "";
+          }, 2000);
+        };
+        window.shareSceneFlix = async function () {
+          const t = getCurrentT();
+          const url = siteUrl();
+          const data = {
+            title: "SCENE-FLIX",
+            text: t.about_share_text || "SCENE-FLIX",
+            url,
+          };
+          if (navigator.share) {
+            try {
+              if (navigator.canShare && !navigator.canShare(data))
+                throw new Error("unsupported");
+              await navigator.share(data);
+              return;
+            } catch (err) {
+              if (err && err.name === "AbortError") return;
+            }
+          }
+          const ok = await copyText(url);
+          if (ok) showToast(t.about_share_copied || "🔗 SCENE-FLIX link copied");
+          else window.prompt("SCENE-FLIX", url);
+        };
       })();
     </script>
     <script>
