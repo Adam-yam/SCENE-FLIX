@@ -4338,6 +4338,18 @@
 
       #aboutChartDetail { min-width: 0 !important; }
       .ab-stat-top { overflow-anchor: none; }
+      #aboutDonutSvg, #aboutDonutSvg [role="button"] {
+        outline: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+      #aboutDonutSvg [role="button"]:focus-visible {
+        filter: brightness(1.2);
+      }
+      #aboutChartDetail { overflow: clip; }
+      @media (min-width: 541px) and (max-width: 768px) {
+        .ab-stat-top { flex-direction: column; flex-wrap: nowrap !important; align-items: stretch; }
+        #aboutChartDetail, #aboutChartLegend { width: 100%; box-sizing: border-box; flex: auto !important; }
+      }
       #aboutChartLegend { min-width: 0 !important; }
       .chart-legend-item { width: 100%; border: 0; background: transparent; text-align: left; font: inherit; }
       .chart-legend-item:focus-visible,
@@ -4348,7 +4360,7 @@
       .ab-row-body { min-width: 0; overflow-wrap: anywhere; }
       .ab-install-head { flex-wrap: wrap; }
       @media (max-width: 540px) {
-        .ab-stat-top { flex-direction: column; align-items: stretch; gap: 20px; }
+        .ab-stat-top { flex-direction: column; flex-wrap: nowrap !important; align-items: stretch; gap: 20px; }
         #aboutChartDetail, #aboutChartLegend { width: 100%; box-sizing: border-box; flex: auto !important; }
         .ab-stat-card { padding: 16px; }
         .chart-cat-label { min-width: 0; overflow-wrap: anywhere; }
@@ -26136,8 +26148,12 @@
               [{ height: previousHeight + "px", overflow: "clip" }, { height: nextHeight + "px", overflow: "clip" }],
               { duration: 240, easing: "cubic-bezier(0.22, 1, 0.36, 1)" }
             );
-            statsFadeAnimation = (closing ? legendEl : innerEl).animate(
-              [{ opacity: 0 }, { opacity: 1 }], { duration: 180, easing: "ease-out" }
+            statsFadeAnimation = (closing ? legendEl : detailEl).animate(
+              [
+                { opacity: 0, clipPath: "inset(0 0 100% 0 round 12px)", transform: "translateY(-6px)" },
+                { opacity: 1, clipPath: "inset(0 0 0 0 round 12px)", transform: "translateY(0)" }
+              ],
+              { duration: 320, easing: "cubic-bezier(0.22, 1, 0.36, 1)" }
             );
           }
           if (closing && detailEl.contains(document.activeElement)) {
