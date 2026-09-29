@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-09-30T06:00:51.349168+09:00",
+  "updatedAt": "2026-09-30T07:00:55.072501+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,7 +20,7 @@
           "previousRank": 2
         },
         "genie": {
-          "rank": 17,
+          "rank": 2,
           "previousRank": 17
         },
         "vibe": {
@@ -29,7 +29,7 @@
         },
         "bugs": {
           "rank": 3,
-          "previousRank": 5
+          "previousRank": 3
         },
         "flo": {
           "rank": 2,
@@ -55,20 +55,20 @@
           "previousRank": 4
         },
         "genie": {
-          "rank": 21,
+          "rank": 24,
           "previousRank": 21
         },
         "vibe": {
-          "rank": 13,
-          "previousRank": 13
+          "rank": 12,
+          "previousRank": 11
         },
         "bugs": {
           "rank": 9,
           "previousRank": 9
         },
         "flo": {
-          "rank": 12,
-          "previousRank": 9
+          "rank": 23,
+          "previousRank": 12
         },
         "youtube_music": {
           "rank": 9,
@@ -90,20 +90,20 @@
           "previousRank": 6
         },
         "genie": {
-          "rank": 27,
-          "previousRank": 22
+          "rank": 22,
+          "previousRank": 27
         },
         "vibe": {
           "rank": 6,
           "previousRank": 6
         },
         "bugs": {
-          "rank": 15,
-          "previousRank": 19
+          "rank": 17,
+          "previousRank": 15
         },
         "flo": {
-          "rank": 31,
-          "previousRank": 28
+          "rank": 32,
+          "previousRank": 31
         },
         "youtube_music": {
           "rank": 8,
@@ -125,12 +125,12 @@
           "previousRank": 54
         },
         "bugs": {
-          "rank": 41,
-          "previousRank": 34
+          "rank": 35,
+          "previousRank": 41
         },
         "flo": {
           "rank": 88,
-          "previousRank": 86
+          "previousRank": 88
         },
         "youtube_music": {
           "rank": 46,
@@ -149,7 +149,7 @@
       "ranks": {
         "bugs": {
           "rank": 26,
-          "previousRank": 25
+          "previousRank": 26
         },
         "flo": {
           "rank": 65,
