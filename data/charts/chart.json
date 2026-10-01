@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T08:00:46.378405+09:00",
+  "updatedAt": "2026-10-01T09:00:50.809633+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,7 +28,7 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 5,
+          "rank": 4,
           "previousRank": 5
         },
         "flo": {
@@ -55,8 +55,8 @@
           "previousRank": 3
         },
         "genie": {
-          "rank": 7,
-          "previousRank": 24
+          "rank": 8,
+          "previousRank": 7
         },
         "vibe": {
           "rank": 12,
@@ -64,10 +64,10 @@
         },
         "bugs": {
           "rank": 8,
-          "previousRank": 7
+          "previousRank": 8
         },
         "flo": {
-          "rank": 24,
+          "rank": 22,
           "previousRank": 24
         },
         "youtube_music": {
@@ -90,20 +90,20 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 8,
-          "previousRank": 23
+          "rank": 7,
+          "previousRank": 8
         },
         "vibe": {
           "rank": 6,
           "previousRank": 6
         },
         "bugs": {
-          "rank": 21,
-          "previousRank": 23
+          "rank": 22,
+          "previousRank": 21
         },
         "flo": {
           "rank": 30,
-          "previousRank": 29
+          "previousRank": 30
         },
         "youtube_music": {
           "rank": 8,
@@ -125,12 +125,12 @@
           "previousRank": 47
         },
         "bugs": {
-          "rank": 37,
-          "previousRank": 32
+          "rank": 38,
+          "previousRank": 37
         },
         "flo": {
           "rank": 89,
-          "previousRank": 90
+          "previousRank": 89
         },
         "youtube_music": {
           "rank": 46,
@@ -145,15 +145,19 @@
     {
       "songName": "Pinball",
       "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
+      "albumImageUrl": "https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/085/542/577/85542577_1724656614230_1_140x140.JPG/dims/resize/Q_80,0",
       "ranks": {
+        "genie": {
+          "rank": 96,
+          "previousRank": 115
+        },
         "bugs": {
-          "rank": 25,
-          "previousRank": 21
+          "rank": 24,
+          "previousRank": 25
         },
         "flo": {
-          "rank": 68,
-          "previousRank": 66
+          "rank": 67,
+          "previousRank": 68
         },
         "youtube_music": {
           "rank": 30,
