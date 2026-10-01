@@ -106,8 +106,8 @@
       } catch (e) {}
     </script>
     <style id="scene-design-styles">
-      /* SCENE-FLIX: 테마 → 기본 컴포넌트 → 반응형 → 상세 화면. 적용 순서 유지. */
-      /* 01. 테마 색상·글꼴·레이어 */
+      
+      
       :root {
         --font-sans:
           "Pretendard Variable", "Pretendard", -apple-system,
@@ -1324,7 +1324,7 @@
         margin-left: auto;
       }
 
-      /* 정렬 컨트롤 기본 스타일 */
+      
       .sort-btns {
         flex-shrink: 0;
       }
@@ -3747,7 +3747,7 @@
         animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
       }
 
-      /* 음원 차트 */
+      
       .chart-wrap {
         max-width: 900px;
         margin: 0 auto;
@@ -7638,7 +7638,7 @@
       }
 
       @media (max-width: 800px) {
-        /* 02. 스케줄 상세 레이아웃 */
+        
       #scheduleMode .schedule-wrap {
           padding: 22px 16px calc(100px + var(--safe-bottom));
         }
@@ -7707,7 +7707,7 @@
         }
       }
 
-      /* 03. 정렬 버튼 선택 표시 */
+      
       .sort-btns {
         position: relative;
         isolation: isolate;
@@ -7839,7 +7839,7 @@
         }
       }
 
-      /* 04. 공통 글꼴과 숫자 정렬 */
+      
       html,
       body,
       button,
@@ -10378,6 +10378,10 @@
 
     <script>
       window._curLang = "KR";
+      try {
+        const savedLang = localStorage.getItem("rescene-lang");
+        if (["KR", "JP", "EN"].includes(savedLang)) window._curLang = savedLang;
+      } catch {}
       function getCurrentT() {
         return window._i18n[window._curLang] || window._i18n["KR"];
       }
@@ -10766,7 +10770,7 @@
       const _I18N_PLACEHOLDER_ELS = Array.from(
         document.querySelectorAll("[data-i18n-placeholder]"),
       );
-      function setLang(lang) {
+      function setLang(lang, render = true) {
         if (!Object.hasOwn(window._i18n, lang)) return;
         window._curLang = lang;
         document.documentElement.lang =
@@ -10806,45 +10810,47 @@
         try {
           localStorage.setItem("rescene-lang", lang);
         } catch {}
-        // Invalidate cached navigation even when its section is hidden.
         _liveNavBuilt = false;
         _extChanBarCat = null;
         _extChanBarLang = null;
-        if (curSection === "live") {
-          buildLiveNav();
-          buildLiveGrid();
-          document
-            .querySelectorAll("#liveMode .type-btn[data-lm]")
-            .forEach((btn) => {
-              const lm = btn.getAttribute("data-lm");
-              btn.classList.toggle("active", lm === curLiveMember);
-            });
-        } else if (curSection === "external") {
-          buildExternalChanBar();
-          buildExternalGrid();
-        } else if (curSection === "songs" || curSection === "content") {
-          buildGrid();
-        } else if (curSection === "allvideos") {
-          buildAllVideosGrid();
-        } else if (curSection === "archive") {
-          buildArchiveSection();
-        } else if (curSection === "bookmark") {
-          buildBookmarkGrid();
-        } else if (curSection === "news") {
-          buildNewsGrid();
-        } else if (curSection === "chart") {
-          buildChartGrid();
-        } else if (curSection === "shorts") {
-          _initShorts();
+        if (render) {
+          if (curSection === "live") {
+            buildLiveNav();
+            buildLiveGrid();
+            document
+              .querySelectorAll("#liveMode .type-btn[data-lm]")
+              .forEach((btn) => {
+                const lm = btn.getAttribute("data-lm");
+                btn.classList.toggle("active", lm === curLiveMember);
+              });
+          } else if (curSection === "external") {
+            buildExternalChanBar();
+            buildExternalGrid();
+          } else if (curSection === "songs" || curSection === "content") {
+            buildGrid();
+          } else if (curSection === "allvideos") {
+            buildAllVideosGrid();
+          } else if (curSection === "archive") {
+            buildArchiveSection();
+          } else if (curSection === "bookmark") {
+            buildBookmarkGrid();
+          } else if (curSection === "news") {
+            buildNewsGrid();
+          } else if (curSection === "chart") {
+            buildChartGrid();
+          } else if (curSection === "shorts") {
+            _initShorts();
+          }
         }
         _refreshDataUpdatedLabels();
-        if (typeof window._aboutRebuildChart === "function") {
+        if (render && typeof window._aboutRebuildChart === "function") {
           window._aboutRebuildChart();
         }
-        syncSubSidebar();
+        if (render) syncSubSidebar();
         if (typeof injectAnnivEvents === "function") {
           injectAnnivEvents();
           if (
+            render &&
             curSection === "schedule" &&
             typeof buildCalendar === "function"
           ) {
@@ -10853,7 +10859,6 @@
         }
         document.dispatchEvent(new Event("menulanguagechange"));
       }
-      // Embedded video catalog. Keep source IDs, dates and durations unchanged.
       const RESCENE_DATA = [
   {
     "song": "YoYo",
@@ -12718,7 +12723,8 @@
   "ewubELWBMaE": "2026.02.27 18:00",
   "CXXnhOfsDJ4": "2026.03.02 18:00",
   "ylD2Lskwydw": "2026.03.09 17:05",
-  "SYuEwH9htrU": "2026.02.26 18:00"
+  "SYuEwH9htrU": "2026.02.26 18:00",
+  "26WwZmXYEuo": "2026.10.01 20:00"
 };
       const DURATION_MAP = {
   "DatRv3vtV5s": "8:18",
@@ -14248,7 +14254,9 @@
   "lkHYRzXyGnk": "1:02:40",
   "AgPXJTqC4RI": "0:30",
   "xBPBS-V1Wq8": "0:16",
-  "7B6iiJtvC_k": "0:16"
+  "7B6iiJtvC_k": "0:16",
+  "0lzu2sv3uG0": "2:29",
+  "26WwZmXYEuo": "13:27"
 };
       const _RX_DATE8 = /(\d{4})(\d{2})(\d{2})/;
       const _RX_DATE_SEP = /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/;
@@ -14409,7 +14417,14 @@
       }
       const _META_CACHE_KEY = "rescene-meta-v1";
       const _META_CACHE_TTL = 30 * 24 * 60 * 60 * 1000;
-      const _isMobile = window.matchMedia("(max-width: 700px)").matches;
+      const _mobileMedia = window.matchMedia("(max-width: 700px)");
+      let _isMobile = _mobileMedia.matches;
+      const _syncMobileMedia = (event) => {
+        _isMobile = event.matches;
+      };
+      if (_mobileMedia.addEventListener)
+        _mobileMedia.addEventListener("change", _syncMobileMedia);
+      else _mobileMedia.addListener(_syncMobileMedia);
       const _deviceUA = navigator.userAgent || "";
       const _devicePlatform = navigator.userAgentData?.platform || navigator.platform || "";
       const _isIOS =
@@ -14877,6 +14892,7 @@
   {
     "category": "기타",
     "urls": [
+      "https://www.youtube.com/watch?v=26WwZmXYEuo",
       "https://youtu.be/OQcGGTAGXgE"
     ]
   },
@@ -16221,6 +16237,11 @@
     }
   ],
   "kbo": [
+    {
+      "vid": "0lzu2sv3uG0",
+      "url": "https://www.youtube.com/watch?v=0lzu2sv3uG0",
+      "date": "2026.10.01 19:19"
+    },
     {
       "vid": "jXG-HT3UGFM",
       "url": "https://youtu.be/jXG-HT3UGFM",
@@ -22528,9 +22549,6 @@
         return str ? str.split(" ")[0] : str;
       }
       function _dateStrToSortKey(full) {
-        // 날짜 정보가 아직 없는 영상(방금 추가되어 DATE_MAP/메타 파싱이
-        // 안 된 경우)은 0(가장 오래됨)이 아니라 "지금"으로 취급해
-        // 최신순 정렬 시 맨 위로, 오래된순 정렬 시 맨 아래로 오게 한다.
         if (!full) return Date.now();
         const [datePart, timePart] = full.split(" ");
         const d = (datePart || "")
@@ -23575,7 +23593,6 @@
             "200px",
           );
         }
-        if (curSearchQuery) applySearch();
       }
       function _avcTitleHtml(item, pfx, videoTitle) {
         return item.loaded
@@ -23805,6 +23822,35 @@
         });
         if (curSearchQuery) _scheduleCountUpdate();
       }
+      function _findVideoCardElement(vid, part, selector = "") {
+        for (const prefix of ["avc", "arc", "bvc"]) {
+          const el = selector
+            ? document.querySelector(`#${prefix}-${vid} ${selector}`)
+            : document.getElementById(`${prefix}-${part}-${vid}`);
+          if (el) return el;
+        }
+        return null;
+      }
+      function _updateVideoCardTitle(vid, title) {
+        const el = _findVideoCardElement(vid, "title");
+        if (el) el.textContent = title;
+      }
+      function _updateVideoCardDate(vid, date, replaceMeta = false) {
+        if (replaceMeta) {
+          const el = _findVideoCardElement(vid, "", ".cmeta");
+          if (el) el.innerHTML = date ? `<span class="cdate">${dateOnly(date)}</span>` : "";
+          return;
+        }
+        const el = _findVideoCardElement(vid, "", ".cdate");
+        const skeleton = _findVideoCardElement(vid, "", ".skel-date");
+        if (el) el.textContent = dateOnly(date) || "";
+        else if (skeleton) {
+          const span = document.createElement("span");
+          span.className = "cdate";
+          span.textContent = dateOnly(date) || "";
+          skeleton.replaceWith(span);
+        }
+      }
       async function loadAllVideosMetas(items) {
         const CHUNK = 6;
         const mainUnloaded = items.filter(
@@ -23832,26 +23878,8 @@
               proxy.meta = ref.meta;
               proxy.loaded = true;
               const tl = getTypeLabel(proxy.type);
-              const titleEl =
-                document.getElementById(`avc-title-${proxy.vid}`) ||
-                document.getElementById(`arc-title-${proxy.vid}`) ||
-                document.getElementById(`bvc-title-${proxy.vid}`);
-              const dateEl =
-                document.querySelector(`#avc-${proxy.vid} .cdate`) ||
-                document.querySelector(`#arc-${proxy.vid} .cdate`) ||
-                document.querySelector(`#bvc-${proxy.vid} .cdate`);
-              const skelDate =
-                document.querySelector(`#avc-${proxy.vid} .skel-date`) ||
-                document.querySelector(`#arc-${proxy.vid} .skel-date`) ||
-                document.querySelector(`#bvc-${proxy.vid} .skel-date`);
-              if (titleEl) titleEl.textContent = ref.meta.rawTitle || ref.song;
-              if (dateEl) dateEl.textContent = dateOnly(ref.meta.date) || "";
-              else if (skelDate) {
-                const span = document.createElement("span");
-                span.className = "cdate";
-                span.textContent = dateOnly(ref.meta.date) || "";
-                skelDate.replaceWith(span);
-              }
+              _updateVideoCardTitle(proxy.vid, ref.meta.rawTitle || ref.song);
+              _updateVideoCardDate(proxy.vid, ref.meta.date);
               replaceSkeleton(ref);
               const showLabel = ref.meta?.show?.label || "";
               const channel = ref.meta?.channel || "";
@@ -23900,19 +23928,8 @@
                 channel: fetched.channel || "",
               };
               proxy.loaded = true;
-              const titleEl =
-                document.getElementById(`avc-title-${proxy.vid}`) ||
-                document.getElementById(`arc-title-${proxy.vid}`) ||
-                document.getElementById(`bvc-title-${proxy.vid}`);
-              const metaEl =
-                document.querySelector(`#avc-${proxy.vid} .cmeta`) ||
-                document.querySelector(`#arc-${proxy.vid} .cmeta`) ||
-                document.querySelector(`#bvc-${proxy.vid} .cmeta`);
-              if (titleEl) titleEl.textContent = ref.title || proxy.vid;
-              if (metaEl)
-                metaEl.innerHTML = ref.date
-                  ? `<span class="cdate">${dateOnly(ref.date)}</span>`
-                  : "";
+              _updateVideoCardTitle(proxy.vid, ref.title || proxy.vid);
+              _updateVideoCardDate(proxy.vid, ref.date, true);
               const channelKey = VID_TO_EXTERNAL_KEY[proxy.vid] || "";
               const channelLabel =
                 EXTERNAL_LABELS[channelKey] || fetched.channel || "";
@@ -23953,11 +23970,7 @@
                   ref.date + (getCurrentT().live_title_suffix || " 라이브");
               proxy.meta.rawTitle = ref.title;
               proxy.loaded = true;
-              const avcTitle =
-                document.getElementById(`avc-title-${proxy.vid}`) ||
-                document.getElementById(`arc-title-${proxy.vid}`) ||
-                document.getElementById(`bvc-title-${proxy.vid}`);
-              if (avcTitle) avcTitle.textContent = ref.title;
+              _updateVideoCardTitle(proxy.vid, ref.title);
               const lvcTitle = document.getElementById(
                 `lvc-title-${proxy.vid}`,
               );
@@ -24842,130 +24855,6 @@
           el.removeAttribute("data-hl-orig");
         });
       }
-      let _applySearchToken = 0;
-      function _flushRemaining(
-        remaining,
-        buildFn,
-        container,
-        sentinel,
-        loadFn,
-      ) {
-        if (!remaining.length) return;
-        const wrapper = document.createElement("div");
-        wrapper.innerHTML = remaining
-          .map((item, i) => {
-            const delay = _cardDelay(i, 60);
-            return buildFn(item, delay);
-          })
-          .join("");
-        const frag = document.createDocumentFragment();
-        while (wrapper.firstElementChild)
-          frag.appendChild(wrapper.firstElementChild);
-        if (sentinel && sentinel.parentNode) {
-          container.insertBefore(frag, sentinel);
-        } else {
-          container.appendChild(frag);
-        }
-        if (loadFn) loadFn(remaining);
-      }
-      function _applySearchFilter(targetGrid, q) {
-        const cards = targetGrid.querySelectorAll(".vcard");
-        let visible = 0;
-        const dateNorm = q ? normalizeDateQuery(q.replace(/\s/g, "")) : null;
-        cards.forEach((card) => {
-          if (!q) {
-            _hlClear(card);
-            card.style.display = "";
-            visible++;
-            return;
-          }
-          let match;
-          if (dateNorm) {
-            const date =
-              card.querySelector(".cdate")?.textContent?.trim() || "";
-            match = date !== "" && date.includes(dateNorm);
-          } else {
-            const cached = card.getAttribute("data-search");
-            if (cached !== null) {
-              match = cached.includes(q);
-            } else {
-              const primary = card.querySelector(".csong")?.textContent || "";
-              const multi =
-                card.querySelector(".csong-multi")?.textContent || "";
-              const badge =
-                card.querySelector(".type-badge")?.textContent || "";
-              const tags = card.querySelector(".ctags")?.textContent || "";
-              const channel = card.getAttribute("data-channel") || "";
-              const category = card.getAttribute("data-category") || "";
-              const show = card.getAttribute("data-show") || "";
-              const type = card.getAttribute("data-type") || "";
-              const date =
-                card.querySelector(".cdate")?.textContent?.trim() || "";
-              match = (
-                primary +
-                " " +
-                multi +
-                " " +
-                badge +
-                " " +
-                tags +
-                " " +
-                channel +
-                " " +
-                category +
-                " " +
-                show +
-                " " +
-                type +
-                " " +
-                date
-              )
-                .toLowerCase()
-                .includes(q);
-            }
-          }
-          card.style.display = match ? "" : "none";
-          if (match) {
-            _hlCard(card, dateNorm || q);
-            visible++;
-          } else {
-            _hlClear(card);
-          }
-        });
-        const countEl = document.getElementById("searchResultCount");
-        if (countEl)
-          countEl.textContent = q
-            ? `${visible}${getCurrentT().search_result_unit || ""}`
-            : "";
-        const emptyId = "searchEmptyMsg";
-        let emptyEl = targetGrid.querySelector(`#${emptyId}`);
-        if (q && visible === 0) {
-          if (emptyEl) emptyEl.remove();
-          const t = getCurrentT();
-          emptyEl = document.createElement("div");
-          emptyEl.id = emptyId;
-          emptyEl.className = "search-empty";
-          const ico = document.createElement("div");
-          ico.className = "ico";
-          ico.textContent = "🔍";
-          const p = document.createElement("p");
-          if (t.search_empty_prefix)
-            p.appendChild(document.createTextNode(t.search_empty_prefix));
-          const quote = document.createElement("strong");
-          quote.textContent = `"${q}"`;
-          p.appendChild(quote);
-          if (t.search_empty_suffix)
-            p.appendChild(document.createTextNode(t.search_empty_suffix));
-          const small = document.createElement("small");
-          small.textContent = t.search_empty_hint || "";
-          emptyEl.appendChild(ico);
-          emptyEl.appendChild(p);
-          emptyEl.appendChild(small);
-          targetGrid.appendChild(emptyEl);
-        } else {
-          if (emptyEl) emptyEl.remove();
-        }
-      }
       let _pagedSearch = null;
       function _stopPagedSearch() {
         if (_pagedSearch?.observer) _pagedSearch.observer.disconnect();
@@ -25001,16 +24890,27 @@
           item.loaded = true;
         }
       }
+      const _searchTextCache = new WeakMap();
       function _searchItemText(item) {
         const ref = item._ref || item;
         const meta = ref.meta || item.meta || {};
+        const fields = [
+          window._curLang, meta.rawTitle, meta.channel, meta.show?.label,
+          ref.title, ref.song, item.song, ref.category, ref.channel,
+          item.channel, item.type, DATE_MAP[item.vid], ref.date, meta.date,
+          VID_TO_EXTERNAL_KEY[item.vid], ...(ref.members || []),
+        ];
+        const cached = _searchTextCache.get(item);
+        if (cached && fields.length === cached.fields.length &&
+            fields.every((value, index) => Object.is(value, cached.fields[index])))
+          return cached.result;
         const extra = [
           getCategoryLabel(ref.category || ""),
           EXTERNAL_LABELS[VID_TO_EXTERNAL_KEY[item.vid] || ""] || "",
           meta.show?.label || "",
         ];
         const date = DATE_MAP[item.vid] || ref.date || meta.date || "";
-        return {
+        const result = {
           date: dateOnly(date),
           text: [
             meta.rawTitle,
@@ -25031,6 +24931,8 @@
             .join(" ")
             .toLowerCase(),
         };
+        _searchTextCache.set(item, { fields, result });
+        return result;
       }
       function _reconcileSearchCards(state, matches) {
         const active = new Set(matches.map((item) => item.vid));
@@ -25107,10 +25009,7 @@
         }
         state.signature = signature;
         state.matches = matches;
-        const wanted =
-          state.section === "allvideos"
-            ? matches.length
-            : Math.max(40, state.loaded || 0);
+        const wanted = Math.max(40, state.loaded || 0);
         state.loaded = 0;
         state.observer?.disconnect();
         state.grid.replaceChildren();
@@ -25514,7 +25413,6 @@
         }
       }
       loadScheduleJson();
-      // Remember source timestamps so switching language refreshes their labels.
       let _newsUpdatedAt = null;
       let _chartUpdatedAt = null;
       function _refreshDataUpdatedLabels() {
@@ -25537,9 +25435,7 @@
           .then(function (data) {
             if (!Array.isArray(data?.articles))
               throw new Error("Invalid news data");
-            NEWS_DATA = (
-              Array.isArray(data?.articles) ? data.articles : []
-            ).filter(
+            NEWS_DATA = data.articles.filter(
               (a) => a && typeof a.title === "string" && _safeHttpUrl(a.url),
             );
             _newsLoaded = true;
@@ -26384,9 +26280,6 @@
         resetSchedSearchUi(true);
         renderCalendar();
         updateSchedList();
-      }
-      function calCloseDetail() {
-        calShowMonth();
       }
       function calShowMonth() {
         _calSelectedDate = null;
@@ -27321,6 +27214,7 @@
         if (document.fonts) document.fonts.ready.then(schedule);
         schedule();
       })();
+      setLang(window._curLang, false);
       (function () {
         const _VALID_TABS = new Set(Object.keys(_PICK_TAB_ID_MAP));
         const params = new URLSearchParams(location.search);
@@ -27338,11 +27232,6 @@
         }
         pickSection(tab, true);
       });
-      try {
-        const savedLang = localStorage.getItem("rescene-lang");
-        if (savedLang && ["KR", "JP", "EN"].includes(savedLang))
-          setLang(savedLang);
-      } catch {}
       updateBookmarkCounts();
       window.addEventListener("load", () => {
         const scrollTopBtn = document.getElementById("scrollTop");
