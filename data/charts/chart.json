@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-01T09:00:50.809633+09:00",
+  "updatedAt": "2026-10-01T10:00:48.722439+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -55,8 +55,8 @@
           "previousRank": 3
         },
         "genie": {
-          "rank": 8,
-          "previousRank": 7
+          "rank": 10,
+          "previousRank": 8
         },
         "vibe": {
           "rank": 12,
@@ -67,8 +67,8 @@
           "previousRank": 8
         },
         "flo": {
-          "rank": 22,
-          "previousRank": 24
+          "rank": 9,
+          "previousRank": 22
         },
         "youtube_music": {
           "rank": 9,
@@ -91,7 +91,7 @@
         },
         "genie": {
           "rank": 7,
-          "previousRank": 8
+          "previousRank": 7
         },
         "vibe": {
           "rank": 6,
@@ -102,7 +102,7 @@
           "previousRank": 21
         },
         "flo": {
-          "rank": 30,
+          "rank": 27,
           "previousRank": 30
         },
         "youtube_music": {
@@ -121,7 +121,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 47,
+          "rank": 50,
           "previousRank": 47
         },
         "bugs": {
@@ -145,19 +145,15 @@
     {
       "songName": "Pinball",
       "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/085/542/577/85542577_1724656614230_1_140x140.JPG/dims/resize/Q_80,0",
+      "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
-        "genie": {
-          "rank": 96,
-          "previousRank": 115
-        },
         "bugs": {
           "rank": 24,
           "previousRank": 25
         },
         "flo": {
-          "rank": 67,
-          "previousRank": 68
+          "rank": 65,
+          "previousRank": 67
         },
         "youtube_music": {
           "rank": 30,
