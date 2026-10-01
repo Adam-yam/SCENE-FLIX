@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T17:58:27Z",
+  "updated": "2026-10-01T19:58:33Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -658,6 +658,14 @@
       "source": "mnetplus"
     },
     {
+      "date": "2026-10-04",
+      "time": "",
+      "title": "2026 의령 리치리치 페스티벌",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
       "date": "2026-10-09",
       "time": "",
       "title": "연수 능허대 문화 축제",
@@ -687,6 +695,30 @@
       "title": "NOL FESTIVAL - 고양",
       "detail": "",
       "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-23",
+      "time": "",
+      "title": "마산대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-24",
+      "time": "",
+      "title": "여기어때 콘서트팩 거제",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-31",
+      "time": "",
+      "title": "APEC 정상회의장 기념관 개관식",
+      "detail": "",
+      "type": "event",
       "source": "mnetplus"
     },
     {
