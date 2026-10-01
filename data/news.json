@@ -1,6 +1,14 @@
 {
-  "updated": "2026-10-01T13:58:38Z",
+  "updated": "2026-10-01T15:58:35Z",
   "articles": [
+    {
+      "title": "‘비서진’ 리센느 편 방송",
+      "url": "https://www.bntnews.co.kr/article/view/bnt202610010189",
+      "date": "2026.10.01",
+      "source": "bntnews.co.kr",
+      "description": "걸그룹 리센느를 만나 세대 차이를 실감한다. 평균 나이 56.5세의 두 사람은 마라탕부터 말랑이까지 젠지 문화를 접하며 연이어 당황한다. 2일 방송되는 SBS 금요 예능 ‘무엇이든 해줄지니 - 비서진’(비서진)에는 리센느...",
+      "thumbnail": "https://www.bntnews.co.kr/data/bnt/image/2026/10/01/bnt202610010340.jpg"
+    },
     {
       "title": "[오늘의 영상] 통편집?…오늘은 리센느 데이",
       "url": "https://m.sports.naver.com/kbaseball/article/056/0012266635",
@@ -42,14 +50,6 @@
       "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616609_001_20261001192840422.jpg"
     },
     {
-      "title": "[사진] 리센느 제나, 삼성 승리 시구 후 세리머니",
-      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616605",
-      "date": "2026.10.01",
-      "source": "osen.co.kr",
-      "description": "2026 신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나가 삼성 라이온즈 승리 기원 시구를 하고 있다. 2026.10.01",
-      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616605_001_20261001192831035.jpg"
-    },
-    {
       "title": "[사진] 리센느 제나, 삼성 승리 함께 해요",
       "url": "https://m.sports.naver.com/kbaseball/article/109/0005616603",
       "date": "2026.10.01",
@@ -58,52 +58,12 @@
       "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616603_001_20261001192827163.jpg"
     },
     {
-      "title": "[사진] 리센느 제나와 원이, 강민호에 승리 기운 듬뿍",
-      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616613",
-      "date": "2026.10.01",
-      "source": "osen.co.kr",
-      "description": "신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나와 원이가 삼성 라이온즈 승리 기원 시구 행사를 하고 있다. 2026.10.01",
-      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616613_001_20261001192849043.jpg"
-    },
-    {
-      "title": "[사진] 리센느 제나, 삼성 승리 완벽 시구",
-      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616604",
+      "title": "[사진] 리센느 제나, 삼성 승리 시구 후 세리머니",
+      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616605",
       "date": "2026.10.01",
       "source": "osen.co.kr",
       "description": "2026 신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나가 삼성 라이온즈 승리 기원 시구를 하고 있다. 2026.10.01",
-      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616604_001_20261001192829082.jpg"
-    },
-    {
-      "title": "[사진] 리센느 제나와 원이, 삼성 라이온즈 승리 함께해요",
-      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616612",
-      "date": "2026.10.01",
-      "source": "osen.co.kr",
-      "description": "신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나와 원이가 삼성 라이온즈 승리 기원 시구 행사를 하고 있다. 2026.10.01",
-      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616612_001_20261001192846993.jpg"
-    },
-    {
-      "title": "[사진] 리센느 제나, 완벽한 삼성 승리 시구",
-      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616607",
-      "date": "2026.10.01",
-      "source": "osen.co.kr",
-      "description": "2026 신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나가 삼성 라이온즈 승리 기원 시구를 하고 있다. 2026.10.01",
-      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616607_001_20261001192835999.jpg"
-    },
-    {
-      "title": "[사진] 리센느 제나와 원이, 라팍서 시구 시타 했어요",
-      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616611",
-      "date": "2026.10.01",
-      "source": "osen.co.kr",
-      "description": "신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나와 원이가 삼성 라이온즈 승리 기원 시구 행사를 하고 있다. 2026.10.01",
-      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616611_001_20261001192844864.jpg"
-    },
-    {
-      "title": "[사진] 시구 리센느 제나, 삼성 우승 세리머니",
-      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616608",
-      "date": "2026.10.01",
-      "source": "osen.co.kr",
-      "description": "2026 신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나가 삼성 라이온즈 승리 기원 시구를 하고 있다. 2026.10.01",
-      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616608_001_20261001192838119.jpg"
+      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616605_001_20261001192831035.jpg"
     },
     {
       "title": "[사진] 리센느 제나, 삼성 승리 시구",
@@ -122,12 +82,52 @@
       "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616606_001_20261001192833945.jpg"
     },
     {
-      "title": "[MD포토] 리센느 제나, '신라공주의 상큼 인사'",
-      "url": "https://m.entertain.naver.com/article/117/0004111172",
+      "title": "[사진] 리센느 제나, 완벽한 삼성 승리 시구",
+      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616607",
       "date": "2026.10.01",
-      "source": "mydaily.co.kr",
-      "description": "1일 오후 대구광역시 대구삼성라이온즈파크에서 진행된 '2026 프로야구 KBO리그' 삼성라이온즈와 한화이글스의 경기. 리센느 제나가 시구를 마친 뒤 인사를 하고 있다.",
-      "thumbnail": "https://imgnews.pstatic.net/image/117/2026/10/01/0004111172_001_20261001191416976.jpg"
+      "source": "osen.co.kr",
+      "description": "2026 신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나가 삼성 라이온즈 승리 기원 시구를 하고 있다. 2026.10.01",
+      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616607_001_20261001192835999.jpg"
+    },
+    {
+      "title": "[사진] 리센느 제나와 원이, 삼성 라이온즈 승리 함께해요",
+      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616612",
+      "date": "2026.10.01",
+      "source": "osen.co.kr",
+      "description": "신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나와 원이가 삼성 라이온즈 승리 기원 시구 행사를 하고 있다. 2026.10.01",
+      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616612_001_20261001192846993.jpg"
+    },
+    {
+      "title": "[사진] 리센느 제나, 삼성 승리 완벽 시구",
+      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616604",
+      "date": "2026.10.01",
+      "source": "osen.co.kr",
+      "description": "2026 신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나가 삼성 라이온즈 승리 기원 시구를 하고 있다. 2026.10.01",
+      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616604_001_20261001192829082.jpg"
+    },
+    {
+      "title": "[사진] 리센느 제나와 원이, 라팍서 시구 시타 했어요",
+      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616611",
+      "date": "2026.10.01",
+      "source": "osen.co.kr",
+      "description": "신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나와 원이가 삼성 라이온즈 승리 기원 시구 행사를 하고 있다. 2026.10.01",
+      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616611_001_20261001192844864.jpg"
+    },
+    {
+      "title": "[사진] 시구 리센느 제나, 삼성 우승 세리머니",
+      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616608",
+      "date": "2026.10.01",
+      "source": "osen.co.kr",
+      "description": "2026 신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나가 삼성 라이온즈 승리 기원 시구를 하고 있다. 2026.10.01",
+      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616608_001_20261001192838119.jpg"
+    },
+    {
+      "title": "[사진] 리센느 제나와 원이, 강민호에 승리 기운 듬뿍",
+      "url": "https://m.sports.naver.com/kbaseball/article/109/0005616613",
+      "date": "2026.10.01",
+      "source": "osen.co.kr",
+      "description": "신한 SOL KBO 리그 삼성 라이온즈와 한화 이글스의 경기가 열렸다. 홈팀 삼성은 원태인이, 방문팀 한화는 황준서가 선발 출전했다. 리센느 제나와 원이가 삼성 라이온즈 승리 기원 시구 행사를 하고 있다. 2026.10.01",
+      "thumbnail": "https://imgnews.pstatic.net/image/109/2026/10/01/0005616613_001_20261001192849043.jpg"
     },
     {
       "title": "[MD포토] 리센느 원이, '돋보이는 미모'",
@@ -136,6 +136,14 @@
       "source": "mydaily.co.kr",
       "description": "1일 오후 대구광역시 대구삼성라이온즈파크에서 진행된 '2026 프로야구 KBO리그' 삼성라이온즈와 한화이글스의 경기. 리센느 원이가 시타를 마친 뒤 인사를 하고 있다.",
       "thumbnail": "https://imgnews.pstatic.net/image/117/2026/10/01/0004111171_001_20261001191414843.jpg"
+    },
+    {
+      "title": "[MD포토] 리센느 제나, '신라공주의 상큼 인사'",
+      "url": "https://m.entertain.naver.com/article/117/0004111172",
+      "date": "2026.10.01",
+      "source": "mydaily.co.kr",
+      "description": "1일 오후 대구광역시 대구삼성라이온즈파크에서 진행된 '2026 프로야구 KBO리그' 삼성라이온즈와 한화이글스의 경기. 리센느 제나가 시구를 마친 뒤 인사를 하고 있다.",
+      "thumbnail": "https://imgnews.pstatic.net/image/117/2026/10/01/0004111172_001_20261001191416976.jpg"
     },
     {
       "title": "[MD포토] 리센느 원이-제나, '라이온즈 유니폼 입고'",
@@ -192,14 +200,6 @@
       "source": "mydaily.co.kr",
       "description": "1일 오후 대구광역시 대구삼성라이온즈파크에서 진행된 '2026 프로야구 KBO리그' 삼성라이온즈와 한화이글스의 경기. 리센느 제나가 시구를 하고 있다.",
       "thumbnail": "https://imgnews.pstatic.net/image/117/2026/10/01/0004111162_001_20261001190306657.jpg"
-    },
-    {
-      "title": "[MD포토] 리센느 제나, '깜찍 미모 폭발'",
-      "url": "https://m.entertain.naver.com/article/117/0004111160",
-      "date": "2026.10.01",
-      "source": "mydaily.co.kr",
-      "description": "1일 오후 대구광역시 대구삼성라이온즈파크에서 진행된 '2026 프로야구 KBO리그' 삼성라이온즈와 한화이글스의 경기. 리센느 제나가 시구를 하고 있다.",
-      "thumbnail": "https://imgnews.pstatic.net/image/117/2026/10/01/0004111160_001_20261001190211485.jpg"
     }
   ]
 }
