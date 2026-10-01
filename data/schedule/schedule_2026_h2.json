@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-30T23:58:30Z",
+  "updated": "2026-10-01T01:58:24Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -685,6 +685,14 @@
       "date": "2026-10-17",
       "time": "",
       "title": "NOL FESTIVAL - 고양",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-11-07",
+      "time": "",
+      "title": "2026 KGMA (코리아 그랜드 뮤직 어워즈)",
       "detail": "",
       "type": "concert",
       "source": "mnetplus"
