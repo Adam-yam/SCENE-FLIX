@@ -10955,6 +10955,7 @@
     "song": "Glow Up",
     "videos": {
       "music": [
+        "https://www.youtube.com/watch?v=Q5CzrSfrnVk",
         "https://youtu.be/Zlv-pEjU4Og",
         "https://youtu.be/FYdghnUJx-Y",
         "https://youtu.be/VTdLPy8HF7c",
@@ -12724,7 +12725,8 @@
   "CXXnhOfsDJ4": "2026.03.02 18:00",
   "ylD2Lskwydw": "2026.03.09 17:05",
   "SYuEwH9htrU": "2026.02.26 18:00",
-  "26WwZmXYEuo": "2026.10.01 20:00"
+  "26WwZmXYEuo": "2026.10.01 20:00",
+  "Q5CzrSfrnVk": "2025.11.12 17:00"
 };
       const DURATION_MAP = {
   "DatRv3vtV5s": "8:18",
@@ -14256,7 +14258,10 @@
   "xBPBS-V1Wq8": "0:16",
   "7B6iiJtvC_k": "0:16",
   "0lzu2sv3uG0": "2:29",
-  "26WwZmXYEuo": "13:27"
+  "26WwZmXYEuo": "13:27",
+  "Q5CzrSfrnVk": "10:32",
+  "_61XvUSGumc": "4:52",
+  "1zNBsXVmJSw": "38:09"
 };
       const _RX_DATE8 = /(\d{4})(\d{2})(\d{2})/;
       const _RX_DATE_SEP = /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/;
@@ -14366,15 +14371,18 @@
           (e.button != null && e.button !== 0)
         )
           return;
-        e.preventDefault();
-        if (!_VIDEO_ID_RE.test(vid)) return;
+        if (!_VIDEO_ID_RE.test(vid)) {
+          e.preventDefault();
+          return;
+        }
         if (e.target.closest(".bm-btn") || e.target.closest(".share-btn"))
           return;
         if (_elDrawer && _elDrawer.classList.contains("open")) {
+          e.preventDefault();
           closeDrawer();
           return;
         }
-        _openYouTubeApp(vid);
+        _openYouTubeApp(vid, e);
         try {
           localStorage.setItem("rescene-last-watched", vid);
         } catch {}
@@ -14435,41 +14443,59 @@
         (!_isIOS && /Linux/i.test(_deviceUA + " " + _devicePlatform) &&
           !/CrOS/i.test(_deviceUA) && navigator.maxTouchPoints > 1 &&
           window.matchMedia("(any-pointer: coarse)").matches);
+      function _videoAppUrl(vid) {
+        const webUrl = ytUrl(vid);
+        if (_isAndroid)
+          return "intent://www.youtube.com/watch?v=" + vid +
+            "#Intent;scheme=https;package=com.google.android.youtube;" +
+            "S.browser_fallback_url=" + encodeURIComponent(webUrl) + ";end";
+        if (_isIOS) return "youtube://watch?v=" + vid;
+        return webUrl;
+      }
+      function _videoLinkAttrs(vid) {
+        return `href="${_videoAppUrl(vid)}" target="${_isIOS || _isAndroid ? "_self" : "_blank"}"`;
+      }
       let _cancelYouTubeLaunch = null;
-      function _openYouTubeApp(vid) {
+      function _openYouTubeApp(vid, event) {
         if (!_VIDEO_ID_RE.test(vid)) return;
         if (_cancelYouTubeLaunch) _cancelYouTubeLaunch();
         const webUrl = ytUrl(vid);
-        if (_isAndroid) {
-          window.location.href =
-            "intent://www.youtube.com/watch?v=" + vid +
-            "#Intent;scheme=https;package=com.google.android.youtube;" +
-            "S.browser_fallback_url=" + encodeURIComponent(webUrl) + ";end";
-          return;
-        }
-        if (!_isIOS) {
+        if (!_isIOS && !_isAndroid) {
+          event?.preventDefault();
           window.open(webUrl, "_blank", "noopener");
           return;
         }
-        let timer;
-        const cancel = () => {
-          clearTimeout(timer);
-          document.removeEventListener("visibilitychange", onVisibility);
-          window.removeEventListener("pagehide", cancel);
-          if (_cancelYouTubeLaunch === cancel) _cancelYouTubeLaunch = null;
-        };
-        const onVisibility = () => {
-          if (document.visibilityState === "hidden") cancel();
-        };
-        _cancelYouTubeLaunch = cancel;
-        document.addEventListener("visibilitychange", onVisibility);
-        window.addEventListener("pagehide", cancel);
-        timer = setTimeout(() => {
-          const visible = document.visibilityState === "visible";
-          cancel();
-          if (visible) window.location.href = webUrl;
-        }, 2500);
-        window.location.href = "youtube://www.youtube.com/watch?v=" + vid;
+        if (_isIOS) {
+          let timer;
+          const cancel = () => {
+            clearTimeout(timer);
+            document.removeEventListener("visibilitychange", onVisibility);
+            window.removeEventListener("pagehide", cancel);
+            window.removeEventListener("blur", cancel);
+            if (_cancelYouTubeLaunch === cancel) _cancelYouTubeLaunch = null;
+          };
+          const onVisibility = () => {
+            if (document.visibilityState === "hidden") cancel();
+          };
+          _cancelYouTubeLaunch = cancel;
+          document.addEventListener("visibilitychange", onVisibility);
+          window.addEventListener("pagehide", cancel);
+          window.addEventListener("blur", cancel);
+          timer = setTimeout(() => {
+            const visible = document.visibilityState === "visible";
+            cancel();
+            if (visible) window.location.assign(webUrl);
+          }, 3500);
+        }
+        const appUrl = _videoAppUrl(vid);
+        const link = event?.target.closest("a");
+        if (link && link.dataset.vid === vid) {
+          link.href = appUrl;
+          link.target = "_self";
+          return;
+        }
+        event?.preventDefault();
+        window.location.assign(appUrl);
       }
       function _cardDelay(i, batchSize = Infinity) {
         return `${Math.min((i % batchSize) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
@@ -15130,7 +15156,8 @@
   "gapcrush": "내돌의 온도차",
   "fxfcrew": "4X4 CREW",
   "dermab": "더마비",
-  "megastudy": "메가스터디"
+  "megastudy": "메가스터디",
+  "kmu": "계명대학교"
 };
       const EXTERNAL_DATA = {
   "suwonuniv": [
@@ -15170,6 +15197,11 @@
     }
   ],
   "secretaryjin": [
+    {
+      "vid": "_61XvUSGumc",
+      "url": "https://www.youtube.com/watch?v=_61XvUSGumc",
+      "date": "2026.10.02 09:00"
+    },
     {
       "vid": "u9o2K1z0wx0",
       "url": "https://youtu.be/u9o2K1z0wx0",
@@ -19797,6 +19829,13 @@
       "url": "https://www.youtube.com/watch?v=7B6iiJtvC_k",
       "date": "2026.10.01 10:47"
     }
+  ],
+  "kmu": [
+    {
+      "vid": "1zNBsXVmJSw",
+      "url": "https://www.youtube.com/watch?v=1zNBsXVmJSw",
+      "date": "2026.10.02 01:09"
+    }
   ]
 };
       const VID_TO_EXTERNAL_KEY = {};
@@ -20045,7 +20084,8 @@
       "spotvkpopawards",
       "thefactmusicawards",
       "suwonuniv",
-      "youthfestival"
+      "youthfestival",
+      "kmu"
     ]
   }
 };
@@ -20175,7 +20215,7 @@
         if (cfg.includeChannelInSearch) searchFields.push(channel);
         searchFields.push(dateStr);
         const searchText = searchFields.join(" ").toLowerCase();
-        return `<a class="vcard card-base hover-lift ${cfg.tbClass}" id="${idPrefix}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-${cfg.dataAttr}="${_escHtml(label)}" data-search="${_escHtml(searchText)}">
+        return `<a class="vcard card-base hover-lift ${cfg.tbClass}" id="${idPrefix}-${item.vid}" ${_videoLinkAttrs(item.vid)} rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-${cfg.dataAttr}="${_escHtml(label)}" data-search="${_escHtml(searchText)}">
     ${buildThumbHtml(item.vid, kindBadgeHtml(cfg.kind))}
     <div class="cbody">
       ${titleHtml}
@@ -22643,7 +22683,7 @@
         const searchText = [item.title || "", memberNames, liveDate]
           .join(" ")
           .toLowerCase();
-        return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${searchText}">
+        return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" ${_videoLinkAttrs(item.vid)} rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${searchText}">
     ${buildThumbHtml(item.vid, kindBadgeHtml("live"))}
     <div class="cbody">
       ${titleHtml}
@@ -23155,7 +23195,7 @@
         ]
           .join(" ")
           .toLowerCase();
-        return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-show="${_escHtml(showLabel)}" data-channel="${_escHtml(channel)}" data-type="${_escHtml(tl)}" data-search="${_escHtml(searchText)}">
+        return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" ${_videoLinkAttrs(item.vid)} rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-show="${_escHtml(showLabel)}" data-channel="${_escHtml(channel)}" data-type="${_escHtml(tl)}" data-search="${_escHtml(searchText)}">
     ${buildThumbHtml(item.vid, kindBadgeHtml(item.type))}
     <div class="cbody">
       ${titleHtml}
@@ -23614,7 +23654,7 @@
           item._src === "external"
             ? item._src
             : item.type;
-        return `<a class="vcard card-base hover-lift ${tbClass}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
+        return `<a class="vcard card-base hover-lift ${tbClass}" id="${pfx}-${item.vid}" ${_videoLinkAttrs(item.vid)} rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
     ${buildThumbHtml(item.vid, kindBadgeHtml(kind), isWatched)}
     <div class="cbody">
       ${bodyHtml}
@@ -25731,8 +25771,8 @@
           const card = document.createElement("a");
           card.className = "shorts-card";
           card.id = "svc-" + item.vid;
-          card.href = ytUrl;
-          card.target = "_blank";
+          card.href = _isIOS || _isAndroid ? _videoAppUrl(item.vid) : ytUrl;
+          card.target = _isIOS || _isAndroid ? "_self" : "_blank";
           card.rel = "noopener";
           card.style.animationDelay = delay;
           card.dataset.vid = item.vid;
