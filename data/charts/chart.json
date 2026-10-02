@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-02T21:00:49.062693+09:00",
+  "updatedAt": "2026-10-02T22:00:51.718787+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -29,7 +29,7 @@
         },
         "bugs": {
           "rank": 3,
-          "previousRank": 4
+          "previousRank": 3
         },
         "flo": {
           "rank": 2,
@@ -51,20 +51,20 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 4,
+          "rank": 3,
           "previousRank": 4
         },
         "genie": {
-          "rank": 10,
-          "previousRank": 9
+          "rank": 9,
+          "previousRank": 10
         },
         "vibe": {
           "rank": 12,
           "previousRank": 12
         },
         "bugs": {
-          "rank": 8,
-          "previousRank": 11
+          "rank": 9,
+          "previousRank": 8
         },
         "flo": {
           "rank": 7,
@@ -98,8 +98,8 @@
           "previousRank": 6
         },
         "bugs": {
-          "rank": 18,
-          "previousRank": 19
+          "rank": 14,
+          "previousRank": 18
         },
         "flo": {
           "rank": 9,
@@ -121,15 +121,15 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 48,
-          "previousRank": 50
+          "rank": 49,
+          "previousRank": 48
         },
         "bugs": {
-          "rank": 53,
-          "previousRank": 37
+          "rank": 45,
+          "previousRank": 53
         },
         "flo": {
-          "rank": 85,
+          "rank": 84,
           "previousRank": 85
         },
         "youtube_music": {
@@ -148,8 +148,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 30,
-          "previousRank": 32
+          "rank": 46,
+          "previousRank": 30
         },
         "flo": {
           "rank": 58,
