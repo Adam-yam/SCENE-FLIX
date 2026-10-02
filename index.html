@@ -14371,18 +14371,20 @@
           (e.button != null && e.button !== 0)
         )
           return;
-        if (!_VIDEO_ID_RE.test(vid)) {
-          e.preventDefault();
-          return;
-        }
+        e.preventDefault();
+        if (!_VIDEO_ID_RE.test(vid)) return;
         if (e.target.closest(".bm-btn") || e.target.closest(".share-btn"))
           return;
         if (_elDrawer && _elDrawer.classList.contains("open")) {
-          e.preventDefault();
           closeDrawer();
           return;
         }
-        _openYouTubeApp(vid, e);
+        const webUrl = ytUrl(vid);
+        if (_isAndroid || _isIOS) {
+          window.location.href = webUrl;
+        } else {
+          window.open(webUrl, "_blank", "noopener");
+        }
         try {
           localStorage.setItem("rescene-last-watched", vid);
         } catch {}
@@ -14433,70 +14435,10 @@
       if (_mobileMedia.addEventListener)
         _mobileMedia.addEventListener("change", _syncMobileMedia);
       else _mobileMedia.addListener(_syncMobileMedia);
-      const _deviceUA = navigator.userAgent || "";
-      const _devicePlatform = navigator.userAgentData?.platform || navigator.platform || "";
+      const _isAndroid = /Android/i.test(navigator.userAgent);
       const _isIOS =
-        /iPad|iPhone|iPod/i.test(_deviceUA) ||
-        (/Mac/i.test(_devicePlatform + " " + _deviceUA) && navigator.maxTouchPoints > 1);
-      const _isAndroid =
-        /Android/i.test(_deviceUA + " " + _devicePlatform) ||
-        (!_isIOS && /Linux/i.test(_deviceUA + " " + _devicePlatform) &&
-          !/CrOS/i.test(_deviceUA) && navigator.maxTouchPoints > 1 &&
-          window.matchMedia("(any-pointer: coarse)").matches);
-      function _videoAppUrl(vid) {
-        const webUrl = ytUrl(vid);
-        if (_isAndroid)
-          return "intent://www.youtube.com/watch?v=" + vid +
-            "#Intent;scheme=https;package=com.google.android.youtube;" +
-            "S.browser_fallback_url=" + encodeURIComponent(webUrl) + ";end";
-        if (_isIOS) return "youtube://watch?v=" + vid;
-        return webUrl;
-      }
-      function _videoLinkAttrs(vid) {
-        return `href="${_videoAppUrl(vid)}" target="${_isIOS || _isAndroid ? "_self" : "_blank"}"`;
-      }
-      let _cancelYouTubeLaunch = null;
-      function _openYouTubeApp(vid, event) {
-        if (!_VIDEO_ID_RE.test(vid)) return;
-        if (_cancelYouTubeLaunch) _cancelYouTubeLaunch();
-        const webUrl = ytUrl(vid);
-        if (!_isIOS && !_isAndroid) {
-          event?.preventDefault();
-          window.open(webUrl, "_blank", "noopener");
-          return;
-        }
-        if (_isIOS) {
-          let timer;
-          const cancel = () => {
-            clearTimeout(timer);
-            document.removeEventListener("visibilitychange", onVisibility);
-            window.removeEventListener("pagehide", cancel);
-            window.removeEventListener("blur", cancel);
-            if (_cancelYouTubeLaunch === cancel) _cancelYouTubeLaunch = null;
-          };
-          const onVisibility = () => {
-            if (document.visibilityState === "hidden") cancel();
-          };
-          _cancelYouTubeLaunch = cancel;
-          document.addEventListener("visibilitychange", onVisibility);
-          window.addEventListener("pagehide", cancel);
-          window.addEventListener("blur", cancel);
-          timer = setTimeout(() => {
-            const visible = document.visibilityState === "visible";
-            cancel();
-            if (visible) window.location.assign(webUrl);
-          }, 3500);
-        }
-        const appUrl = _videoAppUrl(vid);
-        const link = event?.target.closest("a");
-        if (link && link.dataset.vid === vid) {
-          link.href = appUrl;
-          link.target = "_self";
-          return;
-        }
-        event?.preventDefault();
-        window.location.assign(appUrl);
-      }
+        /iPad|iPhone|iPod/i.test(navigator.userAgent) ||
+        (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
       function _cardDelay(i, batchSize = Infinity) {
         return `${Math.min((i % batchSize) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
       }
@@ -20215,7 +20157,7 @@
         if (cfg.includeChannelInSearch) searchFields.push(channel);
         searchFields.push(dateStr);
         const searchText = searchFields.join(" ").toLowerCase();
-        return `<a class="vcard card-base hover-lift ${cfg.tbClass}" id="${idPrefix}-${item.vid}" ${_videoLinkAttrs(item.vid)} rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-${cfg.dataAttr}="${_escHtml(label)}" data-search="${_escHtml(searchText)}">
+        return `<a class="vcard card-base hover-lift ${cfg.tbClass}" id="${idPrefix}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-${cfg.dataAttr}="${_escHtml(label)}" data-search="${_escHtml(searchText)}">
     ${buildThumbHtml(item.vid, kindBadgeHtml(cfg.kind))}
     <div class="cbody">
       ${titleHtml}
@@ -22683,7 +22625,7 @@
         const searchText = [item.title || "", memberNames, liveDate]
           .join(" ")
           .toLowerCase();
-        return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" ${_videoLinkAttrs(item.vid)} rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${searchText}">
+        return `<a class="vcard card-base hover-lift ${lmClass}" id="lvc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${searchText}">
     ${buildThumbHtml(item.vid, kindBadgeHtml("live"))}
     <div class="cbody">
       ${titleHtml}
@@ -23195,7 +23137,7 @@
         ]
           .join(" ")
           .toLowerCase();
-        return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" ${_videoLinkAttrs(item.vid)} rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-show="${_escHtml(showLabel)}" data-channel="${_escHtml(channel)}" data-type="${_escHtml(tl)}" data-search="${_escHtml(searchText)}">
+        return `<a class="vcard card-base hover-lift ${tb}" id="vc-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-show="${_escHtml(showLabel)}" data-channel="${_escHtml(channel)}" data-type="${_escHtml(tl)}" data-search="${_escHtml(searchText)}">
     ${buildThumbHtml(item.vid, kindBadgeHtml(item.type))}
     <div class="cbody">
       ${titleHtml}
@@ -23654,7 +23596,7 @@
           item._src === "external"
             ? item._src
             : item.type;
-        return `<a class="vcard card-base hover-lift ${tbClass}" id="${pfx}-${item.vid}" ${_videoLinkAttrs(item.vid)} rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
+        return `<a class="vcard card-base hover-lift ${tbClass}" id="${pfx}-${item.vid}" href="${ytUrl(item.vid)}" target="_blank" rel="noopener" data-vid="${item.vid}" style="animation-delay:${delay}" data-search="${_escHtml(initialSearch)}">
     ${buildThumbHtml(item.vid, kindBadgeHtml(kind), isWatched)}
     <div class="cbody">
       ${bodyHtml}
@@ -25771,8 +25713,8 @@
           const card = document.createElement("a");
           card.className = "shorts-card";
           card.id = "svc-" + item.vid;
-          card.href = _isIOS || _isAndroid ? _videoAppUrl(item.vid) : ytUrl;
-          card.target = _isIOS || _isAndroid ? "_self" : "_blank";
+          card.href = ytUrl;
+          card.target = "_blank";
           card.rel = "noopener";
           card.style.animationDelay = delay;
           card.dataset.vid = item.vid;
