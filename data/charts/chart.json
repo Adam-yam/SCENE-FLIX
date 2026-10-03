@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T06:00:48.101199+09:00",
+  "updatedAt": "2026-10-04T07:00:45.030790+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -21,7 +21,7 @@
         },
         "genie": {
           "rank": 17,
-          "previousRank": 15
+          "previousRank": 17
         },
         "vibe": {
           "rank": 2,
@@ -55,19 +55,19 @@
           "previousRank": 4
         },
         "genie": {
-          "rank": 24,
+          "rank": 44,
           "previousRank": 24
         },
         "vibe": {
-          "rank": 12,
-          "previousRank": 12
+          "rank": 11,
+          "previousRank": 10
         },
         "bugs": {
           "rank": 9,
-          "previousRank": 10
+          "previousRank": 9
         },
         "flo": {
-          "rank": 9,
+          "rank": 11,
           "previousRank": 9
         },
         "youtube_music": {
@@ -90,27 +90,27 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 22,
-          "previousRank": 21
+          "rank": 21,
+          "previousRank": 22
         },
         "vibe": {
           "rank": 6,
           "previousRank": 6
         },
         "bugs": {
-          "rank": 18,
-          "previousRank": 22
+          "rank": 24,
+          "previousRank": 18
         },
         "flo": {
-          "rank": 11,
-          "previousRank": 10
+          "rank": 17,
+          "previousRank": 11
         },
         "youtube_music": {
           "rank": 8,
           "previousRank": 6
         },
         "spotify": {
-          "rank": 8,
+          "rank": 7,
           "previousRank": 8
         }
       }
@@ -125,20 +125,20 @@
           "previousRank": 60
         },
         "bugs": {
-          "rank": 38,
-          "previousRank": 44
+          "rank": 32,
+          "previousRank": 38
         },
         "flo": {
           "rank": 91,
-          "previousRank": 90
+          "previousRank": 91
         },
         "youtube_music": {
           "rank": 46,
           "previousRank": 53
         },
         "spotify": {
-          "rank": 33,
-          "previousRank": 32
+          "rank": 34,
+          "previousRank": 33
         }
       }
     },
@@ -148,8 +148,8 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 27,
-          "previousRank": 29
+          "rank": 25,
+          "previousRank": 27
         },
         "flo": {
           "rank": 67,
@@ -161,22 +161,7 @@
         },
         "spotify": {
           "rank": 46,
-          "previousRank": 43
-        }
-      }
-    },
-    {
-      "songName": "Glow Up",
-      "artistName": "RESCENE",
-      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
-      "ranks": {
-        "youtube_music": {
-          "rank": 89,
-          "previousRank": 92
-        },
-        "spotify": {
-          "rank": 190,
-          "previousRank": 193
+          "previousRank": 46
         }
       }
     },
@@ -188,6 +173,17 @@
         "youtube_music": {
           "rank": 81,
           "previousRank": 86
+        }
+      }
+    },
+    {
+      "songName": "Glow Up",
+      "artistName": "RESCENE",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
+      "ranks": {
+        "youtube_music": {
+          "rank": 89,
+          "previousRank": 92
         }
       }
     }
