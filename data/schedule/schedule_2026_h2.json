@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-03T15:58:25Z",
+  "updated": "2026-10-03T17:58:25Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -698,9 +698,25 @@
       "source": "mnetplus"
     },
     {
+      "date": "2026-10-04",
+      "time": "",
+      "title": "2026 의령 리치리치페스티벌",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
       "date": "2026-10-09",
       "time": "",
       "title": "연수 능허대 문화 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "20:00",
+      "title": "제14회 연수 능허대 문화축제",
       "detail": "",
       "type": "event",
       "source": "mnetplus"
@@ -749,6 +765,14 @@
       "date": "2026-10-31",
       "time": "",
       "title": "APEC 정상회의장 기념관 개관식",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-31",
+      "time": "",
+      "title": "경주 APEC 정상회의장 기념관 개관식",
       "detail": "",
       "type": "event",
       "source": "mnetplus"
