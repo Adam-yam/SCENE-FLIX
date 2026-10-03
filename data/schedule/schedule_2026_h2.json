@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-03T09:58:27Z",
+  "updated": "2026-10-03T11:58:26Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -642,6 +642,14 @@
       "source": "mnetplus"
     },
     {
+      "date": "2026-10-02",
+      "time": "23:10",
+      "title": "SBS <무엇이든 해줄지니 - 비서진>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
       "date": "2026-10-03",
       "time": "",
       "title": "2026 입크페스티벌",
@@ -658,11 +666,35 @@
       "source": "mnetplus"
     },
     {
+      "date": "2026-10-03",
+      "time": "15:50",
+      "title": "2026 입크 페스티벌",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-03",
+      "time": "20:30",
+      "title": "제72회 백제문화제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
       "date": "2026-10-04",
       "time": "",
       "title": "2026 의령 리치리치 페스티벌",
       "detail": "",
       "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-04",
+      "time": "",
+      "title": "제5회 의령 리치리치 페스티벌",
+      "detail": "",
+      "type": "event",
       "source": "mnetplus"
     },
     {
