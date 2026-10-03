@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-03T16:01:25.912576+09:00",
+  "updatedAt": "2026-10-03T17:00:43.225793+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -121,8 +121,8 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 52,
-          "previousRank": 51
+          "rank": 51,
+          "previousRank": 52
         },
         "bugs": {
           "rank": 34,
