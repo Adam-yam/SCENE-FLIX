@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T22:00:47.215565+09:00",
+  "updatedAt": "2026-10-04T23:00:46.849883+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -55,7 +55,7 @@
           "previousRank": 3
         },
         "genie": {
-          "rank": 9,
+          "rank": 23,
           "previousRank": 9
         },
         "vibe": {
@@ -87,11 +87,11 @@
       "ranks": {
         "melon": {
           "rank": 4,
-          "previousRank": 5
+          "previousRank": 4
         },
         "genie": {
-          "rank": 5,
-          "previousRank": 4
+          "rank": 4,
+          "previousRank": 5
         },
         "vibe": {
           "rank": 6,
@@ -116,13 +116,40 @@
       }
     },
     {
+      "songName": "Pinball",
+      "artistName": "RESCENE (리센느)",
+      "albumImageUrl": "https://image.genie.co.kr/Y/IMAGE/IMG_ALBUM/085/542/577/85542577_1724656614230_1_140x140.JPG/dims/resize/Q_80,0",
+      "ranks": {
+        "genie": {
+          "rank": 96,
+          "previousRank": 117
+        },
+        "bugs": {
+          "rank": 62,
+          "previousRank": 49
+        },
+        "flo": {
+          "rank": 61,
+          "previousRank": 62
+        },
+        "youtube_music": {
+          "rank": 30,
+          "previousRank": 30
+        },
+        "spotify": {
+          "rank": 46,
+          "previousRank": 46
+        }
+      }
+    },
+    {
       "songName": "Runaway",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 53,
-          "previousRank": 58
+          "rank": 56,
+          "previousRank": 53
         },
         "bugs": {
           "rank": 67,
@@ -139,29 +166,6 @@
         "spotify": {
           "rank": 34,
           "previousRank": 33
-        }
-      }
-    },
-    {
-      "songName": "Pinball",
-      "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
-      "ranks": {
-        "bugs": {
-          "rank": 62,
-          "previousRank": 49
-        },
-        "flo": {
-          "rank": 62,
-          "previousRank": 61
-        },
-        "youtube_music": {
-          "rank": 30,
-          "previousRank": 30
-        },
-        "spotify": {
-          "rank": 46,
-          "previousRank": 46
         }
       }
     },
