@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-04T20:00:49.934078+09:00",
+  "updatedAt": "2026-10-04T21:00:50.630875+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -36,8 +36,8 @@
           "previousRank": 2
         },
         "youtube_music": {
-          "rank": 5,
-          "previousRank": 4
+          "rank": 4,
+          "previousRank": 5
         },
         "spotify": {
           "rank": 1,
@@ -51,20 +51,20 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 4,
+          "rank": 3,
           "previousRank": 4
         },
         "genie": {
-          "rank": 10,
-          "previousRank": 9
+          "rank": 9,
+          "previousRank": 10
         },
         "vibe": {
           "rank": 11,
           "previousRank": 10
         },
         "bugs": {
-          "rank": 7,
-          "previousRank": 7
+          "rank": 11,
+          "previousRank": 12
         },
         "flo": {
           "rank": 7,
@@ -72,7 +72,7 @@
         },
         "youtube_music": {
           "rank": 9,
-          "previousRank": 12
+          "previousRank": 9
         },
         "spotify": {
           "rank": 6,
@@ -98,16 +98,16 @@
           "previousRank": 6
         },
         "bugs": {
-          "rank": 15,
-          "previousRank": 14
+          "rank": 9,
+          "previousRank": 18
         },
         "flo": {
           "rank": 8,
           "previousRank": 8
         },
         "youtube_music": {
-          "rank": 8,
-          "previousRank": 6
+          "rank": 6,
+          "previousRank": 8
         },
         "spotify": {
           "rank": 7,
@@ -121,12 +121,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 54,
+          "rank": 58,
           "previousRank": 54
         },
         "bugs": {
-          "rank": 33,
-          "previousRank": 51
+          "rank": 36,
+          "previousRank": 54
         },
         "flo": {
           "rank": 88,
@@ -134,7 +134,7 @@
         },
         "youtube_music": {
           "rank": 46,
-          "previousRank": 53
+          "previousRank": 46
         },
         "spotify": {
           "rank": 34,
@@ -148,16 +148,16 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 37,
-          "previousRank": 34
+          "rank": 49,
+          "previousRank": 38
         },
         "flo": {
-          "rank": 62,
+          "rank": 61,
           "previousRank": 62
         },
         "youtube_music": {
           "rank": 30,
-          "previousRank": 28
+          "previousRank": 30
         },
         "spotify": {
           "rank": 46,
@@ -171,8 +171,19 @@
       "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/91/66/5a/91665a02-b5c1-8336-e973-88746539ab71/8804775401787.jpg/600x600bb.jpg",
       "ranks": {
         "youtube_music": {
-          "rank": 81,
-          "previousRank": 86
+          "rank": 75,
+          "previousRank": 81
+        }
+      }
+    },
+    {
+      "songName": "YoYo",
+      "artistName": "RESCENE",
+      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/a7/bd/34/a7bd3420-de02-6bdc-f40f-6a75764a9a3f/cover_KM0019543_1.jpg/600x600bb.jpg",
+      "ranks": {
+        "youtube_music": {
+          "rank": 76,
+          "previousRank": null
         }
       }
     },
@@ -182,8 +193,8 @@
       "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
       "ranks": {
         "youtube_music": {
-          "rank": 89,
-          "previousRank": 92
+          "rank": 79,
+          "previousRank": 89
         }
       }
     }
