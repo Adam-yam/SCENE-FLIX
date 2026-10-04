@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-05T00:00:44.741166+09:00",
+  "updatedAt": "2026-10-05T01:00:47.806930+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,8 +20,8 @@
           "previousRank": 2
         },
         "genie": {
-          "rank": 17,
-          "previousRank": 2
+          "rank": 18,
+          "previousRank": 17
         },
         "vibe": {
           "rank": 2,
@@ -51,12 +51,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 3,
-          "previousRank": 3
+          "rank": 4,
+          "previousRank": 4
         },
         "genie": {
-          "rank": 22,
-          "previousRank": 23
+          "rank": 24,
+          "previousRank": 22
         },
         "vibe": {
           "rank": 11,
@@ -86,12 +86,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 4,
-          "previousRank": 4
+          "rank": 5,
+          "previousRank": 5
         },
         "genie": {
-          "rank": 18,
-          "previousRank": 4
+          "rank": 17,
+          "previousRank": 18
         },
         "vibe": {
           "rank": 6,
@@ -121,8 +121,8 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 53,
-          "previousRank": 56
+          "rank": 57,
+          "previousRank": 57
         },
         "bugs": {
           "rank": 64,
@@ -152,7 +152,7 @@
           "previousRank": 47
         },
         "flo": {
-          "rank": 61,
+          "rank": 60,
           "previousRank": 61
         },
         "youtube_music": {
