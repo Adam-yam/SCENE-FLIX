@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06T07:01:26.784011+09:00",
+  "updatedAt": "2026-10-06T08:00:49.683571+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -21,14 +21,14 @@
         },
         "genie": {
           "rank": 2,
-          "previousRank": 18
+          "previousRank": 2
         },
         "vibe": {
           "rank": 2,
           "previousRank": 2
         },
         "bugs": {
-          "rank": 3,
+          "rank": 4,
           "previousRank": 3
         },
         "flo": {
@@ -51,20 +51,20 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 4,
-          "previousRank": 4
+          "rank": 3,
+          "previousRank": 3
         },
         "genie": {
-          "rank": 23,
-          "previousRank": 31
+          "rank": 8,
+          "previousRank": 23
         },
         "vibe": {
           "rank": 11,
           "previousRank": 11
         },
         "bugs": {
-          "rank": 11,
-          "previousRank": 10
+          "rank": 10,
+          "previousRank": 11
         },
         "flo": {
           "rank": 26,
@@ -90,16 +90,16 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 21,
-          "previousRank": 17
+          "rank": 5,
+          "previousRank": 21
         },
         "vibe": {
           "rank": 6,
           "previousRank": 6
         },
         "bugs": {
-          "rank": 25,
-          "previousRank": 22
+          "rank": 26,
+          "previousRank": 25
         },
         "flo": {
           "rank": 30,
@@ -116,40 +116,21 @@
       }
     },
     {
-      "songName": "Runaway",
+      "songName": "Pinball",
       "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
+      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 57,
-          "previousRank": 57
+          "rank": 99,
+          "previousRank": 99
+        },
+        "genie": {
+          "rank": 91,
+          "previousRank": 134
         },
         "bugs": {
           "rank": 31,
-          "previousRank": 53
-        },
-        "flo": {
-          "rank": 87,
-          "previousRank": 87
-        },
-        "youtube_music": {
-          "rank": 46,
-          "previousRank": 46
-        },
-        "spotify": {
-          "rank": 35,
-          "previousRank": 37
-        }
-      }
-    },
-    {
-      "songName": "Pinball",
-      "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
-      "ranks": {
-        "bugs": {
-          "rank": 38,
-          "previousRank": 48
+          "previousRank": 38
         },
         "flo": {
           "rank": 66,
@@ -162,6 +143,33 @@
         "spotify": {
           "rank": 41,
           "previousRank": 42
+        }
+      }
+    },
+    {
+      "songName": "Runaway",
+      "artistName": "RESCENE (리센느)",
+      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
+      "ranks": {
+        "melon": {
+          "rank": 45,
+          "previousRank": 45
+        },
+        "bugs": {
+          "rank": 30,
+          "previousRank": 31
+        },
+        "flo": {
+          "rank": 87,
+          "previousRank": 87
+        },
+        "youtube_music": {
+          "rank": 46,
+          "previousRank": 46
+        },
+        "spotify": {
+          "rank": 35,
+          "previousRank": 37
         }
       }
     },
