@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-06T15:00:49.467303+09:00",
+  "updatedAt": "2026-10-06T16:00:49.687377+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -63,12 +63,12 @@
           "previousRank": 11
         },
         "bugs": {
-          "rank": 11,
-          "previousRank": 6
+          "rank": 14,
+          "previousRank": 11
         },
         "flo": {
           "rank": 8,
-          "previousRank": 9
+          "previousRank": 8
         },
         "youtube_music": {
           "rank": 9,
@@ -90,8 +90,8 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 5,
-          "previousRank": 6
+          "rank": 4,
+          "previousRank": 5
         },
         "vibe": {
           "rank": 6,
@@ -99,11 +99,11 @@
         },
         "bugs": {
           "rank": 24,
-          "previousRank": 32
+          "previousRank": 24
         },
         "flo": {
           "rank": 15,
-          "previousRank": 17
+          "previousRank": 15
         },
         "youtube_music": {
           "rank": 6,
@@ -121,15 +121,15 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 44,
-          "previousRank": 42
+          "rank": 47,
+          "previousRank": 44
         },
         "bugs": {
-          "rank": 41,
-          "previousRank": 80
+          "rank": 39,
+          "previousRank": 41
         },
         "flo": {
-          "rank": 86,
+          "rank": 87,
           "previousRank": 86
         },
         "youtube_music": {
@@ -148,11 +148,11 @@
       "albumImageUrl": "https://image.bugsm.co.kr/album/images/350/41063/4106349.jpg",
       "ranks": {
         "bugs": {
-          "rank": 47,
-          "previousRank": 58
+          "rank": 40,
+          "previousRank": 47
         },
         "flo": {
-          "rank": 65,
+          "rank": 67,
           "previousRank": 65
         },
         "youtube_music": {
