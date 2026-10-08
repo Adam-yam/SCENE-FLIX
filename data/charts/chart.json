@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T22:00:58.950099+09:00",
+  "updatedAt": "2026-10-08T23:00:51.683367+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,8 +28,8 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 5,
-          "previousRank": 4
+          "rank": 4,
+          "previousRank": 5
         },
         "flo": {
           "rank": 2,
@@ -55,16 +55,16 @@
           "previousRank": 3
         },
         "genie": {
-          "rank": 7,
-          "previousRank": 8
+          "rank": 8,
+          "previousRank": 7
         },
         "vibe": {
           "rank": 11,
           "previousRank": 11
         },
         "bugs": {
-          "rank": 9,
-          "previousRank": 8
+          "rank": 14,
+          "previousRank": 11
         },
         "flo": {
           "rank": 7,
@@ -90,7 +90,7 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 6,
+          "rank": 7,
           "previousRank": 6
         },
         "vibe": {
@@ -98,11 +98,11 @@
           "previousRank": 8
         },
         "bugs": {
-          "rank": 15,
-          "previousRank": 15
+          "rank": 28,
+          "previousRank": 16
         },
         "flo": {
-          "rank": 11,
+          "rank": 10,
           "previousRank": 11
         },
         "youtube_music": {
@@ -122,15 +122,19 @@
       "ranks": {
         "melon": {
           "rank": 91,
-          "previousRank": 92
+          "previousRank": 91
+        },
+        "genie": {
+          "rank": 97,
+          "previousRank": 101
         },
         "bugs": {
-          "rank": 36,
-          "previousRank": 38
+          "rank": 40,
+          "previousRank": 41
         },
         "flo": {
-          "rank": 55,
-          "previousRank": 56
+          "rank": 54,
+          "previousRank": 55
         },
         "youtube_music": {
           "rank": 30,
@@ -148,12 +152,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 38,
-          "previousRank": 40
+          "rank": 39,
+          "previousRank": 38
         },
         "bugs": {
-          "rank": 40,
-          "previousRank": 51
+          "rank": 39,
+          "previousRank": 49
         },
         "flo": {
           "rank": 82,
