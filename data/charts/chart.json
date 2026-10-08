@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-08T16:00:47.504952+09:00",
+  "updatedAt": "2026-10-08T17:00:51.249811+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -28,8 +28,8 @@
           "previousRank": 2
         },
         "bugs": {
-          "rank": 4,
-          "previousRank": 4
+          "rank": 5,
+          "previousRank": 5
         },
         "flo": {
           "rank": 2,
@@ -63,11 +63,11 @@
           "previousRank": 11
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 8
+          "rank": 7,
+          "previousRank": 10
         },
         "flo": {
-          "rank": 6,
+          "rank": 7,
           "previousRank": 6
         },
         "youtube_music": {
@@ -90,20 +90,20 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 6,
-          "previousRank": 7
+          "rank": 7,
+          "previousRank": 6
         },
         "vibe": {
           "rank": 7,
           "previousRank": 8
         },
         "bugs": {
-          "rank": 25,
-          "previousRank": 49
+          "rank": 19,
+          "previousRank": 22
         },
         "flo": {
-          "rank": 17,
-          "previousRank": 20
+          "rank": 16,
+          "previousRank": 17
         },
         "youtube_music": {
           "rank": 6,
@@ -125,12 +125,12 @@
           "previousRank": 93
         },
         "bugs": {
-          "rank": 34,
-          "previousRank": 59
+          "rank": 27,
+          "previousRank": 36
         },
         "flo": {
-          "rank": 62,
-          "previousRank": 64
+          "rank": 57,
+          "previousRank": 62
         },
         "youtube_music": {
           "rank": 30,
@@ -152,12 +152,12 @@
           "previousRank": 43
         },
         "bugs": {
-          "rank": 61,
-          "previousRank": 47
+          "rank": 37,
+          "previousRank": 63
         },
         "flo": {
           "rank": 90,
-          "previousRank": 89
+          "previousRank": 90
         },
         "youtube_music": {
           "rank": 46,
