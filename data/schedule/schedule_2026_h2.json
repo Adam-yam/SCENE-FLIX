@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-08T13:58:26Z",
+  "updated": "2026-10-08T15:58:26Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -719,6 +719,14 @@
       "title": "제14회 연수 능허대 문화축제",
       "detail": "",
       "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-10-09",
+      "time": "20:30",
+      "title": "KBS 2TV <해피투게더 - 혼자가 아니어서 좋아>",
+      "detail": "",
+      "type": "broadcast",
       "source": "mnetplus"
     },
     {
