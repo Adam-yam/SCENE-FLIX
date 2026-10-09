@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T06:00:48.670306+09:00",
+  "updatedAt": "2026-10-10T07:00:46.496076+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -21,7 +21,7 @@
         },
         "genie": {
           "rank": 17,
-          "previousRank": 16
+          "previousRank": 17
         },
         "vibe": {
           "rank": 2,
@@ -55,8 +55,8 @@
           "previousRank": 4
         },
         "genie": {
-          "rank": 30,
-          "previousRank": 22
+          "rank": 31,
+          "previousRank": 30
         },
         "vibe": {
           "rank": 11,
@@ -67,8 +67,8 @@
           "previousRank": 21
         },
         "flo": {
-          "rank": 11,
-          "previousRank": 9
+          "rank": 13,
+          "previousRank": 11
         },
         "youtube_music": {
           "rank": 9,
@@ -90,20 +90,20 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 37,
-          "previousRank": 24
+          "rank": 33,
+          "previousRank": 37
         },
         "vibe": {
-          "rank": 7,
-          "previousRank": 7
+          "rank": 6,
+          "previousRank": 5
         },
         "bugs": {
           "rank": 17,
           "previousRank": 30
         },
         "flo": {
-          "rank": 15,
-          "previousRank": 12
+          "rank": 23,
+          "previousRank": 15
         },
         "youtube_music": {
           "rank": 6,
@@ -124,16 +124,12 @@
           "rank": 90,
           "previousRank": 90
         },
-        "genie": {
-          "rank": 98,
-          "previousRank": 94
-        },
         "bugs": {
           "rank": 41,
           "previousRank": 52
         },
         "flo": {
-          "rank": 63,
+          "rank": 64,
           "previousRank": 63
         },
         "youtube_music": {
@@ -160,8 +156,8 @@
           "previousRank": 45
         },
         "flo": {
-          "rank": 87,
-          "previousRank": 88
+          "rank": 88,
+          "previousRank": 87
         },
         "youtube_music": {
           "rank": 46,
