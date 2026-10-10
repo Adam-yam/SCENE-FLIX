@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-10T08:00:43.807495+09:00",
+  "updatedAt": "2026-10-10T09:00:51.204349+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -21,7 +21,7 @@
         },
         "genie": {
           "rank": 2,
-          "previousRank": 17
+          "previousRank": 2
         },
         "vibe": {
           "rank": 2,
@@ -32,7 +32,7 @@
           "previousRank": 4
         },
         "flo": {
-          "rank": 2,
+          "rank": 3,
           "previousRank": 2
         },
         "youtube_music": {
@@ -55,8 +55,8 @@
           "previousRank": 4
         },
         "genie": {
-          "rank": 23,
-          "previousRank": 31
+          "rank": 8,
+          "previousRank": 23
         },
         "vibe": {
           "rank": 11,
@@ -67,8 +67,8 @@
           "previousRank": 13
         },
         "flo": {
-          "rank": 20,
-          "previousRank": 13
+          "rank": 29,
+          "previousRank": 20
         },
         "youtube_music": {
           "rank": 9,
@@ -90,8 +90,8 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 22,
-          "previousRank": 33
+          "rank": 6,
+          "previousRank": 22
         },
         "vibe": {
           "rank": 6,
@@ -102,8 +102,8 @@
           "previousRank": 18
         },
         "flo": {
-          "rank": 30,
-          "previousRank": 23
+          "rank": 31,
+          "previousRank": 30
         },
         "youtube_music": {
           "rank": 6,
@@ -121,7 +121,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 83,
+          "rank": 90,
           "previousRank": 83
         },
         "bugs": {
@@ -148,7 +148,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 50,
+          "rank": 46,
           "previousRank": 50
         },
         "bugs": {
