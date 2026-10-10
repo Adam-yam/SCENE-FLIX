@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-11T03:00:47.422248+09:00",
+  "updatedAt": "2026-10-11T04:00:52.451078+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -67,16 +67,16 @@
           "previousRank": 15
         },
         "flo": {
-          "rank": 10,
-          "previousRank": 9
+          "rank": 11,
+          "previousRank": 10
         },
         "youtube_music": {
           "rank": 9,
           "previousRank": 9
         },
         "spotify": {
-          "rank": 7,
-          "previousRank": 5
+          "rank": 6,
+          "previousRank": 7
         }
       }
     },
@@ -102,15 +102,15 @@
           "previousRank": 39
         },
         "flo": {
-          "rank": 14,
-          "previousRank": 11
+          "rank": 16,
+          "previousRank": 14
         },
         "youtube_music": {
           "rank": 6,
           "previousRank": 8
         },
         "spotify": {
-          "rank": 9,
+          "rank": 7,
           "previousRank": 9
         }
       }
@@ -121,7 +121,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 89,
+          "rank": 88,
           "previousRank": 89
         },
         "genie": {
@@ -133,16 +133,16 @@
           "previousRank": 24
         },
         "flo": {
-          "rank": 55,
-          "previousRank": 56
+          "rank": 62,
+          "previousRank": 55
         },
         "youtube_music": {
           "rank": 30,
           "previousRank": 30
         },
         "spotify": {
-          "rank": 26,
-          "previousRank": 29
+          "rank": 27,
+          "previousRank": 26
         }
       }
     },
@@ -152,7 +152,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 55,
+          "rank": 56,
           "previousRank": 55
         },
         "bugs": {
@@ -168,8 +168,8 @@
           "previousRank": 46
         },
         "spotify": {
-          "rank": 30,
-          "previousRank": 32
+          "rank": 32,
+          "previousRank": 30
         }
       }
     },
