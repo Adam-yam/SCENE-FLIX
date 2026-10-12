@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-13T00:00:57.201752+09:00",
+  "updatedAt": "2026-10-13T01:00:55.079491+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -16,12 +16,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 8,
+          "rank": 2,
           "previousRank": 2
         },
         "genie": {
           "rank": 24,
-          "previousRank": 8
+          "previousRank": 24
         },
         "vibe": {
           "rank": 2,
@@ -32,7 +32,7 @@
           "previousRank": 10
         },
         "flo": {
-          "rank": 3,
+          "rank": 4,
           "previousRank": 3
         },
         "youtube_music": {
@@ -46,52 +46,17 @@
       }
     },
     {
-      "songName": "Pretty Girl",
-      "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
-      "ranks": {
-        "melon": {
-          "rank": 12,
-          "previousRank": 12
-        },
-        "genie": {
-          "rank": 30,
-          "previousRank": 28
-        },
-        "vibe": {
-          "rank": 6,
-          "previousRank": 6
-        },
-        "bugs": {
-          "rank": 41,
-          "previousRank": 30
-        },
-        "flo": {
-          "rank": 19,
-          "previousRank": 20
-        },
-        "youtube_music": {
-          "rank": 6,
-          "previousRank": 8
-        },
-        "spotify": {
-          "rank": 8,
-          "previousRank": 7
-        }
-      }
-    },
-    {
       "songName": "Deja Vu",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 11,
-          "previousRank": 10
+          "rank": 3,
+          "previousRank": 3
         },
         "genie": {
-          "rank": 29,
-          "previousRank": 27
+          "rank": 30,
+          "previousRank": 29
         },
         "vibe": {
           "rank": 11,
@@ -102,7 +67,7 @@
           "previousRank": 18
         },
         "flo": {
-          "rank": 13,
+          "rank": 11,
           "previousRank": 13
         },
         "youtube_music": {
@@ -116,16 +81,47 @@
       }
     },
     {
+      "songName": "Pretty Girl",
+      "artistName": "RESCENE (리센느)",
+      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
+      "ranks": {
+        "melon": {
+          "rank": 6,
+          "previousRank": 6
+        },
+        "genie": {
+          "rank": 29,
+          "previousRank": 30
+        },
+        "vibe": {
+          "rank": 6,
+          "previousRank": 6
+        },
+        "bugs": {
+          "rank": 41,
+          "previousRank": 30
+        },
+        "flo": {
+          "rank": 19,
+          "previousRank": 19
+        },
+        "youtube_music": {
+          "rank": 6,
+          "previousRank": 8
+        },
+        "spotify": {
+          "rank": 8,
+          "previousRank": 7
+        }
+      }
+    },
+    {
       "songName": "Pinball",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 70,
-          "previousRank": 67
-        },
-        "genie": {
-          "rank": 86,
+          "rank": 83,
           "previousRank": 83
         },
         "bugs": {
@@ -133,8 +129,8 @@
           "previousRank": 32
         },
         "flo": {
-          "rank": 55,
-          "previousRank": 49
+          "rank": 53,
+          "previousRank": 55
         },
         "youtube_music": {
           "rank": 30,
@@ -152,8 +148,8 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 43,
-          "previousRank": 43
+          "rank": 51,
+          "previousRank": 51
         },
         "bugs": {
           "rank": 57,
@@ -161,7 +157,7 @@
         },
         "flo": {
           "rank": 88,
-          "previousRank": 89
+          "previousRank": 88
         },
         "youtube_music": {
           "rank": 46,
