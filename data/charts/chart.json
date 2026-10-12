@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-12T22:00:54.128904+09:00",
+  "updatedAt": "2026-10-12T23:00:53.401910+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,7 +20,7 @@
           "previousRank": 2
         },
         "genie": {
-          "rank": 2,
+          "rank": 8,
           "previousRank": 2
         },
         "vibe": {
@@ -46,60 +46,25 @@
       }
     },
     {
-      "songName": "Deja Vu",
-      "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
-      "ranks": {
-        "melon": {
-          "rank": 4,
-          "previousRank": 4
-        },
-        "genie": {
-          "rank": 15,
-          "previousRank": 13
-        },
-        "vibe": {
-          "rank": 11,
-          "previousRank": 11
-        },
-        "bugs": {
-          "rank": 15,
-          "previousRank": 17
-        },
-        "flo": {
-          "rank": 15,
-          "previousRank": 16
-        },
-        "youtube_music": {
-          "rank": 9,
-          "previousRank": 9
-        },
-        "spotify": {
-          "rank": 7,
-          "previousRank": 6
-        }
-      }
-    },
-    {
       "songName": "Pretty Girl",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 8,
-          "previousRank": 6
+          "rank": 12,
+          "previousRank": 8
         },
         "genie": {
-          "rank": 13,
-          "previousRank": 10
+          "rank": 28,
+          "previousRank": 13
         },
         "vibe": {
           "rank": 6,
           "previousRank": 6
         },
         "bugs": {
-          "rank": 31,
-          "previousRank": 24
+          "rank": 30,
+          "previousRank": 25
         },
         "flo": {
           "rank": 20,
@@ -116,24 +81,59 @@
       }
     },
     {
+      "songName": "Deja Vu",
+      "artistName": "RESCENE (리센느)",
+      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/118/75/116/11875116_20250701165641_500.jpg?86da3088c776a346e926b1b4052f227c/melon/resize/144/optimize/90",
+      "ranks": {
+        "melon": {
+          "rank": 10,
+          "previousRank": 4
+        },
+        "genie": {
+          "rank": 27,
+          "previousRank": 15
+        },
+        "vibe": {
+          "rank": 11,
+          "previousRank": 11
+        },
+        "bugs": {
+          "rank": 18,
+          "previousRank": 17
+        },
+        "flo": {
+          "rank": 13,
+          "previousRank": 15
+        },
+        "youtube_music": {
+          "rank": 9,
+          "previousRank": 9
+        },
+        "spotify": {
+          "rank": 7,
+          "previousRank": 6
+        }
+      }
+    },
+    {
       "songName": "Pinball",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 69,
-          "previousRank": 82
+          "rank": 67,
+          "previousRank": 69
         },
         "genie": {
-          "rank": 85,
+          "rank": 83,
           "previousRank": 85
         },
         "bugs": {
-          "rank": 26,
-          "previousRank": 43
+          "rank": 32,
+          "previousRank": 28
         },
         "flo": {
-          "rank": 51,
+          "rank": 49,
           "previousRank": 51
         },
         "youtube_music": {
@@ -152,16 +152,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 48,
-          "previousRank": 49
-        },
-        "bugs": {
-          "rank": 32,
+          "rank": 43,
           "previousRank": 48
         },
+        "bugs": {
+          "rank": 79,
+          "previousRank": 37
+        },
         "flo": {
-          "rank": 87,
-          "previousRank": 85
+          "rank": 89,
+          "previousRank": 87
         },
         "youtube_music": {
           "rank": 46,
