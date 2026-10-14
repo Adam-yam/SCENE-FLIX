@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T07:00:48.236586+09:00",
+  "updatedAt": "2026-10-15T08:01:31.178832+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -16,12 +16,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 2,
-          "previousRank": 2
+          "rank": 4,
+          "previousRank": 4
         },
         "genie": {
-          "rank": 9,
-          "previousRank": 25
+          "rank": 3,
+          "previousRank": 9
         },
         "vibe": {
           "rank": 2,
@@ -29,11 +29,11 @@
         },
         "bugs": {
           "rank": 6,
-          "previousRank": 9
+          "previousRank": 6
         },
         "flo": {
           "rank": 10,
-          "previousRank": 9
+          "previousRank": 10
         },
         "youtube_music": {
           "rank": 4,
@@ -55,15 +55,15 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 31,
-          "previousRank": 29
+          "rank": 9,
+          "previousRank": 31
         },
         "vibe": {
           "rank": 12,
           "previousRank": 12
         },
         "bugs": {
-          "rank": 14,
+          "rank": 12,
           "previousRank": 14
         },
         "flo": {
@@ -90,16 +90,16 @@
           "previousRank": 7
         },
         "genie": {
-          "rank": 32,
-          "previousRank": 35
+          "rank": 12,
+          "previousRank": 32
         },
         "vibe": {
           "rank": 9,
           "previousRank": 11
         },
         "bugs": {
-          "rank": 32,
-          "previousRank": 31
+          "rank": 30,
+          "previousRank": 32
         },
         "flo": {
           "rank": 31,
@@ -121,16 +121,20 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 86,
-          "previousRank": 86
+          "rank": 70,
+          "previousRank": 70
+        },
+        "genie": {
+          "rank": 89,
+          "previousRank": 121
         },
         "bugs": {
-          "rank": 29,
-          "previousRank": 30
+          "rank": 22,
+          "previousRank": 29
         },
         "flo": {
-          "rank": 60,
-          "previousRank": 61
+          "rank": 62,
+          "previousRank": 60
         },
         "youtube_music": {
           "rank": 30,
@@ -148,12 +152,12 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 58,
-          "previousRank": 58
+          "rank": 52,
+          "previousRank": 52
         },
         "bugs": {
-          "rank": 41,
-          "previousRank": 39
+          "rank": 38,
+          "previousRank": 41
         },
         "flo": {
           "rank": 86,
@@ -183,7 +187,7 @@
     {
       "songName": "YoYo",
       "artistName": "RESCENE",
-      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/a7/bd/34/a7bd3420-de02-6bdc-f40f-6a75764a9a3f/cover_KM0019543_1.jpg/600x600bb.jpg",
+      "albumImageUrl": "",
       "ranks": {
         "youtube_music": {
           "rank": 76,
@@ -194,7 +198,7 @@
     {
       "songName": "Glow Up",
       "artistName": "RESCENE",
-      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
+      "albumImageUrl": "https://cdn-images.dzcdn.net/images/cover/8c48d8e7eb632b69b8cfe735eed4cf87/1000x1000-000000-80-0-0.jpg",
       "ranks": {
         "youtube_music": {
           "rank": 79,
