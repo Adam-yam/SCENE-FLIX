@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T06:00:52.965503+09:00",
+  "updatedAt": "2026-10-15T07:00:48.236586+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -20,7 +20,7 @@
           "previousRank": 2
         },
         "genie": {
-          "rank": 25,
+          "rank": 9,
           "previousRank": 25
         },
         "vibe": {
@@ -32,7 +32,7 @@
           "previousRank": 9
         },
         "flo": {
-          "rank": 9,
+          "rank": 10,
           "previousRank": 9
         },
         "youtube_music": {
@@ -55,12 +55,12 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 29,
-          "previousRank": 30
+          "rank": 31,
+          "previousRank": 29
         },
         "vibe": {
           "rank": 12,
-          "previousRank": 13
+          "previousRank": 12
         },
         "bugs": {
           "rank": 14,
@@ -68,7 +68,7 @@
         },
         "flo": {
           "rank": 29,
-          "previousRank": 17
+          "previousRank": 29
         },
         "youtube_music": {
           "rank": 9,
@@ -90,12 +90,12 @@
           "previousRank": 7
         },
         "genie": {
-          "rank": 35,
-          "previousRank": 33
+          "rank": 32,
+          "previousRank": 35
         },
         "vibe": {
-          "rank": 7,
-          "previousRank": 7
+          "rank": 9,
+          "previousRank": 11
         },
         "bugs": {
           "rank": 32,
@@ -129,8 +129,8 @@
           "previousRank": 30
         },
         "flo": {
-          "rank": 61,
-          "previousRank": 60
+          "rank": 60,
+          "previousRank": 61
         },
         "youtube_music": {
           "rank": 30,
