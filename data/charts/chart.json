@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-16T05:00:50.129331+09:00",
+  "updatedAt": "2026-10-16T06:00:50.370024+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -67,8 +67,8 @@
           "previousRank": 20
         },
         "flo": {
-          "rank": 18,
-          "previousRank": 16
+          "rank": 29,
+          "previousRank": 18
         },
         "youtube_music": {
           "rank": 8,
@@ -134,7 +134,7 @@
         },
         "flo": {
           "rank": 58,
-          "previousRank": 57
+          "previousRank": 58
         },
         "youtube_music": {
           "rank": 23,
