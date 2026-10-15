@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T11:00:48.815318+09:00",
+  "updatedAt": "2026-10-15T12:00:52.085914+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -17,11 +17,11 @@
       "ranks": {
         "melon": {
           "rank": 3,
-          "previousRank": 4
+          "previousRank": 3
         },
         "genie": {
           "rank": 3,
-          "previousRank": 4
+          "previousRank": 3
         },
         "vibe": {
           "rank": 2,
@@ -55,8 +55,8 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 10,
-          "previousRank": 9
+          "rank": 11,
+          "previousRank": 10
         },
         "vibe": {
           "rank": 12,
@@ -67,7 +67,7 @@
           "previousRank": 13
         },
         "flo": {
-          "rank": 16,
+          "rank": 15,
           "previousRank": 16
         },
         "youtube_music": {
@@ -90,7 +90,7 @@
           "previousRank": 7
         },
         "genie": {
-          "rank": 11,
+          "rank": 10,
           "previousRank": 11
         },
         "vibe": {
@@ -121,15 +121,15 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 95,
-          "previousRank": 86
+          "rank": 96,
+          "previousRank": 95
         },
         "bugs": {
           "rank": 28,
           "previousRank": 23
         },
         "flo": {
-          "rank": 59,
+          "rank": 60,
           "previousRank": 59
         },
         "youtube_music": {
@@ -148,8 +148,8 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 49,
-          "previousRank": 54
+          "rank": 51,
+          "previousRank": 49
         },
         "bugs": {
           "rank": 41,
