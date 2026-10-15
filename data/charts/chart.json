@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T17:00:48.809620+09:00",
+  "updatedAt": "2026-10-15T18:00:53.085450+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -21,7 +21,7 @@
         },
         "genie": {
           "rank": 4,
-          "previousRank": 3
+          "previousRank": 4
         },
         "vibe": {
           "rank": 2,
@@ -55,16 +55,16 @@
           "previousRank": 5
         },
         "genie": {
-          "rank": 10,
-          "previousRank": 12
+          "rank": 11,
+          "previousRank": 10
         },
         "vibe": {
           "rank": 12,
           "previousRank": 12
         },
         "bugs": {
-          "rank": 10,
-          "previousRank": 8
+          "rank": 9,
+          "previousRank": 10
         },
         "flo": {
           "rank": 15,
@@ -98,12 +98,12 @@
           "previousRank": 11
         },
         "bugs": {
-          "rank": 28,
-          "previousRank": 30
+          "rank": 20,
+          "previousRank": 27
         },
         "flo": {
-          "rank": 20,
-          "previousRank": 23
+          "rank": 19,
+          "previousRank": 20
         },
         "youtube_music": {
           "rank": 6,
@@ -121,16 +121,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 93,
-          "previousRank": 94
+          "rank": 90,
+          "previousRank": 93
         },
         "bugs": {
-          "rank": 59,
-          "previousRank": 39
+          "rank": 37,
+          "previousRank": 32
         },
         "flo": {
-          "rank": 54,
-          "previousRank": 53
+          "rank": 53,
+          "previousRank": 54
         },
         "youtube_music": {
           "rank": 30,
@@ -148,16 +148,16 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 50,
-          "previousRank": 54
+          "rank": 58,
+          "previousRank": 50
         },
         "bugs": {
-          "rank": 58,
-          "previousRank": 62
+          "rank": 43,
+          "previousRank": 51
         },
         "flo": {
-          "rank": 91,
-          "previousRank": 90
+          "rank": 90,
+          "previousRank": 91
         },
         "youtube_music": {
           "rank": 46,
