@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-15T20:00:48.071205+09:00",
+  "updatedAt": "2026-10-15T21:00:56.810268+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -36,8 +36,8 @@
           "previousRank": 10
         },
         "youtube_music": {
-          "rank": 4,
-          "previousRank": 5
+          "rank": 5,
+          "previousRank": 4
         },
         "spotify": {
           "rank": 1,
@@ -56,7 +56,7 @@
         },
         "genie": {
           "rank": 9,
-          "previousRank": 10
+          "previousRank": 9
         },
         "vibe": {
           "rank": 12,
@@ -71,7 +71,7 @@
           "previousRank": 14
         },
         "youtube_music": {
-          "rank": 9,
+          "rank": 8,
           "previousRank": 9
         },
         "spotify": {
@@ -91,7 +91,7 @@
         },
         "genie": {
           "rank": 8,
-          "previousRank": 9
+          "previousRank": 8
         },
         "vibe": {
           "rank": 9,
@@ -102,12 +102,12 @@
           "previousRank": 31
         },
         "flo": {
-          "rank": 17,
-          "previousRank": 18
+          "rank": 18,
+          "previousRank": 17
         },
         "youtube_music": {
           "rank": 6,
-          "previousRank": 8
+          "previousRank": 6
         },
         "spotify": {
           "rank": 11,
@@ -121,12 +121,8 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 81,
-          "previousRank": 88
-        },
-        "genie": {
-          "rank": 97,
-          "previousRank": 98
+          "rank": 78,
+          "previousRank": 81
         },
         "bugs": {
           "rank": 21,
@@ -137,7 +133,7 @@
           "previousRank": 53
         },
         "youtube_music": {
-          "rank": 30,
+          "rank": 23,
           "previousRank": 30
         },
         "spotify": {
@@ -152,8 +148,8 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 48,
-          "previousRank": 53
+          "rank": 52,
+          "previousRank": 48
         },
         "bugs": {
           "rank": 55,
@@ -161,10 +157,10 @@
         },
         "flo": {
           "rank": 90,
-          "previousRank": 88
+          "previousRank": 90
         },
         "youtube_music": {
-          "rank": 46,
+          "rank": 50,
           "previousRank": 46
         },
         "spotify": {
@@ -179,19 +175,8 @@
       "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/91/66/5a/91665a02-b5c1-8336-e973-88746539ab71/8804775401787.jpg/600x600bb.jpg",
       "ranks": {
         "youtube_music": {
-          "rank": 75,
-          "previousRank": 81
-        }
-      }
-    },
-    {
-      "songName": "YoYo",
-      "artistName": "RESCENE",
-      "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/a7/bd/34/a7bd3420-de02-6bdc-f40f-6a75764a9a3f/cover_KM0019543_1.jpg/600x600bb.jpg",
-      "ranks": {
-        "youtube_music": {
-          "rank": 76,
-          "previousRank": null
+          "rank": 81,
+          "previousRank": 75
         }
       }
     },
@@ -201,8 +186,8 @@
       "albumImageUrl": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b6/72/c9/b672c9d1-e8a1-4def-363e-dc0e86042761/cover_KM0020943_1.jpg/600x600bb.jpg",
       "ranks": {
         "youtube_music": {
-          "rank": 79,
-          "previousRank": 89
+          "rank": 89,
+          "previousRank": 79
         }
       }
     }
