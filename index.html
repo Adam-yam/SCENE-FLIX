@@ -106,6 +106,8 @@
       } catch (e) {}
     </script>
     <style id="scene-design-styles">
+      .data-state { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px; padding: 24px 16px; color: var(--muted); font-size: 0.85rem; text-align: center; }
+      .data-state .type-btn { cursor: pointer; }
       
       
       :root {
@@ -8912,7 +8914,7 @@
         <div class="song-nav" id="songNav"></div>
       </div>
 
-      <div class="type-bar">
+      <div class="type-bar" id="songTypeBar">
         <button
           class="type-btn active"
           data-t="all"
@@ -9919,7 +9921,7 @@
       <div class="song-nav-inner">
         <div class="song-nav" id="shortsYearNav"></div>
       </div>
-      <div class="type-bar">
+      <div class="type-bar" id="shortsChannelBar">
         <button
           class="type-btn active"
           data-sc="all"
@@ -13978,7 +13980,8 @@
   "Zc9N7TX7N8o": "0:19",
   "rPDF8tOVT2I": "3:29",
   "3OoTrPkjlyM": "16:51",
-  "G_d58EhCEug": "5:01"
+  "G_d58EhCEug": "5:01",
+  "rbPZPK8JVSM": "0:21"
 };
       const _RX_DATE8 = /(\d{4})(\d{2})(\d{2})/;
       const _RX_DATE_SEP = /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/;
@@ -14160,63 +14163,56 @@
         return `${Math.min((i % batchSize) * (_isMobile ? 0.015 : 0.025), _isMobile ? 0.18 : 0.3)}s`;
       }
       let _metaCache = null;
-      let _metaCacheCreatedAt = null;
       function _loadMetaCache() {
         if (_metaCache) return;
+        _metaCache = Object.create(null);
         try {
-          const raw = localStorage.getItem(_META_CACHE_KEY);
-          if (!raw) {
-            _metaCache = {};
-            _metaCacheCreatedAt = Date.now();
-            return;
+          const stored = JSON.parse(localStorage.getItem(_META_CACHE_KEY) || "null");
+          if (!stored?.data || typeof stored.data !== "object" || Array.isArray(stored.data)) return;
+          const now = Date.now();
+          const origin = stored.createdAt || stored.savedAt || 0;
+          for (const [vid, value] of Object.entries(stored.data)) {
+            if (!_VIDEO_ID_RE.test(vid) || !value || typeof value.rawTitle !== "string" ||
+                typeof value.channel !== "string") continue;
+            const timestamp = value.cachedAt ?? origin;
+            _metaCache[vid] = {
+              rawTitle: value.rawTitle,
+              channel: value.channel,
+              date: typeof value.date === "string" ? value.date : null,
+              show: value.show && typeof value.show.label === "string" ? value.show : null,
+              cachedAt: Number.isFinite(timestamp) && timestamp >= 0 && timestamp <= now ? timestamp : 0,
+            };
           }
-          const { data, savedAt, createdAt } = JSON.parse(raw);
-          const origin = createdAt || savedAt;
-          if (
-            !Number.isFinite(origin) ||
-            origin > Date.now() ||
-            !data ||
-            typeof data !== "object" ||
-            Array.isArray(data) ||
-            Date.now() - origin > _META_CACHE_TTL
-          ) {
-            localStorage.removeItem(_META_CACHE_KEY);
-            _metaCache = {};
-            _metaCacheCreatedAt = Date.now();
-          } else {
-            _metaCache = Object.fromEntries(
-              Object.entries(data).filter(
-                ([, value]) =>
-                  value &&
-                  typeof value.rawTitle === "string" &&
-                  typeof value.channel === "string",
-              ),
-            );
-            _metaCacheCreatedAt = origin;
-          }
-        } catch {
-          _metaCache = {};
-          _metaCacheCreatedAt = Date.now();
-        }
+        } catch {}
+      }
+      function _needsMetadataRefresh(vid) {
+        const cached = _metaCache?.[vid];
+        return !!cached && Date.now() - (cached.cachedAt || 0) >= _META_CACHE_TTL &&
+          !((_failedOembedFetches.get(vid) || 0) > Date.now());
       }
       function _saveMetaCache() {
-        try {
-          localStorage.setItem(
-            _META_CACHE_KEY,
-            JSON.stringify({
-              data: _metaCache,
-              createdAt: _metaCacheCreatedAt,
-            }),
-          );
-        } catch {}
+        let entries = Object.entries(_metaCache || {})
+          .sort((a, b) => (b[1].cachedAt || 0) - (a[1].cachedAt || 0))
+          .slice(0, 5000);
+        while (entries.length) {
+          try {
+            localStorage.setItem(_META_CACHE_KEY, JSON.stringify({
+              version: 2, data: Object.fromEntries(entries),
+            }));
+            return;
+          } catch (error) {
+            if (error?.name !== "QuotaExceededError") return;
+            entries = entries.slice(0, Math.floor(entries.length / 2));
+          }
+        }
       }
       let _saveMetaCacheTimer = null;
       function _saveMetaCacheDebounced() {
         clearTimeout(_saveMetaCacheTimer);
         _saveMetaCacheTimer = setTimeout(_saveMetaCache, 500);
       }
-      async function fetchMeta(url, fallbackTitle = "", vid = "") {
-        const d = await _fetchOembed(url, vid);
+      async function fetchMeta(url, fallbackTitle = "", vid = "", context) {
+        const d = await _fetchOembed(url, vid, context);
         if (d) return d;
         return {
           rawTitle: fallbackTitle,
@@ -14827,7 +14823,8 @@
   "safek": "세이프K",
   "nmixx": "NMIXX",
   "ohmyidol": "세상에 이런 아이돌이",
-  "loco": "로꼬 (Loco)"
+  "loco": "로꼬 (Loco)",
+  "wackywily": "와키윌리"
 };
       const EXTERNAL_DATA = {
   "suwonuniv": [
@@ -19759,6 +19756,13 @@
       "url": "https://youtu.be/Zc9N7TX7N8o",
       "date": "2026.10.14 12:31"
     }
+  ],
+  "wackywily": [
+    {
+      "vid": "rbPZPK8JVSM",
+      "url": "https://www.youtube.com/watch?v=rbPZPK8JVSM",
+      "date": "2026.10.13 11:18"
+    }
   ]
 };
       const VID_TO_EXTERNAL_KEY = {};
@@ -19982,7 +19986,8 @@
       "grainon",
       "dermab",
       "megastudy",
-      "beautysum"
+      "beautysum",
+      "wackywily"
     ]
   },
   "event": {
@@ -20178,33 +20183,33 @@
       const _videoRequestQueue = [];
       let _videoRequestsActive = 0;
       const VIDEO_REQUEST_LIMIT = 4;
-      function _queueVideoRequest(run) {
-        const section = curSection;
+      function _metadataContextActive(context) {
+        return context.section === curSection && (!context.search || context.search === _pagedSearch);
+      }
+      function _pruneVideoRequests() {
+        for (let i = _videoRequestQueue.length - 1; i >= 0; i--) {
+          const task = _videoRequestQueue[i];
+          if ([...task.consumers].some(_metadataContextActive)) continue;
+          _videoRequestQueue.splice(i, 1);
+          task.cancel();
+          task.resolve(null);
+        }
+      }
+      function _queueVideoRequest(run, consumers, cancel) {
         return new Promise((resolve, reject) => {
-          _videoRequestQueue.push({ run, resolve, reject, section });
+          _videoRequestQueue.push({ run, resolve, reject, consumers, cancel });
           _drainVideoRequests();
         });
       }
       function _drainVideoRequests() {
-        while (
-          _videoRequestsActive < VIDEO_REQUEST_LIMIT &&
-          _videoRequestQueue.length
-        ) {
-          const preferred = _videoRequestQueue.findIndex(
-            (task) => task.section === curSection,
-          );
-          const task = _videoRequestQueue.splice(
-            preferred < 0 ? 0 : preferred,
-            1,
-          )[0];
+        _pruneVideoRequests();
+        while (_videoRequestsActive < VIDEO_REQUEST_LIMIT && _videoRequestQueue.length) {
+          const task = _videoRequestQueue.shift();
           _videoRequestsActive++;
-          Promise.resolve()
-            .then(task.run)
-            .then(task.resolve, task.reject)
-            .finally(() => {
-              _videoRequestsActive--;
-              _drainVideoRequests();
-            });
+          Promise.resolve().then(task.run).then(task.resolve, task.reject).finally(() => {
+            _videoRequestsActive--;
+            _drainVideoRequests();
+          });
         }
       }
       async function _fetchOembedResponse(url) {
@@ -20230,57 +20235,99 @@
       }
       let _videoMetadataRevision = 0;
       const _pendingOembedFetches = new Map();
-      function _fetchOembed(url, vid) {
+      const _failedOembedFetches = new Map();
+      function _fetchOembed(url, vid, context = { section: curSection }) {
         _loadMetaCache();
         const cacheKey = vid || url;
-        if (Object.hasOwn(_metaCache, cacheKey))
-          return Promise.resolve(_metaCache[cacheKey]);
-        if (_pendingOembedFetches.has(cacheKey))
-          return _pendingOembedFetches.get(cacheKey);
-        const p = _queueVideoRequest(async () => {
+        const cached = _metaCache[cacheKey] || null;
+        if (!_metadataContextActive(context)) return Promise.resolve(cached);
+        if (cached && !_needsMetadataRefresh(cacheKey)) return Promise.resolve(cached);
+        if ((_failedOembedFetches.get(cacheKey) || 0) > Date.now()) return Promise.resolve(cached);
+        const existing = _pendingOembedFetches.get(cacheKey);
+        if (existing) {
+          existing.consumers.add(context);
+          return existing.promise;
+        }
+        const record = { consumers: new Set([context]), promise: null };
+        const cleanup = () => {
+          if (_pendingOembedFetches.get(cacheKey) === record) _pendingOembedFetches.delete(cacheKey);
+        };
+        record.promise = _queueVideoRequest(async () => {
+          let success = false;
           try {
             const r = await _fetchOembedResponse(url);
-            if (!r.ok) return null;
+            if (!r.ok) return cached;
             const d = await r.json();
-            if (
-              !d ||
-              typeof d.title !== "string" ||
-              typeof d.author_name !== "string"
-            )
-              return null;
+            if (!d || typeof d.title !== "string" || typeof d.author_name !== "string") return cached;
             const result = {
-              rawTitle: d.title,
-              channel: d.author_name,
-              date: parseDate(d.title),
-              show: parseShow(d.title),
+              rawTitle: d.title, channel: d.author_name,
+              date: parseDate(d.title), show: parseShow(d.title), cachedAt: Date.now(),
             };
             _metaCache[cacheKey] = result;
+            success = true;
             _videoMetadataRevision++;
             _saveMetaCacheDebounced();
             return result;
           } catch {
-            return null;
+            return cached;
           } finally {
-            _pendingOembedFetches.delete(cacheKey);
+            if (success) _failedOembedFetches.delete(cacheKey);
+            else _failedOembedFetches.set(cacheKey, Date.now() + 30000);
+            cleanup();
           }
-        });
-        _pendingOembedFetches.set(cacheKey, p);
-        return p;
+        }, record.consumers, cleanup);
+        _pendingOembedFetches.set(cacheKey, record);
+        return record.promise;
       }
-      async function loadCardMetas(items, mode) {
+      function _paintCachedMetadata(items) {
+        _primeSearchMetadata(items);
+        for (const item of items) {
+          const cached = _metaCache[item.vid];
+          if (!cached) continue;
+          const ref = item._ref || item;
+          const title = ref.meta?.rawTitle || ref.title || cached.rawTitle;
+          _updateVideoCardTitle(item.vid, title);
+          _updateVideoCardDate(item.vid, DATE_MAP[item.vid] || ref.date || cached.date);
+          for (const prefix of ["vc", "cvc", "evc", "lvc"]) {
+            const el = document.getElementById(`${prefix}-title-${item.vid}`);
+            if (el) {
+              el.removeAttribute("data-hl-orig");
+              el.textContent = title;
+            }
+          }
+          for (const prefix of ["cvc", "evc"]) {
+            const meta = document.getElementById(`${prefix}-meta-${item.vid}`);
+            if (!meta) continue;
+            const value = dateOnly(DATE_MAP[item.vid] || ref.date || cached.date) ||
+              (prefix === "cvc" ? ref.channel || cached.channel : "");
+            meta.replaceChildren();
+            if (value) {
+              const span = document.createElement("span");
+              span.className = "cdate";
+              span.textContent = value;
+              meta.append(span);
+            }
+          }
+          if (ref.song) replaceSkeleton(ref);
+        }
+      }
+      async function loadCardMetas(items, mode, context = { section: curSection }) {
+        if (!_metadataContextActive(context)) return;
+        _paintCachedMetadata(items);
         const unloaded = items.filter(
-          (i) => !i.loaded || i._metaFailed || i.meta?._metaFailed,
+          (i) => !i.loaded || i._metaFailed || i.meta?._metaFailed || _needsMetadataRefresh(i.vid),
         );
         const expectedSection = mode === "content" ? "content" : "external";
         const CHUNK = 5;
         for (let i = 0; i < unloaded.length; i += CHUNK) {
-          if (curSection !== expectedSection) return;
+          if (!_metadataContextActive(context) || curSection !== expectedSection) return;
           const batch = unloaded.slice(i, i + CHUNK);
           await Promise.all(
             batch.map(async (item) => {
-              const d = await _fetchOembed(item.url, item.vid);
+              const d = await _fetchOembed(item.url, item.vid, context);
+              if (!_metadataContextActive(context)) return;
               if (d) {
-                if (!item.title || item._metaFailed) item.title = d.rawTitle;
+                if (!item.title || item._metaFailed || item.title === item._cachedTitle) item.title = d.rawTitle;
                 if (!item.date) item.date = d.date;
                 if (mode === "content") item.channel = d.channel || "";
               }
@@ -20517,7 +20564,7 @@
         _mountGridBatch(
           items,
           "external",
-          (batch) => loadCardMetas(batch, "external"),
+          (batch, context) => loadCardMetas(batch, "external", context),
           getCurrentT().empty_no_links || "링크가 아직 추가되지 않았습니다.",
         );
       }
@@ -20831,16 +20878,15 @@
         if (!nav) return;
         if (!_liveNavBuilt) {
           const allCnt = ALL_LIVE.length;
-          const cnt2024 = LIVE_DATA_2024.length;
-          const cnt2025 = LIVE_DATA_2025.length;
-          const cnt2026 = LIVE_DATA_2026.length;
-          function yearLabel(y) {
-            return _getLiveYearLabel(y);
-          }
           let html = `<button class="song-tab" data-ly="all" onclick="pickLiveYear(this,'all')">ALL<span class="cnt">${allCnt}</span></button>`;
-          html += `<button class="song-tab" data-ly="2024" onclick="pickLiveYear(this,'2024')">${yearLabel("2024")}<span class="cnt">${cnt2024}</span></button>`;
-          html += `<button class="song-tab" data-ly="2025" onclick="pickLiveYear(this,'2025')">${yearLabel("2025")}<span class="cnt">${cnt2025}</span></button>`;
-          html += `<button class="song-tab" data-ly="2026" onclick="pickLiveYear(this,'2026')">${yearLabel("2026")}<span class="cnt">${cnt2026}</span></button>`;
+          const years = new Map();
+          for (const item of ALL_LIVE) {
+            const year = String(item.year || item.date?.slice(0, 4) || "");
+            if (/^\d{4}$/.test(year)) years.set(year, (years.get(year) || 0) + 1);
+          }
+          for (const [year, count] of [...years].sort(([a], [b]) => a.localeCompare(b))) {
+            html += `<button class="song-tab" data-ly="${year}" onclick="pickLiveYear(this,'${year}')">${_getLiveYearLabel(year)}<span class="cnt">${count}</span></button>`;
+          }
           nav.innerHTML = html;
           _liveNavBuilt = true;
         }
@@ -22650,13 +22696,17 @@
     </div>
   </a>`;
       }
-      async function loadLiveTitles(items) {
+      async function loadLiveTitles(items, context = { section: curSection }) {
+        if (!_metadataContextActive(context)) return;
+        _paintCachedMetadata(items);
         const CHUNK = 6;
-        const toLoad = items.filter((i) => !i.title || i._metaFailed);
+        const toLoad = items.filter((i) => !i.title || i._metaFailed || _needsMetadataRefresh(i.vid));
         for (let i = 0; i < toLoad.length; i += CHUNK) {
+          if (!_metadataContextActive(context)) return;
           await Promise.all(
             toLoad.slice(i, i + CHUNK).map(async (item) => {
-              const d = await _fetchOembed(item.url, item.vid);
+              const d = await _fetchOembed(item.url, item.vid, context);
+              if (!_metadataContextActive(context)) return;
               item._metaFailed = !d;
               if (d) item.title = d.rawTitle;
               if (!item.title)
@@ -22689,33 +22739,28 @@
         el.style.cssText = "grid-column:1/-1;height:1px;";
         return el;
       }
-      function _observeSentinel(sentinel, onIntersect, rootMargin = "300px") {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            if (entries[0].isIntersecting) onIntersect();
-          },
-          { rootMargin },
-        );
+      function _createListObserver(sentinel, onIntersect, rootMargin, once) {
+        const section = curSection;
+        const observer = new IntersectionObserver((entries) => {
+          if (!sentinel.isConnected || curSection !== section) {
+            observer.disconnect();
+            return;
+          }
+          if (!entries.some(entry => entry.target === sentinel && entry.isIntersecting)) return;
+          if (once) {
+            observer.disconnect();
+            sentinel.remove();
+          }
+          onIntersect();
+        }, { rootMargin });
         observer.observe(sentinel);
         return observer;
       }
-      function _observeSentinelOnce(
-        sentinel,
-        onIntersect,
-        rootMargin = "300px",
-      ) {
-        const observer = new IntersectionObserver(
-          (entries) => {
-            if (!entries[0].isIntersecting) return;
-            observer.disconnect();
-            if (sentinel && sentinel.parentNode)
-              sentinel.parentNode.removeChild(sentinel);
-            onIntersect();
-          },
-          { rootMargin },
-        );
-        observer.observe(sentinel);
-        return observer;
+      function _observeSentinel(sentinel, onIntersect, rootMargin = "300px") {
+        return _createListObserver(sentinel, onIntersect, rootMargin, false);
+      }
+      function _observeSentinelOnce(sentinel, onIntersect, rootMargin = "300px") {
+        return _createListObserver(sentinel, onIntersect, rootMargin, true);
       }
       function _appendCardBatch(container, items, sentinel, buildFn, loadFn) {
         const wrapper = document.createElement("div");
@@ -22762,7 +22807,12 @@
           items = items.filter((i) => i.year === curLiveYear);
         items = items.filter(memberMatch);
         items = sortLiveItemsByDate(items, curSort);
+        _liveSorted = items;
+        _liveLoaded = 0;
         if (!items.length) {
+          _stopPagedSearch();
+          const count = document.getElementById("searchResultCount");
+          if (count) count.textContent = curSearchQuery ? `0${getCurrentT().search_result_unit || ""}` : "";
           grid.innerHTML = _emptyStateHtml(
             "empty",
             "📺",
@@ -22770,8 +22820,6 @@
           );
           return;
         }
-        _liveSorted = items;
-        _liveLoaded = 0;
         if (curSearchQuery) {
           applySearch();
           return;
@@ -22845,7 +22893,7 @@
           const card = document.getElementById(p + vid);
           if (card) updateBmBtn(card, vid);
         }
-        if (curSection === "bookmark") buildBookmarkGrid();
+        if (curSection === "bookmark") buildBookmarkGrid(true);
         updateBookmarkCounts();
       }
       function updateBmBtn(card, vid) {
@@ -23002,10 +23050,13 @@
           "https://www.youtube.com/watch_videos?video_ids=" + ids.join(",");
         window.open(url, "_blank", "noopener");
       }
-      function buildBookmarkGrid() {
+      function buildBookmarkGrid(preserve = false) {
         if (!_elGrid) return;
         const bmMode = document.getElementById("bookmarkMode");
         if (!BOOKMARKS.size) {
+          _stopPagedSearch();
+          const count = document.getElementById("searchResultCount");
+          if (count) count.textContent = "";
           if (bmMode) bmMode.innerHTML = "";
           const t = getCurrentT();
           const isTouchDevice =
@@ -23038,7 +23089,25 @@
     </div>`;
         }
         if (curSearchQuery) {
-          applySearch();
+          if (preserve && _pagedSearch?.section === "bookmark") {
+            _pagedSearch.items = unique;
+            _refreshPagedSearch(_pagedSearch);
+          } else applySearch();
+          return;
+        }
+        if (preserve) {
+          const ids = new Set(unique.map(item => "bvc-" + item.vid));
+          const focused = document.activeElement;
+          let nextFocus = null;
+          for (const card of _elGrid.querySelectorAll(".vcard")) {
+            if (ids.has(card.id)) continue;
+            if (card.contains(focused)) {
+              nextFocus = card.nextElementSibling?.querySelector(".bm-btn") ||
+                card.previousElementSibling?.querySelector(".bm-btn");
+            }
+            card.remove();
+          }
+          nextFocus?.focus({ preventScroll: true });
           return;
         }
         _elGrid.innerHTML = unique
@@ -23197,14 +23266,17 @@
         }
       }
       function _mountGridBatch(items, section, loadFn, emptyMsg) {
-        if (!items.length) {
-          _elGrid.innerHTML = _emptyStateHtml("empty", "🎬", emptyMsg);
-          return;
-        }
         _gridSorted = items;
         _gridLoaded = 0;
         _gridSection = section;
         _gridLoadFn = loadFn;
+        if (!items.length) {
+          _stopPagedSearch();
+          const count = document.getElementById("searchResultCount");
+          if (count) count.textContent = curSearchQuery ? `0${getCurrentT().search_result_unit || ""}` : "";
+          _elGrid.innerHTML = _emptyStateHtml("empty", "🎬", emptyMsg);
+          return;
+        }
         if (curSearchQuery) {
           applySearch();
           return;
@@ -23218,7 +23290,6 @@
             _gridAppendBatch(_elGrid),
           );
         }
-        if (curSearchQuery) applySearch();
       }
       function buildGrid() {
         _gridDisconnect();
@@ -23231,7 +23302,7 @@
           _mountGridBatch(
             items,
             "content",
-            (items) => loadCardMetas(items, "content"),
+            (items, context) => loadCardMetas(items, "content", context),
             getCurrentT().empty_no_videos || "영상이 없습니다.",
           );
           return;
@@ -23817,36 +23888,42 @@
         });
         if (curSearchQuery) _scheduleCountUpdate();
       }
-      function _findVideoCardElement(vid, part, selector = "") {
+      function _videoCardElements(vid, selector) {
+        const result = [];
         for (const prefix of ["avc", "arc", "bvc"]) {
-          const el = selector
-            ? document.querySelector(`#${prefix}-${vid} ${selector}`)
-            : document.getElementById(`${prefix}-${part}-${vid}`);
-          if (el) return el;
+          const card = document.getElementById(`${prefix}-${vid}`);
+          if (card) result.push(...card.querySelectorAll(selector));
         }
-        return null;
+        return result;
       }
       function _updateVideoCardTitle(vid, title) {
-        const el = _findVideoCardElement(vid, "title");
-        if (el) el.textContent = title;
+        for (const el of _videoCardElements(vid, ".csong-multi")) {
+          el.removeAttribute("data-hl-orig");
+          el.textContent = title || vid;
+        }
       }
       function _updateVideoCardDate(vid, date, replaceMeta = false) {
-        if (replaceMeta) {
-          const el = _findVideoCardElement(vid, "", ".cmeta");
-          if (el) el.innerHTML = date ? `<span class="cdate">${dateOnly(date)}</span>` : "";
-          return;
-        }
-        const el = _findVideoCardElement(vid, "", ".cdate");
-        const skeleton = _findVideoCardElement(vid, "", ".skel-date");
-        if (el) el.textContent = dateOnly(date) || "";
-        else if (skeleton) {
-          const span = document.createElement("span");
-          span.className = "cdate";
-          span.textContent = dateOnly(date) || "";
-          skeleton.replaceWith(span);
+        for (const el of _videoCardElements(vid, ".cmeta")) {
+          const value = dateOnly(date) || "";
+          const target = el.querySelector(".cdate, .skel-date");
+          if (replaceMeta) {
+            el.replaceChildren();
+            if (value) {
+              const span = document.createElement("span");
+              span.className = "cdate";
+              span.textContent = value;
+              el.append(span);
+            }
+          } else if (target) {
+            target.removeAttribute("data-hl-orig");
+            target.className = "cdate";
+            target.textContent = value;
+          }
         }
       }
-      async function loadAllVideosMetas(items) {
+      async function loadAllVideosMetas(items, context = { section: curSection }) {
+        if (!_metadataContextActive(context)) return;
+        _paintCachedMetadata(items);
         const CHUNK = 6;
         const mainUnloaded = items.filter(
           (i) =>
@@ -23854,9 +23931,10 @@
             (!i.loaded ||
               i._metaFailed ||
               i._ref?._metaFailed ||
-              i._ref?.meta?._metaFailed),
+              i._ref?.meta?._metaFailed || _needsMetadataRefresh(i.vid)),
         );
         for (let i = 0; i < mainUnloaded.length; i += CHUNK) {
+          if (!_metadataContextActive(context)) return;
           if (
             curSection !== "allvideos" &&
             curSection !== "archive" &&
@@ -23867,7 +23945,9 @@
           await Promise.all(
             batch.map(async (proxy) => {
               const ref = proxy._ref;
-              ref.meta = await fetchMeta(ref.url, ref.song, ref.vid);
+              const fetched = await fetchMeta(ref.url, ref.song, ref.vid, context);
+              if (!_metadataContextActive(context)) return;
+              ref.meta = fetched;
               if (DATE_MAP[ref.vid]) ref.meta.date = DATE_MAP[ref.vid];
               ref.loaded = true;
               proxy.meta = ref.meta;
@@ -23893,9 +23973,10 @@
             (!i.loaded ||
               i._metaFailed ||
               i._ref?._metaFailed ||
-              i._ref?.meta?._metaFailed),
+              i._ref?.meta?._metaFailed || _needsMetadataRefresh(i.vid)),
         );
         for (let i = 0; i < otherUnloaded.length; i += CHUNK) {
+          if (!_metadataContextActive(context)) return;
           if (
             curSection !== "allvideos" &&
             curSection !== "archive" &&
@@ -23910,8 +23991,10 @@
                 ref.url,
                 ref.title || proxy.song,
                 ref.vid,
+                context,
               );
-              if (!ref.title || ref._metaFailed) ref.title = fetched.rawTitle;
+              if (!_metadataContextActive(context)) return;
+              if (!ref.title || ref._metaFailed || ref.title === ref._cachedTitle) ref.title = fetched.rawTitle;
               ref._metaFailed = !!fetched._metaFailed;
               proxy._metaFailed = ref._metaFailed;
               ref.date = DATE_MAP[ref.vid] || ref.date || fetched.date || null;
@@ -23943,9 +24026,10 @@
             (!i.loaded ||
               i._metaFailed ||
               i._ref?._metaFailed ||
-              i._ref?.meta?._metaFailed),
+              i._ref?.meta?._metaFailed || _needsMetadataRefresh(i.vid)),
         );
         for (let i = 0; i < liveUnloaded.length; i += CHUNK) {
+          if (!_metadataContextActive(context)) return;
           if (
             curSection !== "allvideos" &&
             curSection !== "archive" &&
@@ -23956,7 +24040,8 @@
           await Promise.all(
             batch.map(async (proxy) => {
               const ref = proxy._ref;
-              const d = await _fetchOembed(ref.url, proxy.vid);
+              const d = await _fetchOembed(ref.url, proxy.vid, context);
+              if (!_metadataContextActive(context)) return;
               ref._metaFailed = !d;
               proxy._metaFailed = !d;
               if (d) ref.title = d.rawTitle;
@@ -23984,17 +24069,21 @@
           );
         }
       }
-      async function loadMetas(items) {
+      async function loadMetas(items, context = { section: curSection }) {
+        if (!_metadataContextActive(context)) return;
+        _paintCachedMetadata(items);
         const unloaded = items.filter(
-          (i) => !i.loaded || i._metaFailed || i.meta?._metaFailed,
+          (i) => !i.loaded || i._metaFailed || i.meta?._metaFailed || _needsMetadataRefresh(i.vid),
         );
         const CHUNK = 5;
         for (let i = 0; i < unloaded.length; i += CHUNK) {
-          if (curSection !== "songs") return;
+          if (!_metadataContextActive(context) || curSection !== "songs") return;
           const batch = unloaded.slice(i, i + CHUNK);
           await Promise.all(
             batch.map(async (item) => {
-              item.meta = await fetchMeta(item.url, item.song, item.vid);
+              const fetched = await fetchMeta(item.url, item.song, item.vid, context);
+              if (!_metadataContextActive(context)) return;
+              item.meta = fetched;
               if (DATE_MAP[item.vid]) item.meta.date = DATE_MAP[item.vid];
               item.loaded = true;
               replaceSkeleton(item);
@@ -24856,6 +24945,7 @@
         if (_pagedSearch?.refreshTimer) clearTimeout(_pagedSearch.refreshTimer);
         _pagedSearch?.grid.classList.remove("search-instant");
         _pagedSearch = null;
+        _pruneVideoRequests();
       }
       function _primeSearchMetadata(items) {
         _loadMetaCache();
@@ -24870,6 +24960,7 @@
             ref.title = ref._metaFailed
               ? cached.rawTitle
               : ref.title || cached.rawTitle;
+            if (ref.title === cached.rawTitle) ref._cachedTitle = cached.rawTitle;
             ref.channel = ref.channel || cached.channel;
             ref.date = DATE_MAP[item.vid] || ref.date || cached.date || "";
             item.meta = {
@@ -24929,127 +25020,100 @@
         _searchTextCache.set(item, { fields, result });
         return result;
       }
-      function _reconcileSearchCards(state, matches) {
-        const active = new Set(matches.map((item) => item.vid));
+      function _syncSearchItem(item) {
+        const ref = item._ref;
+        if (!ref) return;
+        if (item._src === "main" && ref.loaded) {
+          item.meta = ref.meta;
+          item.loaded = true;
+        } else if (ref.loaded || ref.title) {
+          item.meta = {
+            ...(item.meta || {}),
+            rawTitle: ref.title || item.meta?.rawTitle,
+            date: DATE_MAP[item.vid] || ref.date || item.meta?.date,
+            channel: ref.channel || item.meta?.channel || "",
+          };
+          item.loaded = true;
+        }
+      }
+      function _reconcileSearchCards(state) {
+        const visible = state.matches.slice(0, state.limit);
+        const active = new Set(visible.map(item => item.vid));
         for (const [vid, card] of state.cards) {
           if (!active.has(vid)) {
             card.remove();
             state.cards.delete(vid);
           }
         }
-        const empty = state.grid.querySelector(".search-empty");
-        if (matches.length) empty?.remove();
-        if (!matches.length && !empty) {
-          state.grid.innerHTML = _emptyStateHtml(
-            "search-empty",
-            "🔍",
+        state.grid.querySelector(".search-empty")?.remove();
+        if (!visible.length) {
+          state.grid.insertAdjacentHTML("afterbegin", _emptyStateHtml(
+            "search-empty", "🔍",
             `${getCurrentT().search_empty_prefix || ""}"${_escHtml(state.q)}"${getCurrentT().search_empty_suffix || ""}`,
-          );
+          ));
         }
         let cursor = state.grid.firstElementChild;
-        for (const item of matches) {
+        for (const item of visible) {
+          _syncSearchItem(item);
+          const html = state.build(item, "0s");
           let card = state.cards.get(item.vid);
-          if (!card) {
+          if (!card || card._renderedHtml !== html) {
             const template = document.createElement("template");
-            template.innerHTML = state.build(item, "0s");
-            card = template.content.firstElementChild;
-            state.cards.set(item.vid, card);
+            template.innerHTML = html;
+            const fresh = template.content.firstElementChild;
+            if (!card) {
+              card = fresh;
+              state.cards.set(item.vid, card);
+            } else {
+              for (const selector of [".csong", ".csong-multi", ".cmeta", ".ctags"]) {
+                const oldPart = card.querySelector(selector);
+                const newPart = fresh.querySelector(selector);
+                if (oldPart && newPart) oldPart.replaceWith(newPart);
+              }
+              card.dataset.search = fresh.dataset.search || "";
+            }
+            card._renderedHtml = html;
+            card._highlightQuery = null;
           }
           if (card !== cursor) state.grid.insertBefore(card, cursor);
           cursor = card.nextElementSibling;
-          const text = card.textContent;
-          if (card._searchText !== text) {
-            card
-              .querySelectorAll("[data-hl-orig]")
-              .forEach((el) => el.removeAttribute("data-hl-orig"));
+          const highlightText = card.textContent;
+          if (card._highlightText !== highlightText || card._highlightQuery !== state.q) {
             _hlCard(card, state.dateQuery || state.q);
-            card._searchText = card.textContent;
+            card._highlightText = card.textContent;
+            card._highlightQuery = state.q;
           }
         }
-        state.matches = matches;
-        state.loaded = matches.length;
+        state.loaded = visible.length;
+        state.observer?.disconnect();
+        if (state.loaded < state.matches.length) {
+          if (!state.sentinel) state.sentinel = _makeSentinel();
+          state.grid.append(state.sentinel);
+          state.observer = _observeSentinel(state.sentinel, () => _appendSearchPage(state));
+        } else state.sentinel?.remove();
       }
       function _refreshPagedSearch(state) {
-        if (
-          _pagedSearch !== state ||
-          curSection !== state.section ||
-          curSearchQuery.toLowerCase() !== state.q
-        )
-          return;
-        const dateQuery = state.dateQuery;
-        const matches = state.items.filter((item) => {
+        if (_pagedSearch !== state || curSection !== state.section ||
+            curSearchQuery.toLowerCase() !== state.q) return;
+        state.matches = state.items.filter(item => {
+          _syncSearchItem(item);
           const data = _searchItemText(item);
-          return dateQuery
-            ? data.date.includes(dateQuery)
-            : data.text.includes(state.q);
+          return state.dateQuery ? data.date.includes(state.dateQuery) : data.text.includes(state.q);
         });
-        const signature = matches
-          .map((item) => item.vid + ":" + (item.type || ""))
-          .join("|");
         const count = document.getElementById("searchResultCount");
-        if (count)
-          count.textContent = `${matches.length}${getCurrentT().search_result_unit || ""}`;
-        if (state.section === "allvideos") {
-          _reconcileSearchCards(state, matches);
-          return;
-        }
-        if (state.signature === signature) {
-          for (const card of state.grid.querySelectorAll(".vcard")) {
-            card
-              .querySelectorAll("[data-hl-orig]")
-              .forEach((el) => el.removeAttribute("data-hl-orig"));
-            _hlCard(card, dateQuery || state.q);
-          }
-          return;
-        }
-        state.signature = signature;
-        state.matches = matches;
-        const wanted = Math.max(40, state.loaded || 0);
-        state.loaded = 0;
-        state.observer?.disconnect();
-        state.grid.replaceChildren();
-        if (!matches.length) {
-          state.grid.innerHTML = _emptyStateHtml(
-            "search-empty",
-            "🔍",
-            `${getCurrentT().search_empty_prefix || ""}"${_escHtml(state.q)}"${getCurrentT().search_empty_suffix || ""}`,
-          );
-          return;
-        }
-        state.sentinel = _makeSentinel();
-        state.grid.append(state.sentinel);
-        _appendSearchPage(state, wanted);
-        if (state.loaded < matches.length)
-          state.observer = _observeSentinel(state.sentinel, () =>
-            _appendSearchPage(state),
-          );
+        if (count) count.textContent = `${state.matches.length}${getCurrentT().search_result_unit || ""}`;
+        _reconcileSearchCards(state);
       }
       function _appendSearchPage(state, size = 40) {
-        if (_pagedSearch !== state || state.loaded >= state.matches.length)
-          return;
-        const batch = state.matches.slice(state.loaded, state.loaded + size);
-        _appendCardBatch(
-          state.grid,
-          batch,
-          state.sentinel,
-          (item, i) => state.build(item, _cardDelay(i, 40)),
-          null,
-        );
-        state.loaded += batch.length;
-        for (const card of state.grid.querySelectorAll(".vcard")) {
-          if (card.dataset.searchHighlight !== state.q) {
-            _hlCard(card, state.q);
-            card.dataset.searchHighlight = state.q;
-          }
-        }
-        if (state.loaded >= state.matches.length) {
-          state.observer?.disconnect();
-          state.sentinel.remove();
-        }
+        if (_pagedSearch !== state || state.loaded >= state.matches.length) return;
+        state.limit += size;
+        _reconcileSearchCards(state);
       }
       async function _hydrateSearch(state) {
         const pending = state.items.filter((item) => {
+          _syncSearchItem(item);
           const ref = item._ref || item;
+          if (_needsMetadataRefresh(item.vid)) return true;
           return item._src === "live" || state.section === "live"
             ? !ref.title || ref._metaFailed
             : !item.loaded ||
@@ -25057,17 +25121,52 @@
                 ref._metaFailed ||
                 ref.meta?._metaFailed;
         });
-        let next = 0;
+        const waiting = new Set(pending);
+        const context = { section: state.section, search: state };
+        function takeNext() {
+          for (const item of (state.matches || []).slice(0, state.limit)) {
+            if (!waiting.has(item)) continue;
+            const card = state.cards.get(item.vid);
+            const rect = card?.getBoundingClientRect();
+            if (rect && rect.bottom >= 0 && rect.top <= window.innerHeight) {
+              const next = item;
+              waiting.delete(item);
+              return next;
+            }
+          }
+          for (const item of (state.matches || []).slice(0, state.limit)) {
+            if (!waiting.has(item)) continue;
+            const next = item;
+            waiting.delete(item);
+            return next;
+          }
+          const next = waiting.values().next().value;
+          if (next) waiting.delete(next);
+          return next;
+        }
         async function worker() {
-          while (_pagedSearch === state && next < pending.length) {
-            const item = pending[next++];
-            await state.load([item]);
+          while (_metadataContextActive(context) && waiting.size) {
+            const item = takeNext();
+            try {
+              await state.load([item], context);
+            } catch {
+              if (!_metadataContextActive(context)) return;
+              const ref = item._ref || item;
+              ref.loaded = item.loaded = true;
+              ref._metaFailed = item._metaFailed = true;
+              if (item._src === "main" || ref.song) {
+                ref.meta = { ...(ref.meta || {}), rawTitle: ref.meta?.rawTitle || ref.song || item.vid, _metaFailed: true };
+                item.meta = ref.meta;
+              } else {
+                ref.title = ref.title || item.song || item.vid;
+              }
+            }
             if (_pagedSearch !== state) return;
             if (!state.refreshTimer)
               state.refreshTimer = setTimeout(() => {
                 state.refreshTimer = null;
                 _refreshPagedSearch(state);
-              }, 32);
+              }, 120);
           }
         }
         await Promise.all(
@@ -25127,14 +25226,13 @@
           load,
           grid,
           loaded: 0,
+          limit: 40,
           signature: null,
           dateQuery: normalizeDateQuery(q.replace(/\s/g, "")),
           cards: new Map(),
         };
-        if (section === "allvideos") {
-          grid.replaceChildren();
-          grid.classList.add("search-instant");
-        }
+        grid.replaceChildren();
+        grid.classList.add("search-instant");
         _pagedSearch = state;
         _refreshPagedSearch(state);
         _hydrateSearch(state).catch(() => {});
@@ -25436,11 +25534,11 @@
             _newsLoaded = true;
             _newsUpdatedAt = data.updated || null;
             _refreshDataUpdatedLabels();
-            if (curSection === "news") buildNewsGrid();
+            return true;
           })
           .catch(function () {
             _newsLoaded = true;
-            if (curSection === "news") buildNewsGrid();
+            return false;
           });
       }
       let CHART_DATA = null;
@@ -25454,11 +25552,11 @@
             _chartLoaded = true;
             _chartUpdatedAt = data.updatedAt || null;
             _refreshDataUpdatedLabels();
-            if (curSection === "chart") buildChartGrid();
+            return true;
           })
           .catch(function () {
             _chartLoaded = true;
-            if (curSection === "chart") buildChartGrid();
+            return false;
           });
       }
       let SHORTS_DATA = [];
@@ -25500,7 +25598,7 @@
               );
           }),
         );
-        if (!results.some((result) => result.status === "fulfilled")) return;
+        if (!results.some((result) => result.status === "fulfilled")) return false;
         results.forEach((result, i) => {
           if (result.status === "fulfilled")
             _shortsSourceCache.set(sources[i].path, result.value);
@@ -25526,33 +25624,102 @@
             channel: String(item.channel || ""),
           }));
         _shortsLoaded = true;
-        if (curSection === "shorts") {
-          buildShortsYearNav();
-          buildShortsGrid();
-          syncSubSidebar();
-        }
+        return results.every(result => result.status === "fulfilled") ? true : "partial";
       }
       const _sectionDataLoads = new Map();
       const _visitedDataSections = new Set();
+      function _sectionPayload(section) {
+        return section === "news" ? NEWS_DATA : section === "chart" ? CHART_DATA : SHORTS_DATA;
+      }
+      function _sectionHasData(section) {
+        return section === "news" ? NEWS_DATA.length > 0 :
+          section === "chart" ? !!CHART_DATA?.songs?.length : SHORTS_DATA.length > 0;
+      }
+      function _dataStateText(key) {
+        const text = {
+          KR: { loading: "불러오는 중…", failed: "정보를 불러오지 못했습니다.", partial: "일부 정보를 불러오지 못했습니다.", stale: "최신 정보를 불러오지 못해 이전 정보를 표시합니다.", empty: "등록된 정보가 없습니다.", retry: "다시 시도" },
+          JP: { loading: "読み込み中…", failed: "情報を読み込めませんでした。", partial: "一部の情報を読み込めませんでした。", stale: "更新できないため、前回の情報を表示しています。", empty: "登録された情報はありません。", retry: "再試行" },
+          EN: { loading: "Loading…", failed: "Could not load this information.", partial: "Some information could not be loaded.", stale: "Could not refresh. Showing previously loaded information.", empty: "No information is available.", retry: "Try again" },
+        };
+        return (text[window._curLang] || text.KR)[key];
+      }
+      function _showDataState(section, host) {
+        if (!host) return true;
+        const record = _sectionDataLoads.get(section);
+        const state = record?.status || "idle";
+        const hasData = _sectionHasData(section);
+        let notice = document.getElementById(`data-state-${section}`);
+        const failed = state === "failed" || state === "partial";
+        const key = failed ? (hasData && state === "failed" ? "stale" : state) :
+          !hasData ? (state === "ready" ? "empty" : "loading") : "";
+        host.setAttribute("aria-busy", String(state === "loading"));
+        if (!key) { notice?.remove(); return false; }
+        if (!notice) {
+          notice = document.createElement("div");
+          notice.id = `data-state-${section}`;
+          notice.className = "data-state";
+          notice.setAttribute("role", "status");
+          host.before(notice);
+        }
+        const signature = key + window._curLang;
+        if (notice.dataset.state !== signature) {
+          notice.dataset.state = signature;
+          notice.replaceChildren(document.createTextNode(_dataStateText(key)));
+          if (failed) {
+            const button = document.createElement("button");
+            button.type = "button";
+            button.className = "type-btn";
+            button.dataset.retrySection = section;
+            button.textContent = _dataStateText("retry");
+            notice.append(button);
+          }
+        }
+        if (!hasData) host.replaceChildren();
+        return !hasData;
+      }
+      function _renderDataSection(section, rebuild = false) {
+        if (curSection !== section) return;
+        const host = document.getElementById({ news: "newsGrid", chart: "chartList", shorts: "shortsGrid" }[section]);
+        if (!host) return;
+        if (rebuild || !host.children.length) {
+          if (section === "news") buildNewsGrid();
+          else if (section === "chart") buildChartGrid();
+          else {
+            buildShortsYearNav();
+            buildShortsGrid(true);
+            syncSubSidebar();
+          }
+        } else _showDataState(section, host);
+      }
       function _ensureSectionData(section, force = false) {
-        const loader = {
-          news: loadNewsJson,
-          chart: loadChartJson,
-          shorts: loadShortsJson,
-        }[section];
+        const loader = { news: loadNewsJson, chart: loadChartJson, shorts: loadShortsJson }[section];
         if (!loader) return Promise.resolve();
         _visitedDataSections.add(section);
         const previous = _sectionDataLoads.get(section);
         if (previous?.pending) return previous.pending;
-        if (!force && previous && Date.now() - previous.time < 10 * 60000)
-          return Promise.resolve();
-        const record = { time: Date.now(), pending: null };
-        record.pending = loader().finally(() => {
-          record.pending = null;
-        });
+        if (!force && previous && Date.now() - previous.time < 10 * 60000) return Promise.resolve();
+        const before = JSON.stringify(_sectionPayload(section));
+        const record = { time: Date.now(), status: "loading", pending: null };
         _sectionDataLoads.set(section, record);
+        record.pending = Promise.resolve().then(loader).then(success => {
+          record.status = success === false ? "failed" : success === "partial" ? "partial" : "ready";
+          if (success !== true) record.time = Date.now() - 10 * 60000 + 15000;
+          return success;
+        }).catch(() => {
+          record.status = "failed";
+          record.time = Date.now() - 10 * 60000 + 15000;
+          return false;
+        }).finally(() => {
+          record.pending = null;
+          _renderDataSection(section, before !== JSON.stringify(_sectionPayload(section)));
+        });
+        _renderDataSection(section);
         return record.pending;
       }
+      document.addEventListener("click", event => {
+        const button = event.target.closest("[data-retry-section]");
+        if (button) _ensureSectionData(button.dataset.retrySection, true);
+      });
       function setShortsChannel(btn, ch) {
         _curShortsChannel = ch;
         document
@@ -25650,9 +25817,10 @@
         onInput: onShortsSearchInput,
         onEscapeClear: closeShortsSearch,
       });
-      function buildShortsGrid() {
+      function buildShortsGrid(preserve = false) {
         const grid = document.getElementById("shortsGrid");
-        if (!grid || !_shortsLoaded) return;
+        if (!grid || _showDataState("shorts", grid)) return;
+        const visiblePages = preserve ? Math.max(1, _shortsPage) : 1;
         if (!grid.dataset.delegated) {
           grid.dataset.delegated = "1";
           grid.addEventListener("click", function (e) {
@@ -25709,7 +25877,11 @@
           }
           return;
         }
-        _appendShortsPage(grid);
+        for (let i = 0; i < visiblePages; i++) {
+          _shortsObserver?.disconnect();
+          _shortsSentinel?.remove();
+          _appendShortsPage(grid);
+        }
       }
       function _appendShortsPage(grid) {
         const start = _shortsPage * _SHORTS_PAGE_SIZE;
@@ -25872,7 +26044,7 @@
       }
       function buildNewsGrid() {
         const grid = document.getElementById("newsGrid");
-        if (!grid || !_newsLoaded) return;
+        if (!grid || _showDataState("news", grid)) return;
         if (!NEWS_DATA.length) {
           grid.innerHTML = `<div class="news-empty"><div class="ico">📰</div><p>${getCurrentT().empty_no_news || "뉴스를 불러올 수 없습니다."}</p></div>`;
           return;
@@ -26000,7 +26172,7 @@
       }
       function buildChartGrid() {
         const list = document.getElementById("chartList");
-        if (!list || !_chartLoaded) return;
+        if (!list || _showDataState("chart", list)) return;
         const songs = (
           Array.isArray(CHART_DATA?.songs) ? CHART_DATA.songs : []
         ).filter((song) => song && typeof song === "object");
@@ -27434,9 +27606,7 @@
           banner.classList.add("show");
           hideTimer = setTimeout(function () {
             banner.classList.remove("show");
-            reloadTimer = setTimeout(function () {
-              if (navigator.onLine) window.location.reload();
-            }, 350);
+
           }, 1400);
         }
         window.addEventListener("offline", showOffline);
