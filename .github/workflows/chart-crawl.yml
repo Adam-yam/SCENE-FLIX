@@ -18,7 +18,7 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install requests ytmusicapi pandas lxml
+        run: pip install requests pandas lxml
 
       - name: Run chart crawler
         run: python crawlers/crawl_chart.py
