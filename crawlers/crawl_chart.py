@@ -444,7 +444,7 @@ def fetch_youtube_music():
                 "clientVersion": "0.2", "gl": "US", "hl": "en", "theme": "MUSIC"},
                 "request": {"internalExperimentFlags": []}},
             "query": "chart_params_type=WEEK&perspective=CHART&flags=viral_video_chart&selected_chart=TRACKS&chart_params_id=weekly:0:0:kr"}
-    response = SESSION.post(url, params={"alt": "json", "key": "AIzaSyCzEW7JUJdSql0-2V4tHUb6laYm4iAE_dM"},
+    response = SESSION.post(url, params={"alt": "json"},
                             json=body, headers=COMMON_HEADERS, timeout=20)
     response.raise_for_status()
     sections = response.json().get("contents", {}).get("sectionListRenderer", {}).get("contents", [])
