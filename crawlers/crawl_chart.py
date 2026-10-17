@@ -12,6 +12,7 @@ from io import StringIO
 
 import pandas as pd
 import requests
+from lxml import html
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
@@ -38,7 +39,8 @@ APPLE_MUSIC_URL = "https://rss.applemarketingtools.com/api/v2/kr/music/most-play
 APPLE_SOURCE_UPDATED = None
 SOURCE_META = {}
 MAX_AGE_HOURS = {"melon": 6, "bugs": 6, "vibe": 48, "apple_music": 72,
-                 "spotify": 72, "youtube_music": 240}
+                 "spotify": 72, "youtube_music": 240,
+                 "melon_daily": 72, "genie_daily": 72, "bugs_daily": 72}
 
 
 def signed_integer(value):
@@ -152,6 +154,122 @@ def safe_url_decode(value):
         return urllib.parse.unquote(str(value))
     except Exception:
         return str(value)
+
+
+
+def request_html(url):
+    response = SESSION.get(url, headers={"User-Agent": "Mozilla/5.0", "Referer": url}, timeout=15)
+    response.raise_for_status()
+    text = response.content.decode("utf-8")
+    return html.fromstring(text), text
+
+
+def node_text(node, xpath):
+    return " ".join(" ".join(node.xpath(xpath)).split())
+
+
+def html_change(rank, direction, amount=None):
+    if direction == "new":
+        return {"previousRank": None, "isNew": True, "isReentry": False}
+    if direction == "reentry":
+        return {"previousRank": None, "isNew": False, "isReentry": True}
+    if direction == "same":
+        previous = rank
+    elif direction in ("up", "down") and positive_rank(amount):
+        previous = positive_rank(rank + int(amount) * (1 if direction == "up" else -1))
+    else:
+        previous = None
+    return {"previousRank": previous, "isNew": False if previous else None, "isReentry": False}
+
+
+def finish_daily(key, url, rows, size, moment, period):
+    validate_chart(rows, size, [r["rank"] for r in rows], [r["id"] for r in rows])
+    if any(not r["songName"] or not r["artistName"] for r in rows):
+        raise ValueError("Missing daily chart title or artist")
+    set_source(key, url, f"일간 TOP{size}", moment=moment, period=period)
+    SOURCE_META[key]["sourceDatePrecision"] = "date"
+    return [{k: v for k, v in row.items() if k != "id"} for row in rows if is_rescene(row["artistName"])]
+
+
+def fetch_melon_daily():
+    url = "https://www.melon.com/chart/day/index.htm"
+    doc, _ = request_html(url)
+    date = node_text(doc, '//span[@class="yyyymmdd"]//text()')
+    moment = datetime.strptime(date, "%Y.%m.%d").replace(tzinfo=KST)
+    rows = []
+    for row in doc.xpath('//tr[@data-song-no]'):
+        rank = positive_rank(node_text(row, './/span[normalize-space(@class)="rank"]/text()'))
+        if rank is None:
+            raise ValueError("Invalid Melon daily rank")
+        change = node_text(row, './/span[@class="rank_wrap"]/@title')
+        amount = re.search(r"\d+", change)
+        direction = "up" if "상승" in change else "down" if "하락" in change else "same" if "동일" in change else "new" if "진입" in change else "unknown"
+        rows.append({"id": row.get("data-song-no"), "rank": rank,
+            "songName": node_text(row, './/div[contains(@class,"rank01")]//a/text()'),
+            "artistName": node_text(row, './/div[contains(@class,"rank02")]/a/text()'),
+            "albumImageUrl": node_text(row, './/a[contains(@class,"image_typeAll")]/img/@src'),
+            **html_change(rank, direction, amount[0] if amount else None)})
+    return finish_daily("melon_daily", url, rows, 100, moment, date)
+
+
+def fetch_genie_daily():
+    url = "https://www.genie.co.kr/chart/top200?ditc=D&rtm=N"
+    rows, chart_date = [], None
+    for page in range(1, 5):
+        target = url + f"&pg={page}" + ("&ymd=" + chart_date.replace(".", "") if chart_date else "")
+        doc, _ = request_html(target)
+        selected = doc.xpath('//a[contains(concat(" ",normalize-space(@class)," ")," current ") and contains(@href,"ditc=D") and contains(@href,"rtm=N")]')
+        if not selected:
+            raise ValueError("Genie response is not a daily chart")
+        date = node_text(doc, '//span[@class="get-date"]//text()')
+        datetime.strptime(date, "%Y.%m.%d")
+        if chart_date and date != chart_date:
+            raise ValueError("Genie daily pages have different dates")
+        chart_date = date
+        page_rows = doc.xpath('//tr[@songid]')
+        if len(page_rows) != 50:
+            raise ValueError("Incomplete Genie daily page")
+        for row in page_rows:
+            rank = positive_rank(node_text(row, './/td[@class="number"]/text()'))
+            if rank is None:
+                raise ValueError("Invalid Genie daily rank")
+            direction = "unknown"
+            for name, mapped in (("rank-up", "up"), ("rank-down", "down"), ("rank-none", "same"), ("rank-new", "new")):
+                if row.xpath('.//td[@class="number"]//span[@class="' + name + '"]'):
+                    direction = mapped
+                    break
+            amount = node_text(row, './/td[@class="number"]//span[@class="rank-up" or @class="rank-down"]/text()')
+            cover = node_text(row, './/a[@class="cover"]/img/@src')
+            rows.append({"id": row.get("songid"), "rank": rank,
+                "songName": node_text(row, './/a[contains(concat(" ",normalize-space(@class)," ")," title ")]/text()'),
+                "artistName": node_text(row, './/a[contains(concat(" ",normalize-space(@class)," ")," artist ")]/text()'),
+                "albumImageUrl": urllib.parse.urljoin(url, cover) if cover else "",
+                **html_change(rank, direction, amount)})
+    moment = datetime.strptime(chart_date, "%Y.%m.%d").replace(tzinfo=KST)
+    return finish_daily("genie_daily", url, rows, 200, moment, chart_date)
+
+
+def fetch_bugs_daily():
+    url = "https://music.bugs.co.kr/chart/track/day/total"
+    doc, text = request_html(url)
+    match = re.search(r"currentPeriodStartDate\s*:\s*new Date\(\s*(\d{4})\s*,\s*(\d+)-1\s*,\s*(\d+)\s*\)", text)
+    if not match:
+        raise ValueError("Bugs daily chart date not found")
+    moment = datetime(*map(int, match.groups()), tzinfo=KST)
+    rows = []
+    for row in doc.xpath('//tr[@trackid]'):
+        rank = positive_rank(node_text(row, './/div[@class="ranking"]/strong/text()'))
+        if rank is None:
+            raise ValueError("Invalid Bugs daily rank")
+        flags = node_text(row, './/p[contains(concat(" ",normalize-space(@class)," ")," change ")]/@class').split()
+        direction = next((k for k in ("up", "down", "new") if k in flags), "same" if "none" in flags or "duration" in flags else "unknown")
+        amount = node_text(row, './/p[contains(@class,"change")]/em/text()')
+        rows.append({"id": row.get("trackid"), "rank": rank,
+            "songName": node_text(row, './/p[@class="title"]/a/text()'),
+            "artistName": node_text(row, './/p[@class="artist"]/a[not(contains(@class,"more"))]/text()'),
+            "albumImageUrl": node_text(row, './/a[@class="thumbnail"]/img/@src'),
+            **html_change(rank, direction, amount)})
+    return finish_daily("bugs_daily", url, rows, 100, moment, moment.strftime("%Y.%m.%d"))
 
 
 def fetch_melon():
@@ -320,7 +438,49 @@ def fetch_flo():
         })
     return results
 def fetch_youtube_music():
-    return fetch_kworb("https://kworb.net/youtube/insights/kr.html")
+    url = "https://charts.youtube.com/youtubei/v1/browse"
+    body = {"browseId": "FEmusic_analytics_charts_home",
+            "context": {"capabilities": {}, "client": {"clientName": "WEB_MUSIC_ANALYTICS",
+                "clientVersion": "0.2", "gl": "US", "hl": "en", "theme": "MUSIC"},
+                "request": {"internalExperimentFlags": []}},
+            "query": "chart_params_type=WEEK&perspective=CHART&flags=viral_video_chart&selected_chart=TRACKS&chart_params_id=weekly:0:0:kr"}
+    response = SESSION.post(url, params={"alt": "json", "key": "AIzaSyCzEW7JUJdSql0-2V4tHUb6laYm4iAE_dM"},
+                            json=body, headers=COMMON_HEADERS, timeout=20)
+    response.raise_for_status()
+    sections = response.json().get("contents", {}).get("sectionListRenderer", {}).get("contents", [])
+    content = next((s["musicAnalyticsSectionRenderer"]["content"] for s in sections if
+                    "content" in s.get("musicAnalyticsSectionRenderer", {})), {})
+    entity = content.get("perspectiveMetadata", {}).get("entityId", "")
+    match = re.fullmatch(r"weekly:(\d{8}):(\d{8}):kr", entity)
+    if not match:
+        raise ValueError("Expected YouTube Korea weekly chart")
+    chart = next((t for t in content.get("trackTypes", []) if t.get("listType") == "TOP_VIEWS_CHART" and
+                  t.get("chartPeriodType") == "CHART_PERIOD_TYPE_WEEKLY"), {})
+    start = datetime.strptime(match[1], "%Y%m%d").replace(tzinfo=timezone.utc)
+    end = datetime.strptime(match[2], "%Y%m%d").replace(tzinfo=timezone.utc)
+    if (end - start).days != 6 or chart.get("endDate") != end.strftime("%Y-%m-%d"):
+        raise ValueError("Inconsistent YouTube chart period")
+    tracks = chart.get("trackViews", [])
+    validate_chart(tracks, 100, [t.get("chartEntryMetadata", {}).get("currentPosition") for t in tracks],
+                   [t.get("id") for t in tracks])
+    if any(not t.get("name") or not t.get("artists") for t in tracks):
+        raise ValueError("Incomplete YouTube song metadata")
+    set_source("youtube_music", url, "한국 주간 인기곡 TOP100", moment=end,
+               period=start.strftime("%Y-%m-%d") + " ~ " + end.strftime("%Y-%m-%d"))
+    SOURCE_META["youtube_music"]["sourceDatePrecision"] = "date"
+    results = []
+    for track in tracks:
+        artist = ", ".join(a.get("name", "") for a in track["artists"])
+        if not is_rescene(artist):
+            continue
+        meta = track["chartEntryMetadata"]
+        previous = positive_rank(meta.get("previousPosition"))
+        periods = positive_rank(meta.get("periodsOnChart"))
+        results.append({"songName": track["name"], "artistName": artist, "albumImageUrl": "",
+                        "rank": positive_rank(meta["currentPosition"]), "previousRank": previous,
+                        "isNew": previous is None and periods == 1,
+                        "isReentry": previous is None and periods is not None and periods > 1})
+    return results
 
 
 def parse_previous_rank(rank, change):
@@ -412,6 +572,9 @@ PLATFORM_FETCHERS = {
     "youtube_music": fetch_youtube_music,
     "spotify": fetch_spotify,
     "apple_music": fetch_apple_music,
+    "melon_daily": fetch_melon_daily,
+    "genie_daily": fetch_genie_daily,
+    "bugs_daily": fetch_bugs_daily,
 }
 
 
@@ -448,7 +611,7 @@ def merge_platform_results(platform_results: dict) -> list:
     songs = list(merged.values())
 
     def sort_key(song):
-        ranks = [v["rank"] for v in song["ranks"].values() if v.get("rank") is not None]
+        ranks = [v["rank"] for k, v in song["ranks"].items() if not k.endswith("_daily") and v.get("rank") is not None]
         return (-len(ranks), min(ranks) if ranks else 9999)
 
     songs.sort(key=sort_key)
