@@ -1,10 +1,13 @@
 import json
+import hashlib
+import math
 import os
 import re
 import sys
 import tempfile
 import urllib.parse
 from datetime import datetime, timedelta, timezone
+from email.utils import parsedate_to_datetime
 from io import StringIO
 
 import pandas as pd
@@ -33,16 +36,84 @@ SESSION.mount("https://", HTTPAdapter(max_retries=Retry(
 )))
 APPLE_MUSIC_URL = "https://rss.applemarketingtools.com/api/v2/kr/music/most-played/100/songs.json"
 APPLE_SOURCE_UPDATED = None
+SOURCE_META = {}
+MAX_AGE_HOURS = {"melon": 6, "bugs": 6, "vibe": 48, "apple_music": 72,
+                 "spotify": 72, "youtube_music": 240}
+
+
+def signed_integer(value):
+    if isinstance(value, bool) or value is None:
+        return None
+    if isinstance(value, float):
+        return int(value) if math.isfinite(value) and value.is_integer() else None
+    try:
+        return int(str(value).strip())
+    except (TypeError, ValueError):
+        return None
+
+
+def explicit_new(value):
+    if value is True or str(value).strip().upper() in {"Y", "TRUE", "NEW"}:
+        return True
+    if value is False or str(value).strip().upper() in {"N", "FALSE", "SAME", "NONE", "UP", "DOWN"}:
+        return False
+    return None
+
+
+def validate_chart(items, size, ranks, ids):
+    require_items(items)
+    if len(items) != size or sorted(positive_rank(v) or 0 for v in ranks) != list(range(1, size + 1)):
+        raise ValueError(f"Incomplete or invalid chart: expected ranks 1..{size}")
+    if any(v is None or str(v) == "" for v in ids) or len(set(map(str, ids))) != size:
+        raise ValueError("Missing or duplicate chart identifiers")
+
+
+def timestamp_ms(value):
+    number = signed_integer(value)
+    if number is None:
+        raise ValueError("Missing chart timestamp")
+    return datetime.fromtimestamp(number / 1000, KST)
+
+
+def set_source(platform, url, label, *, moment=None, period=None, rows=None):
+    metadata = {"source": url, "chartLabel": label, "sourceKind": "third_party" if "kworb.net" in url else "first_party"}
+    if moment is not None:
+        if moment.tzinfo is None:
+            raise ValueError("Chart timestamp must have a timezone")
+        metadata["sourceUpdatedAt"] = moment.isoformat()
+    if period:
+        metadata["sourcePeriod"] = str(period)
+    if rows is not None:
+        payload = json.dumps(rows, ensure_ascii=False, separators=(",", ":"))
+        metadata["sourceRevision"] = hashlib.sha256(payload.encode()).hexdigest()
+    SOURCE_META[platform] = metadata
+
+
+def parse_source_date(value):
+    try:
+        moment = datetime.fromisoformat(value)
+    except ValueError:
+        moment = parsedate_to_datetime(value)
+    if moment.tzinfo is None:
+        raise ValueError("Chart timestamp is missing timezone")
+    return moment
+
+
+def source_freshness(platform, metadata, now):
+    value = metadata.get("sourceUpdatedAt")
+    if not value:
+        return "unknown"
+    moment = parse_source_date(value)
+    age = (now - moment).total_seconds() / 3600
+    if age < -1:
+        raise ValueError("Chart timestamp is in the future")
+    return "outdated" if age > MAX_AGE_HOURS.get(platform, 72) else "current"
+
 
 
 def positive_rank(value):
-    if isinstance(value, bool):
-        return None
-    try:
-        number = int(str(value).strip())
-        return number if number > 0 else None
-    except (TypeError, ValueError):
-        return None
+    number = signed_integer(value)
+    return number if number is not None and number > 0 else None
 
 
 def require_items(items):
@@ -88,13 +159,14 @@ def fetch_melon():
     headers = {**COMMON_HEADERS, "Referer": "https://www.melon.com/"}
     data = request_json(url, headers=headers)
     song_list = data.get("response", {}).get("SONGLIST", [])
-    require_items(song_list)
+    validate_chart(song_list, 100, [x.get("CURRANK") for x in song_list], [x.get("SONGID") for x in song_list])
+    meta = data["response"]
+    moment = datetime.strptime(meta["RANKDAY"] + " " + meta["RANKHOUR"], "%Y.%m.%d %H:%M").replace(tzinfo=KST)
+    set_source("melon", url, "TOP100", moment=moment)
     results = []
     for item in song_list:
         artist_list = item.get("ARTISTLIST") or []
-        artist_name = safe_url_decode(
-            artist_list[0].get("ARTISTNAME") if artist_list else "Unknown"
-        )
+        artist_name = ", ".join(safe_url_decode(a.get("ARTISTNAME")) for a in artist_list)
         if not is_rescene(artist_name):
             continue
         results.append({
@@ -102,7 +174,8 @@ def fetch_melon():
             "artistName": artist_name,
             "albumImageUrl": safe_url_decode(item.get("ALBUMIMGPATH")),
             "rank": int(item.get("CURRANK")) if item.get("CURRANK") is not None else None,
-            "previousRank": int(item.get("PASTRANK")) if item.get("PASTRANK") else None,
+            "previousRank": positive_rank(item.get("PASTRANK")),
+            "isNew": explicit_new(item.get("RANKTYPE")),
         })
     return results
 
@@ -111,8 +184,13 @@ def fetch_genie():
     url = "https://app.genie.co.kr/chart/j_RealTimeRankSongList.json?pg=1&pgsize=100"
     headers = {**COMMON_HEADERS, "Referer": "https://www.genie.co.kr/"}
     data = request_json(url, headers=headers)
-    items = data.get("DataSet", {}).get("DATA", [])
-    require_items(items)
+    second_url = url.replace("pg=1&", "pg=2&")
+    second = request_json(second_url, headers=headers)
+    if data.get("PageInfo", {}).get("ChartTime") != second.get("PageInfo", {}).get("ChartTime"):
+        raise ValueError("Genie pages belong to different chart hours")
+    items = require_items(data.get("DataSet", {}).get("DATA", [])) + require_items(second.get("DataSet", {}).get("DATA", []))
+    validate_chart(items, 200, [x.get("RANK_NO") for x in items], [x.get("SONG_ID") for x in items])
+    set_source("genie", url, "실시간 TOP200", period=data.get("PageInfo", {}).get("ChartTime"))
     results = []
     for item in items:
         artist_name = safe_url_decode(item.get("ARTIST_NAME"))
@@ -123,7 +201,8 @@ def fetch_genie():
             "artistName": artist_name,
             "albumImageUrl": safe_url_decode(item.get("ALBUM_IMG_PATH")),
             "rank": int(item.get("RANK_NO")) if item.get("RANK_NO") is not None else None,
-            "previousRank": int(item.get("PRE_RANK_NO")) if item.get("PRE_RANK_NO") else None,
+            "previousRank": positive_rank(item.get("PRE_RANK_NO")),
+            "isNew": None,
         })
     return results
 
@@ -139,7 +218,9 @@ def fetch_vibe():
     }
     data = request_json(url, headers=headers)
     tracks = data.get("response", {}).get("result", {}).get("chart", {}).get("items", {}).get("tracks", [])
-    require_items(tracks)
+    validate_chart(tracks, 100, [(x.get("rank") or {}).get("currentRank") for x in tracks], [x.get("trackId") for x in tracks])
+    chart = data["response"]["result"]["chart"]
+    set_source("vibe", url, chart.get("title", "오늘 Top 100"), moment=timestamp_ms(chart.get("date")), period=chart.get("chartDate"))
     results = []
     for track in tracks:
         artists = track.get("artists") or []
@@ -147,9 +228,10 @@ def fetch_vibe():
         if not is_rescene(artist_name):
             continue
         rank_info = track.get("rank", {}) or {}
-        current_rank = rank_info.get("currentRank")
-        variation = rank_info.get("rankVariation")
-        previous_rank = (current_rank - variation) if (current_rank is not None and variation is not None) else None
+        current_rank = positive_rank(rank_info.get("currentRank"))
+        variation = signed_integer(rank_info.get("rankVariation"))
+        is_new = explicit_new(rank_info.get("isNew"))
+        previous_rank = positive_rank(current_rank + variation) if current_rank and variation is not None and is_new is not True else None
         album = track.get("album", {}) or {}
         results.append({
             "songName": track.get("trackTitle", ""),
@@ -157,6 +239,7 @@ def fetch_vibe():
             "albumImageUrl": album.get("imageUrl", ""),
             "rank": current_rank,
             "previousRank": previous_rank,
+            "isNew": is_new,
         })
     return results
 
@@ -176,7 +259,8 @@ def fetch_bugs():
     }
     data = request_json(url, headers=headers, data=form_data)
     tracks = data.get("list", [])
-    require_items(tracks)
+    validate_chart(tracks, 100, [(x.get("list_attr") or {}).get("rank") for x in tracks], [x.get("track_id") for x in tracks])
+    set_source("bugs", url, "실시간 TOP100", moment=timestamp_ms(data.get("info", {}).get("start_dt")))
     results = []
     for track in tracks:
         artists = track.get("artists") or []
@@ -192,7 +276,8 @@ def fetch_bugs():
             "artistName": artist_name,
             "albumImageUrl": f"https://image.bugsm.co.kr/album/images/350{image_path}" if image_path else "",
             "rank": rank_info.get("rank"),
-            "previousRank": rank_info.get("rank_last"),
+            "previousRank": positive_rank(rank_info.get("rank_last")),
+            "isNew": explicit_new(rank_info.get("rank_code")),
         })
     return results
 
@@ -206,16 +291,19 @@ def fetch_flo():
     }
     data = request_json(url, headers=headers)
     tracks = data.get("data", {}).get("trackList", [])
-    require_items(tracks)
+    validate_chart(tracks, 100, list(range(1, len(tracks) + 1)), [x.get("id") for x in tracks])
+    set_source("flo", url, "24시간 집계 TOP100", period=data["data"].get("basedOnUpdate"))
     results = []
     for index, item in enumerate(tracks):
         artist_name = (item.get("representationArtist") or {}).get("name", "")
         if not is_rescene(artist_name):
             continue
         rank = index + 1
-        rank_badge = ((item.get("rank") or {}).get("rankBadge"))
+        rank_info = item.get("rank") or {}
+        is_new = explicit_new(rank_info.get("newYn"))
+        rank_badge = signed_integer(rank_info.get("rankBadge"))
         try:
-            previous_rank = int(rank_badge) + rank if rank_badge is not None else None
+            previous_rank = positive_rank(rank_badge + rank) if rank_badge is not None and is_new is not True else None
         except (ValueError, TypeError):
             previous_rank = None
         img_list = (item.get("album") or {}).get("imgList") or []
@@ -228,6 +316,7 @@ def fetch_flo():
             "albumImageUrl": image_url,
             "rank": rank,
             "previousRank": previous_rank,
+            "isNew": is_new,
         })
     return results
 def fetch_youtube_music():
@@ -236,9 +325,9 @@ def fetch_youtube_music():
 
 def parse_previous_rank(rank, change):
     change = (change or "").strip()
-    if change in ("", "=", "nan"):
+    if change == "=":
         return rank
-    if change in ("RE", "NEW"):
+    if change in ("", "nan", "RE", "NEW"):
         return None
     try:
         return rank + int(change)
@@ -254,6 +343,21 @@ def fetch_kworb(url):
                   str(t.columns[0]).strip().lower() in ("pos", "position")), None)
     if table is None or table.empty:
         raise ValueError("Chart table not found")
+    is_youtube = "/youtube/" in url
+    platform = "youtube_music" if is_youtube else "spotify"
+    expected = 100 if is_youtube else 200
+    positions = [positive_rank(v) for v in table.iloc[:, 0]]
+    if len(positions) != expected or sorted(v or 0 for v in positions) != list(range(1, expected + 1)):
+        raise ValueError("Incomplete Kworb chart")
+    pattern = r"Week ending (\d{4}/\d{2}/\d{2})" if is_youtube else r"Spotify Daily Chart - South Korea - (\d{4}/\d{2}/\d{2})"
+    match = re.search(pattern, response.text)
+    if not match:
+        raise ValueError("Kworb chart date not found")
+    moment = datetime.strptime(match[1], "%Y/%m/%d").replace(tzinfo=timezone.utc)
+    set_source(platform, url, "한국 주간 인기곡" if is_youtube else "한국 일간 TOP200",
+               moment=moment, period=match[1])
+    SOURCE_META[platform]["sourceDatePrecision"] = "date"
+    SOURCE_META[platform]["verification"] = "not_compared_with_official"
     results = []
     for row in table.itertuples(index=False, name=None):
         parts = str(row[2]).split(" - ", 1)
@@ -266,6 +370,8 @@ def fetch_kworb(url):
             "songName": re.sub(r"\s*\(w/.*?\)\s*$", "", parts[1]).strip(),
             "artistName": parts[0].strip(), "albumImageUrl": "", "rank": rank,
             "previousRank": positive_rank(parse_previous_rank(rank, str(row[1]))),
+            "isNew": str(row[1]).strip().upper() == "NEW",
+            "isReentry": str(row[1]).strip().upper() == "RE",
         })
     return results
 
@@ -287,10 +393,13 @@ def fetch_apple_music():
     if len({item["id"] for item in items}) != len(items):
         raise ValueError("Duplicate Apple Music chart IDs")
     APPLE_SOURCE_UPDATED = feed.get("updated")
+    moment = parsedate_to_datetime(APPLE_SOURCE_UPDATED)
+    set_source("apple_music", APPLE_MUSIC_URL, "한국 인기곡 TOP100", moment=moment,
+               rows=[str(item["id"]) for item in items])
     return [{
         "songName": item["name"], "artistName": item["artistName"],
         "albumImageUrl": item.get("artworkUrl100", ""),
-        "rank": rank, "previousRank": None,
+        "rank": rank, "previousRank": None, "isNew": None,
     } for rank, item in enumerate(items, 1) if is_rescene(item["artistName"])]
 
 
@@ -332,6 +441,8 @@ def merge_platform_results(platform_results: dict) -> list:
                 merged[key]["ranks"][platform] = {
                     "rank": rank,
                     "previousRank": positive_rank(entry.get("previousRank")),
+                    "isNew": entry.get("isNew"),
+                    "isReentry": entry.get("isReentry", False),
                 }
 
     songs = list(merged.values())
@@ -407,10 +518,13 @@ def previous_entries(previous, platform):
 def apple_previous_ranks(entries, previous):
     old = {normalize_title(e["songName"]): e for e in previous_entries(previous, "apple_music")}
     old_status = previous.get("platformStatus", {}).get("apple_music", {})
-    same_feed = bool(APPLE_SOURCE_UPDATED and old_status.get("sourceUpdatedAt") == APPLE_SOURCE_UPDATED)
+    revision = SOURCE_META.get("apple_music", {}).get("sourceRevision")
+    same_feed = bool(revision and old_status.get("sourceRevision") == revision)
+    has_baseline = bool(old_status.get("sourceRevision"))
     for entry in entries:
         prior = old.get(normalize_title(entry["songName"]))
         entry["previousRank"] = (prior.get("previousRank") if same_feed else prior.get("rank")) if prior else None
+        entry["isNew"] = prior.get("isNew") if same_feed and prior else (False if prior else True if has_baseline and not same_feed else None)
 
 
 def atomic_write(output):
@@ -429,28 +543,36 @@ def atomic_write(output):
 
 def main():
     previous = load_previous()
-    now = datetime.now(KST).isoformat()
+    clock = datetime.now(KST)
+    now = clock.isoformat()
+    SOURCE_META.clear()
     results, statuses = {}, {}
     success_count = 0
     for name, fetcher in PLATFORM_FETCHERS.items():
         old_status = previous.get("platformStatus", {}).get(name, {})
         try:
             entries = fetcher()
+            metadata = SOURCE_META.get(name, {})
+            freshness = source_freshness(name, metadata, clock)
+            old_date, new_date = old_status.get("sourceUpdatedAt"), metadata.get("sourceUpdatedAt")
+            if old_date and new_date and parse_source_date(new_date) < parse_source_date(old_date):
+                raise ValueError("Source chart date went backwards")
             if name == "apple_music":
                 apple_previous_ranks(entries, previous)
+                metadata["previousRankBasis"] = "previous_distinct_successful_snapshot"
             results[name] = entries
-            statuses[name] = {"status": "ok", "lastSuccessAt": now}
-            if name == "apple_music":
-                statuses[name].update(source=APPLE_MUSIC_URL, sourceUpdatedAt=APPLE_SOURCE_UPDATED,
-                                      previousRankBasis="previous_distinct_successful_feed")
+            statuses[name] = {**metadata, "status": "stale" if freshness == "outdated" else "ok",
+                              "freshness": freshness, "lastSuccessAt": now, "lastAttemptAt": now,
+                              "reason": "source_outdated" if freshness == "outdated" else None}
             success_count += 1
             print(f"[{name}] {len(entries)} RESCENE track(s) found")
         except Exception as error:
             results[name] = previous_entries(previous, name)
-            had_previous = name in previous.get("platforms", [])
+            had_previous = bool(results[name] or old_status.get("lastSuccessAt") or
+                                (not old_status and name in previous.get("platforms", [])))
             statuses[name] = {**old_status, "status": "stale" if had_previous else "unavailable",
                               "lastSuccessAt": old_status.get("lastSuccessAt", previous.get("updatedAt") if had_previous else None),
-                              "lastAttemptAt": now}
+                              "lastAttemptAt": now, "reason": "fetch_failed"}
             print(f"[{name}] failed; keeping previous data: {error}", file=sys.stderr)
     if not success_count:
         print("All chart requests failed; chart.json unchanged", file=sys.stderr)

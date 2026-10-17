@@ -7880,7 +7880,7 @@
 #chartMode .minimal-art{width:38px;height:38px;border-radius:5px;background:var(--dim);display:grid;place-items:center;flex-shrink:0;color:var(--muted);font-size:14px;font-weight:400}
 #chartMode .minimal-art img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
 #chartMode .minimal-songtext{min-width:0}
-#chartMode .minimal-title{font-size:12px;font-weight:550;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5}
+#chartMode .minimal-title{font-size:15px;font-weight:550;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5}
 #chartMode .minimal-value{font-size:15px;font-weight:500;color:var(--text);line-height:1.3}
 #chartMode .minimal-delta{display:block;font-size:8px;line-height:1.3;margin-top:5px;min-height:11px;color:var(--muted)}
 #chartMode .minimal-delta.up{color:#c77c76}
@@ -8269,8 +8269,7 @@
           >
             <use href="#ic11" />
           </svg>
-          <span data-i18n="tab_chart">차트</span
-          ><span class="shorts-beta">BETA</span>
+          <span data-i18n="tab_chart">차트</span>
         </button>
         <button
           class="drawer-item btn-base"
@@ -8708,8 +8707,7 @@
           >
             <use href="#ic11" />
           </svg>
-          <span data-i18n="tab_chart">차트</span
-          ><span class="shorts-beta">BETA</span>
+          <span data-i18n="tab_chart">차트</span>
         </button>
         <button
           class="section-tab"
@@ -9786,19 +9784,19 @@
                     style="background: var(--c-youtube-music)"
                   ></span
                   >YOUTUBE MUSIC</span
-                ><span class="chart-info-name">주간 인기곡</span>
+                ><span class="chart-info-name">한국 주간 인기곡 · Kworb</span>
               </div>
               <div class="chart-info-row">
                 <span class="chart-info-plat"
                   ><span class="dot" style="background: var(--c-spotify)"></span
-                  >SPOTIFY</span
-                ><span class="chart-info-name">한국 데일리 차트</span>
+                  >Spotify</span
+                ><span class="chart-info-name">한국 일간 TOP 200 · Kworb</span>
               </div>
               <div class="chart-info-row">
                 <span class="chart-info-plat"
                   ><span class="dot" style="background: var(--c-genie)"></span
                   >GENIE</span
-                ><span class="chart-info-name">TOP 100</span>
+                ><span class="chart-info-name">실시간 TOP 200</span>
               </div>
               <div class="chart-info-row">
                 <span class="chart-info-plat"
@@ -26213,7 +26211,7 @@
         },
         {
           key: "spotify",
-          label: "SPOTIFY",
+          label: "Spotify",
           abbr: "SPOTI",
           color: "var(--c-spotify)",
         },
@@ -26241,9 +26239,9 @@
         const list = document.getElementById("chartList");
         if (!list || _showDataState("chart", list)) return;
         const copy = {
-          KR: { song: "곡", chart: "곡별 플랫폼 순위", pending: "미연동", unavailable: "확인 불가", stale: "이전 정보", none: "순위 없음", same: "변동 없음", up: "상승", down: "하락", new: "신규 진입", notice: "일부 플랫폼은 이전 정보를 표시합니다.", newNote: "NEW 신규 진입 / 첫 집계", out: "— 순위 없음" },
-          EN: { song: "Song", chart: "Song rankings by platform", pending: "Pending", unavailable: "Unavailable", stale: "Previous", none: "Not ranked", same: "No change", up: "Up", down: "Down", new: "New entry", notice: "Some platforms show previously collected rankings.", newNote: "NEW New entry / first observation", out: "— Not ranked" },
-          JP: { song: "曲", chart: "プラットフォーム別順位", pending: "未連携", unavailable: "取得不可", stale: "前回の情報", none: "順位なし", same: "変動なし", up: "上昇", down: "下降", new: "新規", notice: "一部のサービスは前回の順位を表示しています。", newNote: "NEW 新規 / 初回集計", out: "— 順位なし" }
+          KR: { song: "곡", chart: "곡별 플랫폼 순위", pending: "미연동", unavailable: "확인 불가", stale: "이전 정보", none: "순위 없음", same: "변동 없음", up: "상승", down: "하락", new: "신규 진입", notice: "일부 플랫폼은 이전 정보를 표시합니다.", newNote: "NEW 신규 진입 · RE 재진입", out: "— 순위 없음" },
+          EN: { song: "Song", chart: "Song rankings by platform", pending: "Pending", unavailable: "Unavailable", stale: "Previous", none: "Not ranked", same: "No change", up: "Up", down: "Down", new: "New entry", notice: "Some platforms show previously collected rankings.", newNote: "NEW New entry · RE Re-entry", out: "— Not ranked" },
+          JP: { song: "曲", chart: "プラットフォーム別順位", pending: "未連携", unavailable: "取得不可", stale: "前回の情報", none: "順位なし", same: "変動なし", up: "上昇", down: "下降", new: "新規", notice: "一部のサービスは前回の順位を表示しています。", newNote: "NEW 新規 · RE 再登場", out: "— 順位なし" }
         }[window._curLang || "KR"] || { song: "곡", chart: "곡별 플랫폼 순위" };
         const songs = (CHART_DATA?.songs || []).filter(song => song && typeof song === "object");
         const statuses = CHART_DATA?.platformStatus || {};
@@ -26258,14 +26256,18 @@
             const rank = _chartRank(entry?.rank), prev = _chartRank(entry?.previousRank);
             const status = statuses[p.key]?.status;
             const pending = p.key === "apple_music" && !entry && !status && !(CHART_DATA.platforms || []).includes(p.key);
-            let cls = "", delta = "—", description = copy.same;
-            if (rank !== null && prev === null) { cls = "new"; delta = "NEW"; description = copy.new; }
+            const unknown = {KR: "이전 순위 확인 불가", EN: "Previous rank unknown", JP: "前回順位不明"}[window._curLang || "KR"] || "Previous rank unknown";
+            let cls = "", delta = "—", description = prev === null ? unknown : copy.same;
+            if (rank !== null && entry?.isReentry === true) { cls = "new"; delta = "RE"; description = {KR: "재진입", EN: "Re-entry", JP: "再登場"}[window._curLang || "KR"] || "Re-entry"; }
+            else if (rank !== null && entry?.isNew === true) { cls = "new"; delta = "NEW"; description = copy.new; }
             else if (rank !== null && prev > rank) { cls = "up"; delta = "↑ " + (prev-rank); description = copy.up + " " + (prev-rank); }
-            else if (rank !== null && prev < rank) { cls = "down"; delta = "↓ " + (rank-prev); description = copy.down + " " + (rank-prev); }
+            else if (rank !== null && prev !== null && prev < rank) { cls = "down"; delta = "↓ " + (rank-prev); description = copy.down + " " + (rank-prev); }
             if (pending || status === "unavailable") { cls = ""; delta = pending ? copy.pending : copy.unavailable; }
             else if (status === "stale") { cls = ""; delta = copy.stale; }
             else if (rank === null) delta = "";
-            const label = p.label + ": " + (rank === null ? copy.none : rank + ", " + description) + (status === "stale" || status === "unavailable" || pending ? ", " + delta : "");
+            const meta = statuses[p.key] || {};
+            const detail = [meta.chartLabel, meta.sourcePeriod || meta.sourceUpdatedAt, meta.sourceKind === "third_party" ? "Kworb" : "", p.key === "apple_music" && prev !== null ? ({KR: "이전 수집 순위와 비교", EN: "Compared with previous collected chart", JP: "前回収集順位と比較"}[window._curLang || "KR"]) : ""].filter(Boolean).join(" · ");
+            const label = p.label + ": " + (rank === null ? copy.none : rank + ", " + description) + (status === "stale" || status === "unavailable" || pending ? ", " + delta : "") + (detail ? " · " + detail : "");
             return '<td class="' + (rank === null ? 'minimal-out' : '') + '" aria-label="' + _escHtml(label) + '" title="' + _escHtml(label) + '"><span class="minimal-label" aria-hidden="true">' + _chartPlatformLabel(p) + '</span><span class="minimal-value">' + (rank ?? '—') + '</span><span class="minimal-delta ' + cls + '">' + _escHtml(delta) + '</span></td>';
           }).join('');
           return '<tr>' + track + ranks + '</tr>';
