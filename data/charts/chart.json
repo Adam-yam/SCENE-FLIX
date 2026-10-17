@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T10:00:56.864486+09:00",
+  "updatedAt": "2026-10-17T10:49:58.479838+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -7,8 +7,46 @@
     "bugs",
     "flo",
     "youtube_music",
-    "spotify"
+    "spotify",
+    "apple_music"
   ],
+  "platformStatus": {
+    "melon": {
+      "status": "ok",
+      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+    },
+    "genie": {
+      "status": "ok",
+      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+    },
+    "vibe": {
+      "status": "ok",
+      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+    },
+    "bugs": {
+      "status": "ok",
+      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+    },
+    "flo": {
+      "status": "ok",
+      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+    },
+    "youtube_music": {
+      "status": "ok",
+      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+    },
+    "spotify": {
+      "status": "ok",
+      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+    },
+    "apple_music": {
+      "status": "ok",
+      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00",
+      "source": "https://rss.applemarketingtools.com/api/v2/kr/music/most-played/100/songs.json",
+      "sourceUpdatedAt": "Sat, 17 Oct 2026 01:50:20 +0000",
+      "previousRankBasis": "previous_distinct_successful_feed"
+    }
+  },
   "songs": [
     {
       "songName": "LOVE ATTACK",
@@ -42,6 +80,10 @@
         "spotify": {
           "rank": 2,
           "previousRank": 2
+        },
+        "apple_music": {
+          "rank": 5,
+          "previousRank": null
         }
       }
     },
@@ -63,11 +105,11 @@
           "previousRank": 15
         },
         "bugs": {
-          "rank": 11,
-          "previousRank": 13
+          "rank": 10,
+          "previousRank": 11
         },
         "flo": {
-          "rank": 29,
+          "rank": 28,
           "previousRank": 29
         },
         "youtube_music": {
@@ -77,6 +119,10 @@
         "spotify": {
           "rank": 9,
           "previousRank": 9
+        },
+        "apple_music": {
+          "rank": 6,
+          "previousRank": null
         }
       }
     },
@@ -98,11 +144,11 @@
           "previousRank": 10
         },
         "bugs": {
-          "rank": 28,
+          "rank": 23,
           "previousRank": 28
         },
         "flo": {
-          "rank": 32,
+          "rank": 31,
           "previousRank": 32
         },
         "youtube_music": {
@@ -112,6 +158,10 @@
         "spotify": {
           "rank": 10,
           "previousRank": 13
+        },
+        "apple_music": {
+          "rank": 33,
+          "previousRank": null
         }
       }
     },
@@ -125,12 +175,12 @@
           "previousRank": 78
         },
         "bugs": {
-          "rank": 26,
+          "rank": 31,
           "previousRank": 26
         },
         "flo": {
-          "rank": 64,
-          "previousRank": 63
+          "rank": 61,
+          "previousRank": 64
         },
         "youtube_music": {
           "rank": 23,
@@ -139,6 +189,10 @@
         "spotify": {
           "rank": 33,
           "previousRank": 32
+        },
+        "apple_music": {
+          "rank": 11,
+          "previousRank": null
         }
       }
     },
@@ -152,8 +206,8 @@
           "previousRank": 54
         },
         "bugs": {
-          "rank": 51,
-          "previousRank": 48
+          "rank": 63,
+          "previousRank": 51
         },
         "flo": {
           "rank": 91,
@@ -166,6 +220,10 @@
         "spotify": {
           "rank": 40,
           "previousRank": 41
+        },
+        "apple_music": {
+          "rank": 61,
+          "previousRank": null
         }
       }
     },
