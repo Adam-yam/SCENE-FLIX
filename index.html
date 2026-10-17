@@ -7862,7 +7862,66 @@
         font-variant-numeric: tabular-nums;
       }
     </style>
-  </head>
+  <style id="chart-design">
+#chartMode .chart-wrap{max-width:1080px;padding-top:30px;container-type:inline-size;container-name:chart-content}
+#chartMode .chart-header-bar{margin-bottom:8px}
+#chartMode .chart-header-title{color:var(--text);font-size:13px;font-weight:600;letter-spacing:.02em}
+#chartMode .chart-header-title svg{display:none}
+#chartMode .chart-platform-legend{margin-bottom:25px}
+#chartMode .chart-update-notice{font-size:10px;letter-spacing:0}
+#chartMode .chart-list{display:block}
+#chartMode .minimal-chart{width:100%;border-collapse:collapse;table-layout:fixed;font-variant-numeric:tabular-nums}
+#chartMode .minimal-chart th{font-size:9px;font-weight:500;color:var(--muted);padding:0 3px 13px;text-align:center;border-bottom:1px solid var(--border);white-space:nowrap}
+#chartMode .minimal-chart th:first-child{width:24%;text-align:left;padding-left:0}
+#chartMode .minimal-chart td{padding:21px 3px;text-align:center;vertical-align:middle;border-bottom:1px solid var(--border)}
+#chartMode .minimal-chart td:first-child{text-align:left;padding-left:0;padding-right:12px}
+#chartMode .minimal-chart tbody tr:last-child td{border-bottom:0}
+#chartMode .minimal-song{display:flex;gap:12px;align-items:center;min-width:0}
+#chartMode .minimal-art{width:38px;height:38px;border-radius:5px;background:var(--dim);display:grid;place-items:center;flex-shrink:0;color:var(--muted);font-size:14px;font-weight:400}
+#chartMode .minimal-art img{width:100%;height:100%;object-fit:cover;border-radius:inherit}
+#chartMode .minimal-songtext{min-width:0}
+#chartMode .minimal-title{font-size:12px;font-weight:550;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.5}
+#chartMode .minimal-value{font-size:15px;font-weight:500;color:var(--text);line-height:1.3}
+#chartMode .minimal-delta{display:block;font-size:8px;line-height:1.3;margin-top:5px;min-height:11px;color:var(--muted)}
+#chartMode .minimal-delta.up{color:#c77c76}
+#chartMode .minimal-delta.down{color:#7b9bbd}
+#chartMode .minimal-delta.new{color:var(--muted);font-size:7px;letter-spacing:.3px}
+#chartMode .minimal-out .minimal-value{font-size:13px;color:var(--muted);opacity:.55;font-weight:400}
+#chartMode .minimal-label{display:none}
+#chartMode .minimal-key{font-size:9px;color:var(--muted);margin-top:23px;display:flex;gap:16px;flex-wrap:wrap}
+#chartMode .minimal-key span:last-child{margin-left:auto}
+:root[data-theme="light"] #chartMode .minimal-delta.up{color:#a3534b}
+:root[data-theme="light"] #chartMode .minimal-delta.down{color:#4c739c}
+@container chart-content (max-width:760px){
+#chartMode .chart-platform-legend{margin-bottom:4px}
+#chartMode .minimal-chart,#chartMode .minimal-chart tbody{display:block;width:100%}
+#chartMode .minimal-chart thead{display:none}
+#chartMode .minimal-chart tr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:23px 0;border-bottom:1px solid var(--border);row-gap:24px}
+#chartMode .minimal-chart tbody tr:last-child{border-bottom:0}
+#chartMode .minimal-chart td{padding:0;border:0;min-width:0}
+#chartMode .minimal-chart td:first-child{grid-column:1/-1;width:100%;padding:0}
+#chartMode .minimal-label{display:block;font-size:9px;color:var(--muted);font-weight:400;margin-bottom:8px;white-space:nowrap}
+#chartMode .minimal-value{font-size:17px}
+#chartMode .minimal-song{gap:11px}
+#chartMode .minimal-title{font-size:13px}
+#chartMode .minimal-art{width:36px;height:36px}
+#chartMode .minimal-delta{font-size:9px;margin-top:4px}
+#chartMode .minimal-key{font-size:8px;gap:12px;margin-top:12px}
+#chartMode .minimal-key span:last-child{margin-left:0;width:100%;margin-top:1px}
+}
+
+@media(max-width:720px){#chartMode .chart-wrap{padding:22px 20px 85px}}
+
+#chartMode .minimal-platform-name{display:inline-flex;align-items:center;justify-content:center;gap:5px;vertical-align:middle;white-space:nowrap;line-height:1}
+#chartMode .minimal-platform-name>span{display:flex;align-items:center;justify-content:center;min-height:14px;line-height:1;padding:0;margin:0}
+#chartMode .minimal-platform-icon{display:block;width:14px;height:14px;object-fit:contain;flex-shrink:0}
+@container chart-content (max-width:760px){
+#chartMode .minimal-label .minimal-platform-name{display:flex;flex-direction:column;gap:6px}
+#chartMode .minimal-label .minimal-platform-icon{width:14px;height:14px}
+#chartMode .minimal-label{margin-bottom:8px}
+}
+</style>
+</head>
 
   <body>
     <svg style="display: none" aria-hidden="true">
@@ -9700,7 +9759,7 @@
         </div>
         <div class="chart-platform-legend">
           <span class="chart-update-notice"
-            >각 차트 데이터는 매시간 정각에 갱신됩니다.</span
+            >플랫폼별 차트 집계·갱신 시점은 다를 수 있습니다.</span
           >
           <span class="chart-info-btn" id="chartInfoBtn">
             <span
@@ -9739,7 +9798,7 @@
                 <span class="chart-info-plat"
                   ><span class="dot" style="background: var(--c-genie)"></span
                   >GENIE</span
-                ><span class="chart-info-name">TOP 200</span>
+                ><span class="chart-info-name">TOP 100</span>
               </div>
               <div class="chart-info-row">
                 <span class="chart-info-plat"
@@ -9759,6 +9818,7 @@
                   >VIBE</span
                 ><span class="chart-info-name">오늘 TOP 100</span>
               </div>
+              <div class="chart-info-row"><span class="chart-info-plat"><span class="dot" style="background:#fa233b"></span>APPLE MUSIC</span><span class="chart-info-name">한국 인기곡 TOP 100</span></div>
             </div>
           </span>
         </div>
@@ -26166,127 +26226,51 @@
         { key: "flo", label: "FLO", abbr: "FLO", color: "var(--c-flo)" },
         { key: "bugs", label: "BUGS", abbr: "BUGS", color: "var(--c-bugs)" },
         { key: "vibe", label: "VIBE", abbr: "VIBE", color: "var(--c-vibe)" },
+        { key: "apple_music", label: "Apple Music", abbr: "APPLE", color: "#fa233b" },
       ];
-      function _chartChipHtml(platform, rankInfo) {
-        const platHtml =
-          '<span class="plat" style="color:' +
-          platform.color +
-          ';">' +
-          platform.abbr +
-          "</span>";
-        if (!rankInfo || rankInfo.rank == null) {
-          return (
-            '<div class="chart-chip out" title="' +
-            platform.label +
-            " " +
-            (getCurrentT().chart_out || "차트 아웃") +
-            '">' +
-            platHtml +
-            '<span class="val">' +
-            (getCurrentT().chart_out || "-") +
-            "</span></div>"
-          );
-        }
-        const rank = Number(rankInfo.rank);
-        if (!Number.isFinite(rank) || rank <= 0)
-          return _chartChipHtml(platform, null);
-        const prev =
-          rankInfo.previousRank == null ? null : Number(rankInfo.previousRank);
-        let cls, deltaText, title;
-        if (prev == null || !Number.isFinite(prev) || prev <= 0) {
-          cls = "new";
-          deltaText = "NEW";
-          title = platform.label + " " + rank + "위 (NEW)";
-        } else if (prev === rank) {
-          cls = "same";
-          deltaText = "-";
-          title = platform.label + " " + rank + "위 (변동없음)";
-        } else if (prev > rank) {
-          cls = "up";
-          deltaText = "▲" + (prev - rank);
-          title = platform.label + " " + rank + "위 (▲" + (prev - rank) + ")";
-        } else {
-          cls = "down";
-          deltaText = "▼" + (rank - prev);
-          title = platform.label + " " + rank + "위 (▼" + (rank - prev) + ")";
-        }
-        return (
-          '<div class="chart-chip" title="' +
-          _escHtml(title) +
-          '">' +
-          platHtml +
-          '<span class="val">' +
-          rank +
-          '</span><span class="delta ' +
-          cls +
-          '">' +
-          deltaText +
-          "</span></div>"
-        );
+      const _CHART_PLATFORM_ICONS = {"melon": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABA0lEQVR42sXTPUoEQRAF4G8W2UA8gIixkYgMYiCOiBh5hMVjGIksYmBgIB5C9ggGBgZOugwiBkYiIh7AQEQW26SUxf1TN7CgqerqquK9enSWUsqMYTVj2sRPC7OqmMIZltFMeXn0WwRbWEUd+3+hcIXXiC8HUsiqYhJNNDCLJ7RwgPk451/13SpE8yXyPgiusZby8nmYCrtdzTc4RjvuC9gbJWMj/C2WUl7uYCX4w/aoATOfS0p5+QYpLzu4iPx0VhW1YQMewq/HPmRVUcdG5B9TXr4PG3Aafg7trCpOUGEx8q0e1fqocB68v1sVKrwMRBCPm6H5HTq4x2G/5h4E//IbPwDhhk1/mnYYqgAAAABJRU5ErkJggg==", "youtube_music": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAE8UlEQVR42t2af0jcZRzHX98vag7lxgSLGdhB3EIr0Q6NVToG0lh0jgVBzs1coyWIzBkaSvmHGw51tmEFzTWcptsoUMrYWAjSrEY3rsQtxzwCMzJKcHQoLW1cfzzP5aV33+/z9c7b9P3P/Xqez4/v5/N8fj2nEQX4cdqB7cBW4DHAAdiAJLlkDvABXuAWcBUY0vBMRMpbi0DoNGAfUApkrpDMGNANfKzhmYqJAn6cjwK1wH4gnuhgAegEWjQ8P62KAn6cG4A64C0ggdXBPNAMHNPw/BU1Bfw4nwQ+lf4dC9wCXtbwXDdbqCsIXwq4Yyg8kpdb8l65An6cNUAXkEjskQh0SRmsKyA3tnDv0WKkhGbgNl0RsU2xgS1ZvPfNwowvUkVe1fB0myogD6zbstvY06B4BxTmgTMDNib///c/Z8FzEwbdcP4yTFgO+3eAvKUHWwsRKn+wdGCzHNBYDru2ic+//gHDI+CdXHzqKTZwpEN+Njz8oPjus6+g4UMY9VqNTjnBITZuyYI6ZeET4qGpAqr2wN270NEHHf3iKRvBmQEHd0OZC17Mh5PnoP4DmF9QjU51QMMyC8gMO6aUpFI3wcAJePoJGLgCla3w82/WHOKRzfBeDbgK4Lsb4DoM07dVk11mIGMHR6FaZeGHP4LcTKhqg6Jq68KD2FNULWjkZgqaqZuUbC9lXbSALMwmTGubhHi4clowLHkbLnwZnUD5yvPQexSujUHB6yrutADYNTxTAQvsUyrMmiqE21SfiJ7wIGhVS5dsqlDZES9l/s8CP5qWxFkO+L4XLn4tTB/OQmqHMTQ+fxdeeA6eKlGJTmMansd12YyY1/ON5SLaVLaGX9NeI55g0oaVKVDZKng0lquszvTjtOuykzJPUru2wdkB4wObmAB1+2G8D0p2gqZZP9hnBwQve5rKju26bAONUbxDvHb0qwmSlgo9R+CbMyLuW0GAR4CnMbbqSomrME9kWLMktYx8FlzrhjMN8FCK2h7PTcGrME8psemyATfPnsMjK+y6NXitCMb74c29EB9nvmd4RNVyDl1OD4yryo3JoraJBLYkOF4FNz6Bnc8Yr/VOCp4pNlOqetDoI8wSWVVGXg4LbEmHi+3wxUnxPhQCvJZWtMuRpLPGESeHTuGt4JtddKVoYHwSqo7DpW+N3TbQQxhjLk5OzMIrMOMThBzpkQnum4PG09B+ARb+MTma6YKnudv64uS4b7NpaMvPXuEIzw+dA1D/Pvw+o7YnP1s1ZHt12eUYY9AtOimrSenqKOSWwoFGdeGdGYLXoFupQ9MRg1ZjnL8sXg/uVhNiahr2vgPPHrCe/AI8AjxNHpEODJkum5gSPWyZS3RSYdvueTjWCVtegt5Lwn2sdmllLsFLrekfim45/UAC/D0f23Jafug2JT7qFQ24qwAOFYdeE4nwh4oF7ZPnVCcV3eunpZSXC53m84AFMT3w/iIYhrOE1Sffe1TQdB1W7eg6Axci62esIr9oVmI+fVuYuq1HHLrxPjhVr5YnnBli7Xif2NvWI2ipCQ/QHHyLs+ZHi+truBukRPTG6xqqhZkZ1MbrQUrcLxccALUanpDznLANjdxQez8Lb2iBJe50itjfk90B3gjlNpYUCDrYa/OaVbrTdSAHOCITyWphXvLIURFe2QJLrLE2/2oQQpG1+WePMMrYuUd/t/kXZnnsZcYFLNEAAAAASUVORK5CYII=", "spotify": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAFT0lEQVR42rWXX2zdZR3GP8/v92uZW7uhdHOw7RzWnjWGbTpGEdELL0xEkIU/OmWRmJxTlIgxccELQohXJCSAF8YLZFlPJWIw2y6MNC4mQkYCGYOgC8kK62lJzwEGc2uRbW60p7/38eL8bNb2lBVKv9fv+36f9/t+v8/zvGKBkRsutWG2Yn8Nsw3II1YCYM4AVcS/EIeRjtUK5XMLOVcLSLyG4B2YndjbMV8A4nmWp4gxpNcQ+5EGapvKpz4VgPxw6TIH7yBwP7gHk/DJYgrpFSJ+ozgaqHb1TS4YQH64tNqpH8S+B9PGYkKcRdqjOHqkWugbuySA3PHieuC3BN8ORHw2EYh0QJF2VzeVT8wLIFcprSb4CYK/x1JEpH2KdV+1UJ6uxPQN8yO9rQQ/SPCdLFUEf9+pH8i91dsyB4DTcBv2PQuZjMXUAPunTIVbZzxBrlJaQ+q/YN84q0MuAKeQ3gf+DYwj/iupbogI/hywCujAfBG8Grj8khMjvUisO2qbyqcbC+0d4OsvSvwGkZ4GXkF6CzFGrAshUf2dDXt98VkbRn+SKA2t2O1Ya7G7MT3AjdhbMZfPAdAgs+8CTyk3UmpjyvsJ/s70rSP9sNbd/+xiap0b7m0neAv2bZg7sAszpirSgGLdlRDYir191mS0AORGSssIrMVeD6zDdCDaJbUYUoIvID4AnUScQHoPabzWtXeqVug7CxzeWL335TBZf9KBEvbPMZ/PqtBj6xrlhoq7Sf3YDHoVw0jPATnMl7K3XY6b8IIwMAmcBb2PGES8hPQC0pu1Qt8EQP69n0U++9HvSH1fti8l0i+TTFhmcrspZCVjejGcR5wHJpACdgwsy4AtAzrAHZgtwE7kU0gv5IaKTymOnufcZMAsvyhHDGxLgPw8FPofpCOIV4FBpLexx4ELkoIDCZFWYDrAecxm4FrMFuwOzBrsnYib7XAIqBP87VkXzSfTkjpH1fRrtURPVjubi0jTxquUVgBdmG9ljXc9pg371nm2rEzm5W74kChyvlLaYLsT2AisJXgVKAYmiBgHTiCNCkaJo9PVzr2vA6/nKqV+AjcBv8j4pamuKHe8eIjgbzZ5gneRBjFXg6/K3k9N1qXAOdA7iH8i/o50yIlOvL2xz/lKcb1TH8Dc0EQb/pEAo8BcAGYd9roZVRETQD2rkIBWTGuDDb0KsxmxC3hTwX/KV0pPGwI4nafPRhPEUeDuJi4nIL2R2azjGdCTRDqHXUdKCLSDrwS6MddifwVzJXgL5mGbu4EJzJebJJ8CjiZILyOPYdbMWlDJ+LoCcNVQSUmiVsFlTomQghMmJvHkyc5+54Z7W3DoxNxEYBf2ddibP6ZnT4OOKD9SWuEGFd88C8BJIj0EfJTNdqMJoQ1IgLRBPrwLHEM6QsRrtUL5g1yleAVmF8EPNUSqqTd4llh3NdRwqFgk9Z7s4NllUkYal7Je55EGJfYhPUMcnXI9PUBoMoKiTqTeWnf/H5NMHgcQR7C/MasRF25EzXLsHsN2xI8I6THsr88jx4cl/W2GJcsNFe8k+A+YdpYyxIdE+nGtu/+vMxyR4mgAaQ/gJUwfkH5PHB2cY8mqXX2TxHqESPuXzpDpz4r1aK2rrz4HAECtUB5TpN1E2peRzWd380jPEOv+aqE8vpCPyRVO/QD2vYvuCXEG6QnFenR28o//mo30tjoNtxD4FfZX/++SPkHieoPkeJxIB2uFcv3TfU6HSh3gWzA/wO7JHHA8T9Ip4DTSq4h9kg5WN5XHFvU7nq5IpbTC5hrwDcC2hkqyMpuaM8Ao4mhmYgZrhfL5hZz7PxZPTm/ZXsVPAAAAAElFTkSuQmCC", "genie": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAD7UlEQVR42u2ZT2hcRRzHPzNvdxObxKhFayjGBhJrhGJLPUqLtoe22goKFXrwlqMHQQ9evSgKWkEPUg9CDmJBWhWhlF5CiwWNKGkgatIWG0KiSVnSNBs3782Mh9+ML2usCPs2b4M7sJedmeX7/f35zu/3W+Wcc2zipdnkq0WgReD/TqDQiB91gHUQ9E0rUAoU8p3155Tfq2epLGU0AI/uACqxUMjY55kRsC615u1VuLIAVxclRgfvgz3bZG9uGd77Dm4swhv7YODe2ru5hFAAUInh7W/hkwn4dRkwaabt3w4He+HDMZi7DVTBRvDZs+K53HIggJ8sw4tfwQ/zQDuottSqxsHILIxMA23Q1gFJASomzYVcCFhvupsrcOQMTN2CYhckhhqzKge6JKSMlVww9s65smEEHALitYswVYZSF6wmoLSojan6gyVRHmfX38+NQFCbX8ow/DPoDlg1HrwBbeHAQ1DScGEGqg5UIZXW3N+BEPtfX4ckhkLJg3Nwt4LPj8LBHXJ2dBaOfAkLnmBTvcTj5TQLIw3uDxjaJeBjI155ogde3i17WcR9Jh5QHkg1+ZuMONjptT28vtZBf3d2cd/wWigxtQ+TViKlm6aYU/8QJopNRKBVTrcIZFBW/5fvmpZAQad1Unj0CqrJCISSoFRYb95riyKd1ol8agXXlxqjRnV7YLA7JWAsqHb4aAwuz0ApgrYIxufhgx9lzzZLLRQeqmf64PVvfA+M1DplA0+dhcO9Usydm4ZbiRRz/9ZybjgB4+CxrXB8AD6dgGInxAmoSKrPs1fTcroRlWjdIRTqnHf3QW8XxCtQ9DmhgKgdoru8t5qxlAhh9GAHnHseBrsgXhJLK51mrFXrm5mmSeKgNoNb4dIJeHUv9BTAroBZlg+rsK29MQQyG6vEForeHPMV+P53GZ1YC3t74Keb8NJ50FukRzZVONYHXxxrgrGKQ8AbC4mD+7fAoR21ZybKgBWXO39JqSYIIesT9uMx2DUMjw/DydH13jl1xTf3odFx0NNZO93YcA8Yr+kj0zB0XuZBAK+MwOU5OP4orMRwahwuzcpYJRBwDp7envdYxYnSXLgBUSSNfWyBIpyegtOT/mAk4J0nbGN4+B443OdHMzonAiGE9zwAJknj21nR/7VJEryFkub+/UPQWfQDLp1TDkS+6nyuH4Z2Q7wo4P+aQLs0WSMtJM0SvLNf7hhXH/jMZNR5kCdH4a1R+K3iTRNcZIXIQDe8+SS8sHONR5rlHQhavlCBM5NwcQauVQTkI51woBeO9kNHMTvwmRJYq0r1nsmNQAgn40NKp2kADrTOvqFRrX/qWwRaBFoEcl1/ArHbk9prjARIAAAAAElFTkSuQmCC", "flo": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAEgUlEQVR42u2aS29TRxTHfzP3Oo6NCUYENRGKIIqSCBACiUURr8ASiS5QVl2wZFe6gu+BlHyCtjvUSogdG6QQFoUdQogQEJAg0ri8A3Fs35np4jBcx4nVxI/YljjSaOLxvTfnfx7/c2auFTgFyp065QbCkF+s5SLQByjaSxywoBR/WsvE1JSaBacUwJkz7kfn+E1rRpwD52hLUQq0BmtZiCIuTE+rv9XZs27UGKaDgF5jiJQipI3FOaIgILSW59YypqOIX8OwM5T/6oXQGKIgYFApLmutuWAMrhOUrwDhgIu6TRN2YzgUP+gOVf4biLARzKBU1YT7X0bz91tb2/+vC4DWEEVQLIIx8tkrHgTQ1QWJRAzEg/FKKwWFgjwjmWwBgC9fIJuF4WHYtg22bxcgnz7JWFyEN28ERCIhoDyQYhFKJdizBwYHYXYW8vnq3mw4AOfg/Hk4dw4OHxYFy+XDB3j8GGZm4OFDWFiAjx8FRDoN/f0wMgInTsDu3XDpEiwvixc3U0hrAmCtuPzqVejuljVjVl+TzcKxYzKKRVF+ZUUs3NUFO3bEYfPyZe3VP6wn/pWKYz8I1nrIWpm7usTKlVIqyX0+d7Y8B5wTEH6u1rt465YnsTdC+XpLAFSzXjm9GrMapKfMIJC1yvxpOgCvTCoFr15Joj57JswDotDQkCRpXx/09Kz/nFJJ4v/mzdoYqGYAPvYnJ+HWLZiflzgvV6BYlEQdHYWDB2FgADKZmH7fvxeWuncPPn8WZvLhuCldxsZqi0DnRJFUSpSvfIoHWSgIPXZ3C+v44lUoQBhK/fja429tDiglFvaFqdL9Pj/SaVHSM5JzspbJbKzVaGoSWyttQKkks7eiUpKgQSBW9pTrh3Px9cbI/anUFuaAl3xeWoGTJ+HQIdi1SxReWpKkfvQInjyBd+9E0fIwCQIJqeFhOHoUrl+XUPPtRtMBGAPj49ICZLNrvz9+XOblZXjxAubmIJcT5ZJJYaehITFALgc3bsi1W+IBayWOr1yJ3V4Zzz5c0mk4cEBGNSkWa88FXU8IFQprq66P8XJAvq0oH87F/ZNSLUriau1DeV9kzOoEXs+bLWsl1pNcTuK9p0cauJ07q1/rgSYSLdqRVVpSa7h/H65di7l+3z44cgT274e9e+P221rZxExNwYMHUhQ3uxdoigesFXrN58UbT5+Kkr7VyGTE8ktLUgtWVmJmaosQ8qGhtShdXvCcg7dvV7OUby9aHkLrnUasR6v+73KGqieJNS2QRh4etwRAI+U7gO8A6pS69wOe/vy81W936gKQTManEn4Oww4B4JycKCSTcbeZSMSFaquk5k29UtDbu7ooaS2bkqWlDvHA69dr1/xeuCNywPc6zay0TT9abIc60KavtTdmQ+0cix0KwgH/aOCPIEA5R9QxmjuiMEQ5x1/aGCaM4XkQEHYCCP9Tgyji3yBgQt+9q+aM4WfnWAhDQtXGb42/nniE1jKjFD/dvq1mlP+5zenTblhrLjvHONBP41+Auwbcv6g1v0cRk3fuqHlw6j/q5AGqqm5DpAAAAABJRU5ErkJggg==", "bugs": "data:image/png;base64,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", "vibe": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAD5ElEQVR42rWXPY/kRBCGn2p77PnYWe0ud5z22OAEIiUgOVLISBBCZEgIJCR+wok/APnxD8g4JBABGRcgIkguW8GdQAfa4PhaFm7HHrttN8F47O62PcyuoJIZt9t+q96qerss5uAtwxZWGqhEAVAYASCXytmTMwIgk0l9HVFKDIAmbvYVEjX/FRcwZVaAoXR9XoO311HvO2zwCzkQSHctMt3H19FvHdRFNgfSZaHPiSZtHv129AURBREh/4P15X4NXhBdnoFNLETozt5N4IVEFBIRGpMjEl04SmUqKlGEYiiMEBlFLi31mrgD7Beg3joFr93EfPAGAOabBwRvfkjZ07xPfPQucvNZAH5770seff6gA669FIQA27AgV+ar38P9QRY4mDf7FtOrFPzUAS7VqOtAt7+s5bwYrIXyXySskAhN5IAWJux3YM1C9cwh6tv3V96mJcHRO5u1wWKhW4QRLzx8m2ASAPD1S3fJj89cByo7JwZsvVk/eFkbEqVMpm0acwJyAipRjdZvY+bWq5jvb6Pu3ya89cqAHow3gtcMrBbymsFthdTs76Lqgqv2d+t2Cxo+zzkAfnGeSYJdEslcBwqZOQvn6gq7l1E/M8PI2GkyP9o+CzP2nAWftIWZM9vCgfvhcxwxZ8eOWObOnpQdEvG6QIsbb2XmDgMLeYoF13jSc8pO1SN1g5+DJUcXYCytCzTMZMe986Ph4fOftQ6p68j0quXQHvdGL/O0usH1prcjIuMy+efkGolkfPziD83a6YmA1xlh7jsAcGJL4I41y0BZC0lh2mznasyZKnujTE9WB1c2UN6h3iLDmgPn+rHsdfYkMusZNiakfrF6kh9q2ezAYzX14NuobZt5KUiXQuoBam9sAwhL+lslsTTp9E7GV3fusZAaVO15zkw4Ved88vopovKV40ZA5mgqqy2DnhQMyOXIgJa0BbXs7x6FE7XTAgNLKkzNbupNz64QDTCwlAKICGuFzGqJWYhuonZSZdanSExqSboPnhL4DEytqBO0TElYMmWXhKWrkhIBQ3NDXAMqx2FdH28F+YASypTYJI5sThmzEAUWOwvaueAsDDj+tOL37/4A4NfjGJAOeCbSOKGlf/SQLw4XnYO86ETuVu9fwSqaspqT1CnpA9fW4a6l9E7KoDsPqJqmTObMjGYhI7TnTCoxZRV36Bek2bmOfNX3zXTRMzd7I1nrjGnAR4zRLEkl7hEfDcQsRTDkTn1oxBMz6784XRBYNwompr07YkyG1FNCVVdxt/D68m5HPwTe+TAZmZBUtvpYJqlzvhTpkW7pl3TZ4ttwZEJG9YGTDbzov7R/ABhbeWclD6wcAAAAAElFTkSuQmCC", "apple_music": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAMAAABEpIrGAAAApVBMVEVMaXH6Ij37V3D7V3D7Vm/6Ij37V3D6Hzn6ITz7VW77W3T6KUP6K0X6IDr6J0H6Iz77W3T7W3T7ZHn+w8v9pLD7RV/7Umv////7T2j6L0r6K0X6OlT6KUP7QVv9lqP/8fP7PVf//P38jJv9nKn9q7X8gpH+v8j7R2H6Iz76N1H+z9X6NE77S2T+6ez7VW77WHL8dof6J0H+3OH9tLz+1tv7V3H6IDqowEVqAAAAEnRSTlMAKx925ltJ9tjJ9svtj4Xv77zCeo3ZAAABYUlEQVR4Xn3O53KDMBAE4MPGDsSpkui9F/eSvP+j5QQXNInLN/zYud0ZAWg2/9Q/nv/50D/nMxgszf0d5nLo9a+7dFzMzN0D5gzmO/vKjrE9pTmYtuK6rr0/5IKftrk7nkzQ3YnNKlGfksxBxWa86aD6TYEdoQGCjcIdJW6ouD3InNiiAprJOMiSU13k29iiAqxJwzPsKuZa0eYSR1SApfAaO/R3EE0sXlKSg5QiRAov0xuDdCIHpLnEAUVIFV7SNbDUAIIJDjqK0SX+jdBNgrqklLJtvqYMnVKXw5WJfuuowZp466gXMhwSB+UeFUC1VYk+E3jtuCNV08Ab2H2GV4FpHCTMI+PAF45U+BjlE0mxVgNfOss+q0KMHotz5vnEgxcZwuHPeBrKfEQYRi+wCiX/cD5X6TG8soK346CV3w1voBntA4YGsHi/378vAC2M9vum1sBe0l6Np+v6yXjVsPwBsiJ+/AxyGikAAAAASUVORK5CYII="};
+      function _chartPlatformLabel(p) {
+        return '<span class="minimal-platform-name"><img class="minimal-platform-icon" src="' + _CHART_PLATFORM_ICONS[p.key] + '" alt="" aria-hidden="true" width="14" height="14"><span>' + _escHtml(p.label) + '</span></span>';
+      }
+      function _chartRank(value) {
+        if (value == null || typeof value === "boolean" || value === "") return null;
+        const rank = Number(value);
+        return Number.isInteger(rank) && rank > 0 ? rank : null;
       }
       function buildChartGrid() {
         const list = document.getElementById("chartList");
         if (!list || _showDataState("chart", list)) return;
-        const songs = (
-          Array.isArray(CHART_DATA?.songs) ? CHART_DATA.songs : []
-        ).filter((song) => song && typeof song === "object");
-        if (!songs.length) {
-          list.innerHTML =
-            '<div class="chart-empty"><div class="ico">🎵</div><p>' +
-            (getCurrentT().chart_empty || "차트 정보를 불러올 수 없습니다.") +
-            "</p></div>";
-          return;
-        }
-        const noThumb =
-          '<div class="chart-thumb-placeholder"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>';
-        list.innerHTML = songs
-          .map((song, idx) => {
-            const delay = Math.min(
-              idx * (_isMobile ? 0.02 : 0.035),
-              _isMobile ? 0.22 : 0.5,
-            ).toFixed(3);
-            const thumb = song.albumImageUrl
-              ? '<img class="chart-thumb" src="' +
-                _escHtml(_safeHttpUrl(song.albumImageUrl)) +
-                '" alt="" loading="lazy" decoding="async">'
-              : noThumb;
-            const ranks = song.ranks || {};
-            const chips = _CHART_PLATFORMS
-              .map((p) => _chartChipHtml(p, ranks[p.key]))
-              .join("");
-            const rankNum = idx + 1;
-            const rankCls =
-              rankNum === 1
-                ? " top1"
-                : rankNum === 2
-                  ? " top2"
-                  : rankNum === 3
-                    ? " top3"
-                    : "";
-            return (
-              '<div class="chart-card" style="animation:fadeUp 0.45s cubic-bezier(0.22,1,0.36,1) both ' +
-              delay +
-              's;">' +
-              '<div class="chart-card-top">' +
-              '<div class="chart-rank-num' +
-              rankCls +
-              '">' +
-              rankNum +
-              "</div>" +
-              thumb +
-              '<div class="chart-info"><div class="chart-song-title">' +
-              _escHtml(song.songName) +
-              '</div><div class="chart-song-artist">' +
-              _escHtml(song.artistName) +
-              "</div></div>" +
-              "</div>" +
-              '<div class="chart-platforms">' +
-              chips +
-              "</div>" +
-              "</div>"
-            );
-          })
-          .join("");
+        const copy = {
+          KR: { song: "곡", chart: "곡별 플랫폼 순위", pending: "미연동", unavailable: "확인 불가", stale: "이전 정보", none: "순위 없음", same: "변동 없음", up: "상승", down: "하락", new: "신규 진입", notice: "일부 플랫폼은 이전 정보를 표시합니다.", newNote: "NEW 신규 진입 / 첫 집계", out: "— 순위 없음" },
+          EN: { song: "Song", chart: "Song rankings by platform", pending: "Pending", unavailable: "Unavailable", stale: "Previous", none: "Not ranked", same: "No change", up: "Up", down: "Down", new: "New entry", notice: "Some platforms show previously collected rankings.", newNote: "NEW New entry / first observation", out: "— Not ranked" },
+          JP: { song: "曲", chart: "プラットフォーム別順位", pending: "未連携", unavailable: "取得不可", stale: "前回の情報", none: "順位なし", same: "変動なし", up: "上昇", down: "下降", new: "新規", notice: "一部のサービスは前回の順位を表示しています。", newNote: "NEW 新規 / 初回集計", out: "— 順位なし" }
+        }[window._curLang || "KR"] || { song: "곡", chart: "곡별 플랫폼 순위" };
+        const songs = (CHART_DATA?.songs || []).filter(song => song && typeof song === "object");
+        const statuses = CHART_DATA?.platformStatus || {};
+        const hasStale = _CHART_PLATFORMS.some(p => statuses[p.key]?.status === "stale");
+        const heading = '<thead><tr><th scope="col">' + copy.song + '</th>' + _CHART_PLATFORMS.map(p => '<th scope="col">' + _chartPlatformLabel(p) + '</th>').join('') + '</tr></thead>';
+        const body = songs.map(song => {
+          const image = _safeHttpUrl(song.albumImageUrl || "");
+          const artwork = image ? '<img src="' + _escHtml(image) + '" alt="" loading="lazy" decoding="async" onerror="this.parentElement.textContent=&#39;♪&#39;">' : '♪';
+          const track = '<td><div class="minimal-song"><div class="minimal-art" aria-hidden="true">' + artwork + '</div><div class="minimal-songtext"><div class="minimal-title" title="' + _escHtml(song.songName || "") + '">' + _escHtml(song.songName || "") + '</div></div></div></td>';
+          const ranks = _CHART_PLATFORMS.map(p => {
+            const entry = song.ranks?.[p.key];
+            const rank = _chartRank(entry?.rank), prev = _chartRank(entry?.previousRank);
+            const status = statuses[p.key]?.status;
+            const pending = p.key === "apple_music" && !entry && !status && !(CHART_DATA.platforms || []).includes(p.key);
+            let cls = "", delta = "—", description = copy.same;
+            if (rank !== null && prev === null) { cls = "new"; delta = "NEW"; description = copy.new; }
+            else if (rank !== null && prev > rank) { cls = "up"; delta = "↑ " + (prev-rank); description = copy.up + " " + (prev-rank); }
+            else if (rank !== null && prev < rank) { cls = "down"; delta = "↓ " + (rank-prev); description = copy.down + " " + (rank-prev); }
+            if (pending || status === "unavailable") { cls = ""; delta = pending ? copy.pending : copy.unavailable; }
+            else if (status === "stale") { cls = ""; delta = copy.stale; }
+            else if (rank === null) delta = "";
+            const label = p.label + ": " + (rank === null ? copy.none : rank + ", " + description) + (status === "stale" || status === "unavailable" || pending ? ", " + delta : "");
+            return '<td class="' + (rank === null ? 'minimal-out' : '') + '" aria-label="' + _escHtml(label) + '" title="' + _escHtml(label) + '"><span class="minimal-label" aria-hidden="true">' + _chartPlatformLabel(p) + '</span><span class="minimal-value">' + (rank ?? '—') + '</span><span class="minimal-delta ' + cls + '">' + _escHtml(delta) + '</span></td>';
+          }).join('');
+          return '<tr>' + track + ranks + '</tr>';
+        }).join('');
+        list.innerHTML = '<table class="minimal-chart" aria-label="' + copy.chart + '">' + heading + '<tbody>' + body + '</tbody></table><div class="minimal-key"><span>↑ ' + copy.up + ' &nbsp; ↓ ' + copy.down + '</span><span>' + copy.newNote + '</span><span>' + (hasStale ? copy.notice : copy.out) + '</span></div>';
       }
       const SCHED_TYPE_COLOR = {
         broadcast: "var(--c-sched-broadcast)",

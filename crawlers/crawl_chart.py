@@ -2,12 +2,15 @@ import json
 import os
 import re
 import sys
+import tempfile
 import urllib.parse
 from datetime import datetime, timedelta, timezone
 from io import StringIO
 
 import pandas as pd
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 KST = timezone(timedelta(hours=9))
 
@@ -23,6 +26,38 @@ COMMON_HEADERS = {
 }
 
 
+SESSION = requests.Session()
+SESSION.mount("https://", HTTPAdapter(max_retries=Retry(
+    total=2, backoff_factor=0.5, status_forcelist=(429, 500, 502, 503, 504),
+    allowed_methods=frozenset(("GET", "POST")), respect_retry_after_header=False,
+)))
+APPLE_MUSIC_URL = "https://rss.applemarketingtools.com/api/v2/kr/music/most-played/100/songs.json"
+APPLE_SOURCE_UPDATED = None
+
+
+def positive_rank(value):
+    if isinstance(value, bool):
+        return None
+    try:
+        number = int(str(value).strip())
+        return number if number > 0 else None
+    except (TypeError, ValueError):
+        return None
+
+
+def require_items(items):
+    if not isinstance(items, list) or not items or not all(isinstance(x, dict) for x in items):
+        raise ValueError("Chart response has no valid track list")
+    return items
+
+
+def request_json(url, *, headers=None, data=None):
+    method = "POST" if data is not None else "GET"
+    response = SESSION.request(method, url, headers=headers or COMMON_HEADERS, data=data, timeout=10)
+    response.raise_for_status()
+    return response.json()
+
+
 def is_rescene(artist_name: str) -> bool:
     if not artist_name:
         return False
@@ -31,7 +66,6 @@ def is_rescene(artist_name: str) -> bool:
 
 
 def normalize_title(title: str) -> str:
-    # 플랫폼마다 제목 표기가 조금씩 달라서 매칭용으로 공백/괄호 등을 정리
     if not title:
         return ""
     t = title.lower()
@@ -52,15 +86,9 @@ def safe_url_decode(value):
 def fetch_melon():
     url = "https://m2.melon.com/m6/chart/ent/songChartList.json"
     headers = {**COMMON_HEADERS, "Referer": "https://www.melon.com/"}
-    try:
-        r = requests.get(url, headers=headers, timeout=10)
-        r.raise_for_status()
-        data = r.json()
-        song_list = data.get("response", {}).get("SONGLIST", [])
-    except Exception as e:
-        print(f"[melon] fetch failed: {e}", file=sys.stderr)
-        return []
-
+    data = request_json(url, headers=headers)
+    song_list = data.get("response", {}).get("SONGLIST", [])
+    require_items(song_list)
     results = []
     for item in song_list:
         artist_list = item.get("ARTISTLIST") or []
@@ -82,15 +110,9 @@ def fetch_melon():
 def fetch_genie():
     url = "https://app.genie.co.kr/chart/j_RealTimeRankSongList.json?pg=1&pgsize=100"
     headers = {**COMMON_HEADERS, "Referer": "https://www.genie.co.kr/"}
-    try:
-        r = requests.get(url, headers=headers, timeout=10)
-        r.raise_for_status()
-        data = r.json()
-        items = data.get("DataSet", {}).get("DATA", [])
-    except Exception as e:
-        print(f"[genie] fetch failed: {e}", file=sys.stderr)
-        return []
-
+    data = request_json(url, headers=headers)
+    items = data.get("DataSet", {}).get("DATA", [])
+    require_items(items)
     results = []
     for item in items:
         artist_name = safe_url_decode(item.get("ARTIST_NAME"))
@@ -115,23 +137,9 @@ def fetch_vibe():
         "Accept": "application/json, text/plain, */*",
         "Accept-Language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
     }
-    try:
-        r = requests.get(url, headers=headers, timeout=10)
-        print(f"[vibe] status={r.status_code}", file=sys.stderr)
-        r.raise_for_status()
-        if not r.text.strip():
-            print("[vibe] empty response body (likely blocked)", file=sys.stderr)
-            return []
-        data = r.json()
-        tracks = data.get("response", {}).get("result", {}).get("chart", {}).get("items", {}).get("tracks", [])
-        print(f"[vibe] parsed track count={len(tracks)}", file=sys.stderr)
-        if not tracks:
-            print(f"[vibe] response body={json.dumps(data)[:1000]}", file=sys.stderr)
-    except Exception:
-        import traceback
-        traceback.print_exc(file=sys.stderr)
-        return []
-
+    data = request_json(url, headers=headers)
+    tracks = data.get("response", {}).get("result", {}).get("chart", {}).get("items", {}).get("tracks", [])
+    require_items(tracks)
     results = []
     for track in tracks:
         artists = track.get("artists") or []
@@ -166,15 +174,9 @@ def fetch_bugs():
         "svc_type": "20151",
         "size": "100",
     }
-    try:
-        r = requests.post(url, headers=headers, data=form_data, timeout=10)
-        r.raise_for_status()
-        data = r.json()
-        tracks = data.get("list", [])
-    except Exception as e:
-        print(f"[bugs] fetch failed: {e}", file=sys.stderr)
-        return []
-
+    data = request_json(url, headers=headers, data=form_data)
+    tracks = data.get("list", [])
+    require_items(tracks)
     results = []
     for track in tracks:
         artists = track.get("artists") or []
@@ -195,7 +197,6 @@ def fetch_bugs():
     return results
 
 
-# FLO 앱이 내부적으로 쓰는 비공식 차트 API. 로그인 필요 없고 앱 헤더만 있으면 됨
 def fetch_flo():
     url = "https://api.music-flo.com/display/v1/browser/chart/1/list?mixYn=N"
     headers = {
@@ -203,15 +204,9 @@ def fetch_flo():
         "x-gm-app-name": "FLO",
         "x-gm-app-version": "",
     }
-    try:
-        r = requests.get(url, headers=headers, timeout=10)
-        r.raise_for_status()
-        data = r.json()
-        tracks = data.get("data", {}).get("trackList", [])
-    except Exception as e:
-        print(f"[flo] fetch failed: {e}", file=sys.stderr)
-        return []
-
+    data = request_json(url, headers=headers)
+    tracks = data.get("data", {}).get("trackList", [])
+    require_items(tracks)
     results = []
     for index, item in enumerate(tracks):
         artist_name = (item.get("representationArtist") or {}).get("name", "")
@@ -235,48 +230,10 @@ def fetch_flo():
             "previousRank": previous_rank,
         })
     return results
-# 직접 크롤링이 불안정함 -> 스포티파이와 같은 방식으로, kworb.net이 정리해두는
-# 한국 유튜브 주간 차트 표를 대신 가져다 씀
 def fetch_youtube_music():
-    url = "https://kworb.net/youtube/insights/kr.html"
-    try:
-        r = requests.get(url, headers=COMMON_HEADERS, timeout=10)
-        r.raise_for_status()
-        tables = pd.read_html(StringIO(r.text))
-        df = tables[0]
-    except Exception as e:
-        print(f"[youtube_music] fetch failed: {e}", file=sys.stderr)
-        return []
-
-    pos_col, change_col, title_col = df.columns[0], df.columns[1], df.columns[2]
-
-    results = []
-    for _, row in df.iterrows():
-        cell = str(row[title_col])
-        if not is_rescene(cell):
-            continue
-        parts = cell.split(" - ", 1)
-        if len(parts) != 2:
-            continue
-        artist_name = parts[0].strip()
-        song_name = parts[1].strip()
-        try:
-            rank = int(row[pos_col])
-        except (ValueError, TypeError):
-            continue
-        results.append({
-            "songName": song_name,
-            "artistName": artist_name,
-            "albumImageUrl": "",
-            "rank": rank,
-            "previousRank": parse_previous_rank(rank, str(row[change_col])),
-        })
-    return results
+    return fetch_kworb("https://kworb.net/youtube/insights/kr.html")
 
 
-# 스포티파이는 공식 API에 차트 엔드포인트가 없어서, kworb.net이 매일 정리해두는
-# 한국 데일리 차트 표를 가져다 씀. 앨범 이미지가 없으니 다른 플랫폼에서 같은 곡이
-# 잡히면 그쪽 이미지를 병합 단계에서 대신 채워 넣게 됨
 def parse_previous_rank(rank, change):
     change = (change or "").strip()
     if change in ("", "=", "nan"):
@@ -289,41 +246,52 @@ def parse_previous_rank(rank, change):
         return None
 
 
-def fetch_spotify():
-    url = "https://kworb.net/spotify/country/kr_daily.html"
-    try:
-        r = requests.get(url, headers=COMMON_HEADERS, timeout=10)
-        r.raise_for_status()
-        tables = pd.read_html(StringIO(r.text))
-        df = tables[0]
-    except Exception as e:
-        print(f"[spotify] fetch failed: {e}", file=sys.stderr)
-        return []
-
-    pos_col, change_col, title_col = df.columns[0], df.columns[1], df.columns[2]
-
+def fetch_kworb(url):
+    response = SESSION.get(url, headers=COMMON_HEADERS, timeout=10)
+    response.raise_for_status()
+    tables = pd.read_html(StringIO(response.text))
+    table = next((t for t in tables if len(t.columns) >= 3 and
+                  str(t.columns[0]).strip().lower() in ("pos", "position")), None)
+    if table is None or table.empty:
+        raise ValueError("Chart table not found")
     results = []
-    for _, row in df.iterrows():
-        cell = str(row[title_col])
-        if not is_rescene(cell):
+    for row in table.itertuples(index=False, name=None):
+        parts = str(row[2]).split(" - ", 1)
+        if len(parts) != 2 or not is_rescene(parts[0]):
             continue
-        parts = cell.split(" - ", 1)
-        if len(parts) != 2:
-            continue
-        artist_name = parts[0].strip()
-        song_name = re.sub(r"\s*\(w/.*?\)\s*$", "", parts[1]).strip()
-        try:
-            rank = int(row[pos_col])
-        except (ValueError, TypeError):
+        rank = positive_rank(row[0])
+        if rank is None:
             continue
         results.append({
-            "songName": song_name,
-            "artistName": artist_name,
-            "albumImageUrl": "",
-            "rank": rank,
-            "previousRank": parse_previous_rank(rank, str(row[change_col])),
+            "songName": re.sub(r"\s*\(w/.*?\)\s*$", "", parts[1]).strip(),
+            "artistName": parts[0].strip(), "albumImageUrl": "", "rank": rank,
+            "previousRank": positive_rank(parse_previous_rank(rank, str(row[1]))),
         })
     return results
+
+
+def fetch_spotify():
+    return fetch_kworb("https://kworb.net/spotify/country/kr_daily.html")
+
+
+def fetch_apple_music():
+    global APPLE_SOURCE_UPDATED
+    response = SESSION.get(APPLE_MUSIC_URL, headers=COMMON_HEADERS, timeout=15)
+    response.raise_for_status()
+    feed = response.json().get("feed", {})
+    items = require_items(feed.get("results"))
+    if feed.get("country", "").lower() != "kr" or len(items) != 100:
+        raise ValueError("Expected the complete Apple Music Korea top 100 feed")
+    if any(not item.get("name") or not item.get("artistName") or not item.get("id") for item in items):
+        raise ValueError("Incomplete Apple Music chart entry")
+    if len({item["id"] for item in items}) != len(items):
+        raise ValueError("Duplicate Apple Music chart IDs")
+    APPLE_SOURCE_UPDATED = feed.get("updated")
+    return [{
+        "songName": item["name"], "artistName": item["artistName"],
+        "albumImageUrl": item.get("artworkUrl100", ""),
+        "rank": rank, "previousRank": None,
+    } for rank, item in enumerate(items, 1) if is_rescene(item["artistName"])]
 
 
 PLATFORM_FETCHERS = {
@@ -334,17 +302,19 @@ PLATFORM_FETCHERS = {
     "flo": fetch_flo,
     "youtube_music": fetch_youtube_music,
     "spotify": fetch_spotify,
+    "apple_music": fetch_apple_music,
 }
 
 
 def merge_platform_results(platform_results: dict) -> list:
-    # 곡 제목 기준으로 플랫폼별 결과를 하나로 합침
-    # 앨범 이미지는 먼저 찾은 플랫폼 것부터 사용 (melon > genie > vibe > bugs > flo)
-    order = ["melon", "genie", "vibe", "bugs", "flo", "youtube_music", "spotify"]
+    order = PLATFORM_FETCHERS
     merged = {}
 
     for platform in order:
         for entry in platform_results.get(platform, []):
+            rank = positive_rank(entry.get("rank"))
+            if rank is None:
+                continue
             key = normalize_title(entry["songName"])
             if not key:
                 continue
@@ -357,14 +327,15 @@ def merge_platform_results(platform_results: dict) -> list:
                 }
             if not merged[key].get("albumImageUrl") and entry.get("albumImageUrl"):
                 merged[key]["albumImageUrl"] = entry["albumImageUrl"]
-            merged[key]["ranks"][platform] = {
-                "rank": entry.get("rank"),
-                "previousRank": entry.get("previousRank"),
-            }
+            existing = merged[key]["ranks"].get(platform)
+            if existing is None or rank < existing["rank"]:
+                merged[key]["ranks"][platform] = {
+                    "rank": rank,
+                    "previousRank": positive_rank(entry.get("previousRank")),
+                }
 
     songs = list(merged.values())
 
-    # 차트에 걸린 플랫폼이 많은 곡 우선, 그다음 최고 순위가 높은 곡 우선
     def sort_key(song):
         ranks = [v["rank"] for v in song["ranks"].values() if v.get("rank") is not None]
         return (-len(ranks), min(ranks) if ranks else 9999)
@@ -373,18 +344,16 @@ def merge_platform_results(platform_results: dict) -> list:
     return songs
 
 
-# 바이브/스포티파이/유튜브뮤직(kworb)처럼 앨범 이미지를 안 주는 플랫폼에만 걸린
-# 곡은 표지가 비어있을 수 있음 -> 병합이 끝난 뒤 iTunes를 먼저 찾아보고,
-# 거기에 없으면 Deezer로 한 번 더 찾아서 채움 (둘 다 API 키 불필요)
 def fetch_album_image_itunes(artist_name, song_name):
     try:
-        params = {"term": f"{artist_name} {song_name}", "entity": "song", "limit": 1}
-        r = requests.get("https://itunes.apple.com/search", params=params, timeout=10)
+        params = {"term": f"{artist_name} {song_name}", "entity": "song", "limit": 5}
+        r = SESSION.get("https://itunes.apple.com/search", params=params, timeout=10)
         r.raise_for_status()
         results = r.json().get("results", [])
-        if results:
-            artwork = results[0].get("artworkUrl100", "")
-            return artwork.replace("100x100bb", "600x600bb") if artwork else ""
+        for item in results:
+            if is_rescene(item.get("artistName", "")) and normalize_title(item.get("trackName", "")) == normalize_title(song_name):
+                artwork = item.get("artworkUrl100", "")
+                return artwork.replace("100x100bb", "600x600bb") if artwork else ""
     except Exception as e:
         print(f"[album_image] itunes lookup failed for {artist_name} - {song_name}: {e}", file=sys.stderr)
     return ""
@@ -393,12 +362,13 @@ def fetch_album_image_itunes(artist_name, song_name):
 def fetch_album_image_deezer(artist_name, song_name):
     try:
         params = {"q": f"{artist_name} {song_name}"}
-        r = requests.get("https://api.deezer.com/search", params=params, timeout=10)
+        r = SESSION.get("https://api.deezer.com/search", params=params, timeout=10)
         r.raise_for_status()
         data = r.json().get("data", [])
-        if data:
-            album = data[0].get("album", {}) or {}
-            return album.get("cover_xl") or album.get("cover_big") or ""
+        for item in data:
+            if is_rescene((item.get("artist") or {}).get("name", "")) and normalize_title(item.get("title", "")) == normalize_title(song_name):
+                album = item.get("album") or {}
+                return album.get("cover_xl") or album.get("cover_big") or ""
     except Exception as e:
         print(f"[album_image] deezer lookup failed for {artist_name} - {song_name}: {e}", file=sys.stderr)
     return ""
@@ -418,31 +388,84 @@ def fill_missing_album_images(songs):
     return songs
 
 
+def load_previous():
+    if not os.path.exists(OUTPUT_PATH):
+        return {}
+    with open(OUTPUT_PATH, encoding="utf-8") as handle:
+        data = json.load(handle)
+    if not isinstance(data, dict) or not isinstance(data.get("songs"), list):
+        raise ValueError("Invalid existing chart.json; refusing to overwrite")
+    return data
+
+
+def previous_entries(previous, platform):
+    return [dict(songName=song["songName"], artistName=song["artistName"],
+                 albumImageUrl=song.get("albumImageUrl", ""), **song["ranks"][platform])
+            for song in previous.get("songs", []) if platform in song.get("ranks", {})]
+
+
+def apple_previous_ranks(entries, previous):
+    old = {normalize_title(e["songName"]): e for e in previous_entries(previous, "apple_music")}
+    old_status = previous.get("platformStatus", {}).get("apple_music", {})
+    same_feed = bool(APPLE_SOURCE_UPDATED and old_status.get("sourceUpdatedAt") == APPLE_SOURCE_UPDATED)
+    for entry in entries:
+        prior = old.get(normalize_title(entry["songName"]))
+        entry["previousRank"] = (prior.get("previousRank") if same_feed else prior.get("rank")) if prior else None
+
+
+def atomic_write(output):
+    directory = os.path.dirname(os.path.abspath(OUTPUT_PATH))
+    os.makedirs(directory, exist_ok=True)
+    fd, temporary = tempfile.mkstemp(dir=directory, prefix=".chart-", suffix=".json")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(output, handle, ensure_ascii=False, indent=2)
+            handle.write("\n")
+        os.replace(temporary, OUTPUT_PATH)
+    finally:
+        if os.path.exists(temporary):
+            os.unlink(temporary)
+
+
 def main():
-    platform_results = {}
+    previous = load_previous()
+    now = datetime.now(KST).isoformat()
+    results, statuses = {}, {}
+    success_count = 0
     for name, fetcher in PLATFORM_FETCHERS.items():
+        old_status = previous.get("platformStatus", {}).get(name, {})
         try:
-            platform_results[name] = fetcher()
-            print(f"[{name}] {len(platform_results[name])} RESCENE track(s) found")
-        except Exception as e:
-            print(f"[{name}] unexpected error: {e}", file=sys.stderr)
-            platform_results[name] = []
-
-    songs = merge_platform_results(platform_results)
-    songs = fill_missing_album_images(songs)
-
-    output = {
-        "updatedAt": datetime.now(KST).isoformat(),
-        "platforms": list(PLATFORM_FETCHERS.keys()),
-        "songs": songs,
-    }
-
-    os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
-    with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
-        json.dump(output, f, ensure_ascii=False, indent=2)
-
+            entries = fetcher()
+            if name == "apple_music":
+                apple_previous_ranks(entries, previous)
+            results[name] = entries
+            statuses[name] = {"status": "ok", "lastSuccessAt": now}
+            if name == "apple_music":
+                statuses[name].update(source=APPLE_MUSIC_URL, sourceUpdatedAt=APPLE_SOURCE_UPDATED,
+                                      previousRankBasis="previous_distinct_successful_feed")
+            success_count += 1
+            print(f"[{name}] {len(entries)} RESCENE track(s) found")
+        except Exception as error:
+            results[name] = previous_entries(previous, name)
+            had_previous = name in previous.get("platforms", [])
+            statuses[name] = {**old_status, "status": "stale" if had_previous else "unavailable",
+                              "lastSuccessAt": old_status.get("lastSuccessAt", previous.get("updatedAt") if had_previous else None),
+                              "lastAttemptAt": now}
+            print(f"[{name}] failed; keeping previous data: {error}", file=sys.stderr)
+    if not success_count:
+        print("All chart requests failed; chart.json unchanged", file=sys.stderr)
+        return 1
+    songs = merge_platform_results(results)
+    covers = {normalize_title(s["songName"]): s.get("albumImageUrl", "") for s in previous.get("songs", [])}
+    for song in songs:
+        if not song.get("albumImageUrl"):
+            song["albumImageUrl"] = covers.get(normalize_title(song["songName"]), "")
+    fill_missing_album_images(songs)
+    atomic_write({"updatedAt": now, "platforms": list(PLATFORM_FETCHERS),
+                  "platformStatus": statuses, "songs": songs})
     print(f"Saved {len(songs)} song(s) to {OUTPUT_PATH}")
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
