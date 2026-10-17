@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-17T10:49:58.479838+09:00",
+  "updatedAt": "2026-10-17T11:00:44.328655+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -13,37 +13,37 @@
   "platformStatus": {
     "melon": {
       "status": "ok",
-      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+      "lastSuccessAt": "2026-10-17T11:00:44.328655+09:00"
     },
     "genie": {
       "status": "ok",
-      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+      "lastSuccessAt": "2026-10-17T11:00:44.328655+09:00"
     },
     "vibe": {
       "status": "ok",
-      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+      "lastSuccessAt": "2026-10-17T11:00:44.328655+09:00"
     },
     "bugs": {
       "status": "ok",
-      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+      "lastSuccessAt": "2026-10-17T11:00:44.328655+09:00"
     },
     "flo": {
       "status": "ok",
-      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+      "lastSuccessAt": "2026-10-17T11:00:44.328655+09:00"
     },
     "youtube_music": {
       "status": "ok",
-      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+      "lastSuccessAt": "2026-10-17T11:00:44.328655+09:00"
     },
     "spotify": {
       "status": "ok",
-      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00"
+      "lastSuccessAt": "2026-10-17T11:00:44.328655+09:00"
     },
     "apple_music": {
       "status": "ok",
-      "lastSuccessAt": "2026-10-17T10:49:58.479838+09:00",
+      "lastSuccessAt": "2026-10-17T11:00:44.328655+09:00",
       "source": "https://rss.applemarketingtools.com/api/v2/kr/music/most-played/100/songs.json",
-      "sourceUpdatedAt": "Sat, 17 Oct 2026 01:50:20 +0000",
+      "sourceUpdatedAt": "Sat, 17 Oct 2026 02:00:50 +0000",
       "previousRankBasis": "previous_distinct_successful_feed"
     }
   },
@@ -54,7 +54,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 4,
+          "rank": 3,
           "previousRank": 4
         },
         "genie": {
@@ -83,7 +83,7 @@
         },
         "apple_music": {
           "rank": 5,
-          "previousRank": null
+          "previousRank": 5
         }
       }
     },
@@ -98,7 +98,7 @@
         },
         "genie": {
           "rank": 11,
-          "previousRank": 13
+          "previousRank": 11
         },
         "vibe": {
           "rank": 14,
@@ -122,7 +122,7 @@
         },
         "apple_music": {
           "rank": 6,
-          "previousRank": null
+          "previousRank": 6
         }
       }
     },
@@ -136,8 +136,8 @@
           "previousRank": 7
         },
         "genie": {
-          "rank": 9,
-          "previousRank": 10
+          "rank": 8,
+          "previousRank": 9
         },
         "vibe": {
           "rank": 10,
@@ -161,7 +161,7 @@
         },
         "apple_music": {
           "rank": 33,
-          "previousRank": null
+          "previousRank": 33
         }
       }
     },
@@ -171,8 +171,8 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 79,
-          "previousRank": 78
+          "rank": 81,
+          "previousRank": 79
         },
         "bugs": {
           "rank": 31,
@@ -192,7 +192,7 @@
         },
         "apple_music": {
           "rank": 11,
-          "previousRank": null
+          "previousRank": 11
         }
       }
     },
@@ -202,8 +202,8 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 59,
-          "previousRank": 54
+          "rank": 57,
+          "previousRank": 59
         },
         "bugs": {
           "rank": 63,
@@ -223,7 +223,7 @@
         },
         "apple_music": {
           "rank": 61,
-          "previousRank": null
+          "previousRank": 61
         }
       }
     },
