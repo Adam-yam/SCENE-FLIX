@@ -9830,7 +9830,7 @@
                     style="background: var(--c-youtube-music)"
                   ></span
                   >YOUTUBE MUSIC</span
-                ><span class="chart-info-name">한국 주간 인기곡 · Kworb</span>
+                ><span class="chart-info-name">한국 주간 인기곡 · YouTube Charts</span>
               </div>
               <div class="chart-info-row">
                 <span class="chart-info-plat"
@@ -14093,8 +14093,8 @@
   "yNDXNS_KFd0": "3:30",
   "mxOnvJEjDFE": "16:57",
   "kQZh-z7u1WI": "10:59",
-  "yXdZIXAlkiY": "29:47",
-  "3Vb2TGjxDes": "34:04"
+  "3Vb2TGjxDes": "34:04",
+  "yXdZIXAlkiY": "29:47"
 };
       const _RX_DATE8 = /(\d{4})(\d{2})(\d{2})/;
       const _RX_DATE_SEP = /(\d{4})[.\-\/](\d{2})[.\-\/](\d{2})/;
@@ -25523,11 +25523,11 @@
         SCHEDULE_DATA.sort((a, b) => a.date.localeCompare(b.date));
         if (typeof renderMenuSchedule === "function") renderMenuSchedule();
       }
-      async function _fetchWithTimeout(url, timeoutMs = 12000) {
+      async function _fetchWithTimeout(url, timeoutMs = 12000, options = {}) {
         const controller = new AbortController();
         const timer = setTimeout(() => controller.abort(), timeoutMs);
         try {
-          const response = await fetch(url, { signal: controller.signal });
+          const response = await fetch(url, { ...options, signal: controller.signal });
           const body = await response.text();
           return {
             ok: response.ok,
@@ -25714,7 +25714,11 @@
       let CHART_DATA = null;
       let _chartLoaded = false;
       async function loadChartJson() {
-        return _fetchJson("./data/charts/chart.json")
+        return _fetchWithTimeout("./data/charts/chart.json?_=" + Date.now(), 12000, { cache: "no-store" })
+          .then(function (response) {
+            if (!response.ok) throw new Error("HTTP " + response.status);
+            return response.json();
+          })
           .then(function (data) {
             if (!Array.isArray(data?.songs))
               throw new Error("Invalid chart data");
