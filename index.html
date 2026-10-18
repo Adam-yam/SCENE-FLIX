@@ -2661,11 +2661,6 @@
         text-transform: uppercase;
       }
 
-      .sched-updated {
-        font-size: 0.65rem;
-        color: var(--muted);
-      }
-
       .sched-notice-top {
         display: flex;
         align-items: flex-start;
@@ -7971,7 +7966,7 @@
 #scheduleMode .schedule-wrap{max-width:1320px;padding:30px 36px 90px}
 #scheduleMode .sched-header-bar{gap:16px;flex-wrap:wrap;margin-bottom:16px}
 #scheduleMode .sched-header-title{font-size:12px;font-weight:600;letter-spacing:.12em}
-#scheduleMode .sched-updated{margin-left:auto;font-size:11px}
+#scheduleMode .sched-export-trigger{margin-left:auto}
 #scheduleMode .sched-notice-top{font-size:11px;line-height:1.8;color:var(--muted);max-width:760px;margin-bottom:24px}
 #scheduleMode .sched-search-bar{max-width:460px;margin:0 0 28px;padding:0}
 #scheduleMode .sched-search-input-wrap{max-width:none;border:1px solid var(--border);border-radius:12px;background:transparent;min-height:44px}
@@ -8018,6 +8013,8 @@
 .sched-export-trigger:hover{background:var(--card-h)}
 #scheduleExportDialog{width:min(480px,calc(100vw - 32px));max-height:calc(100dvh - 40px);padding:28px;border:1px solid var(--border);border-radius:22px;background:var(--surf);color:var(--text);box-shadow:0 24px 100px #0005;overflow:auto;margin:auto}
 .sx-device-section{border-top:1px solid var(--border);padding-top:18px;margin-top:18px}.sx-device-title{font-size:12px;font-weight:500;margin:0 0 10px}.sx-devices{margin-bottom:12px}.sx-device-section .sx-caption{margin-bottom:0}.sx-device-section .sx-help{margin-top:4px}
+html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){overscroll-behavior-y:none}
+#scheduleExportDialog{overscroll-behavior:contain}
 #scheduleExportDialog::backdrop{background:#0007;backdrop-filter:blur(5px)}
 #scheduleExportDialog [hidden]{display:none!important}
 .sx-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px}
@@ -8047,8 +8044,27 @@
 .sx-actions button:disabled{opacity:.4;cursor:not-allowed}
 .sx-status{font-size:12px;line-height:1.7;margin:12px 0 0;color:var(--muted)}
 @media(max-width:1100px){#scheduleMode .sched-body{grid-template-columns:1fr;gap:32px}#scheduleMode .sched-list-col{border-left:0;padding:0}#scheduleMode .cal-cell{height:88px;min-height:88px}}
-@media(max-width:700px){#scheduleMode .schedule-wrap{padding:24px 18px 90px}#scheduleMode .sched-header-bar{gap:10px}#scheduleMode .sched-updated{order:3;width:100%;margin:0}#scheduleMode .sched-export-trigger{margin-left:auto}#scheduleMode .sched-notice-top{margin-bottom:20px}#scheduleMode .sched-search-bar{max-width:none;margin-bottom:24px}#scheduleMode .cal-month-title{font-size:23px}#scheduleMode .cal-nav-btn,#scheduleMode .sched-action{min-width:40px;min-height:40px}#scheduleMode .cal-grid{gap:2px}#scheduleMode .cal-cell{height:76px;min-height:76px;padding:6px 2px;gap:3px}#scheduleMode .cal-event-pill{font-size:9px;line-height:1.3;padding-left:3px}#scheduleMode .cal-date-num{font-size:12px;width:24px;height:24px}#scheduleMode .sched-item-title{font-size:15px}#scheduleMode .sched-group{column-gap:14px}#scheduleExportDialog{padding:24px 20px;border-radius:22px;max-height:calc(100dvh - 24px)}.sx-fields{gap:10px}}
+@media(max-width:700px){#scheduleMode .schedule-wrap{padding:24px 18px 90px}#scheduleMode .sched-header-bar{gap:10px}#scheduleMode .sched-export-trigger{margin-left:auto}#scheduleMode .sched-notice-top{margin-bottom:20px}#scheduleMode .sched-search-bar{max-width:none;margin-bottom:24px}#scheduleMode .cal-month-title{font-size:23px}#scheduleMode .cal-nav-btn,#scheduleMode .sched-action{min-width:40px;min-height:40px}#scheduleMode .cal-grid{gap:2px}#scheduleMode .cal-cell{height:76px;min-height:76px;padding:6px 2px;gap:3px}#scheduleMode .cal-event-pill{font-size:9px;line-height:1.3;padding-left:3px}#scheduleMode .cal-date-num{font-size:12px;width:24px;height:24px}#scheduleMode .sched-item-title{font-size:15px}#scheduleMode .sched-group{column-gap:14px}#scheduleExportDialog{padding:24px 20px;border-radius:22px;max-height:calc(100dvh - 24px)}.sx-fields{gap:10px}}
 @media(prefers-reduced-transparency:reduce){#scheduleExportDialog::backdrop{backdrop-filter:none;background:#000b}}
+</style>
+<style id="mobile-minimal-controls">
+@media(max-width:700px){
+#mobileMenuBtn,#scrollTop{width:44px;height:44px;padding:0;border:0;border-radius:10px;background:transparent;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;color:var(--text);isolation:isolate}
+#mobileMenuBtn svg,#scrollTop svg{width:20px;height:20px;stroke-width:1.75;pointer-events:none}
+#mobileMenuBtn::before,#scrollTop::before{content:"";position:absolute;inset:4px;border-radius:9px;z-index:-1;pointer-events:none;transition:background .18s ease}
+#scrollTop{right:calc(12px + var(--safe-right));bottom:calc(96px + var(--safe-bottom))}
+#scrollTop::before{background:var(--surf);border:1px solid var(--border)}
+#mobileMenuBtn:hover,#scrollTop:hover{background:transparent}
+#mobileMenuBtn:active{transform:none}
+#mobileMenuBtn:active::before,#scrollTop:active::before{background:var(--card-h)}
+#mobileMenuBtn:focus-visible,#scrollTop:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:10px}
+}
+@media(max-width:700px) and (hover:hover){
+#mobileMenuBtn:hover::before,#scrollTop:hover::before{background:var(--card-h)}
+}
+@media(max-width:700px) and (prefers-reduced-motion:reduce){
+#mobileMenuBtn::before,#scrollTop::before{transition:none}
+}
 </style>
 </head>
 
@@ -9591,7 +9607,6 @@
             </svg>
             SCHEDULE
           </span>
-          <span class="sched-updated" id="schedUpdatedAt"></span>
           <button type="button" class="sched-export-trigger" id="scheduleExportBtn" onclick="openScheduleExport()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></svg><span id="scheduleExportLabel">일정 내보내기</span></button>
         </div>
         <div class="sched-notice-top">
@@ -25675,7 +25690,6 @@
         return `${kst.getUTCFullYear()}.${pad(kst.getUTCMonth() + 1)}.${pad(kst.getUTCDate())} ${pad(kst.getUTCHours())}:${pad(kst.getUTCMinutes())} KST${suffix}`;
       }
       let _scheduleState = "loading";
-      let _scheduleFetchedAt = null;
       let _scheduleBusy = false;
       let _scheduleLastAttempt = 0;
       const _scheduleFiles = new Map();
@@ -25706,21 +25720,6 @@
             fetched: "取得日時",
           },
         }[window._curLang || "KR"];
-      }
-      function _setSchedUpdatedAt() {
-        const el = document.getElementById("schedUpdatedAt");
-        if (!el) return;
-        const t = _menuText();
-        const status =
-          _scheduleState === "ready" ? "" : t[_scheduleState] || "";
-        el.textContent = [
-          status,
-          _scheduleFetchedAt
-            ? t.fetched + " " + _formatUpdatedAt(_scheduleFetchedAt)
-            : "",
-        ]
-          .filter(Boolean)
-          .join(" · ");
       }
       function _scheduleHalfFilePaths() {
         const y = _kstDate().getFullYear();
@@ -25780,7 +25779,6 @@
               : successes
                 ? "partial"
                 : "failed";
-          if (successes) _scheduleFetchedAt = new Date();
           const seen = new Set();
           _baseScheduleData = paths
             .flatMap((path) => _scheduleFiles.get(path) || [])
@@ -25791,7 +25789,6 @@
               return true;
             });
           injectAnnivEvents();
-          _setSchedUpdatedAt();
           if (curSection === "schedule") buildCalendar();
         } finally {
           _scheduleBusy = false;
@@ -25815,7 +25812,6 @@
         }
       }
       let NEWS_DATA = [];
-      let _newsLoaded = false;
       async function loadNewsJson() {
         return _fetchJson("./data/news.json")
           .then(function (data) {
@@ -25824,18 +25820,15 @@
             NEWS_DATA = data.articles.filter(
               (a) => a && typeof a.title === "string" && _safeHttpUrl(a.url),
             );
-            _newsLoaded = true;
             _newsUpdatedAt = data.updated || null;
             _refreshDataUpdatedLabels();
             return true;
           })
           .catch(function () {
-            _newsLoaded = true;
             return false;
           });
       }
       let CHART_DATA = null;
-      let _chartLoaded = false;
       async function loadChartJson() {
         return _fetchWithTimeout("./data/charts/chart.json?_=" + Date.now(), 12000, { cache: "no-store" })
           .then(function (response) {
@@ -25846,13 +25839,11 @@
             if (!Array.isArray(data?.songs))
               throw new Error("Invalid chart data");
             CHART_DATA = data;
-            _chartLoaded = true;
             _chartUpdatedAt = data.updatedAt || null;
             _refreshDataUpdatedLabels();
             return true;
           })
           .catch(function () {
-            _chartLoaded = true;
             return false;
           });
       }
@@ -27719,6 +27710,21 @@
         chart: "dChart",
         projects: "dProjects",
       };
+      function _alignMobileNavIndicator() {
+        const nav = _elMobileBottomNav, indicator = _elNavIndicator;
+        const btn = nav?.querySelector(".mob-nav-btn.active");
+        if (!nav || !indicator) return;
+        if (!btn) {
+          indicator.style.opacity = "0";
+          return;
+        }
+        if (!nav.getClientRects().length) return;
+        const navRect = nav.getBoundingClientRect();
+        const btnRect = btn.getBoundingClientRect();
+        indicator.style.left = btnRect.left - navRect.left - nav.clientLeft + "px";
+        indicator.style.width = btnRect.width + "px";
+        indicator.style.opacity = "1";
+      }
       function updateMobileNav(section) {
         _allMobNavBtns.forEach((b) => b.classList.remove("active"));
         const indicator = _elNavIndicator;
@@ -27726,19 +27732,8 @@
           const btn = document.getElementById(_BOTTOM_NAV_MAP[section]);
           if (btn) {
             btn.classList.add("active");
-            if (indicator && _elMobileBottomNav) {
-              requestAnimationFrame(() => {
-                const navRect = _elMobileBottomNav.getBoundingClientRect();
-                const btnRect = btn.getBoundingClientRect();
-                indicator.style.left =
-                  btnRect.left -
-                  navRect.left -
-                  _elMobileBottomNav.clientLeft +
-                  "px";
-                indicator.style.width = btnRect.width + "px";
-                indicator.style.opacity = "1";
-              });
-            }
+            if (indicator && _elMobileBottomNav)
+              requestAnimationFrame(_alignMobileNavIndicator);
           }
         } else {
           if (indicator) indicator.style.opacity = "0";
@@ -27753,16 +27748,7 @@
         let frame = 0;
         function align() {
           frame = 0;
-          const nav = _elMobileBottomNav,
-            indicator = _elNavIndicator;
-          const btn = nav?.querySelector(".mob-nav-btn.active");
-          if (!nav || !indicator || !btn || !nav.getClientRects().length)
-            return;
-          const navRect = nav.getBoundingClientRect(),
-            btnRect = btn.getBoundingClientRect();
-          indicator.style.left =
-            btnRect.left - navRect.left - nav.clientLeft + "px";
-          indicator.style.width = btnRect.width + "px";
+          _alignMobileNavIndicator();
         }
         function schedule() {
           if (!frame) frame = requestAnimationFrame(align);
@@ -28021,7 +28007,7 @@
         if (!el) return;
         const arrow = document.getElementById("ptrArrow");
         const EXCLUDE_SELECTOR =
-          "#mobileDrawer, #shortsPlayerModal, #subSidebar, .song-nav-outer, .sched-list-col, .drawer-items";
+          "dialog, #mobileDrawer, #shortsPlayerModal, #subSidebar, .song-nav-outer, .sched-list-col, .drawer-items";
         const THRESHOLD = 68;
         const MAX_PULL = 110;
         let startY = 0;
@@ -28038,7 +28024,7 @@
           );
         }
         function canStartPull(target) {
-          if (refreshing) return false;
+          if (refreshing || document.querySelector("dialog[open]")) return false;
           if (document.body.style.position === "fixed") return false;
           if (pageScrollTop() > 0) return false;
           if (target && target.closest && target.closest(EXCLUDE_SELECTOR))
@@ -28071,6 +28057,11 @@
           el.style.opacity = "1";
           el.style.transform = "translate(-50%, 24px)";
           setTimeout(function () {
+            if (document.querySelector("dialog[open]")) {
+              refreshing = false;
+              reset();
+              return;
+            }
             window.location.reload();
           }, 350);
         }
@@ -28096,9 +28087,7 @@
               reset();
               return;
             }
-            if (pageScrollTop() > 0) {
-              pulling = false;
-              dragging = false;
+            if (!canStartPull(e.target)) {
               reset();
               return;
             }
@@ -28117,6 +28106,7 @@
           "touchend",
           function () {
             if (!pulling) return;
+            if (!canStartPull(null)) { reset(); return; }
             if (dragging) {
               if (ready) {
                 doRefresh();
@@ -28209,7 +28199,6 @@
       }
       document.addEventListener("menulanguagechange", () => {
         renderMenuSchedule();
-        _setSchedUpdatedAt();
       });
       document.addEventListener("visibilitychange", () => {
         if (!document.hidden) {
