@@ -7967,6 +7967,89 @@
 #chartMode .minimal-key{font-size:9px;gap:12px}
 }
 </style>
+<style id="schedule-refined-design">
+#scheduleMode .schedule-wrap{max-width:1320px;padding:30px 36px 90px}
+#scheduleMode .sched-header-bar{gap:16px;flex-wrap:wrap;margin-bottom:16px}
+#scheduleMode .sched-header-title{font-size:12px;font-weight:600;letter-spacing:.12em}
+#scheduleMode .sched-updated{margin-left:auto;font-size:11px}
+#scheduleMode .sched-notice-top{font-size:11px;line-height:1.8;color:var(--muted);max-width:760px;margin-bottom:24px}
+#scheduleMode .sched-search-bar{max-width:460px;margin:0 0 28px;padding:0}
+#scheduleMode .sched-search-input-wrap{max-width:none;border:1px solid var(--border);border-radius:12px;background:transparent;min-height:44px}
+#scheduleMode .sched-body{grid-template-columns:minmax(0,1.2fr) minmax(300px,1fr);gap:36px;align-items:start}
+#scheduleMode .sched-cal-col{border:0;border-radius:0;background:transparent;padding:0}
+#scheduleMode .cal-header{min-height:48px;margin-bottom:18px;gap:12px}
+#scheduleMode .cal-month-title{font-size:25px;font-weight:600;letter-spacing:-.045em;padding:4px 0}
+#scheduleMode .cal-nav-group{gap:4px}
+#scheduleMode .cal-nav-btn,#scheduleMode .sched-action{min-width:36px;min-height:36px;border-radius:9px;border-color:var(--border);background:transparent}
+#scheduleMode .cal-grid{border:0;border-radius:0;background:transparent;gap:4px}
+#scheduleMode .cal-day-header{border:0;background:transparent;font-size:11px;padding:8px 0 12px}
+#scheduleMode .cal-cell{background:transparent;border:0!important;border-top:1px solid var(--border)!important;border-radius:0;min-height:94px;height:94px;max-height:none;padding:8px 3px;gap:4px;box-shadow:none}
+#scheduleMode .cal-cell:hover{background:var(--card-h);border-radius:8px}
+#scheduleMode .cal-cell.selected{background:color-mix(in srgb,var(--accent) 8%,transparent);border-radius:8px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--accent) 55%,transparent)}
+#scheduleMode .cal-cell.other-month{background:transparent;opacity:.35}
+#scheduleMode .cal-date-num{width:25px;height:25px;font-size:12px;font-weight:500;margin:0}
+#scheduleMode .cal-cell.today .cal-date-num{background:var(--accent);color:#fff}
+#scheduleMode .cal-event-pill{background:transparent!important;color:var(--text)!important;font-size:10px;font-weight:400;line-height:1.4;padding:0 2px 0 5px;border-left:2px solid var(--muted);border-radius:0;max-width:100%}
+#scheduleMode .cal-event-pill.type-broadcast{border-color:var(--c-sched-broadcast)}
+#scheduleMode .cal-event-pill.type-radio{border-color:var(--c-sched-radio)}
+#scheduleMode .cal-event-pill.type-event{border-color:var(--c-sched-event)}
+#scheduleMode .cal-event-pill.type-fansign{border-color:var(--c-sched-fansign)}
+#scheduleMode .cal-event-pill.type-concert{border-color:var(--c-sched-concert)}
+#scheduleMode .cal-event-pill.type-notice{border-color:var(--c-sched-notice)}
+#scheduleMode .cal-event-pill.type-anniv{border-color:var(--c-sched-anniv)}
+#scheduleMode .cal-more-badge{font-size:10px;font-weight:400}
+#scheduleMode .cal-legend{gap:10px 14px;font-size:10px;line-height:1.5;margin-top:18px;flex-wrap:wrap}
+#scheduleMode .sched-list-col{padding:0 0 0 28px;border-left:1px solid var(--border);max-height:none}
+#scheduleMode .sched-list-header{padding:0 0 18px;min-height:66px;border-bottom:1px solid var(--border)}
+#scheduleMode .sched-list-title{font-size:15px;font-weight:500}
+#scheduleMode .sched-list-count{font-size:11px;background:transparent;padding:0;color:var(--muted)}
+#scheduleMode .sched-group{grid-template-columns:38px minmax(0,1fr);column-gap:18px;padding:23px 0}
+#scheduleMode .sched-group-day-num{font-size:23px;font-weight:500}
+#scheduleMode .sched-group-month{display:none}
+#scheduleMode .sched-item{padding:2px 0 18px;gap:9px;background:transparent}
+#scheduleMode .sched-item-title{font-size:14px;line-height:1.6;font-weight:500;letter-spacing:-.02em}
+#scheduleMode .sched-item-bar{width:2px;border-radius:2px;opacity:.7}
+#scheduleMode .sched-item-meta{font-size:11px;line-height:1.7;gap:6px}
+#scheduleMode .sched-item-type-tag{background:transparent!important;padding:0;font-weight:400}
+#scheduleMode .sched-item-search-btn{min-width:28px;min-height:28px}
+#scheduleMode .sched-item-link{font-size:11px}
+#scheduleMode button:focus-visible,#scheduleExportDialog :focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.sched-export-trigger{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 14px;border:1px solid var(--border);border-radius:10px;color:var(--text);background:var(--surf);font:inherit;font-size:12px;cursor:pointer}
+.sched-export-trigger:hover{background:var(--card-h)}
+#scheduleExportDialog{width:min(480px,calc(100vw - 32px));max-height:calc(100dvh - 40px);padding:28px;border:1px solid var(--border);border-radius:22px;background:var(--surf);color:var(--text);box-shadow:0 24px 100px #0005;overflow:auto;margin:auto}
+.sx-device-section{border-top:1px solid var(--border);padding-top:18px;margin-top:18px}.sx-device-title{font-size:12px;font-weight:500;margin:0 0 10px}.sx-devices{margin-bottom:12px}.sx-device-section .sx-caption{margin-bottom:0}.sx-device-section .sx-help{margin-top:4px}
+#scheduleExportDialog::backdrop{background:#0007;backdrop-filter:blur(5px)}
+#scheduleExportDialog [hidden]{display:none!important}
+.sx-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:8px}
+.sx-head h2{font-size:21px;letter-spacing:-.035em;font-weight:600;margin:0}
+.sx-close{width:36px;height:36px;border:0;border-radius:50%;font-size:24px;background:transparent;color:var(--muted);cursor:pointer}
+.sx-caption{font-size:12px;line-height:1.7;color:var(--muted);margin:0 0 22px}
+.sx-modes{border:0;padding:4px;margin:0 0 24px;display:flex;gap:4px;border-radius:12px;background:var(--card)}
+.sx-modes legend{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.sx-modes label{flex:1;position:relative;text-align:center;cursor:pointer}
+.sx-modes input{position:absolute;opacity:0;width:1px;height:1px}
+.sx-modes span{display:block;border-radius:9px;padding:10px 4px;font-size:12px;color:var(--muted)}
+.sx-modes input:checked+span{background:var(--surf);color:var(--text);box-shadow:0 1px 4px #0001}
+.sx-modes input:focus-visible+span{outline:2px solid var(--accent)}
+.sx-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+.sx-fields label{display:grid;gap:8px;font-size:12px;color:var(--muted);min-width:0}
+.sx-fields input{min-width:0;width:100%;min-height:44px;border:1px solid var(--border);border-radius:10px;background:var(--surf);color:var(--text);font:inherit;padding:8px}
+.sx-summary{border-top:1px solid var(--border);padding-top:18px;font-size:14px;line-height:1.7;margin:0}
+.sx-warning{font-size:12px;line-height:1.7;color:var(--text);padding:12px 14px;background:var(--card);border-radius:10px;margin:12px 0}
+.sx-check{display:flex;gap:9px;align-items:flex-start;font-size:12px;line-height:1.7;margin:14px 0}
+.sx-check input{margin-top:4px;accent-color:var(--accent)}
+.sx-help{font-size:12px;line-height:1.8;color:var(--muted);margin-top:18px}
+.sx-help summary{cursor:pointer;color:var(--text);padding:8px 0}
+.sx-help p{margin:8px 0}
+.sx-actions{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.sx-actions button{flex:1;min-height:44px;border:1px solid var(--border);border-radius:11px;background:transparent;color:var(--text);font:inherit;font-size:13px;cursor:pointer;padding:10px 14px}
+.sx-actions .sx-primary{background:var(--accent);color:#fff;border-color:transparent}
+.sx-actions button:disabled{opacity:.4;cursor:not-allowed}
+.sx-status{font-size:12px;line-height:1.7;margin:12px 0 0;color:var(--muted)}
+@media(max-width:1100px){#scheduleMode .sched-body{grid-template-columns:1fr;gap:32px}#scheduleMode .sched-list-col{border-left:0;padding:0}#scheduleMode .cal-cell{height:88px;min-height:88px}}
+@media(max-width:700px){#scheduleMode .schedule-wrap{padding:24px 18px 90px}#scheduleMode .sched-header-bar{gap:10px}#scheduleMode .sched-updated{order:3;width:100%;margin:0}#scheduleMode .sched-export-trigger{margin-left:auto}#scheduleMode .sched-notice-top{margin-bottom:20px}#scheduleMode .sched-search-bar{max-width:none;margin-bottom:24px}#scheduleMode .cal-month-title{font-size:23px}#scheduleMode .cal-nav-btn,#scheduleMode .sched-action{min-width:40px;min-height:40px}#scheduleMode .cal-grid{gap:2px}#scheduleMode .cal-cell{height:76px;min-height:76px;padding:6px 2px;gap:3px}#scheduleMode .cal-event-pill{font-size:9px;line-height:1.3;padding-left:3px}#scheduleMode .cal-date-num{font-size:12px;width:24px;height:24px}#scheduleMode .sched-item-title{font-size:15px}#scheduleMode .sched-group{column-gap:14px}#scheduleExportDialog{padding:24px 20px;border-radius:22px;max-height:calc(100dvh - 24px)}.sx-fields{gap:10px}}
+@media(prefers-reduced-transparency:reduce){#scheduleExportDialog::backdrop{backdrop-filter:none;background:#000b}}
+</style>
 </head>
 
   <body>
@@ -9509,6 +9592,7 @@
             SCHEDULE
           </span>
           <span class="sched-updated" id="schedUpdatedAt"></span>
+          <button type="button" class="sched-export-trigger" id="scheduleExportBtn" onclick="openScheduleExport()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></svg><span id="scheduleExportLabel">일정 내보내기</span></button>
         </div>
         <div class="sched-notice-top">
           <span
@@ -9743,6 +9827,25 @@
         </div>
       </div>
     </div>
+
+    <dialog id="scheduleExportDialog" aria-labelledby="sx-title" aria-describedby="sx-subtitle">
+      <div class="sx-head"><h2 id="sx-title" data-sx="title">일정 내보내기</h2><button type="button" id="sx-close" class="sx-close" aria-label="닫기" onclick="document.getElementById('scheduleExportDialog').close()">×</button></div>
+      <p id="sx-subtitle" class="sx-caption" data-sx="subtitle">원하는 기간을 골라 내 캘린더에 담아보세요.</p>
+      <fieldset class="sx-modes"><legend data-sx="title">일정 내보내기</legend><label><input type="radio" name="sx-mode" value="month" checked><span data-sx="month">한 달</span></label><label><input type="radio" name="sx-mode" value="range"><span data-sx="range">기간</span></label><label><input type="radio" name="sx-mode" value="all"><span data-sx="all">전체</span></label></fieldset>
+      <div class="sx-fields" id="sx-fields"><label><span id="sx-start-label">내보낼 월</span><input type="month" id="sx-from" required min="1900-01" max="9999-12"></label><label id="sx-end-label" hidden><span data-sx="to">종료 월</span><input type="month" id="sx-to" required min="1900-01" max="9999-12"></label></div>
+      <p id="sx-summary" class="sx-summary" role="status" aria-live="polite"></p>
+      <p id="sx-warning" class="sx-warning" hidden></p>
+      <label id="sx-confirm-wrap" class="sx-check" hidden><input type="checkbox" id="sx-confirm"><span data-sx="confirm">선택한 일정을 모두 내보내겠습니다.</span></label>
+      <p class="sx-caption" data-sx="note"></p>
+      <div class="sx-device-section">
+        <p class="sx-device-title" data-sx="device">추가할 기기</p>
+        <fieldset class="sx-modes sx-devices"><legend data-sx="device">추가할 기기</legend><label><input type="radio" name="sx-device" value="galaxy" checked><span>Galaxy</span></label><label><input type="radio" name="sx-device" value="iphone"><span>iPhone</span></label></fieldset>
+        <p id="sx-device-guide" class="sx-caption"></p>
+        <details class="sx-help"><summary data-sx="fallback">바로 열리지 않나요?</summary><p data-sx="desktop"></p></details>
+      </div>
+      <div class="sx-actions"><button type="button" id="sx-download" onclick="exportScheduleFile(false)" data-sx="download">파일 저장</button><button type="button" id="sx-share" class="sx-primary" onclick="exportScheduleFile(true)" data-sx="share">공유 · 앱에서 열기</button></div>
+      <p id="sx-status" class="sx-status" role="status" aria-live="polite"></p>
+    </dialog>
 
     <div id="newsMode" style="display: none">
       <div class="news-wrap">
@@ -23352,12 +23455,31 @@
         return t["filter_" + type] || TYPE_LABEL[type] || type;
       }
       const _PLAY_RING_SVG = `<div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>`;
+      function _videoThumbAttributes(vid) {
+        const base = "https://img.youtube.com/vi/" + encodeURIComponent(vid) + "/";
+        const connection = navigator.connection;
+        const saveData = connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType);
+        const sizes = "auto, (max-width: 700px) calc((100vw - 44px) / 2), (min-width: 1824px) 286px, calc((100vw - 394px) / 5)";
+        const responsive = saveData ? "" : ' srcset="' + base + 'mqdefault.jpg 320w, ' + base + 'hqdefault.jpg 480w, ' + base + 'sddefault.jpg 640w" sizes="' + sizes + '"';
+        return 'src="' + base + 'mqdefault.jpg"' + responsive + ' alt="" width="320" height="180" loading="lazy" decoding="async" onerror="_videoThumbFallback(this)"';
+      }
+      function _videoThumbFallback(img) {
+        const current = img.currentSrc || img.src;
+        const match = current.match(/^(https:\/\/img\.youtube\.com\/vi\/[^/]+\/)(mqdefault|hqdefault|sddefault)\.jpg$/);
+        if (!match) { img.onerror = null; img.style.visibility = "hidden"; return; }
+        const failed = new Set((img.dataset.thumbFailed || "").split(",").filter(Boolean));
+        failed.add(match[2]);
+        img.dataset.thumbFailed = [...failed].join(",");
+        const next = ["hqdefault", "mqdefault"].find(name => !failed.has(name));
+        img.removeAttribute("srcset");
+        img.removeAttribute("sizes");
+        if (!next) { img.onerror = null; img.style.visibility = "hidden"; return; }
+        img.src = match[1] + next + ".jpg";
+      }
       function buildThumbHtml(vid, badgeHtml, watched) {
         const watchedLabel = getCurrentT().watched_badge || "시청함";
         return `<div class="thumb">
-    <img src="https://img.youtube.com/vi/${vid}/mqdefault.jpg" alt=""
-         loading="lazy" decoding="async"
-         onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${vid}/hqdefault.jpg'">
+    <img ${_videoThumbAttributes(vid)}>
     ${_PLAY_RING_SVG}
     ${badgeHtml}
     ${watched ? `<span class="watched-badge">${watchedLabel}</span>` : ""}
@@ -25673,6 +25795,7 @@
           if (curSection === "schedule") buildCalendar();
         } finally {
           _scheduleBusy = false;
+          refreshScheduleExport();
         }
       }
       loadScheduleJson();
@@ -25753,7 +25876,7 @@
         });
         const sources = [
           { path: "./data/shorts.json", channel: "" },
-          ...keys.map((channel) => ({
+          ...keys.filter(channel => !["official", "woni"].includes(channel)).map((channel) => ({
             path: "./data/" + channel + "-shorts.json",
             channel,
           })),
@@ -26313,17 +26436,21 @@
           vibe:dailyLabel, spotify:dailyLabel,
           youtube_music:{KR:"한국 주간",EN:"KR weekly",JP:"韓国週間"}[lang] || "KR weekly",
           apple_music:{KR:"한국 인기곡",EN:"KR top songs",JP:"韓国人気曲"}[lang] || "KR top songs"};
-        const order = ["melon","genie","bugs","flo","vibe","youtube_music","spotify","apple_music"];
+        const order = ["melon","youtube_music","spotify","genie","flo","vibe","bugs","apple_music"];
         const platforms = order.map(key => _CHART_PLATFORMS.find(p => p.key === key)).filter(Boolean);
         const dailyPlatforms = new Set(["melon","genie","bugs"]);
         const songs = (CHART_DATA?.songs || []).filter(song => song && typeof song === "object");
         const statuses = CHART_DATA?.platformStatus || {};
-        const hasStale = platforms.some(p => statuses[p.key]?.status === "stale" || (dailyPlatforms.has(p.key) && statuses[p.key + "_daily"]?.status === "stale"));
+        function displayStatus(key) {
+          const meta = statuses[key];
+          return key === "youtube_music" && meta?.status === "stale" && meta.reason === "source_outdated" ? "ok" : meta?.status;
+        }
+        const hasStale = platforms.some(p => displayStatus(p.key) === "stale" || (dailyPlatforms.has(p.key) && displayStatus(p.key + "_daily") === "stale"));
         function renderRank(song, p, daily) {
             const key = daily ? p.key + "_daily" : p.key;
             const entry = song.ranks?.[key];
             const rank = _chartRank(entry?.rank), prev = _chartRank(entry?.previousRank);
-            const status = statuses[key]?.status;
+            const status = displayStatus(key);
             const pending = !entry && !status && !(CHART_DATA.platforms || []).includes(key) && (daily || p.key === "apple_music");
             const unknown = {KR: "이전 순위 확인 불가", EN: "Previous rank unknown", JP: "前回順位不明"}[window._curLang || "KR"] || "Previous rank unknown";
             let cls = "", delta = "·", description = prev === null ? unknown : copy.same;
@@ -26350,6 +26477,157 @@
         }).join('');
         list.innerHTML = '<table class="minimal-chart" aria-label="' + copy.chart + '">' + heading + '<tbody>' + body + '</tbody></table><div class="minimal-key"><span>↑ ' + copy.up + ' &nbsp; ↓ ' + copy.down + '</span><span>' + copy.newNote + '</span><span>' + (hasStale ? copy.notice : copy.out) + '</span></div>';
       }
+      const _SCHEDULE_EXPORT_TEXT = {
+        KR: {device:"추가할 기기",fallback:"바로 열리지 않나요?",title:"일정 내보내기",subtitle:"원하는 기간을 골라 내 캘린더에 담아보세요.",month:"한 달",range:"기간",all:"전체",from:"시작 월",to:"종료 월",one:"내보낼 월",close:"닫기",download:"캘린더 파일 저장",share:"공유해서 추가",help:"캘린더에 추가하는 방법",count:n=>`${n}개 일정`,empty:"선택한 기간에 등록된 일정이 없습니다.",invalid:"시작 월과 종료 월을 확인해 주세요.",loading:"일정을 불러오는 중입니다…",failed:"일정을 불러오지 못했습니다. 창을 닫고 다시 시도해 주세요.",partial:"일부 일정 파일을 불러오지 못해 현재 확보한 일정만 포함됩니다.",warning:"전체 또는 많은 일정을 가져오면 캘린더가 복잡해지고 처리에 시간이 걸릴 수 있습니다.",confirm:"선택한 일정을 모두 내보내겠습니다.",note:"현재 불러온 일정 기준 · 한국 시간 기준 · 시간 미정은 종일 일정으로 저장됩니다. 내보낸 일정은 자동 갱신되지 않으며, 다시 가져오면 중복될 수 있습니다.",galaxy:"갤럭시: 저장한 .ics 파일을 내 파일에서 열고, 캘린더 앱이 제시하는 가져오기 화면에서 추가를 확인하세요. 앱 버전에 따라 직접 열기가 지원되지 않을 수 있습니다.",iphone:"아이폰: 공유에서 Mail로 자신에게 보내고, 받은 메일의 .ics 첨부파일을 열어 캘린더에 추가할 수 있습니다. 파일 앱이나 공유 목록에 캘린더가 나타나지 않을 때 이 방법을 이용하세요.",desktop:"직접 열기가 안 되면 PC의 Google Calendar에서 파일을 가져온 뒤, 휴대폰 기본 캘린더에서 같은 Google 계정의 일정 동기화를 켜세요.",saved:"파일 저장을 요청했습니다. 파일을 열어 캘린더에서 추가를 완료해 주세요.",shared:"파일을 전달했습니다. 선택한 앱에서 가져오기를 완료해 주세요.",shareFail:"이 브라우저에서는 파일 공유를 사용할 수 없습니다. 파일 저장을 이용해 주세요.",cancelled:"공유를 취소했습니다.",error:"파일을 만들지 못했습니다. 다시 시도해 주세요.",unknown:"시간 미정",untimed:"일부 일정의 시간 표기를 해석할 수 없어 종일 일정으로 포함합니다. 원래 시간은 일정 설명에 남깁니다."},
+        EN: {device:"Your device",fallback:"Cannot open the file?",title:"Export schedule",subtitle:"Choose a period to add to your calendar.",month:"Month",range:"Range",all:"All",from:"Start month",to:"End month",one:"Month to export",close:"Close",download:"Save calendar file",share:"Share to add",help:"How to add to your calendar",count:n=>`${n} events`,empty:"No events in this period.",invalid:"Check the start and end months.",loading:"Loading events…",failed:"Could not load events. Close this window and try again.",partial:"Some schedule files could not be loaded. Only available events are included.",warning:"Importing all or many events can clutter your calendar and take longer.",confirm:"Export all selected events.",note:"Includes currently loaded events. Times use Korea Standard Time. Unknown times become all-day events. Exports do not update automatically. Reimporting may create duplicates.",galaxy:"Galaxy: Open the saved .ics file in My Files and confirm the import in your calendar app. Direct opening depends on the app version.",iphone:"iPhone: Share the file to Mail, send it to yourself, then open the received .ics attachment to add events. Use this if Calendar is missing from Files or the share sheet.",desktop:"If direct opening is unavailable, import the file in Google Calendar on a computer, then enable that Google account in your phone’s calendar.",saved:"File download requested. Open it and finish importing in your calendar.",shared:"File shared. Finish importing in the selected app.",shareFail:"File sharing is unavailable. Use Save file instead.",cancelled:"Sharing cancelled.",error:"Could not create the file. Try again.",unknown:"Time to be confirmed",untimed:"Some time formats could not be read and will be exported as all-day events, with the original time in the description."},
+        JP: {device:"追加する端末",fallback:"ファイルを開けない場合",title:"予定を書き出す",subtitle:"期間を選んでカレンダーに追加できます。",month:"1か月",range:"期間",all:"すべて",from:"開始月",to:"終了月",one:"書き出す月",close:"閉じる",download:"カレンダーファイルを保存",share:"共有して追加",help:"カレンダーへの追加方法",count:n=>`${n}件の予定`,empty:"この期間に予定はありません。",invalid:"開始月と終了月を確認してください。",loading:"予定を読み込み中…",failed:"読み込めませんでした。閉じて再度お試しください。",partial:"一部の予定を読み込めませんでした。取得済みの予定だけを含みます。",warning:"すべて、または大量の予定を追加すると、カレンダーが見づらくなり処理に時間がかかる場合があります。",confirm:"選択した予定をすべて書き出します。",note:"読み込み済みの予定が対象です。韓国時間基準。時間未定は終日予定になります。自動更新はされません。再度取り込むと重複する場合があります。",galaxy:"Galaxy：マイファイルで保存した .ics を開き、カレンダーの取り込み画面で追加を確認してください。アプリのバージョンによって直接開けない場合があります。",iphone:"iPhone：共有から自分宛てにMailで送り、受信した .ics 添付ファイルを開いて追加できます。共有先にカレンダーがない場合はこの方法を使ってください。",desktop:"直接開けない場合は、PCのGoogleカレンダーに取り込み、スマートフォンのカレンダーで同じGoogleアカウントを同期してください。",saved:"保存を開始しました。ファイルを開いて追加を完了してください。",shared:"ファイルを共有しました。選択したアプリで追加を完了してください。",shareFail:"共有できません。ファイルを保存してください。",cancelled:"共有をキャンセルしました。",error:"ファイルを作成できませんでした。再度お試しください。",unknown:"時間未定",untimed:"一部の時間形式を読み取れないため終日予定として書き出します。元の時間は説明に残します。"}
+      };
+      function _sxText() { return _SCHEDULE_EXPORT_TEXT[window._curLang] || _SCHEDULE_EXPORT_TEXT.KR; }
+      function _sxValidDate(value) {
+        if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
+        const date = new Date(value + "T00:00:00Z");
+        return Number.isFinite(date.getTime()) && date.toISOString().slice(0,10) === value;
+      }
+      function _sxEvents(mode, from, to) {
+        if (!["month","range","all"].includes(mode)) return null;
+        if (mode !== "all" && (!/^\d{4}-(0[1-9]|1[0-2])$/.test(from) || !/^\d{4}-(0[1-9]|1[0-2])$/.test(to) || from > to)) return null;
+        const seen = new Set();
+        return SCHEDULE_DATA.filter(ev => {
+          if (!ev || !_sxValidDate(ev.date) || !String(ev.title || "").trim()) return false;
+          const month = ev.date.slice(0,7);
+          if (mode !== "all" && (month < from || month > (mode === "month" ? from : to))) return false;
+          const key = JSON.stringify([ev.date,ev.time || "",ev.title,ev.type || ""]);
+          if (seen.has(key)) return false;
+          seen.add(key); return true;
+        }).sort((a,b) => a.date.localeCompare(b.date) || (a.time || "").localeCompare(b.time || "") || a.title.localeCompare(b.title));
+      }
+      function _sxTime(value) {
+        return String(value || "").trim().match(/^([01]?\d|2[0-3]):([0-5]\d)(?:\s*[~–—-]\s*([01]?\d|2[0-3]):([0-5]\d))?(?:\s*(?:KST|\(KST\)))?$/i);
+      }
+      function _sxEscape(value) { return String(value ?? "").replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, "").replace(/\\/g,"\\\\").replace(/\r\n|\r|\n/g,"\\n").replace(/;/g,"\\;").replace(/,/g,"\\,"); }
+      function _sxFold(line) {
+        const encoder = new TextEncoder(); let result = "", size = 0;
+        for (const char of line) {
+          const bytes = encoder.encode(char).length;
+          if (size + bytes > 75) { result += "\r\n "; size = 1; }
+          result += char; size += bytes;
+        }
+        return result;
+      }
+      function _sxUid(ev) {
+        const key = JSON.stringify([ev.date,ev.time || "",ev.title,ev.type || ""]);
+        let a = 2166136261, b = 2246822519;
+        for (const c of new TextEncoder().encode(key)) { a = Math.imul(a ^ c,16777619); b = Math.imul(b ^ c,3266489917); }
+        return (a >>> 0).toString(16).padStart(8,"0") + (b >>> 0).toString(16).padStart(8,"0") + "@schedule.scene-flix";
+      }
+      function _sxStamp(date) { return date.toISOString().replace(/[-:]/g,"").replace(/\.\d{3}Z$/,"Z"); }
+      function _sxIcs(events, now = new Date()) {
+        const lines = ["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//SCENE-FLIX//Schedule//KO","CALSCALE:GREGORIAN","X-WR-CALNAME:RESCENE · SCENE-FLIX"];
+        for (const ev of events) {
+          if (!_sxValidDate(ev.date)) throw new Error("Invalid date");
+          lines.push("BEGIN:VEVENT","UID:" + _sxUid(ev),"DTSTAMP:" + _sxStamp(now));
+          const time = _sxTime(ev.time);
+          if (time) {
+            const start = new Date(ev.date + "T" + time[1].padStart(2,"0") + ":" + time[2] + ":00+09:00");
+            lines.push("DTSTART:" + _sxStamp(start));
+            if (time[3]) {
+              let end = new Date(ev.date + "T" + time[3].padStart(2,"0") + ":" + time[4] + ":00+09:00");
+              if (end < start) end = new Date(end.getTime() + 86400000);
+              if (end > start) lines.push("DTEND:" + _sxStamp(end));
+            }
+          } else {
+            lines.push("DTSTART;VALUE=DATE:" + ev.date.replace(/-/g,""));
+            lines.push("DTEND;VALUE=DATE:" + new Date(new Date(ev.date + "T00:00:00Z").getTime() + 86400000).toISOString().slice(0,10).replace(/-/g,""));
+          }
+          const description = [ev.note,ev.time ? "시간(KST): " + ev.time : "시간 미정", "SCENE-FLIX · 내보낸 일정은 자동 갱신되지 않습니다."].filter(Boolean).join("\n");
+          lines.push("SUMMARY:" + _sxEscape(ev.title),"DESCRIPTION:" + _sxEscape(description));
+          const link = _safeHttpUrl(ev.link || "");
+          if (link && !/[\r\n]/.test(link)) lines.push("URL:" + link);
+          if (ev.location) lines.push("LOCATION:" + _sxEscape(ev.location));
+          lines.push("TRANSP:TRANSPARENT","END:VEVENT");
+        }
+        lines.push("END:VCALENDAR");
+        return lines.map(_sxFold).join("\r\n") + "\r\n";
+      }
+      let _sxBusy = false;
+      function _sxSelection() {
+        const mode = document.querySelector('#scheduleExportDialog input[name="sx-mode"]:checked')?.value || "month";
+        const from = document.getElementById("sx-from").value;
+        const to = mode === "month" ? from : document.getElementById("sx-to").value;
+        return { mode,from,to,events:_sxEvents(mode,from,to) };
+      }
+      function refreshScheduleExport() {
+        const dialog = document.getElementById("scheduleExportDialog");
+        if (!dialog?.open) return;
+        const t = _sxText(), s = _sxSelection();
+        const device = dialog.querySelector('input[name="sx-device"]:checked')?.value || "galaxy";
+        document.getElementById("sx-device-guide").textContent = t[device];
+        document.getElementById("sx-fields").hidden = s.mode === "all";
+        document.getElementById("sx-end-label").hidden = s.mode !== "range";
+        document.getElementById("sx-start-label").textContent = s.mode === "month" ? t.one : t.from;
+        const count = s.events?.length || 0;
+        const bulk = s.mode === "all" || count >= 100;
+        document.getElementById("sx-confirm-wrap").hidden = !bulk;
+        const warnings = [];
+        if (bulk) warnings.push(t.warning);
+        if (_scheduleState === "partial") warnings.push(t.partial);
+        if (s.events?.some(ev => ev.time && !_sxTime(ev.time))) warnings.push(t.untimed);
+        const warning = document.getElementById("sx-warning"); warning.textContent = warnings.join(" "); warning.hidden = !warnings.length;
+        const loading = _scheduleBusy || _scheduleState === "loading";
+        const failed = _scheduleState === "failed";
+        const summary = document.getElementById("sx-summary");
+        summary.textContent = loading ? t.loading : failed ? t.failed : !s.events ? t.invalid : !count ? t.empty : t.count(count) + " · " + s.events[0].date + " — " + s.events[count-1].date;
+        const disabled = loading || failed || !count || _sxBusy || (bulk && !document.getElementById("sx-confirm").checked);
+        for (const id of ["sx-download","sx-share"]) document.getElementById(id).disabled = disabled;
+      }
+      function openScheduleExport() {
+        const t = _sxText(), dialog = document.getElementById("scheduleExportDialog");
+        if (dialog.open) return;
+        dialog.querySelectorAll("[data-sx]").forEach(el => el.textContent = t[el.dataset.sx]);
+        document.getElementById("sx-close").setAttribute("aria-label",t.close);
+        const month = String(_calYear).padStart(4,"0") + "-" + String(_calMonth+1).padStart(2,"0");
+        document.getElementById("sx-from").value = month; document.getElementById("sx-to").value = month;
+        dialog.querySelector('input[value="month"]').checked = true;
+        const ios = /iPhone|iPad|iPod/.test(navigator.userAgent || "") || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+        dialog.querySelector('input[name="sx-device"][value="' + (ios ? "iphone" : "galaxy") + '"]').checked = true;
+        document.getElementById("sx-confirm").checked = false;
+        document.getElementById("sx-status").textContent = "";
+        let canShare = false;
+        try { canShare = !!navigator.share && !!navigator.canShare?.({files:[new File(["BEGIN:VCALENDAR\r\nVERSION:2.0\r\nEND:VCALENDAR\r\n"],"schedule.ics",{type:"text/calendar;charset=utf-8"})]}); } catch {}
+        document.getElementById("sx-share").hidden = !canShare;
+        document.getElementById("sx-download").classList.toggle("sx-primary", !canShare);
+        dialog.showModal(); refreshScheduleExport();
+        if (!_scheduleBusy && _scheduleState !== "ready") loadScheduleJson(true).then(refreshScheduleExport).catch(refreshScheduleExport);
+      }
+      function _sxFile(selection) {
+        const name = "SCENE-FLIX-" + (selection.mode === "all" ? "all" : selection.from + (selection.mode === "range" ? "_" + selection.to : "")) + ".ics";
+        return new File([_sxIcs(selection.events)],name,{type:"text/calendar;charset=utf-8"});
+      }
+      async function exportScheduleFile(share) {
+        if (_sxBusy) return;
+        refreshScheduleExport();
+        if (document.getElementById(share ? "sx-share" : "sx-download").disabled) return;
+        const t = _sxText(), status = document.getElementById("sx-status");
+        _sxBusy = true; refreshScheduleExport();
+        try {
+          const file = _sxFile(_sxSelection());
+          if (share) {
+            if (!navigator.canShare?.({files:[file]}) || !navigator.share) { status.textContent = t.shareFail; return; }
+            await navigator.share({files:[file]}); status.textContent = t.shared;
+          } else {
+            const url = URL.createObjectURL(file), a = document.createElement("a");
+            a.href = url; a.download = file.name; document.body.append(a); a.click(); a.remove();
+            setTimeout(() => URL.revokeObjectURL(url),60000); status.textContent = t.saved;
+          }
+        } catch (error) { status.textContent = error.name === "AbortError" ? t.cancelled : share ? t.shareFail : t.error; }
+        finally { _sxBusy = false; refreshScheduleExport(); }
+      }
+      document.getElementById("scheduleExportDialog").addEventListener("change",event => {
+        if (event.target.name === "sx-mode" || ["sx-from","sx-to"].includes(event.target.id)) document.getElementById("sx-confirm").checked = false;
+        document.getElementById("sx-status").textContent = ""; refreshScheduleExport();
+      });
+      document.getElementById("scheduleExportDialog").addEventListener("close",() => document.getElementById("scheduleExportBtn").focus());
+
       const SCHED_TYPE_COLOR = {
         broadcast: "var(--c-sched-broadcast)",
         radio: "var(--c-sched-radio)",
@@ -26473,6 +26751,7 @@
         return map;
       }
       function renderCalendar() {
+        document.getElementById("scheduleExportLabel").textContent = _sxText().title;
         if (_calYmOpen) closeCalYmPicker();
         const lang = window._curLang || "KR";
         const mNames = _CAL_MONTH_NAMES[lang] || _CAL_MONTH_NAMES.KR;
@@ -27374,7 +27653,7 @@
         }
       });
       document.addEventListener("keydown", (e) => {
-        if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey) return;
+        if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey || document.getElementById("scheduleExportDialog").open) return;
         const a = document.activeElement;
         if (
           a &&
