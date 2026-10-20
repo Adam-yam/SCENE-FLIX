@@ -23497,17 +23497,23 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
         const connection = navigator.connection;
         const saveData = connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType);
         const sizes = "auto, (max-width: 700px) calc((100vw - 44px) / 2), (min-width: 1824px) 286px, calc((100vw - 394px) / 5)";
-        const responsive = saveData ? "" : ' srcset="' + base + 'mqdefault.jpg 320w, ' + base + 'hqdefault.jpg 480w, ' + base + 'sddefault.jpg 640w" sizes="' + sizes + '"';
-        return 'src="' + base + 'mqdefault.jpg"' + responsive + ' alt="" width="320" height="180" loading="lazy" decoding="async" onerror="_videoThumbFallback(this)"';
+        const desktop = window.matchMedia("(min-width: 701px)").matches;
+        const candidates = desktop
+          ? base + 'hqdefault.jpg 480w, ' + base + 'sddefault.jpg 640w, ' + base + 'maxresdefault.jpg 1280w'
+          : base + 'mqdefault.jpg 320w, ' + base + 'hqdefault.jpg 480w, ' + base + 'sddefault.jpg 640w';
+        const responsive = saveData ? "" : ' srcset="' + candidates + '" sizes="' + sizes + '"';
+        const initial = desktop && !saveData ? "hqdefault" : "mqdefault";
+        return 'src="' + base + initial + '.jpg"' + responsive + ' alt="" width="320" height="180" loading="lazy" decoding="async" onload="if(this.naturalWidth<=120)_videoThumbFallback(this)" onerror="_videoThumbFallback(this)"';
       }
       function _videoThumbFallback(img) {
         const current = img.currentSrc || img.src;
-        const match = current.match(/^(https:\/\/img\.youtube\.com\/vi\/[^/]+\/)(mqdefault|hqdefault|sddefault)\.jpg$/);
+        const match = current.match(/^(https:\/\/img\.youtube\.com\/vi\/[^/]+\/)(mqdefault|hqdefault|sddefault|maxresdefault)\.jpg$/);
         if (!match) { img.onerror = null; img.style.visibility = "hidden"; return; }
         const failed = new Set((img.dataset.thumbFailed || "").split(",").filter(Boolean));
         failed.add(match[2]);
         img.dataset.thumbFailed = [...failed].join(",");
-        const next = ["hqdefault", "mqdefault"].find(name => !failed.has(name));
+        const qualities = ["maxresdefault", "sddefault", "hqdefault", "mqdefault"];
+        const next = qualities.slice(qualities.indexOf(match[2]) + 1).find(name => !failed.has(name));
         img.removeAttribute("srcset");
         img.removeAttribute("sizes");
         if (!next) { img.onerror = null; img.style.visibility = "hidden"; return; }
