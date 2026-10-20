@@ -23513,6 +23513,25 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
         if (!next) { img.onerror = null; img.style.visibility = "hidden"; return; }
         img.src = match[1] + next + ".jpg";
       }
+      function _shortsThumbAttributes(vid) {
+        const connection = navigator.connection;
+        const saveData = connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType);
+        const quality = saveData ? "sddefault" : "maxresdefault";
+        const base = "https://img.youtube.com/vi/" + encodeURIComponent(vid) + "/";
+        return 'src="' + base + quality + '.jpg" alt="" loading="lazy" decoding="async" onload="if(this.naturalWidth<=120)_shortsThumbFallback(this)" onerror="_shortsThumbFallback(this)"';
+      }
+      function _shortsThumbFallback(img) {
+        const match = (img.currentSrc || img.src).match(/^(https:\/\/img\.youtube\.com\/vi\/[^/]+\/)(maxresdefault|sddefault|hqdefault|mqdefault)\.jpg$/);
+        const qualities = ["maxresdefault", "sddefault", "hqdefault", "mqdefault"];
+        const next = match ? qualities[qualities.indexOf(match[2]) + 1] : null;
+        if (!next) {
+          img.onerror = null;
+          img.onload = null;
+          img.style.visibility = "hidden";
+          return;
+        }
+        img.src = match[1] + next + ".jpg";
+      }
       function buildThumbHtml(vid, badgeHtml, watched) {
         const watchedLabel = getCurrentT().watched_badge || "시청함";
         return `<div class="thumb">
@@ -26223,7 +26242,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
           card.style.animationDelay = delay;
           card.dataset.vid = item.vid;
           card.innerHTML = `<div class="shorts-thumb-wrap">
-        <img src="https://img.youtube.com/vi/${item.vid}/hqdefault.jpg" alt="" loading="lazy" decoding="async" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/${item.vid}/mqdefault.jpg';">
+        <img ${_shortsThumbAttributes(item.vid)}>
         <div class="shorts-play-ring"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></div>
         ${label ? `<span class="shorts-channel-badge">${_kwHl(label, hlq)}</span>` : ""}
       </div>
