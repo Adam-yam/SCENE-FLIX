@@ -15384,6 +15384,31 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
       "date": "2026.06.05 17:00"
     },
     {
+      "vid": "jzd8lOsey7A",
+      "url": "https://youtu.be/jzd8lOsey7A",
+      "date": "2022.02.22 12:00"
+    },
+    {
+      "vid": "bAg0k_TPrUU",
+      "url": "https://youtu.be/bAg0k_TPrUU",
+      "date": "2021.12.05 23:00"
+    },
+    {
+      "vid": "Xq6msgLCGYo",
+      "url": "https://youtu.be/Xq6msgLCGYo",
+      "date": "2022.02.21 01:32"
+    },
+    {
+      "vid": "j6Eg8DYJBNE",
+      "url": "https://youtu.be/j6Eg8DYJBNE",
+      "date": "2021.12.06 01:43"
+    },
+    {
+      "vid": "ZuyquroZWZU",
+      "url": "https://youtu.be/ZuyquroZWZU",
+      "date": "2021.12.05 21:36"
+    },
+    {
       "vid": "x99pl4ngJo4",
       "url": "https://youtu.be/x99pl4ngJo4",
       "date": "2026.06.09 18:15"
@@ -25872,9 +25897,9 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
             b.textContent.trim();
         });
         const sources = [
-          { path: "./data/shorts.json", channel: "" },
+          { path: "./data/shorts/shorts.json", channel: "" },
           ...keys.filter(channel => !["official", "woni"].includes(channel)).map((channel) => ({
-            path: "./data/" + channel + "-shorts.json",
+            path: "./data/shorts/" + channel + "-shorts.json",
             channel,
           })),
         ];
