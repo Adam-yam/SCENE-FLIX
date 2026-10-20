@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-10-20T11:14:32.116677+09:00",
+  "updatedAt": "2026-10-20T12:06:34.492846+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -18,22 +18,22 @@
       "source": "https://m2.melon.com/m6/chart/ent/songChartList.json",
       "chartLabel": "TOP100",
       "sourceKind": "first_party",
-      "sourceUpdatedAt": "2026-10-20T11:00:00+09:00",
+      "sourceUpdatedAt": "2026-10-20T12:00:00+09:00",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-10-20T11:14:32.116677+09:00",
-      "lastAttemptAt": "2026-10-20T11:14:32.116677+09:00",
+      "lastSuccessAt": "2026-10-20T12:06:34.492846+09:00",
+      "lastAttemptAt": "2026-10-20T12:06:34.492846+09:00",
       "reason": null
     },
     "genie": {
       "source": "https://app.genie.co.kr/chart/j_RealTimeRankSongList.json?pg=1&pgsize=100",
       "chartLabel": "실시간 TOP200",
       "sourceKind": "first_party",
-      "sourcePeriod": "11:00",
+      "sourcePeriod": "12:00",
       "status": "ok",
       "freshness": "unknown",
-      "lastSuccessAt": "2026-10-20T11:14:32.116677+09:00",
-      "lastAttemptAt": "2026-10-20T11:14:32.116677+09:00",
+      "lastSuccessAt": "2026-10-20T12:06:34.492846+09:00",
+      "lastAttemptAt": "2026-10-20T12:06:34.492846+09:00",
       "reason": null
     },
     "vibe": {
@@ -44,30 +44,30 @@
       "sourcePeriod": "10월 20일 오전 7시 업데이트",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-10-20T11:14:32.116677+09:00",
-      "lastAttemptAt": "2026-10-20T11:14:32.116677+09:00",
+      "lastSuccessAt": "2026-10-20T12:06:34.492846+09:00",
+      "lastAttemptAt": "2026-10-20T12:06:34.492846+09:00",
       "reason": null
     },
     "bugs": {
       "source": "https://m.bugs.co.kr/api/getChartTrack",
       "chartLabel": "실시간 TOP100",
       "sourceKind": "first_party",
-      "sourceUpdatedAt": "2026-10-20T11:00:00+09:00",
+      "sourceUpdatedAt": "2026-10-20T12:00:00+09:00",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-10-20T11:14:32.116677+09:00",
-      "lastAttemptAt": "2026-10-20T11:14:32.116677+09:00",
+      "lastSuccessAt": "2026-10-20T12:06:34.492846+09:00",
+      "lastAttemptAt": "2026-10-20T12:06:34.492846+09:00",
       "reason": null
     },
     "flo": {
       "source": "https://api.music-flo.com/display/v1/browser/chart/1/list?mixYn=N",
       "chartLabel": "24시간 집계 TOP100",
       "sourceKind": "first_party",
-      "sourcePeriod": "24시간 집계 (11시 기준)",
+      "sourcePeriod": "24시간 집계 (12시 기준)",
       "status": "ok",
       "freshness": "unknown",
-      "lastSuccessAt": "2026-10-20T11:14:32.116677+09:00",
-      "lastAttemptAt": "2026-10-20T11:14:32.116677+09:00",
+      "lastSuccessAt": "2026-10-20T12:06:34.492846+09:00",
+      "lastAttemptAt": "2026-10-20T12:06:34.492846+09:00",
       "reason": null
     },
     "youtube_music": {
@@ -79,8 +79,8 @@
       "sourceDatePrecision": "date",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-10-20T11:14:32.116677+09:00",
-      "lastAttemptAt": "2026-10-20T11:14:32.116677+09:00",
+      "lastSuccessAt": "2026-10-20T12:06:34.492846+09:00",
+      "lastAttemptAt": "2026-10-20T12:06:34.492846+09:00",
       "reason": null
     },
     "spotify": {
@@ -93,21 +93,21 @@
       "verification": "not_compared_with_official",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-10-20T11:14:32.116677+09:00",
-      "lastAttemptAt": "2026-10-20T11:14:32.116677+09:00",
+      "lastSuccessAt": "2026-10-20T12:06:34.492846+09:00",
+      "lastAttemptAt": "2026-10-20T12:06:34.492846+09:00",
       "reason": null
     },
     "apple_music": {
       "source": "https://rss.applemarketingtools.com/api/v2/kr/music/most-played/100/songs.json",
       "chartLabel": "한국 인기곡 TOP100",
       "sourceKind": "first_party",
-      "sourceUpdatedAt": "2026-10-20T02:14:56+00:00",
+      "sourceUpdatedAt": "2026-10-20T03:06:40+00:00",
       "sourceRevision": "af411b76acfe5e9677095d9c367109742b41791947c6248b07bda73be4531cfb",
       "previousRankBasis": "previous_distinct_successful_snapshot",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-10-20T11:14:32.116677+09:00",
-      "lastAttemptAt": "2026-10-20T11:14:32.116677+09:00",
+      "lastSuccessAt": "2026-10-20T12:06:34.492846+09:00",
+      "lastAttemptAt": "2026-10-20T12:06:34.492846+09:00",
       "reason": null
     },
     "melon_daily": {
@@ -119,8 +119,8 @@
       "sourceDatePrecision": "date",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-10-20T11:14:32.116677+09:00",
-      "lastAttemptAt": "2026-10-20T11:14:32.116677+09:00",
+      "lastSuccessAt": "2026-10-20T12:06:34.492846+09:00",
+      "lastAttemptAt": "2026-10-20T12:06:34.492846+09:00",
       "reason": null
     },
     "genie_daily": {
@@ -132,21 +132,21 @@
       "sourceDatePrecision": "date",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-10-20T11:14:32.116677+09:00",
-      "lastAttemptAt": "2026-10-20T11:14:32.116677+09:00",
+      "lastSuccessAt": "2026-10-20T12:06:34.492846+09:00",
+      "lastAttemptAt": "2026-10-20T12:06:34.492846+09:00",
       "reason": null
     },
     "bugs_daily": {
       "source": "https://music.bugs.co.kr/chart/track/day/total",
       "chartLabel": "일간 TOP100",
       "sourceKind": "first_party",
-      "sourceUpdatedAt": "2026-10-18T00:00:00+09:00",
-      "sourcePeriod": "2026.10.18",
+      "sourceUpdatedAt": "2026-10-19T00:00:00+09:00",
+      "sourcePeriod": "2026.10.19",
       "sourceDatePrecision": "date",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-10-20T11:14:32.116677+09:00",
-      "lastAttemptAt": "2026-10-20T11:14:32.116677+09:00",
+      "lastSuccessAt": "2026-10-20T12:06:34.492846+09:00",
+      "lastAttemptAt": "2026-10-20T12:06:34.492846+09:00",
       "reason": null
     }
   },
@@ -217,8 +217,8 @@
           "isReentry": false
         },
         "bugs_daily": {
-          "rank": 5,
-          "previousRank": 6,
+          "rank": 6,
+          "previousRank": 5,
           "isNew": false,
           "isReentry": false
         }
@@ -236,7 +236,7 @@
           "isReentry": false
         },
         "genie": {
-          "rank": 11,
+          "rank": 12,
           "previousRank": 11,
           "isNew": null,
           "isReentry": false
@@ -248,8 +248,8 @@
           "isReentry": false
         },
         "bugs": {
-          "rank": 17,
-          "previousRank": 16,
+          "rank": 13,
+          "previousRank": 17,
           "isNew": false,
           "isReentry": false
         },
@@ -285,13 +285,13 @@
         },
         "genie_daily": {
           "rank": 11,
-          "previousRank": 10,
+          "previousRank": 11,
           "isNew": false,
           "isReentry": false
         },
         "bugs_daily": {
-          "rank": 10,
-          "previousRank": 12,
+          "rank": 16,
+          "previousRank": 10,
           "isNew": false,
           "isReentry": false
         }
@@ -303,7 +303,7 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/137/88/545/13788545_20260707111659_500.jpg?3ef0f9e6af1ea09e3f919c7cb69065ed/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 7,
+          "rank": 8,
           "previousRank": 7,
           "isNew": false,
           "isReentry": false
@@ -321,8 +321,8 @@
           "isReentry": false
         },
         "bugs": {
-          "rank": 27,
-          "previousRank": 36,
+          "rank": 43,
+          "previousRank": 27,
           "isNew": false,
           "isReentry": false
         },
@@ -357,14 +357,14 @@
           "isReentry": false
         },
         "genie_daily": {
-          "rank": 9,
+          "rank": 10,
           "previousRank": 9,
           "isNew": false,
           "isReentry": false
         },
         "bugs_daily": {
-          "rank": 25,
-          "previousRank": 23,
+          "rank": 29,
+          "previousRank": 25,
           "isNew": false,
           "isReentry": false
         }
@@ -376,26 +376,26 @@
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
-          "rank": 84,
-          "previousRank": 78,
+          "rank": 83,
+          "previousRank": 84,
           "isNew": false,
           "isReentry": false
         },
         "genie": {
-          "rank": 124,
-          "previousRank": 101,
+          "rank": 113,
+          "previousRank": 124,
           "isNew": null,
           "isReentry": false
         },
         "bugs": {
-          "rank": 32,
-          "previousRank": 27,
+          "rank": 26,
+          "previousRank": 32,
           "isNew": false,
           "isReentry": false
         },
         "flo": {
           "rank": 65,
-          "previousRank": 64,
+          "previousRank": 65,
           "isNew": false,
           "isReentry": false
         },
@@ -424,14 +424,14 @@
           "isReentry": false
         },
         "genie_daily": {
-          "rank": 94,
-          "previousRank": 97,
+          "rank": 95,
+          "previousRank": 94,
           "isNew": false,
           "isReentry": false
         },
         "bugs_daily": {
           "rank": 30,
-          "previousRank": 33,
+          "previousRank": 30,
           "isNew": false,
           "isReentry": false
         }
@@ -444,25 +444,25 @@
       "ranks": {
         "melon": {
           "rank": 50,
-          "previousRank": 51,
+          "previousRank": 50,
           "isNew": false,
           "isReentry": false
         },
         "genie": {
-          "rank": 181,
-          "previousRank": 141,
+          "rank": 174,
+          "previousRank": 181,
           "isNew": null,
           "isReentry": false
         },
         "bugs": {
-          "rank": 46,
-          "previousRank": 49,
+          "rank": 45,
+          "previousRank": 46,
           "isNew": false,
           "isReentry": false
         },
         "flo": {
           "rank": 94,
-          "previousRank": 92,
+          "previousRank": 94,
           "isNew": false,
           "isReentry": false
         },
@@ -485,14 +485,14 @@
           "isReentry": false
         },
         "genie_daily": {
-          "rank": 134,
-          "previousRank": 138,
+          "rank": 133,
+          "previousRank": 134,
           "isNew": false,
           "isReentry": false
         },
         "bugs_daily": {
-          "rank": 51,
-          "previousRank": 58,
+          "rank": 55,
+          "previousRank": 51,
           "isNew": false,
           "isReentry": false
         }
