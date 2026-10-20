@@ -1,0 +1,885 @@
+{
+  "updated": "2026-08-04T06:32:38Z",
+  "events": [
+    {
+      "date": "2025-01-03",
+      "time": "19:00",
+      "title": "[SCENEDROME] 대면 팬사인회 by SOUNDWAVE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-01-09",
+      "time": "20:00",
+      "title": "[SCENEDROME] 대면 팬사인회 by MAKESTAR",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-01-11",
+      "time": "22:00",
+      "title": "SBS 파워FM <배성재의 텐>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-01-17",
+      "time": "03:00",
+      "title": "[SCENEDROME] 영상통화 팬사인회 by fanplee",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-01-19",
+      "time": "15:00",
+      "title": "[SCENEDROME] 대면 팬사인회 by JUMP UP",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-01-19",
+      "time": "19:30",
+      "title": "[SCENEDROME] 대면 팬사인회 by fanplee",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-01-24",
+      "time": "20:00",
+      "title": "[SCENEDROME] 대면 팬사인회 by SOUNDWAVE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-01-25",
+      "time": "15:00",
+      "title": "[SCENEDROME] 대면 팬사인회 by MUSICART",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-01-26",
+      "time": "15:00",
+      "title": "[SCENEDROME] 대면 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-03",
+      "time": "16:50",
+      "title": "SBS <박소현의 러브게임>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-05",
+      "time": "19:00",
+      "title": "RESCENE (리센느) 2nd Mini Album [Glow Up] SHOWCASE",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-06",
+      "time": "13:20",
+      "title": "Mnet <M COUNTDOWN> KPOP Chart Show 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-06",
+      "time": "18:00",
+      "title": "Mnet <M COUNTDOWN>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-07",
+      "time": "14:50",
+      "title": "KBS2 <뮤직뱅크> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-07",
+      "time": "17:10",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-07",
+      "time": "20:00",
+      "title": "[Glow Up] 포토 이벤트 by INSIDE RECORD",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-07",
+      "time": "20:00",
+      "title": "[Glow Up] 영상통화 팬사인회 by INSIDE RECORD",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-07",
+      "time": "20:00",
+      "title": "[Glow Up] 대면 팬사인회 by INSIDE RECORD",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-08",
+      "time": "15:20",
+      "title": "MBC <쇼! 음악중심>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-09",
+      "time": "15:20",
+      "title": "SBS <인기가요>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-11",
+      "time": "13:00",
+      "title": "Arirang TV <After School Club>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-11",
+      "time": "07:00",
+      "title": "MBC M <쇼! 챔피언> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-12",
+      "time": "12:20",
+      "title": "MBC M <쇼! 챔피언> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-12",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-13",
+      "time": "12:00",
+      "title": "MBC <친한친구, 이현입니다>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-13",
+      "time": "18:00",
+      "title": "Mnet <M COUNTDOWN>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-14",
+      "time": "12:40",
+      "title": "KBS2 <뮤직뱅크> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-14",
+      "time": "17:10",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-14",
+      "time": "20:00",
+      "title": "[Glow Up] 대면 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-15",
+      "time": "19:30",
+      "title": "[Glow Up] 대면 팬사인회 by MAKESTAR",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-16",
+      "time": "19:00",
+      "title": "[Glow Up] 대면 팬사인회 by APPLE MUSIC",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-17",
+      "time": "21:00",
+      "title": "MBC <아이돌 라디오>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-20",
+      "time": "18:00",
+      "title": "Mnet <M COUNTDOWN>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-21",
+      "time": "14:20",
+      "title": "KBS2 <뮤직뱅크> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-21",
+      "time": "17:10",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-22",
+      "time": "15:20",
+      "title": "MBC <쇼! 음악중심>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-22",
+      "time": "19:00",
+      "title": "[Glow Up] 대면 팬사인회 by EVERLINE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-23",
+      "time": "15:20",
+      "title": "SBS <인기가요>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-23",
+      "time": "19:00",
+      "title": "[Glow Up] 대면 팬사인회 by INSIDE RECORD",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-24",
+      "time": "12:00",
+      "title": "Arirang RADIO <K-POPPIN'>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-26",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-28",
+      "time": "17:10",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-02-28",
+      "time": "20:00",
+      "title": "[Glow Up] 영상통화 팬사인회 by MILLION MUSIC",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-01",
+      "time": "03:20",
+      "title": "SBS <인기가요>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-04",
+      "time": "18:00",
+      "title": "SBS M <더쇼>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-05",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-07",
+      "time": "20:00",
+      "title": "[Glow Up] 대면 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-08",
+      "time": "13:00",
+      "title": "[Glow Up] 대면 팬사인회 by MAKESTAR",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-12",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-15",
+      "time": "15:00",
+      "title": "[Glow Up] 대면 팬사인회 by APPLE MUSIC",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-16",
+      "time": "15:00",
+      "title": "[Glow Up] 대면 팬사인회 by INSIDE RECORD",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-17",
+      "time": "20:00",
+      "title": "한남대학교 축제",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-22",
+      "time": "19:00",
+      "title": "[Glow Up] 대면 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-23",
+      "time": "14:00",
+      "title": "[Glow Up] 대면 팬사인회 by EVERLINE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-29",
+      "time": "13:00",
+      "title": "[Glow Up] 대면 팬사인회 by MAKESTAR",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-30",
+      "time": "15:00",
+      "title": "[Glow Up] 대면 팬사인회 by MILLIONMUSIC",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-03-31",
+      "time": "22:40",
+      "title": "EBS FM 보이는 라디오 <경청>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-04-05",
+      "time": "16:00",
+      "title": "[Glow Up] 대면 팬사인회 by ARAISE",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-04-13",
+      "time": "14:00",
+      "title": "[Glow Up] 대면 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-04-16",
+      "time": "13:00",
+      "title": "KBS <이은지의 가요광장>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-04-17",
+      "time": "19:00",
+      "title": "포스코 상생 콘서트",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-04-19",
+      "time": "12:00",
+      "title": "[Glow Up] 대면 팬사인회 by MILLIONMUSIC in China",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-04-20",
+      "time": "14:00",
+      "title": "키움히어로즈 시구/시타/공연",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-04-26",
+      "time": "10:00",
+      "title": "2025 거제 정원산업박람회",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-04-26",
+      "time": "19:00",
+      "title": "포스코 상생 콘서트",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-04-27",
+      "time": "20:00",
+      "title": "[Glow Up] 일본 영상통화 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-04-28",
+      "time": "20:00",
+      "title": "[Glow Up] 일본 영상통화 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-01",
+      "time": "14:00",
+      "title": "[Glow Up] 영상통화 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-01",
+      "time": "15:40",
+      "title": "[Glow Up] 중국 영상통화 팬사인회 by itta",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-02",
+      "time": "17:30",
+      "title": "유성온천 문화축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-04",
+      "time": "16:30",
+      "title": "안산그리너스FC 시축/공연",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-06",
+      "time": "13:00",
+      "title": "[Glow Up] 대면/영상통화 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-09",
+      "time": "",
+      "title": "KCON JAPAN 2025",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-10",
+      "time": "",
+      "title": "KCON JAPAN 2025",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-11",
+      "time": "",
+      "title": "KCON JAPAN 2025",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-13",
+      "time": "21:00",
+      "title": "Seoul National University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-14",
+      "time": "15:50",
+      "title": "Gachon University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-14",
+      "time": "21:00",
+      "title": "Halla University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-15",
+      "time": "21:00",
+      "title": "National Military University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-16",
+      "time": "19:20",
+      "title": "Sogang University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-16",
+      "time": "21:00",
+      "title": "Oriental Future University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-18",
+      "time": "14:30",
+      "title": "Celebration of Coming-of-Age Day in Seoul",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-18",
+      "time": "18:00",
+      "title": "[Glow Up] 대면 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-19",
+      "time": "20:00",
+      "title": "Woosong University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-20",
+      "time": "17:30",
+      "title": "Sungkyul University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-21",
+      "time": "17:30",
+      "title": "Korea University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-21",
+      "time": "20:40",
+      "title": "Kookmin University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-22",
+      "time": "20:00",
+      "title": "Sunmoon University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-22",
+      "time": "21:40",
+      "title": "한밭대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-23",
+      "time": "21:00",
+      "title": "Kyungmin University Festival",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-24",
+      "time": "16:30",
+      "title": "2025 경상북도 청소년 페스티벌",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-25",
+      "time": "12:10",
+      "title": "[Glow Up] 중국 영상통화 팬사인회 by itta",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-25",
+      "time": "13:30",
+      "title": "[Glow Up] 대면 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-26",
+      "time": "20:10",
+      "title": "영남대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-27",
+      "time": "19:20",
+      "title": "국립경국대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-28",
+      "time": "19:40",
+      "title": "부산대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-28",
+      "time": "21:10",
+      "title": "동국대학교(경주) 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-29",
+      "time": "19:00",
+      "title": "대구가톨릭대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-05-31",
+      "time": "",
+      "title": "The World Voice HK",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-06-04",
+      "time": "20:00",
+      "title": "목포대학교 축제",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-06-07",
+      "time": "19:00",
+      "title": "2025 고령 뮤직페스티벌",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-06-08",
+      "time": "19:00",
+      "title": "[Glow Up] 공개 대면 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-06-12",
+      "time": "12:00",
+      "title": "OST <밤밤밤> 발매 (남주의 첫날밤을 가져버렸다 OST Part. 1)",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-06-13",
+      "time": "18:30",
+      "title": "KBS WORLD <뮤비드림>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-06-13",
+      "time": "20:00",
+      "title": "[Glow Up] 영상통화 팬사인회 by ITTA",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-06-14",
+      "time": "20:00",
+      "title": "[Glow Up] 대면/영상통화 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-06-20",
+      "time": "18:30",
+      "title": "KBS WORLD <뮤비드림>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-06-22",
+      "time": "17:00",
+      "title": "한밭국악전국대회",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-06-27",
+      "time": "18:30",
+      "title": "KBS WORLD <뮤비드림>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2025-06-27",
+      "time": "20:30",
+      "title": "SBS <배성재의 텐>",
+      "detail": "",
+      "type": "radio",
+      "source": "mnetplus"
+    }
+  ]
+}
