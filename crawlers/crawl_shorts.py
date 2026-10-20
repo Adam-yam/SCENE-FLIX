@@ -25,7 +25,7 @@ SHORTS_CHANNELS = {
     "woni":     "https://www.youtube.com/@helloiamwoninicetomeetyou/shorts",
 }
 
-SHORTS_JSON_PATH = ROOT / "data" / "shorts.json"
+SHORTS_JSON_PATH = ROOT / "data" / "shorts" / "shorts.json"
 YOUTUBE_API_KEY  = os.environ.get("YOUTUBE_API_KEY", "")
 
 
