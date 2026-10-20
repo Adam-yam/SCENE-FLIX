@@ -3,6 +3,10 @@ name: ■ 각 음원 플랫폼 차트 크롤링
 on:
   workflow_dispatch: {}
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   crawl:
     runs-on: ubuntu-latest
@@ -18,7 +22,10 @@ jobs:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install requests pandas lxml
+        run: pip install -r crawlers/requirements.txt
+
+      - name: Test crawlers
+        run: python -m unittest discover -s crawlers/tests -q
 
       - name: Run chart crawler
         run: python crawlers/crawl_chart.py
@@ -29,4 +36,8 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/charts/chart.json
           git diff --staged --quiet || git commit -m "chore: update chart data [skip ci]"
-          git push
+          for attempt in 1 2 3; do
+            git pull --rebase origin "${{ github.ref_name }}" || exit 1
+            if git push; then exit 0; fi
+          done
+          exit 1

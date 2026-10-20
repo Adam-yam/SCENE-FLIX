@@ -1,0 +1,19 @@
+name: Validate site and crawlers
+on:
+  push:
+    paths: ['index.html', 'service-worker.js', 'crawlers/**', 'tests/**', 'data/schedule/**', '.github/workflows/**']
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - run: pip install -r crawlers/requirements.txt
+      - run: python -m unittest discover -s crawlers/tests -q
+      - run: node --check service-worker.js
+      - run: node tests/site.test.cjs
