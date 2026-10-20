@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-20T01:58:28Z",
+  "updated": "2026-10-20T02:16:16Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -13,6 +13,14 @@
       "date": "2026-07-08",
       "time": "04:00",
       "title": "Mnet <M COUNTDOWN> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-09",
+      "time": "08:15",
+      "title": "KBS2 <뮤직뱅크> 사전녹화",
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
@@ -37,14 +45,6 @@
       "date": "2026-07-09",
       "time": "19:50",
       "title": "Mnet  <Check-in! 아이돌 빙고>",
-      "detail": "",
-      "type": "broadcast",
-      "source": "mnetplus"
-    },
-    {
-      "date": "2026-07-09",
-      "time": "08:15",
-      "title": "KBS2 <뮤직뱅크> 사전녹화",
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
@@ -123,6 +123,14 @@
     },
     {
       "date": "2026-07-14",
+      "time": "05:00",
+      "title": "MBC M <쇼! 챔피언> 사전녹화 1",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-14",
       "time": "18:00",
       "title": "SBS M <더 쇼>",
       "detail": "",
@@ -143,14 +151,6 @@
       "title": "KBS <키스 더 라디오>",
       "detail": "",
       "type": "radio",
-      "source": "mnetplus"
-    },
-    {
-      "date": "2026-07-14",
-      "time": "05:00",
-      "title": "MBC M <쇼! 챔피언> 사전녹화 1",
-      "detail": "",
-      "type": "broadcast",
       "source": "mnetplus"
     },
     {
@@ -187,6 +187,14 @@
     },
     {
       "date": "2026-07-17",
+      "time": "08:15",
+      "title": "<쇼음악중심> 사전 녹화(+미니 팬미팅)",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-17",
       "time": "09:10",
       "title": "KBS2 <뮤직뱅크> 사전 녹화",
       "detail": "",
@@ -205,14 +213,6 @@
       "date": "2026-07-17",
       "time": "18:20",
       "title": "KBS WORLD <마이데이트립>",
-      "detail": "",
-      "type": "broadcast",
-      "source": "mnetplus"
-    },
-    {
-      "date": "2026-07-17",
-      "time": "08:15",
-      "title": "<쇼음악중심> 사전 녹화(+미니 팬미팅)",
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
@@ -275,6 +275,14 @@
     },
     {
       "date": "2026-07-25",
+      "time": "04:30",
+      "title": "SBS <인기가요> 사전녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-07-25",
       "time": "12:45",
       "title": "2026 원 유니버스 페스티벌",
       "detail": "",
@@ -287,14 +295,6 @@
       "title": "보령 KBS 슈퍼라이브",
       "detail": "",
       "type": "concert",
-      "source": "mnetplus"
-    },
-    {
-      "date": "2026-07-25",
-      "time": "04:30",
-      "title": "SBS <인기가요> 사전녹화",
-      "detail": "",
-      "type": "broadcast",
       "source": "mnetplus"
     },
     {
@@ -363,18 +363,18 @@
     },
     {
       "date": "2026-08-09",
-      "time": "20:00",
-      "title": "<2026 쿠팡플레이 시리즈> 하프타임 쇼",
-      "detail": "",
-      "type": "event",
-      "source": "mnetplus"
-    },
-    {
-      "date": "2026-08-09",
       "time": "18:30",
       "title": "<2026 쿠팡플레이 시리즈> 프리뷰쇼",
       "detail": "",
       "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "date": "2026-08-09",
+      "time": "20:00",
+      "title": "<2026 쿠팡플레이 시리즈> 하프타임 쇼",
+      "detail": "",
+      "type": "event",
       "source": "mnetplus"
     },
     {
@@ -626,6 +626,7 @@
       "source": "mnetplus"
     },
     {
+      "id": "6a8d885d8e8ebf53edc6a55d",
       "date": "2026-10-01",
       "time": "20:00",
       "title": "계명대학교 축제",
@@ -634,14 +635,16 @@
       "source": "mnetplus"
     },
     {
+      "id": "6a8d889c8e8ebf53edc6a55f",
       "date": "2026-10-01",
-      "time": "21:30",
+      "time": "22:10",
       "title": "대구보건대학교 축제",
       "detail": "",
       "type": "event",
       "source": "mnetplus"
     },
     {
+      "id": "6ac0db6e61092456453dd662",
       "date": "2026-10-02",
       "time": "23:10",
       "title": "SBS <무엇이든 해줄지니 - 비서진>",
@@ -650,22 +653,7 @@
       "source": "mnetplus"
     },
     {
-      "date": "2026-10-03",
-      "time": "",
-      "title": "2026 입크페스티벌",
-      "detail": "",
-      "type": "concert",
-      "source": "mnetplus"
-    },
-    {
-      "date": "2026-10-03",
-      "time": "",
-      "title": "공주 백제문화제",
-      "detail": "",
-      "type": "event",
-      "source": "mnetplus"
-    },
-    {
+      "id": "6a3e81070b7c92615f50c73f",
       "date": "2026-10-03",
       "time": "15:50",
       "title": "2026 입크 페스티벌",
@@ -674,6 +662,7 @@
       "source": "mnetplus"
     },
     {
+      "id": "6a98f6bd4563ce4caf466390",
       "date": "2026-10-03",
       "time": "20:30",
       "title": "제72회 백제문화제",
@@ -682,22 +671,7 @@
       "source": "mnetplus"
     },
     {
-      "date": "2026-10-04",
-      "time": "",
-      "title": "2026 의령 리치리치 페스티벌",
-      "detail": "",
-      "type": "concert",
-      "source": "mnetplus"
-    },
-    {
-      "date": "2026-10-04",
-      "time": "",
-      "title": "제5회 의령 리치리치 페스티벌",
-      "detail": "",
-      "type": "event",
-      "source": "mnetplus"
-    },
-    {
+      "id": "6abeae327cda1f77dc44908f",
       "date": "2026-10-04",
       "time": "",
       "title": "2026 의령 리치리치페스티벌",
@@ -706,14 +680,7 @@
       "source": "mnetplus"
     },
     {
-      "date": "2026-10-09",
-      "time": "",
-      "title": "연수 능허대 문화 축제",
-      "detail": "",
-      "type": "event",
-      "source": "mnetplus"
-    },
-    {
+      "id": "6aa966b78bbf3631c83b8e7f",
       "date": "2026-10-09",
       "time": "20:00",
       "title": "제14회 연수 능허대 문화축제",
@@ -722,6 +689,7 @@
       "source": "mnetplus"
     },
     {
+      "id": "6ac7a5627a5b7f332bf392dc",
       "date": "2026-10-09",
       "time": "20:30",
       "title": "KBS 2TV <해피투게더 - 혼자가 아니어서 좋아>",
@@ -730,22 +698,25 @@
       "source": "mnetplus"
     },
     {
+      "id": "6a98f7a94563ce4caf466391",
       "date": "2026-10-10",
-      "time": "",
+      "time": "20:00",
       "title": "2026 대전 동구동락 축제",
       "detail": "",
       "type": "event",
       "source": "mnetplus"
     },
     {
+      "id": "6a48ce2d2abffc033aa33c91",
       "date": "2026-10-11",
-      "time": "",
+      "time": "16:10",
       "title": "2026 GHOST (경기 한류 OST 뮤직페스티벌)",
       "detail": "",
-      "type": "concert",
+      "type": "event",
       "source": "mnetplus"
     },
     {
+      "id": "6acb95e6447ee70d40cd0eaa",
       "date": "2026-10-11",
       "time": "20:00",
       "title": "SBS 8 뉴스",
@@ -754,6 +725,7 @@
       "source": "mnetplus"
     },
     {
+      "id": "6a4612a67dd960680ac6f9b8",
       "date": "2026-10-17",
       "time": "",
       "title": "NOL FESTIVAL - 고양",
@@ -762,6 +734,7 @@
       "source": "mnetplus"
     },
     {
+      "id": "6a8d89530baf003252ac6227",
       "date": "2026-10-23",
       "time": "",
       "title": "마산대학교 축제",
@@ -770,6 +743,7 @@
       "source": "mnetplus"
     },
     {
+      "id": "6abeaf6f9fce30571f6042d7",
       "date": "2026-10-24",
       "time": "",
       "title": "여기어때 콘서트팩 거제",
@@ -778,14 +752,7 @@
       "source": "mnetplus"
     },
     {
-      "date": "2026-10-31",
-      "time": "",
-      "title": "APEC 정상회의장 기념관 개관식",
-      "detail": "",
-      "type": "event",
-      "source": "mnetplus"
-    },
-    {
+      "id": "6a3e80b31df3183e76dd7b31",
       "date": "2026-10-31",
       "time": "",
       "title": "경주 APEC 정상회의장 기념관 개관식",
@@ -794,6 +761,7 @@
       "source": "mnetplus"
     },
     {
+      "id": "6a3e7e069f69517347795cee",
       "date": "2026-11-07",
       "time": "",
       "title": "2026 KGMA (코리아 그랜드 뮤직 어워즈)",
