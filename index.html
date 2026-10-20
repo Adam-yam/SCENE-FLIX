@@ -25739,7 +25739,16 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
         _scheduleBusy = true;
         _scheduleLastAttempt = Date.now();
         try {
-          const paths = _scheduleHalfFilePaths();
+          let paths;
+          try {
+            const manifest = await _fetchJson("./data/schedule/manifest.json");
+            if (!Array.isArray(manifest?.files) || !manifest.files.length ||
+                manifest.files.some(name => typeof name !== "string" || !/^schedule_\d{4}_h[12]\.json$/.test(name)))
+              throw new Error("Invalid schedule manifest");
+            paths = [...new Set(manifest.files)].map(name => "./data/schedule/" + name);
+          } catch {
+            paths = _scheduleHalfFilePaths();
+          }
           const results = await Promise.allSettled(paths.map(_fetchJson));
           let successes = 0;
           results.forEach((result, i) => {
@@ -28433,30 +28442,6 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
         window.addEventListener("load", () => {
           navigator.serviceWorker
             .register("./service-worker.js")
-            .then((reg) => {
-              reg.addEventListener("updatefound", () => {
-                const newSW = reg.installing;
-                if (!newSW) return;
-                newSW.addEventListener("statechange", () => {
-                  if (
-                    newSW.state === "installed" &&
-                    navigator.serviceWorker.controller
-                  ) {
-                    newSW.postMessage("SKIP_WAITING");
-                  }
-                });
-              });
-              let refreshing = false;
-              navigator.serviceWorker.addEventListener(
-                "controllerchange",
-                () => {
-                  if (!refreshing) {
-                    refreshing = true;
-                    window.location.reload();
-                  }
-                }
-              );
-            })
             .catch(() => {});
         });
       }

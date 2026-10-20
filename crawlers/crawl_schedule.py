@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+                      
 
 import asyncio
 import html
@@ -14,6 +14,9 @@ from typing import Optional
 
 import aiohttp
 import requests
+from storage import atomic_json
+
+KST = timezone(timedelta(hours=9))
 
 ROOT = pathlib.Path(__file__).parent.parent
 
@@ -49,39 +52,24 @@ def build_params(year: int, month: int) -> dict:
     }
 
 
-def extract_date(ev: dict) -> Optional[str]:
-    if ev.get("allDay"):
-        raw = ev.get("startAtAllDay", "")
-    else:
-        raw = ev.get("startAt", ev.get("startAtAllDay", ""))
-    if not raw:
-        return None
-    m = re.search(r"(\d{4})-(\d{2})-(\d{2})", str(raw))
-    return f"{m.group(1)}-{m.group(2)}-{m.group(3)}" if m else None
-
-
-def extract_time(ev: dict) -> str:
-    """allDay가 아닌 경우 startAt(UTC)을 KST로 변환해 'HH:MM' 반환. 없으면 빈 문자열."""
-    if ev.get("allDay"):
-        return ""
+def event_datetime(ev):
     raw = ev.get("startAt", "")
     if not raw:
-        return ""
-    m = re.search(r"(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})", str(raw))
-    if not m:
-        return ""
-    try:
-        dt_utc = datetime(
-            int(m.group(1)), int(m.group(2)), int(m.group(3)),
-            int(m.group(4)), int(m.group(5)), tzinfo=timezone.utc,
-        )
-        dt_kst = dt_utc + timedelta(hours=9)
-        # 자정(00:00)은 실질적으로 시간 정보가 없는 종일 일정으로 취급
-        if dt_kst.hour == 0 and dt_kst.minute == 0:
-            return ""
-        return dt_kst.strftime("%H:%M")
-    except Exception:
-        return ""
+        raise ValueError("Missing event timestamp")
+    value = datetime.fromisoformat(str(raw).replace("Z", "+00:00"))
+    if value.tzinfo is None:
+        value = value.replace(tzinfo=timezone.utc)
+    return value.astimezone(KST)
+
+
+def extract_date(ev):
+    if ev.get("allDay"):
+        return date.fromisoformat(str(ev.get("startAtAllDay", ""))[:10]).isoformat()
+    return event_datetime(ev).date().isoformat()
+
+
+def extract_time(ev):
+    return "" if ev.get("allDay") else event_datetime(ev).strftime("%H:%M")
 
 
 LABEL_MAP = {
@@ -128,17 +116,23 @@ def crawl_schedule_month(year: int, month: int) -> list:
         data = resp.json()
     except Exception as e:
         print(f"[MnetPlus] {year}/{month:02d} API 오류: {e}", file=sys.stderr)
-        return []
+        return None
+    if not isinstance(data, dict) or not isinstance(data.get("events"), list):
+        return None
     events = []
     for ev in data.get("events", []):
-        d     = extract_date(ev)
+        try:
+            d = extract_date(ev)
+        except (ValueError, TypeError, AttributeError):
+            return None
         title = ev.get("title", "").strip()
         if not d or not title:
-            continue
+            return None
         label_name = (ev.get("label") or {}).get("name", "")
         if label_name == "기념일":
             continue
         events.append({
+            "id": str(ev.get("id", "")),
             "date":   d,
             "time":   extract_time(ev),
             "title":  title,
@@ -151,7 +145,7 @@ def crawl_schedule_month(year: int, month: int) -> list:
 
 
 def half_key(date_str: str) -> tuple[int, int]:
-    """'YYYY-MM-DD' → (year, half) 반기 키. half 1 = 1~6월, half 2 = 7~12월."""
+
     year  = int(date_str[0:4])
     month = int(date_str[5:7])
     half  = 1 if month <= 6 else 2
@@ -169,45 +163,39 @@ def _load_half_schedule(year: int, half: int) -> list:
     try:
         with open(path, encoding="utf-8") as f:
             data = json.load(f)
-        return data.get("events", [])
+        events = data.get("events")
+        if not isinstance(events, list) or any(not isinstance(ev, dict) or not isinstance(ev.get("date"), str) or not isinstance(ev.get("title"), str) for ev in events):
+            raise ValueError("Invalid stored schedules")
+        return events
     except Exception as e:
         print(f"[스케줄] {path.name} 읽기 실패: {e}", file=sys.stderr)
-        return []
+        raise ValueError("Invalid existing schedule; refusing to overwrite") from e
 
 
-def run_schedule_crawler() -> dict[tuple[int, int], list]:
-    """반기 키(year, half)별로 병합·중복제거된 이벤트 리스트를 반환."""
-    print("[스케줄] 시작", file=sys.stderr)
-    today  = date.today()
+def run_schedule_crawler():
+    today = datetime.now(KST).date()
     months = [(today.year, today.month)]
-    if today.month == 12:
-        months.append((today.year + 1, 1))
-    else:
-        months.append((today.year, today.month + 1))
-
-    new_events = []
-    for y, m in months:
-        new_events.extend(crawl_schedule_month(y, m))
-
-    # 새로 크롤링한 이벤트가 걸쳐있는 반기들만 갱신 대상으로 삼는다
-    touched_halves = {half_key(ev["date"]) for ev in new_events}
-
-    result: dict[tuple[int, int], list] = {}
-    for hk in touched_halves:
-        year, half = hk
-        merged = _load_half_schedule(year, half)
-        merged.extend(ev for ev in new_events if half_key(ev["date"]) == hk)
-        seen    = set()
-        deduped = []
-        for ev in sorted(merged, key=lambda e: e["date"]):
-            key = (ev["date"], ev["title"])
+    months.append((today.year + 1, 1) if today.month == 12 else (today.year, today.month + 1))
+    result = {}
+    for year, month in months:
+        events = crawl_schedule_month(year, month)
+        if events is None:
+            print(f"::warning::Schedule {year}-{month:02d} failed; keeping previous data", file=sys.stderr)
+            continue
+        prefix = f"{year}-{month:02d}"
+        hk = (year, 1 if month <= 6 else 2)
+        existing = result.get(hk)
+        if existing is None:
+            existing = _load_half_schedule(*hk)
+        kept = [ev for ev in existing if not (ev.get("source") == "mnetplus" and ev.get("date", "").startswith(prefix))]
+        seen = set()
+        merged = []
+        for ev in kept + [ev for ev in events if ev["date"].startswith(prefix)]:
+            key = (ev.get("id") or "", ev["date"], ev.get("time", ""), ev["title"])
             if key not in seen:
                 seen.add(key)
-                deduped.append(ev)
-        result[hk] = deduped
-        print(f"[스케줄] {year} H{half} → {len(deduped)}개", file=sys.stderr)
-
-    print("[스케줄] 완료", file=sys.stderr)
+                merged.append(ev)
+        result[hk] = sorted(merged, key=lambda ev: (ev["date"], ev.get("time", "")))
     return result
 
 
@@ -238,7 +226,7 @@ THUMB_CONCUR   = 6
 def parse_pub_date(raw: str) -> str:
     try:
         dt = parsedate_to_datetime(raw)
-        return dt.astimezone(timezone.utc).strftime("%Y.%m.%d")
+        return dt.astimezone(KST).strftime("%Y.%m.%d")
     except Exception:
         pass
     m = re.search(r"(\d{4})-(\d{2})-(\d{2})", raw)
@@ -267,7 +255,9 @@ def crawl_naver_api(query: str) -> list[dict]:
         resp = requests.get(url, headers=NAVER_HEADERS, params=params, timeout=15)
         resp.raise_for_status()
         data = resp.json()
-        for item in data.get("items", []):
+        if not isinstance(data, dict) or not isinstance(data.get("items"), list):
+            raise ValueError("Invalid news response")
+        for item in data["items"]:
             title        = clean_text(item.get("title", ""))
             naver_link   = item.get("link", "")
             originallink = item.get("originallink", "")
@@ -289,7 +279,8 @@ def crawl_naver_api(query: str) -> list[dict]:
                 })
         print(f"[Naver] '{query}' → {len(articles)}개 / 제목 불일치 {skipped}개 제외", file=sys.stderr)
     except Exception as e:
-        print(f"[Naver] '{query}' 오류: {e}", file=sys.stderr)
+        print(f"[Naver] request failed ({type(e).__name__})", file=sys.stderr)
+        return None
     return articles
 
 
@@ -321,7 +312,7 @@ async def fetch_og_image(session: aiohttp.ClientSession, article: dict, sem: asy
             async with session.get(
                 url, headers=FETCH_HEADERS,
                 timeout=aiohttp.ClientTimeout(total=THUMB_TIMEOUT),
-                allow_redirects=True, ssl=False,
+                allow_redirects=True,
             ) as resp:
                 if resp.status != 200:
                     return
@@ -359,7 +350,7 @@ async def enrich_thumbnails(articles: list[dict]):
         return
     print(f"[썸네일] {len(need)}개 수집 중...", file=sys.stderr)
     sem  = asyncio.Semaphore(THUMB_CONCUR)
-    conn = aiohttp.TCPConnector(limit=THUMB_CONCUR, ssl=False)
+    conn = aiohttp.TCPConnector(limit=THUMB_CONCUR)
     async with aiohttp.ClientSession(connector=conn) as session:
         await asyncio.gather(*[fetch_og_image(session, a, sem) for a in need])
     filled = sum(1 for a in need if a.get("thumbnail"))
@@ -370,11 +361,18 @@ def run_news_crawler() -> dict:
     print("[뉴스] 시작", file=sys.stderr)
     if not NAVER_CLIENT_ID or not NAVER_CLIENT_SECRET:
         print("[뉴스] NAVER 환경변수 없음 — 건너뜀", file=sys.stderr)
-        return {"updated": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "articles": []}
+        return None
     all_articles = []
     for q in SEARCH_QUERIES:
-        all_articles += crawl_naver_api(q)
+        batch = crawl_naver_api(q)
+        if batch is None:
+            print("::warning::News fetch failed; keeping previous data", file=sys.stderr)
+            return None
+        all_articles += batch
         time.sleep(0.3)
+    if not all_articles:
+        print("::warning::No matching news; keeping previous data", file=sys.stderr)
+        return None
     articles = merge_articles([all_articles])
     asyncio.run(enrich_thumbnails(articles))
     for a in articles:
@@ -397,14 +395,15 @@ def main():
     updated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     for (year, half), events in schedule_by_half.items():
         path = schedule_json_path(year, half)
-        with open(path, "w", encoding="utf-8") as f:
-            json.dump({"updated": updated_at, "events": events}, f, ensure_ascii=False, indent=2)
+        atomic_json(path, {"updated": updated_at, "events": events})
         print(f"[완료] {path.name} 저장", file=sys.stderr)
 
+    paths = sorted((ROOT / "data" / "schedule").glob("schedule_????_h[12].json"))
+    atomic_json(ROOT / "data" / "schedule" / "manifest.json", {"files": [p.name for p in paths]})
     news_data = run_news_crawler()
-    with open(ROOT / "data" / "news.json", "w", encoding="utf-8") as f:
-        json.dump(news_data, f, ensure_ascii=False, indent=2)
-    print(f"[완료] news.json 저장", file=sys.stderr)
+    if news_data is not None:
+        atomic_json(ROOT / "data" / "news.json", news_data)
+        print("[완료] news.json 저장", file=sys.stderr)
 
 
 if __name__ == "__main__":

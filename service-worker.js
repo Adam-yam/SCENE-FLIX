@@ -1,62 +1,68 @@
-const CACHE = 'sceneflix-v8';
-const SHELL = [
-  './',
-  './image/favicon.png',
-  './image/icon-192.png',
-  './image/icon-512.png',
-  'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap',
-];
-
-self.addEventListener('install', e => {
-  e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(SHELL)).then(() => self.skipWaiting())
-  );
+const PREFIX = 'sceneflix-' + new URL(self.registration.scope).pathname + '-';
+const SHELL = PREFIX + 'shell-v9';
+const ASSETS = PREFIX + 'assets-v9';
+const EXTERNAL = PREFIX + 'external-v9';
+const HOME = new URL('./', self.registration.scope).href;
+const CURRENT = new Set([SHELL, ASSETS, EXTERNAL]);
+let writes = Promise.resolve();
+function store(name, key, response, limit) {
+  writes = writes.catch(() => {}).then(async () => {
+    const cache = await caches.open(name);
+    await cache.put(key, response);
+    const keys = await cache.keys();
+    for (const old of keys.slice(0, Math.max(0, keys.length - limit))) await cache.delete(old);
+  }).catch(() => {});
+  return writes;
+}
+self.addEventListener('install', event => {
+  event.waitUntil((async () => {
+    const cache = await caches.open(SHELL);
+    const response = await fetch(HOME, {cache: 'no-store'});
+    if (!response.ok) throw new Error('Unable to cache page');
+    await cache.put(HOME, response);
+    await Promise.allSettled(['image/favicon.png', 'image/icon-192.png', 'image/icon-512.png'].map(async path => {
+      const url = new URL(path, HOME).href;
+      const response = await fetch(url);
+      if (response.ok) await store(ASSETS, url, response, 100);
+    }));
+  })());
 });
-
-self.addEventListener('activate', e => {
-  e.waitUntil(
-    caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
-    ).then(() => self.clients.claim())
-  );
+self.addEventListener('activate', event => {
+  event.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(keys.filter(key => (key.startsWith(PREFIX) || /^sceneflix-v\d+$/.test(key)) && !CURRENT.has(key)).map(key => caches.delete(key)));
+    await self.clients.claim();
+  })());
 });
-
-self.addEventListener('message', e => {
-  if (e.data === 'SKIP_WAITING') self.skipWaiting();
-});
-
-self.addEventListener('fetch', e => {
-  const url = new URL(e.request.url);
-
-  if (url.pathname.endsWith('/') || url.pathname.endsWith('.html')) {
-    e.respondWith(
-      fetch(e.request, { cache: 'no-store' }).catch(() =>
-        caches.match(e.request).then(cached => cached || caches.match('./'))
-      )
-    );
-    return;
-  }
-
-  if (url.hostname !== self.location.hostname) {
-    e.respondWith(
-      fetch(e.request).then(res => {
-        if (res && (res.ok || res.type === 'opaque') && e.request.method === 'GET') {
-          const resClone = res.clone();
-          caches.open(CACHE).then(cache => cache.put(e.request, resClone));
-        }
-        return res;
-      }).catch(() => caches.match(e.request))
-    );
-    return;
-  }
-
-  e.respondWith(
-    fetch(e.request, { cache: 'no-store' }).then(res => {
-      if (res && res.status === 200 && e.request.method === 'GET') {
-        const resClone = res.clone();
-        caches.open(CACHE).then(cache => cache.put(e.request, resClone));
+self.addEventListener('fetch', event => {
+  if (event.request.method !== 'GET') return;
+  const url = new URL(event.request.url);
+  const local = url.origin === self.location.origin;
+  if (local && !url.href.startsWith(self.registration.scope)) return;
+  if (event.request.mode === 'navigate' && local) {
+    event.respondWith((async () => {
+      try {
+        const response = await fetch(event.request, {cache: 'no-store'});
+        if (response.ok) event.waitUntil(store(SHELL, HOME, response.clone(), 1));
+        return response;
+      } catch {
+        return await (await caches.open(SHELL)).match(HOME) || Response.error();
       }
-      return res;
-    }).catch(() => caches.match(e.request))
-  );
+    })());
+    return;
+  }
+  const isExternalAsset = !local && ['image', 'font', 'style'].includes(event.request.destination);
+  if (!local && !isExternalAsset) return;
+  const name = local ? ASSETS : EXTERNAL;
+  if (local) url.searchParams.delete('_');
+  const key = url.href;
+  event.respondWith((async () => {
+    try {
+      const response = await fetch(event.request);
+      if (response.ok && response.type !== 'opaque') event.waitUntil(store(name, key, response.clone(), local ? 100 : 60));
+      return response;
+    } catch {
+      return await (await caches.open(name)).match(key) || Response.error();
+    }
+  })());
 });
