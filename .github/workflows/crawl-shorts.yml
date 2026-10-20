@@ -37,7 +37,7 @@ jobs:
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/shorts.json
+          git add data/shorts/shorts.json
           git diff --cached --quiet && echo "변경사항 없음" && exit 0
           git commit -m "chore: 공식채널/안원잘부 쇼츠 크롤링 크롤링 data 업데이트 $(date +'%Y-%m-%d %H:%M')"
           for attempt in 1 2 3; do
