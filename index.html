@@ -632,233 +632,49 @@
         color: var(--muted);
       }
 
-      .series-wrap {
-        display: grid;
-        grid-template-columns: repeat(8, minmax(0, 1fr));
-        gap: 32px 16px;
-        max-width: 1600px;
-        margin: 0 auto;
-        padding: 10px 40px 96px;
-      }
-      @media (max-width: 1100px) {
-        .series-wrap {
-          grid-template-columns: repeat(6, minmax(0, 1fr));
-        }
-      }
-      @media (max-width: 800px) {
-        .series-wrap {
-          grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 28px 14px;
-        }
-      }
-      @media (max-width: 700px) {
-        .series-wrap {
-          padding: 6px 14px calc(60px + var(--safe-bottom));
-        }
-      }
-      @media (max-width: 560px) {
-        .series-wrap {
-          grid-template-columns: repeat(3, minmax(0, 1fr));
-          gap: 24px 10px;
-        }
-      }
-      .series-card {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
-        padding: 0;
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: var(--text);
-        font-family: var(--font-sans);
-        text-align: center;
-        contain: layout style;
-        -webkit-tap-highlight-color: transparent;
-      }
-      .series-folder {
-        position: relative;
-        width: 100%;
-        aspect-ratio: 5 / 4;
-        transition: transform 0.25s ease;
-      }
-      .series-card:hover .series-folder {
-        transform: translateY(-4px);
-      }
-      .series-card:active .series-folder {
-        transform: scale(0.97);
-      }
-      .sf-back {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 14%;
-        border-radius: 4px 12px 12px 12px;
-        background: #2a4a89;
-        box-shadow: 0 10px 14px -6px rgba(0, 0, 0, 0.35);
-      }
-      .sf-back::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: 100%;
-        width: 36%;
-        height: 10%;
-        min-height: 8px;
-        border-radius: 8px 8px 0 0;
-        background: #2a4a89;
-      }
-      .sf-thumb {
-        position: absolute;
-        left: 8%;
-        bottom: 20%;
-        width: 84%;
-        aspect-ratio: 16 / 9;
-        object-fit: cover;
-        border-radius: 6px;
-        background: #0d0d10;
-        box-shadow:
-          0 0 0 1px rgba(255, 255, 255, 0.16),
-          0 3px 8px rgba(0, 0, 0, 0.35);
-        transform-origin: 50% 100%;
-        transform: translateY(calc(var(--d) * -15%))
-          scale(calc(1 - var(--d) * 0.06));
-        transition: transform 0.25s ease;
-      }
-      .series-card:hover .sf-thumb {
-        transform: translateY(calc(var(--d) * -20% - 4%))
-          scale(calc(1 - var(--d) * 0.06));
-      }
-      .sf-front {
-        position: absolute;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        height: 38%;
-        border-radius: 5px 5px 12px 12px;
-        background: linear-gradient(180deg, #5f96f2 0%, #4079dc 100%);
-        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
-      }
-      .series-title {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        overflow: hidden;
-        padding: 0 2px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        line-height: 1.3;
-        word-break: keep-all;
-        overflow-wrap: anywhere;
-      }
-      .series-count {
-        font-size: 0.7rem;
-        color: var(--muted);
-        margin-top: -8px;
-      }
-      #seriesSearchInput {
-        width: 100%;
-        height: 38px;
-        padding: 0 52px 0 38px;
-        border: 1px solid transparent;
-        border-radius: 12px;
-        background: var(--fill);
-        color: var(--text);
-        font-family: var(--font-sans);
-        font-size: 0.85rem;
-        outline: none;
-        box-sizing: border-box;
-        min-width: 0;
-        user-select: text;
-        -webkit-user-select: text;
-        transition:
-          border-color 0.18s cubic-bezier(0.4, 0, 0.2, 1),
-          background 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-      }
-      #seriesSearchInput::placeholder {
-        color: var(--muted);
-      }
-      #seriesSearchInput:focus {
-        border-color: rgba(var(--accent-rgb), 0.6);
-        background: var(--fill-h);
-        box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18);
-      }
-      #seriesSearchInput:focus ~ .search-kbd,
-      #seriesSearchInput:not(:placeholder-shown) ~ .search-kbd {
-        display: none;
-      }
-      #seriesSearchClear {
-        position: absolute;
-        right: 42px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: var(--muted);
-        padding: 4px;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        transition: color 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-        flex-shrink: 0;
-        z-index: 1;
-      }
-      #seriesSearchClear:hover {
-        color: var(--text);
-      }
-      #seriesSearchClear svg {
-        width: 12px;
-        height: 12px;
-        display: block;
-      }
-      #seriesSearchSubmit {
-        position: absolute;
-        right: 5px;
-        width: 30px;
-        height: 28px;
-        padding: 0;
-        border: none;
-        border-radius: 9px;
-        background: var(--accent);
-        color: #fff;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-        z-index: 1;
-      }
-      #seriesSearchSubmit:hover {
-        opacity: 0.85;
-      }
-      #seriesSearchSubmit svg {
-        width: 12px;
-        height: 12px;
-        flex-shrink: 0;
-      }
-      #seriesSearchResultCount {
-        position: absolute;
-        right: 90px;
-        font-size: 0.65rem;
-        color: var(--muted);
-        pointer-events: none;
-        white-space: nowrap;
-      }
-      .series-empty {
-        grid-column: 1 / -1;
-        padding: 48px 0;
-        font-size: 0.85rem;
-        color: var(--muted);
-        text-align: center;
-      }
-      @media (max-width: 700px) {
-        #seriesSearchInput {
-          font-size: 0.9rem;
-        }
-      }
+      #seriesMode{padding:0;max-width:none;margin:0}
+      #seriesSort{font:inherit;font-size:.76rem;color:var(--text);background:var(--fill);border:0;border-radius:11px;min-height:38px;max-width:210px;padding:0 12px;cursor:pointer;flex-shrink:0}
+      #seriesSort{color-scheme:dark}
+      #seriesSort option{color:var(--text);background-color:var(--card)}
+      :root[data-theme="light"] #seriesSort{color-scheme:light}
+      #seriesSearchResultCount{font-size:12px;color:var(--muted);white-space:nowrap}
+      .series-wrap{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:32px 20px}
+      .series-card{font-family:var(--font-sans);color:var(--text);background:none;border:0;text-align:left;padding:0;min-width:0;width:100%;cursor:pointer;-webkit-tap-highlight-color:transparent}
+      .series-cover{position:relative;aspect-ratio:16/9;margin-top:13px;background:var(--fill);border-radius:12px;isolation:isolate}
+      .series-cover:before{content:"";position:absolute;inset:-7px 8px 12px;background:var(--border);border:1px solid var(--bg);border-radius:12px;z-index:-1;box-shadow:0 -6px 0 -1px var(--fill)}
+      .series-cover img{display:block;width:100%;height:100%;object-fit:cover;border-radius:12px;transition:filter .18s}
+      .series-cover:after{content:"";position:absolute;inset:0;border:1px solid rgba(128,128,128,.1);border-radius:12px;pointer-events:none}
+      .series-count{position:absolute;right:10px;bottom:10px;display:flex;align-items:center;gap:5px;color:#fff;background:rgba(23,25,29,.88);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.14);border-radius:6px;padding:3px 8px;font-size:11px}
+      .series-count svg{width:13px;height:13px}
+      .series-caption{display:flex;justify-content:space-between;gap:10px;padding:13px 1px 0}
+      .series-title{display:block;font-size:16px;font-weight:650;line-height:1.45;letter-spacing:-.4px;overflow-wrap:anywhere}
+      .series-runtime{display:block;font-size:11px;line-height:1.6;color:var(--muted);margin-top:4px}
+      .series-arrow{width:30px;height:32px;flex-shrink:0;display:grid;place-items:center;color:var(--muted)}
+      .series-arrow svg{width:17px;height:17px}
+      .series-card:hover .series-cover img{filter:brightness(1.07)}
+      .series-card:hover .series-arrow,.series-card:hover .series-title{color:var(--accent)}
+      .series-empty{grid-column:1/-1;padding:64px 0;text-align:center;color:var(--muted);font-size:14px}
+      #seriesMode button:focus-visible,#seriesMode a:focus-visible,#seriesMode select:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+      #seriesDetailDialog{color:var(--text);background:var(--card);border:1px solid var(--border);border-radius:20px;padding:0;width:min(580px,calc(100vw - 32px));max-height:85dvh;overscroll-behavior:contain;margin:auto}
+      #seriesDetailDialog::backdrop{background:rgba(8,10,14,.5);backdrop-filter:blur(6px)}
+      .series-detail-top{padding:24px 24px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--card);z-index:1}
+      .series-detail-row{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}
+      #seriesDetailTitle{font-size:24px;line-height:1.4;letter-spacing:-.8px;margin:0}
+      #seriesDetailCount{font-size:12px;color:var(--muted);margin:5px 0 20px}
+      .series-close{display:grid;place-items:center;width:40px;height:40px;flex-shrink:0;font-size:24px;border:0;border-radius:10px;background:none;color:var(--text);cursor:pointer}
+      .series-close:hover{background:var(--fill)}
+      .series-play{font:inherit;display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:44px;background:var(--text);color:var(--bg);border:0;border-radius:10px;padding:12px;font-size:13px;font-weight:600;cursor:pointer}
+      .series-episodes{padding:8px 24px 20px}
+      .series-episode{display:flex;align-items:center;gap:16px;padding:17px 0;border-bottom:1px solid var(--border);color:var(--text);text-decoration:none}
+      .series-episode:last-child{border:0}
+      .series-episode:hover{color:var(--accent)}
+      .series-number{font-size:12px;font-variant-numeric:tabular-nums;color:var(--muted);width:24px;flex-shrink:0}
+      .series-episode-text{flex:1;min-width:0;font-size:14px;overflow-wrap:anywhere}
+      .series-episode-text small{display:block;font-size:11px;line-height:1.6;color:var(--muted);margin-top:3px}
+      body:has(#seriesDetailDialog[open]){overflow:hidden}
+      @media(max-width:1000px){.series-wrap{gap:28px 16px}}
+      @media(max-width:700px){#seriesSearchResultCount{display:none}#seriesSort{font-size:.72rem;max-width:145px;padding:0 8px}.series-wrap{grid-template-columns:repeat(2,minmax(0,1fr));gap:26px 14px}.series-caption{gap:3px;padding-top:10px}.series-title{font-size:14px}.series-runtime{font-size:10px}.series-caption>.series-arrow{display:none}.series-cover,.series-cover img,.series-cover:after{border-radius:9px}.series-cover:before{border-radius:8px;inset:-5px 7px 10px}.series-count{bottom:6px;right:6px;font-size:10px;padding:2px 5px}.series-detail-top{padding:20px}.series-episodes{padding:4px 20px 16px}#seriesDetailTitle{font-size:22px}}
+      @media(prefers-reduced-motion:reduce){.series-cover img{transition:none}}
 
       mark.sh {
         background: rgba(255, 210, 80, 0.28);
@@ -1358,7 +1174,7 @@
         z-index: 1;
       }
 
-      #searchInput {
+      :is(#searchInput, #seriesSearchInput) {
         width: 100%;
         color: var(--text);
         font-family: var(--font-sans);
@@ -1391,11 +1207,11 @@
         z-index: 1;
       }
 
-      #searchInput:focus ~ .search-kbd, #searchInput:not(:placeholder-shown) ~ .search-kbd {
+      :is(#searchInput, #seriesSearchInput):focus ~ .search-kbd, :is(#searchInput, #seriesSearchInput):not(:placeholder-shown) ~ .search-kbd {
         display: none;
       }
 
-      #searchClear {
+      :is(#searchClear, #seriesSearchClear) {
         position: absolute;
         right: 42px;
         background: none;
@@ -1412,11 +1228,11 @@
         z-index: 1;
       }
 
-      #searchClear:hover {
+      :is(#searchClear, #seriesSearchClear):hover {
         color: var(--text);
       }
 
-      #searchClear svg {
+      :is(#searchClear, #seriesSearchClear) svg {
         width: 12px;
         height: 12px;
         display: block;
@@ -1431,7 +1247,7 @@
         white-space: nowrap;
       }
 
-      #searchSubmit {
+      :is(#searchSubmit, #seriesSearchSubmit) {
         position: absolute;
         padding: 0;
         border: none;
@@ -1444,11 +1260,11 @@
         z-index: 1;
       }
 
-      #searchSubmit:hover {
+      :is(#searchSubmit, #seriesSearchSubmit):hover {
         opacity: 0.85;
       }
 
-      #searchSubmit svg {
+      :is(#searchSubmit, #seriesSearchSubmit) svg {
         width: 12px;
         height: 12px;
         flex-shrink: 0;
@@ -1911,7 +1727,7 @@
           background: color-mix(in srgb, var(--bg) 97%, transparent);
         }
 
-        #searchInput {
+        :is(#searchInput, #seriesSearchInput) {
           font-size: 0.75rem;
         }
 
@@ -2241,11 +2057,11 @@
           max-width: 100%;
         }
 
-        #searchSubmit span {
+        :is(#searchSubmit, #seriesSearchSubmit) span {
           display: none;
         }
 
-        #searchSubmit {
+        :is(#searchSubmit, #seriesSearchSubmit) {
           padding: 0 10px;
           gap: 0;
         }
@@ -6353,7 +6169,7 @@
         height: 16px;
       }
 
-      #searchInput {
+      :is(#searchInput, #seriesSearchInput) {
         height: 38px;
         padding: 0 52px 0 38px;
         border: 1px solid transparent;
@@ -6362,17 +6178,17 @@
         font-size: 0.85rem;
       }
 
-      #searchInput::placeholder {
+      :is(#searchInput, #seriesSearchInput)::placeholder {
         color: var(--muted);
       }
 
-      #searchInput:focus {
+      :is(#searchInput, #seriesSearchInput):focus {
         border-color: rgba(var(--accent-rgb), 0.6);
         background: var(--fill-h);
         box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18);
       }
 
-      #searchSubmit {
+      :is(#searchSubmit, #seriesSearchSubmit) {
         right: 5px;
         width: 30px;
         height: 28px;
@@ -6900,7 +6716,7 @@
           padding: 8px 14px 10px;
         }
 
-        #searchInput {
+        :is(#searchInput, #seriesSearchInput) {
           font-size: 0.9rem;
         }
 
@@ -9259,72 +9075,24 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
     <div id="seriesMode" style="display: none">
       <div class="search-bar" id="seriesSearchBar">
         <div class="search-bar-inner">
+          <select id="seriesSort" aria-label="시리즈 정렬" onchange="curSeriesSort=this.value;buildSeriesGrid()"><option value="oldest">오래된 순</option><option value="newest">최신 순</option><option value="count">영상 많은 순</option><option value="longest">재생시간 긴 순</option><option value="shortest">재생시간 짧은 순</option></select>
+          <span id="seriesSearchResultCount" aria-live="polite"></span>
           <div class="search-input-wrap">
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="11" cy="11" r="8" />
-              <line x1="21" y1="21" x2="16.65" y2="16.65" />
-            </svg>
-            <input
-              type="text"
-              id="seriesSearchInput"
-              placeholder="시리즈 제목으로 검색..."
-              autocomplete="off"
-              data-i18n-placeholder="series_search_placeholder"
-              aria-label="시리즈 검색"
-              data-i18n-aria="series_search_input_aria"
-            />
-            <span class="search-kbd" aria-hidden="true">/</span>
-            <span id="seriesSearchResultCount"></span>
-            <button
-              id="seriesSearchClear"
-              onclick="clearSeriesSearch()"
-              title="검색어 지우기"
-              aria-label="검색어 지우기"
-              data-i18n-title="search_clear"
-              data-i18n-aria="search_clear"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-              >
-                <line x1="18" y1="6" x2="6" y2="18" />
-                <line x1="6" y1="6" x2="18" y2="18" />
-              </svg>
-            </button>
-            <button
-              id="seriesSearchSubmit"
-              onclick="submitSeriesSearch()"
-              title="검색"
-              aria-label="검색"
-              data-i18n-title="search_btn"
-              data-i18n-aria="search_btn"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-              </svg>
-            </button>
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m17 17 4 4"/></svg>
+            <input type="text" id="seriesSearchInput" placeholder="시리즈 이름으로 검색" aria-label="시리즈 이름으로 검색" autocomplete="off">
+            <button type="button" id="seriesSearchClear" onclick="clearSeriesSearch()" aria-label="검색어 지우기"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+            <button type="button" id="seriesSearchSubmit" onclick="submitSeriesSearch()" aria-label="검색" data-i18n-aria="search_btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><path d="m17 17 4 4"/></svg></button>
           </div>
         </div>
       </div>
-      <div id="seriesGridHost"></div>
+      <div id="seriesGridHost" class="grid-wrap"></div>
+      <dialog id="seriesDetailDialog" aria-labelledby="seriesDetailTitle">
+        <div class="series-detail-top">
+          <div class="series-detail-row"><div><h2 id="seriesDetailTitle"></h2><p id="seriesDetailCount"></p></div><button type="button" class="series-close" id="seriesDetailClose" onclick="closeSeriesDetail()" aria-label="시리즈 닫기">×</button></div>
+          <button type="button" class="series-play" id="seriesDetailPlay" onclick="playSeries(_activeSeriesIndex)"></button>
+        </div>
+        <div class="series-episodes" id="seriesEpisodes"></div>
+      </dialog>
     </div>
 
     <div id="aboutMode" style="display: none">
@@ -24713,15 +24481,23 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
       "GE8FCHPGLwE",
       "PRGn7LYfLAY"
     ]
+  },
+  {
+    "title": "침착맨",
+    "ids": [
+      "wbfy9Tm0UjA",
+      "2usNtJUdtSQ",
+      "fBwm2xzhbzU",
+      "z9pVFFikowI"
+    ]
   }
 ];
-      function _seriesOldestDate(s) {
-        let min = "";
-        for (const id of s.ids) {
-          const d = DATE_MAP[id];
-          if (d && (!min || d < min)) min = d;
-        }
-        return min || "\uffff";
+      function _seriesFirstDate(s) {
+        const value = String(DATE_MAP[s.ids[0]] || "");
+        const match = value.match(/^(\d{4})[.\/-](\d{2})[.\/-](\d{2})(?:[ T](\d{2}):(\d{2})(?::(\d{2}))?)?/);
+        if (!match) return null;
+        const [, year, month, day, hour = "0", minute = "0", second = "0"] = match;
+        return Date.UTC(Number(year), Number(month) - 1, Number(day), Number(hour), Number(minute), Number(second));
       }
       let curSeriesQuery = "";
       function onSeriesSearchInput(val) {
@@ -24746,65 +24522,100 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
           debounceMs: 120,
         });
       });
+      const _SERIES_LABELS = {
+        KR: {title:"시리즈",intro:"한 편에서 다음 편으로.\n리센느의 이야기를 차례대로 만나보세요.",search:"시리즈 이름으로 검색",clear:"검색어 지우기",sort:"시리즈 정렬",oldest:"오래된 순",newest:"최신 순",count:"영상 많은 순",longest:"재생시간 긴 순",shortest:"재생시간 짧은 순",collections:"{n}개 시리즈",videos:"영상 {n}개",total:"총 ",partial:"확인된 재생시간 ",unknown:"재생시간 확인 중",close:"시리즈 닫기",play:"유튜브에서 이어 보기 ↗",watch:"유튜브에서 보기 ↗",episode:"영상",h:"시간",m:"분",s:"초"},
+        EN: {title:"Series",intro:"One episode leads to another.\nExplore RESCENE’s stories, together.",search:"Search series",clear:"Clear search",sort:"Sort series",oldest:"Oldest first",newest:"Newest first",count:"Most videos",longest:"Longest duration",shortest:"Shortest duration",collections:"{n} series",videos:"{n} videos",total:"Total ",partial:"Known duration ",unknown:"Duration unavailable",close:"Close series",play:"Watch on YouTube ↗",watch:"Watch on YouTube ↗",episode:"Video",h:"h",m:"m",s:"s"},
+        JP: {title:"シリーズ",intro:"ひとつの動画から、その続きへ。\nRESCENEの物語を順番に楽しもう。",search:"シリーズ名で検索",clear:"検索をクリア",sort:"シリーズの並び順",oldest:"古い順",newest:"新しい順",count:"動画が多い順",longest:"再生時間が長い順",shortest:"再生時間が短い順",collections:"{n}シリーズ",videos:"動画{n}本",total:"合計 ",partial:"確認済みの再生時間 ",unknown:"再生時間を確認中",close:"シリーズを閉じる",play:"YouTubeで続けて見る ↗",watch:"YouTubeで見る ↗",episode:"動画",h:"時間",m:"分",s:"秒"}
+      };
+      let curSeriesSort = "oldest";
+      let _activeSeriesIndex = -1;
+      function _seriesLabels() { return _SERIES_LABELS[window._curLang] || _SERIES_LABELS.KR; }
+      function _seriesDuration(s) {
+        let seconds = 0, known = 0;
+        for (const id of s.ids) {
+          const value = String(DURATION_MAP[id] || "").trim();
+          if (!/^\d+:\d{2}(?::\d{2})?$/.test(value)) continue;
+          const parts = value.split(":").map(Number);
+          if (parts.slice(1).some(n => n > 59)) continue;
+          seconds += parts.reduce((sum, n) => sum * 60 + n, 0);
+          known++;
+        }
+        return { seconds, known, complete: known === s.ids.length && known > 0 };
+      }
+      function _seriesDurationLabel(s) {
+        const t = _seriesLabels(), d = _seriesDuration(s);
+        if (!d.known) return t.unknown;
+        const h = Math.floor(d.seconds / 3600), m = Math.floor(d.seconds % 3600 / 60), sec = d.seconds % 60;
+        const time = [h ? h + t.h : "", m ? m + t.m : "", sec || (!h && !m) ? sec + t.s : ""].filter(Boolean).join(" ");
+        return (d.complete ? t.total : t.partial) + time;
+      }
+      const _SERIES_ARROW = '<span class="series-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span>';
+      function _seriesThumb(vid) {
+        const base = "https://img.youtube.com/vi/" + encodeURIComponent(vid) + "/";
+        const connection = navigator.connection;
+        const saveData = connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType);
+        const responsive = saveData ? "" : ' srcset="' + base + 'hqdefault.jpg 480w, ' + base + 'sddefault.jpg 640w, ' + base + 'maxresdefault.jpg 1280w" sizes="auto, (max-width:700px) calc((100vw - 42px) / 2), (min-width:1824px) 365px, calc((100vw - 340px) / 4)"';
+        return '<img src="' + base + 'hqdefault.jpg"' + responsive + ' alt="" width="480" height="270" loading="lazy" decoding="async" onload="if(this.naturalWidth<=120)_videoThumbFallback(this)" onerror="_videoThumbFallback(this)">';
+      }
       function buildSeriesGrid() {
         const el = document.getElementById("seriesGridHost");
         if (!el) return;
-        const t = getCurrentT();
+        const t = _seriesLabels();
+        const input = document.getElementById("seriesSearchInput");
+        input.placeholder = t.search;
+        input.setAttribute("aria-label", t.search);
+        document.getElementById("seriesSearchClear").setAttribute("aria-label", t.clear);
+        const sort = document.getElementById("seriesSort");
+        sort.setAttribute("aria-label", t.sort);
+        for (const option of sort.options) option.textContent = t[option.value];
         const q = curSeriesQuery.toLowerCase();
-        const list = SERIES_DATA.map((s, i) => ({ s, i, d: _seriesOldestDate(s) }))
-          .filter(({ s }) => !q || s.title.toLowerCase().includes(q))
-          .sort((a, b) => (a.d < b.d ? -1 : a.d > b.d ? 1 : a.i - b.i));
-        const cntEl = document.getElementById("seriesSearchResultCount");
-        if (cntEl) cntEl.textContent = q ? String(list.length) : "";
-        if (!list.length) {
-          el.innerHTML =
-            '<div class="series-wrap"><div class="series-empty">' +
-            _escHtml(t.series_no_results || "검색 결과가 없습니다.") +
-            "</div></div>";
-          return;
+        const list = SERIES_DATA.map((s, i) => ({ s, i })).filter(({s}) => !q || s.title.toLowerCase().includes(q));
+        if (curSeriesSort === "oldest" || curSeriesSort === "newest") {
+          const dates = new Map(list.map(({s,i}) => [i, _seriesFirstDate(s)]));
+          const direction = curSeriesSort === "newest" ? -1 : 1;
+          list.sort((a,b) => {
+            const x = dates.get(a.i), y = dates.get(b.i);
+            if (x === null || y === null) return x === y ? a.i - b.i : x === null ? 1 : -1;
+            return direction * (x - y) || a.i - b.i;
+          });
         }
-        el.innerHTML =
-          '<div class="series-wrap">' +
-          list
-            .map(({ s, i }) => {
-            const count = (t.series_count || "{n}").replace(
-              /\{n\}/g,
-              s.ids.length,
-            );
-            const aria = (t.series_play_aria || "{title}").replace(
-              /\{title\}/g,
-              s.title,
-            );
-            const n = Math.min(3, s.ids.length);
-            const thumbs = s.ids
-              .slice(0, n)
-              .map(
-                (id, k) =>
-                  '<img class="sf-thumb" src="https://img.youtube.com/vi/' +
-                  id +
-                  '/hqdefault.jpg" alt="" loading="lazy" decoding="async" style="--d:' +
-                  k +
-                  ";z-index:" +
-                  (4 - k) +
-                  '">',
-              )
-              .reverse()
-              .join("");
-            return (
-              '<button class="series-card" onclick="playSeries(' +
-              i +
-              ')" aria-label="' +
-              _escHtml(aria) +
-              '"><div class="series-folder"><div class="sf-back"></div>' +
-              thumbs +
-              '<div class="sf-front" style="z-index:5"></div></div><span class="series-title">' +
-              _escHtml(s.title) +
-              '</span><span class="series-count">' +
-              _escHtml(count) +
-              "</span></button>"
-            );
-          }).join("") +
-          "</div>";
+        if (curSeriesSort === "count") list.sort((a, b) => b.s.ids.length - a.s.ids.length || a.i - b.i);
+        if (curSeriesSort === "longest" || curSeriesSort === "shortest") {
+          const durations = new Map(list.map(({s,i}) => [i, _seriesDuration(s)]));
+          const direction = curSeriesSort === "longest" ? -1 : 1;
+          list.sort((a,b) => {
+            const x = durations.get(a.i), y = durations.get(b.i);
+            if (x.complete !== y.complete) return x.complete ? -1 : 1;
+            if (!x.complete) return a.i - b.i;
+            return direction * (x.seconds - y.seconds) || a.i - b.i;
+          });
+        }
+        document.getElementById("seriesSearchResultCount").textContent = t.collections.replace("{n}", list.length);
+        el.innerHTML = '<div class="series-wrap">' + (list.length ? list.map(({s,i}) => {
+          const count = t.videos.replace("{n}", s.ids.length);
+          const duration = _seriesDurationLabel(s);
+          return '<button type="button" class="series-card" onclick="openSeriesDetail(' + i + ')" aria-label="' + _escHtml(s.title + " · " + count + " · " + duration) + '"><div class="series-cover">' + (s.ids.length ? _seriesThumb(s.ids[0]) : '') + '<span class="series-count"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M6 3h12"/></svg>' + _escHtml(count) + '</span></div><div class="series-caption"><div><span class="series-title">' + _escHtml(s.title) + '</span><span class="series-runtime">' + _escHtml(duration) + '</span></div>' + _SERIES_ARROW + '</div></button>';
+        }).join("") : '<div class="series-empty">' + _escHtml(getCurrentT().series_no_results || "검색 결과가 없습니다.") + '</div>') + '</div>';
+      }
+      function openSeriesDetail(i) {
+        const s = SERIES_DATA[i];
+        if (!s) return;
+        _activeSeriesIndex = i;
+        const t = _seriesLabels(), dialog = document.getElementById("seriesDetailDialog");
+        document.getElementById("seriesDetailTitle").textContent = s.title;
+        document.getElementById("seriesDetailCount").textContent = t.videos.replace("{n}", s.ids.length) + " · " + _seriesDurationLabel(s);
+        document.getElementById("seriesDetailClose").setAttribute("aria-label", t.close);
+        const play = document.getElementById("seriesDetailPlay");
+        play.textContent = "▶ " + t.play;
+        play.disabled = !s.ids.length;
+        document.getElementById("seriesEpisodes").innerHTML = s.ids.map((id,n) =>
+          '<a class="series-episode" href="https://www.youtube.com/watch?v=' + encodeURIComponent(id) + '" target="_blank" rel="noopener"><span class="series-number">' + String(n + 1).padStart(2,"0") + '</span><span class="series-episode-text">' + _escHtml(s.title + " · " + t.episode + " " + (n + 1)) + '<small>' + _escHtml((DURATION_MAP[id] ? DURATION_MAP[id] + " · " : "") + t.watch) + '</small></span>' + _SERIES_ARROW + '</a>'
+        ).join("");
+        if (!dialog.open) dialog.showModal();
+      }
+      function closeSeriesDetail() {
+        document.getElementById("seriesDetailDialog").close();
+        _activeSeriesIndex = -1;
       }
       function playSeries(i) {
         const s = SERIES_DATA[i];
@@ -24816,8 +24627,16 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
       }
       document.addEventListener("menulanguagechange", () => {
         if (curSection === "series") buildSeriesGrid();
+        if (document.getElementById("seriesDetailDialog").open && _activeSeriesIndex >= 0) openSeriesDetail(_activeSeriesIndex);
+      });
+      document.getElementById("seriesDetailDialog").addEventListener("click", (event) => {
+        const dialog = event.currentTarget;
+        if (event.target !== dialog) return;
+        const rect = dialog.getBoundingClientRect();
+        if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) closeSeriesDetail();
       });
       function pickSection(section, _fromPopState) {
+        if (section !== "series" && document.getElementById("seriesDetailDialog").open) closeSeriesDetail();
         if (!Object.hasOwn(_PICK_SECTION_MAP, section)) section = "about";
         if (
           section !== "schedule" &&
