@@ -7882,6 +7882,15 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
 #mobileMenuBtn::before,#scrollTop::before{transition:none}
 }
 </style>
+<style>
+.series-card-wrap{position:relative;min-width:0}
+.series-card-wrap .series-caption{padding-right:44px;min-height:48px}
+.series-share{position:absolute;right:0;bottom:0;display:grid;place-items:center;width:36px;height:36px;padding:8px;border:0;border-radius:8px;background:transparent;color:var(--muted);cursor:pointer}
+.series-share svg{width:18px;height:18px}
+.series-share:hover{color:var(--text);background:var(--fill)}
+.series-share:disabled{opacity:.4;cursor:default}
+@media(max-width:700px){.series-card-wrap .series-caption{padding-right:42px}.series-share{width:40px;height:40px}}
+</style>
 </head>
 
   <body>
@@ -10057,6 +10066,8 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
           tab_bookmark: "즐겨찾기",
           tab_bookmark_full: "즐겨찾기",
           tab_series: "시리즈",
+          series_share: "시리즈 재생목록 링크 복사",
+          series_share_copied: "시리즈 재생목록 링크가 복사되었습니다.",
           tab_trending: "급상승 영상",
           trending_link_label: "급상승 영상 (새 탭에서 열기)",
           series_count: "{n}개 영상",
@@ -10184,6 +10195,8 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
           tab_bookmark: "お気に入り",
           tab_bookmark_full: "お気に入り",
           tab_series: "シリーズ",
+          series_share: "シリーズの再生リストリンクをコピー",
+          series_share_copied: "再生リストのリンクをコピーしました。",
           tab_trending: "急上昇動画",
           trending_link_label: "急上昇動画（新しいタブで開く）",
           series_count: "{n}本の動画",
@@ -10313,6 +10326,8 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
           tab_bookmark: "Saved",
           tab_bookmark_full: "Saved",
           tab_series: "Series",
+          series_share: "Copy series playlist link",
+          series_share_copied: "Series playlist link copied.",
           tab_trending: "Trending Videos",
           trending_link_label: "Trending videos (opens in a new tab)",
           series_count: "{n} videos",
@@ -24667,7 +24682,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
         el.innerHTML = '<div class="series-wrap">' + (list.length ? list.map(({s,i}) => {
           const count = t.videos.replace("{n}", s.ids.length);
           const duration = _seriesDurationLabel(s);
-          return '<button type="button" class="series-card" onclick="openSeriesDetail(' + i + ')" aria-label="' + _escHtml(s.title + " · " + count + " · " + duration) + '"><div class="series-cover">' + (s.ids.length ? _seriesThumb(s.ids[0]) : '') + '<span class="series-count"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M6 3h12"/></svg>' + _escHtml(count) + '</span></div><div class="series-caption"><div><span class="series-title">' + _escHtml(s.title) + '</span><span class="series-runtime">' + _escHtml(duration) + '</span></div>' + _SERIES_ARROW + '</div></button>';
+          return '<article class="series-card-wrap"><button type="button" class="series-card" onclick="openSeriesDetail(' + i + ')" aria-label="' + _escHtml(s.title + " · " + count + " · " + duration) + '"><div class="series-cover">' + (s.ids.length ? _seriesThumb(s.ids[0]) : '') + '<span class="series-count"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M6 3h12"/></svg>' + _escHtml(count) + '</span></div><div class="series-caption"><div><span class="series-title">' + _escHtml(s.title) + '</span><span class="series-runtime">' + _escHtml(duration) + '</span></div>' + '</div></button><button type="button" class="series-share" onclick="copySeriesPlaylist(event,' + i + ')" aria-label="' + _escHtml(s.title + ' · ' + getCurrentT().series_share) + '" title="' + _escHtml(getCurrentT().series_share) + '"' + (s.ids.length ? '' : ' disabled') + '><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg></button></article>';
         }).join("") : '<div class="series-empty">' + _escHtml(getCurrentT().series_no_results || "검색 결과가 없습니다.") + '</div>') + '</div>';
       }
       function openSeriesDetail(i) {
@@ -24689,6 +24704,42 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
       function closeSeriesDetail() {
         document.getElementById("seriesDetailDialog").close();
         _activeSeriesIndex = -1;
+      }
+      async function copySeriesPlaylist(event, index) {
+        event.preventDefault();
+        event.stopPropagation();
+        const series = SERIES_DATA[index];
+        if (!series?.ids.length) return;
+        const url = "https://www.youtube.com/watch_videos?video_ids=" + series.ids.map(id => encodeURIComponent(id)).join(",");
+        let copied = false;
+        try {
+          await navigator.clipboard.writeText(url);
+          copied = true;
+        } catch {
+          const previousFocus = document.activeElement;
+          const field = document.createElement("textarea");
+          field.value = url;
+          field.readOnly = true;
+          field.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
+          document.body.append(field);
+          try {
+            field.select();
+            field.setSelectionRange(0, field.value.length);
+            copied = document.execCommand("copy");
+          } catch {} finally {
+            field.remove();
+            if (previousFocus instanceof HTMLElement) previousFocus.focus({preventScroll:true});
+          }
+        }
+        const t = getCurrentT();
+        if (!copied) { window.prompt(t.series_share, url); return; }
+        const toast = document.getElementById("share-toast");
+        if (toast) {
+          toast.textContent = t.series_share_copied;
+          toast.classList.add("show");
+          clearTimeout(_shareToastTimer);
+          _shareToastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+        }
       }
       function playSeries(i) {
         const s = SERIES_DATA[i];
