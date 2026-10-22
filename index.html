@@ -8110,6 +8110,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
           </svg>
           <span data-i18n="tab_series">시리즈</span>
         </button>
+        <button type="button" class="drawer-item btn-base" id="dTrending" onclick="closeDrawer();window.open('https://velocity.rescene-feed.workers.dev/', '_blank', 'noopener,noreferrer');" data-i18n-aria="trending_link_label" aria-label="급상승 영상 (새 탭에서 열기)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 4-2 5-2 8 0 1 .5 2 1.5 2.5C14 12 15 9 15 7c3 3 5 6 5 9a8 8 0 0 1-16 0c0-3 2-6 4-8-.5 3 .5 4 1 4C8 8 12 7 12 3Z"/></svg><span data-i18n="tab_trending">급상승 영상</span></button>
         <div class="drawer-divider"></div>
         <button
           class="drawer-item btn-base"
@@ -8570,6 +8571,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
           </svg>
           <span data-i18n="tab_series">시리즈</span>
         </button>
+        <button type="button" class="section-tab" id="secTrending" onclick="window.open('https://velocity.rescene-feed.workers.dev/', '_blank', 'noopener,noreferrer');" data-i18n-aria="trending_link_label" aria-label="급상승 영상 (새 탭에서 열기)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1 4-2 5-2 8 0 1 .5 2 1.5 2.5C14 12 15 9 15 7c3 3 5 6 5 9a8 8 0 0 1-16 0c0-3 2-6 4-8-.5 3 .5 4 1 4C8 8 12 7 12 3Z"/></svg><span data-i18n="tab_trending">급상승 영상</span></button>
         <div class="u-hr-line"></div>
         <button
           class="section-tab"
@@ -10055,6 +10057,8 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
           tab_bookmark: "즐겨찾기",
           tab_bookmark_full: "즐겨찾기",
           tab_series: "시리즈",
+          tab_trending: "급상승 영상",
+          trending_link_label: "급상승 영상 (새 탭에서 열기)",
           series_count: "{n}개 영상",
           series_play_aria: "{title} 재생목록으로 재생",
           series_search_placeholder: "시리즈 제목으로 검색...",
@@ -10180,6 +10184,8 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
           tab_bookmark: "お気に入り",
           tab_bookmark_full: "お気に入り",
           tab_series: "シリーズ",
+          tab_trending: "急上昇動画",
+          trending_link_label: "急上昇動画（新しいタブで開く）",
           series_count: "{n}本の動画",
           series_play_aria: "{title}を再生リストで再生",
           series_search_placeholder: "シリーズ名で検索...",
@@ -10307,6 +10313,8 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
           tab_bookmark: "Saved",
           tab_bookmark_full: "Saved",
           tab_series: "Series",
+          tab_trending: "Trending Videos",
+          trending_link_label: "Trending videos (opens in a new tab)",
           series_count: "{n} videos",
           series_play_aria: "Play {title} as playlist",
           series_search_placeholder: "Search series by title...",
@@ -23301,21 +23309,57 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
           : base + 'mqdefault.jpg 320w, ' + base + 'hqdefault.jpg 480w, ' + base + 'sddefault.jpg 640w';
         const responsive = saveData ? "" : ' srcset="' + candidates + '" sizes="' + sizes + '"';
         const initial = desktop && !saveData ? "hqdefault" : "mqdefault";
-        return 'src="' + base + initial + '.jpg"' + responsive + ' alt="" width="320" height="180" loading="lazy" decoding="async" onload="if(this.naturalWidth<=120)_videoThumbFallback(this)" onerror="_videoThumbFallback(this)"';
+        return 'src="' + base + initial + '.jpg"' + responsive + ' alt="" width="320" height="180" loading="lazy" decoding="async" onload="_videoThumbLoaded(this)" onerror="_videoThumbFallback(this)"';
+      }
+      const _thumbSourceChecks = new Map();
+      const _thumbLoadVersions = new WeakMap();
+      function _checkThumbSource(url) {
+        if (_thumbSourceChecks.has(url)) return _thumbSourceChecks.get(url);
+        const result = new Promise(resolve => {
+          const probe = new Image();
+          let timer;
+          const finish = value => {
+            clearTimeout(timer);
+            probe.onload = probe.onerror = null;
+            if (value === null) _thumbSourceChecks.delete(url);
+            resolve(value);
+          };
+          probe.onload = () => finish(probe.naturalWidth > 120);
+          probe.onerror = () => finish(null);
+          timer = setTimeout(() => finish(null), 10000);
+          probe.src = url;
+        });
+        if (_thumbSourceChecks.size >= 256) _thumbSourceChecks.delete(_thumbSourceChecks.keys().next().value);
+        _thumbSourceChecks.set(url, result);
+        return result;
+      }
+      async function _videoThumbLoaded(img) {
+        img.style.visibility = "";
+        const current = img.currentSrc || img.src;
+        const version = (_thumbLoadVersions.get(img) || 0) + 1;
+        _thumbLoadVersions.set(img, version);
+        if (!/^https:\/\/img\.youtube\.com\/vi\/[^/]+\/(mqdefault|hqdefault|sddefault|maxresdefault)\.jpg$/.test(current)) return;
+        const valid = img.hasAttribute("srcset") ? await _checkThumbSource(current) : img.naturalWidth > 120;
+        if (_thumbLoadVersions.get(img) !== version || (img.currentSrc || img.src) !== current) return;
+        if (valid === false) { _videoThumbFallback(img); return; }
+        if (valid === true) img.dataset.thumbGood = current;
       }
       function _videoThumbFallback(img) {
+        _thumbLoadVersions.set(img, (_thumbLoadVersions.get(img) || 0) + 1);
         const current = img.currentSrc || img.src;
         const match = current.match(/^(https:\/\/img\.youtube\.com\/vi\/[^/]+\/)(mqdefault|hqdefault|sddefault|maxresdefault)\.jpg$/);
-        if (!match) { img.onerror = null; img.style.visibility = "hidden"; return; }
         const failed = new Set((img.dataset.thumbFailed || "").split(",").filter(Boolean));
-        failed.add(match[2]);
+        if (match) failed.add(match[2]);
         img.dataset.thumbFailed = [...failed].join(",");
         const qualities = ["maxresdefault", "sddefault", "hqdefault", "mqdefault"];
-        const next = qualities.slice(qualities.indexOf(match[2]) + 1).find(name => !failed.has(name));
+        const next = match && qualities.slice(qualities.indexOf(match[2]) + 1).find(name => !failed.has(name));
         img.removeAttribute("srcset");
         img.removeAttribute("sizes");
-        if (!next) { img.onerror = null; img.style.visibility = "hidden"; return; }
-        img.src = match[1] + next + ".jpg";
+        img.style.visibility = "";
+        if (next) { img.src = match[1] + next + ".jpg"; return; }
+        const good = img.dataset.thumbGood;
+        if (good && good !== current) { delete img.dataset.thumbGood; img.src = good; return; }
+        img.src = "data:image/svg+xml," + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180"><rect width="320" height="180" fill="#252830"/><path d="m150 72 28 18-28 18z" fill="#9298a3"/></svg>');
       }
       function _shortsThumbAttributes(vid) {
         const connection = navigator.connection;
@@ -24584,7 +24628,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]){over
         const connection = navigator.connection;
         const saveData = connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType);
         const responsive = saveData ? "" : ' srcset="' + base + 'hqdefault.jpg 480w, ' + base + 'sddefault.jpg 640w, ' + base + 'maxresdefault.jpg 1280w" sizes="auto, (max-width:700px) calc((100vw - 42px) / 2), (min-width:1824px) 365px, calc((100vw - 340px) / 4)"';
-        return '<img src="' + base + 'hqdefault.jpg"' + responsive + ' alt="" width="480" height="270" loading="lazy" decoding="async" onload="if(this.naturalWidth<=120)_videoThumbFallback(this)" onerror="_videoThumbFallback(this)">';
+        return '<img src="' + base + 'hqdefault.jpg"' + responsive + ' alt="" width="480" height="270" loading="lazy" decoding="async" onload="_videoThumbLoaded(this)" onerror="_videoThumbFallback(this)">';
       }
       function buildSeriesGrid() {
         const el = document.getElementById("seriesGridHost");
