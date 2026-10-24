@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-24T01:58:35Z",
+  "updated": "2026-10-24T03:58:34Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -772,7 +772,7 @@
     {
       "id": "6a3e80b31df3183e76dd7b31",
       "date": "2026-10-31",
-      "time": "",
+      "time": "16:00",
       "title": "경주 APEC 정상회의장 기념관 개관식",
       "detail": "",
       "type": "event",
@@ -783,6 +783,15 @@
       "date": "2026-11-07",
       "time": "",
       "title": "2026 KGMA (코리아 그랜드 뮤직 어워즈)",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
+      "id": "6adc11ce13e68b02d4a6b14a",
+      "date": "2026-11-14",
+      "time": "",
+      "title": "2026 멜론 뮤직 어워드 (MMA)",
       "detail": "",
       "type": "concert",
       "source": "mnetplus"
