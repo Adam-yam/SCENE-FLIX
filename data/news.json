@@ -1,6 +1,14 @@
 {
-  "updated": "2026-10-25T19:58:43Z",
+  "updated": "2026-10-25T21:58:53Z",
   "articles": [
+    {
+      "title": "애플은 로제, 삼성은 리센느…스마트폰도 ‘K팝 대결’",
+      "url": "https://n.news.naver.com/mnews/article/011/0004675021?sid=101",
+      "date": "2026.10.26",
+      "source": "sedaily.com",
+      "description": "걸그룹 리센느와 갤럭시 Z 폴드8 협업을 예고했다. 26일 업계에 따르면 삼성전자는 지난 23일 공식... 사진 속 인물들은 리센느 멤버들로 추정된다. 삼성전자는 앞서 지난 7월 리센느 멤버들에게 폴드8과 플립8을...",
+      "thumbnail": "https://imgnews.pstatic.net/image/011/2026/10/26/0004675021_001_20261026063113805.png?type&#x3D;w800"
+    },
     {
       "title": "\"리센느까지 제쳤다\"…한국서 난리 난 가수 누구길래 [김수영의 크레딧...",
       "url": "https://n.news.naver.com/mnews/article/015/0005346292?sid=103",
@@ -151,7 +159,7 @@
       "date": "2026.10.24",
       "source": "inews24.com",
       "description": "삼성전자가 걸그룹 리센느와 갤럭시 Z 폴드8 협업 캠페인을 예고했다. 갤럭시 Z 폴드8 구매층에서 10~30대... 이미지에는 리센느 멤버로 보이는 다섯 명의 여성이 갤럭시 Z 폴드8을 들고 있는 흑백 실루엣이 담겼다....",
-      "thumbnail": "https://imgnews.pstatic.net/image/031/2026/10/24/0001068965_001_20261024150508119.jpg?type&#x3D;w800"
+      "thumbnail": null
     },
     {
       "title": "설렘 한도 초과! 리센느, 'PULSE' 트랙리스트 선물",
@@ -191,15 +199,7 @@
       "date": "2026.10.24",
       "source": "biz.sbs.co.kr",
       "description": "삼성전자가 그룹 리센느와 손잡고 갤럭시 Z 폴드8 협업 캠페인에 나섭니다. 여권형 디자인으로 젊은 층과... '라는 문구와 함께 리센느로 추정되는 여성 다섯 명이 폴드8을 들고 있는 흑백 실루엣 티저 이미지를...",
-      "thumbnail": "https://imgnews.pstatic.net/image/374/2026/10/24/0000539586_001_20261024140207829.jpg?type&#x3D;w800"
-    },
-    {
-      "title": "리센느, 11월 3일 컴백…이번엔 ‘수호자’ 변신",
-      "url": "https://m.entertain.naver.com/article/382/0001300795",
-      "date": "2026.10.24",
-      "source": "sports.donga.com",
-      "description": "그룹 리센느(RESCENE)가 새 앨범 트랙리스트를 공개했다. 리센느(원이, 리브, 미나미, 메이, 제나)는 지난 23일 공식 SNS를 통해 네 번째 미니 앨범 ‘PULSE’(펄스)의 트랙리스트를 공개했다. 공개된 트랙리스트에는...",
-      "thumbnail": "https://imgnews.pstatic.net/image/382/2026/10/24/0001300795_001_20261024134108767.jpg"
+      "thumbnail": null
     }
   ]
 }
