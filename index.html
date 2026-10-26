@@ -18235,7 +18235,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
     ]
   },
   {
-    "category": "Pretty Girl - Special Single",
+    "category": "Pretty Girl",
     "urls": [
       "https://youtu.be/dglF9_PJqto",
       "https://youtu.be/RX592yMx7P0",
@@ -24508,16 +24508,72 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
           return new Set();
         }
       }
-      let BOOKMARKS = _readVideoIdSet("rescene-bookmarks");
-      let curBmSort = "added";
-      function saveBookmarks() {
+      const _BOOKMARK_ITEM_PREFIX = "rescene-bookmark-v2:";
+      function _readStoredBookmarks() {
         try {
-          localStorage.setItem(
-            "rescene-bookmarks",
-            JSON.stringify([...BOOKMARKS]),
-          );
-        } catch {}
+          let legacy;
+          try { legacy = JSON.parse(localStorage.getItem("rescene-bookmarks") || "[]"); }
+          catch (error) { if (error instanceof SyntaxError) legacy = []; else throw error; }
+          const result = new Set(Array.isArray(legacy) ? legacy.filter(id => typeof id === "string" && _VIDEO_ID_RE.test(id)) : []);
+          const changes = [];
+          for (let i = 0; i < localStorage.length; i++) {
+            const key = localStorage.key(i);
+            if (!key?.startsWith(_BOOKMARK_ITEM_PREFIX)) continue;
+            const vid = key.slice(_BOOKMARK_ITEM_PREFIX.length);
+            if (!_VIDEO_ID_RE.test(vid)) continue;
+            let value;
+            try { value = JSON.parse(localStorage.getItem(key)); } catch (error) { if (error instanceof SyntaxError) continue; throw error; }
+            if (!value || typeof value.saved !== "boolean" || !Number.isFinite(value.time) || value.time < 0) continue;
+            changes.push({ vid, saved: value.saved, time: value.time });
+          }
+          changes.sort((a, b) => a.time - b.time || a.vid.localeCompare(b.vid));
+          for (const change of changes) {
+            result.delete(change.vid);
+            if (change.saved) result.add(change.vid);
+          }
+          return result;
+        } catch { return null; }
       }
+      let BOOKMARKS = _readStoredBookmarks() || new Set();
+      let curBmSort = "added";
+      function _bookmarkSaveFailed() {
+        const toast = document.getElementById("share-toast");
+        if (!toast) return;
+        toast.textContent = {
+          KR: "즐겨찾기를 저장하지 못했습니다. 브라우저 저장 공간과 설정을 확인해주세요.",
+          EN: "Could not save this bookmark. Check your browser storage and settings.",
+          JP: "お気に入りを保存できませんでした。ブラウザの保存容量と設定を確認してください。"
+        }[_curLang] || "Could not save this bookmark.";
+        clearTimeout(_shareToastTimer);
+        toast.classList.add("show");
+        _shareToastTimer = setTimeout(() => toast.classList.remove("show"), 5000);
+      }
+      function saveBookmarks(vid, saved) {
+        try {
+          localStorage.setItem(_BOOKMARK_ITEM_PREFIX + vid, JSON.stringify({ saved, time: Date.now() }));
+          return true;
+        } catch { _bookmarkSaveFailed(); return false; }
+      }
+      function _syncBookmarks() {
+        const next = _readStoredBookmarks();
+        if (!next || JSON.stringify([...next]) === JSON.stringify([...BOOKMARKS])) return;
+        BOOKMARKS = next;
+        document.querySelectorAll(".vcard[data-vid]").forEach(card => updateBmBtn(card, card.dataset.vid));
+        updateBookmarkCounts();
+        if (curSection === "bookmark") {
+          const y = window.scrollY;
+          buildBookmarkGrid();
+          window.scrollTo({ top: y, behavior: "instant" });
+        }
+      }
+      let _bookmarkSyncTimer = null;
+      window.addEventListener("storage", event => {
+        if (event.key !== null && event.key !== "rescene-bookmarks" && !event.key.startsWith(_BOOKMARK_ITEM_PREFIX)) return;
+        clearTimeout(_bookmarkSyncTimer);
+        _bookmarkSyncTimer = setTimeout(_syncBookmarks, 20);
+      });
+      window.addEventListener("pageshow", _syncBookmarks);
+      document.addEventListener("visibilitychange", () => { if (!document.hidden) _syncBookmarks(); });
       let WATCHED = _readVideoIdSet("rescene-watched");
       function saveWatched() {
         try {
@@ -24542,12 +24598,14 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
       function toggleBookmark(e, vid) {
         e.preventDefault();
         e.stopPropagation();
-        if (BOOKMARKS.has(vid)) {
-          BOOKMARKS.delete(vid);
-        } else {
-          BOOKMARKS.add(vid);
-        }
-        saveBookmarks();
+        if (!_VIDEO_ID_RE.test(vid)) return;
+        const current = _readStoredBookmarks();
+        if (!current) { _bookmarkSaveFailed(); return; }
+        const saved = !current.has(vid);
+        if (!saveBookmarks(vid, saved)) return;
+        current.delete(vid);
+        if (saved) current.add(vid);
+        BOOKMARKS = _readStoredBookmarks() || current;
         for (const p of CARD_PREFIXES) {
           const card = document.getElementById(p + vid);
           if (card) updateBmBtn(card, vid);
@@ -24910,12 +24968,46 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         if (good && good !== current) { delete img.dataset.thumbGood; img.src = good; return; }
         if (img.src !== THUMBNAIL_PLACEHOLDER) img.src = THUMBNAIL_PLACEHOLDER;
       }
-      function _shortsThumbAttributes(vid) {
+      const _shortsThumbSizes = [
+        { quality: "hqdefault", height: 360 },
+        { quality: "sddefault", height: 480 },
+        { quality: "maxresdefault", height: 720 },
+      ];
+      function _updateShortsThumb(img) {
+        if (!img.isConnected || img.dataset.thumbNear !== "1") return;
+        const rect = img.getBoundingClientRect();
+        if (rect.width <= 0 || rect.height <= 0) return;
         const connection = navigator.connection;
         const saveData = connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType);
-        const quality = saveData ? "sddefault" : "maxresdefault";
-        const base = "https://img.youtube.com/vi/" + encodeURIComponent(vid) + "/";
-        return 'src="' + base + quality + '.jpg" alt="" loading="lazy" decoding="async" data-image="video"';
+        const needed = rect.height * (saveData ? 1 : Math.max(1, window.devicePixelRatio || 1));
+        const target = _shortsThumbSizes.findIndex(candidate => candidate.height >= needed);
+        const level = target < 0 ? _shortsThumbSizes.length - 1 : target;
+        const previous = Number(img.dataset.thumbLevel ?? -1);
+        if (previous >= level) return;
+        const failed = new Set((img.dataset.thumbFailed || "").split(","));
+        if (failed.has(_shortsThumbSizes[level].quality)) return;
+        img.dataset.thumbLevel = String(level);
+        img.src = "https://img.youtube.com/vi/" + encodeURIComponent(img.dataset.thumbVid) + "/" + _shortsThumbSizes[level].quality + ".jpg";
+      }
+      const _shortsThumbResize = typeof ResizeObserver === "undefined" ? null : new ResizeObserver(entries => {
+        for (const entry of entries) _updateShortsThumb(entry.target);
+      });
+      const _shortsThumbVisibility = typeof IntersectionObserver === "undefined" ? null : new IntersectionObserver(entries => {
+        for (const entry of entries) {
+          entry.target.dataset.thumbNear = entry.isIntersecting ? "1" : "0";
+          if (entry.isIntersecting) _updateShortsThumb(entry.target);
+        }
+      }, { rootMargin: "400px" });
+      function _observeShortsThumb(img) {
+        _shortsThumbResize?.observe(img);
+        if (_shortsThumbVisibility) _shortsThumbVisibility.observe(img);
+        else { img.dataset.thumbNear = "1"; _updateShortsThumb(img); }
+      }
+      window.addEventListener("resize", () => {
+        document.querySelectorAll("#shortsGrid img[data-thumb-vid]").forEach(_updateShortsThumb);
+      }, { passive: true });
+      function _shortsThumbAttributes(vid) {
+        return 'alt="" decoding="async" data-image="video" data-thumb-vid="' + _escHtml(vid) + '"';
       }
       function buildThumbHtml(vid, badgeHtml, watched) {
         const watchedLabel = getCurrentT().watched_badge || "시청함";
@@ -26302,6 +26394,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         curSection = section;
         _drainVideoRequests();
         _ensureSectionData(section);
+        if (section === "schedule") loadScheduleJson().catch(() => {});
         if (!_fromPopState) {
           const url =
             section === "about"
@@ -26937,6 +27030,10 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         const pending = state.items.filter((item) => {
           _syncSearchItem(item);
           const ref = item._ref || item;
+          if (state.dateQuery) {
+            const date = _searchItemText(item).date;
+            if (/^\d{4}\.\d{2}\.\d{2}$/.test(date) && !date.includes(state.dateQuery)) return false;
+          }
           if (_needsMetadataRefresh(item.vid)) return true;
           return item._src === "live" || state.section === "live"
             ? !ref.title || ref._metaFailed
@@ -27209,6 +27306,21 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
       let _scheduleState = "loading";
       let _scheduleBusy = false;
       let _scheduleLastAttempt = 0;
+      let _scheduleNextAttempt = 0;
+      let _scheduleRetryCount = 0;
+      let _scheduleRetryTimer = null;
+      let _scheduleManifestPaths = null;
+      const _SCHEDULE_RETRY_DELAYS = [15000, 30000, 60000];
+      function _queueScheduleRetry() {
+        clearTimeout(_scheduleRetryTimer);
+        _scheduleRetryTimer = null;
+        if (!["failed", "partial"].includes(_scheduleState) || _scheduleRetryCount > _SCHEDULE_RETRY_DELAYS.length || document.hidden || navigator.onLine === false) return;
+        _scheduleRetryTimer = setTimeout(() => {
+          _scheduleRetryTimer = null;
+          if (!document.hidden && navigator.onLine !== false) loadScheduleJson().catch(() => {});
+        }, Math.max(0, _scheduleNextAttempt - Date.now()));
+      }
+      document.addEventListener("visibilitychange", _queueScheduleRetry);
       const _scheduleFiles = new Map();
       function _menuText() {
         return {
@@ -27250,9 +27362,12 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
       async function loadScheduleJson(force = false) {
         if (
           _scheduleBusy ||
-          (!force && Date.now() - _scheduleLastAttempt < 10 * 60000)
+          (!force && Date.now() < _scheduleNextAttempt)
         )
           return;
+        clearTimeout(_scheduleRetryTimer);
+        _scheduleRetryTimer = null;
+        if (force || Date.now() - _scheduleLastAttempt >= 10 * 60000) _scheduleRetryCount = 0;
         _scheduleBusy = true;
         _scheduleLastAttempt = Date.now();
         try {
@@ -27263,8 +27378,9 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
                 manifest.files.some(name => typeof name !== "string" || !/^schedule_\d{4}_h[12]\.json$/.test(name)))
               throw new Error("Invalid schedule manifest");
             paths = [...new Set(manifest.files)].map(name => "./data/schedule/" + name);
+            _scheduleManifestPaths = paths;
           } catch {
-            paths = _scheduleHalfFilePaths();
+            paths = _scheduleManifestPaths || _scheduleHalfFilePaths();
           }
           const results = await Promise.allSettled(paths.map(_fetchJson));
           let successes = 0;
@@ -27316,8 +27432,19 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
             });
           injectAnnivEvents();
           if (curSection === "schedule") buildCalendar();
+        } catch {
+          _scheduleState = "failed";
         } finally {
           _scheduleBusy = false;
+          if (_scheduleState === "ready") {
+            _scheduleRetryCount = 0;
+            _scheduleNextAttempt = Date.now() + 10 * 60000;
+          } else {
+            const delay = _SCHEDULE_RETRY_DELAYS[_scheduleRetryCount] || 10 * 60000;
+            _scheduleRetryCount++;
+            _scheduleNextAttempt = Date.now() + delay;
+          }
+          _queueScheduleRetry();
           refreshScheduleExport();
         }
       }
@@ -27441,7 +27568,6 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         return results.every(result => result.status === "fulfilled") ? true : "partial";
       }
       const _sectionDataLoads = new Map();
-      const _visitedDataSections = new Set();
       function _sectionPayload(section) {
         return section === "news" ? NEWS_DATA : section === "chart" ? CHART_DATA : SHORTS_DATA;
       }
@@ -27508,7 +27634,6 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
       function _ensureSectionData(section, force = false) {
         const loader = { news: loadNewsJson, chart: loadChartJson, shorts: loadShortsJson }[section];
         if (!loader) return Promise.resolve();
-        _visitedDataSections.add(section);
         const previous = _sectionDataLoads.get(section);
         if (previous?.pending) return previous.pending;
         if (!force && previous && Date.now() - previous.time < 10 * 60000) return Promise.resolve();
@@ -27668,6 +27793,8 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         items = sortItemsByDate(items, _curShortsSort);
         _shortsFiltered = items;
         _shortsPage = 0;
+        _shortsThumbResize?.disconnect();
+        _shortsThumbVisibility?.disconnect();
         grid.innerHTML = "";
         const countEl = document.getElementById("shortsSearchResultCount");
         if (countEl)
@@ -27724,6 +27851,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         ${date ? `<div class="shorts-date">${_escHtml(date)}</div>` : ""}
       </div>`;
           grid.appendChild(card);
+          _observeShortsThumb(card.querySelector("img"));
         });
         _shortsPage++;
         if (_shortsPage * _SHORTS_PAGE_SIZE >= _shortsFiltered.length) return;
@@ -29630,30 +29758,19 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
     
 
       (function () {
-        let lastAttempt = Date.now(),
-          busy = false;
         let day = _dateStr(_kstDate());
         async function refreshPageData(force = false) {
-          if (document.hidden || busy) return;
+          if (document.hidden || navigator.onLine === false) return;
           const nextDay = _dateStr(_kstDate());
           if (nextDay !== day) {
             day = nextDay;
             injectAnnivEvents();
             if (curSection === "schedule") buildCalendar();
           }
-          if (!force && Date.now() - lastAttempt < 10 * 60000) return;
-          busy = true;
-          lastAttempt = Date.now();
-          try {
-            await Promise.allSettled([
-              loadScheduleJson(force),
-              ...[..._visitedDataSections].map((section) =>
-                _ensureSectionData(section, force),
-              ),
-            ]);
-          } finally {
-            busy = false;
-          }
+          await Promise.allSettled([
+            loadScheduleJson(force),
+            _ensureSectionData(curSection, force),
+          ]);
         }
         setInterval(refreshPageData, 60000);
         document.addEventListener("visibilitychange", () => refreshPageData());
