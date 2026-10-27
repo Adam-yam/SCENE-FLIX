@@ -1,5 +1,3 @@
-                      
-
 import asyncio
 import html
 import json
@@ -144,6 +142,116 @@ def crawl_schedule_month(year: int, month: int) -> list:
     return events
 
 
+BLIP_URL = "https://blip.kr/artists/RESCENE/schedule"
+BLIP_UNIT_ID = 133
+
+
+def parse_blip_page(page, year, month):
+    chunks = []
+    for script in re.findall(r"<script\b[^>]*>(.*?)</script>", page, re.S | re.I):
+        match = re.fullmatch(r"\s*self\.__next_f\.push\((.*)\)\s*;?\s*", script, re.S)
+        if not match:
+            continue
+        value = json.loads(match.group(1))
+        if isinstance(value, list) and len(value) == 2 and value[0] == 1 and isinstance(value[1], str):
+            chunks.append(value[1])
+    matches = []
+
+    def visit(value):
+        if isinstance(value, dict):
+            if value.get("queryKey") == ["schedule", year, month, BLIP_UNIT_ID]:
+                state = value.get("state", {})
+                if state.get("status") != "success" or not isinstance(state.get("data"), list):
+                    raise ValueError("Invalid blip schedule query")
+                matches.append(state["data"])
+            for child in value.values():
+                visit(child)
+        elif isinstance(value, list):
+            for child in value:
+                visit(child)
+
+    for line in "".join(chunks).splitlines():
+        if ":" not in line:
+            continue
+        try:
+            value = json.loads(line.split(":", 1)[1])
+        except json.JSONDecodeError:
+            continue
+        visit(value)
+    if not matches or any(value != matches[0] for value in matches[1:]):
+        raise ValueError("Missing or inconsistent blip schedule query")
+    return normalize_blip_events(matches[0], year, month)
+
+
+def normalize_blip_events(records, year, month):
+    first = date(year, month, 1)
+    last = date(year + (month == 12), month % 12 + 1, 1) - timedelta(days=1)
+    events = {}
+    for record in records:
+        if not isinstance(record, dict) or record.get("unitId") != BLIP_UNIT_ID:
+            raise ValueError("Invalid blip artist")
+        ident, title = record.get("scheduleId"), record.get("title")
+        if type(ident) is not int or ident <= 0 or not isinstance(title, str) or not title.strip():
+            raise ValueError("Invalid blip event")
+        start = datetime.fromisoformat(str(record.get("startTime", "")).replace("Z", "+00:00"))
+        end = datetime.fromisoformat(str(record.get("endTime") or record.get("startTime", "")).replace("Z", "+00:00"))
+        if start.tzinfo is None or end.tzinfo is None or end < start:
+            raise ValueError("Invalid blip event time")
+        start, end = start.astimezone(KST), end.astimezone(KST)
+        allday = record.get("isAllday")
+        if not isinstance(allday, bool):
+            raise ValueError("Invalid blip all-day value")
+        title = title.strip()
+        if title.startswith("<") and title.endswith(">"):
+            title = title[1:-1].strip()
+        if not title:
+            raise ValueError("Empty blip title")
+        field = record.get("extField") or {}
+        location = str(field.get("value") or "") if isinstance(field, dict) and field.get("key") == "장소" else ""
+        id_hash = record.get("idHash", "")
+        link = "https://s.blip.kr/s/" + id_hash if isinstance(id_hash, str) and re.fullmatch(r"[A-Za-z0-9_-]{1,64}", id_hash) else BLIP_URL + "?unitId=133"
+        period = f"{start:%Y.%m.%d} – {end:%Y.%m.%d}" if start.date() != end.date() else ""
+        kind = classify_type({"title": title})
+        if kind == "notice":
+            kind = {1: "broadcast", 2: "anniv", 4: "event", 5: "event"}.get(record.get("typeId"), "notice")
+        day = max(first, start.date())
+        while day <= min(last, end.date()):
+            event = {
+                "id": str(ident), "date": day.isoformat(),
+                "time": start.strftime("%H:%M") if not allday and day == start.date() else "",
+                "title": title, "detail": " · ".join(filter(None, [period, location])),
+                "type": kind, "source": "blip", "link": link,
+                "location": location, "allDay": allday,
+            }
+            key = (event["id"], event["date"])
+            if key in events and events[key] != event:
+                raise ValueError("Conflicting blip event ID")
+            events[key] = event
+            day += timedelta(days=1)
+    return list(events.values())
+
+
+def crawl_blip_month(year, month):
+    try:
+        response = requests.get(BLIP_URL, params={"unitId": BLIP_UNIT_ID, "year": year, "month": month},
+                                headers={"User-Agent": COMMON_UA, "Accept": "text/html"}, timeout=25)
+        response.raise_for_status()
+        if len(response.content) > 8 * 1024 * 1024:
+            raise ValueError("Oversized blip page")
+        events = parse_blip_page(response.text, year, month)
+        print(f"[blip] {year}/{month:02d} → {len(events)}개 날짜별 일정", file=sys.stderr)
+        return events
+    except (requests.RequestException, ValueError, TypeError, KeyError, OverflowError) as error:
+        print(f"[blip] {year}/{month:02d} 수집 실패 ({type(error).__name__})", file=sys.stderr)
+        return None
+
+
+def schedule_months(today, offsets):
+    for offset in offsets:
+        year, month = divmod(today.year * 12 + today.month - 1 + offset, 12)
+        yield year, month + 1
+
+
 def half_key(date_str: str) -> tuple[int, int]:
 
     year  = int(date_str[0:4])
@@ -174,28 +282,28 @@ def _load_half_schedule(year: int, half: int) -> list:
 
 def run_schedule_crawler():
     today = datetime.now(KST).date()
-    months = [(today.year, today.month)]
-    months.append((today.year + 1, 1) if today.month == 12 else (today.year, today.month + 1))
     result = {}
-    for year, month in months:
-        events = crawl_schedule_month(year, month)
-        if events is None:
-            print(f"::warning::Schedule {year}-{month:02d} failed; keeping previous data", file=sys.stderr)
-            continue
-        prefix = f"{year}-{month:02d}"
-        hk = (year, 1 if month <= 6 else 2)
-        existing = result.get(hk)
-        if existing is None:
-            existing = _load_half_schedule(*hk)
-        kept = [ev for ev in existing if not (ev.get("source") == "mnetplus" and ev.get("date", "").startswith(prefix))]
-        seen = set()
-        merged = []
-        for ev in kept + [ev for ev in events if ev["date"].startswith(prefix)]:
-            key = (ev.get("id") or "", ev["date"], ev.get("time", ""), ev["title"])
-            if key not in seen:
-                seen.add(key)
-                merged.append(ev)
-        result[hk] = sorted(merged, key=lambda ev: (ev["date"], ev.get("time", "")))
+    sources = [("mnetplus", crawl_schedule_month, [0, 1]), ("blip", crawl_blip_month, [-1, 0, 1, 2])]
+    for source, crawler, offsets in sources:
+        for year, month in schedule_months(today, offsets):
+            events = crawler(year, month)
+            if events is None:
+                print(f"::warning::{source} {year}-{month:02d} failed; keeping previous data", file=sys.stderr)
+                continue
+            prefix = f"{year}-{month:02d}"
+            hk = (year, 1 if month <= 6 else 2)
+            existing = result.get(hk)
+            if existing is None:
+                existing = _load_half_schedule(*hk)
+            kept = [ev for ev in existing if not (ev.get("source") == source and ev.get("date", "").startswith(prefix))]
+            seen = set()
+            merged = []
+            for ev in kept + [ev for ev in events if ev["date"].startswith(prefix)]:
+                key = (ev.get("source", ""), ev.get("id") or "", ev["date"], ev.get("time", ""), ev["title"])
+                if key not in seen:
+                    seen.add(key)
+                    merged.append(ev)
+            result[hk] = sorted(merged, key=lambda ev: (ev["date"], ev.get("time", ""), ev.get("source", ""), ev["title"]))
     return result
 
 
@@ -395,6 +503,8 @@ def main():
     updated_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     for (year, half), events in schedule_by_half.items():
         path = schedule_json_path(year, half)
+        if path.exists() and json.loads(path.read_text(encoding="utf-8")).get("events") == events:
+            continue
         atomic_json(path, {"updated": updated_at, "events": events})
         print(f"[완료] {path.name} 저장", file=sys.stderr)
 

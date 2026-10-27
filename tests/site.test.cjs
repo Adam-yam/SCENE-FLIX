@@ -74,3 +74,5 @@ async function request(url, mode='cors', destination='') {
   assert.equal(await request('https://example.com/other-project/data.json'),null);
   console.log('PASS: script syntax, schedule manifest, latest offline HTML, stable data cache keys, cache limits, other project protection');
 })().catch(error=>{console.error(error);process.exitCode=1});
+
+require('./schedule.test.cjs');

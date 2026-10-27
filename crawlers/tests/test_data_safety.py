@@ -35,7 +35,7 @@ class DataSafetyTests(unittest.TestCase):
         prefix = today.strftime('%Y-%m')
         old = {'date': prefix + '-10', 'title': 'Event', 'time': '12:00', 'source': 'mnetplus'}
         manual = {**old, 'title': 'Manual', 'source': 'manual'}
-        with patch.object(schedule, 'crawl_schedule_month', side_effect=[first(prefix), second]), patch.object(schedule, '_load_half_schedule', return_value=[old, manual]):
+        with patch.object(schedule, 'crawl_blip_month', return_value=None), patch.object(schedule, 'crawl_schedule_month', side_effect=[first(prefix), second]), patch.object(schedule, '_load_half_schedule', return_value=[old, manual]):
             result = schedule.run_schedule_crawler()
         return result, old, manual
 

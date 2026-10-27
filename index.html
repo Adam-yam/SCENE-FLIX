@@ -7966,6 +7966,13 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
     height: 40px;
   }
 }
+
+.sched-source-filter {display:flex;width:fit-content;max-width:100%;gap:4px;padding:4px;margin:0 0 18px;border:1px solid var(--border);border-radius:12px;background:var(--surf);}
+.sched-source-filter button {appearance:none;border:0;border-radius:8px;padding:10px 16px;min-height:40px;background:transparent;color:var(--muted);font:inherit;font-size:13px;font-weight:600;cursor:pointer;transition:background .15s,color .15s;}
+.sched-source-filter button[aria-pressed="true"] {background:var(--text);color:var(--bg);}
+.sched-source-filter button:focus-visible {outline:2px solid var(--accent);outline-offset:2px;}
+.sched-item-source {font-size:11px;color:var(--muted);white-space:nowrap;}
+@media (max-width:700px) {.sched-source-filter {width:100%;box-sizing:border-box;}.sched-source-filter button {flex:1;padding:10px 8px;}}
 </style>
   
 
@@ -9420,18 +9427,10 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
           </span>
           <button type="button" class="sched-export-trigger" id="scheduleExportBtn" data-action="openScheduleExport"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></svg><span id="scheduleExportLabel">일정 내보내기</span></button>
         </div>
-        <div class="sched-notice-top">
-          <span
-            >스케줄은 공식 채널 Mnet Plus의 정보를 바탕으로 제공되며,
-            SCENE-FLIX에서는 2시간마다 자동으로 갱신됩니다. 최신 스케줄은
-            <a
-              href="https://artist.mnetplus.world/main/stg/rescene-official/schedule"
-              target="_blank"
-              rel="noopener"
-              class="sched-notice-link"
-              >Mnet Plus</a
-            >에서 실시간으로 확인하실 수 있습니다.</span
-          >
+        <div class="sched-source-filter" id="scheduleSources" role="group" aria-label="일정 출처">
+          <button type="button" data-action="setScheduleSource" data-value="all" aria-pressed="true">전체</button>
+          <button type="button" data-action="setScheduleSource" data-value="mnetplus" aria-pressed="false">Mnet Plus</button>
+          <button type="button" data-action="setScheduleSource" data-value="blip" aria-pressed="false">blip</button>
         </div>
         <div class="sched-search-bar">
           <div class="search-input-wrap sched-search-input-wrap">
@@ -10184,6 +10183,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
     
     
   
+<script src="assets/search/search-v1.min.js"></script>
 <script data-scene-events="delegated">
 (function () {
       let _curLang, _i18n, _aboutRebuildChart, aboutChartSelect;
@@ -10215,6 +10215,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         shareSceneFlix: (event, el) => { shareSceneFlix(); },
         copyContactEmail: (event, el) => { copyContactEmail(); },
         openScheduleExport: (event, el) => { openScheduleExport(); },
+        setScheduleSource: (event, el) => { setScheduleSource(el.dataset.value); },
         resetSchedSearchUi: (event, el) => { resetSchedSearchUi(); },
         toggleCalYmPicker: (event, el) => { toggleCalYmPicker(event); },
         calYmYearNav: (event, el) => { calYmYearNav(Number(el.dataset.value), event); },
@@ -26050,7 +26051,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
           const dateNorm = normalizeDateQuery(q.replace(/\s/g, ""));
           const match = dateNorm
             ? !!(date && date.includes(dateNorm))
-            : searchText.includes(q);
+            : _searchRank([searchText], q, text => text).length > 0;
           cardEl.style.display = match ? "" : "none";
           _hlClear(cardEl);
           if (match) _hlCard(cardEl, dateNorm || q);
@@ -26621,7 +26622,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         sort.setAttribute("aria-label", t.sort);
         for (const option of sort.options) option.textContent = t[option.value];
         const q = curSeriesQuery.toLowerCase();
-        const list = SERIES_DATA.map((s, i) => ({ s, i })).filter(({s}) => !q || s.title.toLowerCase().includes(q));
+        const list = _searchRank(SERIES_DATA.map((s, i) => ({ s, i })), q, ({s}) => s.title, false);
         if (curSeriesSort === "oldest" || curSeriesSort === "newest") {
           const dates = new Map(list.map(({s,i}) => [i, _seriesFirstDate(s)]));
           const direction = curSeriesSort === "newest" ? -1 : 1;
@@ -27237,6 +27238,11 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
           item.loaded = true;
         }
       }
+      function _searchRank(items, query, getText, ordered = true) {
+        if (window.SceneSearch) return window.SceneSearch.rank(items, query, getText, ordered);
+        const q = String(query || "").trim().toLowerCase();
+        return items.filter(item => String(getText(item) || "").toLowerCase().includes(q));
+      }
       const _searchTextCache = new WeakMap();
       function _searchItemText(item) {
         const ref = item._ref || item;
@@ -27356,11 +27362,10 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
       function _refreshPagedSearch(state) {
         if (_pagedSearch !== state || curSection !== state.section ||
             curSearchQuery.toLowerCase() !== state.q) return;
-        state.matches = state.items.filter(item => {
-          _syncSearchItem(item);
-          const data = _searchItemText(item);
-          return state.dateQuery ? data.date.includes(state.dateQuery) : data.text.includes(state.q);
-        });
+        state.items.forEach(_syncSearchItem);
+        state.matches = state.dateQuery
+          ? state.items.filter(item => _searchItemText(item).date.includes(state.dateQuery))
+          : _searchRank(state.items, state.q, item => _searchItemText(item).text);
         const count = document.getElementById("searchResultCount");
         if (count) count.textContent = `${state.matches.length}${getCurrentT().search_result_unit || ""}`;
         _reconcileSearchCards(state);
@@ -27604,18 +27609,66 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         return events;
       }
       let _baseScheduleData = [];
-      function injectAnnivEvents() {
-        const annivEvents = generateAnnivEvents();
-        const existing = new Set(
-          _baseScheduleData.map((e) => e.date + "|" + e.title),
-        );
-        SCHEDULE_DATA = [..._baseScheduleData];
-        for (const ev of annivEvents) {
-          if (!existing.has(ev.date + "|" + ev.title)) {
-            SCHEDULE_DATA.push(ev);
+      let _allScheduleData = [];
+      let _scheduleSource = (() => {
+        try {
+          const value = localStorage.getItem("sceneflix-schedule-source");
+          return ["all", "mnetplus", "blip"].includes(value) ? value : "all";
+        } catch { return "all"; }
+      })();
+      function _scheduleSourceText() {
+        return ({KR: {all: "전체", label: "일정 출처", export: "내보낼 출처"}, EN: {all: "All", label: "Schedule source", export: "Export source"}, JP: {all: "すべて", label: "予定の提供元", export: "書き出す提供元"}})[_curLang || "KR"];
+      }
+      function _scheduleSourceLabel(value) {
+        return value === "mnetplus" ? "Mnet Plus" : value === "blip" ? "blip" : _scheduleSourceText().all;
+      }
+      function _mergeScheduleSources(items) {
+        const merged = new Map();
+        for (const ev of items) {
+          const title = ev.title.normalize("NFC").toLowerCase().replace(/[\s<>《》〈〉]+/g, "");
+          const key = JSON.stringify([ev.date, ev.time || "", title]);
+          const previous = merged.get(key);
+          if (!previous) merged.set(key, {...ev, sources: ["mnetplus", "blip"].includes(ev.source) ? [ev.source] : []});
+          else {
+            if (["mnetplus", "blip"].includes(ev.source) && !previous.sources.includes(ev.source)) previous.sources.push(ev.source);
+            if (!previous.note) previous.note = ev.note;
+            if (!previous.link) previous.link = ev.link;
+            if (!previous.location) previous.location = ev.location;
           }
         }
-        SCHEDULE_DATA.sort((a, b) => a.date.localeCompare(b.date));
+        return [...merged.values()];
+      }
+      function _syncScheduleSourceUi() {
+        const group = document.getElementById("scheduleSources");
+        if (!group) return;
+        group.setAttribute("aria-label", _scheduleSourceText().label);
+        group.querySelectorAll("button").forEach(button => {
+          button.textContent = _scheduleSourceLabel(button.dataset.value);
+          button.setAttribute("aria-pressed", String(button.dataset.value === _scheduleSource));
+        });
+      }
+      function setScheduleSource(value) {
+        if (!["all", "mnetplus", "blip"].includes(value) || value === _scheduleSource) return;
+        _scheduleSource = value;
+        try { localStorage.setItem("sceneflix-schedule-source", value); } catch {}
+        injectAnnivEvents();
+        renderCalendar();
+        updateSchedList();
+        refreshScheduleExport();
+      }
+      function injectAnnivEvents() {
+        const annivEvents = generateAnnivEvents();
+        function withAnniversaries(items) {
+          const merged = _mergeScheduleSources(items);
+          const existing = new Set(merged.map(ev => ev.date + "|" + ev.title));
+          for (const ev of annivEvents) {
+            if (!existing.has(ev.date + "|" + ev.title)) merged.push(ev);
+          }
+          return merged.sort((a, b) => a.date.localeCompare(b.date) || (a.time || "").localeCompare(b.time || ""));
+        }
+        _allScheduleData = withAnniversaries(_baseScheduleData);
+        SCHEDULE_DATA = _scheduleSource === "all" ? _allScheduleData : withAnniversaries(_baseScheduleData.filter(ev => ev.source === _scheduleSource || !["blip", "mnetplus"].includes(ev.source)));
+        _syncScheduleSourceUi();
         if (typeof renderMenuSchedule === "function") renderMenuSchedule();
       }
       async function _fetchWithTimeout(url, timeoutMs = 12000, options = {}) {
@@ -27750,6 +27803,9 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
             _scheduleFiles.set(
               paths[i],
               events.map((ev) => ({
+                id: String(ev.id || ""),
+                source: typeof ev.source === "string" ? ev.source : "manual",
+                location: typeof ev.location === "string" ? ev.location : "",
                 date: ev.date,
                 time: typeof ev.time === "string" ? ev.time : "",
                 title: ev.title,
@@ -27769,7 +27825,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
           _baseScheduleData = paths
             .flatMap((path) => _scheduleFiles.get(path) || [])
             .filter((ev) => {
-              const key = JSON.stringify([ev.date, ev.time, ev.title, ev.type]);
+              const key = JSON.stringify([ev.source, ev.id, ev.date, ev.time, ev.title, ev.type]);
               if (seen.has(key)) return false;
               seen.add(key);
               return true;
@@ -28123,18 +28179,8 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
             (i) => i.date && i.date.startsWith(_curShortsYear),
           );
         const q = curShortsSearchQuery.toLowerCase();
-        if (q) {
-          items = items.filter((i) => {
-            const title = (i.title || "").toLowerCase();
-            const label = (
-              _SHORTS_CHANNEL_LABEL[i.channel] ||
-              i.channel ||
-              ""
-            ).toLowerCase();
-            return title.includes(q) || label.includes(q);
-          });
-        }
         items = sortItemsByDate(items, _curShortsSort);
+        if (q) items = _searchRank(items, q, item => [item.title, _SHORTS_CHANNEL_LABEL[item.channel] || item.channel].filter(Boolean).join(" "));
         _shortsFiltered = items;
         _shortsPage = 0;
         _shortsThumbResize?.disconnect();
@@ -28572,6 +28618,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         const failed = _scheduleState === "failed";
         const summary = document.getElementById("sx-summary");
         summary.textContent = loading ? t.loading : failed ? t.failed : !s.events ? t.invalid : !count ? t.empty : t.count(count) + " · " + s.events[0].date + " — " + s.events[count-1].date;
+        summary.textContent += " · " + _scheduleSourceText().export + ": " + _scheduleSourceLabel(_scheduleSource);
         const disabled = loading || failed || !count || _sxBusy || (bulk && !document.getElementById("sx-confirm").checked);
         for (const id of ["sx-download","sx-share"]) document.getElementById(id).disabled = disabled;
       }
@@ -28746,6 +28793,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         return map;
       }
       function renderCalendar() {
+        _syncScheduleSourceUi();
         document.getElementById("scheduleExportLabel").textContent = _sxText().title;
         if (_calYmOpen) closeCalYmPicker();
         const lang = _curLang || "KR";
@@ -28980,6 +29028,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
           <div class="sched-item-meta">
             <span class="sched-item-type-tag" style="${tagStyle}">${_escHtml(tl)}</span>
             ${timeTag}
+            ${ev.sources?.length ? `<span class="sched-item-source">${ev.sources.map(source => _escHtml(_scheduleSourceLabel(source))).join(" · ")}</span>` : ""}
             ${noteHtml ? `<span>${noteHtml}</span>` : ""}
           </div>
         </div>
@@ -29090,11 +29139,6 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
             "</div>";
       }
       let curSchedSearchQuery = "";
-      function _schedSearchMatch(ev, q) {
-        const title = (ev.title || "").toLowerCase();
-        const note = (ev.note || "").toLowerCase();
-        return title.includes(q) || note.includes(q);
-      }
       const _debouncedSchedUpdate = _debounce(updateSchedList, 150);
       function onSchedSearchInput(val) {
         curSchedSearchQuery = val.trim();
@@ -29116,7 +29160,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
       function renderSchedSearchResults() {
         const lang = _curLang || "KR";
         const q = curSchedSearchQuery.toLowerCase();
-        const matches = SCHEDULE_DATA.filter((ev) => _schedSearchMatch(ev, q));
+        const matches = _searchRank(SCHEDULE_DATA, q, ev => [ev.title, ev.note].filter(Boolean).join(" "), false);
         matches.sort((a, b) => a.date.localeCompare(b.date));
         const listEl = document.getElementById("schedList");
         const countEl = document.getElementById("schedListCount");
@@ -30029,7 +30073,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         if (!root) return;
         const today = _dateStr(_kstDate());
         const t = _menuText();
-        const upcoming = SCHEDULE_DATA.filter((e) => e.date >= today).sort(
+        const upcoming = _allScheduleData.filter((e) => e.date >= today).sort(
           (a, b) =>
             a.date.localeCompare(b.date) ||
             (a.time || "").localeCompare(b.time || ""),
