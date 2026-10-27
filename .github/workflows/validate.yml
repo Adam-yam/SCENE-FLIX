@@ -1,7 +1,7 @@
 name: Validate site and crawlers
 on:
   push:
-    paths: ['index.html', 'service-worker.js', 'crawlers/**', 'tests/**', 'data/schedule/**', '.github/workflows/**']
+    paths: ['index.html', 'assets/search/**', 'service-worker.js', 'crawlers/**', 'tests/**', 'data/schedule/**', '.github/workflows/**']
   pull_request:
 permissions:
   contents: read
@@ -17,3 +17,4 @@ jobs:
       - run: python -m unittest discover -s crawlers/tests -q
       - run: node --check service-worker.js
       - run: node tests/site.test.cjs
+      - run: node tests/search.test.cjs
