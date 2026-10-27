@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T07:07:13Z",
+  "updated": "2026-10-27T12:02:07Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -451,7 +451,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/de60aae6",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-04T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113622",
@@ -463,7 +466,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/d2c22de6",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-04T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113650",
@@ -475,7 +481,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/76ebadde",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113674",
@@ -487,7 +496,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8875b07f",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-25T15:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116158",
@@ -499,7 +511,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/7e7881d7",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-01T20:00:00+09:00",
+      "end": "2026-09-01T20:07:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1103438",
@@ -511,7 +526,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/e6fb9ec2",
       "location": "천안 독립기념관",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-02T00:00:00+09:00",
+      "end": "2026-09-02T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113636",
@@ -523,7 +541,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/de60aae6",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-04T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113622",
@@ -535,7 +556,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/d2c22de6",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-04T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113650",
@@ -547,7 +571,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/76ebadde",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113674",
@@ -559,7 +586,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8875b07f",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-25T15:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-02",
@@ -587,7 +617,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/32ed43a3",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-02T20:00:00+09:00",
+      "end": "2026-09-02T20:03:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113636",
@@ -599,7 +632,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/de60aae6",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-04T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113622",
@@ -611,7 +647,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/d2c22de6",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-04T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113650",
@@ -623,7 +662,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/76ebadde",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113674",
@@ -635,7 +677,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8875b07f",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-25T15:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-03",
@@ -655,7 +700,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/6bc36820",
       "location": "MBC 공개홀(상암)",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-03T15:00:00+09:00",
+      "end": "2026-09-03T15:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1106180",
@@ -667,7 +715,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/5cf3adad",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-03T19:00:00+09:00",
+      "end": "2026-09-03T19:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116951",
@@ -679,7 +730,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/1d933ef2",
       "location": "",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-04T01:00:00+09:00",
+      "end": "2026-09-04T01:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113636",
@@ -691,7 +745,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/de60aae6",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-04T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113622",
@@ -703,7 +760,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/d2c22de6",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-04T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113650",
@@ -715,7 +775,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/76ebadde",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113674",
@@ -727,7 +790,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8875b07f",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-25T15:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116737",
@@ -739,7 +805,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a5b65c3a",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-04T18:00:00+09:00",
+      "end": "2026-09-04T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116856",
@@ -751,7 +820,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/54b2f089",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-04T19:00:00+09:00",
+      "end": "2026-09-04T19:20:19+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-04",
@@ -787,7 +859,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/76ebadde",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113674",
@@ -799,7 +874,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8875b07f",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-25T15:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1104762",
@@ -811,7 +889,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/3ac2ee7c",
       "location": "제천예술의전당 여름광장",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-05T19:30:00+09:00",
+      "end": "2026-09-05T19:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-05",
@@ -831,7 +912,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/4ab5eece",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-05T20:00:00+09:00",
+      "end": "2026-09-05T20:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113650",
@@ -843,7 +927,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/76ebadde",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-24T12:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1113674",
@@ -855,7 +942,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8875b07f",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-08-25T15:00:00+09:00",
+      "end": "2026-09-06T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1107273",
@@ -867,7 +957,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/bfe63d68",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-06T17:00:00+09:00",
+      "end": "2026-09-06T17:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-06",
@@ -887,7 +980,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/c400d2ed",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-06T22:00:00+09:00",
+      "end": "2026-09-06T22:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1117261",
@@ -899,7 +995,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/652f2502",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-06T22:00:00+09:00",
+      "end": "2026-09-06T22:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1117401",
@@ -911,7 +1010,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/716ac553",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-07T20:00:00+09:00",
+      "end": "2026-09-07T20:05:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1117438",
@@ -923,7 +1025,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/fe3be17c",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-07T20:15:00+09:00",
+      "end": "2026-09-07T21:23:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1117949",
@@ -935,7 +1040,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/e23505bf",
       "location": "",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-10T00:00:00+09:00",
+      "end": "2026-09-10T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-10",
@@ -955,7 +1063,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/be2e7b70",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-10T21:00:00+09:00",
+      "end": "2026-09-10T21:09:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1112500",
@@ -967,7 +1078,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/4d6a8560",
       "location": "서울 여의도 물빛광장 (서울 영등포구 여의도동 84-9)",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-11T18:00:00+09:00",
+      "end": "2026-09-11T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1118287",
@@ -979,7 +1093,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/1a6cbef5",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-11T18:00:00+09:00",
+      "end": "2026-09-11T18:27:01+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1118306",
@@ -991,7 +1108,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/7a38feb3",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-11T19:00:00+09:00",
+      "end": "2026-09-11T19:10:38+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1118502",
@@ -1003,7 +1123,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a1b2e660",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-12T20:00:00+09:00",
+      "end": "2026-09-12T20:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116119",
@@ -1015,7 +1138,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a6909d4a",
       "location": "더현대 서울 5층 에픽서울",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-15T00:00:00+09:00",
+      "end": "2026-09-23T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116119",
@@ -1027,7 +1153,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a6909d4a",
       "location": "더현대 서울 5층 에픽서울",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-15T00:00:00+09:00",
+      "end": "2026-09-23T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1118297",
@@ -1039,7 +1168,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/2575d5fc",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-16T22:30:00+09:00",
+      "end": "2026-09-16T22:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-16",
@@ -1059,7 +1191,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a6909d4a",
       "location": "더현대 서울 5층 에픽서울",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-15T00:00:00+09:00",
+      "end": "2026-09-23T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1118303",
@@ -1071,7 +1206,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/cce0f5ac",
       "location": "서울대학교 버들골 풍산마당",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-17T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1083,7 +1221,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-17",
@@ -1103,7 +1244,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a0cf6e4e",
       "location": "동국대학교 대운동장",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-17T17:00:00+09:00",
+      "end": "2026-09-17T17:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-17",
@@ -1123,7 +1267,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/94600870",
       "location": "수원대학교",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-18T00:00:00+09:00",
+      "end": "2026-09-18T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116119",
@@ -1135,7 +1282,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a6909d4a",
       "location": "더현대 서울 5층 에픽서울",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-15T00:00:00+09:00",
+      "end": "2026-09-23T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1147,7 +1297,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116468",
@@ -1159,7 +1312,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b2d953f1",
       "location": "",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-18T00:00:00+09:00",
+      "end": "2026-09-18T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-18",
@@ -1187,7 +1343,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/52dc38f4",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-18T19:00:00+09:00",
+      "end": "2026-09-18T19:05:14+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116119",
@@ -1199,7 +1358,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a6909d4a",
       "location": "더현대 서울 5층 에픽서울",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-15T00:00:00+09:00",
+      "end": "2026-09-23T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1211,7 +1373,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-19",
@@ -1231,7 +1396,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/31f5c662",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-19T12:00:00+09:00",
+      "end": "2026-09-19T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1119843",
@@ -1243,7 +1411,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/2e1f08c7",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-19T16:00:00+09:00",
+      "end": "2026-09-19T16:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1104792",
@@ -1255,7 +1426,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/29a4693a",
       "location": "부산 아시아드 주경기장",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-19T18:00:00+09:00",
+      "end": "2026-09-19T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1119898",
@@ -1267,7 +1441,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/55acc692",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-19T19:40:00+09:00",
+      "end": "2026-09-19T19:40:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1119769",
@@ -1279,7 +1456,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/3246e3e7",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-19T20:00:00+09:00",
+      "end": "2026-09-19T20:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1119951",
@@ -1291,7 +1471,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/9caecaa6",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-19T21:45:00+09:00",
+      "end": "2026-09-19T21:45:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116119",
@@ -1303,7 +1486,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a6909d4a",
       "location": "더현대 서울 5층 에픽서울",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-15T00:00:00+09:00",
+      "end": "2026-09-23T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1315,7 +1501,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116119",
@@ -1327,7 +1516,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a6909d4a",
       "location": "더현대 서울 5층 에픽서울",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-15T00:00:00+09:00",
+      "end": "2026-09-23T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1339,7 +1531,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116119",
@@ -1351,7 +1546,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a6909d4a",
       "location": "더현대 서울 5층 에픽서울",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-15T00:00:00+09:00",
+      "end": "2026-09-23T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1117805",
@@ -1363,7 +1561,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/1fe863d3",
       "location": "명지대학교",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-22T00:00:00+09:00",
+      "end": "2026-09-22T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1375,7 +1576,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121201",
@@ -1387,7 +1591,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/d7624232",
       "location": "",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-22T00:00:00+09:00",
+      "end": "2026-09-22T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-22",
@@ -1415,7 +1622,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a6909d4a",
       "location": "더현대 서울 5층 에픽서울",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-15T00:00:00+09:00",
+      "end": "2026-09-23T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1427,7 +1637,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121132",
@@ -1439,7 +1652,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/925daaf3",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-23T20:00:00+09:00",
+      "end": "2026-09-23T20:14:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1451,7 +1667,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1463,7 +1682,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121550",
@@ -1475,7 +1697,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/3a593a81",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-25T12:00:00+09:00",
+      "end": "2026-09-25T13:49:12+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121618",
@@ -1487,7 +1712,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/05a117fb",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-25T18:00:00+09:00",
+      "end": "2026-09-25T18:36:30+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1499,7 +1727,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1511,7 +1742,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-27",
@@ -1539,7 +1773,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1120296",
@@ -1551,7 +1788,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/cc37e4d7",
       "location": "경희대학교 국제캠퍼스",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-29T00:00:00+09:00",
+      "end": "2026-09-29T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1563,7 +1803,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1119180",
@@ -1575,7 +1818,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/c2a7a11d",
       "location": "한양대학교 erica 캠퍼스 ",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-29T00:00:00+09:00",
+      "end": "2026-09-29T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-29",
@@ -1603,7 +1849,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/f5deb20d",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-09-29T18:00:00+09:00",
+      "end": "2026-09-29T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1120240",
@@ -1615,7 +1864,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/31cb184d",
       "location": "을지대학교",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-30T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121993",
@@ -1627,7 +1879,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b32c821a",
       "location": "더 현대 서울 지하2층",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-17T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1119163",
@@ -1639,7 +1894,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/e174e5f0",
       "location": "한경국립대학교",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-09-30T00:00:00+09:00",
+      "end": "2026-09-30T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "date": "2026-09-30",
@@ -1667,7 +1925,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b59ac5de",
       "location": "",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-01T00:00:00+09:00",
+      "end": "2026-10-01T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121198",
@@ -1679,7 +1940,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/4b9faa48",
       "location": "",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-01T00:00:00+09:00",
+      "end": "2026-10-01T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1122878",
@@ -1691,7 +1955,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/14d9ecde",
       "location": "대구 삼성라이온즈파크",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-01T18:30:00+09:00",
+      "end": "2026-10-01T18:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1121926",
@@ -1703,7 +1970,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/0fc2c4a8",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-01T20:00:00+09:00",
+      "end": "2026-10-01T20:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6a8d885d8e8ebf53edc6a55d",
@@ -1733,7 +2003,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/066393e2",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-02T22:30:00+09:00",
+      "end": "2026-10-02T22:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6ac0db6e61092456453dd662",
@@ -1754,7 +2027,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/073b356a",
       "location": "공주 금강신관공원, 미르섬, 공산성, 왕도심 일원",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-03T00:00:00+09:00",
+      "end": "2026-10-03T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1108061",
@@ -1766,7 +2042,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b3574c93",
       "location": "일산 킨텍스 제1전시장",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-03T15:20:00+09:00",
+      "end": "2026-10-03T15:20:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6a3e81070b7c92615f50c73f",
@@ -1796,7 +2075,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/3f628cbb",
       "location": "의령군민공원 · 솥바위 일원",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-04T16:00:00+09:00",
+      "end": "2026-10-04T16:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1123868",
@@ -1808,7 +2090,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/475ffb0f",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-04T19:00:00+09:00",
+      "end": "2026-10-04T19:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6abeae327cda1f77dc44908f",
@@ -1829,7 +2114,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/036f0b4c",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-05T17:00:00+09:00",
+      "end": "2026-10-05T17:28:11+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124531",
@@ -1841,7 +2129,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/fb84aa2f",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-07T20:00:00+09:00",
+      "end": "2026-10-07T20:03:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1118447",
@@ -1853,7 +2144,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/5fd81945",
       "location": "",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-09T00:00:00+09:00",
+      "end": "2026-10-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6aa966b78bbf3631c83b8e7f",
@@ -1874,7 +2168,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/78ff0821",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-09T20:30:00+09:00",
+      "end": "2026-10-09T20:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6ac7a5627a5b7f332bf392dc",
@@ -1895,7 +2192,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/e478e29e",
       "location": "대전 소제동 동광장로 및 대동천 일원",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-10T00:00:00+09:00",
+      "end": "2026-10-10T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125234",
@@ -1907,7 +2207,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/15fdb890",
       "location": "성남시 탄천종합운동장",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-10T10:30:00+09:00",
+      "end": "2026-10-10T10:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125103",
@@ -1919,7 +2222,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/3c896e7e",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-10T18:30:00+09:00",
+      "end": "2026-10-10T18:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6a98f7a94563ce4caf466391",
@@ -1940,7 +2246,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "731305",
@@ -1952,7 +2261,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/3196fa31",
       "location": "",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-10-11T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1112328",
@@ -1964,7 +2276,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a0724b4b",
       "location": "파주 임진각 평화누리",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-11T16:10:00+09:00",
+      "end": "2026-10-11T16:10:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6a48ce2d2abffc033aa33c91",
@@ -1985,7 +2300,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/21b7c588",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-11T19:30:00+09:00",
+      "end": "2026-10-11T19:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124671",
@@ -1997,7 +2315,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/89677ee7",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-11T20:00:00+09:00",
+      "end": "2026-10-11T20:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6acb95e6447ee70d40cd0eaa",
@@ -2018,7 +2339,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/04a39a78",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-11T20:30:00+09:00",
+      "end": "2026-10-11T20:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2030,7 +2354,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125619",
@@ -2042,7 +2369,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/46a7d8c6",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-12T20:00:00+09:00",
+      "end": "2026-10-12T20:08:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125647",
@@ -2054,7 +2384,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/aed95253",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-12T21:00:00+09:00",
+      "end": "2026-10-12T21:08:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125782",
@@ -2066,7 +2399,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/94a29d11",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-12T22:00:00+09:00",
+      "end": "2026-10-12T22:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2078,7 +2414,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2090,7 +2429,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1126060",
@@ -2102,7 +2444,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/1d6bab24",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-14T20:00:00+09:00",
+      "end": "2026-10-14T20:03:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2114,7 +2459,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1126113",
@@ -2126,7 +2474,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8b05d2aa",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-15T18:00:00+09:00",
+      "end": "2026-10-15T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2138,7 +2489,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1129048",
@@ -2150,7 +2504,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/538b00b2",
       "location": "용산 아이파크몰 4F 더팝업",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-16T11:00:00+09:00",
+      "end": "2026-10-22T22:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1127654",
@@ -2162,7 +2519,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/744fa0cb",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-16T20:30:00+09:00",
+      "end": "2026-10-16T20:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1128318",
@@ -2174,7 +2534,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8cbe9cb8",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-16T21:00:00+09:00",
+      "end": "2026-10-16T21:28:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2186,7 +2549,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1129048",
@@ -2198,7 +2564,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/538b00b2",
       "location": "용산 아이파크몰 4F 더팝업",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-16T11:00:00+09:00",
+      "end": "2026-10-22T22:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1108116",
@@ -2210,7 +2579,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/f19ac3a9",
       "location": "",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-17T00:00:00+09:00",
+      "end": "2026-10-17T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1127545",
@@ -2222,7 +2594,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/d4c9b477",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-17T17:00:00+09:00",
+      "end": "2026-10-17T17:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6a4612a67dd960680ac6f9b8",
@@ -2243,7 +2618,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a57ebdb3",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-17T19:00:00+09:00",
+      "end": "2026-10-17T19:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2255,7 +2633,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1129048",
@@ -2267,7 +2648,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/538b00b2",
       "location": "용산 아이파크몰 4F 더팝업",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-16T11:00:00+09:00",
+      "end": "2026-10-22T22:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1129102",
@@ -2279,7 +2663,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/c1ffb38a",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-18T21:00:00+09:00",
+      "end": "2026-10-18T21:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2291,7 +2678,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1129048",
@@ -2303,7 +2693,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/538b00b2",
       "location": "용산 아이파크몰 4F 더팝업",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-16T11:00:00+09:00",
+      "end": "2026-10-22T22:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125783",
@@ -2315,7 +2708,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/2bf7eb57",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-19T18:00:00+09:00",
+      "end": "2026-10-19T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2327,7 +2723,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1129048",
@@ -2339,7 +2738,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/538b00b2",
       "location": "용산 아이파크몰 4F 더팝업",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-16T11:00:00+09:00",
+      "end": "2026-10-22T22:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125784",
@@ -2351,7 +2753,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/1b6ff67e",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-20T18:00:00+09:00",
+      "end": "2026-10-20T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2363,7 +2768,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1129048",
@@ -2375,7 +2783,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/538b00b2",
       "location": "용산 아이파크몰 4F 더팝업",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-16T11:00:00+09:00",
+      "end": "2026-10-22T22:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1130637",
@@ -2387,7 +2798,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/e62f7d55",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-21T20:00:00+09:00",
+      "end": "2026-10-21T20:20:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2399,7 +2813,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1129048",
@@ -2411,7 +2828,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/538b00b2",
       "location": "용산 아이파크몰 4F 더팝업",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-16T11:00:00+09:00",
+      "end": "2026-10-22T22:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1131026",
@@ -2423,7 +2843,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/f1b68799",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-22T12:00:00+09:00",
+      "end": "2026-10-22T17:09:05+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125785",
@@ -2435,7 +2858,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/71e2f673",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-22T18:00:00+09:00",
+      "end": "2026-10-22T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1128955",
@@ -2447,7 +2873,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/7a7ac5c9",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-22T19:00:00+09:00",
+      "end": "2026-10-22T19:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2459,7 +2888,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1122201",
@@ -2471,7 +2903,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/9a1d7205",
       "location": "마산대학교",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-23T00:00:00+09:00",
+      "end": "2026-10-23T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125786",
@@ -2483,7 +2918,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/74ab223c",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-23T15:00:00+09:00",
+      "end": "2026-10-23T15:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125808",
@@ -2495,7 +2933,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/996453f8",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-23T18:00:00+09:00",
+      "end": "2026-10-23T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1128173",
@@ -2507,7 +2948,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/eb09c728",
       "location": "동아대학교 승학캠퍼스 뉴턴공원 일대",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-23T18:00:00+09:00",
+      "end": "2026-10-23T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1130510",
@@ -2519,7 +2963,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/1d08bc6a",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-23T18:30:00+09:00",
+      "end": "2026-10-23T18:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6adb1f0443ea3171535c8d2a",
@@ -2549,7 +2996,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1116102",
@@ -2561,7 +3011,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/21856e63",
       "location": "한화리조트 거제 벨버디어",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-24T00:00:00+09:00",
+      "end": "2026-10-24T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6abeaf6f9fce30571f6042d7",
@@ -2582,7 +3035,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/778f5997",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-24T19:00:00+09:00",
+      "end": "2026-10-24T19:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6adb1fc313e68b02d4a6b12a",
@@ -2603,7 +3059,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1131330",
@@ -2615,7 +3074,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/5f138340",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-25T19:00:00+09:00",
+      "end": "2026-10-25T19:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2627,7 +3089,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1132450",
@@ -2639,7 +3104,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/e387795a",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-26T12:00:00+09:00",
+      "end": "2026-10-26T12:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125809",
@@ -2651,7 +3119,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8682e597",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-26T18:00:00+09:00",
+      "end": "2026-10-26T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1132675",
@@ -2663,7 +3134,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/13baa2fb",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-26T20:00:00+09:00",
+      "end": "2026-10-26T20:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2675,7 +3149,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125810",
@@ -2687,7 +3164,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/63fb90b8",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-27T18:00:00+09:00",
+      "end": "2026-10-27T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2699,7 +3179,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2711,7 +3194,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2723,7 +3209,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125811",
@@ -2735,7 +3224,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/97ed6681",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-30T18:00:00+09:00",
+      "end": "2026-10-30T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1131744",
@@ -2747,7 +3239,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/fa50b5c7",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-30T20:00:00+09:00",
+      "end": "2026-10-30T20:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2759,7 +3254,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1123252",
@@ -2771,7 +3269,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/12fa4607",
       "location": "경주엑스포대공원 천마광장",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-10-31T16:00:00+09:00",
+      "end": "2026-10-31T16:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6a3e80b31df3183e76dd7b31",
@@ -2792,7 +3293,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2804,7 +3308,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2816,7 +3323,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1120078",
@@ -2828,7 +3338,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/7a898137",
       "location": "",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-11-03T18:00:00+09:00",
+      "end": "2026-11-03T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125781",
@@ -2840,7 +3353,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/f403104a",
       "location": "블루스퀘어 우리WON뱅킹홀",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-11-03T20:00:00+09:00",
+      "end": "2026-11-03T20:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2852,7 +3368,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2864,7 +3383,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2876,7 +3398,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2888,7 +3413,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1119029",
@@ -2900,7 +3428,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/38cc9e67",
       "location": "고척스카이돔",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-11-07T00:00:00+09:00",
+      "end": "2026-11-07T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6a3e7e069f69517347795cee",
@@ -2921,7 +3452,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/7f37c10e",
       "location": "고척 스카이돔",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-11-07T17:00:00+09:00",
+      "end": "2026-11-07T17:00:00+09:00",
+      "endTimeHidden": false
     },
     {
       "id": "1124956",
@@ -2933,7 +3467,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
@@ -2945,7 +3482,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/8215c8a2",
       "location": "포토이즘 박스/컬러드 전 지점",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-10-11T00:00:00+09:00",
+      "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6adc11ce13e68b02d4a6b14a",
@@ -2966,7 +3506,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/71c8fd54",
       "location": "고척 스카이돔",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-11-14T18:00:00+09:00",
+      "end": "2026-11-14T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125767",
@@ -2978,7 +3521,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b83a0671",
       "location": "KYOCERA DOME OSAKA",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-11-20T00:00:00+09:00",
+      "end": "2026-11-21T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125767",
@@ -2990,7 +3536,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/b83a0671",
       "location": "KYOCERA DOME OSAKA",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-11-20T00:00:00+09:00",
+      "end": "2026-11-21T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "731507",
@@ -3002,7 +3551,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/a6f0522d",
       "location": "",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-11-27T00:00:00+09:00",
+      "end": "2026-11-27T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "731397",
@@ -3014,7 +3566,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/e42b4e20",
       "location": "",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-11-29T00:00:00+09:00",
+      "end": "2026-11-29T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1109822",
@@ -3026,7 +3581,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/e7c93451",
       "location": "Kaohsiung National Stadium",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-12-05T18:00:00+09:00",
+      "end": "2026-12-05T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1120214",
@@ -3038,7 +3596,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/321d9d78",
       "location": "Kaohsiung National Stadium",
-      "allDay": false
+      "allDay": false,
+      "start": "2026-12-06T18:00:00+09:00",
+      "end": "2026-12-06T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1123982",
@@ -3050,7 +3611,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/f615cde7",
       "location": "도쿄 MUFG 스타디움 (국립경기장)",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-12-13T00:00:00+09:00",
+      "end": "2026-12-13T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1131475",
@@ -3062,7 +3626,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/0f3ccb74",
       "location": "KINTEX",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-12-24T00:00:00+09:00",
+      "end": "2026-12-25T00:00:00+09:00",
+      "endTimeHidden": false
     },
     {
       "id": "1131475",
@@ -3074,7 +3641,10 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/0f3ccb74",
       "location": "KINTEX",
-      "allDay": true
+      "allDay": true,
+      "start": "2026-12-24T00:00:00+09:00",
+      "end": "2026-12-25T00:00:00+09:00",
+      "endTimeHidden": false
     }
   ]
 }
