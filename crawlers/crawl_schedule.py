@@ -13,6 +13,7 @@ from typing import Optional
 import aiohttp
 import requests
 from storage import atomic_json
+from calendar_feed import publish_calendars
 
 KST = timezone(timedelta(hours=9))
 
@@ -222,6 +223,8 @@ def normalize_blip_events(records, year, month):
                 "title": title, "detail": " · ".join(filter(None, [period, location])),
                 "type": kind, "source": "blip", "link": link,
                 "location": location, "allDay": allday,
+                "start": start.isoformat(), "end": end.isoformat(),
+                "endTimeHidden": bool(record.get("isEndTimeHidden")),
             }
             key = (event["id"], event["date"])
             if key in events and events[key] != event:
@@ -510,6 +513,7 @@ def main():
 
     paths = sorted((ROOT / "data" / "schedule").glob("schedule_????_h[12].json"))
     atomic_json(ROOT / "data" / "schedule" / "manifest.json", {"files": [p.name for p in paths]})
+    publish_calendars(ROOT)
     news_data = run_news_crawler()
     if news_data is not None:
         atomic_json(ROOT / "data" / "news.json", news_data)
