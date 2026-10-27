@@ -7546,7 +7546,7 @@ html,
 #scheduleMode .sched-item-link {
   font-size: 11px;
 }
-#scheduleMode button:focus-visible,#scheduleExportDialog :focus-visible {
+#scheduleMode button:focus-visible,:is(#scheduleExportDialog,#scheduleSubscribeDialog) :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
@@ -7578,7 +7578,7 @@ html,
 @media (max-width: 700px) {
   .sched-export-trigger {padding:0 11px;font-size:0.72rem;}
 }
-#scheduleExportDialog {
+:is(#scheduleExportDialog,#scheduleSubscribeDialog) {
   width: min(480px,calc(100vw - 32px));
   max-height: calc(100dvh - 40px);
   padding: 28px;
@@ -7609,17 +7609,17 @@ html,
 .sx-device-section .sx-help {
   margin-top: 4px;
 }
-html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
+html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]) {
   overscroll-behavior-y: none;
 }
-#scheduleExportDialog {
+:is(#scheduleExportDialog,#scheduleSubscribeDialog) {
   overscroll-behavior: contain;
 }
-#scheduleExportDialog::backdrop {
+:is(#scheduleExportDialog,#scheduleSubscribeDialog)::backdrop {
   background: #0007;
   backdrop-filter: blur(5px);
 }
-#scheduleExportDialog [hidden] {
+:is(#scheduleExportDialog,#scheduleSubscribeDialog) [hidden] {
   display: none !important;
 }
 .sx-head {
@@ -7856,7 +7856,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
   #scheduleMode .sched-group {
     column-gap: 14px;
   }
-  #scheduleExportDialog {
+  :is(#scheduleExportDialog,#scheduleSubscribeDialog) {
     padding: 24px 20px;
     border-radius: 22px;
     max-height: calc(100dvh - 24px);
@@ -7866,7 +7866,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
   }
 }
 @media(prefers-reduced-transparency:reduce) {
-  #scheduleExportDialog::backdrop {
+  :is(#scheduleExportDialog,#scheduleSubscribeDialog)::backdrop {
     backdrop-filter: none;
     background: #000b;
   }
@@ -7983,6 +7983,14 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
 .sched-source-filter:has([data-value="blip"].active)::before {transform:translateX(200%);}
 .sched-item-source {font-size:11px;color:var(--muted);white-space:nowrap;}
 
+
+.sched-header-actions {display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end;}
+.ss-url-row {display:flex;gap:8px;align-items:stretch;}
+.ss-url-row input {min-width:0;flex:1;padding:12px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--text);font:inherit;font-size:12px;}
+.ss-url-row button {padding:0 12px;border:1px solid var(--border);border-radius:10px;background:var(--surf);color:var(--text);font:inherit;font-size:12px;cursor:pointer;}
+.ss-url-label {display:block;font-size:12px;color:var(--muted);margin:20px 0 8px;}
+.ss-open {display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:11px;background:var(--accent);color:#fff;text-decoration:none;font-size:13px;font-weight:600;}
+.ss-note {margin-top:14px;margin-bottom:0;}
 </style>
   
 
@@ -9435,7 +9443,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
             </svg>
             SCHEDULE
           </span>
-          <button type="button" class="sched-export-trigger" id="scheduleExportBtn" data-action="openScheduleExport"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></svg><span id="scheduleExportLabel">일정 내보내기</span></button>
+          <div class="sched-header-actions"><button type="button" class="sched-export-trigger" id="scheduleSubscribeBtn" data-action="openScheduleSubscription"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4m10-4v4M3 10h18m-9 3v5m-2.5-2.5h5"/></svg><span id="scheduleSubscribeLabel">구독</span></button><button type="button" class="sched-export-trigger" id="scheduleExportBtn" data-action="openScheduleExport"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M12 3v12m-4-4 4 4 4-4M4 16v5h16v-5"/></svg><span id="scheduleExportLabel">일정 내보내기</span></button></div>
         </div>
         <div class="sort-btns sort-three sched-source-filter" id="scheduleSources" role="group" aria-label="일정 출처">
           <button type="button" class="sort-btn active" data-action="setScheduleSource" data-value="all" aria-pressed="true">전체</button>
@@ -9662,6 +9670,18 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         </div>
       </div>
     </div>
+
+    <dialog id="scheduleSubscribeDialog" aria-labelledby="ss-title" aria-describedby="ss-intro">
+      <div class="sx-head"><h2 id="ss-title" data-ss="title">캘린더 구독</h2><button type="button" id="ss-close" class="sx-close" aria-label="닫기" data-action="closeScheduleSubscription">×</button></div>
+      <p id="ss-intro" class="sx-caption" data-ss="intro"></p>
+      <fieldset class="sx-modes"><legend data-ss="source">구독할 일정</legend><label><input type="radio" name="ss-source" value="all" checked><span data-ss="all">전체</span></label><label><input type="radio" name="ss-source" value="mnetplus"><span>Mnet Plus</span></label><label><input type="radio" name="ss-source" value="blip"><span>blip</span></label></fieldset>
+      <a id="ss-open" class="ss-open" data-ss="open">아이폰 캘린더에서 구독</a>
+      <label for="ss-url" class="ss-url-label" data-ss="url">구독 주소</label>
+      <div class="ss-url-row"><input type="text" inputmode="url" id="ss-url" readonly spellcheck="false"><button type="button" data-action="copyScheduleSubscription" data-ss="copy">복사</button></div>
+      <p class="sx-caption ss-note" data-ss="help"></p>
+      <p class="sx-caption ss-note" data-ss="note"></p>
+      <p id="ss-status" class="sx-status" role="status" aria-live="polite"></p>
+    </dialog>
 
     <dialog id="scheduleExportDialog" aria-labelledby="sx-title" aria-describedby="sx-subtitle">
       <div class="sx-head"><h2 id="sx-title" data-sx="title">일정 내보내기</h2><button type="button" id="sx-close" class="sx-close" aria-label="닫기" data-action="closeScheduleExport">×</button></div>
@@ -10224,6 +10244,9 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         playSeries: (event, el) => { playSeries(_activeSeriesIndex); },
         shareSceneFlix: (event, el) => { shareSceneFlix(); },
         copyContactEmail: (event, el) => { copyContactEmail(); },
+        openScheduleSubscription: () => { openScheduleSubscription(); },
+        closeScheduleSubscription: () => { document.getElementById("scheduleSubscribeDialog").close(); },
+        copyScheduleSubscription: () => { copyScheduleSubscription(); },
         openScheduleExport: (event, el) => { openScheduleExport(); },
         setScheduleSource: (event, el) => { setScheduleSource(el.dataset.value); },
         resetSchedSearchUi: (event, el) => { resetSchedSearchUi(); },
@@ -28633,6 +28656,48 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         const disabled = loading || failed || !count || _sxBusy || (bulk && !document.getElementById("sx-confirm").checked);
         for (const id of ["sx-download","sx-share"]) document.getElementById(id).disabled = disabled;
       }
+      const _SUBSCRIPTION_TEXT = {
+        KR: {button:"구독",title:"캘린더 구독",intro:"구독할 플랫폼을 선택하세요. 이후 일정 변경은 캘린더 앱이 다시 읽어올 때 반영됩니다.",source:"구독할 일정",all:"전체",open:"아이폰 캘린더에서 구독",url:"구독 주소",copy:"복사",copied:"구독 주소를 복사했습니다.",copyFail:"주소를 길게 눌러 복사해 주세요.",close:"닫기",help:"열리지 않으면 주소를 복사한 뒤 아이폰 캘린더의 ‘캘린더 추가 → 구독 캘린더 추가’에 붙여넣으세요.",note:"전체와 개별 플랫폼을 함께 구독하면 일정이 겹칠 수 있습니다. 선택을 바꿔도 기존 구독은 변경되지 않습니다. 반영까지 시간이 걸릴 수 있습니다."},
+        EN: {button:"Subscribe",title:"Subscribe to calendar",intro:"Choose a schedule source. Changes appear when your calendar app refreshes the subscription.",source:"Schedule source",all:"All",open:"Subscribe in Apple Calendar",url:"Subscription URL",copy:"Copy",copied:"Subscription URL copied.",copyFail:"Select and copy the URL manually.",close:"Close",help:"If it does not open, copy the URL and paste it into Apple Calendar → Add Calendar → Add Subscription Calendar.",note:"Subscribing to All and an individual source can show duplicates. Changing this selection does not change an existing subscription. Updates may take time."},
+        JP: {button:"登録",title:"カレンダーを登録",intro:"登録する配信元を選択してください。予定の変更はカレンダーアプリの更新時に反映されます。",source:"予定の配信元",all:"すべて",open:"Appleカレンダーで登録",url:"登録用URL",copy:"コピー",copied:"URLをコピーしました。",copyFail:"URLを選択してコピーしてください。",close:"閉じる",help:"開かない場合はURLをコピーし、カレンダーの「カレンダーを追加 → 照会カレンダーを追加」に貼り付けてください。",note:"すべてと個別の配信元を同時に登録すると予定が重複する場合があります。この選択を変えても既存の登録は変更されません。反映に時間がかかる場合があります。"}
+      };
+      function _subscriptionText() { return _SUBSCRIPTION_TEXT[_curLang] || _SUBSCRIPTION_TEXT.KR; }
+      function _subscriptionUrl(source) {
+        if (!["all","mnetplus","blip"].includes(source)) source = "all";
+        const base = /^https?:$/.test(location.protocol) ? document.baseURI : "https://adam-yam.github.io/SCENE-FLIX/";
+        return new URL("data/schedule/" + source + ".ics", base).href;
+      }
+      function refreshScheduleSubscription() {
+        const dialog = document.getElementById("scheduleSubscribeDialog");
+        const source = dialog.querySelector('input[name="ss-source"]:checked')?.value || "all";
+        const url = _subscriptionUrl(source);
+        document.getElementById("ss-url").value = url;
+        document.getElementById("ss-open").href = url.replace(/^https?:/,"webcal:");
+        document.getElementById("ss-status").textContent = "";
+      }
+      function openScheduleSubscription() {
+        const dialog = document.getElementById("scheduleSubscribeDialog"), t = _subscriptionText();
+        if (dialog.open) return;
+        dialog.querySelectorAll("[data-ss]").forEach(el => el.textContent = t[el.dataset.ss]);
+        document.getElementById("ss-close").setAttribute("aria-label",t.close);
+        dialog.querySelector('input[name="ss-source"][value="' + _scheduleSource + '"]').checked = true;
+        refreshScheduleSubscription();
+        dialog.showModal();
+      }
+      async function copyScheduleSubscription() {
+        const input = document.getElementById("ss-url"), url = input.value;
+        try {
+          await navigator.clipboard.writeText(url);
+          if (input.value === url) document.getElementById("ss-status").textContent = _subscriptionText().copied;
+        } catch {
+          if (input.value !== url || !document.getElementById("scheduleSubscribeDialog").open) return;
+          input.focus(); input.select(); input.setSelectionRange(0,input.value.length);
+          document.getElementById("ss-status").textContent = _subscriptionText().copyFail;
+        }
+      }
+      document.getElementById("scheduleSubscribeDialog").addEventListener("change", refreshScheduleSubscription);
+      document.getElementById("scheduleSubscribeDialog").addEventListener("close", () => document.getElementById("scheduleSubscribeBtn").focus());
+
       function openScheduleExport() {
         const t = _sxText(), dialog = document.getElementById("scheduleExportDialog");
         if (dialog.open) return;
@@ -28804,6 +28869,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         return map;
       }
       function renderCalendar() {
+        document.getElementById("scheduleSubscribeLabel").textContent = _subscriptionText().button;
         _syncScheduleSourceUi();
         document.getElementById("scheduleExportLabel").textContent = _sxText().title;
         if (_calYmOpen) closeCalYmPicker();
@@ -29699,7 +29765,7 @@ html:has(#scheduleExportDialog[open]),body:has(#scheduleExportDialog[open]) {
         }
       });
       document.addEventListener("keydown", (e) => {
-        if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey || document.getElementById("scheduleExportDialog").open) return;
+        if (e.key !== "/" || e.metaKey || e.ctrlKey || e.altKey || document.querySelector("dialog[open]")) return;
         const a = document.activeElement;
         if (
           a &&
