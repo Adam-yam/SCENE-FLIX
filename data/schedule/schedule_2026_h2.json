@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-28T07:58:37Z",
+  "updated": "2026-10-28T09:58:46Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3353,6 +3353,21 @@
       "source": "blip",
       "link": "https://s.blip.kr/s/f403104a",
       "location": "블루스퀘어 우리WON뱅킹홀",
+      "allDay": false,
+      "start": "2026-11-03T20:00:00+09:00",
+      "end": "2026-11-03T20:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1134077",
+      "date": "2026-11-03",
+      "time": "20:00",
+      "title": "<PULSE> SHOWCASE LIVE",
+      "detail": "",
+      "type": "concert",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/90d4e2c6",
+      "location": "",
       "allDay": false,
       "start": "2026-11-03T20:00:00+09:00",
       "end": "2026-11-03T20:00:00+09:00",
