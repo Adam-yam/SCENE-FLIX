@@ -7991,6 +7991,167 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
 .ss-url-label {display:block;font-size:12px;color:var(--muted);margin:20px 0 8px;}
 .ss-open {display:flex;align-items:center;justify-content:center;min-height:44px;border-radius:11px;background:var(--accent);color:#fff;text-decoration:none;font-size:13px;font-weight:600;}
 .ss-note {margin-top:14px;margin-bottom:0;}
+
+.bm-editing .vcard {
+  position: relative;
+  cursor: default;
+  animation: none !important;
+}
+.bm-reorder-handle {
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  z-index: 4;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surf);
+  color: var(--text);
+  font-size: 26px;
+  cursor: grab;
+  touch-action: none;
+  display: grid;
+  place-items: center;
+}
+.bm-reorder-handle:active {
+  cursor: grabbing;
+}
+.bm-drag-ghost {
+  opacity: 0.25;
+}
+.bm-drag-chosen {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.bm-editing .card-actions {
+  pointer-events: none;
+}
+.bm-toolbar .search-bar-inner {
+  flex-wrap: wrap;
+  gap: 8px;
+}
+#bmManual[aria-pressed="true"],
+#bmReorder[aria-pressed="true"] {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.series-qr {
+  position: absolute;
+  right: 40px;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  padding: 8px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+}
+.series-qr:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+.series-card-wrap .series-caption {
+  padding-right: 0 !important;
+  padding-bottom: 42px;
+}
+@media (max-width: 700px) {
+  .series-qr {
+    right: 44px;
+    width: 40px;
+    height: 40px;
+  }
+}
+#seriesQrDialog {
+  width: min(420px, calc(100vw - 28px));
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surf);
+  color: var(--text);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+#seriesQrDialog::backdrop {
+  background: #0009;
+  backdrop-filter: blur(4px);
+}
+html:has(#seriesQrDialog[open]),
+body:has(#seriesQrDialog[open]) {
+  overscroll-behavior-y: none;
+}
+.qr-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+.qr-head h2 {
+  margin: 0;
+  font-size: 20px;
+}
+.qr-head button {
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 25px;
+  padding: 5px 9px;
+  cursor: pointer;
+}
+#qrSeries {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 12px 0 18px;
+}
+#qrCanvas {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+  max-width: 100%;
+  background: white;
+  border-radius: 8px;
+}
+#qrCanvas[hidden] {
+  display: none;
+}
+.qr-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 18px;
+}
+.qr-actions button {
+  flex: 1;
+  min-height: 42px;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  font: inherit;
+  font-size: 13px;
+}
+.qr-actions button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+#qrStatus {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.7;
+  margin-bottom: 0;
+}
+#seriesQrDialog :focus-visible,
+.bm-reorder-handle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
 </style>
   
 
@@ -9154,7 +9315,8 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
         </div>
       </div>
       <div id="seriesGridHost" class="grid-wrap"></div>
-      <dialog id="seriesDetailDialog" aria-labelledby="seriesDetailTitle">
+      <dialog id="seriesQrDialog" aria-labelledby="qrTitle" aria-describedby="qrSeries"><div class="qr-head"><h2 id="qrTitle">QR 코드</h2><button type="button" id="qrClose" data-action="closeSeriesQr" aria-label="닫기">×</button></div><p id="qrSeries"></p><canvas id="qrCanvas" role="img" aria-label="YouTube playlist QR code" hidden></canvas><div class="qr-actions"><button type="button" id="qrCopy" data-action="copySeriesQr" disabled>이미지 복사</button><button type="button" id="qrSave" data-action="saveSeriesQr" disabled>이미지 저장</button></div><p id="qrStatus" role="status" aria-live="polite"></p></dialog>
+<dialog id="seriesDetailDialog" aria-labelledby="seriesDetailTitle">
         <div class="series-detail-top">
           <div class="series-detail-row"><div><h2 id="seriesDetailTitle"></h2><p id="seriesDetailCount"></p></div><button type="button" class="series-close" id="seriesDetailClose" data-action="closeSeriesDetail" aria-label="시리즈 닫기">×</button></div>
           <button type="button" class="series-play" id="seriesDetailPlay" data-action="playSeries"></button>
@@ -10281,6 +10443,12 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
         playBookmarksAsPlaylist: (event, el) => { playBookmarksAsPlaylist(); },
         setArchiveMonth: (event, el) => { setArchiveMonth(el.dataset.year, el.dataset.month); },
         openSeriesDetail: (event, el) => { openSeriesDetail(Number(el.dataset.value)); },
+        toggleBookmarkReorder: () => { toggleBookmarkReorder(); },
+        bookmarkManual: () => { setSort('manual'); },
+        openSeriesQr: (event,el) => { openSeriesQr(event,Number(el.dataset.value)); },
+        closeSeriesQr: () => { document.getElementById('seriesQrDialog').close(); },
+        copySeriesQr: () => { copySeriesQr(); },
+        saveSeriesQr: () => { saveSeriesQr(); },
         copySeriesPlaylist: (event, el) => { copySeriesPlaylist(event, Number(el.dataset.value)); },
         pickSong: (event, el) => { pickSong(el.dataset.value); },
         pickShortsYear: (event, el) => { pickShortsYear(el.dataset.value); },
@@ -24939,19 +25107,247 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
           return result;
         } catch { return null; }
       }
-      let BOOKMARKS = _readStoredBookmarks() || new Set();
-      let curBmSort = "added";
-      function _bookmarkSaveFailed() {
+      const _FEATURE_TEXT = {
+        KR: {
+          edit: "순서 변경",
+          done: "순서 변경 완료",
+          manual: "내 순서",
+          handle: "끌어서 이동 · 방향키로 순서 변경",
+          search: "검색을 지운 뒤 순서를 변경해 주세요.",
+          failed: "기능을 불러오지 못했습니다. 다시 시도해 주세요.",
+          saved: "순서를 저장했습니다.",
+          qr: "QR 코드",
+          copy: "이미지 복사",
+          download: "이미지 저장",
+          close: "닫기",
+          copied: "QR 이미지를 복사했습니다.",
+          copyFail: "이미지 복사를 지원하지 않거나 권한이 없습니다. 이미지 저장을 이용해 주세요.",
+          loading: "QR 코드를 만드는 중입니다.",
+          qrFail: "주소가 너무 길거나 QR 생성에 실패했습니다. 기존 공유 버튼으로 링크를 복사해 주세요.",
+        },
+        EN: {
+          edit: "Reorder",
+          done: "Done",
+          manual: "My order",
+          handle: "Drag to move · use arrow keys to reorder",
+          search: "Clear your search before reordering.",
+          failed: "Could not load this feature. Try again.",
+          saved: "Order saved.",
+          qr: "QR code",
+          copy: "Copy image",
+          download: "Save image",
+          close: "Close",
+          copied: "QR image copied.",
+          copyFail: "Image copying is unavailable or denied. Use Save image.",
+          loading: "Creating QR code…",
+          qrFail:
+            "The URL is too long or QR generation failed. Use the existing share button to copy the link.",
+        },
+        JP: {
+          edit: "順序を変更",
+          done: "完了",
+          manual: "自分の順序",
+          handle: "ドラッグ、または矢印キーで移動",
+          search: "検索をクリアしてから順序を変更してください。",
+          failed: "読み込めませんでした。もう一度お試しください。",
+          saved: "順序を保存しました。",
+          qr: "QRコード",
+          copy: "画像をコピー",
+          download: "画像を保存",
+          close: "閉じる",
+          copied: "QR画像をコピーしました。",
+          copyFail: "画像をコピーできません。画像を保存してください。",
+          loading: "QRコードを作成しています。",
+          qrFail: "URLが長すぎるか生成に失敗しました。共有ボタンでリンクをコピーしてください。",
+        },
+      };
+      const _ft = () => _FEATURE_TEXT[_curLang] || _FEATURE_TEXT.KR;
+      const _BM_ORDER_KEY = "sceneflix-bookmark-order-v1";
+      function _readBmOrder() {
+        try {
+          const v = JSON.parse(localStorage.getItem(_BM_ORDER_KEY) || "[]");
+          return Array.isArray(v)
+            ? [...new Set(v.filter((id) => typeof id === "string" && _VIDEO_ID_RE.test(id)))]
+            : [];
+        } catch {
+          return [];
+        }
+      }
+      let _bmOrder = _readBmOrder(),
+        _bmEditing = false,
+        _bmSortable = null,
+        _bmLoading = false,
+        _bmEditRequest = 0;
+      const _featureScripts = new Map();
+      const _FEATURE_ASSETS = {
+        sortable: {
+          path: "assets/features/sortable-v1.min.js",
+          ready: () => typeof window.Sortable === "function",
+        },
+        qrcode: {
+          path: "assets/features/qrcode-v1.min.js",
+          ready: () => typeof window.SceneQRCode?.toCanvas === "function",
+        },
+      };
+      function _featureLoad(name) {
+        const asset = _FEATURE_ASSETS[name];
+        if (!asset) return Promise.reject(new Error("Unknown feature"));
+        if (asset.ready()) return Promise.resolve();
+        if (_featureScripts.has(name)) return _featureScripts.get(name);
+        const promise = new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          let settled = false;
+          const finish = (error) => {
+            if (settled) return;
+            settled = true;
+            clearTimeout(timer);
+            script.onload = null;
+            script.onerror = null;
+            if (error) {
+              script.remove();
+              _featureScripts.delete(name);
+              reject(error);
+            } else resolve();
+          };
+          const timer = setTimeout(() => finish(new Error("Feature load timed out")), 15000);
+          script.src = asset.path;
+          script.onload = () => finish(asset.ready() ? null : new Error("Feature unavailable"));
+          script.onerror = () => finish(new Error("Feature load failed"));
+          document.head.append(script);
+        });
+        _featureScripts.set(name, promise);
+        return promise;
+      }
+      function _featureToast(text, duration = 4000) {
         const toast = document.getElementById("share-toast");
         if (!toast) return;
-        toast.textContent = {
+        toast.textContent = text;
+        clearTimeout(_shareToastTimer);
+        toast.classList.add("show");
+        _shareToastTimer = setTimeout(() => toast.classList.remove("show"), duration);
+      }
+      function _endBmEdit() {
+        ++_bmEditRequest;
+        _bmEditing = false;
+        _bmSortable?.destroy();
+        _bmSortable = null;
+        _elGrid?.classList.remove("bm-editing");
+        _elGrid?.querySelectorAll(".bm-reorder-handle").forEach((e) => e.remove());
+        const b = document.getElementById("bmReorder");
+        if (b) {
+          b.textContent = _ft().edit;
+          b.setAttribute("aria-pressed", "false");
+        }
+      }
+      function _saveBmOrder() {
+        const next = [..._elGrid.querySelectorAll(".vcard[data-vid]")].map((e) => e.dataset.vid);
+        try {
+          localStorage.setItem(_BM_ORDER_KEY, JSON.stringify(next));
+          _bmOrder = next;
+          _featureToast(_ft().saved);
+        } catch {
+          _bookmarkSaveFailed();
+          buildBookmarkGrid();
+        }
+      }
+      function _mountBmEdit() {
+        _bmSortable?.destroy();
+        _bmSortable = null;
+        if (!_bmEditing || curSection !== "bookmark" || curSearchQuery) return;
+        _elGrid.classList.add("bm-editing");
+        _elGrid.querySelectorAll(".vcard[data-vid]").forEach((card) => {
+          if (card.querySelector(".bm-reorder-handle")) return;
+          const b = document.createElement("button");
+          b.type = "button";
+          b.className = "bm-reorder-handle";
+          b.textContent = "⠿";
+          b.setAttribute("aria-label", _ft().handle);
+          b.title = _ft().handle;
+          card.append(b);
+        });
+        _bmSortable = new window.Sortable(_elGrid, {
+          draggable: ".vcard[data-vid]",
+          handle: ".bm-reorder-handle",
+          animation: matchMedia("(prefers-reduced-motion:reduce)").matches ? 0 : 180,
+          ghostClass: "bm-drag-ghost",
+          chosenClass: "bm-drag-chosen",
+          delay: 120,
+          delayOnTouchOnly: true,
+          touchStartThreshold: 5,
+          onEnd: () => _saveBmOrder(),
+        });
+      }
+      async function toggleBookmarkReorder() {
+        if (_bmEditing) {
+          _endBmEdit();
+          return;
+        }
+        if (_bmLoading || curSection !== "bookmark") return;
+        if (curSearchQuery) {
+          _featureToast(_ft().search);
+          return;
+        }
+        _bmLoading = true;
+        const request = ++_bmEditRequest;
+        try {
+          await _featureLoad("sortable");
+          if (request !== _bmEditRequest || curSection !== "bookmark" || curSearchQuery) return;
+          _bmEditing = true;
+          curBmSort = "manual";
+          setSort("manual");
+        } catch {
+          _featureToast(_ft().failed);
+        } finally {
+          _bmLoading = false;
+        }
+      }
+      document.addEventListener(
+        "click",
+        (event) => {
+          if (!_bmEditing || !event.target.closest("#grid .vcard")) return;
+          event.preventDefault();
+          event.stopImmediatePropagation();
+        },
+        true,
+      );
+      document.addEventListener(
+        "keydown",
+        (event) => {
+          const handle = event.target.closest(".bm-reorder-handle");
+          if (!handle || !_bmEditing) return;
+          const direction = ["ArrowLeft", "ArrowUp"].includes(event.key)
+            ? -1
+            : ["ArrowRight", "ArrowDown"].includes(event.key)
+              ? 1
+              : 0;
+          if (!direction) return;
+          event.preventDefault();
+          event.stopPropagation();
+          const card = handle.closest(".vcard"),
+            other = direction < 0 ? card.previousElementSibling : card.nextElementSibling;
+          if (other) {
+            if (direction < 0) other.before(card);
+            else other.after(card);
+            _saveBmOrder();
+            handle.focus({ preventScroll: true });
+          }
+        },
+        true,
+      );
+      window.addEventListener("storage", (event) => {
+        if (event.key !== _BM_ORDER_KEY && event.key !== null) return;
+        _bmOrder = _readBmOrder();
+        if (curSection === "bookmark" && !_bmEditing) buildBookmarkGrid();
+      });
+
+      let BOOKMARKS = _readStoredBookmarks() || new Set();
+      let curBmSort = _bmOrder.length ? "manual" : "added";
+      function _bookmarkSaveFailed() {
+        _featureToast({
           KR: "즐겨찾기를 저장하지 못했습니다. 브라우저 저장 공간과 설정을 확인해주세요.",
           EN: "Could not save this bookmark. Check your browser storage and settings.",
           JP: "お気に入りを保存できませんでした。ブラウザの保存容量と設定を確認してください。"
-        }[_curLang] || "Could not save this bookmark.";
-        clearTimeout(_shareToastTimer);
-        toast.classList.add("show");
-        _shareToastTimer = setTimeout(() => toast.classList.remove("show"), 5000);
+        }[_curLang] || "Could not save this bookmark.",5000);
       }
       function saveBookmarks(vid, saved) {
         try {
@@ -25147,6 +25543,10 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
           (i) =>
             BOOKMARKS.has(i.vid) && !seenVids.has(i.vid) && seenVids.add(i.vid),
         );
+        if (sort === "manual") {
+          const rank=new Map(_bmOrder.map((id,i)=>[id,i]));
+          return items.sort((a,b)=>(rank.get(a.vid)??Number.MAX_SAFE_INTEGER)-(rank.get(b.vid)??Number.MAX_SAFE_INTEGER));
+        }
         if (sort === "added") {
           const order = [...BOOKMARKS];
           const rank = new Map(order.map((vid, idx) => [vid, idx]));
@@ -25173,9 +25573,12 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
         window.open(url, "_blank", "noopener");
       }
       function buildBookmarkGrid(preserve = false) {
+        _bmSortable?.destroy();_bmSortable=null;
+        if(_bmEditing&&!preserve)queueMicrotask(_mountBmEdit);
         if (!_elGrid) return;
         const bmMode = document.getElementById("bookmarkMode");
         if (!BOOKMARKS.size) {
+          _endBmEdit();
           _stopPagedSearch();
           const count = document.getElementById("searchResultCount");
           if (count) count.textContent = "";
@@ -25206,6 +25609,8 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
           ${t.bm_playlist_play || "재생목록으로 재생"}
         </button>
+        <button type="button" class="bm-playlist-btn" id="bmManual" data-action="bookmarkManual" aria-pressed="${curBmSort==='manual'}">${_ft().manual}</button>
+        <button type="button" class="bm-playlist-btn" id="bmReorder" data-action="toggleBookmarkReorder" aria-pressed="${_bmEditing}">${_bmEditing?_ft().done:_ft().edit}</button>
         ${capped ? `<span class="bm-playlist-note">${_escHtml(note)}</span>` : ""}
       </div>
     </div>`;
@@ -25230,6 +25635,7 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
             card.remove();
           }
           nextFocus?.focus({ preventScroll: true });
+          if(_bmEditing)queueMicrotask(_mountBmEdit);
           return;
         }
         _elGrid.innerHTML = unique
@@ -26707,7 +27113,7 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
         el.innerHTML = '<div class="series-wrap">' + (list.length ? list.map(({s,i}) => {
           const count = t.videos.replace("{n}", s.ids.length);
           const duration = _seriesDurationLabel(s);
-          return '<article class="series-card-wrap"><button type="button" class="series-card" data-action="openSeriesDetail" data-value="' + i + '" aria-label="' + _escHtml(s.title + " · " + count + " · " + duration) + '"><div class="series-cover">' + (s.ids.length ? _seriesThumb(s.ids[0]) : '') + '<span class="series-count"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M6 3h12"/></svg>' + _escHtml(count) + '</span></div><div class="series-caption"><div><span class="series-title">' + _escHtml(s.title) + '</span><span class="series-runtime">' + _escHtml(duration) + '</span></div>' + '</div></button><button type="button" class="series-share" data-action="copySeriesPlaylist" data-value="' + i + '" aria-label="' + _escHtml(s.title + ' · ' + getCurrentT().series_share) + '" title="' + _escHtml(getCurrentT().series_share) + '"' + (s.ids.length ? '' : ' disabled') + '><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg></button></article>';
+          return '<article class="series-card-wrap"><button type="button" class="series-card" data-action="openSeriesDetail" data-value="' + i + '" aria-label="' + _escHtml(s.title + " · " + count + " · " + duration) + '"><div class="series-cover">' + (s.ids.length ? _seriesThumb(s.ids[0]) : '') + '<span class="series-count"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M6 3h12"/></svg>' + _escHtml(count) + '</span></div><div class="series-caption"><div><span class="series-title">' + _escHtml(s.title) + '</span><span class="series-runtime">' + _escHtml(duration) + '</span></div>' + '</div></button><button type="button" class="series-share" data-action="copySeriesPlaylist" data-value="' + i + '" aria-label="' + _escHtml(s.title + ' · ' + getCurrentT().series_share) + '" title="' + _escHtml(getCurrentT().series_share) + '"' + (s.ids.length ? '' : ' disabled') + '><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 10.5 6.8-4M8.6 13.5l6.8 4"/></svg></button><button type="button" class="series-qr" data-action="openSeriesQr" data-value="' + i + '" aria-label="' + _escHtml(s.title + ' · ' + _ft().qr) + '" title="' + _ft().qr + '"' + (s.ids.length ? '' : ' disabled') + '><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M3 3h6v6H3zM15 3h6v6h-6zM3 15h6v6H3zM14 14h3v3h4v4h-7zM20 13h1M12 3v5M3 12h5"/></svg></button></article>';
         }).join("") : '<div class="series-empty">' + _escHtml(getCurrentT().series_no_results || "검색 결과가 없습니다.") + '</div>') + '</div>';
       }
       function openSeriesDetail(i) {
@@ -26730,12 +27136,92 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
         document.getElementById("seriesDetailDialog").close();
         _activeSeriesIndex = -1;
       }
+      let _qrToken = 0,
+        _qrBlob = null,
+        _qrFocus = null;
+      function _seriesPlaylistUrl(series) {
+        return (
+          "https://www.youtube.com/watch_videos?video_ids=" +
+          series.ids.map((id) => encodeURIComponent(id)).join(",")
+        );
+      }
+      async function openSeriesQr(event, index) {
+        event.preventDefault();
+        event.stopPropagation();
+        const series = SERIES_DATA[index];
+        if (!series?.ids.length) return;
+        const dialog = document.getElementById("seriesQrDialog"),
+          token = ++_qrToken,
+          t = _ft();
+        _qrBlob = null;
+        _qrFocus =
+          event.currentTarget instanceof HTMLElement ? event.currentTarget : document.activeElement;
+        document.getElementById("qrTitle").textContent = t.qr;
+        document.getElementById("qrSeries").textContent = series.title;
+        document.getElementById("qrClose").setAttribute("aria-label", t.close);
+        document.getElementById("qrCopy").textContent = t.copy;
+        document.getElementById("qrSave").textContent = t.download;
+        document.getElementById("qrCanvas").hidden = true;
+        document.getElementById("qrStatus").textContent = t.loading;
+        document.getElementById("qrCopy").disabled = true;
+        document.getElementById("qrSave").disabled = true;
+        if (!dialog.open) dialog.showModal();
+        try {
+          await _featureLoad("qrcode");
+          if (token !== _qrToken || !dialog.open) return;
+          const canvas = document.getElementById("qrCanvas");
+          await window.SceneQRCode.toCanvas(canvas, _seriesPlaylistUrl(series), {
+            errorCorrectionLevel: "M",
+            width: 768,
+            margin: 4,
+            color: { dark: "#000000ff", light: "#ffffffff" },
+          });
+          const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+          if (token !== _qrToken || !dialog.open) return;
+          if (!blob) throw Error("PNG");
+          _qrBlob = blob;
+          canvas.hidden = false;
+          document.getElementById("qrStatus").textContent = "";
+          document.getElementById("qrCopy").disabled = false;
+          document.getElementById("qrSave").disabled = false;
+        } catch {
+          if (token === _qrToken) document.getElementById("qrStatus").textContent = _ft().qrFail;
+        }
+      }
+      async function copySeriesQr() {
+        if (!_qrBlob) return;
+        const token = _qrToken;
+        try {
+          if (!navigator.clipboard?.write || !window.ClipboardItem) throw Error("Unsupported");
+          await navigator.clipboard.write([new ClipboardItem({ "image/png": _qrBlob })]);
+          if (token === _qrToken) document.getElementById("qrStatus").textContent = _ft().copied;
+        } catch {
+          if (token === _qrToken) document.getElementById("qrStatus").textContent = _ft().copyFail;
+        }
+      }
+      function saveSeriesQr() {
+        if (!_qrBlob) return;
+        const url = URL.createObjectURL(_qrBlob),
+          a = document.createElement("a");
+        a.href = url;
+        a.download = "SCENE-FLIX-series-QR.png";
+        document.body.append(a);
+        a.click();
+        a.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 60000);
+      }
+      document.getElementById("seriesQrDialog").addEventListener("close", () => {
+        ++_qrToken;
+        _qrBlob = null;
+        if (_qrFocus?.isConnected) _qrFocus.focus({ preventScroll: true });
+      });
+
       async function copySeriesPlaylist(event, index) {
         event.preventDefault();
         event.stopPropagation();
         const series = SERIES_DATA[index];
         if (!series?.ids.length) return;
-        const url = "https://www.youtube.com/watch_videos?video_ids=" + series.ids.map(id => encodeURIComponent(id)).join(",");
+        const url = _seriesPlaylistUrl(series);
         let copied = false;
         try {
           await navigator.clipboard.writeText(url);
@@ -26785,6 +27271,7 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
         if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) closeSeriesDetail();
       });
       function pickSection(section, _fromPopState) {
+        if(section!=="bookmark")_endBmEdit();
         if (section !== "series" && document.getElementById("seriesDetailDialog").open) closeSeriesDetail();
         if (!Object.hasOwn(_PICK_SECTION_MAP, section)) section = "about";
         if (
@@ -27070,6 +27557,7 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
       }
       function setSort(dir) {
         if (curSection === "bookmark") {
+          if(dir!=='manual')_endBmEdit();
           curBmSort = dir;
           _elSortAdded.classList.toggle("active", dir === "added");
           _elSortNewest.classList.toggle("active", dir === "newest");
@@ -27509,6 +27997,7 @@ html:has(:is(#scheduleExportDialog,#scheduleSubscribeDialog)[open]),body:has(:is
         }
       }
       function applySearch() {
+        if(_bmEditing)_endBmEdit();
         const q = curSearchQuery.toLowerCase();
         _stopPagedSearch();
         if (!q) {
