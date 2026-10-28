@@ -76,3 +76,50 @@ async function request(url, mode='cors', destination='') {
 })().catch(error=>{console.error(error);process.exitCode=1});
 
 require('./schedule.test.cjs');
+
+{
+  const grab = (name, next) => html.slice(html.indexOf('      function ' + name + '('), html.indexOf(next, html.indexOf('      function ' + name + '(')));
+  const vids = ['aaaaaaaaaaa', 'bbbbbbbbbbb', 'ccccccccccc', 'ddddddddddd'];
+  const items = vids.map((vid, i) => ({vid, meta:{date:String(i)}}));
+  const state = {BOOKMARKS:new Set(vids), curBmSort:'manual', _bmOrder:[vids[2], vids[0]], buildUnifiedVideoList:()=>[...items, items[0]], _videoDate:()=>'', _dateStrToSortKey:Number};
+  vm.createContext(state);
+  vm.runInContext(grab('_getBookmarkedItems', '      const BOOKMARK_PLAYLIST_LIMIT'), state);
+  assert.deepEqual(Array.from(state._getBookmarkedItems('manual'), i=>i.vid), [vids[2],vids[0],vids[1],vids[3]]);
+  assert.deepEqual(Array.from(state._getBookmarkedItems('added'), i=>i.vid), vids);
+  assert.deepEqual(Array.from(state._getBookmarkedItems('newest'), i=>i.vid), [...vids].reverse());
+  state.BOOKMARKS.delete(vids[2]);
+  assert.deepEqual(Array.from(state._getBookmarkedItems('manual'), i=>i.vid), [vids[0],vids[1],vids[3]]);
+  const urlSource = html.slice(html.indexOf('      function _seriesPlaylistUrl('), html.indexOf('      async function openSeriesQr('));
+  vm.runInContext(urlSource,state);
+  assert.equal(state._seriesPlaylistUrl({ids:vids}), 'https://www.youtube.com/watch_videos?video_ids='+vids.join(','));
+  for (const name of ['sortable','qrcode']) new vm.Script(fs.readFileSync(path.join(root,'assets/features',name+'-v1.min.js'),'utf8'));
+  console.log('PASS: bookmark manual order, new and removed entries, existing sort modes, QR playlist address, bundled script syntax');
+}
+
+(async () => {
+  const scripts=[], timers=new Map();let clock=0;
+  const state={window:{},document:{createElement:()=>({remove(){this.removed=true}}),head:{append:s=>scripts.push(s)}},setTimeout:fn=>{timers.set(++clock,fn);return clock},clearTimeout:id=>timers.delete(id)};
+  vm.createContext(state);
+  const begin=html.indexOf('      const _featureScripts');
+  vm.runInContext(html.slice(begin,html.indexOf('      function _featureToast',begin)),state);
+  const first=state._featureLoad('sortable');
+  assert.equal(first,state._featureLoad('sortable'));
+  const rejected=assert.rejects(first);
+  scripts[0].onerror();await rejected;
+  assert(scripts[0].removed);
+  const retry=state._featureLoad('sortable');state.window.Sortable=function(){};scripts[1].onload();await retry;
+  assert.equal(timers.size,0);
+  const timeout=state._featureLoad('qrcode');const expired=assert.rejects(timeout);[...timers.values()][0]();await expired;
+  await assert.rejects(state._featureLoad('../unknown'));
+  let release,enabled=0;
+  const edit={_bmEditing:false,_bmLoading:false,_bmEditRequest:0,_bmSortable:null,_elGrid:null,curSection:'bookmark',curSearchQuery:'',_featureLoad:()=>new Promise(resolve=>release=resolve),_featureToast:()=>{},_ft:()=>({}),document:{getElementById:()=>null},setSort:()=>enabled++};
+  vm.createContext(edit);
+  const end=html.indexOf('      function _endBmEdit');
+  vm.runInContext(html.slice(end,html.indexOf('      function _saveBmOrder',end)),edit);
+  const toggle=html.indexOf('      async function toggleBookmarkReorder');
+  vm.runInContext(html.slice(toggle,html.indexOf('      document.addEventListener',toggle)),edit);
+  const loading=edit.toggleBookmarkReorder();
+  edit.curSection='series';edit._endBmEdit();edit.curSection='bookmark';release();await loading;
+  assert.equal(enabled,0);assert.equal(edit._bmEditing,false);assert.equal(edit._bmLoading,false);
+  console.log('PASS: feature load deduplication, retry, timeout, allowlist and stale reorder cancellation');
+})().catch(error=>{console.error(error);process.exitCode=1});
