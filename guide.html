@@ -1,22 +1,439 @@
-<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>센플릭스 둘러보기</title><link rel="stylesheet" href="assets/fonts/pretendard-1.3.9/pretendardvariable-dynamic-subset.css"><style>
-*{box-sizing:border-box}body{margin:0;background:#151618;font-family:'Pretendard Variable',sans-serif;color:#fff}iframe{position:fixed;inset:0;width:100%;height:100%;border:0;transition:opacity .28s ease,filter .28s ease}body.docked iframe{height:calc(100% - 280px)}body.moving iframe{opacity:.35;filter:blur(3px)}#spot{position:fixed;border:1px solid #ffffffc0;border-radius:12px;box-shadow:0 0 0 9999px #000a;pointer-events:none;z-index:2;transition:all .38s cubic-bezier(.22,1,.36,1)}#coach{position:fixed;z-index:3;width:340px;max-width:calc(100vw - 32px);padding:19px 21px;border-radius:15px;background:#222426f5;border:1px solid #ffffff14;box-shadow:0 12px 40px #0003;transition:opacity .2s,transform .3s,left .38s,top .38s}body.moving #coach{opacity:0;transform:translateY(8px);pointer-events:none}h2{font-size:18px;letter-spacing:-.4px;margin:11px 0 8px}p{font-size:13px;line-height:1.7;color:#c7cbca;margin:0 0 15px}button,select,a{font:inherit}button{cursor:pointer;padding:8px 13px;border-radius:8px;border:1px solid #ffffff26;background:transparent;color:#eee;font-size:12px}button:disabled{opacity:.3}#next{background:#fff;color:#17191a;border-color:#fff}.nav{display:flex;gap:8px;align-items:center}.count{margin-right:auto;color:#999;font-size:11px}#steps{background:transparent;border:0;color:#abb5b0;font-size:11px;max-width:100%;padding:0}#steps option{background:#252728}#exit{position:fixed;z-index:4;right:16px;bottom:16px;background:#242628ed;color:#ddd;text-decoration:none;padding:9px 14px;border:1px solid #ffffff22;border-radius:30px;font-size:11px}#notice{font-size:12px;color:#a7d4bb;margin-bottom:12px}#loading{position:fixed;inset:0;display:grid;place-items:center;background:#151618;z-index:5}button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid #a4cfb8;outline-offset:4px}[hidden]{display:none!important}@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
-</style></head><body><iframe id="app" src="guide-frame.html" title="센플릭스 기능 체험 화면" sandbox="allow-scripts allow-same-origin"></iframe><div id="loading">센플릭스를 준비하고 있어요.</div><div id="spot" hidden></div><section id="coach" aria-label="기능 안내" hidden><select id="steps" aria-label="체험 항목"></select><h2 id="title"></h2><p id="desc"></p><div id="notice" role="status"></div><div class="nav"><span class="count"></span><button id="prev">이전</button><button id="next">다음 →</button></div></section><a id="exit" href="index.html">체험 종료 ↗</a><script>
-(()=>{const $=s=>document.querySelector(s),frame=$('#app'),mobile=matchMedia('(max-width:700px)');let current=0,busy=false,target=null,seq=0;const all=[
-['allvideos','#searchInput','영상 찾기','제목이나 초성을 입력하고 검색해 보세요. 실제 센플릭스와 같은 검색 기능입니다.'],
-['external','#searchBar .sort-btns','영상 탭의 필터','최신순·오래된순을 바꿔보세요. 콘텐츠와 채널 필터도 실제 화면 그대로 사용할 수 있습니다.'],
-['archive','#archiveMonthBar','기간별 보기','연도를 고른 다음 월을 선택하면 해당 시기에 올라온 영상을 모아볼 수 있습니다.'],
-['bookmark','.bm-playlist-btn','즐겨찾기 · 재생목록','영상의 별 버튼으로 저장하거나 해제할 수 있어요. “재생목록으로 재생”은 모은 영상들을 이어보는 기능입니다. 체험용으로 3개를 담아두었습니다.'],
-['series','.series-runtime','시리즈 재생시간','시리즈에 담긴 모든 영상의 재생시간을 합한 값입니다. 첫 영상 한 편의 길이가 아니에요.'],
-['series','.series-share','시리즈 공유','이 버튼을 누르면 시리즈 영상들을 묶은 YouTube 재생목록 주소를 복사할 수 있습니다.'],
-['schedule','#scheduleSources','스케줄 플랫폼 선택','전체·Mnet Plus·blip 중 보고 싶은 일정 출처를 선택해 보세요.'],
-['schedule','#scheduleExportBtn','스케줄 내보내기','눌러서 한 달·기간·전체 중 선택해 보세요. 내보내기는 현재 일정을 한 번 저장하는 방식입니다. 체험에서는 파일을 저장하지 않습니다.'],
-['schedule','#scheduleSubscribeBtn','스케줄 구독','구독할 플랫폼을 선택해 보세요. 등록 후에는 캘린더가 다시 읽을 때 변경 내용이 반영됩니다. 체험에서는 구독을 등록하지 않습니다.'],
-['allvideos','[data-action="toggleTheme"]','다크 · 라이트 모드','버튼을 눌러 화면 밝기를 바꿔보세요. 체험 중 설정은 실제 페이지에 저장되지 않습니다.'],
-['allvideos','[data-action="toggleSidebar"]','메뉴 최소화','메뉴 오른쪽 버튼을 누르면 메뉴가 접히고 영상 영역이 넓어집니다. 다시 눌러 펼칠 수 있어요.'],
-['allvideos','.lang-btn','언어 변경','한국어·영어·일본어 버튼을 눌러보세요. 실제 센플릭스의 화면 문구가 바뀝니다.']];
-let steps=all.filter(x=>!mobile.matches||x[2]!=='메뉴 최소화');const wait=ms=>new Promise(r=>setTimeout(r,ms));function visible(selector){return [...frame.contentDocument.querySelectorAll(selector)].find(e=>e.getBoundingClientRect().width&&e.getBoundingClientRect().height)}
-function position(){if(!target||busy)return;const doc=frame.contentDocument;const dialog=visible('dialog[open]');const el=dialog||target;if(!el.isConnected)return;const r=el.getBoundingClientRect();let x=Math.max(8,r.left-5),y=Math.max(8,r.top-5),w=Math.min(innerWidth-x-8,r.width+10),h=Math.min(innerHeight-y-8,r.height+10);Object.assign($('#spot').style,{left:x+'px',top:y+'px',width:w+'px',height:h+'px'});const coach=$('#coach'),cw=Math.min(340,innerWidth-32);coach.style.width=cw+'px';let top=y+h+14;if(top+coach.offsetHeight>innerHeight-58){top=innerHeight-coach.offsetHeight-58;if(!dialog&&r.top>100){frame.contentWindow.scrollBy({top:r.top-85,behavior:'smooth'})}}coach.style.left=Math.max(16,Math.min(innerWidth-cw-16,x))+'px';coach.style.top=Math.max(16,top)+'px'}
-async function go(index){if(busy)return;busy=true;const token=++seq;document.body.classList.add('moving');await wait(matchMedia('(prefers-reduced-motion:reduce)').matches?0:200);current=index;const step=steps[current],api=frame.contentWindow.guideAPI;document.body.classList.toggle('docked',['다크 · 라이트 모드','언어 변경'].includes(step[2]));frame.contentDocument.querySelectorAll('dialog[open]').forEach(d=>d.close());api.closeDrawer();if(step[0]==='bookmark')api.prepareBookmarks();api.pick(step[0]);if(mobile.matches&&['다크 · 라이트 모드','언어 변경'].includes(step[2]))api.drawer();$('#title').textContent=step[2];$('#desc').textContent=step[3];$('#notice').textContent='';$('#steps').innerHTML=steps.map((s,i)=>`<option value="${i}">${String(i+1).padStart(2,'0')} · ${s[2]}</option>`).join('');$('#steps').value=current;$('.count').textContent=`${current+1} / ${steps.length}`;$('#prev').disabled=current===0;$('#next').textContent=current===steps.length-1?'마치기':'다음 →';await wait(180);target=visible(['다크 · 라이트 모드','언어 변경'].includes(step[2])?(mobile.matches?'#mobileDrawer ':'#sidebarBottom ')+step[1]:step[1]);if(!target)target=visible(step[0]==='external'?'#searchBar':'header');if(target){if(['다크 · 라이트 모드','언어 변경'].includes(step[2]))target.scrollIntoView({block:'end',behavior:'instant'});const r=target.getBoundingClientRect();if(r.top<70||r.bottom>innerHeight-300)frame.contentWindow.scrollBy({top:r.top-100,behavior:'instant'});}await wait(30);if(token!==seq)return;busy=false;$('#coach').hidden=false;$('#spot').hidden=false;position();document.body.classList.remove('moving')}
-$('#next').onclick=()=>current===steps.length-1?location.assign('index.html'):go(current+1);$('#prev').onclick=()=>go(Math.max(0,current-1));$('#steps').onchange=e=>go(Number(e.target.value));addEventListener('message',e=>{if(e.source===frame.contentWindow&&e.data?.type==='guide-notice'){$('#notice').textContent=e.data.text;position()}});addEventListener('resize',()=>{const name=steps[current][2];steps=all.filter(x=>!mobile.matches||x[2]!=='메뉴 최소화');go(Math.max(0,steps.findIndex(s=>s[2]===name)))});setInterval(position,120);frame.addEventListener('load',async()=>{for(let i=0;i<100&&!frame.contentWindow.guideAPI;i++)await wait(100);if(!frame.contentWindow.guideAPI){$('#loading').textContent='화면을 불러오지 못했습니다. 새로고침해 주세요.';return}$('#loading').hidden=true;frame.contentWindow.addEventListener('scroll',position,{passive:true});new ResizeObserver(position).observe(frame.contentDocument.body);frame.contentDocument.addEventListener('click',()=>setTimeout(position,100));go(0)});
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>센플릭스 둘러보기</title>
+<link rel="stylesheet" href="assets/fonts/pretendard-1.3.9/pretendardvariable-dynamic-subset.css">
+<style>
+*{box-sizing:border-box}
+:root{--ease:cubic-bezier(.22,1,.36,1);--panel:#222426;--line:rgba(255,255,255,.12);--mint:#a4cfb8}
+html,body{height:100%}
+body{margin:0;overflow:hidden;background:#151618;color:#fff;font-family:'Pretendard Variable',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+iframe{position:fixed;inset:0;width:100%;height:100%;border:0;opacity:1;transition:opacity .3s var(--ease)}
+body.swap iframe{opacity:.22}
+#spot{position:fixed;left:0;top:0;z-index:2;width:0;height:0;border-radius:12px;box-shadow:0 0 0 9999px rgba(0,0,0,.64);pointer-events:none;opacity:0;transition:opacity .32s ease,border-radius .32s var(--ease);will-change:transform,width,height}
+#spot.on{opacity:1}
+#spot::before{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid rgba(255,255,255,.78)}
+#spot::after{content:"";position:absolute;inset:0;border-radius:inherit;animation:ring 2.4s ease-out infinite}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(164,207,184,.55)}70%,100%{box-shadow:0 0 0 12px rgba(164,207,184,0)}}
+#coach{position:fixed;left:0;top:0;z-index:3;width:340px;max-width:calc(100vw - 24px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .28s ease;will-change:transform}
+#coach.shown{visibility:visible}
+#coach.on{opacity:1;pointer-events:auto}
+.in{position:relative;padding:16px 20px 18px;border-radius:16px;background:var(--panel);border:1px solid var(--line);box-shadow:0 18px 50px rgba(0,0,0,.42);transform:translateY(10px);transition:transform .45s var(--ease)}
+#coach.on .in{transform:none}
+.arrow{position:absolute;width:12px;height:12px;background:var(--panel);border:1px solid var(--line);transform:rotate(45deg);pointer-events:none;display:none}
+#coach[data-side="below"] .arrow{display:block;top:-7px;left:var(--ap,40px);margin-left:-6px;border-right:0;border-bottom:0}
+#coach[data-side="above"] .arrow{display:block;bottom:-7px;left:var(--ap,40px);margin-left:-6px;border-top:0;border-left:0}
+#coach[data-side="right"] .arrow{display:block;left:-7px;top:var(--ap,40px);margin-top:-6px;border-top:0;border-right:0}
+#coach[data-side="left"] .arrow{display:block;right:-7px;top:var(--ap,40px);margin-top:-6px;border-bottom:0;border-left:0}
+.head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+#steps{min-width:0;max-width:calc(100% - 92px);padding:2px 0;border:0;background:transparent;color:#b3beb8;font:inherit;font-size:11px;cursor:pointer;text-overflow:ellipsis}
+#steps option{background:#2a2c2e;color:#eee}
+#exit{flex-shrink:0;padding:5px 10px;border-radius:20px;color:#9ba5a0;font-size:11px;text-decoration:none;transition:background .2s,color .2s}
+#exit:hover{background:rgba(255,255,255,.08);color:#fff}
+.bar{height:3px;margin:12px 0 14px;border-radius:3px;background:rgba(255,255,255,.1);overflow:hidden}
+#fill{display:block;height:100%;width:0;border-radius:3px;background:var(--mint);transition:width .55s var(--ease)}
+h2{margin:0 0 8px;font-size:18px;letter-spacing:-.4px;line-height:1.4}
+p{margin:0 0 10px;font-size:13px;line-height:1.7;color:#c7cbca}
+#notice{min-height:19px;margin-bottom:10px;font-size:12px;line-height:1.5;color:#a7d4bb;opacity:0;transform:translateY(3px);transition:opacity .3s ease,transform .3s var(--ease)}
+#notice.on{opacity:1;transform:none}
+.nav{display:flex;align-items:center;gap:8px}
+#count{margin-right:auto;color:#8f9995;font-size:11px;font-variant-numeric:tabular-nums}
+button,select,a{font:inherit}
+button{cursor:pointer;padding:8px 14px;border-radius:9px;border:1px solid rgba(255,255,255,.18);background:transparent;color:#eee;font-size:12px;transition:background .2s,opacity .2s,transform .25s var(--ease)}
+button:hover:not(:disabled){background:rgba(255,255,255,.08)}
+button:active:not(:disabled){transform:scale(.95)}
+button:disabled{opacity:.3;cursor:default}
+#next{background:#fff;border-color:#fff;color:#17191a;font-weight:600}
+#next:hover:not(:disabled){background:#e9eeeb}
+button:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid var(--mint);outline-offset:3px}
+#loading{position:fixed;inset:0;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#151618;color:#b9c1bd;font-size:13px;transition:opacity .5s ease,visibility 0s .5s}
+#loading.done{opacity:0;visibility:hidden;pointer-events:none}
+#loading i{width:22px;height:22px;border:2px solid rgba(255,255,255,.14);border-top-color:var(--mint);border-radius:50%;animation:spin .8s linear infinite}
+#loading.fail i{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:700px){#coach{width:calc(100vw - 24px)}.in{padding:14px 16px 16px}h2{font-size:17px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition-duration:0s!important;animation:none!important}}
+</style>
+</head>
+<body class="swap">
+<iframe id="app" src="guide-frame.html" title="센플릭스 기능 체험 화면" sandbox="allow-scripts allow-same-origin"></iframe>
+<div id="loading"><i></i><span id="loadText">센플릭스를 준비하고 있어요</span></div>
+<div id="spot"></div>
+<section id="coach" aria-label="기능 안내">
+<div class="in">
+<i class="arrow"></i>
+<div class="head"><select id="steps" aria-label="체험 항목"></select><a id="exit" href="index.html">체험 종료 ↗</a></div>
+<div class="bar"><b id="fill"></b></div>
+<h2 id="title"></h2>
+<p id="desc"></p>
+<div id="notice" role="status"></div>
+<div class="nav"><span id="count"></span><button id="prev" type="button">이전</button><button id="next" type="button">다음 →</button></div>
+</div>
+</section>
+<script>
+(()=>{
+const $=s=>document.querySelector(s);
+const frame=$('#app'),spot=$('#spot'),coach=$('#coach'),stepsEl=$('#steps'),fillEl=$('#fill'),noticeEl=$('#notice'),loading=$('#loading');
+const mobile=matchMedia('(max-width:700px)'),reduce=matchMedia('(prefers-reduced-motion:reduce)');
+const wait=ms=>new Promise(r=>setTimeout(r,ms));
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
+const all=[
+{s:'allvideos',q:'#searchInput',t:'영상 찾기',d:'제목이나 초성을 입력하고 검색해 보세요. 실제 센플릭스와 같은 검색 기능입니다.'},
+{s:'external',q:'#searchBar .sort-btns',t:'영상 탭의 필터',d:'최신순·오래된순을 바꿔보세요. 콘텐츠와 채널 필터도 실제 화면 그대로 사용할 수 있습니다.'},
+{s:'archive',q:'#archiveMonthBar',t:'기간별 보기',d:'연도를 고른 다음 월을 선택하면 해당 시기에 올라온 영상을 모아볼 수 있습니다.'},
+{s:'bookmark',q:'.bm-playlist-btn',t:'즐겨찾기 · 재생목록',d:'영상의 별 버튼으로 저장하거나 해제할 수 있어요. “재생목록으로 재생”은 모은 영상들을 이어보는 기능입니다. 체험용으로 3개를 담아두었습니다.'},
+{s:'series',q:'.series-runtime',t:'시리즈 재생시간',d:'시리즈에 담긴 모든 영상의 재생시간을 합한 값입니다. 첫 영상 한 편의 길이가 아니에요.'},
+{s:'series',q:'.series-share',t:'시리즈 공유',d:'이 버튼을 누르면 시리즈 영상들을 묶은 YouTube 재생목록 주소를 복사할 수 있습니다.'},
+{s:'schedule',q:'#scheduleSources',t:'스케줄 플랫폼 선택',d:'전체·Mnet Plus·blip 중 보고 싶은 일정 출처를 선택해 보세요.'},
+{s:'schedule',q:'#scheduleExportBtn',t:'스케줄 내보내기',d:'눌러서 한 달·기간·전체 중 선택해 보세요. 내보내기는 현재 일정을 한 번 저장하는 방식입니다. 체험에서는 파일을 저장하지 않습니다.'},
+{s:'schedule',q:'#scheduleSubscribeBtn',t:'스케줄 구독',d:'구독할 플랫폼을 선택해 보세요. 등록 후에는 캘린더가 다시 읽을 때 변경 내용이 반영됩니다. 체험에서는 구독을 등록하지 않습니다.'},
+{s:'allvideos',k:'theme',pref:'right',t:'다크 · 라이트 모드',d:'버튼을 눌러 화면 밝기를 바꿔보세요. 체험 중 설정은 실제 페이지에 저장되지 않습니다.'},
+{s:'allvideos',k:'sidebar',pref:'right',t:'메뉴 최소화',d:'메뉴 오른쪽 버튼을 누르면 메뉴가 접히고 영상 영역이 넓어집니다. 다시 눌러 펼칠 수 있어요.'},
+{s:'allvideos',k:'lang',pref:'right',t:'언어 변경',d:'한국어·영어·일본어 버튼을 눌러보세요. 실제 센플릭스의 화면 문구가 바뀝니다.'}
+];
+const build=()=>all.filter(x=>!mobile.matches||x.k!=='sidebar');
+let steps=build(),current=0,seq=0,shown=null,started=false;
+const track={el:null,dlg:null,side:null,pref:null,ready:false,glide:false,snap:false,snapCard:false,relayout:true};
+const spotCur={x:0,y:0,w:0,h:0},cardCur={x:0,y:0};
+const written={spot:'',card:'',side:'',ap:'',on:false,radius:''};
+let cw=340,ch=260,last=performance.now();
+const docOf=()=>frame.contentDocument;
+const visible=sel=>[...docOf().querySelectorAll(sel)].find(e=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0});
+const resolve=step=>{
+if(step.k==='theme')return visible((mobile.matches?'#mobileDrawer ':'#sidebarBottom ')+'.theme-toggle');
+if(step.k==='lang')return visible(mobile.matches?'#mobileDrawer #langSwitcher':'#langSwitcherDesktop');
+if(step.k==='sidebar')return visible('[data-action="toggleSidebar"]');
+return visible(step.q);
+};
+const waitFor=async(fn,ms)=>{
+const end=performance.now()+ms;
+for(;;){
+const v=fn();
+if(v)return v;
+if(performance.now()>=end)return null;
+await wait(40);
+}
+};
+const stable=async el=>{
+let prev='',same=0;
+const end=performance.now()+700;
+while(performance.now()<end&&same<3){
+await wait(40);
+const r=el.getBoundingClientRect();
+const key=[r.left,r.top,r.width,r.height].map(Math.round).join();
+same=key===prev?same+1:0;
+prev=key;
+}
+};
+const settle=async(win,goal)=>{
+const end=performance.now()+900;
+let still=0,prev=-1;
+while(performance.now()<end){
+await wait(32);
+const y=win.scrollY;
+if(Math.abs(y-goal)<1.5)return;
+still=Math.abs(y-prev)<.5?still+1:0;
+prev=y;
+if(still>=4)return;
+}
+};
+const reveal=async(el,instant)=>{
+const doc=docOf(),win=frame.contentWindow;
+if(el.closest('#mobileDrawer')){el.scrollIntoView({block:'nearest',behavior:'instant'});return}
+if(el.closest('.song-nav-outer,#subSidebar,#sidebarBottom'))return;
+const r=el.getBoundingClientRect(),vh=win.innerHeight,margin=mobile.matches?88:100;
+if(r.top>=margin-28&&r.bottom<=vh-52)return;
+const max=Math.max(0,doc.documentElement.scrollHeight-vh),from=win.scrollY;
+const goal=clamp(from+r.top-margin,0,max);
+if(Math.abs(goal-from)<2)return;
+win.scrollTo({top:goal,behavior:instant||reduce.matches?'instant':'smooth'});
+if(!instant&&!reduce.matches)await settle(win,goal);
+else await wait(30);
+};
+const setSidebar=async collapsed=>{
+if(mobile.matches)return;
+const doc=docOf();
+const now=doc.documentElement.getAttribute('data-sb')==='collapsed';
+if(now===collapsed)return;
+const btn=doc.querySelector('[data-action="toggleSidebar"]');
+if(!btn)return;
+btn.click();
+await wait(reduce.matches?0:360);
+};
+const resetTrials=step=>{
+const doc=docOf();
+if(step.k!=='theme'&&doc.documentElement.getAttribute('data-theme')!=='dark'){
+const b=doc.querySelector('.theme-toggle');
+if(b)b.click();
+}
+if(step.k!=='lang'){
+const a=doc.querySelector('.lang-btn.active');
+if(a&&a.dataset.value!=='KR'){
+const k=doc.querySelector('.lang-btn[data-value="KR"]');
+if(k)k.click();
+}
+}
+};
+const fillCard=step=>{
+$('#title').textContent=step.t;
+$('#desc').textContent=step.d;
+noticeEl.classList.remove('on');
+noticeEl.textContent='';
+$('#count').textContent=`${current+1} / ${steps.length}`;
+$('#prev').disabled=current===0;
+$('#next').textContent=current===steps.length-1?'마치기':'다음 →';
+fillEl.style.width=`${((current+1)/steps.length)*100}%`;
+stepsEl.value=String(current);
+ch=coach.offsetHeight;
+cw=coach.offsetWidth;
+};
+const buildSelect=()=>{
+stepsEl.innerHTML=steps.map((s,i)=>`<option value="${i}">${String(i+1).padStart(2,'0')} · ${s.t}</option>`).join('');
+};
+const chooseSide=(r,keep)=>{
+const W=innerWidth,H=innerHeight,m=14,e=12,dk=!mobile.matches;
+const fit={
+below:H-e-(r.y+r.h+m)>=ch,
+above:r.y-m-e>=ch,
+right:dk&&W-e-(r.x+r.w+m)>=cw,
+left:dk&&r.x-m-e>=cw
+};
+if(keep&&fit[keep])return keep;
+const order=track.pref==='right'?['right','below','above','left']:['below','above','right','left'];
+return order.find(s=>fit[s])||'over';
+};
+const place=(side,r)=>{
+const W=innerWidth,H=innerHeight,m=14,e=12;
+let x,y,ap;
+if(side==='right'||side==='left'){
+x=side==='right'?r.x+r.w+m:r.x-m-cw;
+y=clamp(r.y+r.h/2-ch/2,e,Math.max(e,H-ch-e));
+ap=clamp(r.y+r.h/2-y,24,ch-24);
+}else{
+x=clamp(r.x,e,Math.max(e,W-cw-e));
+y=side==='below'?r.y+r.h+m:side==='above'?r.y-m-ch:H-ch-e-(mobile.matches?64:0);
+y=clamp(y,e,Math.max(e,H-ch-e));
+ap=clamp(r.x+r.w/2-x,24,cw-24);
+}
+x=clamp(x,e,Math.max(e,W-cw-e));
+return{x:Math.round(x),y:Math.round(y),ap:Math.round(ap)};
+};
+const approach=(cur,want,k)=>cur+(want-cur)*k;
+const update=dt=>{
+if(!track.el)return;
+const doc=docOf();
+if(!track.el.isConnected){
+const n=resolve(steps[current]);
+if(!n)return;
+track.el=n;
+track.glide=true;
+}
+const dlg=doc.querySelector('dialog[open]');
+if(dlg!==track.dlg){
+track.dlg=dlg;
+track.glide=true;
+track.side=null;
+}
+const el=dlg||track.el;
+const b=el.getBoundingClientRect();
+const W=innerWidth,H=innerHeight;
+const l=Math.max(6,b.left-5),t=Math.max(6,b.top-5),rr=Math.min(W-6,b.right+5),bb=Math.min(H-6,b.bottom+5);
+const want={x:l,y:t,w:Math.max(0,rr-l),h:Math.max(0,bb-t)};
+const inView=b.width>0&&b.height>0&&b.bottom>0&&b.top<H&&b.right>0&&b.left<W;
+if(track.side===null||track.relayout){
+track.side=chooseSide(want,track.side);
+track.relayout=false;
+}
+const pos=place(track.side,want);
+const gliding=track.glide&&!reduce.matches&&!track.snap;
+if(track.snap||!gliding){
+Object.assign(spotCur,want);
+track.snap=false;
+}else{
+const k=1-Math.exp(-dt/80);
+spotCur.x=approach(spotCur.x,want.x,k);
+spotCur.y=approach(spotCur.y,want.y,k);
+spotCur.w=approach(spotCur.w,want.w,k);
+spotCur.h=approach(spotCur.h,want.h,k);
+}
+if(track.snapCard||!gliding){
+cardCur.x=pos.x;
+cardCur.y=pos.y;
+track.snapCard=false;
+}else{
+const k=1-Math.exp(-dt/80);
+cardCur.x=approach(cardCur.x,pos.x,k);
+cardCur.y=approach(cardCur.y,pos.y,k);
+}
+if(gliding){
+const d=Math.max(Math.abs(spotCur.x-want.x),Math.abs(spotCur.y-want.y),Math.abs(spotCur.w-want.w),Math.abs(spotCur.h-want.h),Math.abs(cardCur.x-pos.x),Math.abs(cardCur.y-pos.y));
+if(d<.5)track.glide=false;
+}
+const sKey=`${spotCur.x.toFixed(1)},${spotCur.y.toFixed(1)},${spotCur.w.toFixed(1)},${spotCur.h.toFixed(1)}`;
+if(sKey!==written.spot){
+written.spot=sKey;
+spot.style.transform=`translate3d(${spotCur.x.toFixed(1)}px,${spotCur.y.toFixed(1)}px,0)`;
+spot.style.width=`${spotCur.w.toFixed(1)}px`;
+spot.style.height=`${spotCur.h.toFixed(1)}px`;
+}
+const cKey=`${Math.round(cardCur.x)},${Math.round(cardCur.y)}`;
+if(cKey!==written.card){
+written.card=cKey;
+coach.style.transform=`translate3d(${Math.round(cardCur.x)}px,${Math.round(cardCur.y)}px,0)`;
+}
+if(track.side!==written.side){
+written.side=track.side;
+coach.dataset.side=track.side;
+}
+const apKey=String(pos.ap);
+if(apKey!==written.ap){
+written.ap=apKey;
+coach.style.setProperty('--ap',`${pos.ap}px`);
+}
+const radius=dlg?'22px':'12px';
+if(radius!==written.radius){
+written.radius=radius;
+spot.style.borderRadius=radius;
+}
+const show=track.ready&&inView;
+if(show!==written.on){
+written.on=show;
+spot.classList.toggle('on',show);
+}
+};
+const tick=now=>{
+requestAnimationFrame(tick);
+const dt=Math.min(64,now-last);
+last=now;
+if(!started||document.hidden)return;
+try{update(dt)}catch(err){}
+};
+const go=async(index,force)=>{
+const my=++seq;
+current=clamp(index,0,steps.length-1);
+const step=steps[current];
+const swap=force||shown!==step.s;
+coach.classList.remove('on');
+if(swap){
+document.body.classList.add('swap');
+track.ready=false;
+spot.classList.remove('on');
+written.on=false;
+}
+await wait(reduce.matches?0:swap?260:170);
+if(my!==seq)return;
+const doc=docOf(),api=frame.contentWindow.guideAPI;
+doc.querySelectorAll('dialog[open]').forEach(d=>d.close());
+const needDrawer=mobile.matches&&(step.k==='theme'||step.k==='lang');
+if(!needDrawer||swap)api.closeDrawer();
+resetTrials(step);
+if(step.s==='bookmark')api.prepareBookmarks();
+if(swap){
+api.pick(step.s,true);
+shown=step.s;
+await wait(140);
+if(my!==seq)return;
+}
+if(!mobile.matches){
+const subOpen=doc.getElementById('subSidebar').classList.contains('open');
+await setSidebar(subOpen&&!step.k);
+if(my!==seq)return;
+}
+if(needDrawer&&!doc.querySelector('#mobileDrawer.open')){
+api.drawer();
+await wait(reduce.matches?0:400);
+if(my!==seq)return;
+}
+const el=await waitFor(()=>resolve(step),2200)||visible('#searchBar')||visible('header')||doc.body;
+if(my!==seq)return;
+track.el=el;
+track.pref=step.pref||null;
+if(swap){
+track.snap=true;
+track.glide=false;
+}else{
+track.glide=true;
+}
+await reveal(el,swap);
+if(my!==seq)return;
+await stable(el);
+if(my!==seq)return;
+fillCard(step);
+track.side=null;
+track.relayout=true;
+track.snapCard=true;
+track.ready=true;
+docOf().documentElement.style.setProperty('--guide-card',`${ch}px`);
+update(16);
+document.body.classList.remove('swap');
+coach.classList.add('shown');
+requestAnimationFrame(()=>coach.classList.add('on'));
+if(!started){
+started=true;
+loading.classList.add('done');
+}
+};
+const next=()=>current===steps.length-1?location.assign('index.html'):go(current+1);
+const prev=()=>current>0&&go(current-1);
+$('#next').addEventListener('click',next);
+$('#prev').addEventListener('click',prev);
+stepsEl.addEventListener('change',e=>go(Number(e.target.value)));
+const onKey=e=>{
+if(e.metaKey||e.ctrlKey||e.altKey||e.defaultPrevented)return;
+const t=e.target,tag=t&&t.tagName;
+if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(t&&t.isContentEditable))return;
+if(docOf()&&docOf().querySelector('dialog[open]'))return;
+if(e.key==='ArrowRight'){e.preventDefault();next()}
+else if(e.key==='ArrowLeft'){e.preventDefault();prev()}
+};
+document.addEventListener('keydown',onKey);
+document.addEventListener('keydown',e=>{
+if(e.key==='Escape'&&!e.defaultPrevented&&e.target.tagName!=='SELECT')location.assign('index.html');
+});
+addEventListener('message',e=>{
+if(e.origin!==location.origin||e.source!==frame.contentWindow||!e.data||e.data.type!=='guide-notice')return;
+noticeEl.textContent=e.data.text;
+noticeEl.classList.add('on');
+});
+addEventListener('resize',()=>{track.relayout=true});
+mobile.addEventListener('change',()=>{
+if(!started)return;
+const title=steps[current].t;
+steps=build();
+buildSelect();
+const idx=steps.findIndex(s=>s.t===title);
+go(idx<0?Math.min(current,steps.length-1):idx,true);
+});
+new ResizeObserver(()=>{
+cw=coach.offsetWidth;
+ch=coach.offsetHeight;
+track.relayout=true;
+try{docOf().documentElement.style.setProperty('--guide-card',`${ch}px`)}catch(err){}
+}).observe(coach);
+const frameCss='@media(min-width:701px){html.guide-sub body{padding-left:440px!important}html.guide-sub[data-sb="collapsed"] body{padding-left:304px!important}html.guide-sub #subSidebarOverlay{pointer-events:none!important}body{transition:padding-left .32s cubic-bezier(.22,1,.36,1)}}dialog[open]{max-height:calc(100dvh - var(--guide-card,266px) - 44px)!important;margin-top:24px!important;margin-bottom:auto!important}';
+frame.addEventListener('load',async()=>{
+for(let i=0;i<100&&!(frame.contentWindow&&frame.contentWindow.guideAPI);i++)await wait(100);
+if(!frame.contentWindow||!frame.contentWindow.guideAPI){
+loading.classList.add('fail');
+$('#loadText').textContent='화면을 불러오지 못했습니다. 새로고침해 주세요.';
+return;
+}
+const doc=docOf(),root=doc.documentElement;
+const style=doc.createElement('style');
+style.textContent=frameCss;
+doc.head.appendChild(style);
+const sub=doc.getElementById('subSidebar');
+const syncSub=()=>root.classList.toggle('guide-sub',sub.classList.contains('open'));
+new MutationObserver(syncSub).observe(sub,{attributes:true,attributeFilter:['class']});
+syncSub();
+doc.addEventListener('keydown',onKey);
+buildSelect();
+go(0,true);
+});
+requestAnimationFrame(tick);
 })();
-</script></body></html>
+</script>
+</body>
+</html>
