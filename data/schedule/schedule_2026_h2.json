@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T12:02:07Z",
+  "updated": "2026-10-28T07:58:37Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3260,21 +3260,6 @@
       "endTimeHidden": true
     },
     {
-      "id": "1123252",
-      "date": "2026-10-31",
-      "time": "16:00",
-      "title": "APEC 정상회의 기념관 개관식",
-      "detail": "경주엑스포대공원 천마광장",
-      "type": "event",
-      "source": "blip",
-      "link": "https://s.blip.kr/s/12fa4607",
-      "location": "경주엑스포대공원 천마광장",
-      "allDay": false,
-      "start": "2026-10-31T16:00:00+09:00",
-      "end": "2026-10-31T16:00:00+09:00",
-      "endTimeHidden": true
-    },
-    {
       "id": "6a3e80b31df3183e76dd7b31",
       "date": "2026-10-31",
       "time": "16:00",
@@ -3282,6 +3267,21 @@
       "detail": "",
       "type": "event",
       "source": "mnetplus"
+    },
+    {
+      "id": "1123252",
+      "date": "2026-10-31",
+      "time": "16:45",
+      "title": "APEC 정상회의 기념관 개관식",
+      "detail": "경주엑스포대공원 천마광장",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/12fa4607",
+      "location": "경주엑스포대공원 천마광장",
+      "allDay": false,
+      "start": "2026-10-31T16:45:00+09:00",
+      "end": "2026-10-31T16:45:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
