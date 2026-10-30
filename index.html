@@ -8139,6 +8139,14 @@ body:has(#seriesQrDialog[open]) {
   outline-offset: 3px;
 }
 
+  #scheduleMode .sched-cal-col,
+  #scheduleMode .sched-list-col {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surf);
+  }
 @media (min-width: 1000px) {
   #scheduleMode .schedule-wrap {
     max-width: 1440px;
@@ -8149,14 +8157,6 @@ body:has(#seriesQrDialog[open]) {
     grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
     gap: 24px;
     align-items: start;
-  }
-  #scheduleMode .sched-cal-col,
-  #scheduleMode .sched-list-col {
-    min-width: 0;
-    padding: 20px;
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    background: var(--surf);
   }
   #scheduleMode .cal-header {
     margin-bottom: 12px;
@@ -8182,6 +8182,57 @@ body:has(#seriesQrDialog[open]) {
     scrollbar-gutter: stable;
     overscroll-behavior-y: contain;
   }
+}
+
+@media (max-width: 999px) {
+  #scheduleMode .sched-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+  #scheduleMode .sched-cal-col,
+  #scheduleMode .sched-list-col {
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surf);
+    min-width: 0;
+  }
+  #scheduleMode .sched-list-col {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+  #scheduleMode .cal-header {
+    margin-bottom: 12px;
+  }
+  #scheduleMode .cal-month-title {
+    font-size: 22px;
+  }
+  #scheduleMode .sched-list-header {
+    min-height: 48px;
+    margin-bottom: 12px;
+  }
+}
+@media (max-width: 400px) {
+  #scheduleMode .sched-cal-col,
+  #scheduleMode .sched-list-col {
+    padding: 12px;
+  }
+}
+
+#scheduleMode .sched-item-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 4px;
+}
+#scheduleMode .sched-item-actions .sched-item-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 28px;
+  margin: 0;
+  align-self: center;
 }
 </style>
   
@@ -18018,6 +18069,46 @@ body:has(#seriesQrDialog[open]) {
   "ZZ55Z2l1XXE": {
     "duration": "24:52",
     "sourceDate": "2026.10.29 19:00"
+  },
+  "1w3MVddRDkQ": {
+    "duration": "2:35",
+    "sourceDate": "2026.10.30 00:00"
+  },
+  "i6KASVqhxC4": {
+    "duration": "0:32",
+    "sourceDate": "2026.10.30 00:00"
+  },
+  "eXXgMruQKRM": {
+    "duration": "0:31",
+    "sourceDate": "2026.10.30 08:00"
+  },
+  "2Ne5T7GCXYM": {
+    "duration": "11:59",
+    "sourceDate": "2026.10.27 19:00"
+  },
+  "JnevWsovCK0": {
+    "duration": "18:51",
+    "sourceDate": "2026.10.21 21:00"
+  },
+  "Ly_kewqEGlI": {
+    "duration": "17:31",
+    "sourceDate": "2026.09.21 19:00"
+  },
+  "4Q90kzOo1nU": {
+    "duration": "19:03",
+    "sourceDate": "2026.08.31 18:00"
+  },
+  "VS_KZTkXeOw": {
+    "duration": "28:40",
+    "sourceDate": "2026.08.23 17:59"
+  },
+  "TleUuvsju7A": {
+    "duration": "17:50",
+    "sourceDate": "2026.08.10 22:00"
+  },
+  "_nW-LtWTOX4": {
+    "duration": "16:58",
+    "sourceDate": "2026.07.30 21:59"
   }
 };
       
@@ -18924,7 +19015,15 @@ body:has(#seriesQrDialog[open]) {
   "lesserafim": "LE SSERAFIM",
   "detikcom": "detikcom",
   "cinescape": "cinescape",
-  "playfesta": "PLAY FESTA"
+  "playfesta": "PLAY FESTA",
+  "wooribank": "우리은행",
+  "hex": "헥스: 마녀왕국",
+  "kiikii": "KiiKii",
+  "tws": "TWS",
+  "sunmi": "선미 (SUNMI)",
+  "txt": "TOMORROW X TOGETHER",
+  "uspeer": "USPEER",
+  "seventeen": "세븐틴"
 };
       const EXTERNAL_DATA = {
   "suwonuniv": [
@@ -22292,6 +22391,52 @@ body:has(#seriesQrDialog[open]) {
     {
       "vid": "R_ItKI4cpBA"
     }
+  ],
+  "wooribank": [
+    {
+      "vid": "i6KASVqhxC4"
+    },
+    {
+      "vid": "1w3MVddRDkQ"
+    }
+  ],
+  "hex": [
+    {
+      "vid": "eXXgMruQKRM"
+    }
+  ],
+  "kiikii": [
+    {
+      "vid": "Ly_kewqEGlI"
+    },
+    {
+      "vid": "2Ne5T7GCXYM"
+    }
+  ],
+  "tws": [
+    {
+      "vid": "JnevWsovCK0"
+    }
+  ],
+  "sunmi": [
+    {
+      "vid": "4Q90kzOo1nU"
+    }
+  ],
+  "txt": [
+    {
+      "vid": "VS_KZTkXeOw"
+    }
+  ],
+  "uspeer": [
+    {
+      "vid": "TleUuvsju7A"
+    }
+  ],
+  "seventeen": [
+    {
+      "vid": "_nW-LtWTOX4"
+    }
   ]
 };
       const VID_TO_EXTERNAL_KEY = {};
@@ -22530,7 +22675,9 @@ body:has(#seriesQrDialog[open]) {
       "mnetplus",
       "oceanworld",
       "oka",
-      "stonemusic"
+      "stonemusic",
+      "wooribank",
+      "hex"
     ]
   },
   "event": {
@@ -22578,7 +22725,13 @@ body:has(#seriesQrDialog[open]) {
       "teayang",
       "izna",
       "nmixx",
-      "madein"
+      "madein",
+      "kiikii",
+      "tws",
+      "sunmi",
+      "txt",
+      "uspeer",
+      "seventeen"
     ]
   },
   "etc": {
@@ -28227,21 +28380,39 @@ body:has(#seriesQrDialog[open]) {
       function _scheduleSourceLabel(value) {
         return value === "mnetplus" ? "Mnet Plus" : value === "blip" ? "blip" : _scheduleSourceText().all;
       }
+      function _scheduleTitleKey(title) {
+        return String(title || "").normalize("NFKC").toLowerCase()
+          .replace(/\b(?:rescene|mnet|plus|blip)\b|리센느|블립/g, " ")
+          .replace(/[^\p{L}\p{N}]+/gu, "");
+      }
+      function _sameSchedule(a, b) {
+        if (a.date !== b.date || (a.time || "") !== (b.time || "")) return false;
+        const exact = value => String(value || "").normalize("NFC").toLowerCase().replace(/[\s<>《》〈〉]+/g, "");
+        if (exact(a.title) === exact(b.title)) return true;
+        if (!["mnetplus", "blip"].includes(a.source) || !["mnetplus", "blip"].includes(b.source) || a.source === b.source) return false;
+        const x = _scheduleTitleKey(a.title), y = _scheduleTitleKey(b.title);
+        if (Math.min(x.length, y.length) < 6) return false;
+        if (x === y) return true;
+        if (!a.time || !b.time || a.type !== b.type) return false;
+        if (JSON.stringify(x.match(/\d+/g)) !== JSON.stringify(y.match(/\d+/g))) return false;
+        const short = x.length < y.length ? x : y, long = x.length < y.length ? y : x;
+        return short.length >= 10 && short.length / long.length >= .8 && long.includes(short);
+      }
       function _mergeScheduleSources(items) {
-        const merged = new Map();
+        const merged = [];
         for (const ev of items) {
-          const title = ev.title.normalize("NFC").toLowerCase().replace(/[\s<>《》〈〉]+/g, "");
-          const key = JSON.stringify([ev.date, ev.time || "", title]);
-          const previous = merged.get(key);
-          if (!previous) merged.set(key, {...ev, sources: ["mnetplus", "blip"].includes(ev.source) ? [ev.source] : []});
-          else {
-            if (["mnetplus", "blip"].includes(ev.source) && !previous.sources.includes(ev.source)) previous.sources.push(ev.source);
-            if (!previous.note) previous.note = ev.note;
-            if (!previous.link) previous.link = ev.link;
-            if (!previous.location) previous.location = ev.location;
+          const matches = merged.filter(previous => _sameSchedule(previous, ev));
+          const previous = matches.length === 1 ? matches[0] : null;
+          if (!previous) {
+            merged.push({...ev, sources: ["mnetplus", "blip"].includes(ev.source) ? [ev.source] : []});
+            continue;
           }
+          if (["mnetplus", "blip"].includes(ev.source) && !previous.sources.includes(ev.source)) previous.sources.push(ev.source);
+          if (!previous.note) previous.note = ev.note;
+          if (!previous.link) previous.link = ev.link;
+          if (!previous.location) previous.location = ev.location;
         }
-        return [...merged.values()];
+        return merged;
       }
       function _syncScheduleSourceUi() {
         const group = document.getElementById("scheduleSources");
@@ -29672,7 +29843,7 @@ body:has(#seriesQrDialog[open]) {
         <div class="sched-item-body">
           <div class="sched-item-title-row">
             <div class="sched-item-title">${titleHtml}</div>
-            ${searchBtn}
+            <div class="sched-item-actions">${searchBtn}${link}</div>
           </div>
           <div class="sched-item-meta">
             <span class="sched-item-type-tag" style="${tagStyle}">${_escHtml(tl)}</span>
@@ -29681,7 +29852,6 @@ body:has(#seriesQrDialog[open]) {
             ${noteHtml ? `<span>${noteHtml}</span>` : ""}
           </div>
         </div>
-        ${link}
       </div>`;
       }
       function _groupScheduleByDate(items) {
