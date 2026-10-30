@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-29T23:58:45Z",
+  "updated": "2026-10-30T05:58:42Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3227,6 +3227,21 @@
       "allDay": true,
       "start": "2026-10-11T00:00:00+09:00",
       "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1135706",
+      "date": "2026-10-30",
+      "time": "13:00",
+      "title": "<리무진서비스> 선공개",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/2c0c7ddd",
+      "location": "",
+      "allDay": false,
+      "start": "2026-10-30T13:00:00+09:00",
+      "end": "2026-10-30T13:36:33+09:00",
       "endTimeHidden": true
     },
     {
