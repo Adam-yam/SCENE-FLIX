@@ -8138,6 +8138,51 @@ body:has(#seriesQrDialog[open]) {
   outline: 2px solid var(--accent);
   outline-offset: 3px;
 }
+
+@media (min-width: 1000px) {
+  #scheduleMode .schedule-wrap {
+    max-width: 1440px;
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+  #scheduleMode .sched-body {
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  #scheduleMode .sched-cal-col,
+  #scheduleMode .sched-list-col {
+    min-width: 0;
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: var(--surf);
+  }
+  #scheduleMode .cal-header {
+    margin-bottom: 12px;
+  }
+  #scheduleMode .cal-month-title {
+    font-size: 22px;
+  }
+  #scheduleMode .cal-cell {
+    height: 84px;
+    min-height: 84px;
+    padding: 6px 3px;
+  }
+  #scheduleMode .sched-list-header {
+    min-height: 48px;
+    margin-bottom: 12px;
+  }
+  #scheduleMode .sched-list-col {
+    position: sticky;
+    top: 24px;
+    max-height: calc(100dvh - 48px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+    overscroll-behavior-y: contain;
+  }
+}
 </style>
   
 
@@ -10566,6 +10611,8 @@ body:has(#seriesQrDialog[open]) {
           ext_cat_interview: "인터뷰",
           ext_cat_ad: "광고·홍보",
           ext_cat_event: "행사",
+          ext_cat_etc: "기타",
+          ext_cat_artists: "타 아티스트",
           share_toast_copied: "🔗 YouTube 링크 복사됨",
           offline_banner: "인터넷 연결이 끊겼어요",
           offline_reconnected: "다시 연결됐어요",
@@ -10695,6 +10742,8 @@ body:has(#seriesQrDialog[open]) {
           ext_cat_interview: "インタビュー",
           ext_cat_ad: "広告・PR",
           ext_cat_event: "イベント",
+          ext_cat_etc: "その他",
+          ext_cat_artists: "他のアーティスト",
           share_toast_copied: "🔗 YouTubeリンクをコピーしました",
           offline_banner: "インターネット接続が切れました",
           offline_reconnected: "再接続しました",
@@ -10827,6 +10876,8 @@ body:has(#seriesQrDialog[open]) {
           ext_cat_interview: "Interview",
           ext_cat_ad: "AD·PR",
           ext_cat_event: "Event",
+          ext_cat_etc: "Other",
+          ext_cat_artists: "Other Artists",
           share_toast_copied: "🔗 YouTube link copied",
           offline_banner: "You\u2019re offline",
           offline_reconnected: "Back online",
@@ -22339,7 +22390,6 @@ body:has(#seriesQrDialog[open]) {
       "gotthespot",
       "newpick",
       "weltodong",
-      "madein",
       "yoohoo",
       "woojeonging",
       "hobby",
@@ -22392,7 +22442,6 @@ body:has(#seriesQrDialog[open]) {
       "luckybag",
       "babytouho",
       "marketgayo",
-      "idle",
       "everline",
       "idol24",
       "magenta",
@@ -22415,7 +22464,6 @@ body:has(#seriesQrDialog[open]) {
       "mtg",
       "jeondosa",
       "sanas",
-      "izna",
       "radiostar",
       "hyundai",
       "secretaryjin",
@@ -22423,16 +22471,13 @@ body:has(#seriesQrDialog[open]) {
       "extreme",
       "koreanfight",
       "hangoutwithyoo",
-      "nmixx",
       "ohmyidol",
       "mimiminu",
       "pacemaker",
       "negoking",
       "M2bestchallenge",
       "simplykpopcontour",
-      "teayang",
       "kusunghwan",
-      "lesserafim",
       "detikcom"
     ]
   },
@@ -22524,6 +22569,18 @@ body:has(#seriesQrDialog[open]) {
       "gwanak"
     ]
   },
+  "artists": {
+    "label": "타 아티스트",
+    "i18nKey": "ext_cat_artists",
+    "keys": [
+      "idle",
+      "lesserafim",
+      "teayang",
+      "izna",
+      "nmixx",
+      "madein"
+    ]
+  },
   "etc": {
     "label": "기타",
     "keys": [
@@ -22531,7 +22588,8 @@ body:has(#seriesQrDialog[open]) {
       "sbsnews",
       "safek",
       "astyle"
-    ]
+    ],
+    "i18nKey": "ext_cat_etc"
   }
 };
       function _hydrateVideoItem(item, live = false) {
@@ -27359,7 +27417,14 @@ body:has(#seriesQrDialog[open]) {
         if (section === "fantube") buildFantubeGrid();
         if (section === "bookmark") buildBookmarkGrid();
         if (section === "series") buildSeriesGrid();
-        if (section === "schedule") buildCalendar();
+        if (section === "schedule") {
+          const today = _kstDate();
+          _calYear = today.getFullYear();
+          _calMonth = today.getMonth();
+          _calSelectedDate = _dateStr(today);
+          resetSchedSearchUi(true);
+          buildCalendar();
+        }
         if (section === "news") buildNewsGrid();
         if (section === "chart") buildChartGrid();
         updateMobileNav(section);
@@ -29264,7 +29329,7 @@ body:has(#seriesQrDialog[open]) {
       };
       let _calYear = _kstDate().getFullYear();
       let _calMonth = _kstDate().getMonth();
-      let _calSelectedDate = null;
+      let _calSelectedDate = _dateStr(_kstDate());
       const _CAL_MONTH_NAMES = {
         KR: [
           "1월",
