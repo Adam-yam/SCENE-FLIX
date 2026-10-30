@@ -8234,6 +8234,28 @@ body:has(#seriesQrDialog[open]) {
   margin: 0;
   align-self: center;
 }
+.sort-btns:not(:has(> .sort-btn.active))::before {
+  opacity: 0;
+}
+@media (max-width: 700px) {
+  #searchBar .search-bar-inner {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  #searchBar .search-input-wrap {
+    flex: 1 1 120px;
+    min-width: 0;
+    max-width: 100%;
+  }
+  #shortsSearchBarInner {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  #shortsSearchBarInner .shorts-search-wrap {
+    min-width: 0;
+    max-width: 100%;
+  }
+}
 </style>
   
 
@@ -9238,7 +9260,7 @@ body:has(#seriesQrDialog[open]) {
       <div class="type-bar" id="archiveMonthBar"></div>
     </div>
 
-    <div id="songMode">
+    <div id="songMode" style="display: none">
       <div class="song-nav-inner">
         <div class="song-nav" id="songNav"></div>
       </div>
@@ -10337,7 +10359,7 @@ body:has(#seriesQrDialog[open]) {
         </div>
       </div>
     </div>
-    <div class="grid-wrap" id="grid-wrap-el">
+    <div class="grid-wrap" id="grid-wrap-el" style="display: none">
       <div class="video-grid" id="grid"></div>
     </div>
 
@@ -10458,7 +10480,7 @@ body:has(#seriesQrDialog[open]) {
     
     
   
-<script src="assets/search/search-v1.min.js"></script>
+<script defer src="assets/search/search-v1.min.js"></script>
 <script data-scene-events="delegated">
 (function () {
       let _curLang, _i18n, _aboutRebuildChart, aboutChartSelect;
@@ -27482,6 +27504,15 @@ body:has(#seriesQrDialog[open]) {
         window.open(url, "_blank", "noopener");
       }
       document.addEventListener("menulanguagechange", () => {
+        const qr = document.getElementById("seriesQrDialog");
+        if (qr.open) {
+          const t = _ft();
+          document.getElementById("qrTitle").textContent = t.qr;
+          document.getElementById("qrCopy").textContent = t.copy;
+          document.getElementById("qrSave").textContent = t.download;
+          document.getElementById("qrClose").setAttribute("aria-label", t.close);
+          document.getElementById("qrStatus").textContent = _qrBlob ? "" : t.loading;
+        }
         if (curSection === "series") buildSeriesGrid();
         if (document.getElementById("seriesDetailDialog").open && _activeSeriesIndex >= 0) openSeriesDetail(_activeSeriesIndex);
       });
@@ -28420,6 +28451,7 @@ body:has(#seriesQrDialog[open]) {
         if (at && bt && at !== bt) return false;
         const x = _scheduleTitleKey(a.title), y = _scheduleTitleKey(b.title);
         if (!x || !y) return false;
+        if (a.location && b.location && _scheduleTitleKey(a.location) !== _scheduleTitleKey(b.location)) return false;
         if (x === y) return true;
         if (Math.min(x.length, y.length) < 8) return false;
         if (JSON.stringify(x.match(/\d+/g)) !== JSON.stringify(y.match(/\d+/g))) return false;
@@ -29361,7 +29393,7 @@ body:has(#seriesQrDialog[open]) {
         }).sort((a,b) => a.date.localeCompare(b.date) || (a.time || "").localeCompare(b.time || "") || a.title.localeCompare(b.title));
       }
       function _sxTime(value) {
-        return String(value || "").trim().match(/^([01]?\d|2[0-3]):([0-5]\d)(?:\s*[~–—-]\s*([01]?\d|2[0-3]):([0-5]\d))?(?:\s*(?:KST|\(KST\)))?$/i);
+        return (_scheduleTimeKey(value) || String(value || "").trim()).match(/^([01]?\d|2[0-3]):([0-5]\d)(?:\s*[~–—-]\s*([01]?\d|2[0-3]):([0-5]\d))?(?:\s*(?:KST|\(KST\)))?$/i);
       }
       function _sxEscape(value) { return String(value ?? "").replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f]/g, "").replace(/\\/g,"\\\\").replace(/\r\n|\r|\n/g,"\\n").replace(/;/g,"\\;").replace(/,/g,"\\,"); }
       function _sxFold(line) {
@@ -29878,7 +29910,8 @@ body:has(#seriesQrDialog[open]) {
             ? _kwHl(ev.note, hlq)
             : _escHtml(ev.note)
           : "";
-        const searchBtn = `<button type="button" class="sched-item-search-btn" data-title="${_escHtml(ev.title)}" title="Google에서 검색" aria-label="Google에서 검색"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>`;
+        const searchLabel = lang === "EN" ? "Search on Google" : lang === "JP" ? "Googleで検索" : "Google에서 검색";
+        const searchBtn = `<button type="button" class="sched-item-search-btn" data-title="${_escHtml(ev.title)}" title="${searchLabel}" aria-label="${searchLabel}"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button>`;
         return `<div class="sched-item">
         <div class="sched-item-bar" style="${bar}"></div>
         <div class="sched-item-body">
