@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-30T11:58:44Z",
+  "updated": "2026-10-30T15:58:45Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3275,6 +3275,15 @@
       "endTimeHidden": true
     },
     {
+      "id": "6ae4a4065ba3d32fb9cca84a",
+      "date": "2026-10-30",
+      "time": "20:00",
+      "title": "갤럭시 나이트 - 네이버 쇼핑라이브",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
       "id": "1124956",
       "date": "2026-10-31",
       "time": "",
@@ -3587,6 +3596,15 @@
       "endTimeHidden": true
     },
     {
+      "id": "6ae4ba84a46d723d18905122",
+      "date": "2026-11-20",
+      "time": "",
+      "title": "2026 MAMA AWARDS (OSAKA)",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
       "id": "1125767",
       "date": "2026-11-21",
       "time": "",
@@ -3600,6 +3618,15 @@
       "start": "2026-11-20T00:00:00+09:00",
       "end": "2026-11-21T00:00:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "6ae4ae265e04b81dc54f1e11",
+      "date": "2026-11-22",
+      "time": "13:00",
+      "title": "[PULSE] 대면/영상통화 팬사인회 by MAKESTAR",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
     },
     {
       "id": "731507",
