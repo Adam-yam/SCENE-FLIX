@@ -10663,7 +10663,7 @@ body:has(#seriesQrDialog[open]) {
           ext_cat_ad: "광고·홍보",
           ext_cat_event: "행사",
           ext_cat_etc: "기타",
-          ext_cat_artists: "타 아티스트",
+          ext_cat_artists: "챌린지 비하인드",
           share_toast_copied: "🔗 YouTube 링크 복사됨",
           offline_banner: "인터넷 연결이 끊겼어요",
           offline_reconnected: "다시 연결됐어요",
@@ -10794,7 +10794,7 @@ body:has(#seriesQrDialog[open]) {
           ext_cat_ad: "広告・PR",
           ext_cat_event: "イベント",
           ext_cat_etc: "その他",
-          ext_cat_artists: "他のアーティスト",
+          ext_cat_artists: "チャレンジの舞台裏",
           share_toast_copied: "🔗 YouTubeリンクをコピーしました",
           offline_banner: "インターネット接続が切れました",
           offline_reconnected: "再接続しました",
@@ -10928,7 +10928,7 @@ body:has(#seriesQrDialog[open]) {
           ext_cat_ad: "AD·PR",
           ext_cat_event: "Event",
           ext_cat_etc: "Other",
-          ext_cat_artists: "Other Artists",
+          ext_cat_artists: "Challenge Behind the Scenes",
           share_toast_copied: "🔗 YouTube link copied",
           offline_banner: "You\u2019re offline",
           offline_reconnected: "Back online",
@@ -22623,7 +22623,10 @@ body:has(#seriesQrDialog[open]) {
       "M2bestchallenge",
       "simplykpopcontour",
       "kusunghwan",
-      "detikcom"
+      "detikcom",
+      "izna",
+      "nmixx",
+      "madein"
     ]
   },
   "interview": {
@@ -22717,15 +22720,12 @@ body:has(#seriesQrDialog[open]) {
     ]
   },
   "artists": {
-    "label": "타 아티스트",
+    "label": "챌린지 비하인드",
     "i18nKey": "ext_cat_artists",
     "keys": [
       "idle",
       "lesserafim",
       "teayang",
-      "izna",
-      "nmixx",
-      "madein",
       "kiikii",
       "tws",
       "sunmi",
@@ -28385,22 +28385,43 @@ body:has(#seriesQrDialog[open]) {
           .replace(/\b(?:rescene|mnet|plus|blip)\b|리센느|블립/g, " ")
           .replace(/[^\p{L}\p{N}]+/gu, "");
       }
+      function _scheduleTimeKey(value) {
+        const text = String(value || "").trim();
+        if (!text || /^(미정|시간 미정|종일|all.?day|tba|tbd|未定)$/i.test(text)) return "";
+        const match = text.match(/^(?:(오전|오후|am|pm)\s*)?(\d{1,2})(?::|시\s*)(\d{1,2})?\s*분?\s*(am|pm)?$/i);
+        if (!match) return text.toLowerCase();
+        let hour = Number(match[2]);
+        const period = (match[1] || match[4] || "").toLowerCase();
+        if (period) hour = hour % 12 + (/오후|pm/.test(period) ? 12 : 0);
+        return String(hour).padStart(2, "0") + ":" + String(Number(match[3] || 0)).padStart(2, "0");
+      }
       function _sameSchedule(a, b) {
-        if (a.date !== b.date || (a.time || "") !== (b.time || "")) return false;
-        const exact = value => String(value || "").normalize("NFC").toLowerCase().replace(/[\s<>《》〈〉]+/g, "");
-        if (exact(a.title) === exact(b.title)) return true;
-        if (!["mnetplus", "blip"].includes(a.source) || !["mnetplus", "blip"].includes(b.source) || a.source === b.source) return false;
+        if (a.date !== b.date) return false;
+        const at = _scheduleTimeKey(a.time), bt = _scheduleTimeKey(b.time);
+        if (at && bt && at !== bt) return false;
         const x = _scheduleTitleKey(a.title), y = _scheduleTitleKey(b.title);
-        if (Math.min(x.length, y.length) < 6) return false;
+        if (!x || !y) return false;
         if (x === y) return true;
-        if (!a.time || !b.time || a.type !== b.type) return false;
+        if (Math.min(x.length, y.length) < 8) return false;
         if (JSON.stringify(x.match(/\d+/g)) !== JSON.stringify(y.match(/\d+/g))) return false;
+        const distinctions = /사전녹화|본방송|재방송|리허설|영상통화|대면|응모|당첨|발표|취소/g;
+        if (JSON.stringify(x.match(distinctions)) !== JSON.stringify(y.match(distinctions))) return false;
+        if (a.location && b.location && _scheduleTitleKey(a.location) !== _scheduleTitleKey(b.location)) return false;
         const short = x.length < y.length ? x : y, long = x.length < y.length ? y : x;
-        return short.length >= 10 && short.length / long.length >= .8 && long.includes(short);
+        if (short.length >= 10 && short.length / long.length >= .85 && long.includes(short)) return true;
+        if (long.length > 300 || long.length - short.length > long.length * .1) return false;
+        let row = Array.from({length: y.length + 1}, (_, i) => i);
+        for (let i = 1; i <= x.length; i++) {
+          const next = [i];
+          for (let j = 1; j <= y.length; j++) next[j] = Math.min(next[j - 1] + 1, row[j] + 1, row[j - 1] + (x[i - 1] === y[j - 1] ? 0 : 1));
+          row = next;
+        }
+        return 1 - row[y.length] / long.length >= .9;
       }
       function _mergeScheduleSources(items) {
         const merged = [];
-        for (const ev of items) {
+        const ordered = [...items].sort((a, b) => Number(Boolean(_scheduleTimeKey(b.time))) - Number(Boolean(_scheduleTimeKey(a.time))));
+        for (const ev of ordered) {
           const matches = merged.filter(previous => _sameSchedule(previous, ev));
           const previous = matches.length === 1 ? matches[0] : null;
           if (!previous) {
@@ -28408,6 +28429,7 @@ body:has(#seriesQrDialog[open]) {
             continue;
           }
           if (["mnetplus", "blip"].includes(ev.source) && !previous.sources.includes(ev.source)) previous.sources.push(ev.source);
+          if (!previous.time) previous.time = ev.time;
           if (!previous.note) previous.note = ev.note;
           if (!previous.link) previous.link = ev.link;
           if (!previous.location) previous.location = ev.location;
