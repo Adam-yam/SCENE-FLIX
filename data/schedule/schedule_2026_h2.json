@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-30T15:58:45Z",
+  "updated": "2026-10-31T13:58:42Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3629,6 +3629,15 @@
       "source": "mnetplus"
     },
     {
+      "id": "6ae4c03fa46d723d18905123",
+      "date": "2026-11-24",
+      "time": "",
+      "title": "멜론 STAGE 99",
+      "detail": "",
+      "type": "event",
+      "source": "mnetplus"
+    },
+    {
       "id": "731507",
       "date": "2026-11-27",
       "time": "",
@@ -3642,6 +3651,15 @@
       "start": "2026-11-27T00:00:00+09:00",
       "end": "2026-11-27T00:00:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "6ae5ef3d5ba3d32fb9cca86f",
+      "date": "2026-11-27",
+      "time": "18:30",
+      "title": "[PULSE] 영상통화/대면 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
     },
     {
       "id": "731397",
