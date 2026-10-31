@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-31T13:58:42Z",
+  "updated": "2026-10-31T15:58:41Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3677,6 +3677,15 @@
       "endTimeHidden": true
     },
     {
+      "id": "6a98f652301866263741bcec",
+      "date": "2026-12-05",
+      "time": "",
+      "title": "AAA 2026 in Kaohsiung",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
+    },
+    {
       "id": "1109822",
       "date": "2026-12-05",
       "time": "18:00",
@@ -3720,6 +3729,15 @@
       "start": "2026-12-13T00:00:00+09:00",
       "end": "2026-12-13T00:00:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "6adc139b5aa3932ecf5898af",
+      "date": "2026-12-13",
+      "time": "",
+      "title": "2026 MUSIC BANK GLOBAL FESTIVAL IN JAPAN",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
     },
     {
       "id": "1131475",
