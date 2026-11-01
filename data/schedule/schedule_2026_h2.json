@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-01T15:58:38Z",
+  "updated": "2026-11-01T17:58:41Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3338,6 +3338,21 @@
       "endTimeHidden": true
     },
     {
+      "id": "1137053",
+      "date": "2026-11-01",
+      "time": "19:00",
+      "title": "안녕하세요원이입니다잘부탁드립니다",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/c1d07530",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-01T19:00:00+09:00",
+      "end": "2026-11-01T19:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1124956",
       "date": "2026-11-02",
       "time": "",
@@ -3600,6 +3615,21 @@
       "start": "2026-11-07T17:00:00+09:00",
       "end": "2026-11-07T17:00:00+09:00",
       "endTimeHidden": false
+    },
+    {
+      "id": "1137048",
+      "date": "2026-11-07",
+      "time": "18:30",
+      "title": "놀면 뭐하니",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/176203ea",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-07T18:30:00+09:00",
+      "end": "2026-11-07T19:45:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
