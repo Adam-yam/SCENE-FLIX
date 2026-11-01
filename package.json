@@ -1,0 +1,13 @@
+{
+  "name": "sceneflix-checks",
+  "private": true,
+  "scripts": {
+    "test": "node tests/site.test.cjs && node tests/search.test.cjs && node tests/quality.test.cjs",
+    "test:browser": "node --test tests/browser.test.cjs"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.14.0",
+    "playwright": "1.62.1",
+    "web-vitals": "6.2.3"
+  }
+}

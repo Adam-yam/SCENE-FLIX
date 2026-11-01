@@ -17,6 +17,7 @@
       media="(prefers-color-scheme: light)"
     />
     <title>SCENE-FLIX</title>
+    <script defer src="assets/features/performance-v1.js"></script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-05C99P2DB9"></script>
     <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
     gtag('js',new Date());gtag('config','G-05C99P2DB9');gtag('config','G-KKJR841BXB');</script>
@@ -4944,7 +4945,7 @@ a.ab-row-label:hover {
     will-change: transform;
     transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  #mobileBottomNav.nav-hidden {
+  #mobileBottomNav.nav-hidden:not(:focus-within) {
     transform: translateX(-50%)
             translateY(calc(100% + 32px + var(--safe-bottom))) translateZ(0);
   }
@@ -5054,7 +5055,7 @@ a.ab-row-label:hover {
     width: 20px;
     height: 20px;
   }
-  #mobileMenuBtn.nav-hidden {
+  #mobileMenuBtn.nav-hidden:not(:focus-visible) {
     transform: translateY(-64px);
     opacity: 0;
     pointer-events: none;
@@ -7430,8 +7431,11 @@ html,
   box-shadow: inset 0 0 0 1px color-mix(in srgb,var(--accent) 55%,transparent);
 }
 #scheduleMode .cal-cell.other-month {
-  background: transparent;
-  opacity: .35;
+  background: color-mix(in srgb, var(--surf) 50%, transparent);
+  opacity: 1;
+}
+#scheduleMode .cal-cell.other-month .cal-date-num {
+  color: var(--muted);
 }
 #scheduleMode .cal-date-num {
   width: 25px;
@@ -8256,6 +8260,25 @@ body:has(#seriesQrDialog[open]) {
     max-width: 100%;
   }
 }
+
+#scheduleMode .sched-export-trigger { color: var(--text); }
+:root[data-theme="light"] #scheduleMode .cal-cell.sat-col:not(.today) .cal-date-num,
+:root[data-theme="light"] #scheduleMode .cal-day-header.sat { color: #2b60bd; }
+:root[data-theme="light"] #scheduleMode .cal-cell.sun-col:not(.today) .cal-date-num,
+:root[data-theme="light"] #scheduleMode .cal-day-header.sun { color: #b52d45; }
+.bookmark-backup-dialog { margin: auto; width: min(440px, calc(100vw - 32px)); box-sizing: border-box; max-height: calc(100dvh - 48px); overflow: auto; overscroll-behavior: contain; border: 1px solid var(--border); border-radius: 20px; padding: 24px; background: var(--bg); color: var(--text); box-shadow: 0 24px 80px #0004; }
+.bookmark-backup-dialog::backdrop { background: #0008; }
+body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
+.bookmark-backup-heading { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.bookmark-backup-heading h2 { margin: 0; font-size: 18px; }
+.bookmark-backup-dialog p { line-height: 1.65; font-size: 14px; overflow-wrap: anywhere; }
+.bookmark-backup-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.bookmark-backup-dialog .bm-playlist-btn { min-height: 44px; white-space: normal; }
+#bookmarkBackupStatus:empty { display: none; }
+.reset-view-filters { justify-self: center; grid-column: 1 / -1; margin: 8px auto 24px; }
+:where(button, a, input, select, summary):focus-visible { outline: 2px solid var(--accent, #04a06e); outline-offset: 4px; }
+@media (max-width: 700px) { .series-actions button { min-width: 40px; min-height: 40px; } .bm-toolbar .search-bar-inner { flex-wrap: wrap; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-delay: 0ms !important; transition-duration: .01ms !important; } }
 </style>
   
 
@@ -10406,6 +10429,16 @@ body:has(#seriesQrDialog[open]) {
       </div>
     </div>
 
+    <dialog id="bookmarkBackupDialog" class="bookmark-backup-dialog" aria-labelledby="bookmarkBackupTitle">
+      <div class="bookmark-backup-heading"><h2 id="bookmarkBackupTitle"></h2><button type="button" class="bm-playlist-btn" data-action="closeBookmarkBackup" id="bookmarkBackupClose">×</button></div>
+      <p id="bookmarkBackupHint"></p>
+      <div class="bookmark-backup-actions">
+        <button type="button" class="bm-playlist-btn" data-action="exportBookmarks" id="bookmarkBackupExport"></button>
+        <button type="button" class="bm-playlist-btn" data-action="importBookmarks" id="bookmarkBackupImport"></button>
+      </div>
+      <input type="file" id="bookmarkBackupFile" accept="application/json,.json" hidden>
+      <p id="bookmarkBackupStatus" role="status" aria-live="polite"></p>
+    </dialog>
     <div id="share-toast" role="status" aria-live="polite"></div>
     <div
       id="shortsPlayerModal"
@@ -10547,6 +10580,12 @@ body:has(#seriesQrDialog[open]) {
         setArchiveMonth: (event, el) => { setArchiveMonth(el.dataset.year, el.dataset.month); },
         openSeriesDetail: (event, el) => { openSeriesDetail(Number(el.dataset.value)); },
         toggleBookmarkReorder: () => { toggleBookmarkReorder(); },
+        openBookmarkBackup: () => { openBookmarkBackup(); },
+        exportBookmarks: () => { exportBookmarks(); },
+        importBookmarks: () => { document.getElementById("bookmarkBackupFile").click(); },
+        closeBookmarkBackup: () => { document.getElementById("bookmarkBackupDialog").close(); },
+        resetViewFilters: () => { resetViewFilters(); },
+        retrySchedule: () => { loadScheduleJson(true); },
         bookmarkManual: () => { setSort('manual'); },
         openSeriesQr: (event,el) => { openSeriesQr(event,Number(el.dataset.value)); },
         closeSeriesQr: () => { document.getElementById('seriesQrDialog').close(); },
@@ -18155,10 +18194,6 @@ body:has(#seriesQrDialog[open]) {
   "J9atiwEiKrs": {
     "duration": "1:33",
     "sourceDate": "2026.11.01 07:15"
-  },
-  "Ky4R8o5cTKQ": {
-    "duration": "10:39",
-    "sourceDate": "2026.11.01 19:00"
   }
 };
       
@@ -21082,9 +21117,6 @@ body:has(#seriesQrDialog[open]) {
     }
   ],
   "anwonjal": [
-    {
-      "vid": "Ky4R8o5cTKQ"
-    },
     {
       "vid": "1kHqK1oqHzc"
     },
@@ -25858,7 +25890,7 @@ body:has(#seriesQrDialog[open]) {
           _stopPagedSearch();
           const count = document.getElementById("searchResultCount");
           if (count) count.textContent = "";
-          if (bmMode) bmMode.innerHTML = "";
+          if (bmMode) bmMode.innerHTML = _bookmarkBackupToolbar();
           const t = getCurrentT();
           const isTouchDevice =
             "ontouchstart" in window || navigator.maxTouchPoints > 0;
@@ -25887,6 +25919,7 @@ body:has(#seriesQrDialog[open]) {
         </button>
         <button type="button" class="bm-playlist-btn" id="bmManual" data-action="bookmarkManual" aria-pressed="${curBmSort==='manual'}">${_ft().manual}</button>
         <button type="button" class="bm-playlist-btn" id="bmReorder" data-action="toggleBookmarkReorder" aria-pressed="${_bmEditing}">${_bmEditing?_ft().done:_ft().edit}</button>
+        <button type="button" class="bm-playlist-btn" data-action="openBookmarkBackup">${_qualityText().backup}</button>
         ${capped ? `<span class="bm-playlist-note">${_escHtml(note)}</span>` : ""}
       </div>
     </div>`;
@@ -27365,6 +27398,7 @@ body:has(#seriesQrDialog[open]) {
         for (const option of sort.options) option.textContent = t[option.value];
         const q = curSeriesQuery.toLowerCase();
         const list = _searchRank(SERIES_DATA.map((s, i) => ({ s, i })), q, ({s}) => s.title, false);
+        sort.value = curSeriesSort;
         if (curSeriesSort === "oldest" || curSeriesSort === "newest") {
           const dates = new Map(list.map(({s,i}) => [i, _seriesFirstDate(s)]));
           const direction = curSeriesSort === "newest" ? -1 : 1;
@@ -27554,7 +27588,12 @@ body:has(#seriesQrDialog[open]) {
         const rect = dialog.getBoundingClientRect();
         if (event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom) closeSeriesDetail();
       });
-      function pickSection(section, _fromPopState) {
+      function pickSection(section, _fromPopState, historyView) {
+        if (_viewReady) _persistView(!_fromPopState);
+        const savedView = _validView(historyView, section) || _savedViews[section];
+        _viewRestoring = true;
+        _viewRestoreToken++;
+        _pendingViewRestore = null;
         if(section!=="bookmark")_endBmEdit();
         if (section !== "series" && document.getElementById("seriesDetailDialog").open) closeSeriesDetail();
         if (!Object.hasOwn(_PICK_SECTION_MAP, section)) section = "about";
@@ -27568,6 +27607,7 @@ body:has(#seriesQrDialog[open]) {
           _saveAvView();
         _stopPagedSearch();
         curSection = section;
+        if (savedView) _applyViewFields(savedView);
         _drainVideoRequests();
         _ensureSectionData(section);
         if (section === "schedule") loadScheduleJson().catch(() => {});
@@ -27607,6 +27647,11 @@ body:has(#seriesQrDialog[open]) {
           _elSortOldest.classList.toggle("active", curSort === "oldest");
         }
         clearSearch(true);
+        if (savedView) {
+          curSearchQuery = savedView.query;
+          _elSearchInput.value = savedView.draft;
+          _toggleClearBtn(_elSearchClear, !!savedView.draft);
+        }
         if (section !== "shorts") resetShortsSearchUi(true);
         if (section !== "schedule") resetSchedSearchUi(true);
         if (section === "about")
@@ -27653,11 +27698,13 @@ body:has(#seriesQrDialog[open]) {
         if (section === "bookmark") buildBookmarkGrid();
         if (section === "series") buildSeriesGrid();
         if (section === "schedule") {
-          const today = _kstDate();
-          _calYear = today.getFullYear();
-          _calMonth = today.getMonth();
-          _calSelectedDate = _dateStr(today);
-          resetSchedSearchUi(true);
+          if (!savedView) {
+            const today = _kstDate();
+            _calYear = today.getFullYear();
+            _calMonth = today.getMonth();
+            _calSelectedDate = _dateStr(today);
+            resetSchedSearchUi(true);
+          }
           buildCalendar();
         }
         if (section === "news") buildNewsGrid();
@@ -27666,6 +27713,11 @@ body:has(#seriesQrDialog[open]) {
         updateSubSidebar(section);
         clearTimeout(_restoreLastWatchedTimer);
         _restoreLastWatchedTimer = setTimeout(restoreLastWatched, 50);
+        _viewReady = true;
+        _viewRestoring = false;
+        _syncViewControls();
+        if (savedView) _restoreViewPosition(savedView);
+        else _persistView();
       }
       function updateSubSidebar(section) {
         const sidebar = _elSubSidebar;
@@ -28152,12 +28204,14 @@ body:has(#seriesQrDialog[open]) {
           }
         }
         state.grid.querySelector(".search-empty")?.remove();
+        state.grid.querySelectorAll(".reset-view-filters").forEach(button => button.remove());
         if (!visible.length) {
           state.grid.insertAdjacentHTML("afterbegin", _emptyStateHtml(
             "search-empty", "🔍",
             `${getCurrentT().search_empty_prefix || ""}"${_escHtml(state.q)}"${getCurrentT().search_empty_suffix || ""}`,
-          ));
+          ) + _resetFiltersButton());
         }
+        
         let cursor = state.grid.firstElementChild;
         for (const item of visible) {
           _syncSearchItem(item);
@@ -28649,6 +28703,7 @@ body:has(#seriesQrDialog[open]) {
         if (force || Date.now() - _scheduleLastAttempt >= 10 * 60000) _scheduleRetryCount = 0;
         _scheduleBusy = true;
         _scheduleLastAttempt = Date.now();
+        if (curSection === "schedule") _renderScheduleStatus();
         try {
           let paths;
           try {
@@ -28728,6 +28783,10 @@ body:has(#seriesQrDialog[open]) {
           }
           _queueScheduleRetry();
           refreshScheduleExport();
+          if (curSection === "schedule") {
+            _renderScheduleStatus();
+            if (_pendingViewRestore?.section === "schedule") _restoreViewPosition(_pendingViewRestore);
+          }
         }
       }
       loadScheduleJson();
@@ -28933,6 +28992,7 @@ body:has(#seriesQrDialog[open]) {
         }).finally(() => {
           record.pending = null;
           _renderDataSection(section, before !== JSON.stringify(_sectionPayload(section)));
+          if (curSection === section && _pendingViewRestore?.section === section) _restoreViewPosition(_pendingViewRestore);
         });
         _renderDataSection(section);
         return record.pending;
@@ -29929,7 +29989,7 @@ body:has(#seriesQrDialog[open]) {
             : SCHED_TYPE_COLOR[ev.type] || "#888";
         const bar = `background:${evColor}`;
         const tl = (_SCHED_TYPE_LABEL[ev.type] || {})[lang] || ev.type;
-        const tagStyle = `background:color-mix(in srgb, ${evColor} 18%, transparent);color:${evColor}`;
+        const tagStyle = `background:color-mix(in srgb, ${evColor} 18%, transparent);color:var(--text)`;
         const link = ev.link
           ? `<a href="${_escHtml(_safeHttpUrl(ev.link))}" target="_blank" rel="noopener" class="sched-item-link">${getCurrentT().cal_link_label || "↗ 링크"}</a>`
           : "";
@@ -30019,6 +30079,7 @@ body:has(#seriesQrDialog[open]) {
         return html;
       }
       function renderSchedList() {
+        _renderScheduleStatus();
         const lang = _curLang || "KR";
         const monthStr = `${_calYear}-${String(_calMonth + 1).padStart(2, "0")}`;
         const events = SCHEDULE_DATA.filter((e) =>
@@ -30056,7 +30117,7 @@ body:has(#seriesQrDialog[open]) {
               hlq: null,
             })
           : '<div class="sched-list-empty">' +
-            (lang === "KR"
+            (_scheduleBusy ? _dataStateText("loading") : _scheduleState === "failed" && !_baseScheduleData.length ? _dataStateText("failed") : lang === "KR"
               ? "등록된 일정이 없습니다."
               : lang === "JP"
                 ? "予定はありません。"
@@ -30083,6 +30144,7 @@ body:has(#seriesQrDialog[open]) {
         else renderSchedList();
       }
       function renderSchedSearchResults() {
+        _renderScheduleStatus();
         const lang = _curLang || "KR";
         const q = curSchedSearchQuery.toLowerCase();
         const matches = _searchRank(SCHEDULE_DATA, q, ev => [ev.title, ev.note].filter(Boolean).join(" "), false);
@@ -30569,6 +30631,13 @@ body:has(#seriesQrDialog[open]) {
       const _elDrawerOverlay = document.getElementById("mobileDrawerOverlay");
       const _elMenuBtn = document.getElementById("mobileMenuBtn");
       let _drawerScrollY = 0;
+      _elDrawer.inert = true;
+      _elDrawer.setAttribute("aria-hidden", "true");
+      _elDrawer.setAttribute("role", "dialog");
+      _elDrawer.setAttribute("aria-modal", "true");
+      _elDrawer.setAttribute("aria-label", "SCENE-FLIX");
+      _elMenuBtn?.setAttribute("aria-expanded", "false");
+      _elMenuBtn?.setAttribute("aria-controls", "mobileDrawer");
       function _lockBodyScroll() {
         _drawerScrollY = window.scrollY || window.pageYOffset || 0;
         document.body.style.position = "fixed";
@@ -30589,19 +30658,35 @@ body:has(#seriesQrDialog[open]) {
         if (_elDrawer.classList.contains("open")) {
           closeDrawer();
         } else {
+          _elDrawer.inert = false;
+          _elDrawer.setAttribute("aria-hidden", "false");
+          _elMenuBtn?.setAttribute("aria-expanded", "true");
           _elDrawer.classList.add("open");
           _elDrawerOverlay.classList.add("open");
           if (_elMenuBtn) _elMenuBtn.classList.add("open");
           _lockBodyScroll();
+          (_elDrawer.querySelector(".drawer-item.active") || _elDrawer.querySelector("button"))?.focus({ preventScroll: true });
         }
       }
       function closeDrawer() {
         if (!_elDrawer.classList.contains("open")) return;
+        _elDrawer.inert = true;
+        _elDrawer.setAttribute("aria-hidden", "true");
+        _elMenuBtn?.setAttribute("aria-expanded", "false");
         _elDrawer.classList.remove("open");
         _elDrawerOverlay.classList.remove("open");
         if (_elMenuBtn) _elMenuBtn.classList.remove("open");
         _unlockBodyScroll();
+        _elMenuBtn?.focus({ preventScroll: true });
       }
+      document.addEventListener("keydown", event => {
+        if (event.key !== "Tab" || !_elDrawer.classList.contains("open")) return;
+        const buttons = [..._elDrawer.querySelectorAll("button:not(:disabled), a[href], [tabindex='0']")].filter(el => el.getClientRects().length);
+        const first = buttons[0], last = buttons.at(-1);
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus(); }
+      });
+      _mobileMedia.addEventListener?.("change", event => { if (!event.matches) closeDrawer(); });
       _elDrawerOverlay.addEventListener("click", function (e) {
         e.stopPropagation();
         closeDrawer();
@@ -30731,14 +30816,278 @@ body:has(#seriesQrDialog[open]) {
         if (document.fonts) document.fonts.ready.then(schedule);
         schedule();
       })();
+      function _qualityText() {
+        return ({
+          KR: { backup: "백업·복원", export: "파일로 저장", import: "파일 가져오기", close: "닫기", hint: "즐겨찾기와 내 순서를 저장합니다. 가져온 영상은 기존 목록에 추가되며, 기존 순서는 유지됩니다.", exported: "백업 파일을 만들었습니다.", imported: "{n}개 영상을 추가했습니다.", invalid: "센플릭스 즐겨찾기 백업 파일을 선택해 주세요. (최대 1MB)", saveFailed: "저장하지 못했습니다. 브라우저 저장 공간과 설정을 확인한 뒤 다시 시도해 주세요.", reset: "검색·필터 초기화", importing: "가져오는 중…" },
+          EN: { backup: "Backup & restore", export: "Save to file", import: "Import file", close: "Close", hint: "Save your bookmarks and custom order. Imports add to your existing list and keep its order.", exported: "Backup file created.", imported: "Added {n} videos.", invalid: "Choose a SCENE-FLIX bookmark backup file (up to 1 MB).", saveFailed: "Could not save. Check browser storage and settings, then try again.", reset: "Reset search & filters", importing: "Importing…" },
+          JP: { backup: "バックアップ", export: "ファイルに保存", import: "ファイルを読み込む", close: "閉じる", hint: "お気に入りと並び順を保存します。読み込んだ動画は既存の順序を保ったまま追加されます。", exported: "バックアップを作成しました。", imported: "{n}本の動画を追加しました。", invalid: "センフリックスのお気に入りバックアップを選択してください（最大1MB）。", saveFailed: "保存できませんでした。ブラウザの保存容量と設定を確認してください。", reset: "検索・絞り込みをリセット", importing: "読み込み中…" }
+        })[_curLang] || {};
+      }
+      function _bookmarkBackupToolbar() {
+        return `<div class="search-bar bm-toolbar"><div class="search-bar-inner"><button type="button" class="bm-playlist-btn" data-action="openBookmarkBackup">${_qualityText().backup}</button></div></div>`;
+      }
+      function openBookmarkBackup() {
+        const t = _qualityText();
+        for (const [id, text] of Object.entries({ bookmarkBackupTitle: t.backup, bookmarkBackupHint: t.hint, bookmarkBackupExport: t.export, bookmarkBackupImport: t.import })) document.getElementById(id).textContent = text;
+        document.getElementById("bookmarkBackupClose").setAttribute("aria-label", t.close);
+        document.getElementById("bookmarkBackupStatus").textContent = "";
+        const dialog = document.getElementById("bookmarkBackupDialog");
+        if (!dialog.open) dialog.showModal();
+      }
+      document.getElementById("bookmarkBackupDialog").addEventListener("close", () => {
+        if (curSection === "bookmark") document.querySelector('#bookmarkMode [data-action="openBookmarkBackup"]')?.focus({ preventScroll: true });
+      });
+      function _parseBookmarkBackup(text) {
+        const data = JSON.parse(text);
+        if (!data || data.app !== "SCENE-FLIX" || data.version !== 1 || !Array.isArray(data.bookmarks) || !Array.isArray(data.order) || data.bookmarks.length > 10000 || data.order.length > 10000) throw new Error("Invalid backup");
+        for (const id of [...data.bookmarks, ...data.order]) if (typeof id !== "string" || !_VIDEO_ID_RE.test(id)) throw new Error("Invalid video ID");
+        const bookmarks = [...new Set(data.bookmarks)];
+        const saved = new Set(bookmarks);
+        return { bookmarks, order: [...new Set(data.order)].filter(id => saved.has(id)) };
+      }
+      function exportBookmarks() {
+        const status = document.getElementById("bookmarkBackupStatus");
+        const saved = _readStoredBookmarks();
+        if (!saved) { status.textContent = _qualityText().saveFailed; return; }
+        const data = { app: "SCENE-FLIX", version: 1, createdAt: new Date().toISOString(), bookmarks: [...saved], order: [...new Set([..._readBmOrder(), ...saved])].filter(id => saved.has(id)) };
+        const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: "application/json" }));
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "sceneflix-bookmarks-" + new Date().toISOString().slice(0, 10) + ".json";
+        document.body.append(link);
+        link.click();
+        link.remove();
+        setTimeout(() => URL.revokeObjectURL(url), 30000);
+        status.textContent = _qualityText().exported;
+      }
+      function _mergeBookmarkBackup(data) {
+        const current = _readStoredBookmarks();
+        if (!current) throw new Error("Storage unavailable");
+        const incoming = [...new Set([...data.order, ...data.bookmarks])].filter(id => !current.has(id));
+        const order = [...new Set([..._readBmOrder().filter(id => current.has(id)), ...current, ...incoming])];
+        const writes = incoming.map((id, i) => [_BOOKMARK_ITEM_PREFIX + id, JSON.stringify({ saved: true, time: Date.now() + i })]);
+        writes.push([_BM_ORDER_KEY, JSON.stringify(order)]);
+        const undo = writes.map(([key]) => [key, localStorage.getItem(key)]);
+        try {
+          for (const [key, value] of writes) localStorage.setItem(key, value);
+        } catch (error) {
+          for (const [key, value] of undo.reverse()) {
+            try { if (value === null) localStorage.removeItem(key); else localStorage.setItem(key, value); } catch {}
+          }
+          throw error;
+        }
+        _bmOrder = order;
+        BOOKMARKS = _readStoredBookmarks() || new Set([...current, ...incoming]);
+        return incoming.length;
+      }
+      document.getElementById("bookmarkBackupFile").addEventListener("change", async event => {
+        const input = event.target, file = input.files?.[0];
+        input.value = "";
+        if (!file) return;
+        const status = document.getElementById("bookmarkBackupStatus");
+        const button = document.getElementById("bookmarkBackupImport");
+        let data;
+        try {
+          if (file.size > 1024 * 1024) throw new Error("File too large");
+          data = _parseBookmarkBackup(await file.text());
+        } catch { status.textContent = _qualityText().invalid; return; }
+        button.disabled = true;
+        status.textContent = _qualityText().importing;
+        try {
+          _endBmEdit();
+          const added = _mergeBookmarkBackup(data);
+          updateBookmarkCounts();
+          if (curSection === "bookmark") buildBookmarkGrid();
+          status.textContent = _qualityText().imported.replace("{n}", added);
+        } catch { status.textContent = _qualityText().saveFailed; }
+        finally { button.disabled = false; }
+      });
+      function _resetFiltersButton() {
+        return `<button type="button" class="bm-playlist-btn reset-view-filters" data-action="resetViewFilters">${_qualityText().reset}</button>`;
+      }
+      function resetViewFilters() {
+        curSong = curType = curContentCat = curExternal = curExternalCat = curLiveYear = curLiveMember = "all";
+        clearSearch(true);
+        pickSection(curSection, true, { ..._captureView(), query: "", draft: "", y: 0, count: 40 });
+        _elSearchInput.focus({ preventScroll: true });
+      }
+      function _renderScheduleStatus() {
+        const host = document.getElementById("schedList");
+        if (!host) return;
+        let status = document.getElementById("scheduleLoadStatus");
+        const failed = _scheduleState === "failed";
+        const loading = _scheduleBusy && !_baseScheduleData.length;
+        host.setAttribute("aria-busy", String(_scheduleBusy));
+        if (!failed && !loading) { status?.remove(); return; }
+        if (!status) {
+          status = document.createElement("div");
+          status.id = "scheduleLoadStatus";
+          status.className = "data-state";
+          status.setAttribute("role", "status");
+          host.before(status);
+        }
+        status.replaceChildren(document.createTextNode(_dataStateText(loading ? "loading" : _baseScheduleData.length ? "stale" : "failed")));
+        if (failed && !_scheduleBusy) {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "type-btn";
+          button.dataset.action = "retrySchedule";
+          button.textContent = _dataStateText("retry");
+          status.append(button);
+        }
+      }
+      const _VIEW_STORAGE_KEY = "sceneflix-views-v1";
+      const _VIEW_BINDINGS = {
+        sort: [() => curSort, v => curSort = v, v => ["newest", "oldest"].includes(v)],
+        bmSort: [() => curBmSort, v => curBmSort = v, v => ["manual", "added", "newest", "oldest"].includes(v)],
+        song: [() => curSong, v => curSong = v], type: [() => curType, v => curType = v],
+        content: [() => curContentCat, v => curContentCat = v],
+        external: [() => curExternal, v => curExternal = v], externalCat: [() => curExternalCat, v => curExternalCat = v],
+        liveYear: [() => curLiveYear, v => curLiveYear = v], liveMember: [() => curLiveMember, v => curLiveMember = v],
+        archiveYear: [() => _archiveYear, v => _archiveYear = v, v => v === null || /^\d{4}$/.test(v)],
+        archiveMonth: [() => _archiveMonth, v => _archiveMonth = v, v => v === null || /^(0[1-9]|1[0-2])$/.test(v)],
+        seriesQuery: [() => curSeriesQuery, v => curSeriesQuery = v],
+        seriesSort: [() => curSeriesSort, v => curSeriesSort = v, v => ["oldest", "newest", "count", "longest", "shortest"].includes(v)],
+        shortsQuery: [() => curShortsSearchQuery, v => curShortsSearchQuery = v],
+        shortsYear: [() => _curShortsYear, v => _curShortsYear = v],
+        shortsChannel: [() => _curShortsChannel, v => _curShortsChannel = v],
+        shortsSort: [() => _curShortsSort, v => _curShortsSort = v, v => ["newest", "oldest"].includes(v)],
+        schedQuery: [() => curSchedSearchQuery, v => curSchedSearchQuery = v],
+        calYear: [() => _calYear, v => _calYear = v, v => Number.isInteger(v) && v >= 2000 && v <= 2200],
+        calMonth: [() => _calMonth, v => _calMonth = v, v => Number.isInteger(v) && v >= 0 && v <= 11],
+        calDate: [() => _calSelectedDate, v => _calSelectedDate = v, v => v === null || /^\d{4}-\d{2}-\d{2}$/.test(v)],
+        source: [() => _scheduleSource, v => _scheduleSource = v, v => ["all", "mnetplus", "blip"].includes(v)],
+        fantube: [() => curFantubeTag, v => curFantubeTag = v]
+      };
+      function _validView(view, section) {
+        if (!view || view.version !== 1 || view.section !== section || !Object.hasOwn(_PICK_SECTION_MAP, section) || !view.fields || typeof view.fields !== "object") return null;
+        if (![view.query, view.draft].every(value => typeof value === "string" && value.length <= 500)) return null;
+        if (![view.y, view.count].every(value => Number.isFinite(value) && value >= 0) || view.count > 10000 || view.y > 10000000) return null;
+        for (const [key, binding] of Object.entries(_VIEW_BINDINGS)) {
+          const value = view.fields[key];
+          if (!(binding[2] || (v => typeof v === "string" && v.length <= 500))(value)) return null;
+        }
+        return view;
+      }
+      const _savedViews = Object.create(null);
+      try {
+        const saved = JSON.parse(sessionStorage.getItem(_VIEW_STORAGE_KEY) || "{}");
+        for (const section of Object.keys(_PICK_SECTION_MAP)) {
+          const view = _validView(saved?.[section], section);
+          if (view) _savedViews[section] = view;
+        }
+      } catch {}
+      let _viewReady = false, _viewRestoring = false, _viewRestoreToken = 0, _viewSaveTimer = null, _pendingViewRestore = null;
+      function _captureView() {
+        const count = _pagedSearch?.section === curSection ? _pagedSearch.limit : curSection === "allvideos" ? _avLoaded : curSection === "live" ? _liveLoaded : curSection === "shorts" ? _shortsPage * _SHORTS_PAGE_SIZE : _gridLoaded;
+        const fields = Object.fromEntries(Object.entries(_VIEW_BINDINGS).map(([key, binding]) => [key, binding[0]() ]));
+        if (curSection === "series") fields.seriesQuery = (document.getElementById("seriesSearchInput")?.value || "").trim().slice(0, 500);
+        return { version: 1, section: curSection, fields, query: curSearchQuery.slice(0, 500), draft: (_elSearchInput?.value || "").slice(0, 500), y: Math.max(0, document.body.style.position === "fixed" ? _drawerScrollY : window.scrollY), count: Math.max(40, Math.min(10000, count)) };
+      }
+      function _persistView(updateHistory = true) {
+        if (!_viewReady || _viewRestoring || _pendingViewRestore) return;
+        const view = _captureView();
+        _savedViews[curSection] = view;
+        try { sessionStorage.setItem(_VIEW_STORAGE_KEY, JSON.stringify(_savedViews)); } catch {}
+        if (updateHistory) {
+          try { history.replaceState({ ...history.state, tab: curSection, view }, "", location.href); } catch {}
+        }
+      }
+      function _applyViewFields(view) {
+        const fields = {
+          allvideos: ["sort"], songs: ["sort", "song", "type"], content: ["sort", "content"],
+          external: ["sort", "external", "externalCat"], live: ["sort", "liveYear", "liveMember"],
+          archive: ["archiveYear", "archiveMonth"], bookmark: ["bmSort"],
+          series: ["seriesQuery", "seriesSort"], shorts: ["shortsQuery", "shortsYear", "shortsChannel", "shortsSort"],
+          schedule: ["schedQuery", "calYear", "calMonth", "calDate", "source"], fantube: ["fantube"]
+        }[view.section] || [];
+        for (const key of fields) _VIEW_BINDINGS[key][1](view.fields[key]);
+        if (curExternalCat !== "all" && !Object.hasOwn(EXTERNAL_CATS, curExternalCat)) curExternalCat = "all";
+        if (curExternal !== "all" && !Object.hasOwn(EXTERNAL_DATA, curExternal)) curExternal = "all";
+        if (curContentCat !== "all" && !CONTENT_DATA.some(item => item.category === curContentCat)) curContentCat = "all";
+        if (curSong !== "all" && !ALL_ITEMS.some(item => item.song === curSong)) curSong = "all";
+        if (curType !== "all" && !Object.hasOwn(TYPE_BADGE, curType)) curType = "all";
+        if (view.section === "schedule") injectAnnivEvents();
+      }
+      function _syncFilterButtons() {
+        const active = { setSort: curSection === "bookmark" ? curBmSort : curSort, pickSong: curSong, setType: curType, setContentCat: curContentCat, pickExternalCat: curExternalCat, pickExternalChan: curExternal, pickLiveYear: curLiveYear, setLiveMember: curLiveMember, setShortsChannel: _curShortsChannel, setShortsSort: _curShortsSort };
+        document.querySelectorAll("button[data-action]").forEach(button => {
+          if (Object.hasOwn(active, button.dataset.action)) {
+            const selected = button.dataset.value === active[button.dataset.action];
+            button.classList.toggle("active", selected);
+            button.setAttribute("aria-pressed", String(selected));
+          }
+        });
+      }
+      function _syncViewControls() {
+        _syncFilterButtons();
+        for (const [inputId, clearId, value] of [["seriesSearchInput", "seriesSearchClear", curSeriesQuery], ["shortsSearchInput", "shortsSearchClear", curShortsSearchQuery], ["schedSearchInput", "schedSearchClear", curSchedSearchQuery]]) {
+          const input = document.getElementById(inputId);
+          if (input) input.value = value;
+          _toggleClearBtn(clearId, !!value);
+        }
+        document.getElementById("shortsSearchBarInner")?.classList.toggle("ssb-open", !!curShortsSearchQuery);
+      }
+      function _restoreViewPosition(view) {
+        if (view.section !== curSection) return;
+        if ((["shorts", "news", "chart"].includes(curSection) && _sectionDataLoads.get(curSection)?.pending && !_sectionHasData(curSection)) || (curSection === "schedule" && _scheduleBusy && !_baseScheduleData.length)) {
+          _pendingViewRestore = view;
+          return;
+        }
+        _pendingViewRestore = null;
+        _viewRestoring = true;
+        if (_pagedSearch?.section === curSection) {
+          _pagedSearch.limit = view.count;
+          _refreshPagedSearch(_pagedSearch);
+        } else if (curSection === "allvideos") {
+          while (_avLoaded < Math.min(view.count, _avSorted.length)) _avAppendNextBatch(_elGrid);
+        } else if (["songs", "content", "external"].includes(curSection)) {
+          while (_gridLoaded < Math.min(view.count, _gridSorted.length)) _gridAppendBatch(_elGrid);
+        } else if (curSection === "live") {
+          while (_liveLoaded < Math.min(view.count, _liveSorted.length)) _liveAppendBatch(document.getElementById("liveGridInner"));
+        } else if (curSection === "shorts") {
+          while (_shortsPage * _SHORTS_PAGE_SIZE < Math.min(view.count, _shortsFiltered.length)) {
+            _shortsObserver?.disconnect();
+            _shortsSentinel?.remove();
+            _appendShortsPage(document.getElementById("shortsGrid"));
+          }
+        }
+        const token = ++_viewRestoreToken;
+        requestAnimationFrame(() => requestAnimationFrame(() => {
+          if (token !== _viewRestoreToken || curSection !== view.section) return;
+          window.scrollTo({ top: view.y, behavior: "instant" });
+          _viewRestoring = false;
+          _persistView();
+        }));
+      }
+      function _queueViewSave() {
+        clearTimeout(_viewSaveTimer);
+        _viewSaveTimer = setTimeout(() => { _syncFilterButtons(); _persistView(); }, 250);
+      }
+      document.addEventListener("click", _queueViewSave);
+      document.addEventListener("input", _queueViewSave);
+      document.addEventListener("change", _queueViewSave);
+      window.addEventListener("scroll", _queueViewSave, { passive: true });
+      window.addEventListener("pagehide", () => _persistView());
+      document.addEventListener("visibilitychange", () => { if (document.hidden) _persistView(); });
+      for (const type of ["wheel", "touchstart", "keydown"]) window.addEventListener(type, () => {
+        if (_viewRestoring || _pendingViewRestore) {
+          _viewRestoreToken++;
+          _viewRestoring = false;
+          _pendingViewRestore = null;
+        }
+      }, { passive: true });
+
       setLang(_curLang, false);
       (function () {
         const _VALID_TABS = new Set(Object.keys(_PICK_TAB_ID_MAP));
         const params = new URLSearchParams(location.search);
         const tabFromUrl = params.get("tab");
         const initTab = _VALID_TABS.has(tabFromUrl) ? tabFromUrl : "about";
-        history.replaceState({ tab: initTab }, "", location.href);
-        pickSection(initTab, true);
+        const view = _validView(history.state?.view, initTab);
+        history.scrollRestoration = "manual";
+        history.replaceState({ tab: initTab, view }, "", location.href);
+        pickSection(initTab, true, view);
       })();
       window.addEventListener("popstate", (e) => {
         const wasShortsPlayerOpen = _shortsPlayerHistoryPushed;
@@ -30747,7 +31096,7 @@ body:has(#seriesQrDialog[open]) {
           closeShortsPlayer(true);
           if (tab === curSection) return;
         }
-        pickSection(tab, true);
+        pickSection(tab, true, e.state?.view);
       });
       updateBookmarkCounts();
       window.addEventListener("load", () => {
