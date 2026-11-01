@@ -1,7 +1,7 @@
 name: Validate site and crawlers
 on:
   push:
-    paths: ['index.html', 'assets/search/**', 'service-worker.js', 'crawlers/**', 'tests/**', 'data/schedule/**', '.github/workflows/**']
+    paths: ['index.html', 'assets/**', 'package.json', 'package-lock.json', 'service-worker.js', 'crawlers/**', 'tests/**', 'data/schedule/**', '.github/workflows/**']
   pull_request:
 permissions:
   contents: read
@@ -15,6 +15,30 @@ jobs:
           python-version: '3.12'
       - run: pip install -r crawlers/requirements.txt
       - run: python -m unittest discover -s crawlers/tests -q
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
       - run: node --check service-worker.js
       - run: node tests/site.test.cjs
       - run: node tests/search.test.cjs
+      - run: node tests/quality.test.cjs
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, webkit]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - run: npm run test:browser
+        env:
+          SCENE_BROWSER: ${{ matrix.browser }}
