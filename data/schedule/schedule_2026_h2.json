@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-01T01:58:40Z",
+  "updated": "2026-11-01T15:58:38Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -2588,7 +2588,7 @@
       "id": "1127545",
       "date": "2026-10-17",
       "time": "17:00",
-      "title": "안원잘부",
+      "title": "안녕하세요원이입니다잘부탁드립니다",
       "detail": "",
       "type": "broadcast",
       "source": "blip",
@@ -3368,6 +3368,21 @@
       "endTimeHidden": true
     },
     {
+      "id": "1137038",
+      "date": "2026-11-03",
+      "time": "07:00",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1120078",
       "date": "2026-11-03",
       "time": "18:00",
@@ -3428,6 +3443,21 @@
       "endTimeHidden": true
     },
     {
+      "id": "1137038",
+      "date": "2026-11-04",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1135707",
       "date": "2026-11-04",
       "time": "18:00",
@@ -3458,6 +3488,21 @@
       "endTimeHidden": true
     },
     {
+      "id": "1137038",
+      "date": "2026-11-05",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1124956",
       "date": "2026-11-06",
       "time": "",
@@ -3473,6 +3518,21 @@
       "endTimeHidden": true
     },
     {
+      "id": "1137038",
+      "date": "2026-11-06",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1124956",
       "date": "2026-11-07",
       "time": "",
@@ -3485,6 +3545,21 @@
       "allDay": true,
       "start": "2026-10-11T00:00:00+09:00",
       "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1137038",
+      "date": "2026-11-07",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
       "endTimeHidden": true
     },
     {
@@ -3542,6 +3617,21 @@
       "endTimeHidden": true
     },
     {
+      "id": "1137038",
+      "date": "2026-11-08",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1124956",
       "date": "2026-11-09",
       "time": "",
@@ -3554,6 +3644,96 @@
       "allDay": true,
       "start": "2026-10-11T00:00:00+09:00",
       "end": "2026-11-09T00:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1137038",
+      "date": "2026-11-09",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1137038",
+      "date": "2026-11-10",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1137038",
+      "date": "2026-11-11",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1137038",
+      "date": "2026-11-12",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1137038",
+      "date": "2026-11-13",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1137038",
+      "date": "2026-11-14",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
       "endTimeHidden": true
     },
     {
@@ -3578,6 +3758,21 @@
       "allDay": false,
       "start": "2026-11-14T18:00:00+09:00",
       "end": "2026-11-14T18:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1137038",
+      "date": "2026-11-15",
+      "time": "",
+      "title": "CU <PULSE> POP-UP STORE",
+      "detail": "2026.11.03 – 2026.11.15 · CU 올림픽광장점",
+      "type": "notice",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/54f175f4",
+      "location": "CU 올림픽광장점",
+      "allDay": false,
+      "start": "2026-11-03T07:00:00+09:00",
+      "end": "2026-11-15T23:00:00+09:00",
       "endTimeHidden": true
     },
     {
@@ -3665,6 +3860,21 @@
       "allDay": true,
       "start": "2026-11-29T00:00:00+09:00",
       "end": "2026-11-29T00:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1137059",
+      "date": "2026-11-30",
+      "time": "20:00",
+      "title": "BASE NOTES",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/6a16439f",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-30T20:00:00+09:00",
+      "end": "2026-11-30T20:00:00+09:00",
       "endTimeHidden": true
     },
     {
