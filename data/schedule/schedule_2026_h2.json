@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T15:58:45Z",
+  "updated": "2026-11-02T17:58:41Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3692,6 +3692,15 @@
       "endTimeHidden": true
     },
     {
+      "id": "6ae8b3bd5e04b81dc54f220e",
+      "date": "2026-11-08",
+      "time": "18:30",
+      "title": "[PULSE] 대면/영상통화 팬사인회 by MAKESTAR",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
+    },
+    {
       "id": "1124956",
       "date": "2026-11-09",
       "time": "",
@@ -3921,6 +3930,15 @@
       "start": "2026-11-29T00:00:00+09:00",
       "end": "2026-11-29T00:00:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "6ae8b5f0a46d723d18905224",
+      "date": "2026-11-29",
+      "time": "14:00",
+      "title": "[PULSE] 대면/영상통화 팬사인회 by WHOSFAN",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
     },
     {
       "id": "6a98f652301866263741bcec",
