@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T11:58:42Z",
+  "updated": "2026-11-02T15:58:45Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3455,6 +3455,21 @@
       "allDay": false,
       "start": "2026-11-03T20:00:00+09:00",
       "end": "2026-11-03T20:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1137529",
+      "date": "2026-11-03",
+      "time": "22:00",
+      "title": "STUDIO CHOOM ORIGINAL",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/adc89352",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-03T22:00:00+09:00",
+      "end": "2026-11-03T22:00:00+09:00",
       "endTimeHidden": true
     },
     {
