@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-02T17:58:41Z",
+  "updated": "2026-11-03T11:58:41Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3425,6 +3425,21 @@
       "allDay": false,
       "start": "2026-11-03T18:00:00+09:00",
       "end": "2026-11-03T18:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1137832",
+      "date": "2026-11-03",
+      "time": "18:00",
+      "title": "안녕하세요원이입니다잘부탁드립니다",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/dd43b2d9",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-03T18:00:00+09:00",
+      "end": "2026-11-03T19:59:00+09:00",
       "endTimeHidden": true
     },
     {
