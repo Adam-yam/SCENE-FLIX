@@ -29570,7 +29570,12 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         const order = ["melon","youtube_music","spotify","genie","flo","vibe","bugs","apple_music"];
         const platforms = order.map(key => _CHART_PLATFORMS.find(p => p.key === key)).filter(Boolean);
         const dailyPlatforms = new Set(["melon","genie","bugs"]);
-        const songs = (CHART_DATA?.songs || []).filter(song => song && typeof song === "object");
+        const songs = (CHART_DATA?.songs || [])
+          .filter(song => song && typeof song === "object")
+          .sort((a, b) =>
+            (_chartRank(a.ranks?.melon?.rank) ?? Number.MAX_SAFE_INTEGER) -
+            (_chartRank(b.ranks?.melon?.rank) ?? Number.MAX_SAFE_INTEGER)
+          );
         const statuses = CHART_DATA?.platformStatus || {};
         function displayStatus(key) {
           const meta = statuses[key];
