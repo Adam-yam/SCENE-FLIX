@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-03T11:58:41Z",
+  "updated": "2026-11-03T17:58:50Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3906,6 +3906,21 @@
       "detail": "",
       "type": "fansign",
       "source": "mnetplus"
+    },
+    {
+      "id": "1137992",
+      "date": "2026-11-24",
+      "time": "",
+      "title": "멜론 STAGE 99",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/e56953a5",
+      "location": "",
+      "allDay": true,
+      "start": "2026-11-24T00:00:00+09:00",
+      "end": "2026-11-24T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "731507",
