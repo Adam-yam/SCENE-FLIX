@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04T07:58:41Z",
+  "updated": "2026-11-04T11:58:41Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3030,11 +3030,11 @@
       "date": "2026-10-24",
       "time": "19:00",
       "title": "2026 한화오션 오션하모니",
-      "detail": "",
+      "detail": "거제 한화오션 오션프라자",
       "type": "event",
       "source": "blip",
       "link": "https://s.blip.kr/s/778f5997",
-      "location": "",
+      "location": "거제 한화오션 오션프라자",
       "allDay": false,
       "start": "2026-10-24T19:00:00+09:00",
       "end": "2026-10-24T19:00:00+09:00",
@@ -3565,8 +3565,8 @@
     {
       "id": "6aeabe5d5ba3d32fb9ccab77",
       "date": "2026-11-05",
-      "time": "",
-      "title": "MBC <쇼음악중심> 사전 녹화",
+      "time": "06:00",
+      "title": "MBC <쇼!음악중심> 사전 녹화",
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
@@ -3574,7 +3574,7 @@
     {
       "id": "6aeabdec5e04b81dc54f256a",
       "date": "2026-11-05",
-      "time": "",
+      "time": "10:30",
       "title": "SBS <인기가요> 사전 녹화",
       "detail": "",
       "type": "broadcast",
@@ -3609,6 +3609,24 @@
       "start": "2026-11-03T07:00:00+09:00",
       "end": "2026-11-15T23:00:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "6aeb1b00a46d723d189054e1",
+      "date": "2026-11-06",
+      "time": "06:00",
+      "title": "KBS2 <뮤직뱅크> 사전 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "id": "6aeb1a6f5e04b81dc54f2630",
+      "date": "2026-11-06",
+      "time": "16:45",
+      "title": "KBS2 <뮤직뱅크>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
     },
     {
       "id": "1124956",
@@ -3930,11 +3948,11 @@
       "date": "2026-11-24",
       "time": "",
       "title": "멜론 STAGE 99",
-      "detail": "",
+      "detail": "무신사 개러지",
       "type": "event",
       "source": "blip",
       "link": "https://s.blip.kr/s/e56953a5",
-      "location": "",
+      "location": "무신사 개러지",
       "allDay": true,
       "start": "2026-11-24T00:00:00+09:00",
       "end": "2026-11-24T00:00:00+09:00",
@@ -4030,15 +4048,6 @@
     {
       "id": "6ae5f5805e04b81dc54f1f02",
       "date": "2026-12-08",
-      "time": "20:00",
-      "title": "[PULSE] 영상통화 팬사인회 by WITHMUU",
-      "detail": "",
-      "type": "fansign",
-      "source": "mnetplus"
-    },
-    {
-      "id": "6ae5f5c95e04b81dc54f1f04",
-      "date": "2026-12-10",
       "time": "20:00",
       "title": "[PULSE] 영상통화 팬사인회 by WITHMUU",
       "detail": "",
