@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T05:58:38Z",
+  "updated": "2026-11-06T07:58:34Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3701,6 +3701,21 @@
       "endTimeHidden": true
     },
     {
+      "id": "1139238",
+      "date": "2026-11-05",
+      "time": "17:00",
+      "title": "[THE SHOW] EP. 403 사전투표 | 1위 후보 투표",
+      "detail": "2026.11.05 – 2026.11.09",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/b12d5784",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-05T17:00:00+09:00",
+      "end": "2026-11-09T10:00:00+09:00",
+      "endTimeHidden": false
+    },
+    {
       "id": "1138831",
       "date": "2026-11-05",
       "time": "19:00",
@@ -3776,6 +3791,21 @@
       "endTimeHidden": true
     },
     {
+      "id": "1139238",
+      "date": "2026-11-06",
+      "time": "",
+      "title": "[THE SHOW] EP. 403 사전투표 | 1위 후보 투표",
+      "detail": "2026.11.05 – 2026.11.09",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/b12d5784",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-05T17:00:00+09:00",
+      "end": "2026-11-09T10:00:00+09:00",
+      "endTimeHidden": false
+    },
+    {
       "id": "6aeb1b00a46d723d189054e1",
       "date": "2026-11-06",
       "time": "06:00",
@@ -3785,6 +3815,21 @@
       "source": "mnetplus"
     },
     {
+      "id": "1139170",
+      "date": "2026-11-06",
+      "time": "16:45",
+      "title": "뮤직뱅크",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/a2006f3f",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-06T16:45:00+09:00",
+      "end": "2026-11-06T16:45:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "6aeb1a6f5e04b81dc54f2630",
       "date": "2026-11-06",
       "time": "16:45",
@@ -3792,6 +3837,21 @@
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
+    },
+    {
+      "id": "1139242",
+      "date": "2026-11-06",
+      "time": "17:00",
+      "title": "[THE SHOW] EP. 403 사전투표 | 팬픽캠 <리센느",
+      "detail": "2026.11.06 – 2026.11.09",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/2078dd1d",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-06T17:00:00+09:00",
+      "end": "2026-11-09T10:00:00+09:00",
+      "endTimeHidden": false
     },
     {
       "id": "1124956",
@@ -3852,6 +3912,36 @@
       "start": "2026-11-07T00:00:00+09:00",
       "end": "2026-11-07T00:00:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "1139238",
+      "date": "2026-11-07",
+      "time": "",
+      "title": "[THE SHOW] EP. 403 사전투표 | 1위 후보 투표",
+      "detail": "2026.11.05 – 2026.11.09",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/b12d5784",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-05T17:00:00+09:00",
+      "end": "2026-11-09T10:00:00+09:00",
+      "endTimeHidden": false
+    },
+    {
+      "id": "1139242",
+      "date": "2026-11-07",
+      "time": "",
+      "title": "[THE SHOW] EP. 403 사전투표 | 팬픽캠 <리센느",
+      "detail": "2026.11.06 – 2026.11.09",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/2078dd1d",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-06T17:00:00+09:00",
+      "end": "2026-11-09T10:00:00+09:00",
+      "endTimeHidden": false
     },
     {
       "id": "6a3e7e069f69517347795cee",
@@ -3962,6 +4052,36 @@
       "endTimeHidden": true
     },
     {
+      "id": "1139238",
+      "date": "2026-11-08",
+      "time": "",
+      "title": "[THE SHOW] EP. 403 사전투표 | 1위 후보 투표",
+      "detail": "2026.11.05 – 2026.11.09",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/b12d5784",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-05T17:00:00+09:00",
+      "end": "2026-11-09T10:00:00+09:00",
+      "endTimeHidden": false
+    },
+    {
+      "id": "1139242",
+      "date": "2026-11-08",
+      "time": "",
+      "title": "[THE SHOW] EP. 403 사전투표 | 팬픽캠 <리센느",
+      "detail": "2026.11.06 – 2026.11.09",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/2078dd1d",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-06T17:00:00+09:00",
+      "end": "2026-11-09T10:00:00+09:00",
+      "endTimeHidden": false
+    },
+    {
       "id": "6aed5f75b4515616f2a91866",
       "date": "2026-11-08",
       "time": "06:25",
@@ -3978,6 +4098,21 @@
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
+    },
+    {
+      "id": "1139181",
+      "date": "2026-11-08",
+      "time": "15:15",
+      "title": "SBS 인기가요",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/58bfd1d1",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-08T15:15:00+09:00",
+      "end": "2026-11-08T15:15:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6ae8b3bd5e04b81dc54f220e",
@@ -4034,6 +4169,36 @@
       "endTimeHidden": true
     },
     {
+      "id": "1139238",
+      "date": "2026-11-09",
+      "time": "",
+      "title": "[THE SHOW] EP. 403 사전투표 | 1위 후보 투표",
+      "detail": "2026.11.05 – 2026.11.09",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/b12d5784",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-05T17:00:00+09:00",
+      "end": "2026-11-09T10:00:00+09:00",
+      "endTimeHidden": false
+    },
+    {
+      "id": "1139242",
+      "date": "2026-11-09",
+      "time": "",
+      "title": "[THE SHOW] EP. 403 사전투표 | 팬픽캠 <리센느",
+      "detail": "2026.11.06 – 2026.11.09",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/2078dd1d",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-06T17:00:00+09:00",
+      "end": "2026-11-09T10:00:00+09:00",
+      "endTimeHidden": false
+    },
+    {
       "id": "1139134",
       "date": "2026-11-10",
       "time": "",
@@ -4061,6 +4226,21 @@
       "allDay": false,
       "start": "2026-11-03T07:00:00+09:00",
       "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1139195",
+      "date": "2026-11-10",
+      "time": "18:00",
+      "title": "THE SHOW",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/9bfe59eb",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-10T18:00:00+09:00",
+      "end": "2026-11-10T18:00:00+09:00",
       "endTimeHidden": true
     },
     {
