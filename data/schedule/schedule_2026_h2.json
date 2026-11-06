@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T07:58:34Z",
+  "updated": "2026-11-06T09:58:31Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3605,6 +3605,21 @@
       "allDay": false,
       "start": "2026-11-04T18:00:00+09:00",
       "end": "2026-11-04T18:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1139131",
+      "date": "2026-11-04",
+      "time": "20:00",
+      "title": "'With' MV Reaction",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/90445c60",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-04T20:00:00+09:00",
+      "end": "2026-11-04T20:00:00+09:00",
       "endTimeHidden": true
     },
     {
