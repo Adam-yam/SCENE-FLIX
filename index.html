@@ -6215,7 +6215,8 @@ header {
 }
 .cbody:has(> .ext-channel-badge) > .cacts,
       .cbody:has(> .content-category-badge) > .cacts,
-      .cbody:has(> .ctags) > .cacts {
+      .cbody:has(> .ctags) > .cacts,
+      .cbody:has(> .music-type-label) > .cacts {
   grid-row: 3;
 }
 .cbody .ext-channel-badge,
@@ -6251,6 +6252,35 @@ header {
 }
 .cbody .content-category-badge::before {
   color: var(--c-content);
+}
+.cbody > .music-type-label {
+  grid-column: 1 / span 2;
+  grid-row: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-width: 0;
+  margin: 4px 0 0;
+  font-size: 0.72rem;
+  font-weight: 500;
+  line-height: 16px;
+}
+.cbody > .music-type-label { color: var(--muted); }
+.cbody > .music-type-music > svg {
+  color: var(--c-music);
+}
+.cbody > .music-type-fullcam > svg {
+  color: var(--c-fullcam);
+}
+.music-type-label > svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+}
+.music-type-label > span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .cbody > .ctags {
   grid-column: 1 / span 2;
@@ -6304,7 +6334,8 @@ header {
         .cbody > .ctags {
     font-size: 0.66rem;
   }
-  .cbody .ctags .ctag[class*="lm-"] {
+  .cbody .ctags .ctag[class*="lm-"],
+  .cbody > .music-type-label {
     font-size: 0.66rem;
   }
   .cbody .card-act {
@@ -25715,10 +25746,18 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         return getTypeLabel(kind);
       }
       function kindBadgeHtml(kind) {
+        if (kind === "music" || kind === "fullcam") return "";
         const label = kind ? getKindLabel(kind) : "";
         return label
           ? `<span class="ckind k-${kind}"><span>${_escHtml(label)}</span></span>`
           : "";
+      }
+      function musicTypeLabelHtml(kind) {
+        if (kind !== "music" && kind !== "fullcam") return "";
+        const icon = kind === "music"
+          ? '<path d="M9 18V5l11-2v13M9 9l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="17" cy="16" rx="3" ry="2"/>'
+          : '<rect x="4" y="4" width="16" height="16" rx="2" fill="currentColor" stroke="none"/>';
+        return '<div class="music-type-label music-type-' + kind + '"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + icon + '</svg><span>' + _escHtml(getKindLabel(kind)) + '</span></div>';
       }
       function cardActsHtml(vid) {
         return `<div class="cacts">${shareBtnHtml(vid)}${bmBtnHtml(vid)}</div>`;
@@ -26135,6 +26174,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
     <div class="cbody">
       ${titleHtml}
       <div class="cmeta">${dateHtml}</div>
+      ${musicTypeLabelHtml(item.type)}
       ${cardActsHtml(item.vid)}
     </div>
   </a>`;
@@ -26595,6 +26635,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
     ${buildThumbHtml(item.vid, kindBadgeHtml(kind), isWatched)}
     <div class="cbody">
       ${bodyHtml}
+      ${musicTypeLabelHtml(kind)}
       ${cardActsHtml(item.vid)}
     </div>
   </a>`;
@@ -28232,7 +28273,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
               card = fresh;
               state.cards.set(item.vid, card);
             } else {
-              for (const selector of [".csong", ".csong-multi", ".cmeta", ".ctags"]) {
+              for (const selector of [".csong", ".csong-multi", ".cmeta", ".ctags", ".music-type-label"]) {
                 const oldPart = card.querySelector(selector);
                 const newPart = fresh.querySelector(selector);
                 if (oldPart && newPart) oldPart.replaceWith(newPart);
