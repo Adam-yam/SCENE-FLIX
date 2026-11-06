@@ -6887,447 +6887,112 @@ html,
   font-variant-numeric: tabular-nums;
 }
 #chartMode .chart-wrap {
-  max-width: 1080px;
+  max-width: 1200px;
   padding-top: 30px;
   container-type: inline-size;
   container-name: chart-content;
 }
-#chartMode .chart-header-bar {
-  margin-bottom: 8px;
+#chartMode .chart-header-bar { margin-bottom: 8px; }
+#chartMode .chart-header-title { color: var(--text); font-size: 13px; font-weight: 600; letter-spacing: .02em; }
+#chartMode .chart-header-title svg { display: none; }
+#chartMode .chart-platform-legend { margin-bottom: 20px; }
+#chartMode .chart-update-notice { font-size: 10px; letter-spacing: 0; }
+#chartMode .chart-platform-scroll { overflow-x: auto; padding: 4px 3px 12px; margin: 0 -3px 12px; scrollbar-width: thin; scrollbar-color: var(--border) transparent; }
+#chartMode .chart-platform-filters { display: flex; gap: 7px; width: max-content; min-width: 100%; }
+#chartMode .chart-platform-button { display: flex; align-items: center; justify-content: center; gap: 7px; flex: 1; min-height: 44px; padding: 0 12px; border: 1px solid transparent; border-radius: 12px; background: rgba(var(--platform-rgb),.075); color: var(--text); font-size: 11px; font-weight: 550; white-space: nowrap; cursor: pointer; transition: background .18s, border-color .18s; }
+#chartMode .chart-platform-button:hover { background: rgba(var(--platform-rgb),.13); }
+#chartMode .chart-platform-button[aria-pressed="true"] { background: rgba(var(--platform-rgb),.15); border-color: rgba(var(--platform-rgb),.5); }
+#chartMode .chart-platform-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+#chartMode .chart-platform-button img { width: 17px; height: 17px; object-fit: contain; display: block; flex-shrink: 0; }
+#chartMode .chart-platform-check { width: 10px; height: 10px; opacity: 0; flex-shrink: 0; }
+#chartMode .chart-platform-button[aria-pressed="true"] .chart-platform-check { opacity: 1; }
+:root[data-theme="light"] #chartMode .chart-platform-button { background: rgba(var(--platform-rgb),.055); }
+:root[data-theme="light"] #chartMode .chart-platform-button[aria-pressed="true"] { background: rgba(var(--platform-rgb),.115); border-color: rgba(var(--platform-rgb),.38); }
+#chartMode .chart-view-context { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: 28px; margin-bottom: 17px; }
+#chartMode .chart-view-title { font-size: 12px; font-weight: 550; }
+#chartMode .chart-view-order { font-size: 10px; color: var(--muted); }
+#chartMode .chart-list { display: block; }
+#chartMode .minimal-chart { width: 100%; border-collapse: collapse; table-layout: fixed; font-variant-numeric: tabular-nums; }
+#chartMode .minimal-chart th { font-size: 10px; font-weight: 450; color: var(--muted); padding: 0 3px 15px; text-align: center; border-bottom: 1px solid var(--border); white-space: nowrap; }
+#chartMode .minimal-chart th:first-child { width: 24%; text-align: left; padding-left: 0; }
+#chartMode .minimal-chart td { padding: 22px 3px; text-align: center; vertical-align: middle; border-bottom: 1px solid var(--border); }
+#chartMode .minimal-chart td:first-child { text-align: left; padding-left: 0; padding-right: 12px; }
+#chartMode .minimal-chart tbody tr:last-child td { border-bottom: 0; }
+#chartMode .minimal-song { display: flex; gap: 12px; align-items: center; min-width: 0; }
+#chartMode .minimal-art { width: 39px; height: 39px; border-radius: 7px; background: var(--dim); display: grid; place-items: center; flex-shrink: 0; color: var(--muted); font-size: 14px; }
+#chartMode .minimal-art img { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; }
+#chartMode .minimal-songtext { min-width: 0; }
+#chartMode .minimal-title { font-size: 15px; color: var(--text); overflow-wrap: anywhere; line-height: 1.5; font-weight: 550; letter-spacing: -.25px; }
+#chartMode .minimal-platform-name { display: inline-flex; align-items: center; justify-content: center; gap: 5px; line-height: 1.2; white-space: nowrap; vertical-align: middle; }
+#chartMode .minimal-platform-icon { display: block; width: 14px; height: 14px; object-fit: contain; flex-shrink: 0; }
+#chartMode .minimal-basis { display: block; font-size: 9px; color: var(--muted); margin-top: 7px; font-weight: 400; }
+#chartMode .minimal-label { display: none; }
+#chartMode .minimal-primary { min-height: 41px; }
+#chartMode .minimal-metric { display: inline-flex; flex-direction: column; align-items: center; vertical-align: middle; }
+#chartMode .minimal-value { font-size: 16px; font-weight: 550; color: var(--text); line-height: 1.3; letter-spacing: -.3px; }
+#chartMode .minimal-delta { display: block; font-size: 9px; line-height: 1.4; margin-top: 4px; min-height: 13px; color: var(--muted); }
+#chartMode .minimal-delta.up { color: #df938b; }
+#chartMode .minimal-delta.down { color: #91b2dc; }
+:root[data-theme="light"] #chartMode .minimal-delta.up { color: #ad554e; }
+:root[data-theme="light"] #chartMode .minimal-delta.down { color: #4b739d; }
+#chartMode .minimal-out .minimal-value { color: var(--muted); font-weight: 400; opacity: .7; }
+#chartMode .minimal-secondary { display: flex; align-items: baseline; justify-content: center; gap: 5px; min-height: 29px; margin-top: 7px; }
+#chartMode .minimal-daily-label { font-size: 8px; color: var(--muted); }
+#chartMode .minimal-secondary .minimal-value { font-size: 11px; color: var(--muted); font-weight: 450; }
+#chartMode .minimal-secondary .minimal-delta { font-size: 8px; margin-top: 2px; }
+#chartMode .minimal-spacer { min-height: 29px; margin-top: 7px; }
+#chartMode .minimal-pending { font-size: 9px; color: var(--muted); }
+#chartMode .minimal-key { font-size: 10px; color: var(--muted); margin-top: 23px; display: flex; gap: 16px; flex-wrap: wrap; line-height: 1.7; }
+#chartMode .minimal-key span:last-child { margin-left: auto; }
+#chartMode .minimal-chart-single th:first-child { width: 64%; }
+#chartMode .minimal-chart-single th { font-size: 11px; }
+#chartMode .minimal-chart-single td { padding-top: 20px; padding-bottom: 20px; }
+#chartMode .minimal-chart-single .minimal-value { font-size: 23px; }
+#chartMode .minimal-chart-single .minimal-primary { min-height: 0; }
+#chartMode .minimal-chart-single .minimal-secondary { margin: 0; min-height: 0; display: block; }
+#chartMode .minimal-chart-single .minimal-secondary .minimal-value { font-size: 19px; color: var(--text); }
+#chartMode .minimal-chart-single .minimal-delta { font-size: 10px; }
+#chartMode .minimal-chart-single .minimal-title { font-size: 16px; }
+#chartMode .minimal-chart-single .minimal-art { width: 44px; height: 44px; }
+@container chart-content (max-width: 860px) {
+  #chartMode .chart-platform-filters { min-width: 0; }
+  #chartMode .chart-platform-button { flex: 0 0 auto; }
+  #chartMode .minimal-chart, #chartMode .minimal-chart tbody { display: block; width: 100%; }
+  #chartMode .minimal-chart thead { display: none; }
+  #chartMode .minimal-chart tbody { display: grid; gap: 13px; }
+  #chartMode .minimal-chart tr { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); background: var(--card); border: 1px solid var(--border); border-radius: 18px; padding: 18px 13px 17px; row-gap: 22px; }
+  #chartMode .minimal-chart td, #chartMode .minimal-chart td:first-child { border: 0; padding: 0; min-width: 0; }
+  #chartMode .minimal-chart td:first-child { grid-column: 1/-1; padding-inline: 4px; }
+  #chartMode .minimal-label { display: block; margin-bottom: 12px; }
+  #chartMode .minimal-label .minimal-platform-name { display: flex; flex-direction: column; gap: 6px; font-size: 9px; color: var(--muted); }
+  #chartMode .minimal-label .minimal-platform-icon { width: 16px; height: 16px; }
+  #chartMode .minimal-value { font-size: 18px; }
+  #chartMode .minimal-secondary { margin-top: 6px; min-height: 28px; gap: 4px; }
+  #chartMode .minimal-secondary .minimal-value { font-size: 11px; }
+  #chartMode .minimal-chart-single tr { grid-template-columns: minmax(0,1fr) 66px 66px; align-items: center; gap: 12px; padding: 17px 15px; }
+  #chartMode .minimal-chart-single td:first-child { grid-column: 1; padding: 0; }
+  #chartMode .minimal-chart-single .minimal-art { width: 38px; height: 38px; }
+  #chartMode .minimal-chart-single .minimal-title { font-size: 14px; }
+  #chartMode .minimal-chart-single .minimal-value { font-size: 22px; }
+  #chartMode .minimal-chart-single .minimal-secondary .minimal-value { font-size: 17px; }
+  #chartMode .minimal-chart-single .minimal-label { font-size: 9px; color: var(--muted); margin-bottom: 7px; }
+  #chartMode .minimal-chart-single:not(.minimal-has-daily) tr { grid-template-columns: minmax(0,1fr) 80px; }
+  #chartMode .minimal-key { font-size: 9px; gap: 10px; }
+  #chartMode .minimal-key span:last-child { width: 100%; margin-left: 0; }
 }
-#chartMode .chart-header-title {
-  color: var(--text);
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: .02em;
+@media (max-width: 720px) {
+  #chartMode .chart-wrap { padding: 22px 18px 85px; }
+  #chartMode .chart-platform-scroll { margin-inline: -18px; padding-inline: 18px; scroll-padding-inline: 18px; }
+  #chartMode .chart-view-title { font-size: 11px; }
+  #chartMode .chart-view-order { font-size: 9px; }
 }
-#chartMode .chart-header-title svg {
-  display: none;
+@container chart-content (max-width: 330px) {
+  #chartMode .minimal-chart tr { padding-inline: 9px; }
+  #chartMode .minimal-chart-single tr { grid-template-columns: minmax(0,1fr) 54px 54px; gap: 8px; }
+  #chartMode .minimal-chart-single .minimal-title { font-size: 13px; }
 }
-#chartMode .chart-platform-legend {
-  margin-bottom: 25px;
-}
-#chartMode .chart-update-notice {
-  font-size: 10px;
-  letter-spacing: 0;
-}
-#chartMode .chart-list {
-  display: block;
-}
-#chartMode .minimal-chart {
-  width: 100%;
-  border-collapse: collapse;
-  table-layout: fixed;
-  font-variant-numeric: tabular-nums;
-}
-#chartMode .minimal-chart th {
-  font-size: 9px;
-  font-weight: 500;
-  color: var(--muted);
-  padding: 0 3px 13px;
-  text-align: center;
-  border-bottom: 1px solid var(--border);
-  white-space: nowrap;
-}
-#chartMode .minimal-chart th:first-child {
-  width: 24%;
-  text-align: left;
-  padding-left: 0;
-}
-#chartMode .minimal-chart td {
-  padding: 21px 3px;
-  text-align: center;
-  vertical-align: middle;
-  border-bottom: 1px solid var(--border);
-}
-#chartMode .minimal-chart td:first-child {
-  text-align: left;
-  padding-left: 0;
-  padding-right: 12px;
-}
-#chartMode .minimal-chart tbody tr:last-child td {
-  border-bottom: 0;
-}
-#chartMode .minimal-song {
-  display: flex;
-  gap: 12px;
-  align-items: center;
-  min-width: 0;
-}
-#chartMode .minimal-art {
-  width: 38px;
-  height: 38px;
-  border-radius: 5px;
-  background: var(--dim);
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 400;
-}
-#chartMode .minimal-art img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: inherit;
-}
-#chartMode .minimal-songtext {
-  min-width: 0;
-}
-#chartMode .minimal-title {
-  font-size: 15px;
-  color: var(--text);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  line-height: 1.5;
-}
-#chartMode .minimal-value {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--text);
-  line-height: 1.3;
-}
-#chartMode .minimal-delta {
-  display: block;
-  font-size: 8px;
-  margin-top: 5px;
-  min-height: 11px;
-  color: var(--muted);
-}
-#chartMode .minimal-delta.up {
-  color: #c77c76;
-}
-#chartMode .minimal-delta.down {
-  color: #7b9bbd;
-}
-#chartMode .minimal-delta.new {
-  color: var(--muted);
-  font-size: 7px;
-  letter-spacing: .3px;
-}
-#chartMode .minimal-out .minimal-value {
-  font-size: 13px;
-  color: var(--muted);
-  opacity: .55;
-  font-weight: 400;
-}
-#chartMode .minimal-label {
-  display: none;
-}
-#chartMode .minimal-key {
-  font-size: 9px;
-  color: var(--muted);
-  margin-top: 23px;
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-#chartMode .minimal-key span:last-child {
-  margin-left: auto;
-}
-:root[data-theme="light"] #chartMode .minimal-delta.up {
-  color: #a3534b;
-}
-:root[data-theme="light"] #chartMode .minimal-delta.down {
-  color: #4c739c;
-}
-@container chart-content (max-width:760px) {
-  #chartMode .chart-platform-legend {
-    margin-bottom: 4px;
-  }
-  #chartMode .minimal-chart,#chartMode .minimal-chart tbody {
-    display: block;
-    width: 100%;
-  }
-  #chartMode .minimal-chart thead {
-    display: none;
-  }
-  #chartMode .minimal-chart tr {
-    display: grid;
-    grid-template-columns: repeat(4,minmax(0,1fr));
-    padding: 23px 0;
-    border-bottom: 1px solid var(--border);
-    row-gap: 24px;
-  }
-  #chartMode .minimal-chart tbody tr:last-child {
-    border-bottom: 0;
-  }
-  #chartMode .minimal-chart td {
-    padding: 0;
-    border: 0;
-    min-width: 0;
-  }
-  #chartMode .minimal-chart td:first-child {
-    grid-column: 1/-1;
-    width: 100%;
-    padding: 0;
-  }
-  #chartMode .minimal-label {
-    display: block;
-    font-size: 9px;
-    color: var(--muted);
-    font-weight: 400;
-    white-space: nowrap;
-  }
-  #chartMode .minimal-value {
-    font-size: 17px;
-  }
-  #chartMode .minimal-song {
-    gap: 11px;
-  }
-  #chartMode .minimal-title {
-    font-size: 13px;
-  }
-  #chartMode .minimal-art {
-    width: 36px;
-    height: 36px;
-  }
-  #chartMode .minimal-delta {
-    font-size: 9px;
-    margin-top: 4px;
-  }
-  #chartMode .minimal-key {
-    font-size: 8px;
-    gap: 12px;
-    margin-top: 12px;
-  }
-  #chartMode .minimal-key span:last-child {
-    margin-left: 0;
-    width: 100%;
-    margin-top: 1px;
-  }
-}
-@media(max-width: 720px) {
-  #chartMode .chart-wrap {
-    padding: 22px 20px 85px;
-  }
-}
-#chartMode .minimal-platform-name {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-  vertical-align: middle;
-  white-space: nowrap;
-  line-height: 1;
-}
-#chartMode .minimal-platform-name>span {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 14px;
-  line-height: 1;
-  padding: 0;
-  margin: 0;
-}
-#chartMode .minimal-platform-icon {
-  display: block;
-  width: 14px;
-  height: 14px;
-  object-fit: contain;
-  flex-shrink: 0;
-}
-@container chart-content (max-width:760px) {
-  #chartMode .minimal-label .minimal-platform-name {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  #chartMode .minimal-label .minimal-platform-icon {
-    width: 14px;
-    height: 14px;
-  }
-  #chartMode .minimal-label {
-    margin-bottom: 8px;
-  }
-}
-#chartMode .chart-wrap {
-  max-width: 1200px;
-}
-#chartMode .minimal-chart th:first-child {
-  width: 200px;
-}
-#chartMode .minimal-chart th {
-  padding-bottom: 16px;
-}
-#chartMode .minimal-chart td {
-  height: 108px;
-  padding: 20px 4px;
-}
-#chartMode .minimal-art {
-  width: 45px;
-  height: 45px;
-  border-radius: 7px;
-}
-#chartMode .minimal-title {
-  font-size: 17px;
-  white-space: normal;
-  overflow-wrap: anywhere;
-  line-height: 1.4;
-  font-weight: 550;
-}
-#chartMode .minimal-platform-name {
-  font-size: 11px;
-  line-height: 20px;
-  gap: 6px;
-}
-#chartMode .minimal-platform-icon {
-  height: 17px;
-  width: 17px;
-}
-#chartMode .minimal-platform-name>span {
-  line-height: 20px;
-  min-height: 20px;
-}
-#chartMode .minimal-basis {
-  display: block;
-  font-size: 10px;
-  font-weight: 400;
-  color: var(--muted);
-  margin-top: 4px;
-}
-#chartMode .minimal-two-lines {
-  display: grid;
-  grid-template-rows: 28px 22px;
-  row-gap: 9px;
-}
-#chartMode .minimal-primary,#chartMode .minimal-secondary {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-#chartMode .minimal-metric {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-#chartMode .minimal-value,#chartMode .minimal-out .minimal-value {
-  font-size: 22px;
-  min-width: 27px;
-  text-align: right;
-  font-weight: 550;
-  line-height: 1.3;
-  opacity: 1;
-}
-#chartMode .minimal-delta {
-  display: inline-block;
-  font-size: 10px;
-  line-height: 1.3;
-  min-width: 24px;
-  min-height: 0;
-  margin: 0;
-  text-align: left;
-}
-#chartMode .minimal-delta.new {
-  font-size: 9px;
-}
-#chartMode .minimal-secondary {
-  gap: 7px;
-}
-#chartMode .minimal-daily-label {
-  color: var(--muted);
-  font-size: 9px;
-  line-height: 20px;
-}
-#chartMode .minimal-secondary .minimal-metric {
-  gap: 4px;
-}
-#chartMode .minimal-secondary .minimal-value {
-  font-size: 13px;
-  min-width: 18px;
-  color: var(--muted);
-  font-weight: 450;
-}
-#chartMode .minimal-secondary .minimal-delta {
-  font-size: 9px;
-  min-width: 22px;
-}
-#chartMode .minimal-spacer {
-  height: 22px;
-}
-#chartMode .minimal-pending {
-  font-size: 9px;
-  color: var(--muted);
-  line-height: 20px;
-}
-@container chart-content (max-width:1000px) {
-  #chartMode .minimal-chart th:first-child {
-    width: 175px;
-  }
-  #chartMode .minimal-platform-name {
-    font-size: 10px;
-    gap: 4px;
-  }
-  #chartMode .minimal-platform-icon {
-    width: 15px;
-    height: 15px;
-  }
-  #chartMode .minimal-secondary {
-    gap: 4px;
-  }
-  #chartMode .minimal-metric {
-    gap: 4px;
-  }
-}
-@container chart-content (max-width:860px) {
-  #chartMode .minimal-chart,#chartMode .minimal-chart tbody {
-    display: block;
-    width: 100%;
-  }
-  #chartMode .minimal-chart thead {
-    display: none;
-  }
-  #chartMode .minimal-chart tr {
-    display: grid;
-    grid-template-columns: repeat(4,minmax(0,1fr));
-    padding: 25px 0;
-    border-bottom: 1px solid var(--border);
-    gap: 24px 8px;
-  }
-  #chartMode .minimal-chart tbody tr:last-child {
-    border-bottom: 0;
-  }
-  #chartMode .minimal-chart td {
-    padding: 0;
-    border: 0;
-    min-width: 0;
-    height: auto;
-  }
-  #chartMode .minimal-chart td:first-child {
-    grid-column: 1/-1;
-    width: 100%;
-    padding: 0;
-  }
-  #chartMode .minimal-label {
-    display: block;
-    color: var(--muted);
-    margin-bottom: 12px;
-    white-space: nowrap;
-  }
-  #chartMode .minimal-title {
-    font-size: 17px;
-  }
-  #chartMode .minimal-art {
-    width: 44px;
-    height: 44px;
-  }
-  #chartMode .minimal-two-lines {
-    row-gap: 7px;
-  }
-  #chartMode .minimal-chart td:nth-child(n+6) .minimal-two-lines {
-    grid-template-rows: 28px;
-    row-gap: 0;
-  }
-  #chartMode .minimal-chart td:nth-child(n+6) .minimal-spacer {
-    display: none;
-  }
-  #chartMode .minimal-key {
-    font-size: 9px;
-    gap: 12px;
-  }
+@media (prefers-reduced-motion: reduce) {
+  #chartMode .chart-platform-button { transition: none; }
 }
 #scheduleMode .schedule-wrap {
   max-width: 1320px;
@@ -10109,7 +9774,9 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
             </div>
           </span>
         </div>
-        <div class="chart-list" id="chartList">
+        <div class="chart-platform-scroll"><div class="chart-platform-filters" id="chartPlatformFilters" role="group" aria-label="음악 플랫폼 선택"></div></div>
+        <div class="chart-view-context"><span class="chart-view-title" id="chartViewTitle"></span><span class="chart-view-order" id="chartViewOrder"></span></div>
+        <div class="chart-list" id="chartList" aria-live="polite" aria-atomic="false">
           <div class="chart-loading">
             <div class="chart-skel-card"></div>
             <div class="chart-skel-card"></div>
@@ -10558,6 +10225,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         closeScheduleExport: (event, el) => { document.getElementById('scheduleExportDialog').close(); },
         downloadSchedule: (event, el) => { exportScheduleFile(false); },
         shareSchedule: (event, el) => { exportScheduleFile(true); },
+        setChartPlatform: (event, el) => { setChartPlatform(el.dataset.value); },
         toggleChartInfo: (event, el) => { event.stopPropagation(); document.getElementById('chartInfoBtn').classList.toggle('open'); },
         setShortsSort: (event, el) => { setShortsSort(el.dataset.value); },
         toggleShortsFlixMode: (event, el) => { toggleShortsFlixMode(); },
@@ -18334,6 +18002,10 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
   "spN_ZVoONdg": {
     "duration": "3:11",
     "sourceDate": "2026.11.06 17:00"
+  },
+  "aJ61F8L9wmM": {
+    "duration": "7:24",
+    "sourceDate": "2026.11.05 14:00"
   }
 };
       
@@ -22539,6 +22211,9 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
     }
   ],
   "mama2026": [
+    {
+      "vid": "aJ61F8L9wmM"
+    },
     {
       "vid": "I9DIT2DhX9k"
     }
@@ -29683,6 +29358,39 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         "vibe": "./assets/icons/charts/vibe-5b5456d076.png",
         "apple_music": "./assets/icons/charts/apple_music-33bd3bcb52.png"
 };
+      let _chartPlatformFilter = "all";
+      const _CHART_PLATFORM_ORDER = ["melon", "youtube_music", "spotify", "genie", "flo", "vibe", "bugs", "apple_music"];
+      const _CHART_PLATFORM_TINTS = {all:"117,122,130", melon:"0,181,58", youtube_music:"231,49,65", spotify:"30,185,84", genie:"0,151,218", flo:"91,79,224", vibe:"177,54,200", bugs:"238,87,43", apple_music:"235,58,91"};
+      function _renderChartFilters() {
+        const host = document.getElementById("chartPlatformFilters");
+        if (!host) return;
+        const lang = _curLang || "KR";
+        const labels = {
+          KR: {all:"전체", group:"음악 플랫폼 선택", melon:"멜론", youtube_music:"YouTube Music", genie:"지니", bugs:"벅스"},
+          EN: {all:"All", group:"Choose music platform"},
+          JP: {all:"すべて", group:"音楽サービスを選択"}
+        }[lang] || {all:"All", group:"Choose music platform"};
+        if (host.dataset.lang !== lang) {
+          const choices = [{key:"all", label:labels.all}, ..._CHART_PLATFORM_ORDER.map(key => _CHART_PLATFORMS.find(p => p.key === key))];
+          host.setAttribute("aria-label", labels.group);
+          host.innerHTML = choices.map(p => '<button type="button" class="chart-platform-button" data-action="setChartPlatform" data-value="' + p.key + '" style="--platform-rgb:' + _CHART_PLATFORM_TINTS[p.key] + '" aria-pressed="false">' + (p.key === "all" ? "" : '<img src="' + _CHART_PLATFORM_ICONS[p.key] + '" alt="" width="17" height="17">') + '<span>' + _escHtml(labels[p.key] || p.label) + '</span><svg class="chart-platform-check" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m2 6 2.5 2.5L10 3"/></svg></button>').join("");
+          host.dataset.lang = lang;
+        }
+        host.querySelectorAll("button").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.value === _chartPlatformFilter)));
+      }
+      function setChartPlatform(key) {
+        if (key !== "all" && !_CHART_PLATFORM_ORDER.includes(key)) return;
+        if (_chartPlatformFilter === key) return;
+        _chartPlatformFilter = key;
+        buildChartGrid();
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const list = document.getElementById("chartList");
+        if (list && !reduceMotion && typeof list.animate === "function") {
+          list.getAnimations().forEach(animation => animation.cancel());
+          list.animate([{opacity:.2, transform:"translateY(5px)"}, {opacity:1, transform:"translateY(0)"}], {duration:220, easing:"cubic-bezier(.2,.7,.3,1)"});
+        }
+        document.querySelector('#chartPlatformFilters [data-value="' + key + '"]')?.scrollIntoView({behavior:reduceMotion ? "instant" : "smooth", block:"nearest", inline:"nearest"});
+      }
       function _chartPlatformLabel(p) {
         return '<span class="minimal-platform-name"><img class="minimal-platform-icon" src="' + _CHART_PLATFORM_ICONS[p.key] + '" alt="" aria-hidden="true" width="14" height="14"><span>' + _escHtml(p.label) + '</span></span>';
       }
@@ -29693,6 +29401,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
       }
       function buildChartGrid() {
         const list = document.getElementById("chartList");
+        _renderChartFilters();
         if (!list || _showDataState("chart", list)) return;
         const copy = {
           KR: { song: "곡", chart: "곡별 플랫폼 순위", pending: "미연동", unavailable: "확인 불가", stale: "이전 정보", none: "순위 없음", same: "변동 없음", up: "상승", down: "하락", new: "신규 진입", notice: "일부 플랫폼은 이전 정보를 표시합니다.", newNote: "NEW 신규 진입 · RE 재진입", out: "— 순위 없음" },
@@ -29707,14 +29416,20 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
           vibe:dailyLabel, spotify:dailyLabel,
           youtube_music:{KR:"한국 주간",EN:"KR weekly",JP:"韓国週間"}[lang] || "KR weekly",
           apple_music:{KR:"한국 인기곡",EN:"KR top songs",JP:"韓国人気曲"}[lang] || "KR top songs"};
-        const order = ["melon","youtube_music","spotify","genie","flo","vibe","bugs","apple_music"];
-        const platforms = order.map(key => _CHART_PLATFORMS.find(p => p.key === key)).filter(Boolean);
+        const allPlatforms = _chartPlatformFilter === "all";
+        const platforms = _CHART_PLATFORM_ORDER.filter(key => allPlatforms || key === _chartPlatformFilter).map(key => _CHART_PLATFORMS.find(p => p.key === key));
+        const selectedPlatform = platforms[0];
+        const title = {KR:"전체 플랫폼", EN:"All platforms", JP:"すべてのサービス"}[lang] || "All platforms";
+        document.getElementById("chartViewTitle").textContent = allPlatforms ? title : selectedPlatform.label;
+        const orderLabel = allPlatforms ? "MELON TOP100" : selectedPlatform.label + " · " + basis[selectedPlatform.key];
+        document.getElementById("chartViewOrder").textContent = {KR:orderLabel + " 순", EN:"Sorted by " + orderLabel, JP:orderLabel + " 順"}[lang] || orderLabel;
+        const sortPlatform = allPlatforms ? "melon" : _chartPlatformFilter;
         const dailyPlatforms = new Set(["melon","genie","bugs"]);
         const songs = (CHART_DATA?.songs || [])
           .filter(song => song && typeof song === "object")
           .sort((a, b) =>
-            (_chartRank(a.ranks?.melon?.rank) ?? Number.MAX_SAFE_INTEGER) -
-            (_chartRank(b.ranks?.melon?.rank) ?? Number.MAX_SAFE_INTEGER)
+            (_chartRank(a.ranks?.[sortPlatform]?.rank) ?? Number.MAX_SAFE_INTEGER) -
+            (_chartRank(b.ranks?.[sortPlatform]?.rank) ?? Number.MAX_SAFE_INTEGER)
           );
         const statuses = CHART_DATA?.platformStatus || {};
         function displayStatus(key) {
@@ -29743,15 +29458,15 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
             if (daily && (pending || status === "unavailable")) return '<span class="minimal-pending" title="' + _escHtml(label) + '" aria-label="' + _escHtml(label) + '">' + _escHtml(delta) + '</span>';
             return '<span class="minimal-metric' + (rank === null ? ' minimal-out' : '') + '" aria-label="' + _escHtml(label) + '" title="' + _escHtml(label) + '"><span class="minimal-value">' + (rank ?? '—') + '</span><span class="minimal-delta ' + cls + '">' + _escHtml(delta) + '</span></span>';
         }
-        const heading = '<thead><tr><th scope="col">' + copy.song + '</th>' + platforms.map(p => '<th scope="col">' + _chartPlatformLabel(p) + '<span class="minimal-basis">' + _escHtml(basis[p.key]) + '</span></th>').join('') + '</tr></thead>';
+        const heading = '<thead><tr><th scope="col">' + copy.song + '</th>' + (allPlatforms ? platforms.map(p => '<th scope="col">' + _chartPlatformLabel(p) + '<span class="minimal-basis">' + _escHtml(basis[p.key]) + '</span></th>').join('') : '<th scope="col">' + _escHtml(basis[selectedPlatform.key]) + '</th>' + (dailyPlatforms.has(selectedPlatform.key) ? '<th scope="col">' + dailyLabel + '</th>' : '')) + '</tr></thead>';
         const body = songs.map(song => {
           const image = _safeHttpUrl(song.albumImageUrl || "");
           const artwork = image ? '<img src="' + _escHtml(image) + '" alt="" loading="lazy" decoding="async" data-image="artwork">' : '♪';
           const track = '<td><div class="minimal-song"><div class="minimal-art" aria-hidden="true">' + artwork + '</div><div class="minimal-songtext"><div class="minimal-title" title="' + _escHtml(song.songName || "") + '">' + _escHtml(song.songName || "") + '</div></div></div></td>';
-          const cells = platforms.map(p => '<td><span class="minimal-label" aria-hidden="true">' + _chartPlatformLabel(p) + '</span><div class="minimal-two-lines"><div class="minimal-primary">' + renderRank(song,p,false) + '</div>' + (dailyPlatforms.has(p.key) ? '<div class="minimal-secondary"><span class="minimal-daily-label">' + dailyLabel + '</span>' + renderRank(song,p,true) + '</div>' : '<div class="minimal-spacer" aria-hidden="true"></div>') + '</div></td>').join('');
+          const cells = allPlatforms ? platforms.map(p => '<td><span class="minimal-label" aria-hidden="true">' + _chartPlatformLabel(p) + '</span><div class="minimal-two-lines"><div class="minimal-primary">' + renderRank(song,p,false) + '</div>' + (dailyPlatforms.has(p.key) ? '<div class="minimal-secondary"><span class="minimal-daily-label">' + dailyLabel + '</span>' + renderRank(song,p,true) + '</div>' : '<div class="minimal-spacer" aria-hidden="true"></div>') + '</div></td>').join('') : '<td><span class="minimal-label" aria-hidden="true">' + _escHtml(basis[selectedPlatform.key]) + '</span><div class="minimal-primary">' + renderRank(song,selectedPlatform,false) + '</div></td>' + (dailyPlatforms.has(selectedPlatform.key) ? '<td><span class="minimal-label" aria-hidden="true">' + dailyLabel + '</span><div class="minimal-secondary">' + renderRank(song,selectedPlatform,true) + '</div></td>' : '');
           return '<tr>' + track + cells + '</tr>';
         }).join('');
-        list.innerHTML = '<table class="minimal-chart" aria-label="' + copy.chart + '">' + heading + '<tbody>' + body + '</tbody></table><div class="minimal-key"><span>↑ ' + copy.up + ' &nbsp; ↓ ' + copy.down + '</span><span>' + copy.newNote + '</span><span>' + (hasStale ? copy.notice : copy.out) + '</span></div>';
+        list.innerHTML = '<table class="minimal-chart' + (allPlatforms ? '' : ' minimal-chart-single' + (dailyPlatforms.has(selectedPlatform.key) ? ' minimal-has-daily' : '')) + '" aria-label="' + (allPlatforms ? copy.chart : selectedPlatform.label + ' · ' + copy.chart) + '">' + heading + '<tbody>' + body + '</tbody></table><div class="minimal-key"><span>↑ ' + copy.up + ' &nbsp; ↓ ' + copy.down + '</span><span>' + copy.newNote + '</span><span>' + (hasStale ? copy.notice : copy.out) + '</span></div>';
       }
       const _SCHEDULE_EXPORT_TEXT = {
         KR: {device:"추가할 기기",fallback:"바로 열리지 않나요?",title:"일정 내보내기",subtitle:"원하는 기간을 골라 내 캘린더에 담아보세요.",month:"한 달",range:"기간",all:"전체",from:"시작 월",to:"종료 월",one:"내보낼 월",close:"닫기",download:"캘린더 파일 저장",share:"공유해서 추가",help:"캘린더에 추가하는 방법",count:n=>`${n}개 일정`,empty:"선택한 기간에 등록된 일정이 없습니다.",invalid:"시작 월과 종료 월을 확인해 주세요.",loading:"일정을 불러오는 중입니다…",failed:"일정을 불러오지 못했습니다. 창을 닫고 다시 시도해 주세요.",partial:"일부 일정 파일을 불러오지 못해 현재 확보한 일정만 포함됩니다.",warning:"전체 또는 많은 일정을 가져오면 캘린더가 복잡해지고 처리에 시간이 걸릴 수 있습니다.",confirm:"선택한 일정을 모두 내보내겠습니다.",note:"현재 불러온 일정 기준 · 한국 시간 기준 · 시간 미정은 종일 일정으로 저장됩니다. 내보낸 일정은 자동 갱신되지 않으며, 다시 가져오면 중복될 수 있습니다.",galaxy:"갤럭시: 저장한 .ics 파일을 내 파일에서 열고, 캘린더 앱이 제시하는 가져오기 화면에서 추가를 확인하세요. 앱 버전에 따라 직접 열기가 지원되지 않을 수 있습니다.",iphone:"아이폰: 공유에서 Mail로 자신에게 보내고, 받은 메일의 .ics 첨부파일을 열어 캘린더에 추가할 수 있습니다. 파일 앱이나 공유 목록에 캘린더가 나타나지 않을 때 이 방법을 이용하세요.",desktop:"직접 열기가 안 되면 PC의 Google Calendar에서 파일을 가져온 뒤, 휴대폰 기본 캘린더에서 같은 Google 계정의 일정 동기화를 켜세요.",saved:"파일 저장을 요청했습니다. 파일을 열어 캘린더에서 추가를 완료해 주세요.",shared:"파일을 전달했습니다. 선택한 앱에서 가져오기를 완료해 주세요.",shareFail:"이 브라우저에서는 파일 공유를 사용할 수 없습니다. 파일 저장을 이용해 주세요.",cancelled:"공유를 취소했습니다.",error:"파일을 만들지 못했습니다. 다시 시도해 주세요.",unknown:"시간 미정",untimed:"일부 일정의 시간 표기를 해석할 수 없어 종일 일정으로 포함합니다. 원래 시간은 일정 설명에 남깁니다."},
