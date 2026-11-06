@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T09:58:31Z",
+  "updated": "2026-11-06T11:58:38Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -3867,6 +3867,36 @@
       "start": "2026-11-06T17:00:00+09:00",
       "end": "2026-11-09T10:00:00+09:00",
       "endTimeHidden": false
+    },
+    {
+      "id": "1139324",
+      "date": "2026-11-06",
+      "time": "19:00",
+      "title": "K_Choreo8K - 'With'",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/d0fd32df",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-06T19:00:00+09:00",
+      "end": "2026-11-06T19:05:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1139385",
+      "date": "2026-11-06",
+      "time": "20:00",
+      "title": "스포티파이 K-Pop ON! RECORD",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/6b81221d",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-06T20:00:00+09:00",
+      "end": "2026-11-06T20:07:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
