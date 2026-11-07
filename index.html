@@ -6971,6 +6971,9 @@ html,
 #chartMode .minimal-daily-label { font-size: 8px; color: var(--muted); }
 #chartMode .minimal-secondary .minimal-value { font-size: 11px; color: var(--muted); font-weight: 450; }
 #chartMode .minimal-secondary .minimal-delta { font-size: 8px; margin-top: 2px; }
+#chartMode .minimal-chart:not(.minimal-chart-single) .minimal-metric { flex-direction: row; align-items: center; gap: 5px; }
+#chartMode .minimal-chart:not(.minimal-chart-single) .minimal-delta { margin-top: 0; min-height: 0; white-space: nowrap; }
+#chartMode .minimal-chart:not(.minimal-chart-single) .minimal-delta:empty { display: none; }
 #chartMode .minimal-spacer { min-height: 29px; margin-top: 7px; }
 #chartMode .minimal-pending { font-size: 9px; color: var(--muted); }
 #chartMode .minimal-key { font-size: 10px; color: var(--muted); margin-top: 23px; display: flex; gap: 16px; flex-wrap: wrap; line-height: 1.7; }
@@ -29539,6 +29542,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         const dailyPlatforms = new Set(["melon","genie","bugs"]);
         const songs = (CHART_DATA?.songs || [])
           .filter(song => song && typeof song === "object")
+          .filter(song => allPlatforms || _chartRank(song.ranks?.[sortPlatform]?.rank) !== null || (dailyPlatforms.has(sortPlatform) && _chartRank(song.ranks?.[sortPlatform + "_daily"]?.rank) !== null))
           .sort((a, b) =>
             (_chartRank(a.ranks?.[sortPlatform]?.rank) ?? Number.MAX_SAFE_INTEGER) -
             (_chartRank(b.ranks?.[sortPlatform]?.rank) ?? Number.MAX_SAFE_INTEGER)
