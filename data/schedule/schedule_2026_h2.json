@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-06T11:58:38Z",
+  "updated": "2026-11-07T11:58:40Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4007,6 +4007,21 @@
       "source": "mnetplus"
     },
     {
+      "id": "1139745",
+      "date": "2026-11-07",
+      "time": "09:00",
+      "title": "스타뉴스룸",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/2b675912",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-07T09:00:00+09:00",
+      "end": "2026-11-07T09:30:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1138679",
       "date": "2026-11-07",
       "time": "15:20",
@@ -4416,6 +4431,21 @@
       "detail": "",
       "type": "concert",
       "source": "mnetplus"
+    },
+    {
+      "id": "1139746",
+      "date": "2026-11-14",
+      "time": "09:00",
+      "title": "스타뉴스룸",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/791e629a",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-14T09:00:00+09:00",
+      "end": "2026-11-14T09:30:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1120249",
