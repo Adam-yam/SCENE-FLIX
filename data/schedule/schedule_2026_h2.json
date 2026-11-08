@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08T07:58:37Z",
+  "updated": "2026-11-08T11:58:39Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4182,6 +4182,21 @@
       "detail": "",
       "type": "fansign",
       "source": "mnetplus"
+    },
+    {
+      "id": "1140162",
+      "date": "2026-11-08",
+      "time": "20:00",
+      "title": "스포티파이 아이돌잔치",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/7dd1f316",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-08T20:00:00+09:00",
+      "end": "2026-11-08T20:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1124956",
