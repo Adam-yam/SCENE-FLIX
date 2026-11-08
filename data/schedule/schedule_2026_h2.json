@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-07T11:58:40Z",
+  "updated": "2026-11-08T07:58:37Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4151,18 +4151,9 @@
       "source": "mnetplus"
     },
     {
-      "id": "6aed5f9fb4515616f2a91867",
-      "date": "2026-11-08",
-      "time": "15:10",
-      "title": "SBS <인기가요>",
-      "detail": "",
-      "type": "broadcast",
-      "source": "mnetplus"
-    },
-    {
       "id": "1139181",
       "date": "2026-11-08",
-      "time": "15:15",
+      "time": "15:10",
       "title": "SBS 인기가요",
       "detail": "",
       "type": "broadcast",
@@ -4170,9 +4161,18 @@
       "link": "https://s.blip.kr/s/58bfd1d1",
       "location": "",
       "allDay": false,
-      "start": "2026-11-08T15:15:00+09:00",
-      "end": "2026-11-08T15:15:00+09:00",
+      "start": "2026-11-08T15:10:00+09:00",
+      "end": "2026-11-08T15:10:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "6aed5f9fb4515616f2a91867",
+      "date": "2026-11-08",
+      "time": "15:10",
+      "title": "SBS <인기가요>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
     },
     {
       "id": "6ae8b3bd5e04b81dc54f220e",
