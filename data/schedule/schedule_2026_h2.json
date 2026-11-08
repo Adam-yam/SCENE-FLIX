@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-08T11:58:39Z",
+  "updated": "2026-11-08T17:58:40Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4064,6 +4064,51 @@
       "allDay": false,
       "start": "2026-11-07T18:30:00+09:00",
       "end": "2026-11-07T19:45:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1140296",
+      "date": "2026-11-07",
+      "time": "22:00",
+      "title": "KGMA <베리즈 글로벌 팬스 초이스> 수상 🏆",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/8dbadd87",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-07T22:00:00+09:00",
+      "end": "2026-11-07T22:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1140288",
+      "date": "2026-11-07",
+      "time": "22:00",
+      "title": "KGMA <베스트 메모리> 수상 🏆",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/31f868d4",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-07T22:00:00+09:00",
+      "end": "2026-11-07T22:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1140275",
+      "date": "2026-11-07",
+      "time": "22:00",
+      "title": "KGMA <베스트 아티스트> 수상 🏆",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/05c68976",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-07T22:00:00+09:00",
+      "end": "2026-11-07T22:00:00+09:00",
       "endTimeHidden": true
     },
     {
