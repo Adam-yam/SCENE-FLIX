@@ -13,7 +13,7 @@
     />
     <meta
       name="theme-color"
-      content="#F7F7F5"
+      content="#ECEAE5"
       media="(prefers-color-scheme: light)"
     />
     <title>SCENE-FLIX</title>
@@ -237,20 +237,20 @@
   --ic-moon: none;
 }
 :root[data-theme="light"] {
-  --bg: #f7f7f5;
-  --surf: #fafaf8;
-  --card: #fcfcfb;
-  --card-h: #efeeeb;
-  --border: rgba(0, 0, 0, 0.14);
+  --bg: #eceae5;
+  --surf: #f1f0ec;
+  --card: #f4f3ef;
+  --card-h: #e6e4de;
+  --border: rgba(0, 0, 0, 0.12);
   --border-h: rgba(0, 0, 0, 0.2);
-  --accent: #3b82f6;
-  --text: #1d1d1f;
-  --muted: #6c6c72;
-  --dim: #dcdbd7;
+  --accent: #4a7bd0;
+  --text: #26282c;
+  --muted: #62666c;
+  --dim: #d6d4ce;
   --glass-fill: rgba(0, 0, 0, 0.04);
   --glass-fill-h: rgba(0, 0, 0, 0.07);
   --glass-border: rgba(0, 0, 0, 0.07);
-  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --glass-highlight: rgba(255, 255, 255, 0.5);
   --glass-shadow: 0 10px 34px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.06);
   --c-music: #A879E8;
   --c-mv: #c4359f;
@@ -271,25 +271,25 @@
   --c-zena: #8b5fbf;
   --c-mei-dark: #8a6d00;
   --c-shorts-ch: #7562a6;
-  --accent-rgb: 59, 130, 246;
+  --accent-rgb: 74, 123, 208;
   --w: 0, 0, 0;
   --fill: rgba(120, 120, 128, 0.14);
   --fill-h: rgba(120, 120, 128, 0.22);
   --sel: rgba(0, 0, 0, 0.07);
   --sel-h: rgba(0, 0, 0, 0.045);
   --sep: rgba(0, 0, 0, 0.08);
-  --hl: rgba(255, 255, 255, 0.9);
-  --hl-soft: rgba(255, 255, 255, 0.7);
-  --glass-bg: rgba(250, 250, 248, 0.62);
-  --btn-glass: rgba(250, 250, 248, 0.62);
-  --nav-bg: rgba(250, 250, 248, 0.7);
+  --hl: rgba(255, 255, 255, 0.5);
+  --hl-soft: rgba(255, 255, 255, 0.35);
+  --glass-bg: rgba(241, 240, 236, 0.62);
+  --btn-glass: rgba(241, 240, 236, 0.62);
+  --nav-bg: rgba(241, 240, 236, 0.7);
   --nav-sheen: linear-gradient(
           160deg,
-          rgba(255, 255, 255, 0.7),
-          rgba(255, 255, 255, 0.12) 50%,
-          rgba(255, 255, 255, 0.35)
+          rgba(255, 255, 255, 0.35),
+          rgba(255, 255, 255, 0.06) 50%,
+          rgba(255, 255, 255, 0.18)
         );
-  --seg-on: #fcfcfb;
+  --seg-on: #f6f5f1;
   --seg-shadow: 0 1px 3px rgba(0, 0, 0, 0.14), 0 0 0 0.5px rgba(0, 0, 0, 0.05);
   --card-border: rgba(0, 0, 0, 0.06);
   --card-shadow-h: 0 18px 40px rgba(0, 0, 0, 0.14);
@@ -616,7 +616,7 @@
 }
 .series-wrap {
   display: grid;
-  grid-template-columns: repeat(4,minmax(0,1fr));
+  grid-template-columns: repeat(5,minmax(0,1fr));
   gap: 32px 20px;
 }
 .series-card {
@@ -1635,178 +1635,27 @@ header {
   opacity: 0.7;
   flex-shrink: 0;
 }
-.fantube-wrap {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px 40px 80px;
-}
-.fantube-desc {
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  color: var(--muted);
-  text-transform: uppercase;
-  margin-bottom: 24px;
-  text-align: center;
-}
-.fantube-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-  gap: 12px;
-}
-.fantube-tagnav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 24px;
-}
-.fantube-tagbtn {
-  cursor: pointer;
-  border: 1px solid var(--border);
-  background: var(--glass-fill);
-  color: var(--muted);
-  font-family: var(--font-sans);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  padding: 7px 16px;
-  border-radius: 999px;
-  transition: color 0.18s cubic-bezier(0.4, 0, 0.2, 1),
-          background 0.18s cubic-bezier(0.4, 0, 0.2, 1),
-          border-color 0.18s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.fantube-tagbtn:hover {
-  color: var(--text);
-  border-color: var(--border-h);
-}
-.fantube-tagbtn.active {
-  color: #fff;
-  background: var(--accent);
-  border-color: var(--accent);
-}
-.ftcard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 22px 16px 20px;
-  background: var(--glass-fill);
-  border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  text-decoration: none;
-  color: var(--text);
-  cursor: pointer;
-  animation: fadeUp 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
-  position: relative;
-  overflow: hidden;
-  box-shadow: inset 0 1px 0 var(--glass-highlight);
-}
-.ftcard::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-          160deg,
-          rgba(var(--w), 0.05) 0%,
-          transparent 45%
-        );
-  pointer-events: none;
-}
-.ftcard-avatar-wrap {
-  position: relative;
-  flex-shrink: 0;
-}
-.ftcard-avatar {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
-  background: var(--surf);
-  border: 2px solid var(--glass-border);
-  overflow: hidden;
-  box-shadow: inset 0 1px 2px rgba(var(--w), 0.12),
-          0 2px 10px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-          border-color 0.22s cubic-bezier(0.4, 0, 0.2, 1);
-}
-.ftcard-avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.ftcard-avatar-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.6rem;
-  color: var(--muted);
-  background: var(--surf);
-}
-.ftcard-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 5px;
-  width: 100%;
-  min-width: 0;
-}
-.ftcard-name {
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--text);
-  text-align: center;
-  letter-spacing: 0.01em;
-  line-height: 1.3;
-  word-break: break-word;
-}
-.ftcard-handle {
-  font-size: 0.62rem;
-  color: var(--muted);
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 100%;
-  letter-spacing: 0.01em;
-}
-.ftcard-subtitle {
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--c-external);
-  background: rgba(var(--c-external-rgb), 0.12);
-  border: 1px solid rgba(var(--c-external-rgb), 0.3);
-  border-radius: 3px;
-  padding: 2px 7px;
-  text-align: center;
-  white-space: nowrap;
-  margin-top: 1px;
-}
-.ftcard-tags {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 4px;
-  margin-top: 2px;
-  padding-top: 8px;
-  width: 100%;
-  border-top: 1px solid rgba(var(--accent-rgb), 0.14);
-}
-.ftcard-tag {
-  font-size: 0.6rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  color: var(--accent);
-  background: rgba(var(--accent-rgb), 0.1);
-  border: 1px solid rgba(var(--accent-rgb), 0.24);
-  border-radius: 6px;
-  padding: 2px 8px;
-  white-space: nowrap;
-}
+.fantube-wrap { max-width: 1440px; margin: 0 auto; padding: 24px 32px 64px; }
+.fantube-desc { font-size: 12px; color: var(--muted); margin: 0 0 16px; text-align: left; }
+.fantube-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(190px,1fr)); gap: 14px; }
+.fantube-tagnav { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 20px; }
+.fantube-tagbtn { cursor: pointer; border: 1px solid var(--border); background: transparent; color: var(--muted); font: 500 12px var(--font-sans); padding: 8px 15px; min-height: 36px; border-radius: 999px; transition: color .18s,background .18s,border-color .18s; }
+.fantube-tagbtn:hover { color: var(--text); border-color: var(--border-h); }
+.fantube-tagbtn.active { color: var(--accent); background: rgba(var(--accent-rgb),.1); border-color: transparent; }
+.ftcard { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 20px 16px 14px; min-width: 0; background: var(--card); border: 1px solid var(--border); border-radius: 18px; text-decoration: none; color: var(--text); cursor: pointer; animation: fadeUp .35s cubic-bezier(.22,1,.36,1) both; overflow: hidden; }
+.ftcard-avatar-wrap { flex-shrink: 0; }
+.ftcard-avatar { width: 68px; height: 68px; border-radius: 50%; background: var(--surf); overflow: hidden; }
+.ftcard-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ftcard-avatar-placeholder { width: 100%; height: 100%; display: grid; place-items: center; font-size: 24px; color: var(--muted); background: var(--surf); }
+.ftcard-info { display: flex; flex-direction: column; align-items: center; gap: 5px; width: 100%; min-width: 0; text-align: center; }
+.ftcard-name { font-size: 14px; font-weight: 600; color: var(--text); letter-spacing: -.3px; line-height: 1.4; overflow-wrap: anywhere; }
+.ftcard-handle { font-size: 11px; color: var(--muted); width: 100%; overflow-wrap: anywhere; line-height: 1.4; }
+.ftcard-subtitle { font-size: 11px; font-weight: 400; color: var(--muted); overflow-wrap: anywhere; }
+.ftcard-tags { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 5px; margin-top: 5px; width: 100%; }
+.ftcard-tag { font-size: 10px; font-weight: 450; color: var(--muted); background: var(--fill); border-radius: 5px; padding: 3px 7px; white-space: nowrap; }
+.ftcard-visit { display: flex; align-items: center; justify-content: center; gap: 5px; width: 100%; margin-top: auto; padding-top: 11px; border-top: 1px solid var(--border); color: var(--muted); font-size: 11px; line-height: 1.5; }
+.ftcard-visit svg { width: 14px; height: 14px; }
+.ftcard:focus-visible,.fantube-tagbtn:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 @media (max-width: 700px) {
   .archive-month-bar {
     padding: 12px 12px 0;
@@ -1818,42 +1667,15 @@ header {
   :is(#searchInput, #seriesSearchInput) {
     font-size: 0.75rem;
   }
-  .fantube-wrap {
-    padding: 20px 12px calc(60px + var(--safe-bottom));
-  }
-  .fantube-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
-  .fantube-tagnav {
-    gap: 6px;
-    margin-bottom: 16px;
-  }
-  .fantube-tagbtn {
-    font-size: 0.64rem;
-    padding: 6px 12px;
-  }
-  .ftcard {
-    padding: 16px 10px 14px;
-    gap: 9px;
-  }
-  .ftcard-avatar {
-    width: 56px;
-    height: 56px;
-  }
-  .ftcard-name {
-    font-size: 0.74rem;
-  }
-  .ftcard-handle {
-    display: none;
-  }
-  .ftcard-tags {
-    padding-top: 6px;
-  }
-  .ftcard-tag {
-    font-size: 0.54rem;
-    padding: 1px 6px;
-  }
+  .fantube-wrap { padding: 20px 16px calc(60px + var(--safe-bottom)); }
+  .fantube-grid { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 12px; }
+  .fantube-tagnav { gap: 6px; margin-bottom: 16px; }
+  .fantube-tagbtn { font-size: 11px; padding: 8px 13px; }
+  .ftcard { padding: 18px 12px 12px; gap: 11px; border-radius: 16px; }
+  .ftcard-avatar { width: 60px; height: 60px; }
+  .ftcard-name { font-size: 13px; }
+  .ftcard-handle { font-size: 10px; }
+  .ftcard-tag { font-size: 10px; padding: 2px 6px; }
 }
 @media (max-width: 400px) {
   .fantube-grid {
@@ -2203,24 +2025,8 @@ header {
             background 0.22s cubic-bezier(0.4, 0, 0.2, 1),
             box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   }
-  .ftcard:hover {
-    transform: translateY(-6px);
-    border-color: rgba(var(--accent-rgb), 0.4);
-    background: var(--glass-fill-h);
-    box-shadow: var(--glass-shadow),
-            inset 0 1px 0 var(--glass-highlight),
-            0 0 0 1px rgba(var(--accent-rgb), 0.12);
-  }
-  .ftcard:hover .ftcard-avatar {
-    border-color: rgba(var(--accent-rgb), 0.45);
-    transform: scale(1.05);
-  }
-  .ftcard:hover .ftcard-tags {
-    border-color: rgba(var(--accent-rgb), 0.32);
-  }
-  .ftcard:hover .ftcard-tag {
-    border-color: rgba(var(--accent-rgb), 0.4);
-  }
+  .ftcard:hover { transform: translateY(-3px); border-color: rgba(var(--accent-rgb),.3); background: var(--card-h,var(--card)); box-shadow: none; }
+  .ftcard:hover .ftcard-visit { color: var(--accent); }
 }
 @media (min-width: 701px) {
   body {
@@ -10398,6 +10204,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
           chan_more: "더보기",
           chan_less: "접기",
           fantube_desc: "리마인분들의 팬튜브 채널입니다.",
+          fantube_visit: "채널 보기",
           member_desc: "멤버를 선택하면 유튜브에서 관련 영상을 검색합니다.",
           about_headline: "리센느(RESCENE)의 팬 메이드 페이지입니다.",
           about_byline: "made with love, by Adam",
@@ -10529,6 +10336,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
           chan_more: "もっと見る",
           chan_less: "閉じる",
           fantube_desc: "REMINEの皆さんのファンYouTubeチャンネルです。",
+          fantube_visit: "チャンネルを見る",
           member_desc: "メンバーを選択するとYouTubeで関連動画を検索します。",
           about_headline: "RESCENE のファンメイドページです。",
           about_byline: "made with love, by Adam",
@@ -10662,6 +10470,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
           chan_more: "Show more",
           chan_less: "Show less",
           fantube_desc: "Fan YouTube channels run by REMINE.",
+          fantube_visit: "View channel",
           member_desc:
             "Select a member to search for related videos on YouTube.",
           about_headline: "A fan-made page dedicated to RESCENE.",
@@ -23682,13 +23491,13 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
       function buildFantubeCard(ch, idx, avatarUrl) {
         const delay = `${Math.min(idx * 0.04, 0.5)}s`;
         const avatarHtml = avatarUrl
-          ? `<img src="${_escHtml(avatarUrl)}" alt="${_escHtml(ch.name)}" loading="lazy" data-image="avatar">`
+          ? `<img src="${_escHtml(avatarUrl)}" alt="" loading="lazy" decoding="async" data-image="avatar">`
           : `<div class="ftcard-avatar-placeholder">▶</div>`;
         const tagsHtml =
           ch.tags && ch.tags.length
             ? `<span class="ftcard-tags">${ch.tags.map((tag) => `<span class="ftcard-tag">#${_escHtml(tag)}</span>`).join("")}</span>`
             : "";
-        return `<a class="ftcard" href="${_escHtml(ch.url)}" target="_blank" rel="noopener" style="animation-delay:${delay}">
+        return `<a class="ftcard" href="${_escHtml(ch.url)}" target="_blank" rel="noopener noreferrer" style="animation-delay:${delay}">
     <div class="ftcard-avatar-wrap">
       <div class="ftcard-avatar">${avatarHtml}</div>
     </div>
@@ -23698,6 +23507,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
       ${ch.subtitle ? `<span class="ftcard-subtitle">${_escHtml(ch.subtitle)}</span>` : ""}
       ${tagsHtml}
     </div>
+    <span class="ftcard-visit"><span data-i18n="fantube_visit">${_escHtml(getCurrentT().fantube_visit)}</span><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M7 7h10v10"/></svg></span>
   </a>`;
       }
       let curFantubeTag = "all";
@@ -31641,7 +31451,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
             );
           document.querySelectorAll('meta[name="theme-color"]').forEach((m) => {
             m.removeAttribute("media");
-            m.setAttribute("content", light ? "#F7F7F5" : "#151618");
+            m.setAttribute("content", light ? "#ECEAE5" : "#151618");
           });
         }
 
