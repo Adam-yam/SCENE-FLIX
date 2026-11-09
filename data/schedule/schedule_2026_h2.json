@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-09T03:58:41Z",
+  "updated": "2026-11-09T05:58:40Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -5325,14 +5325,14 @@
       "date": "2026-12-24",
       "time": "",
       "title": "2026 SBS 가요대전",
-      "detail": "2026.12.24 – 2026.12.25 · KINTEX",
+      "detail": "KINTEX",
       "type": "event",
       "source": "blip",
       "link": "https://s.blip.kr/s/0f3ccb74",
       "location": "KINTEX",
       "allDay": true,
       "start": "2026-12-24T00:00:00+09:00",
-      "end": "2026-12-25T00:00:00+09:00",
+      "end": "2026-12-24T00:00:00+09:00",
       "endTimeHidden": false
     },
     {
@@ -5348,21 +5348,6 @@
       "allDay": true,
       "start": "2026-11-03T00:00:00+09:00",
       "end": "2026-12-31T00:00:00+09:00",
-      "endTimeHidden": false
-    },
-    {
-      "id": "1131475",
-      "date": "2026-12-25",
-      "time": "",
-      "title": "2026 SBS 가요대전",
-      "detail": "2026.12.24 – 2026.12.25 · KINTEX",
-      "type": "event",
-      "source": "blip",
-      "link": "https://s.blip.kr/s/0f3ccb74",
-      "location": "KINTEX",
-      "allDay": true,
-      "start": "2026-12-24T00:00:00+09:00",
-      "end": "2026-12-25T00:00:00+09:00",
       "endTimeHidden": false
     },
     {
