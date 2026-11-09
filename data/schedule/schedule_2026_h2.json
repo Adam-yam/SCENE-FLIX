@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-09T05:58:40Z",
+  "updated": "2026-11-09T07:58:38Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4349,6 +4349,24 @@
       "endTimeHidden": true
     },
     {
+      "id": "6af175a75e04b81dc54f3997",
+      "date": "2026-11-10",
+      "time": "07:25",
+      "title": "SBS M <더 쇼> 사전 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "id": "6af175e1a46d723d189056f5",
+      "date": "2026-11-10",
+      "time": "13:20",
+      "title": "SBS M <더 쇼> 사전 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
       "id": "1139195",
       "date": "2026-11-10",
       "time": "18:00",
@@ -4362,6 +4380,15 @@
       "start": "2026-11-10T18:00:00+09:00",
       "end": "2026-11-10T18:00:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "6af17804a46d723d189056fc",
+      "date": "2026-11-10",
+      "time": "18:00",
+      "title": "SBS M <더 쇼>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
     },
     {
       "id": "1139134",
@@ -4392,6 +4419,33 @@
       "start": "2026-11-03T07:00:00+09:00",
       "end": "2026-11-15T23:00:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "6af162a2a46d723d189056e9",
+      "date": "2026-11-11",
+      "time": "06:00",
+      "title": "MBC M <쇼! 챔피언> 사전 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "id": "6af162d3a46d723d189056ea",
+      "date": "2026-11-11",
+      "time": "12:50",
+      "title": "MBC M <쇼! 챔피언> 사전 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "id": "6af16317a46d723d189056eb",
+      "date": "2026-11-11",
+      "time": "17:00",
+      "title": "MBC M <쇼! 챔피언>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
     },
     {
       "id": "1139134",
@@ -4779,6 +4833,21 @@
       "start": "2026-11-03T00:00:00+09:00",
       "end": "2026-12-31T00:00:00+09:00",
       "endTimeHidden": false
+    },
+    {
+      "id": "1140474",
+      "date": "2026-11-25",
+      "time": "",
+      "title": "할리스 ♡ 리센느의 특별한 만남",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/411288c2",
+      "location": "",
+      "allDay": true,
+      "start": "2026-11-25T00:00:00+09:00",
+      "end": "2026-11-25T00:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1139134",
