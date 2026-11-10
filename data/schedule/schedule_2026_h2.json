@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-10T11:58:35Z",
+  "updated": "2026-11-10T17:58:35Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4391,6 +4391,21 @@
       "allDay": false,
       "start": "2026-11-09T17:27:00+09:00",
       "end": "2026-11-09T19:21:39+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1141269",
+      "date": "2026-11-09",
+      "time": "18:00",
+      "title": "스포티파이 K-Pop ON! RECORD",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/20dace00",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-09T18:00:00+09:00",
+      "end": "2026-11-09T18:00:00+09:00",
       "endTimeHidden": true
     },
     {
