@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-12T06:01:00.948504+09:00",
+  "updatedAt": "2026-11-12T07:01:12.203039+09:00",
   "platforms": [
     "melon",
     "genie",
@@ -18,56 +18,56 @@
       "source": "https://m2.melon.com/m6/chart/ent/songChartList.json",
       "chartLabel": "TOP100",
       "sourceKind": "first_party",
-      "sourceUpdatedAt": "2026-11-12T06:00:00+09:00",
+      "sourceUpdatedAt": "2026-11-12T07:00:00+09:00",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-11-12T06:01:00.948504+09:00",
-      "lastAttemptAt": "2026-11-12T06:01:00.948504+09:00",
+      "lastSuccessAt": "2026-11-12T07:01:12.203039+09:00",
+      "lastAttemptAt": "2026-11-12T07:01:12.203039+09:00",
       "reason": null
     },
     "genie": {
       "source": "https://app.genie.co.kr/chart/j_RealTimeRankSongList.json?pg=1&pgsize=100",
       "chartLabel": "실시간 TOP200",
       "sourceKind": "first_party",
-      "sourcePeriod": "06:00",
+      "sourcePeriod": "07:00",
       "status": "ok",
       "freshness": "unknown",
-      "lastSuccessAt": "2026-11-12T06:01:00.948504+09:00",
-      "lastAttemptAt": "2026-11-12T06:01:00.948504+09:00",
+      "lastSuccessAt": "2026-11-12T07:01:12.203039+09:00",
+      "lastAttemptAt": "2026-11-12T07:01:12.203039+09:00",
       "reason": null
     },
     "vibe": {
       "source": "https://apis.naver.com/vibeWeb/musicapiweb/vibe/v1/chart/track/total?start=1&display=100",
       "chartLabel": "오늘 Top 100",
       "sourceKind": "first_party",
-      "sourceUpdatedAt": "2026-11-11T07:00:00+09:00",
-      "sourcePeriod": "11월 11일 오전 7시 업데이트",
+      "sourceUpdatedAt": "2026-11-12T07:00:00+09:00",
+      "sourcePeriod": "11월 12일 오전 7시 업데이트",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-11-12T06:01:00.948504+09:00",
-      "lastAttemptAt": "2026-11-12T06:01:00.948504+09:00",
+      "lastSuccessAt": "2026-11-12T07:01:12.203039+09:00",
+      "lastAttemptAt": "2026-11-12T07:01:12.203039+09:00",
       "reason": null
     },
     "bugs": {
       "source": "https://m.bugs.co.kr/api/getChartTrack",
       "chartLabel": "실시간 TOP100",
       "sourceKind": "first_party",
-      "sourceUpdatedAt": "2026-11-12T01:00:00+09:00",
+      "sourceUpdatedAt": "2026-11-12T07:00:00+09:00",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-11-12T06:01:00.948504+09:00",
-      "lastAttemptAt": "2026-11-12T06:01:00.948504+09:00",
+      "lastSuccessAt": "2026-11-12T07:01:12.203039+09:00",
+      "lastAttemptAt": "2026-11-12T07:01:12.203039+09:00",
       "reason": null
     },
     "flo": {
       "source": "https://api.music-flo.com/display/v1/browser/chart/1/list?mixYn=N",
       "chartLabel": "24시간 집계 TOP100",
       "sourceKind": "first_party",
-      "sourcePeriod": "24시간 집계 (05시 기준)",
+      "sourcePeriod": "24시간 집계 (07시 기준)",
       "status": "ok",
       "freshness": "unknown",
-      "lastSuccessAt": "2026-11-12T06:01:00.948504+09:00",
-      "lastAttemptAt": "2026-11-12T06:01:00.948504+09:00",
+      "lastSuccessAt": "2026-11-12T07:01:12.203039+09:00",
+      "lastAttemptAt": "2026-11-12T07:01:12.203039+09:00",
       "reason": null
     },
     "youtube_music": {
@@ -79,8 +79,8 @@
       "sourceDatePrecision": "date",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-11-12T06:01:00.948504+09:00",
-      "lastAttemptAt": "2026-11-12T06:01:00.948504+09:00",
+      "lastSuccessAt": "2026-11-12T07:01:12.203039+09:00",
+      "lastAttemptAt": "2026-11-12T07:01:12.203039+09:00",
       "reason": null
     },
     "spotify": {
@@ -93,21 +93,21 @@
       "verification": "not_compared_with_official",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-11-12T06:01:00.948504+09:00",
-      "lastAttemptAt": "2026-11-12T06:01:00.948504+09:00",
+      "lastSuccessAt": "2026-11-12T07:01:12.203039+09:00",
+      "lastAttemptAt": "2026-11-12T07:01:12.203039+09:00",
       "reason": null
     },
     "apple_music": {
       "source": "https://rss.applemarketingtools.com/api/v2/kr/music/most-played/100/songs.json",
       "chartLabel": "한국 인기곡 TOP100",
       "sourceKind": "first_party",
-      "sourceUpdatedAt": "2026-11-11T21:01:07+00:00",
+      "sourceUpdatedAt": "2026-11-11T22:01:36+00:00",
       "sourceRevision": "36603d0338f17f7adbb07577bd18965738e75ab44bb701c27a048afe51ded0aa",
       "previousRankBasis": "previous_distinct_successful_snapshot",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-11-12T06:01:00.948504+09:00",
-      "lastAttemptAt": "2026-11-12T06:01:00.948504+09:00",
+      "lastSuccessAt": "2026-11-12T07:01:12.203039+09:00",
+      "lastAttemptAt": "2026-11-12T07:01:12.203039+09:00",
       "reason": null
     },
     "melon_daily": {
@@ -119,8 +119,8 @@
       "sourceDatePrecision": "date",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-11-12T06:01:00.948504+09:00",
-      "lastAttemptAt": "2026-11-12T06:01:00.948504+09:00",
+      "lastSuccessAt": "2026-11-12T07:01:12.203039+09:00",
+      "lastAttemptAt": "2026-11-12T07:01:12.203039+09:00",
       "reason": null
     },
     "genie_daily": {
@@ -132,8 +132,8 @@
       "sourceDatePrecision": "date",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-11-12T06:01:00.948504+09:00",
-      "lastAttemptAt": "2026-11-12T06:01:00.948504+09:00",
+      "lastSuccessAt": "2026-11-12T07:01:12.203039+09:00",
+      "lastAttemptAt": "2026-11-12T07:01:12.203039+09:00",
       "reason": null
     },
     "bugs_daily": {
@@ -145,8 +145,8 @@
       "sourceDatePrecision": "date",
       "status": "ok",
       "freshness": "current",
-      "lastSuccessAt": "2026-11-12T06:01:00.948504+09:00",
-      "lastAttemptAt": "2026-11-12T06:01:00.948504+09:00",
+      "lastSuccessAt": "2026-11-12T07:01:12.203039+09:00",
+      "lastAttemptAt": "2026-11-12T07:01:12.203039+09:00",
       "reason": null
     }
   },
@@ -163,14 +163,14 @@
           "isReentry": false
         },
         "genie": {
-          "rank": 2,
+          "rank": 3,
           "previousRank": 2,
           "isNew": null,
           "isReentry": false
         },
         "vibe": {
           "rank": 5,
-          "previousRank": 6,
+          "previousRank": 5,
           "isNew": false,
           "isReentry": false
         },
@@ -182,7 +182,7 @@
         },
         "flo": {
           "rank": 5,
-          "previousRank": 4,
+          "previousRank": 5,
           "isNew": false,
           "isReentry": false
         },
@@ -236,26 +236,26 @@
           "isReentry": false
         },
         "genie": {
-          "rank": 31,
-          "previousRank": 32,
+          "rank": 6,
+          "previousRank": 31,
           "isNew": null,
           "isReentry": false
         },
         "vibe": {
           "rank": 6,
-          "previousRank": 5,
+          "previousRank": 6,
           "isNew": false,
           "isReentry": false
         },
         "bugs": {
-          "rank": 16,
-          "previousRank": 18,
+          "rank": 15,
+          "previousRank": 16,
           "isNew": false,
           "isReentry": false
         },
         "flo": {
-          "rank": 14,
-          "previousRank": 12,
+          "rank": 15,
+          "previousRank": 15,
           "isNew": false,
           "isReentry": false
         },
@@ -310,19 +310,19 @@
         },
         "genie": {
           "rank": 37,
-          "previousRank": 39,
+          "previousRank": 37,
           "isNew": null,
           "isReentry": false
         },
         "vibe": {
-          "rank": 22,
+          "rank": 23,
           "previousRank": 22,
           "isNew": false,
           "isReentry": false
         },
         "bugs": {
-          "rank": 22,
-          "previousRank": 24,
+          "rank": 21,
+          "previousRank": 22,
           "isNew": false,
           "isReentry": false
         },
@@ -383,25 +383,25 @@
         },
         "genie": {
           "rank": 42,
-          "previousRank": 41,
+          "previousRank": 42,
           "isNew": null,
           "isReentry": false
         },
         "vibe": {
           "rank": 17,
-          "previousRank": 16,
+          "previousRank": 17,
           "isNew": false,
           "isReentry": false
         },
         "bugs": {
-          "rank": 39,
-          "previousRank": 40,
+          "rank": 48,
+          "previousRank": 39,
           "isNew": false,
           "isReentry": false
         },
         "flo": {
           "rank": 46,
-          "previousRank": 39,
+          "previousRank": 46,
           "isNew": false,
           "isReentry": false
         },
@@ -444,103 +444,30 @@
       }
     },
     {
-      "songName": "Finest Thing",
-      "artistName": "RESCENE (리센느)",
-      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/150/82/293/15082293_20261026170443_500.jpg?4d6b5106b27f2c41c45ed4957be82cee/melon/resize/144/optimize/90",
-      "ranks": {
-        "melon": {
-          "rank": 30,
-          "previousRank": 30,
-          "isNew": false,
-          "isReentry": false
-        },
-        "genie": {
-          "rank": 78,
-          "previousRank": 92,
-          "isNew": null,
-          "isReentry": false
-        },
-        "vibe": {
-          "rank": 100,
-          "previousRank": 100,
-          "isNew": false,
-          "isReentry": false
-        },
-        "bugs": {
-          "rank": 58,
-          "previousRank": 81,
-          "isNew": false,
-          "isReentry": false
-        },
-        "flo": {
-          "rank": 85,
-          "previousRank": 85,
-          "isNew": false,
-          "isReentry": false
-        },
-        "youtube_music": {
-          "rank": 65,
-          "previousRank": null,
-          "isNew": true,
-          "isReentry": false
-        },
-        "spotify": {
-          "rank": 21,
-          "previousRank": 21,
-          "isNew": false,
-          "isReentry": false
-        },
-        "apple_music": {
-          "rank": 24,
-          "previousRank": 24,
-          "isNew": false,
-          "isReentry": false
-        },
-        "melon_daily": {
-          "rank": 29,
-          "previousRank": 26,
-          "isNew": false,
-          "isReentry": false
-        },
-        "genie_daily": {
-          "rank": 113,
-          "previousRank": 105,
-          "isNew": false,
-          "isReentry": false
-        },
-        "bugs_daily": {
-          "rank": 40,
-          "previousRank": 39,
-          "isNew": false,
-          "isReentry": false
-        }
-      }
-    },
-    {
       "songName": "Runaway",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/133/12/413/13312413_20260406143448_500.jpg?0d1b1aec895dbf60aa601748ddf64dd9/melon/resize/144/optimize/90",
       "ranks": {
         "melon": {
           "rank": 21,
-          "previousRank": 20,
+          "previousRank": 21,
           "isNew": false,
           "isReentry": false
         },
         "genie": {
-          "rank": 125,
-          "previousRank": 142,
+          "rank": 151,
+          "previousRank": 125,
           "isNew": null,
           "isReentry": false
         },
         "bugs": {
           "rank": 54,
-          "previousRank": 47,
+          "previousRank": 54,
           "isNew": false,
           "isReentry": false
         },
         "flo": {
-          "rank": 90,
+          "rank": 88,
           "previousRank": 89,
           "isNew": false,
           "isReentry": false
@@ -584,6 +511,73 @@
       }
     },
     {
+      "songName": "Finest Thing",
+      "artistName": "RESCENE (리센느)",
+      "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/150/82/293/15082293_20261026170443_500.jpg?4d6b5106b27f2c41c45ed4957be82cee/melon/resize/144/optimize/90",
+      "ranks": {
+        "melon": {
+          "rank": 30,
+          "previousRank": 30,
+          "isNew": false,
+          "isReentry": false
+        },
+        "genie": {
+          "rank": 86,
+          "previousRank": 78,
+          "isNew": null,
+          "isReentry": false
+        },
+        "bugs": {
+          "rank": 74,
+          "previousRank": 58,
+          "isNew": false,
+          "isReentry": false
+        },
+        "flo": {
+          "rank": 84,
+          "previousRank": 85,
+          "isNew": false,
+          "isReentry": false
+        },
+        "youtube_music": {
+          "rank": 65,
+          "previousRank": null,
+          "isNew": true,
+          "isReentry": false
+        },
+        "spotify": {
+          "rank": 21,
+          "previousRank": 21,
+          "isNew": false,
+          "isReentry": false
+        },
+        "apple_music": {
+          "rank": 24,
+          "previousRank": 24,
+          "isNew": false,
+          "isReentry": false
+        },
+        "melon_daily": {
+          "rank": 29,
+          "previousRank": 26,
+          "isNew": false,
+          "isReentry": false
+        },
+        "genie_daily": {
+          "rank": 113,
+          "previousRank": 105,
+          "isNew": false,
+          "isReentry": false
+        },
+        "bugs_daily": {
+          "rank": 40,
+          "previousRank": 39,
+          "isNew": false,
+          "isReentry": false
+        }
+      }
+    },
+    {
       "songName": "Pinball",
       "artistName": "RESCENE (리센느)",
       "albumImageUrl": "https://cdnimg.melon.co.kr/cm2/album/images/115/75/849/11575849_20240826152240_500.jpg?da43be78cb2cc67e9ee423c739bc09b6/melon/resize/144/optimize/90",
@@ -595,20 +589,20 @@
           "isReentry": false
         },
         "genie": {
-          "rank": 114,
-          "previousRank": 107,
+          "rank": 120,
+          "previousRank": 114,
           "isNew": null,
           "isReentry": false
         },
         "bugs": {
-          "rank": 53,
-          "previousRank": 66,
+          "rank": 50,
+          "previousRank": 53,
           "isNew": false,
           "isReentry": false
         },
         "flo": {
           "rank": 72,
-          "previousRank": 74,
+          "previousRank": 71,
           "isNew": false,
           "isReentry": false
         },
@@ -662,26 +656,26 @@
           "isReentry": false
         },
         "genie": {
-          "rank": 33,
-          "previousRank": 37,
+          "rank": 38,
+          "previousRank": 33,
           "isNew": null,
           "isReentry": false
         },
         "vibe": {
           "rank": 27,
-          "previousRank": 29,
+          "previousRank": 27,
           "isNew": false,
           "isReentry": false
         },
         "bugs": {
           "rank": 8,
-          "previousRank": 10,
+          "previousRank": 8,
           "isNew": false,
           "isReentry": false
         },
         "flo": {
-          "rank": 26,
-          "previousRank": 20,
+          "rank": 33,
+          "previousRank": 33,
           "isNew": false,
           "isReentry": false
         },
@@ -723,14 +717,14 @@
           "isReentry": false
         },
         "genie": {
-          "rank": 88,
-          "previousRank": 108,
+          "rank": 97,
+          "previousRank": 88,
           "isNew": null,
           "isReentry": false
         },
         "bugs": {
-          "rank": 82,
-          "previousRank": 100,
+          "rank": 93,
+          "previousRank": 82,
           "isNew": false,
           "isReentry": false
         },
@@ -784,8 +778,8 @@
           "isReentry": false
         },
         "genie": {
-          "rank": 107,
-          "previousRank": 114,
+          "rank": 111,
+          "previousRank": 107,
           "isNew": null,
           "isReentry": false
         },
