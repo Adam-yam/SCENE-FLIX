@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11T01:58:39Z",
+  "updated": "2026-11-11T05:58:38Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4580,6 +4580,21 @@
       "source": "mnetplus"
     },
     {
+      "id": "1141360",
+      "date": "2026-11-11",
+      "time": "09:21",
+      "title": "〈NOTES : BLOOMING〉 공연 개최 안내 (Notice)",
+      "detail": "",
+      "type": "concert",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/5d2dd945",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-11T09:21:00+09:00",
+      "end": "2026-11-11T13:08:49+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "6af162d3a46d723d189056ea",
       "date": "2026-11-11",
       "time": "12:50",
@@ -4587,6 +4602,21 @@
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
+    },
+    {
+      "id": "1141382",
+      "date": "2026-11-11",
+      "time": "17:00",
+      "title": "쇼챔피언",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/3b654ac9",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-11T17:00:00+09:00",
+      "end": "2026-11-11T17:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "6af16317a46d723d189056eb",
