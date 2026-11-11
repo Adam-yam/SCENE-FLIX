@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11T13:58:31Z",
+  "updated": "2026-11-11T15:58:34Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4686,6 +4686,15 @@
       "start": "2026-11-03T07:00:00+09:00",
       "end": "2026-11-15T23:00:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "6af47819c920f3638b52225c",
+      "date": "2026-11-12",
+      "time": "",
+      "title": "BIODANCE 대면 팬사인회",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
     },
     {
       "id": "1139134",
