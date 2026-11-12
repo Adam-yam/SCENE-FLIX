@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T09:58:41Z",
+  "updated": "2026-11-12T11:58:39Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4784,6 +4784,21 @@
       "allDay": false,
       "start": "2026-11-03T07:00:00+09:00",
       "end": "2026-11-15T23:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1142009",
+      "date": "2026-11-13",
+      "time": "17:10",
+      "title": "뮤직뱅크",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/27b04243",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-13T17:10:00+09:00",
+      "end": "2026-11-13T17:10:00+09:00",
       "endTimeHidden": true
     },
     {
