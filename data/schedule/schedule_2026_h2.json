@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T01:58:40Z",
+  "updated": "2026-11-12T05:58:38Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4658,6 +4658,51 @@
       "endTimeHidden": true
     },
     {
+      "id": "1141890",
+      "date": "2026-11-11",
+      "time": "20:15",
+      "title": "#쇼챔피언 11월 2주 '챔피언송'🏆 'With' 앵콜 Full ver.",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/8ec89ed8",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-11T20:15:00+09:00",
+      "end": "2026-11-11T20:15:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1141873",
+      "date": "2026-11-11",
+      "time": "22:03",
+      "title": "<쇼챔직캠 4K> 'With'",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/71b63a54",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-11T22:03:00+09:00",
+      "end": "2026-11-11T22:09:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1141874",
+      "date": "2026-11-11",
+      "time": "22:09",
+      "title": "<쇼챔직캠 4K> '백화요란 (Inside Out)'",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/abdd74b7",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-11T22:09:00+09:00",
+      "end": "2026-11-11T22:09:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1139134",
       "date": "2026-11-12",
       "time": "",
@@ -4695,6 +4740,21 @@
       "detail": "",
       "type": "fansign",
       "source": "mnetplus"
+    },
+    {
+      "id": "1141892",
+      "date": "2026-11-12",
+      "time": "19:00",
+      "title": "UP코노2",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/8af6ff07",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-12T19:00:00+09:00",
+      "end": "2026-11-12T19:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1139134",
@@ -4788,6 +4848,15 @@
       "start": "2026-11-14T09:00:00+09:00",
       "end": "2026-11-14T09:30:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "6af5486d16bd0539d8e6ba15",
+      "date": "2026-11-14",
+      "time": "10:00",
+      "title": "MBC <쇼음악중심> 사전 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
     },
     {
       "id": "1120249",
