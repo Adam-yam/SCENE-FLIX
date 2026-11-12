@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T05:58:38Z",
+  "updated": "2026-11-12T09:58:41Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4857,6 +4857,21 @@
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
+    },
+    {
+      "id": "1141969",
+      "date": "2026-11-14",
+      "time": "15:20",
+      "title": "쇼! 음악중심",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/6e8bfc52",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-14T15:20:00+09:00",
+      "end": "2026-11-14T15:20:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1120249",
