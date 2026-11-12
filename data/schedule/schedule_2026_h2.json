@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-11T23:58:36Z",
+  "updated": "2026-11-12T01:58:40Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -5646,6 +5646,15 @@
       "start": "2026-11-03T00:00:00+09:00",
       "end": "2026-12-31T00:00:00+09:00",
       "endTimeHidden": false
+    },
+    {
+      "id": "6af50e7574c3d63faa38c626",
+      "date": "2026-12-24",
+      "time": "",
+      "title": "2026 SBS 가요대전",
+      "detail": "",
+      "type": "concert",
+      "source": "mnetplus"
     },
     {
       "id": "1139134",
