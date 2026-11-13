@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13T05:58:35Z",
+  "updated": "2026-11-13T07:58:38Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4965,6 +4965,21 @@
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
+    },
+    {
+      "id": "1142408",
+      "date": "2026-11-15",
+      "time": "15:20",
+      "title": "SBS 인기가요",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/cf6aaaf8",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-15T15:20:00+09:00",
+      "end": "2026-11-15T15:20:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1139134",
