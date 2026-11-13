@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-13T07:58:38Z",
+  "updated": "2026-11-13T13:58:41Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4742,6 +4742,21 @@
       "source": "mnetplus"
     },
     {
+      "id": "1142370",
+      "date": "2026-11-12",
+      "time": "10:00",
+      "title": "<With (헥스: 마녀왕국 OST)> MV Release",
+      "detail": "",
+      "type": "anniv",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/f49a2bea",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-12T10:00:00+09:00",
+      "end": "2026-11-12T10:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1141892",
       "date": "2026-11-12",
       "time": "19:00",
@@ -4809,6 +4824,21 @@
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
+    },
+    {
+      "id": "1142807",
+      "date": "2026-11-13",
+      "time": "22:00",
+      "title": "여담: 餘談 TRIVIA",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/4a44b316",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-13T22:00:00+09:00",
+      "end": "2026-11-13T22:57:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1139134",
