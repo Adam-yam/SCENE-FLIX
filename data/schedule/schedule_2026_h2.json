@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-12T11:58:39Z",
+  "updated": "2026-11-13T05:58:35Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4947,6 +4947,24 @@
       "start": "2026-11-03T07:00:00+09:00",
       "end": "2026-11-15T23:00:00+09:00",
       "endTimeHidden": true
+    },
+    {
+      "id": "6af69ac5b12b5508a503cc7b",
+      "date": "2026-11-15",
+      "time": "08:30",
+      "title": "SBS <인기가요> 사전 녹화",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
+    },
+    {
+      "id": "6af69afeb12b5508a503cc7c",
+      "date": "2026-11-15",
+      "time": "15:15",
+      "title": "SBS <인기가요>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "mnetplus"
     },
     {
       "id": "1139134",
