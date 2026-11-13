@@ -1,6 +1,14 @@
 {
-  "updated": "2026-11-13T17:58:51Z",
+  "updated": "2026-11-13T19:58:52Z",
   "articles": [
+    {
+      "title": "리센느 제치고 'AI 가수'가 멜론 1위…사람도 아닌데 통했다",
+      "url": "https://n.news.naver.com/mnews/article/053/0000063020?sid=103",
+      "date": "2026.11.14",
+      "source": "weekly.chosun.com",
+      "description": "'는 이날 오후 5시 기준 멜론 톱100 차트에서 걸그룹 리센느의 '위드(With)'를 제치고 1위를 차지했다. 이후 오후 8시까지 정상을 유지했다. 지난 6월 23일 발매된 지 약 5개월 만이다. 리센느뿐 아니라 A2O 라이트, 아일릿 등...",
+      "thumbnail": "https://imgnews.pstatic.net/image/053/2026/11/14/0000063020_001_20261114031106440.png?type&#x3D;w800"
+    },
     {
       "title": "엠넷플러스 숨바꼭질2, 리센느 출연 최종회 오늘 공개",
       "url": "https://www.topstarnews.net/news/articleView.html?idxno=16276169",
@@ -23,7 +31,7 @@
       "date": "2026.11.13",
       "source": "news.jtbc.co.kr",
       "description": "오늘(13일) 머무르의 '꿈꾸던 어른이 되었나요?'는 이날 오후 5시 기준 멜론 '톱 100' 차트에서 리센느의... 이런 차트에서 AI 활용곡이 리센느(2위), A2O 라이트(3위), 아일릿(5위) 등 K팝 스타를 따돌리고 1위를 차지하면서...",
-      "thumbnail": "https://imgnews.pstatic.net/image/437/2026/11/13/0000520688_001_20261113222214454.jpg?type&#x3D;w800"
+      "thumbnail": null
     },
     {
       "title": "도미노피자, '리센느 포토카드 세트 증정' 이벤트…16일부터 선착순 지...",
@@ -39,7 +47,7 @@
       "date": "2026.11.13",
       "source": "hankyung.com",
       "description": "13일 가요계에 따르면 머무르의 '꿈꾸던 어른이 되었나요?'는 이날 오후 5시 기준 리센느의 신곡 '위드'(With)... 그런데 AI를 활용한 머무르의 곡이 리센느(2위), A2O 라이트(3위), 아일릿(5위) 등 K팝 그룹의 곡을 제치고...",
-      "thumbnail": null
+      "thumbnail": "https://imgnews.pstatic.net/image/015/2026/11/13/0005353755_001_20261113222912282.jpg?type&#x3D;w800"
     },
     {
       "title": "리센느 제치고 멜론 1위 오른 이 노래…AI가 불렀다",
@@ -192,14 +200,6 @@
       "source": "spotvnews.co.kr",
       "description": "그룹 리센느(RESCENE) 측이 악성 루머에 칼을 빼들었다. 소속사 더뮤즈엔터테인먼트는 12일 공식 팬 플랫폼과 SNS를 통해 \"당사는 최근 온라인 커뮤니티와 각종 SNS 플랫폼에서 리센느 멤버들을 겨냥한 근거 없는 루머와...",
       "thumbnail": "https://imgnews.pstatic.net/image/477/2026/11/13/0000638872_001_20261113103309816.jpg"
-    },
-    {
-      "title": "더뮤즈, 리센느 악플러들 형사 고소 \"선처·예외 없이 엄중한 법적 책임...",
-      "url": "https://swtvnews.com/news/newsview.php?ncode=1065574806905423",
-      "date": "2026.11.13",
-      "source": "swtvnews.com",
-      "description": "▲ 리센느(사진: 더뮤즈엔터테인먼트) 걸그룹 리센느(RESCENE)의 소속사인 더뮤즈엔터테인먼트(이하 더뮤즈)가 최근 리센느에 대해 악플을 일삼은 누리꾼들을 형사 고소하고 엄중한 법적인 책임을 물을 것임을 강조했다....",
-      "thumbnail": "https://swtvnews.com/news/data/20261113/p1065574806905423_237_thum.jpg"
     }
   ]
 }
