@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T09:58:42Z",
+  "updated": "2026-11-14T11:58:39Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4824,6 +4824,21 @@
       "detail": "",
       "type": "broadcast",
       "source": "mnetplus"
+    },
+    {
+      "id": "1143024",
+      "date": "2026-11-13",
+      "time": "18:00",
+      "title": "Mnet Plus <숨바꼭질2>",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/91aa5c87",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-13T18:00:00+09:00",
+      "end": "2026-11-13T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1142807",
