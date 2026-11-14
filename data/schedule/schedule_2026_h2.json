@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-14T11:58:39Z",
+  "updated": "2026-11-14T13:58:36Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -4934,6 +4934,21 @@
       "endTimeHidden": true
     },
     {
+      "id": "1143141",
+      "date": "2026-11-14",
+      "time": "17:00",
+      "title": "이번 주 <쇼! 음악중심(Show! MusicCore)> 1위 🎉",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/531959c7",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-14T17:00:00+09:00",
+      "end": "2026-11-14T17:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1120249",
       "date": "2026-11-14",
       "time": "18:00",
@@ -4961,6 +4976,51 @@
       "allDay": false,
       "start": "2026-11-14T18:30:00+09:00",
       "end": "2026-11-14T18:30:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1143156",
+      "date": "2026-11-14",
+      "time": "22:00",
+      "title": "MMA <글로벌 TOP 10> 수상 🏆",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/82ba76d6",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-14T22:00:00+09:00",
+      "end": "2026-11-14T22:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1143169",
+      "date": "2026-11-14",
+      "time": "22:00",
+      "title": "MMA <카카오뱅크 모두의 스타> 수상 🏆",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/29f835aa",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-14T22:00:00+09:00",
+      "end": "2026-11-14T22:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1143168",
+      "date": "2026-11-14",
+      "time": "22:00",
+      "title": "MMA <핫트렌드> 수상 🏆",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/95e5ec15",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-14T22:00:00+09:00",
+      "end": "2026-11-14T22:00:00+09:00",
       "endTimeHidden": true
     },
     {
