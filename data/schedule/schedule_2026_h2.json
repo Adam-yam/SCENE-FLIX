@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-15T11:58:34Z",
+  "updated": "2026-11-15T17:58:38Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -5099,6 +5099,21 @@
       "allDay": false,
       "start": "2026-11-15T15:20:00+09:00",
       "end": "2026-11-15T15:20:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1143655",
+      "date": "2026-11-15",
+      "time": "17:00",
+      "title": "이번 주 <인기가요(Inkigayo)> 1위 🎉",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/f79a3615",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-15T17:00:00+09:00",
+      "end": "2026-11-15T17:00:00+09:00",
       "endTimeHidden": true
     },
     {
