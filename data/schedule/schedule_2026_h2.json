@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-18T07:58:40Z",
+  "updated": "2026-11-18T11:58:40Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -5220,6 +5220,21 @@
       "start": "2026-11-03T00:00:00+09:00",
       "end": "2026-12-31T00:00:00+09:00",
       "endTimeHidden": false
+    },
+    {
+      "id": "1144970",
+      "date": "2026-11-19",
+      "time": "19:00",
+      "title": "UP코노2",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/0a5c2539",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-19T19:00:00+09:00",
+      "end": "2026-11-19T19:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1125767",
