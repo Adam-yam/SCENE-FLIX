@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-17T23:58:39Z",
+  "updated": "2026-11-18T07:58:40Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -5162,6 +5162,21 @@
       "endTimeHidden": false
     },
     {
+      "id": "1144751",
+      "date": "2026-11-17",
+      "time": "17:30",
+      "title": "📽#페이스캠(멤버) 'With'",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/c85e4e87",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-17T17:30:00+09:00",
+      "end": "2026-11-17T17:30:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1139134",
       "date": "2026-11-18",
       "time": "",
@@ -5175,6 +5190,21 @@
       "start": "2026-11-03T00:00:00+09:00",
       "end": "2026-12-31T00:00:00+09:00",
       "endTimeHidden": false
+    },
+    {
+      "id": "1144795",
+      "date": "2026-11-18",
+      "time": "15:03",
+      "title": "<백화요란> 챌린지 (w. 엑스러브 하루, 루이)",
+      "detail": "",
+      "type": "broadcast",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/ebefe582",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-18T15:03:00+09:00",
+      "end": "2026-11-18T15:15:03+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1139134",
