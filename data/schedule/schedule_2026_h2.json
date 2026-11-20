@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-20T11:59:01Z",
+  "updated": "2026-11-20T15:58:45Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -5249,6 +5249,21 @@
       "allDay": false,
       "start": "2026-11-19T20:00:00+09:00",
       "end": "2026-11-19T20:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1146226",
+      "date": "2026-11-20",
+      "time": "",
+      "title": "2026 MAMA AWARDS <BEST OF NEXT> 수상 🏆",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/164dddad",
+      "location": "",
+      "allDay": true,
+      "start": "2026-11-20T00:00:00+09:00",
+      "end": "2026-11-20T00:00:00+09:00",
       "endTimeHidden": true
     },
     {
