@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-19T17:58:40Z",
+  "updated": "2026-11-20T03:58:39Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -5252,21 +5252,6 @@
       "endTimeHidden": true
     },
     {
-      "id": "1125767",
-      "date": "2026-11-20",
-      "time": "",
-      "title": "2026 MAMA AWARDS",
-      "detail": "2026.11.20 – 2026.11.21 · KYOCERA DOME OSAKA",
-      "type": "event",
-      "source": "blip",
-      "link": "https://s.blip.kr/s/b83a0671",
-      "location": "KYOCERA DOME OSAKA",
-      "allDay": true,
-      "start": "2026-11-20T00:00:00+09:00",
-      "end": "2026-11-21T00:00:00+09:00",
-      "endTimeHidden": true
-    },
-    {
       "id": "1139134",
       "date": "2026-11-20",
       "time": "",
@@ -5291,18 +5276,33 @@
       "source": "mnetplus"
     },
     {
+      "id": "1145721",
+      "date": "2026-11-20",
+      "time": "15:30",
+      "title": "<2026 MAMA AWARDS> RED CARPET",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/5ab71c93",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-20T15:30:00+09:00",
+      "end": "2026-11-20T15:30:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1125767",
-      "date": "2026-11-21",
-      "time": "",
+      "date": "2026-11-20",
+      "time": "18:00",
       "title": "2026 MAMA AWARDS",
-      "detail": "2026.11.20 – 2026.11.21 · KYOCERA DOME OSAKA",
+      "detail": "KYOCERA DOME OSAKA",
       "type": "event",
       "source": "blip",
       "link": "https://s.blip.kr/s/b83a0671",
       "location": "KYOCERA DOME OSAKA",
-      "allDay": true,
-      "start": "2026-11-20T00:00:00+09:00",
-      "end": "2026-11-21T00:00:00+09:00",
+      "allDay": false,
+      "start": "2026-11-20T18:00:00+09:00",
+      "end": "2026-11-20T18:00:00+09:00",
       "endTimeHidden": true
     },
     {
