@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-21T09:58:37Z",
+  "updated": "2026-11-21T11:58:41Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -5340,14 +5340,14 @@
       "date": "2026-11-21",
       "time": "23:10",
       "title": "전지적 참견 시점",
-      "detail": "2026.11.21 – 2026.11.22",
+      "detail": "",
       "type": "broadcast",
       "source": "blip",
       "link": "https://s.blip.kr/s/569ffdcd",
       "location": "",
       "allDay": false,
       "start": "2026-11-21T23:10:00+09:00",
-      "end": "2026-11-22T01:30:00+09:00",
+      "end": "2026-11-21T23:10:00+09:00",
       "endTimeHidden": true
     },
     {
@@ -5364,21 +5364,6 @@
       "start": "2026-11-03T00:00:00+09:00",
       "end": "2026-12-31T00:00:00+09:00",
       "endTimeHidden": false
-    },
-    {
-      "id": "1143512",
-      "date": "2026-11-22",
-      "time": "",
-      "title": "전지적 참견 시점",
-      "detail": "2026.11.21 – 2026.11.22",
-      "type": "broadcast",
-      "source": "blip",
-      "link": "https://s.blip.kr/s/569ffdcd",
-      "location": "",
-      "allDay": false,
-      "start": "2026-11-21T23:10:00+09:00",
-      "end": "2026-11-22T01:30:00+09:00",
-      "endTimeHidden": true
     },
     {
       "id": "6ae4ae265e04b81dc54f1e11",
