@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23T11:58:38Z",
+  "updated": "2026-11-23T13:58:42Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -5895,6 +5895,15 @@
       "start": "2026-11-03T00:00:00+09:00",
       "end": "2026-12-31T00:00:00+09:00",
       "endTimeHidden": false
+    },
+    {
+      "id": "6ae5f5c95e04b81dc54f1f04",
+      "date": "2026-12-10",
+      "time": "20:30",
+      "title": "[PULSE] 영상통화 팬사인회 by WITHMUU",
+      "detail": "",
+      "type": "fansign",
+      "source": "mnetplus"
     },
     {
       "id": "1139134",
