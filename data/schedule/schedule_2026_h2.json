@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-23T03:58:34Z",
+  "updated": "2026-11-23T09:58:40Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -5375,6 +5375,21 @@
       "source": "mnetplus"
     },
     {
+      "id": "1147244",
+      "date": "2026-11-22",
+      "time": "21:23",
+      "title": "2026 MAMA AWARD <BEST OF NEXT> 수상 🏆",
+      "detail": "",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/9c9cf772",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-22T21:23:00+09:00",
+      "end": "2026-11-22T21:23:00+09:00",
+      "endTimeHidden": true
+    },
+    {
       "id": "1139134",
       "date": "2026-11-23",
       "time": "",
@@ -5388,6 +5403,21 @@
       "start": "2026-11-03T00:00:00+09:00",
       "end": "2026-12-31T00:00:00+09:00",
       "endTimeHidden": false
+    },
+    {
+      "id": "1147252",
+      "date": "2026-11-23",
+      "time": "18:00",
+      "title": "<Love Again (feat. 제나 of RESCENE)> Release",
+      "detail": "",
+      "type": "anniv",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/1c4cdb41",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-23T18:00:00+09:00",
+      "end": "2026-11-23T18:00:00+09:00",
+      "endTimeHidden": true
     },
     {
       "id": "1147142",
