@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-24T15:58:35Z",
+  "updated": "2026-11-25T03:58:36Z",
   "events": [
     {
       "date": "2026-07-06",
@@ -5516,6 +5516,21 @@
       "allDay": true,
       "start": "2026-11-25T00:00:00+09:00",
       "end": "2026-11-25T00:00:00+09:00",
+      "endTimeHidden": true
+    },
+    {
+      "id": "1147993",
+      "date": "2026-11-25",
+      "time": "00:00",
+      "title": "<Magic (From \"Hexed\"/Korean Single Version)> Release",
+      "detail": "",
+      "type": "anniv",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/a675459d",
+      "location": "",
+      "allDay": false,
+      "start": "2026-11-25T00:00:00+09:00",
+      "end": "2026-11-25T12:15:45+09:00",
       "endTimeHidden": true
     },
     {
