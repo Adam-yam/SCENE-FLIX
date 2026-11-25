@@ -1,6 +1,14 @@
 {
-  "updated": "2026-11-25T19:58:45Z",
+  "updated": "2026-11-25T21:58:53Z",
   "articles": [
+    {
+      "title": "티맵, 걸그룹 리센느와 IP 협업…내비게이션에 ‘레미니’ 캐릭터 도입",
+      "url": "https://n.news.naver.com/mnews/article/011/0004686240?sid=105",
+      "date": "2026.11.26",
+      "source": "sedaily.com",
+      "description": "티맵모빌리티는 ‘차꾸미기’ 서비스에 걸그룹 리센느(RESCENE)의 공식 캐릭터 ‘레미니(REMINI)’를... 레미니는 리센느 멤버 원이, 리브, 미나미, 메이, 제나의 개성을 반영한 동물 캐릭터다. 멤버들이 기획 단계부터...",
+      "thumbnail": "https://imgnews.pstatic.net/image/011/2026/11/26/0004686240_001_20261126050109925.png?type&#x3D;w800"
+    },
     {
       "title": "티맵, 리센느 캐릭터 '레미니' 도입⋯차량 아이콘으로 만난다",
       "url": "https://www.autodaily.co.kr/news/articleView.html?idxno=602445",
@@ -151,7 +159,7 @@
       "date": "2026.11.25",
       "source": "news1.kr",
       "description": "티맵모빌리티가 걸그룹 리센느의 공식 캐릭터를 활용해 내비게이션 서비스 내 차량 아이콘을 꾸밀 수 있는... 티맵모빌리티는 자사 내비게이션 서비스 티맵의 '차꾸미기' 서비스에 리센느 공식 캐릭터 '레미니'를...",
-      "thumbnail": "https://imgnews.pstatic.net/image/421/2026/11/25/0009309453_001_20261125143708871.jpg?type&#x3D;w800"
+      "thumbnail": null
     },
     {
       "title": "\"리센느 캐릭터가 내비게이션에\"…티맵서 만난다",
@@ -159,7 +167,7 @@
       "date": "2026.11.25",
       "source": "ddaily.co.kr",
       "description": "25일 티맵모빌리티에 따르면, 회사는 지식재산권(IP) 사업 전문기업 올라보엑스와 협업해 걸그룹 '리센느(RESCENE)'의 공식 캐릭터 '레미니(REMINI)' 5종을 '차꾸미기' 서비스에 추가한다. 차꾸미기는 운전자가 내비게이션...",
-      "thumbnail": "https://imgnews.pstatic.net/image/138/2026/11/25/0002249849_001_20261125112214926.jpg?type&#x3D;w800"
+      "thumbnail": null
     },
     {
       "title": "리센느 제나, 한해·문세윤과 겨울 감성 신곡 '러브 어게인' 발표",
@@ -192,14 +200,6 @@
       "source": "swtvnews.com",
       "description": "▲ 사진 출처 : 월트디즈니컴퍼니코리아 걸그룹 리센느(RESCENE / 원이, 리브, 미나미, 메이, 제나)가 부른 디즈니 영화 ‘헥스: 마녀왕국’의 공식 오리지널 사운드 트랙(OST) '매직(Magic)'이 영화의 개봉에 맞춰 함께...",
       "thumbnail": "https://swtvnews.com/news/data/20261125/p1065572520917610_141_thum.jpg"
-    },
-    {
-      "title": "리센느, '헥스: 마녀왕국' OST 'Magic' 정식 발매",
-      "url": "https://m.entertain.naver.com/article/629/0000555257",
-      "date": "2026.11.25",
-      "source": "news.tf.co.kr",
-      "description": "'헥스: 마녀왕국' 엔딩 크레딧 삽입 'With'도 OST에 수록 그룹 리센느(RESCENE)가 '디즈니 공주'로 변신한다. 25일 소속사 더뮤즈엔터테인먼트에 다르면 리센느가 부른 영화 '헥스: 마녀왕국'의 공식 OST인 'Magic(매직)...",
-      "thumbnail": "https://imgnews.pstatic.net/image/629/2026/11/25/202644791795565664_20261125093106638.jpg"
     }
   ]
 }
