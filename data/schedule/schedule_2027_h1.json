@@ -1,4 +1,20 @@
 {
-  "updated": "2026-10-31T15:58:41Z",
-  "events": []
+  "updated": "2026-11-26T07:58:41Z",
+  "events": [
+    {
+      "id": "1148557",
+      "date": "2027-01-10",
+      "time": "",
+      "title": "제41회 골든디스크어워즈 with MBBank",
+      "detail": "'VIETNAM EXPOSITION CENTER' Special Outdoor Stage",
+      "type": "event",
+      "source": "blip",
+      "link": "https://s.blip.kr/s/1b898e31",
+      "location": "'VIETNAM EXPOSITION CENTER' Special Outdoor Stage",
+      "allDay": true,
+      "start": "2027-01-10T00:00:00+09:00",
+      "end": "2027-01-10T00:00:00+09:00",
+      "endTimeHidden": true
+    }
+  ]
 }
