@@ -3227,6 +3227,9 @@ header {
           background 0.15s cubic-bezier(0.4, 0, 0.2, 1),
           border-color 0.15s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.chart-info-btn .ico:focus-visible {
+  border-radius: 50%;
+}
 .chart-info-btn .ico:hover,
       .chart-info-btn.open .ico {
   color: var(--text);
@@ -7910,6 +7913,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
           src="image/logo.png"
           alt="RESCENE"
           class="drawer-logo"
+          role="button" tabindex="0" data-key-activate
           data-action="drawerSection" data-value="about"
           style="cursor: pointer"
         />
@@ -8332,6 +8336,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         src="image/logo.png"
         alt="RESCENE"
         class="wordmark-img"
+        role="button" tabindex="0" data-key-activate
         data-action="pickSection" data-value="about"
         style="cursor: pointer"
       />
@@ -8946,7 +8951,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         </div>
       </div>
       <div id="seriesGridHost" class="grid-wrap"></div>
-      <dialog id="seriesQrDialog" aria-labelledby="qrTitle" aria-describedby="qrSeries"><div class="qr-head"><h2 id="qrTitle">QR 코드</h2><button type="button" id="qrClose" data-action="closeSeriesQr" aria-label="닫기">×</button></div><p id="qrSeries"></p><canvas id="qrCanvas" role="img" aria-label="YouTube playlist QR code" hidden></canvas><div class="qr-actions"><button type="button" id="qrCopy" data-action="copySeriesQr" disabled>이미지 복사</button><button type="button" id="qrSave" data-action="saveSeriesQr" disabled>이미지 저장</button></div><p id="qrStatus" role="status" aria-live="polite"></p></dialog>
+      <dialog id="seriesQrDialog" aria-labelledby="qrTitle" aria-describedby="qrSeries"><div class="qr-head"><h2 id="qrTitle">QR 코드</h2><button type="button" id="qrClose" data-action="closeDialog" data-value="seriesQrDialog" aria-label="닫기">×</button></div><p id="qrSeries"></p><canvas id="qrCanvas" role="img" aria-label="YouTube playlist QR code" hidden></canvas><div class="qr-actions"><button type="button" id="qrCopy" data-action="copySeriesQr" disabled>이미지 복사</button><button type="button" id="qrSave" data-action="saveSeriesQr" disabled>이미지 저장</button></div><p id="qrStatus" role="status" aria-live="polite"></p></dialog>
 <dialog id="seriesDetailDialog" aria-labelledby="seriesDetailTitle">
         <div class="series-detail-top">
           <div class="series-detail-row"><div><h2 id="seriesDetailTitle"></h2><p id="seriesDetailCount"></p></div><button type="button" class="series-close" id="seriesDetailClose" data-action="closeSeriesDetail" aria-label="시리즈 닫기">×</button></div>
@@ -9467,7 +9472,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
     </div>
 
     <dialog id="scheduleSubscribeDialog" aria-labelledby="ss-title" aria-describedby="ss-intro">
-      <div class="sx-head"><h2 id="ss-title" data-ss="title">캘린더 구독</h2><button type="button" id="ss-close" class="sx-close" aria-label="닫기" data-action="closeScheduleSubscription">×</button></div>
+      <div class="sx-head"><h2 id="ss-title" data-ss="title">캘린더 구독</h2><button type="button" id="ss-close" class="sx-close" aria-label="닫기" data-action="closeDialog" data-value="scheduleSubscribeDialog">×</button></div>
       <p id="ss-intro" class="sx-caption" data-ss="intro"></p>
       <fieldset class="sx-modes"><legend data-ss="source">구독할 일정</legend><label><input type="radio" name="ss-source" value="all" checked><span data-ss="all">전체</span></label><label><input type="radio" name="ss-source" value="mnetplus"><span>Mnet Plus</span></label><label><input type="radio" name="ss-source" value="blip"><span>blip</span></label></fieldset>
       <a id="ss-open" class="ss-open" data-ss="open">아이폰 캘린더에서 구독</a>
@@ -9479,7 +9484,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
     </dialog>
 
     <dialog id="scheduleExportDialog" aria-labelledby="sx-title" aria-describedby="sx-subtitle">
-      <div class="sx-head"><h2 id="sx-title" data-sx="title">일정 내보내기</h2><button type="button" id="sx-close" class="sx-close" aria-label="닫기" data-action="closeScheduleExport">×</button></div>
+      <div class="sx-head"><h2 id="sx-title" data-sx="title">일정 내보내기</h2><button type="button" id="sx-close" class="sx-close" aria-label="닫기" data-action="closeDialog" data-value="scheduleExportDialog">×</button></div>
       <p id="sx-subtitle" class="sx-caption" data-sx="subtitle">원하는 기간을 골라 내 캘린더에 담아보세요.</p>
       <fieldset class="sx-modes"><legend data-sx="title">일정 내보내기</legend><label><input type="radio" name="sx-mode" value="month" checked><span data-sx="month">한 달</span></label><label><input type="radio" name="sx-mode" value="range"><span data-sx="range">기간</span></label><label><input type="radio" name="sx-mode" value="all"><span data-sx="all">전체</span></label></fieldset>
       <div class="sx-fields" id="sx-fields"><label><span id="sx-start-label">내보낼 월</span><input type="month" id="sx-from" required min="1900-01" max="9999-12"></label><label id="sx-end-label" hidden><span data-sx="to">종료 월</span><input type="month" id="sx-to" required min="1900-01" max="9999-12"></label></div>
@@ -9561,6 +9566,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
           <span class="chart-info-btn" id="chartInfoBtn">
             <span
               class="ico"
+              role="button" tabindex="0" data-key-activate
               data-action="toggleChartInfo"
               >?</span
             >
@@ -9937,7 +9943,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
     </div>
 
     <dialog id="bookmarkBackupDialog" class="bookmark-backup-dialog" aria-labelledby="bookmarkBackupTitle">
-      <div class="bookmark-backup-heading"><h2 id="bookmarkBackupTitle"></h2><button type="button" class="bm-playlist-btn" data-action="closeBookmarkBackup" id="bookmarkBackupClose">×</button></div>
+      <div class="bookmark-backup-heading"><h2 id="bookmarkBackupTitle"></h2><button type="button" class="bm-playlist-btn" data-action="closeDialog" data-value="bookmarkBackupDialog" id="bookmarkBackupClose">×</button></div>
       <p id="bookmarkBackupHint"></p>
       <div class="bookmark-backup-actions">
         <button type="button" class="bm-playlist-btn" data-action="exportBookmarks" id="bookmarkBackupExport"></button>
@@ -10052,7 +10058,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         shareSceneFlix: (event, el) => { shareSceneFlix(); },
         copyContactEmail: (event, el) => { copyContactEmail(); },
         openScheduleSubscription: () => { openScheduleSubscription(); },
-        closeScheduleSubscription: () => { document.getElementById("scheduleSubscribeDialog").close(); },
+        closeDialog: (event, el) => { document.getElementById(el.dataset.value).close(); },
         copyScheduleSubscription: () => { copyScheduleSubscription(); },
         openScheduleExport: (event, el) => { openScheduleExport(); },
         setScheduleSource: (event, el) => { setScheduleSource(el.dataset.value); },
@@ -10062,7 +10068,6 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         calNavigate: (event, el) => { calNavigate(Number(el.dataset.value)); },
         calGoToday: (event, el) => { calGoToday(); },
         calShowMonth: (event, el) => { calShowMonth(); },
-        closeScheduleExport: (event, el) => { document.getElementById('scheduleExportDialog').close(); },
         downloadSchedule: (event, el) => { exportScheduleFile(false); },
         shareSchedule: (event, el) => { exportScheduleFile(true); },
         setChartPlatform: (event, el) => { setChartPlatform(el.dataset.value); },
@@ -10091,12 +10096,10 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         openBookmarkBackup: () => { openBookmarkBackup(); },
         exportBookmarks: () => { exportBookmarks(); },
         importBookmarks: () => { document.getElementById("bookmarkBackupFile").click(); },
-        closeBookmarkBackup: () => { document.getElementById("bookmarkBackupDialog").close(); },
         resetViewFilters: () => { resetViewFilters(); },
         retrySchedule: () => { loadScheduleJson(true); },
         bookmarkManual: () => { setSort('manual'); },
         openSeriesQr: (event,el) => { openSeriesQr(event,Number(el.dataset.value)); },
-        closeSeriesQr: () => { document.getElementById('seriesQrDialog').close(); },
         copySeriesQr: () => { copySeriesQr(); },
         saveSeriesQr: () => { saveSeriesQr(); },
         copySeriesPlaylist: (event, el) => { copySeriesPlaylist(event, Number(el.dataset.value)); },
@@ -10129,6 +10132,13 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         dispatchCardClick(event);
       }
       document.body.addEventListener("click", dispatchActionClick);
+      document.body.addEventListener("keydown", event => {
+        if (event.key !== "Enter" && event.key !== " ") return;
+        const el = event.target;
+        if (!(el instanceof HTMLElement) || !el.hasAttribute("data-key-activate")) return;
+        event.preventDefault();
+        el.click();
+      });
       document.body.addEventListener("change", event => {
         const el = event.target;
         if (el instanceof HTMLSelectElement && el.dataset.changeAction === "seriesSort") {
@@ -26216,13 +26226,38 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         _featureScripts.set(name, promise);
         return promise;
       }
-      function _featureToast(text, duration = 4000) {
+      let _shareToastTimer = null;
+      function showToast(text, duration = 2200) {
         const toast = document.getElementById("share-toast");
         if (!toast) return;
         toast.textContent = text;
         clearTimeout(_shareToastTimer);
         toast.classList.add("show");
         _shareToastTimer = setTimeout(() => toast.classList.remove("show"), duration);
+      }
+      async function copyText(text) {
+        try {
+          if (!navigator.clipboard?.writeText) throw new Error("Clipboard unavailable");
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch {
+          const previousFocus = document.activeElement;
+          const field = document.createElement("textarea");
+          field.value = text;
+          field.readOnly = true;
+          field.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
+          document.body.append(field);
+          let copied = false;
+          try {
+            field.select();
+            field.setSelectionRange(0, field.value.length);
+            copied = document.execCommand("copy");
+          } catch {} finally {
+            field.remove();
+            if (previousFocus instanceof HTMLElement) previousFocus.focus({ preventScroll: true });
+          }
+          return copied;
+        }
       }
       function _endBmEdit() {
         ++_bmEditRequest;
@@ -26242,7 +26277,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         try {
           localStorage.setItem(_BM_ORDER_KEY, JSON.stringify(next));
           _bmOrder = next;
-          _featureToast(_ft().saved);
+          showToast(_ft().saved, 4000);
         } catch {
           _bookmarkSaveFailed();
           buildBookmarkGrid();
@@ -26282,7 +26317,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         }
         if (_bmLoading || curSection !== "bookmark") return;
         if (curSearchQuery) {
-          _featureToast(_ft().search);
+          showToast(_ft().search, 4000);
           return;
         }
         _bmLoading = true;
@@ -26294,7 +26329,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
           curBmSort = "manual";
           setSort("manual");
         } catch {
-          _featureToast(_ft().failed);
+          showToast(_ft().failed, 4000);
         } finally {
           _bmLoading = false;
         }
@@ -26341,7 +26376,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
       let BOOKMARKS = _readStoredBookmarks() || new Set();
       let curBmSort = _bmOrder.length ? "manual" : "added";
       function _bookmarkSaveFailed() {
-        _featureToast({
+        showToast({
           KR: "즐겨찾기를 저장하지 못했습니다. 브라우저 저장 공간과 설정을 확인해주세요.",
           EN: "Could not save this bookmark. Check your browser storage and settings.",
           JP: "お気に入りを保存できませんでした。ブラウザの保存容量と設定を確認してください。"
@@ -26477,7 +26512,6 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
     </svg>
   </button>`;
       }
-      let _shareToastTimer = null;
       async function copyShareUrl(e, vid) {
         e.preventDefault();
         e.stopPropagation();
@@ -26493,46 +26527,16 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
               }
             }
           }
-          const toast = document.getElementById("share-toast");
-          if (toast && !(_isAndroid || _isIOS)) {
-            const t = getCurrentT();
-            toast.textContent =
-              t.share_toast_copied || "🔗 YouTube 링크 복사됨";
-            toast.classList.add("show");
-            clearTimeout(_shareToastTimer);
-            _shareToastTimer = setTimeout(
-              () => toast.classList.remove("show"),
-              2200,
-            );
+          if (!(_isAndroid || _isIOS)) {
+            showToast(getCurrentT().share_toast_copied || "🔗 YouTube 링크 복사됨");
           }
         }
-        try {
-          if (!navigator.clipboard?.writeText)
-            throw new Error("Clipboard unavailable");
-          await navigator.clipboard.writeText(url);
-        } catch {
-          const previousFocus = document.activeElement;
-          const ta = document.createElement("textarea");
-          ta.value = url;
-          ta.style.cssText = "position:fixed;opacity:0";
-          document.body.appendChild(ta);
-          let copied = false;
-          try {
-            ta.select();
-            copied = document.execCommand("copy");
-          } catch {
-          } finally {
-            ta.remove();
-            if (previousFocus instanceof HTMLElement)
-              previousFocus.focus({ preventScroll: true });
-          }
-          if (!copied) {
-            window.prompt(
-              getCurrentT().share_copy_link || "YouTube 링크 복사",
-              url,
-            );
-            return;
-          }
+        if (!(await copyText(url))) {
+          window.prompt(
+            getCurrentT().share_copy_link || "YouTube 링크 복사",
+            url,
+          );
+          return;
         }
         _afterCopy();
       }
@@ -26717,10 +26721,13 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         return t["filter_" + type] || TYPE_LABEL[type] || type;
       }
       const _PLAY_RING_SVG = `<div class="play-ring"><svg viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l10 6-10 6V1z"/></svg></div>`;
+      function _saveData() {
+        const connection = navigator.connection;
+        return !!(connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType));
+      }
       function _videoThumbAttributes(vid) {
         const base = "https://img.youtube.com/vi/" + encodeURIComponent(vid) + "/";
-        const connection = navigator.connection;
-        const saveData = connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType);
+        const saveData = _saveData();
         const sizes = "auto, (max-width: 700px) calc((100vw - 44px) / 2), (min-width: 1824px) 286px, calc((100vw - 394px) / 5)";
         const desktop = window.matchMedia("(min-width: 701px)").matches;
         const candidates = desktop
@@ -26795,8 +26802,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         if (!img.isConnected || img.dataset.thumbNear !== "1") return;
         const rect = img.getBoundingClientRect();
         if (rect.width <= 0 || rect.height <= 0) return;
-        const connection = navigator.connection;
-        const saveData = connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType);
+        const saveData = _saveData();
         const needed = rect.height * (saveData ? 1 : Math.max(1, window.devicePixelRatio || 1));
         const target = _shortsThumbSizes.findIndex(candidate => candidate.height >= needed);
         const level = target < 0 ? _shortsThumbSizes.length - 1 : target;
@@ -28121,8 +28127,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
       const _SERIES_ARROW = '<span class="series-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m9 5 7 7-7 7"/></svg></span>';
       function _seriesThumb(vid) {
         const base = "https://img.youtube.com/vi/" + encodeURIComponent(vid) + "/";
-        const connection = navigator.connection;
-        const saveData = connection?.saveData || ["slow-2g", "2g"].includes(connection?.effectiveType);
+        const saveData = _saveData();
         const responsive = saveData ? "" : ' srcset="' + base + 'hqdefault.jpg 480w, ' + base + 'sddefault.jpg 640w, ' + base + 'maxresdefault.jpg 1280w" sizes="auto, (max-width:700px) calc((100vw - 42px) / 2), (min-width:1824px) 365px, calc((100vw - 340px) / 4)"';
         return '<img src="' + base + 'hqdefault.jpg"' + responsive + ' alt="" width="480" height="270" loading="lazy" decoding="async" data-image="video">';
       }
@@ -28272,35 +28277,10 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         const series = SERIES_DATA[index];
         if (!series?.ids.length) return;
         const url = _seriesPlaylistUrl(series);
-        let copied = false;
-        try {
-          await navigator.clipboard.writeText(url);
-          copied = true;
-        } catch {
-          const previousFocus = document.activeElement;
-          const field = document.createElement("textarea");
-          field.value = url;
-          field.readOnly = true;
-          field.style.cssText = "position:fixed;top:0;left:0;opacity:0;font-size:16px";
-          document.body.append(field);
-          try {
-            field.select();
-            field.setSelectionRange(0, field.value.length);
-            copied = document.execCommand("copy");
-          } catch {} finally {
-            field.remove();
-            if (previousFocus instanceof HTMLElement) previousFocus.focus({preventScroll:true});
-          }
-        }
+        const copied = await copyText(url);
         const t = getCurrentT();
         if (!copied) { window.prompt(t.series_share, url); return; }
-        const toast = document.getElementById("share-toast");
-        if (toast) {
-          toast.textContent = t.series_share_copied;
-          toast.classList.add("show");
-          clearTimeout(_shareToastTimer);
-          _shareToastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
-        }
+        showToast(t.series_share_copied);
       }
       function playSeries(i) {
         const s = SERIES_DATA[i];
@@ -30401,8 +30381,7 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         const month = String(_calYear).padStart(4,"0") + "-" + String(_calMonth+1).padStart(2,"0");
         document.getElementById("sx-from").value = month; document.getElementById("sx-to").value = month;
         dialog.querySelector('input[value="month"]').checked = true;
-        const ios = /iPhone|iPad|iPod/.test(navigator.userAgent || "") || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-        dialog.querySelector('input[name="sx-device"][value="' + (ios ? "iphone" : "galaxy") + '"]').checked = true;
+        dialog.querySelector('input[name="sx-device"][value="' + (_isIOS ? "iphone" : "galaxy") + '"]').checked = true;
         document.getElementById("sx-confirm").checked = false;
         document.getElementById("sx-status").textContent = "";
         let canShare = false;
@@ -32297,10 +32276,6 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
           window.navigator.standalone === true;
         const section = document.getElementById("installSection");
         if (isStandalone || !section) return;
-        const ua = navigator.userAgent || "";
-        const isIOS =
-          /iPad|iPhone|iPod/.test(ua) ||
-          (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
         const descs = {
           ios: [
             "Safari에서 <b>공유</b> 버튼 탭",
@@ -32324,51 +32299,16 @@ body:has(#bookmarkBackupDialog[open]) { overflow: hidden; }
         btns.forEach((b) =>
           b.addEventListener("click", () => select(b.dataset.os)),
         );
-        select(isIOS ? "ios" : "android");
+        select(_isIOS ? "ios" : "android");
         section.style.display = "";
         window.addEventListener("appinstalled", () => {
           section.style.display = "none";
         });
       })();
       (function () {
-        let timer = null;
         function siteUrl() {
           const c = document.querySelector('link[rel="canonical"]');
           return (c && c.href) || "https://adam-yam.github.io/SCENE-FLIX/";
-        }
-        function showToast(msg) {
-          const toast = document.getElementById("share-toast");
-          if (!toast) return;
-          toast.textContent = msg;
-          toast.classList.add("show");
-          clearTimeout(timer);
-          timer = setTimeout(() => toast.classList.remove("show"), 2200);
-        }
-        async function copyText(text) {
-          try {
-            if (!navigator.clipboard || !navigator.clipboard.writeText)
-              throw new Error("unavailable");
-            await navigator.clipboard.writeText(text);
-            return true;
-          } catch {
-            const prev = document.activeElement;
-            const ta = document.createElement("textarea");
-            ta.value = text;
-            ta.setAttribute("readonly", "");
-            ta.style.cssText = "position:fixed;opacity:0;top:0;left:0";
-            document.body.appendChild(ta);
-            let ok = false;
-            try {
-              ta.select();
-              ok = document.execCommand("copy");
-            } catch {
-            } finally {
-              ta.remove();
-              if (prev instanceof HTMLElement)
-                prev.focus({ preventScroll: true });
-            }
-            return ok;
-          }
         }
         let contactCopyTimer = null;
         copyContactEmail = async function () {
