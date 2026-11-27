@@ -4,6 +4,13 @@ const vm = require('node:vm');
 const path = require('node:path');
 const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const cut = (start, end) => {
+  const from = html.indexOf(start);
+  assert(from >= 0, 'index.html에서 시작 앵커를 찾을 수 없음: ' + start.trim());
+  const to = html.indexOf(end, from);
+  assert(to >= 0, 'index.html에서 끝 앵커를 찾을 수 없음: ' + end.trim() + ' (시작: ' + start.trim() + ')');
+  return html.slice(from, to);
+};
 for (const match of html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)) {
   if (match[1].trim()) new vm.Script(match[1]);
 }
@@ -78,7 +85,7 @@ async function request(url, mode='cors', destination='') {
 require('./schedule.test.cjs');
 
 {
-  const grab = (name, next) => html.slice(html.indexOf('      function ' + name + '('), html.indexOf(next, html.indexOf('      function ' + name + '(')));
+  const grab = (name, next) => cut('      function ' + name + '(', next);
   const vids = ['aaaaaaaaaaa', 'bbbbbbbbbbb', 'ccccccccccc', 'ddddddddddd'];
   const items = vids.map((vid, i) => ({vid, meta:{date:String(i)}}));
   const state = {BOOKMARKS:new Set(vids), curBmSort:'manual', _bmOrder:[vids[2], vids[0]], buildUnifiedVideoList:()=>[...items, items[0]], _videoDate:()=>'', _dateStrToSortKey:Number};
@@ -89,7 +96,7 @@ require('./schedule.test.cjs');
   assert.deepEqual(Array.from(state._getBookmarkedItems('newest'), i=>i.vid), [...vids].reverse());
   state.BOOKMARKS.delete(vids[2]);
   assert.deepEqual(Array.from(state._getBookmarkedItems('manual'), i=>i.vid), [vids[0],vids[1],vids[3]]);
-  const urlSource = html.slice(html.indexOf('      function _seriesPlaylistUrl('), html.indexOf('      async function openSeriesQr('));
+  const urlSource = cut('      function _seriesPlaylistUrl(', '      async function openSeriesQr(');
   vm.runInContext(urlSource,state);
   assert.equal(state._seriesPlaylistUrl({ids:vids}), 'https://www.youtube.com/watch_videos?video_ids='+vids.join(','));
   for (const name of ['sortable','qrcode']) new vm.Script(fs.readFileSync(path.join(root,'assets/features',name+'-v1.min.js'),'utf8'));
@@ -100,8 +107,7 @@ require('./schedule.test.cjs');
   const scripts=[], timers=new Map();let clock=0;
   const state={window:{},document:{createElement:()=>({remove(){this.removed=true}}),head:{append:s=>scripts.push(s)}},setTimeout:fn=>{timers.set(++clock,fn);return clock},clearTimeout:id=>timers.delete(id)};
   vm.createContext(state);
-  const begin=html.indexOf('      const _featureScripts');
-  vm.runInContext(html.slice(begin,html.indexOf('      let _shareToastTimer',begin)),state);
+  vm.runInContext(cut('      const _featureScripts','      let _shareToastTimer'),state);
   const first=state._featureLoad('sortable');
   assert.equal(first,state._featureLoad('sortable'));
   const rejected=assert.rejects(first);
@@ -114,10 +120,8 @@ require('./schedule.test.cjs');
   let release,enabled=0;
   const edit={_bmEditing:false,_bmLoading:false,_bmEditRequest:0,_bmSortable:null,_elGrid:null,curSection:'bookmark',curSearchQuery:'',_featureLoad:()=>new Promise(resolve=>release=resolve),showToast:()=>{},_ft:()=>({}),document:{getElementById:()=>null},setSort:()=>enabled++};
   vm.createContext(edit);
-  const end=html.indexOf('      function _endBmEdit');
-  vm.runInContext(html.slice(end,html.indexOf('      function _saveBmOrder',end)),edit);
-  const toggle=html.indexOf('      async function toggleBookmarkReorder');
-  vm.runInContext(html.slice(toggle,html.indexOf('      document.addEventListener',toggle)),edit);
+  vm.runInContext(cut('      function _endBmEdit','      function _saveBmOrder'),edit);
+  vm.runInContext(cut('      async function toggleBookmarkReorder','      document.addEventListener'),edit);
   const loading=edit.toggleBookmarkReorder();
   edit.curSection='series';edit._endBmEdit();edit.curSection='bookmark';release();await loading;
   assert.equal(enabled,0);assert.equal(edit._bmEditing,false);assert.equal(edit._bmLoading,false);
