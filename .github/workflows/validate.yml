@@ -1,7 +1,7 @@
 name: Validate site and crawlers
 on:
   push:
-    paths: ['index.html', 'assets/**', 'package.json', 'package-lock.json', 'service-worker.js', 'crawlers/**', 'tests/**', 'data/schedule/**', '.github/workflows/**']
+    paths: ['index.html', 'guide.html', 'guide-frame.html', 'manifest.json', 'other_projects.json', 'assets/**', 'package.json', 'package-lock.json', 'service-worker.js', 'crawlers/**', 'tests/**', 'data/schedule/**', '.github/workflows/**']
   pull_request:
 permissions:
   contents: read
@@ -22,5 +22,6 @@ jobs:
       - run: npm ci
       - run: node --check service-worker.js
       - run: node tests/site.test.cjs
+      - run: node tests/schedule.test.cjs
       - run: node tests/search.test.cjs
       - run: node tests/quality.test.cjs
