@@ -2,7 +2,7 @@
   "name": "sceneflix-checks",
   "private": true,
   "scripts": {
-    "test": "node tests/site.test.cjs && node tests/search.test.cjs && node tests/quality.test.cjs",
+    "test": "node tests/site.test.cjs && node tests/schedule.test.cjs && node tests/search.test.cjs && node tests/quality.test.cjs",
     "test:browser": "node --test tests/browser.test.cjs"
   },
   "devDependencies": {
